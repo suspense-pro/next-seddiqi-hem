@@ -1,5 +1,5 @@
 import Image from "next/image";
-import getProducts from "../../sfcc.js";
+import getProducts from "@utils/sfcc-connector";
 
 export default function Product({ product }) {
   return (

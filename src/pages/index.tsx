@@ -1,9 +1,11 @@
 import { useRef } from "react";
-import Header from "../components/Header";
-import ProductCard from "../components/ProductCard";
-import getProducts from "../sfcc.js";
+import ProductCard from "@components/ProductCard";
+import getProducts from "@utils/sfcc-connector";
+import Layout from "@components/layout";
 
-export default function Gallery({ data }) {
+
+
+export default function Home({ data }) {
   let coffeeRef = useRef<HTMLParagraphElement>();
 
   const scrollHandler = (e) => {
@@ -17,7 +19,6 @@ export default function Gallery({ data }) {
 
   return (
     <>
-      <Header scrollHandler={scrollHandler} />
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="sm:py-15 mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8">
           <div className="text-center">
@@ -40,6 +41,8 @@ export default function Gallery({ data }) {
   );
 }
 
+Home.Layout = Layout;
+
 export async function getStaticProps() {
   const searchResults = await getProducts("shirt");
 
@@ -49,3 +52,4 @@ export async function getStaticProps() {
     },
   };
 }
+

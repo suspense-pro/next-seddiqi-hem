@@ -1,5 +1,4 @@
 import Image from "next/image";
-import img from "../public/hero.jpg";
 
 export default function Header({ scrollHandler }) {
   return (
@@ -12,7 +11,7 @@ export default function Header({ scrollHandler }) {
               priority
               fill
               className="h-full w-full object-cover"
-              src={img}
+              src={"/images/hero.jpg"}
               placeholder="blur"
               alt="Coffee grinder"
             />

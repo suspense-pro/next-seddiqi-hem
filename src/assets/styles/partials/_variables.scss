@@ -1,0 +1,112 @@
+// colors
+
+// Brand Colours
+$colors: (
+  "blue": #0033A0,
+  "turquoise": #00AEC7,
+  "sky-blue": #00A3E0,
+  "green-blue": #153642,
+  "dark-blue": #001D2B,
+  "light-blue": #376377,
+  "gold": #AF8D69,
+  "gold-light": #F3E7D6,
+  "gold-metallic": #9C815C,
+  "white": #ffffff,
+  "black": #180D22,
+  "yellow": #FFC72C,
+  "grey": #525b5d,
+  "grey-mid": #D1D1D1,
+  "grey-light": #F6F6F6,
+  "grey-golden": #DEDCD7,
+  "light-grey": #f8f8f8,
+  "orange": #faab51,
+  "pink": #e7519d,
+  "red": #e61933,
+  "red-dark": #6A2102,
+  "maroon": #401C32,
+  "dark-purple": #1d2995,
+  "dark-pink": #c131ba,
+  "peach": #ae9296,
+  "brass": #C8B594,
+  "strong-brass": #D1A458,
+  "transparent-grey": #ffffff33,
+  "transparent-black": #01010163,
+  "full-transparent-black": #0000,
+  "green": #032715,
+  "green-palm": #365244,
+  "green-palm-dark": #384643,
+  "green-tint": #CDD4D0,
+  "sand": #C1B496,
+  "sand-mid": #D4CBB5,
+  "sand-tint": #ECE9DF,
+  "rose": #ECC7CE,
+  "plumeria": #E6E0D8,
+  "plumeria-tint": #F8F3ED,
+  "salmon": #fbdfbf,
+  "tint": #F9F6EF,
+  "white-with-opacity": #FFFFFF29,
+  "black-with-opacity": #180d221f,
+  "steel-gray": #746E7A,
+  "success":#1E955D
+) !default;
+
+
+
+// animations
+$transition-time: 0.3s;
+$transition-name: ease-in-out;
+
+// button variables
+
+$mBtnPadding: 8 16;
+$dBtnPadding: 8 52;
+$mCtaSize: 14;
+$mCtaLineHeight: 18;
+$dCtaSize: 16;
+$dCtaLineHeight: 20;
+$ctaLetterSpacing: 1;
+
+$mInputPadding: 12 16;
+$dInputPadding: 12 16;
+$mInputSize: 16;
+$mInputLineHeight: 22;
+$dInputSize: 16;
+$dInputLineHeight: 22;
+$inputLetterSpacing: 0.4;
+
+$mDropdownPadding: 12 16;
+$dDropdownPadding: 12 16;
+$mDropdownSize: 16;
+$mDropdownLineHeight: 22;
+$dDropdownSize: 16;
+$dDropdownLineHeight: 22;
+$dropdownLetterSpacing: 0.4;
+
+$mSelectPadding: 8 16 8 28;
+$dSelectPadding: 8 16 8px 28;
+$mSelectSize: 14;
+$mSelectLineHeight: 18;
+$dSelectSize: 16;
+$dSelectLineHeight: 20;
+$selectLetterSpacing: 0.4;
+
+
+@function getColorHex($colorname, $opacity: 1) {
+  $color: map-get($colors, $colorname);
+  @if $opacity == 1 {
+    @return $color;
+  } @else {
+    @return rgba(red($color), green($color), blue($color), $opacity);
+  }
+}
+
+$baseFont: 16;
+
+@function rem($pxWidths) {
+  $remValues: null;
+
+  @each $pxValue in $pxWidths {
+    $remValues: append($remValues, $pxValue / $baseFont + rem);
+  }
+  @return $remValues;
+}

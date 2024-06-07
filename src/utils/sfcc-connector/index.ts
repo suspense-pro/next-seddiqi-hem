@@ -26,6 +26,8 @@ export default async function getProducts(searchQuery) {
     },
   });
 
+  console.log({shopperToken});
+
   const configWithAuth = {
     ...clientConfig,
     headers: { authorization: `Bearer ${shopperToken.access_token}` },

@@ -1,0 +1,212 @@
+@import "mixins";
+@import "typography";
+@import "variables";
+
+
+
+$sqrt3: 1.2;
+$hex-height: 3rem;
+$hex-min-width: $hex-height * $sqrt3 / 2;
+$hex-distance: (
+  $hex-height / (2 * $sqrt3)
+);
+$border-width: rem(1);
+
+.button {
+  @include cta_regular;
+  @include transition-3s;
+  padding: rem(12 20);
+  font-size: rem(14);
+  line-height: rem(18);
+  letter-spacing: rem(1);
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: getColorHex("green-palm");
+  color: getColorHex("white");
+  border: none;
+  min-width: rem(174);
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  border-radius: rem(4);
+  
+  @include md {
+    padding: rem(12 22);
+    font-size: rem(16);
+    line-height: rem(20);
+  }
+
+  &.solid {
+    background-color: getColorHex("green");
+    color: getColorHex("white");
+    border: rem(1) solid getColorHex("green");
+
+    &:hover {
+      background-color:  getColorHex("green-palm");
+      color: getColorHex("white");
+    }
+
+    &.green {
+      background-color: getColorHex("green");
+      border: rem(1) solid getColorHex("green");
+  
+      &:hover {
+        background-color:  getColorHex("green-palm");
+        border: rem(1) solid getColorHex("green-palm");
+      }
+    }
+
+    &.white {
+      background-color: getColorHex("white");
+      color: getColorHex("green");
+      border: rem(1) solid getColorHex("white");
+
+      &:hover {
+        background-color: getColorHex("green-tint");
+        border: rem(1) solid getColorHex("green-tint");
+      }
+    }
+
+    &.black {
+      background-color: getColorHex("black");
+      color: getColorHex("white");
+      border: rem(1) solid getColorHex("black");
+
+      &:hover {
+        background-color: getColorHex("white");
+        color: getColorHex("black");
+        border: rem(1) solid getColorHex("white");
+      }
+    }
+
+    &.sand {
+      background-color: getColorHex("sand");
+      color: getColorHex("green");
+      border: rem(1) solid getColorHex("sand");
+
+      &:hover {
+        background-color: getColorHex("sand-mid");
+        border-color: getColorHex("sand-mid");
+      }
+    }
+
+  }
+
+  &.transparent {
+    border: rem(1) solid transparent;
+    color: getColorHex("green");
+    border-color: getColorHex("green");
+    background-color: transparent;
+
+    &:hover {
+      color: getColorHex("white");
+      background-color: getColorHex("green");
+    }
+
+    &.green {
+      border-color: getColorHex("green-palm");
+  
+      &:hover {
+        background-color: getColorHex("green");
+      }
+    }
+
+    &.white {
+      color: getColorHex("white");
+      border-color: getColorHex("white");
+
+      &:hover {
+        color: getColorHex("green");
+        background-color: getColorHex("white");
+      }
+    }
+
+    &.black {
+      color: getColorHex("black");
+      border-color: getColorHex("black");
+
+      &:hover {
+        background-color: getColorHex("black");
+        color: getColorHex("white");
+      }
+    }
+
+    &.sand {
+      color: getColorHex("sand");
+      border-color: getColorHex("sand");
+
+      &:hover {
+        background-color: getColorHex("sand-mid");
+        color: getColorHex("green");
+      }
+    }
+
+  }
+
+  &.plain {
+    border: none;
+    text-decoration-line: underline;
+    padding: 0;
+    min-width: auto;
+    background-color: transparent;
+    border: none;
+    span {
+      text-decoration-line: underline;
+      text-underline-offset: rem(2.3);
+      text-decoration: underline;
+    }
+
+    &.white {
+      span {
+        color: getColorHex("white");
+
+        &:hover {
+          color: getColorHex("black");
+        }
+      }
+    }
+
+    &.black {
+      span {
+        color: getColorHex("black");
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+
+    &.sand {
+      span {
+        color: getColorHex("sand");
+
+        &:hover {
+          color: getColorHex("sand-mid");
+        }
+      }
+    }
+
+    &.green {
+      span {
+        color: getColorHex("green");
+
+        &:hover {
+          color: getColorHex("green-palm");
+        }
+      }
+    }
+  }
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+.svg {
+  @include vertical_align_center;
+  @include pointer;
+  @include svg;
+}
