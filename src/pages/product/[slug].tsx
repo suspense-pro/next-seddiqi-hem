@@ -1,5 +1,35 @@
 import Image from "next/image";
 import getProducts from "@utils/sfcc-connector";
+import Layout from "@components/layout";
+
+
+export async function getStaticProps({ params }) {
+  const searchResults = await getProducts(params.slug);
+  const coffeeProduct = searchResults[0];
+
+  return {
+    props: {
+      product: coffeeProduct,
+    },
+  };
+}
+
+export async function getStaticPaths() {
+  const coffeeProducts = await getProducts("shirt");
+  let fullPaths = [];
+
+  console.log("path");
+
+  for (let product of coffeeProducts) {
+    fullPaths.push({ params: { slug: product.id } });
+  }
+
+  return {
+    paths: fullPaths,
+    fallback: "blocking",
+  };
+}
+
 
 export default function Product({ product }) {
   return (
@@ -31,29 +61,5 @@ export default function Product({ product }) {
   );
 }
 
-export async function getStaticProps({ params }) {
-  const searchResults = await getProducts(params.slug);
-  const coffeeProduct = searchResults[0];
 
-  return {
-    props: {
-      product: coffeeProduct,
-    },
-  };
-}
-
-export async function getStaticPaths() {
-  const coffeeProducts = await getProducts("shirt");
-  let fullPaths = [];
-
-  console.log("path");
-
-  for (let product of coffeeProducts) {
-    fullPaths.push({ params: { slug: product.id } });
-  }
-
-  return {
-    paths: fullPaths,
-    fallback: "blocking",
-  };
-}
+Product.Layout = Layout;

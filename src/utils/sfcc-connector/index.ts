@@ -1,37 +1,11 @@
-import { Customer, Product, Search } from "commerce-sdk";
+import { Product, Search } from "commerce-sdk";
+import initializeShopperConfig, { clientConfig } from "./config";
+
+
 
 export default async function getProducts(searchQuery) {
-  const clientConfig = {
-    headers: {
-      authorization: ``,
-    },
-    parameters: {
-      clientId: process.env.SFDC_CLIENT_ID,
-      secret: process.env.SFDC_SECRET,
-      organizationId: process.env.SFDC_ORGANIZATIONID,
-      shortCode: process.env.SFDC_SHORTCODE,
-      siteId: process.env.SFDC_SITEID,
-    },
-  };
 
-  const credentials = `${clientConfig.parameters.clientId}:${clientConfig.parameters.secret}`;
-  const base64data = Buffer.from(credentials).toString("base64");
-  const headers = { Authorization: `Basic ${base64data}` };
-  const client = new Customer.ShopperLogin(clientConfig);
-
-  const shopperToken = await client.getAccessToken({
-    headers,
-    body: {
-      grant_type: "client_credentials",
-    },
-  });
-
-  console.log({shopperToken});
-
-  const configWithAuth = {
-    ...clientConfig,
-    headers: { authorization: `Bearer ${shopperToken.access_token}` },
-  };
+  const configWithAuth = await initializeShopperConfig();
 
   const searchClient = new Search.ShopperSearch(configWithAuth);
   const searchResults = await searchClient.productSearch({
@@ -41,6 +15,7 @@ export default async function getProducts(searchQuery) {
   const results = [];
 
   const productsClient = new Product.ShopperProducts(configWithAuth);
+
   await Promise.all(
     searchResults.hits.map(async (product) => {
       const productResults = await productsClient.getProduct({
@@ -50,6 +25,8 @@ export default async function getProducts(searchQuery) {
           id: product.productId,
         },
       });
+
+      /* Transform Product Results Here before pusing in the Results Array */
 
       results.push(productResults);
     }),

@@ -1,5 +1,6 @@
 import React from 'react';
 import NextHead from 'next/head';
+import FontPreloader from '../fontPreloader';
 // import { DefaultSeo } from 'next-seo';
 
 const Head = () => {
@@ -14,6 +15,7 @@ const Head = () => {
                 <meta name="aria_config_locator_hub" content={""} />
                 <link rel="icon" href="/favicon.ico" type="image/x-icon" />
                 <title>Amplience Retail Storefront Website</title>
+                <FontPreloader />
             </NextHead>
         </>
     );

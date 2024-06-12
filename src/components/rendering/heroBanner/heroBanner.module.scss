@@ -1,0 +1,17 @@
+@import "../../../assets/styles/main.scss";
+
+.hero_banner_main {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  &.container {
+    @include md {
+      max-width: calc(#{rem(1312)} + #{rem(40)});
+      padding: rem(0 20);
+      margin: 0 auto;
+    }
+  }
+
+}

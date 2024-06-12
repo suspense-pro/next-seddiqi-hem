@@ -46,16 +46,6 @@ $border-width: rem(1);
       color: getColorHex("white");
     }
 
-    &.green {
-      background-color: getColorHex("green");
-      border: rem(1) solid getColorHex("green");
-  
-      &:hover {
-        background-color:  getColorHex("green-palm");
-        border: rem(1) solid getColorHex("green-palm");
-      }
-    }
-
     &.white {
       background-color: getColorHex("white");
       color: getColorHex("green");
@@ -67,28 +57,6 @@ $border-width: rem(1);
       }
     }
 
-    &.black {
-      background-color: getColorHex("black");
-      color: getColorHex("white");
-      border: rem(1) solid getColorHex("black");
-
-      &:hover {
-        background-color: getColorHex("white");
-        color: getColorHex("black");
-        border: rem(1) solid getColorHex("white");
-      }
-    }
-
-    &.sand {
-      background-color: getColorHex("sand");
-      color: getColorHex("green");
-      border: rem(1) solid getColorHex("sand");
-
-      &:hover {
-        background-color: getColorHex("sand-mid");
-        border-color: getColorHex("sand-mid");
-      }
-    }
 
   }
 
@@ -103,13 +71,6 @@ $border-width: rem(1);
       background-color: getColorHex("green");
     }
 
-    &.green {
-      border-color: getColorHex("green-palm");
-  
-      &:hover {
-        background-color: getColorHex("green");
-      }
-    }
 
     &.white {
       color: getColorHex("white");
@@ -120,27 +81,6 @@ $border-width: rem(1);
         background-color: getColorHex("white");
       }
     }
-
-    &.black {
-      color: getColorHex("black");
-      border-color: getColorHex("black");
-
-      &:hover {
-        background-color: getColorHex("black");
-        color: getColorHex("white");
-      }
-    }
-
-    &.sand {
-      color: getColorHex("sand");
-      border-color: getColorHex("sand");
-
-      &:hover {
-        background-color: getColorHex("sand-mid");
-        color: getColorHex("green");
-      }
-    }
-
   }
 
   &.plain {
@@ -166,35 +106,6 @@ $border-width: rem(1);
       }
     }
 
-    &.black {
-      span {
-        color: getColorHex("black");
-
-        &:hover {
-          opacity: 0.7;
-        }
-      }
-    }
-
-    &.sand {
-      span {
-        color: getColorHex("sand");
-
-        &:hover {
-          color: getColorHex("sand-mid");
-        }
-      }
-    }
-
-    &.green {
-      span {
-        color: getColorHex("green");
-
-        &:hover {
-          color: getColorHex("green-palm");
-        }
-      }
-    }
   }
 
   &:disabled,
