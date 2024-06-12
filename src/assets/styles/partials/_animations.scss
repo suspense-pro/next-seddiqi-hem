@@ -51,3 +51,324 @@
     transform: rotate(90deg);
   }
 }
+
+
+@mixin underLineHoverWhite {
+  &::after {
+    background: $via-arno-white;
+  }
+}
+
+@-webkit-keyframes tracking-in-left-to-right {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes tracking-in-left-to-right {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@mixin underLinePrimary {
+  width: fit-content;
+  position: relative;
+  overflow-x: hidden;
+  padding: 0 rem-calc(1.2);
+
+  @keyframes toRight {
+    0% {
+      transform: translateX(0);
+    }
+    50%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes fromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    50%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: rem-calc(1.2);
+    width: 100%;
+    left: 0;
+    bottom: rem-calc(-1.2);
+    background-color: $via-arno-black;
+    clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
+
+    animation: fromLeft 1s forwards;
+    animation-fill-mode: forwards;
+    transform: translateX(-100%);
+  }
+
+  &:hover {
+    &::after {
+      animation-play-state: running;
+      animation: toRight 1s forwards;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+@mixin underLinePrimaryLight {
+  width: fit-content;
+  position: relative;
+  overflow-x: hidden;
+  padding: 0 rem-calc(1.2);
+
+  @keyframes toRight {
+    0% {
+      transform: translateX(0);
+    }
+    50%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes fromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    50%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: rem-calc(1.2);
+    width: 100%;
+    left: 0;
+    bottom: rem-calc(-1.2);
+    background-color: $via-arno-white;
+    clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
+
+    animation: fromLeft 1s forwards;
+    animation-fill-mode: forwards;
+    transform: translateX(-100%);
+  }
+
+  &:hover {
+    &::after {
+      animation-play-state: running;
+      animation: toRight 1s forwards;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+@mixin underLineSecondary {
+  width: fit-content;
+  position: relative;
+  overflow-x: hidden;
+  padding: 0 rem-calc(1.2);
+
+  @keyframes fromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    50%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes toRight {
+    0% {
+      transform: translateX(0);
+    }
+    50%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: rem-calc(1.2);
+    width: 100%;
+    left: 0;
+    bottom: rem-calc(-1.2);
+    background-color: $via-arno-black;
+    clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
+
+    animation: toRight 1s forwards;
+    animation-fill-mode: forwards;
+    transform: translateX(-100%);
+  }
+
+  &:hover {
+    &::after {
+      animation-play-state: running;
+      animation: fromLeft 1s forwards;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+@mixin underLineSecondaryLight {
+  width: fit-content;
+  position: relative;
+  overflow-x: hidden;
+  padding: 0 rem-calc(1.2);
+
+  @keyframes fromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    50%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes toRight {
+    0% {
+      transform: translateX(0);
+    }
+    50%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: rem-calc(1.2);
+    width: 100%;
+    left: 0;
+    bottom: rem-calc(-1.2);
+    background-color: $via-arno-white;
+    clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
+
+    animation: toRight 1s forwards;
+    animation-fill-mode: forwards;
+    transform: translateX(-100%);
+  }
+
+  &:hover {
+    &::after {
+      animation-play-state: running;
+      animation: fromLeft 1s forwards;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+@mixin underLinePreselect {
+  width: fit-content;
+  position: relative;
+  overflow-x: hidden;
+  padding: 0 rem-calc(1.2);
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: rem-calc(1.2);
+    width: 100%;
+    left: 0;
+    bottom: rem-calc(-1.2);
+    background-color: $via-arno-black;
+    clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
+  }
+}
+
+@mixin underLinePreselectLight {
+  width: fit-content;
+  position: relative;
+  overflow-x: hidden;
+  padding: 0 rem-calc(1.2);
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: rem-calc(1.2);
+    width: 100%;
+    left: 0;
+    bottom: rem-calc(-1.2);
+    background-color: $via-arno-white;
+    clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
+  }
+}
+
+.animated-link-wrapper {
+  width: fit-content;
+  overflow-x: hidden;
+  flex-shrink: 0;
+}
+
+.animated-link {
+  margin: 0;
+  color: $via-arno-black;
+  font-variant-numeric: lining-nums proportional-nums;
+  @include MarcinAntique;
+  font-size: rem-calc(14);
+  font-style: normal;
+  font-weight: $fontWeight-normal;
+  line-height: 1.4;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.animated-link.primary.light {
+  @include underLinePrimaryLight;
+  color: $via-arno-white;
+}
+
+.animated-link.primary.dark {
+  @include underLinePrimary;
+  color: $via-arno-black;
+}
+
+.animated-link.secondary.light {
+  @include underLineSecondaryLight;
+  color: $via-arno-white;
+}
+
+.animated-link.secondary.dark {
+  @include underLineSecondary;
+  color: $via-arno-black;
+}
+
+.animated-link.muted {
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.animated-link.preselect.light {
+  @include underLinePreselectLight;
+  color: $via-arno-white;
+}
+
+.animated-link.preselect.dark {
+  @include underLinePreselect;
+  color: $via-arno-black;
+}
