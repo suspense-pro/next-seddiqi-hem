@@ -55,7 +55,7 @@
 
 @mixin underLineHoverWhite {
   &::after {
-    background: $via-arno-white;
+    background: getColorHex("white");
   }
 }
 
@@ -112,7 +112,7 @@
     width: 100%;
     left: 0;
     bottom: rem-calc(-1.2);
-    background-color: $via-arno-black;
+    background-color: getColorHex("black");
     clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
 
     animation: fromLeft 1s forwards;
@@ -162,7 +162,7 @@
     width: 100%;
     left: 0;
     bottom: rem-calc(-1.2);
-    background-color: $via-arno-white;
+    background-color: getColorHex("white");
     clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
 
     animation: fromLeft 1s forwards;
@@ -212,7 +212,7 @@
     width: 100%;
     left: 0;
     bottom: rem-calc(-1.2);
-    background-color: $via-arno-black;
+    background-color: getColorHex("black");
     clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
 
     animation: toRight 1s forwards;
@@ -262,7 +262,7 @@
     width: 100%;
     left: 0;
     bottom: rem-calc(-1.2);
-    background-color: $via-arno-white;
+    background-color: getColorHex("white");
     clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
 
     animation: toRight 1s forwards;
@@ -292,7 +292,7 @@
     width: 100%;
     left: 0;
     bottom: rem-calc(-1.2);
-    background-color: $via-arno-black;
+    background-color: getColorHex("black");
     clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
   }
 }
@@ -310,7 +310,7 @@
     width: 100%;
     left: 0;
     bottom: rem-calc(-1.2);
-    background-color: $via-arno-white;
+    background-color: getColorHex("white");
     clip-path: polygon(1.2px 0%, 100% 0%, calc(100% - 1.2px) 100%, 0% 100%);
   }
 }
@@ -323,12 +323,12 @@
 
 .animated-link {
   margin: 0;
-  color: $via-arno-black;
+  color: getColorHex("black");
   font-variant-numeric: lining-nums proportional-nums;
-  @include MarcinAntique;
+  @include body_regular;
   font-size: rem-calc(14);
   font-style: normal;
-  font-weight: $fontWeight-normal;
+  font-weight: normal;
   line-height: 1.4;
   text-decoration: none;
   overflow: hidden;
@@ -337,22 +337,22 @@
 
 .animated-link.primary.light {
   @include underLinePrimaryLight;
-  color: $via-arno-white;
+  color: getColorHex("white");
 }
 
 .animated-link.primary.dark {
   @include underLinePrimary;
-  color: $via-arno-black;
+  color: getColorHex("black");
 }
 
 .animated-link.secondary.light {
   @include underLineSecondaryLight;
-  color: $via-arno-white;
+  color: getColorHex("white");
 }
 
 .animated-link.secondary.dark {
   @include underLineSecondary;
-  color: $via-arno-black;
+  color: getColorHex("black");
 }
 
 .animated-link.muted {
@@ -365,10 +365,10 @@
 
 .animated-link.preselect.light {
   @include underLinePreselectLight;
-  color: $via-arno-white;
+  color: getColorHex("white");
 }
 
 .animated-link.preselect.dark {
   @include underLinePreselect;
-  color: $via-arno-black;
+  color: getColorHex("black");
 }
