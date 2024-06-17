@@ -59,11 +59,12 @@ $border-width: rem(1);
 
     &.bronze_grey {
       background-color: getColorHex("bronze-grey");
-      color: getColorHex("white");
+      color: getColorHex("midnight-brown");
       border: rem(1) solid getColorHex("bronze-grey");
 
       &:hover {
         background-color: getColorHex("midnight-brown");
+        color: getColorHex("white");
         border: rem(1) solid getColorHex("midnight-brown");
       }
     }
