@@ -10,6 +10,7 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
 import ErrorPage from "next/error";
+import WithVisualization from "@contexts/withVisualizationContext";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -29,9 +30,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head />
-      <Layout pageProps={pageProps}>
-        <Component {...pageProps} />
-      </Layout>
+      <WithVisualization>
+        <Layout pageProps={pageProps}>
+          <Component {...pageProps} />
+        </Layout>
+      </WithVisualization>
     </>
   );
 }
