@@ -3,6 +3,7 @@ import styles from "./heroBanner.module.scss";
 import classNames from "classnames";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "@components/module/image"
+import { Button } from "@components/module";
 
 export default function HeroBanner({
   _meta,
@@ -25,6 +26,10 @@ export default function HeroBanner({
                 image={banner}
                 className={styles.heroImage}
               />
+              <br /><br />
+              <Button title="Shop Now" type="solid " /> <br /><br />
+              <Button title="Shop transparent" type="transparent" /> <br /><br />
+              <Button title="Shop plain" type="plain" />
           </div>
           <div className={`${styles.hero_banner_text_container}`}>
 
