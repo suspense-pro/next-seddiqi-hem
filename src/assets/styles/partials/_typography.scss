@@ -1,72 +1,140 @@
 @mixin heading_bold {
-  font-family: "Freight_Display_Bold", sans-serif;
+  font-family: "Haboro_Contrast_Bold", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
 
 @mixin heading_bold_italic {
-  font-family: "Freight_Display_Bold_Italic", sans-serif;
+  font-family: "Haboro_Contrast_Bold_Italic", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
 
 @mixin heading_regular {
-  font-family: "Freight_Display_Pro", sans-serif;
+  font-family: "Haboro_Contrast_Regular", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
 
 @mixin heading_regular_italic {
-  font-family: "Freight_Display_Italic", sans-serif;
+  font-family: "Haboro_Contrast_Italic", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
 
-
 @mixin body_regular {
-  font-family: "Freight_Sans_Pro", sans-serif;
+  font-family: "Urbanist_Regular", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
 
 @mixin body_bold {
-  font-family: "Freight_Sans_Bold", sans-serif;
+  font-family: "Urbanist_Bold", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
 
 @mixin cta_regular {
-  font-family: "Freight_Sans_Pro", sans-serif;
+  font-family: "Urbanist_Regular", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
-
 
 @mixin cta_bold {
-  font-family: "Freight_Sans_Bold", sans-serif;
+  font-family: "Urbanist_Bold", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
 
-
-.qdf-dokkan {
-
+.seddiqi-theme {
   @include body_regular;
-  
+
   .h1,
   .h2,
   .h3,
   .h4,
+  .h5,
+  .h6,
   h1,
   h2,
   h3,
-  h4 {
+  h4,
+  h5,
+  h6 {
     @include heading_regular();
     font-weight: normal;
 
     em {
       @include heading_regular_italic();
     }
+  }
+  .h1,
+  .h2,
+  .h3,
+  h1,
+  h2,
+  h3 {
+    letter-spacing: rem(0.4);
+  }
+
+  .h4,
+  .h5,
+  .h6,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: rem(0.6);
+  }
+
+  .h1,
+  h1 {
+    font-size: rem(34);
+    line-height: rem(40);
+    @include md {
+      font-size: rem(48);
+      line-height: rem(54);
+    }
+  }
+  .h2,
+  h2 {
+    font-size: rem(28);
+    line-height: rem(34);
+    @include md {
+      font-size: rem(40);
+      line-height: rem(46);
+    }
+  }
+  .h3,
+  h3 {
+    font-size: rem(22);
+    line-height: rem(30);
+    @include md {
+      font-size: rem(32);
+      line-height: rem(38);
+    }
+  }
+  .h4,
+  h4 {
+    font-size: rem(18);
+    line-height: rem(26);
+    @include md {
+      font-size: rem(26);
+      line-height: rem(32);
+    }
+  }
+  .h5,
+  h5 {
+    font-size: rem(14);
+    line-height: rem(20);
+    @include md {
+      font-size: rem(20);
+      line-height: rem(26);
+    }
+  }
+  .h6,
+  h6 {
+    font-size: rem(16);
+    line-height: rem(20);
   }
 
   .rich-text,
@@ -124,5 +192,4 @@
       margin-top: 0;
     }
   }
-
 }
