@@ -21,39 +21,50 @@ $border-width: rem(1);
   letter-spacing: rem(1);
   text-transform: uppercase;
   cursor: pointer;
-  background-color: getColorHex("green-palm");
+  background-color: getColorHex("midnight-brown");
   color: getColorHex("white");
   border: none;
   min-width: rem(174);
   display: inline-block;
   text-align: center;
   position: relative;
-  border-radius: rem(4);
+  border-radius: rem( 12 0 12 0);
   
   @include md {
-    padding: rem(12 22);
-    font-size: rem(16);
+    padding: rem(12 28);
+    font-size: rem(14);
     line-height: rem(20);
   }
 
   &.solid {
-    background-color: getColorHex("green");
+    background-color: getColorHex("midnight-brown");
     color: getColorHex("white");
-    border: rem(1) solid getColorHex("green");
+    border: rem(1) solid getColorHex("midnight-brown");
 
     &:hover {
-      background-color:  getColorHex("green-palm");
+      background-color:  getColorHex("black");
       color: getColorHex("white");
     }
 
-    &.white {
-      background-color: getColorHex("white");
-      color: getColorHex("green");
-      border: rem(1) solid getColorHex("white");
+    &.metallic {
+      background-color: getColorHex("metallic");
+      color: getColorHex("white");
+      border: rem(1) solid getColorHex("metallic");
 
       &:hover {
-        background-color: getColorHex("green-tint");
-        border: rem(1) solid getColorHex("green-tint");
+        background-color: getColorHex("midnight-brown");
+        border: rem(1) solid getColorHex("midnight-brown");
+      }
+    }
+
+    &.grey {
+      background-color: getColorHex("bronze-grey");
+      color: getColorHex("white");
+      border: rem(1) solid getColorHex("bronze-grey");
+
+      &:hover {
+        background-color: getColorHex("midnight-brown");
+        border: rem(1) solid getColorHex("midnight-brown");
       }
     }
 
@@ -62,25 +73,36 @@ $border-width: rem(1);
 
   &.transparent {
     border: rem(1) solid transparent;
-    color: getColorHex("green");
-    border-color: getColorHex("green");
+    color: getColorHex("midnight-brown");
+    border-color: getColorHex("midnight-brown");
     background-color: transparent;
 
     &:hover {
       color: getColorHex("white");
-      background-color: getColorHex("green");
+      background-color: getColorHex("black");
     }
 
-
-    &.white {
+    &.black {
       color: getColorHex("white");
-      border-color: getColorHex("white");
+      border-color: getColorHex("midnight-brown");
 
       &:hover {
-        color: getColorHex("green");
-        background-color: getColorHex("white");
+        color: getColorHex("white");
+        background-color: getColorHex("black");
       }
     }
+
+    &.white {
+      color: getColorHex("bronze-grey");
+      border-color: getColorHex("bronze-grey");
+
+      &:hover {
+        color: getColorHex("midnight-brown");
+        background-color: getColorHex("bronze-grey");
+      }
+    }
+
+
   }
 
   &.plain {
