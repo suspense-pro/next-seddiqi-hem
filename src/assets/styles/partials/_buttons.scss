@@ -57,7 +57,7 @@ $border-width: rem(1);
       }
     }
 
-    &.grey {
+    &.bronze_grey {
       background-color: getColorHex("bronze-grey");
       color: getColorHex("white");
       border: rem(1) solid getColorHex("bronze-grey");
@@ -65,6 +65,26 @@ $border-width: rem(1);
       &:hover {
         background-color: getColorHex("midnight-brown");
         border: rem(1) solid getColorHex("midnight-brown");
+      }
+    }
+    &.green_dark {
+      background-color: getColorHex("green-dark");
+      color: getColorHex("white");
+      border: rem(1) solid getColorHex("green-dark");
+
+      &:hover {
+        background-color: getColorHex("green-grey");
+        border: rem(1) solid getColorHex("green-grey");
+      }
+    }
+    &.green_grey {
+      background-color: getColorHex("green-grey");
+      color: getColorHex("white");
+      border: rem(1) solid getColorHex("green-grey");
+
+      &:hover {
+        background-color: getColorHex("green-dark");
+        border: rem(1) solid getColorHex("green-dark");
       }
     }
 
@@ -83,7 +103,7 @@ $border-width: rem(1);
     }
 
     &.black {
-      color: getColorHex("white");
+      color: getColorHex("midnight-brown");
       border-color: getColorHex("midnight-brown");
 
       &:hover {
@@ -92,13 +112,31 @@ $border-width: rem(1);
       }
     }
 
-    &.white {
+    &.grey {
       color: getColorHex("bronze-grey");
       border-color: getColorHex("bronze-grey");
 
       &:hover {
         color: getColorHex("midnight-brown");
         background-color: getColorHex("bronze-grey");
+      }
+    }
+    &.dark_green {
+      color: getColorHex("green-dark");
+      border-color: getColorHex("green-dark");
+
+      &:hover {
+        color: getColorHex("white");
+        background-color: getColorHex("green-dark");
+      }
+    }
+    &.grey_light {
+      color: getColorHex("green-greyish-light");
+      border-color: getColorHex("green-greyish-light");
+
+      &:hover {
+        color: getColorHex("green-dark");
+        background-color: getColorHex("green-greyish-light");
       }
     }
 
