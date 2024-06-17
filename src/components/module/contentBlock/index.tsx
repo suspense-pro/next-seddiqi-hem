@@ -8,6 +8,7 @@ import CmsSlot from '@components/module/cmsSlot';
 
 import { useRouter } from 'next/router';
 import { ComponentMapping } from '@utils/cms/config';
+import { useContent } from '@contexts/withVisualizationContext';
 
 export type ContentBlockType = 'SLOT' | 'CONTENT';
 
@@ -29,14 +30,12 @@ const ContentBlock = ({
     const vse = (query?.vse as string) || '';
 
     // Get real-time content from original content
-    // const [liveContent] = useContent(originalContent, vse);
-    // if (!liveContent) {
-    //     return null;
-    // }
+    const [liveContent] = useContent(originalContent, vse);
+    if (!liveContent) {
+        return null;
+    }
 
-    const content = originalContent;
-
-    console.log({originalContent});
+    const content = liveContent;
     
     const Component = components[content?._meta?.schema];
     const children = Component ? <Component {...content} /> : <>{JSON.stringify(content)}</>;
