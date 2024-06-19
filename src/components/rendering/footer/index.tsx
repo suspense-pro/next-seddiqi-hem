@@ -6,22 +6,22 @@ import { TwitterIcon, InstaIcon, FBIcon } from "@assets/images/svg";
 import { FooterPropType } from "@utils/models";
 
 const commonLinks = [
-  { text: "Watches", url: "" },
-  { text: "Jewellery", url: "" },
-  { text: "Accessories", url: "/accessories" },
-  { text: "Brands", url: "/brands" },
-  { text: "Explore", url: "" },
-  { text: "Services", url: "/services" },
-  { text: "Contact Us", url: "/contact" },
-  { text: "Store Locator", url: "/stores" },
+  { label: "Watches", url: "" },
+  { label: "Jewellery", url: "" },
+  { label: "Accessories", url: "/accessories" },
+  { label: "Brands", url: "/brands" },
+  { label: "Explore", url: "" },
+  { label: "Services", url: "/services" },
+  { label: "Contact Us", url: "/contact" },
+  { label: "Store Locator", url: "/stores" },
 ];
 
 const distinctLinks = [
-  { text: "Boutique Locators", url: "/boutique-locators" },
-  { text: "FAQs", url: "/faqs" },
-  { text: "Warranty", url: "/warranty" },
-  { text: "Return Policy", url: "/return-policy" },
-  { text: "Terms & Conditions", url: "/terms-conditions" },
+  { label: "Boutique Locators", url: "/boutique-locators" },
+  { label: "FAQs", url: "/faqs" },
+  { label: "Warranty", url: "/warranty" },
+  { label: "Return Policy", url: "/return-policy" },
+  { label: "Terms & Conditions", url: "/terms-conditions" },
 ];
 
 export default function Footer({
@@ -42,13 +42,13 @@ export default function Footer({
             style={{ gridArea: `links${offset / 4 + 1}` }}
           >
             {commonLinks.slice(offset, offset + 4).map((link) => (
-              <NavigationLink key={link.text} text={link.text} url={link.url} />
+              <NavigationLink key={link.label} label={link.label} url={link.url} />
             ))}
           </div>
         ))}
         <div className={styles.column} style={{ gridArea: "links3" }}>
           {distinctLinks.map((link) => (
-            <NavigationLink key={link.text} text={link.text} url={link.url} />
+            <NavigationLink key={link.label} label={link.label} url={link.url} />
           ))}
         </div>
       </div>

@@ -3,22 +3,22 @@ import Link from "next/link";
 
 interface NavigationLinkProps {
   url?: string;
-  text: string;
+  label: string;
 }
  
 
-const NavigationLink: React.FC<NavigationLinkProps> = ({ url, text }) => {
+const NavigationLink: React.FC<NavigationLinkProps> = ({ url, label }) => {
  
   if (url) {
     return (
       <Link href={url} passHref>
-        {text}
+        {label}
       </Link>
     );
   } else {
     return (
       <div>
-        <span>{text}</span>
+        <span>{label}</span>
       </div>
     );
   }
