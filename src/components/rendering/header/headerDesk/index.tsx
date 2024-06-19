@@ -7,16 +7,9 @@ import {
   WishlistIcon,
 } from "@assets/images/svg";
 import NavigationLink from "@components/module/navigationLink";
+import { headerDummyData } from "../headerDummyData";
 
 // TEMP
-const NAVIGATION_DATA = [
-  "WATCHES",
-  "JEWELLERY",
-  "ACCESSORIES",
-  "BRANDS",
-  "SERVICES",
-  "EXPLORE",
-];
 const HEADER_LOGOS = [
   {
     id: 1,
@@ -61,11 +54,11 @@ export default function HeaderDesk() {
         <div className={styles.linksContainer}>
           <div className={styles.appointmentBtn}>BOOK APPOINTMENT</div>
           <div className={styles.links}>
-            {NAVIGATION_DATA?.map((name) => (
+            {headerDummyData.navigation?.map((link) => (
               <NavigationLink
                 className={styles.headerLink}
-                key={name}
-                title={name}
+                key={link.title}
+                title={link.title}
               />
             ))}
           </div>
