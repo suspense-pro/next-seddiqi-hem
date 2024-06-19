@@ -7,7 +7,7 @@ import {
   WishlistIcon,
 } from "@assets/images/svg";
 import NavigationLink from "@components/module/navigationLink";
-import { headerDummyData } from "../headerDummyData";
+import { headerDummyData } from "./headerDummyData";
 
 // TEMP
 const HEADER_LOGOS = [
@@ -34,7 +34,7 @@ const HEADER_LOGOS = [
   },
 ];
 
-export default function HeaderDesk() {
+export default function DesktopHeader() {
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>

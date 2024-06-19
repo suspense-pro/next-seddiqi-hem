@@ -37,8 +37,5 @@ export const headerDummyData = {
     {
       icon: "",
     },
-    {
-      icon: "",
-    },
   ],
 };

@@ -1,9 +1,9 @@
-import HeaderDesk from "./headerDesk";
+import DesktopHeader from "@components/module/desktopHeader";
 
 export default function Header() {
   return (
     <header>
-      <HeaderDesk />
+      <DesktopHeader />
     </header>
   );
 }
