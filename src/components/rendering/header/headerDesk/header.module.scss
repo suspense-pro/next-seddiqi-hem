@@ -1,0 +1,66 @@
+@import "../../../../assets/styles/main.scss";
+
+.headerContainer {
+  height: rem(156);
+  padding: rem(28 0);
+  margin: rem(0 40);
+  background-color: getColorHex("white");
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid getColorHex("grey-light");
+
+  .headerLogoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .linksContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .appointmentBtn {
+      padding: rem(4 0);
+      border-bottom: 1px solid getColorHex("green-dark");
+      color: getColorHex("green-dark");
+      max-width: 250px;
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+      gap: 36px;
+
+      .headerLink {
+        padding: rem(7 0);
+        cursor: pointer;
+        color: getColorHex("green-dark");
+        border-bottom: 2px solid #00000000;
+
+        &:hover {
+          border-bottom: 2px solid getColorHex("green-dark");
+        }
+      }
+
+      .headerLinkActive {
+        border-bottom: 2px solid getColorHex("green-dark");
+      }
+    }
+
+    .navIcons {
+      max-width: 250px;
+      display: flex;
+      align-items: center;
+      gap: 28.2px;
+    }
+  }
+}
