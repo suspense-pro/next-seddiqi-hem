@@ -30,9 +30,11 @@
       border-bottom: 1px solid getColorHex("green-dark");
       color: getColorHex("green-dark");
       max-width: rem(250);
+      cursor: pointer;
     }
 
     .links {
+      @include heading_regular;
       display: flex;
       align-items: center;
       justify-content: center;
