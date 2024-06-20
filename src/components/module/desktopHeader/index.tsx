@@ -42,6 +42,7 @@ export default function DesktopHeader() {
         <div className={styles.headerLogoContainer}>
           {HEADER_LOGOS?.map((logo) => (
             <Image
+              key={logo.title}
               src={logo.url}
               width={logo.width}
               height={logo.height}

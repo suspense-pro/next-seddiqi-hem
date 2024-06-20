@@ -15,13 +15,17 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
 }) => {
   if (url) {
     return (
-      <Link className={className} href={url || "/"}>
+      <Link
+        onMouseEnter={() => console.log("hello")}
+        className={className}
+        href={url || "/"}
+      >
         <span>{title}</span>
       </Link>
     );
   } else {
     return (
-      <div className={className}>
+      <div onMouseEnter={() => console.log("hello")} className={className}>
         <span>{title}</span>{" "}
       </div>
     );

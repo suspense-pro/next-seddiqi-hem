@@ -1,0 +1,28 @@
+@import "./../../../../../assets/styles/main.scss";
+
+.storyCardContainer {
+  display: flex;
+  gap: rem(20);
+  width: rem(368);
+  height: rem(109);
+
+  .image {
+    border-top-left-radius: rem(6);
+    border-bottom-right-radius: rem(6);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+    width: rem(188);
+
+    .title {
+    }
+
+    .subtitle {
+      font-size: rem(14);
+      line-height: rem(22);
+    }
+  }
+}

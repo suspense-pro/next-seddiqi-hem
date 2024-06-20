@@ -1,0 +1,42 @@
+@import "./../../../assets/styles/main.scss";
+
+.megaMenuContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: rem(60 120);
+
+  .columns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .menuLeft {
+      display: flex;
+      gap: rem(87);
+      justify-content: space-between;
+    }
+
+    .displayCardsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: rem(12);
+      .displayCards {
+        display: flex;
+        gap: rem(24);
+      }
+
+      .displayCardsTitle {
+        font-size: rem(16);
+        font-weight: 400;
+        line-height: rem(20);
+        letter-spacing: rem(0.4);
+      }
+
+      .storyCards {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+  }
+}
