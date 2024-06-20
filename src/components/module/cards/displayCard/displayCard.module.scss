@@ -1,0 +1,32 @@
+@import "./../../../../assets//styles/main.scss";
+
+.displayCard {
+  min-width: rem(226);
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+  cursor: pointer;
+  .storyImg {
+    border-top-left-radius: rem(16);
+    border-bottom-right-radius: rem(16);
+    object-fit: cover;
+  }
+
+  .displayCardInfo {
+    display: flex;
+    flex-direction: column;
+    gap: rem(8);
+    .title {
+      color: getColorHex("green-metallic");
+      letter-spacing: rem(0.4);
+      text-transform: uppercase;
+      font-size: rem(14);
+    }
+
+    .subTitle {
+      @include heading_regular;
+      color: getColorHex("green-dark");
+      font-size: rem(16);
+    }
+  }
+}

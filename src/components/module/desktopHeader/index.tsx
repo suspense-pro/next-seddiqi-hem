@@ -8,6 +8,9 @@ import {
 } from "@assets/images/svg";
 import NavigationLink from "@components/module/navigationLink";
 import { headerDummyData } from "./headerDummyData";
+import { useContext } from "react";
+import { HeaderContext } from "@contexts/headerContext";
+import Link from "next/link";
 
 // TEMP
 const HEADER_LOGOS = [
@@ -16,51 +19,67 @@ const HEADER_LOGOS = [
     width: 78.65,
     height: 46,
     title: "PatekLogo",
-    url: "/images/png/PatekLogo.png",
+    imageUrl: "/images/png/PatekLogo.png",
+    url: "/",
   },
   {
     id: 2,
     width: 120,
     height: 24,
     title: "PatekLogo",
-    url: "/images/png/SeddiqiLogo.png",
+    imageUrl: "/images/png/SeddiqiLogo.png",
+    url: "/",
   },
   {
     id: 3,
     width: 100.3,
     height: 46,
     title: "PatekLogo",
-    url: "/images/png/ROlexLogo.png",
+    imageUrl: "/images/png/ROlexLogo.png",
+    url: "/",
   },
 ];
 
 export default function DesktopHeader() {
+  const headerContext = useContext(HeaderContext);
+
+  if (!headerContext) {
+    return null;
+  }
+  const { current, updateCurrent } = headerContext;
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>
         {/* logo bar */}
         <div className={styles.headerLogoContainer}>
           {HEADER_LOGOS?.map((logo) => (
-            <Image
-              key={logo.title}
-              src={logo.url}
-              width={logo.width}
-              height={logo.height}
-              alt={logo.title}
-            />
+            <Link href={logo.url}>
+              <Image
+                key={logo.title}
+                src={logo.imageUrl}
+                width={logo.width}
+                height={logo.height}
+                alt={logo.title}
+              />
+            </Link>
           ))}
         </div>
 
         {/* links */}
-        <div className={styles.linksContainer}>
+        <div
+          // onMouseLeave={() => updateCurrent(null)}
+          className={styles.linksContainer}
+        >
           <div className={styles.appointmentBtn}>BOOK APPOINTMENT</div>
           <div className={styles.links}>
-            {headerDummyData.navigation?.map((link) => (
-              <NavigationLink
-                className={styles.headerLink}
-                key={link.title}
-                title={link.title}
-              />
+            {headerDummyData.navigation?.map((link, ind) => (
+              <div onMouseEnter={() => updateCurrent(ind)}>
+                <NavigationLink
+                  className={styles.headerLink}
+                  key={link.title}
+                  title={link.title}
+                />
+              </div>
             ))}
           </div>
           <div className={styles.navIcons}>

@@ -1,7 +1,8 @@
 // types.ts
-export interface LatestProduct {
-  brand: string;
-  product: string;
+export interface LatestsubTitle {
+  image?: string;
+  title?: string;
+  subTitle?: string;
 }
 
 export interface Category {
@@ -14,7 +15,7 @@ export interface Section {
   type: string;
   categories?: Category[];
   special_categories?: Category[];
-  the_latest?: LatestProduct[];
+  the_latest?: LatestsubTitle[];
 }
 
 export interface HeaderData {
@@ -27,7 +28,7 @@ export const headerDummyData: HeaderData = {
     "Watches",
     "Jewellery",
     "Accessories",
-    "Brands",
+    "titles",
     "Services",
     "Explore",
   ],
@@ -50,12 +51,14 @@ export const headerDummyData: HeaderData = {
       ],
       the_latest: [
         {
-          brand: "Chopard",
-          product: "Happy Hearts",
+          image: "/images/png/watchImage_01.png",
+          title: "Rolex",
+          subTitle: "GMT‑Master II",
         },
         {
-          brand: "Van Cleef Arpels",
-          product: "Fleurette Earrings",
+          title: "breitling",
+          subTitle: "Navitimer automatic GMT 41",
+          image: "/images/png/watchImage_03.png",
         },
       ],
     },
@@ -78,12 +81,14 @@ export const headerDummyData: HeaderData = {
       ],
       the_latest: [
         {
-          brand: "Chopard",
-          product: "Happy Hearts",
+          title: "Chopard",
+          subTitle: "Happy Hearts",
+          image: "/images/png/jewellery_01.png",
         },
         {
-          brand: "Van Cleef Arpels",
-          product: "Fleurette Earrings",
+          title: "Van Cleef Arpels",
+          subTitle: "Fleurette Earrings",
+          image: "/images/png/jewellery_02.png",
         },
       ],
     },
@@ -98,12 +103,14 @@ export const headerDummyData: HeaderData = {
       special_categories: [],
       the_latest: [
         {
-          brand: "Chopard",
-          product: "Happy Hearts",
+          title: "Rapport",
+          subTitle: "Vantage three watch roll",
+          image: "/images/png/acessories_01.png",
         },
         {
-          brand: "Van Cleef Arpels",
-          product: "Fleurette Earrings",
+          title: "Chopard",
+          subTitle: "Happy hearts tote bag",
+          image: "/images/png/acessories_02.png",
         },
       ],
     },
@@ -119,12 +126,14 @@ export const headerDummyData: HeaderData = {
       special_categories: [],
       the_latest: [
         {
-          brand: "Chopard",
-          product: "Happy Hearts",
+          title: "Sediqqi Servicing",
+          subTitle: "How to take care of your watch?",
+          image: "/images/jpg/services_01.jpg",
         },
         {
-          brand: "Van Cleef Arpels",
-          product: "Fleurette Earrings",
+          title: "Sediqqi Servicing",
+          subTitle: "Swiss trained watchmakers",
+          image: "/images/png/services_02.png",
         },
       ],
     },
@@ -139,12 +148,28 @@ export const headerDummyData: HeaderData = {
         { name: "SEDDIQI WORLD", expand: false },
       ],
       special_categories: [
-        { name: "New Products", expand: false },
-        { name: "Seddiqi Brand Launches", expand: false },
+        { name: "New subTitles", expand: false },
+        { name: "Seddiqi title Launches", expand: false },
         { name: "Seddiqi Partnerships", expand: false },
         { name: "Latest News", expand: false },
       ],
-      the_latest: [],
+      the_latest: [
+        {
+          title: "Seddiqi Jewellery Show: Where Nature and Luxury Intertwine",
+          subTitle: "The world of watchmaking came to Geneva.",
+          image: "/images/jpg/story_01.jpg",
+        },
+        {
+          title: "Wish-list Watches for Workplace Big Hitters",
+          subTitle: "Elevate your office attire with these watches.",
+          image: "/images/png/story_02.png",
+        },
+        {
+          title: "Wish-Show her that you love her",
+          subTitle: "Elevate your office attire with these watches.",
+          image: "/images/png/story_02.png",
+        },
+      ],
     },
   ],
 };
