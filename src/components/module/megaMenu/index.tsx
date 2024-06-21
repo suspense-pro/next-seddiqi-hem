@@ -92,7 +92,7 @@ const ContentBlocks = () => {
   );
 };
 
-const MegaMenu = () => {
+const MegaMenu = ({ headerHeightClass }) => {
   const headerContext = useContext(HeaderContext);
   const { current, headerData } = headerContext;
 
@@ -105,7 +105,7 @@ const MegaMenu = () => {
     return null;
   }
   return (
-    <section className={styles.megaMenuContainer}>
+    <section className={`${headerHeightClass} ${styles.megaMenuContainer}`}>
       <div className={styles.columns}>
         <SubMenuLinks />
         <ContentBlocks />

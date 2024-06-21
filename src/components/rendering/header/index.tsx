@@ -7,7 +7,6 @@ export default function Header() {
     <HeaderProvider>
       <header className={styles.header}>
         <DesktopHeader />
-        <MegaMenu />
       </header>
     </HeaderProvider>
   );

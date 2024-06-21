@@ -5,6 +5,7 @@
   display: flex;
   justify-content: space-between;
   padding: rem(60 120);
+  transition: all 0.3s;
 
   @include breakpoint-max-width("1150px") {
     padding: rem(30 60);

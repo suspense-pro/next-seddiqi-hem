@@ -11,6 +11,7 @@ import { headerDummyData } from "./headerDummyData";
 import { useContext, useEffect, useState } from "react";
 import { HeaderContext } from "@contexts/headerContext";
 import Link from "next/link";
+import MegaMenu from "../megaMenu";
 
 // TEMP
 const HEADER_LOGOS = [
@@ -42,6 +43,12 @@ const HEADER_LOGOS = [
 
 export default function DesktopHeader() {
   const [scrolled, setScrolled] = useState(false);
+  const headerContext = useContext(HeaderContext);
+
+  if (!headerContext) {
+    return null;
+  }
+  const { current, updateCurrent } = headerContext;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,21 +65,15 @@ export default function DesktopHeader() {
     };
   }, []);
 
-  const headerContext = useContext(HeaderContext);
-
-  if (!headerContext) {
-    return null;
-  }
-  const { current, updateCurrent } = headerContext;
   return (
-    <div
-      className={`${styles.desktopHeader} ${scrolled ? styles.scrolled : ""}`}
-    >
+    <div className={styles.desktopHeader}>
       <div
         className={`${styles.headerContainer} ${
           scrolled ? styles.scrolled : ""
         }`}
       >
+        <MegaMenu headerHeightClass={styles.headerHeight} />
+
         {/* logo bar */}
         <div className={styles.headerLogoContainer}>
           {HEADER_LOGOS?.map((logo) => (
