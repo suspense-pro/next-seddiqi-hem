@@ -1,13 +1,96 @@
 import React, { useContext } from "react";
 import styles from "./megaMenu.module.scss";
-import Link from "next/link";
-import MenuLink from "../cards/menuLink/menuLink";
-import DisplayCard from "../cards/displayCard/displayCard";
-import ArticleCard from "../cards/articleCard/articleCard";
-import StoryCard from "../cards/storyCard/storyCard";
 import { HeaderContext } from "@contexts/headerContext";
-import MegaMenuLeft from "./megaMenuLeft";
-import MegaMenuRight from "./megaMenuRight";
+import NavigationLink from "../navigationLink";
+
+import { StoryCard, ArticleCard, DisplayCard } from "@components/module";
+
+const SubMenuLinks = () => {
+  const headerContext = useContext(HeaderContext);
+  const { current, updateCurrent, headerData } = headerContext;
+  const currentHeaderData = headerData.sections[current];
+
+  if (current === null) {
+    return null;
+  }
+
+  return (
+    <div className={styles.menuLeft}>
+      <div className={styles.columnCategories}>
+        {currentHeaderData.categories?.map((item) => (
+          <NavigationLink
+            className={styles.menuLink}
+            key={item.name}
+            title={item.name}
+            arrow={item.expand}
+            url="/"
+          />
+        ))}
+      </div>
+      <div className={styles.columnFilters}>
+        {currentHeaderData.special_categories?.map((item) => (
+          <NavigationLink
+            className={styles.menuLink}
+            key={item.name}
+            title={item.name}
+            arrow={item.expand}
+            url="/"
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const ContentBlocks = () => {
+  const headerContext = useContext(HeaderContext);
+  const { current, headerData } = headerContext;
+  const currentHeaderData = headerData.sections[current];
+
+  if (current === null) {
+    return null;
+  }
+
+  if (currentHeaderData.type === "Explore") {
+    return (
+      <div className={styles.rightSideContainer}>
+        <div className={styles.column1}>
+          <div className={styles.displayCardsTitle}>OTHERS</div>
+
+          <div className={styles.storyCardContainer}>
+            {currentHeaderData.the_latest.map((item) => (
+              <StoryCard key={item.title} item={item} />
+            ))}
+          </div>
+        </div>
+        <div className={styles.column2}>
+          <div className={styles.displayCardsTitle}>THE LATEST</div>
+          <div className={styles.displayCards}>
+            {/* temp */}
+            <DisplayCard item={currentHeaderData.the_latest[0]} />
+            <DisplayCard item={currentHeaderData.the_latest[1]} />
+          </div>
+        </div>
+        {/* temp */}
+        {/* <div className={styles.column2}>
+          <div className={styles.displayCardsTitle}>LATEST ARTICLE</div>
+          <ArticleCard item={currentHeaderData.the_latest[0]} />
+        </div> */}
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.displayCardsContainer}>
+      <div className={styles.displayCardsTitle}>THE LATEST</div>
+      <div className={styles.displayCards}>
+        {currentHeaderData.the_latest?.map((item, ind) => (
+          <DisplayCard item={item} key={ind} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const MegaMenu = () => {
   const headerContext = useContext(HeaderContext);
@@ -24,8 +107,8 @@ const MegaMenu = () => {
   return (
     <section className={styles.megaMenuContainer}>
       <div className={styles.columns}>
-        <MegaMenuLeft />
-        <MegaMenuRight />
+        <SubMenuLinks />
+        <ContentBlocks />
       </div>
     </section>
   );

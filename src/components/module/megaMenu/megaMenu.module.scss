@@ -6,7 +6,12 @@
   justify-content: space-between;
   padding: rem(60 120);
 
-  position: absolute;
+  @include breakpoint-max-width("1150px") {
+    padding: rem(30 60);
+    flex-direction: column;
+  }
+
+  position: fixed;
   top: rem(156);
   z-index: 2000;
   width: 100%;
@@ -18,12 +23,27 @@
     display: flex;
     justify-content: space-between;
 
+    @include breakpoint-max-width("1150px") {
+      gap: rem(20);
+      flex-direction: column;
+    }
+
     .menuLeft {
       display: flex;
       gap: rem(87);
       justify-content: space-between;
     }
   }
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  width: rem(217);
+  justify-content: space-between;
+  margin-bottom: rem(28);
+  text-transform: uppercase;
+  @include body_regular;
 }
 
 // megamenu right side cards
@@ -42,9 +62,9 @@
   display: flex;
   gap: rem(40);
 
-  @include xl-max {
-    flex-wrap: wrap;
-    justify-content: flex-end;
+  @include breakpoint-max-width("1612px") {
+    flex-direction: column;
+    // justify-content: flex-end;
   }
 
   .column1 {
@@ -71,7 +91,7 @@
 
 .displayCardsTitle {
   font-size: rem(16);
-  font-weight: 400;
+  @include heading_regular;
   line-height: rem(20);
   letter-spacing: rem(0.4);
 }

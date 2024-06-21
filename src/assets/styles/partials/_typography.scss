@@ -15,6 +15,11 @@
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
+@mixin heading_medium {
+  font-family: "Haboro_Contrast_Medium", sans-serif;
+  font-style: normal;
+  font-variant-numeric: lining-nums proportional-nums;
+}
 
 @mixin heading_regular_italic {
   font-family: "Haboro_Contrast_Italic", sans-serif;
@@ -22,8 +27,25 @@
   font-variant-numeric: lining-nums proportional-nums;
 }
 
+@mixin heading_light {
+  font-family: "Haboro_Contrast_Light", sans-serif;
+  font-style: normal;
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
+@mixin heading_light_italic {
+  font-family: "Haboro_Contrast_Light_Italic", sans-serif;
+  font-style: normal;
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
 @mixin body_regular {
   font-family: "Urbanist_Regular", sans-serif;
+  font-style: normal;
+  font-variant-numeric: lining-nums proportional-nums;
+}
+@mixin body_light {
+  font-family: "Urbanist_Light", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }

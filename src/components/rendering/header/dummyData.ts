@@ -167,7 +167,7 @@ export const headerDummyData: HeaderData = {
         {
           title: "Wish-Show her that you love her",
           subTitle: "Elevate your office attire with these watches.",
-          image: "/images/png/story_02.png",
+          image: "/images/png/story_03.png",
         },
       ],
     },

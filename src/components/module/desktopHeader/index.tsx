@@ -8,7 +8,7 @@ import {
 } from "@assets/images/svg";
 import NavigationLink from "@components/module/navigationLink";
 import { headerDummyData } from "./headerDummyData";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HeaderContext } from "@contexts/headerContext";
 import Link from "next/link";
 
@@ -41,6 +41,23 @@ const HEADER_LOGOS = [
 ];
 
 export default function DesktopHeader() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 40) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const headerContext = useContext(HeaderContext);
 
   if (!headerContext) {
@@ -48,18 +65,25 @@ export default function DesktopHeader() {
   }
   const { current, updateCurrent } = headerContext;
   return (
-    <header className={styles.header}>
-      <div className={styles.headerContainer}>
+    <div
+      className={`${styles.desktopHeader} ${scrolled ? styles.scrolled : ""}`}
+    >
+      <div
+        className={`${styles.headerContainer} ${
+          scrolled ? styles.scrolled : ""
+        }`}
+      >
         {/* logo bar */}
         <div className={styles.headerLogoContainer}>
           {HEADER_LOGOS?.map((logo) => (
-            <Link href={logo.url}>
+            <Link style={{ margin: 0, padding: 0 }} href={logo.url}>
               <Image
                 key={logo.title}
                 src={logo.imageUrl}
                 width={logo.width}
                 height={logo.height}
                 alt={logo.title}
+                className={styles.image}
               />
             </Link>
           ))}
@@ -78,6 +102,7 @@ export default function DesktopHeader() {
                   className={styles.headerLink}
                   key={link.title}
                   title={link.title}
+                  url={link.url && link.url}
                 />
               </div>
             ))}
@@ -90,6 +115,6 @@ export default function DesktopHeader() {
           </div>
         </div>
       </div>
-    </header>
+    </div>
   );
 }

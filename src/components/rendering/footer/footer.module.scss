@@ -1,0 +1,128 @@
+@import "../../../assets/styles/main.scss";
+
+.footer {
+  max-width: rem(1440);
+  margin: 0 auto;
+  width: 100%;
+  padding: rem(0 28 0 28);
+
+  @include lg {
+    padding: rem(0 60 0 60);
+  }
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "logo"
+      "links1"
+      "links2"
+      "links3";
+    align-items: start;
+    margin: rem(48 0);
+    background-color: getColorHex("white");
+
+    @include lg {
+      margin: rem(80 0);
+      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      grid-template-areas: "logo links1 links2 links3";
+    }
+  }
+
+  .column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: rem(20);
+    flex-direction: column;
+
+    span {
+      cursor: pointer;
+    }
+
+    @include lg {
+      display: flex;
+      flex-direction: column;
+      gap: rem(36);
+    }
+  }
+
+  .column[style*="logo"] {
+    margin-bottom: rem(48);
+
+    @include lg {
+      margin-bottom: rem(0);
+    }
+  }
+  .column[style*="links3"] {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    grid-auto-flow: row dense;
+    @include body_light;
+    color: getColorHex("green-metallic");
+    font-size: rem(14);
+    margin-top: rem(40);
+
+    @include lg {
+      font-size: rem(16);
+      gap: rem(20);
+      margin-top: 0;
+    }
+  }
+  .column[style*="links2"] {
+    margin-top: rem(20);
+
+    @include lg {
+      margin-top: 0;
+    }
+  }
+
+  .column[style*="links1"],
+  .column[style*="links2"] {
+    @include heading_light;
+    font-size: rem(22);
+    color: getColorHex("green-dark");
+
+    @include lg {
+      font-size: rem(26);
+    }
+  }
+
+  .divider {
+    border-top: rem(1) solid getColorHex("bronze-grey");
+  }
+
+  .footer_bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin: rem(40 0 40 0);
+    @include lg {
+      margin: rem(28 0 28 0);
+      flex-direction: row;
+    }
+  }
+
+  .copy_right {
+    @include body_light;
+    font-size: rem(12);
+    color: getColorHex("green-metallic");
+    @include lg {
+      font-size: rem(16);
+    }
+  }
+
+  .social_icons {
+    display: flex;
+    gap: rem(20);
+    cursor: pointer;
+    margin-top: rem(24);
+    svg {
+      width: rem(16);
+      height: rem(16);
+    }
+    @include lg {
+      margin-top: 0;
+      gap: rem(16);
+    }
+  }
+}

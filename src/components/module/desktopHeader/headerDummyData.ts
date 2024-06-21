@@ -4,38 +4,28 @@ export const headerDummyData = {
   navigation: [
     {
       title: "WATCHES",
-      url: "/watches",
       openNewTab: false,
     },
     {
       title: "JEWELLERY",
-      url: "/jewellery",
       openNewTab: false,
     },
     {
       title: "ACCESSORIES",
-      url: "/accessories",
       openNewTab: false,
     },
     {
       title: "BRANDS",
-      url: "/brands",
+      url: "/",
       openNewTab: false,
     },
     {
       title: "SERVICES",
-      url: "/services",
       openNewTab: false,
     },
     {
       title: "EXPLORE",
-      url: "/explore",
       openNewTab: false,
-    },
-  ],
-  Icons: [
-    {
-      icon: "",
     },
   ],
 };

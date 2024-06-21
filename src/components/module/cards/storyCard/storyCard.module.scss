@@ -10,6 +10,7 @@
   .image {
     border-top-left-radius: rem(6);
     border-bottom-right-radius: rem(6);
+    object-fit: cover;
   }
 
   .content {
@@ -25,6 +26,7 @@
     }
 
     .subtitle {
+      @include body_light;
       color: getColorHex("green-dark");
       font-size: rem(14);
       line-height: rem(22);

@@ -3,7 +3,6 @@
 .articleCard {
   width: rem(473);
   height: rem(315);
-  background-image: url("/images/png/watchImage_02.png");
   padding: rem(30);
   background-size: cover;
   background-repeat: no-repeat;
@@ -15,13 +14,31 @@
   justify-content: flex-end;
   border-top-left-radius: rem(16);
   border-bottom-right-radius: rem(16);
+  gap: rem(8);
+  position: relative;
+  overflow: hidden;
+
+  .backgroundFade {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      to bottom,
+      getColorHex("black-dark", 0.1),
+      getColorHex("black-dark", 0.7)
+    );
+  }
 
   .articleTitle {
-    @include heading_regular;
-    font-weight: 500;
+    @include heading_medium;
     font-size: rem(20);
     line-height: rem(28);
     letter-spacing: rem(0.6);
+    text-transform: uppercase;
+    z-index: 1;
   }
 
   .articleBtn {
@@ -32,6 +49,7 @@
     line-height: rem(18);
     letter-spacing: rem(1);
     font-size: rem(14);
-    font-weight: 400;
+    z-index: 2;
+    position: relative;
   }
 }
