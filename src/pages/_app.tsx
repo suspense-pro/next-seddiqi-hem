@@ -30,11 +30,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head />
-      <WithVisualization>
+      {/* <WithVisualization> */}
         <Layout pageProps={pageProps}>
           <Component {...pageProps} />
         </Layout>
-      </WithVisualization>
+      {/* </WithVisualization> */}
     </>
   );
 }

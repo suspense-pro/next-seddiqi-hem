@@ -19,8 +19,8 @@ export function useCmsContentItem(): CmsContentItemState | null {
 
 const CmsContentItem = ({ content, children }: CmsContentItemProps) => {
 
-    console.log({content});
-    console.log({children});
+    // console.log({content});
+    // console.log({children});
     
     
 
