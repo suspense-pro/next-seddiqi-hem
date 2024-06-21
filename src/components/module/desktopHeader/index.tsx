@@ -72,47 +72,51 @@ export default function DesktopHeader() {
           scrolled ? styles.scrolled : ""
         }`}
       >
-        <MegaMenu headerHeightClass={styles.headerHeight} />
+        <MegaMenu
+          headerHeightClass={styles.headerHeight ? styles.headerHeight : ""}
+        />
 
         {/* logo bar */}
-        <div className={styles.headerLogoContainer}>
-          {HEADER_LOGOS?.map((logo) => (
-            <Link style={{ margin: 0, padding: 0 }} href={logo.url}>
-              <Image
-                key={logo.title}
-                src={logo.imageUrl}
-                width={logo.width}
-                height={logo.height}
-                alt={logo.title}
-                className={styles.image}
-              />
-            </Link>
-          ))}
-        </div>
-
-        {/* links */}
-        <div
-          // onMouseLeave={() => updateCurrent(null)}
-          className={styles.linksContainer}
-        >
-          <div className={styles.appointmentBtn}>BOOK APPOINTMENT</div>
-          <div className={styles.links}>
-            {headerDummyData.navigation?.map((link, ind) => (
-              <div onMouseEnter={() => updateCurrent(ind)}>
-                <NavigationLink
-                  className={styles.headerLink}
-                  key={link.title}
-                  title={link.title}
-                  url={link.url && link.url}
+        <div className={styles.headerMargin}>
+          <div className={styles.headerLogoContainer}>
+            {HEADER_LOGOS?.map((logo) => (
+              <Link style={{ margin: 0, padding: 0 }} href={logo.url}>
+                <Image
+                  key={logo.title}
+                  src={logo.imageUrl}
+                  width={logo.width}
+                  height={logo.height}
+                  alt={logo.title}
+                  className={styles.image}
                 />
-              </div>
+              </Link>
             ))}
           </div>
-          <div className={styles.navIcons}>
-            <SearchIcon fill={"#"} />
-            <AccountIcon fill={"#"} />
-            <MapIcon fill={"#"} />
-            <WishlistIcon fill={"#"} />
+
+          {/* links */}
+          <div
+            // onMouseLeave={() => updateCurrent(null)}
+            className={styles.linksContainer}
+          >
+            <div className={styles.appointmentBtn}>BOOK APPOINTMENT</div>
+            <div className={styles.links}>
+              {headerDummyData.navigation?.map((link, ind) => (
+                <div onMouseEnter={() => updateCurrent(ind)}>
+                  <NavigationLink
+                    className={styles.headerLink}
+                    key={link.title}
+                    title={link.title}
+                    url={link.url && link.url}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className={styles.navIcons}>
+              <SearchIcon fill={"#"} />
+              <AccountIcon fill={"#"} />
+              <MapIcon fill={"#"} />
+              <WishlistIcon fill={"#"} />
+            </div>
           </div>
         </div>
       </div>

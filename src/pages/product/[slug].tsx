@@ -2,7 +2,6 @@ import Image from "next/image";
 import getProducts from "@utils/sfcc-connector";
 import Layout from "@components/layout";
 
-
 export async function getStaticProps({ params }) {
   const searchResults = await getProducts(params.slug);
   const coffeeProduct = searchResults[0];
@@ -29,7 +28,6 @@ export async function getStaticPaths() {
     fallback: "blocking",
   };
 }
-
 
 export default function Product({ product }) {
   return (
@@ -60,6 +58,5 @@ export default function Product({ product }) {
     </div>
   );
 }
-
 
 Product.Layout = Layout;

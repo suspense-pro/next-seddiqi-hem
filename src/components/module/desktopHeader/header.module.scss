@@ -2,16 +2,9 @@
 
 .headerContainer {
   height: rem(156);
-  margin: rem(0 40);
-  padding: rem(28 0);
   background-color: getColorHex("white");
-  display: flex;
-  flex-direction: column;
-  // justify-content: space-between;
-  border-bottom: rem(1) solid getColorHex("grey-light");
   position: fixed;
-  width: calc(100% - #{rem(80)});
-  gap: rem(22);
+  width: 100%;
   top: 0;
   left: 0;
   z-index: 6000;
@@ -27,11 +20,26 @@
       transition: all 0.3s;
       top: rem(78);
     }
+
+    .headerMargin {
+      padding: rem(0);
+    }
     .headerLogoContainer {
       height: 0;
       opacity: 0;
       visibility: hidden;
     }
+  }
+
+  .headerMargin {
+    padding: rem(28 0);
+    border-bottom: rem(1) solid getColorHex("grey-light");
+    margin: rem(0 40);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: rem(22);
+    transition: all 0.3s;
   }
 
   .headerLogoContainer {
