@@ -13,7 +13,7 @@ export default function HeroBanner({
 }: any) {
   const [isDesktop] = useDeviceWidth();
 
-  console.log({_meta});
+  // console.log({_meta});
   
 
   return (
