@@ -8,7 +8,7 @@ import { Button } from "@components/module";
 export default function HeroBanner({ _meta, banner, title, description }: any) {
   const [isDesktop] = useDeviceWidth();
 
-  console.log({ _meta });
+  // console.log({_meta});
 
   return (
     <div className={classNames(styles.hero_banner_main, styles.container)}>

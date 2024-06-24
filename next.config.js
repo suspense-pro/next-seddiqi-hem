@@ -1,7 +1,5 @@
 const path = require('path');
 
-console.log({__dirname})
-
 module.exports = {
   reactStrictMode: true,
   sassOptions: {
@@ -19,5 +17,9 @@ module.exports = {
         hostname: "localhost",
       },
     ],
+  },
+  i18n: {
+    locales: ["en", "ar"],
+    defaultLocale: "en",
   },
 };
