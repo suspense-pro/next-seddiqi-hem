@@ -27,7 +27,23 @@
       grid-template-areas: "logo links1 links2 links3";
     }
   }
-
+  .languageSelectorTop {
+    display: none; 
+  }
+  
+  .languageSelectorBottom {
+    display: block;
+    margin-bottom: rem(48);
+  }
+  
+  @include lg {
+    .languageSelectorTop {
+      display: block;
+    }
+    .languageSelectorBottom {
+      display: none;
+    }
+  }
   .column {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -163,20 +179,4 @@
   }
 }
 
-.languageSelectorTop {
-  display: none;
-}
 
-.languageSelectorBottom {
-  display: block;
-  margin-bottom: rem(48);
-}
-
-@include lg {
-  .languageSelectorTop {
-    display: block;
-  }
-  .languageSelectorBottom {
-    display: none;
-  }
-}
