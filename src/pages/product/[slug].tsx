@@ -18,8 +18,6 @@ export async function getStaticPaths() {
   const coffeeProducts = await getProducts("shirt");
   let fullPaths = [];
 
-  console.log("path");
-
   for (let product of coffeeProducts) {
     fullPaths.push({ params: { slug: product.id } });
   }

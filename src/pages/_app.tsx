@@ -32,11 +32,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <LanguageProvider>
         <Head />
-        <WithVisualization>
-          <Layout pageProps={pageProps}>
-            <Component {...pageProps} />
-          </Layout>
-        </WithVisualization>
+        {/* <WithVisualization> */}
+        <Layout pageProps={pageProps}>
+          <Component {...pageProps} />
+        </Layout>
+        {/* </WithVisualization> */}
       </LanguageProvider>
     </>
   );
