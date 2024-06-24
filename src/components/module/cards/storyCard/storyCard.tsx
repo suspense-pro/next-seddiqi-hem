@@ -15,13 +15,14 @@ const temPSubTitle = "The world of watchmaking came to Geneva.";
 const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
   return (
     <div className={styles.storyCardContainer}>
-      <Image
-        src={item?.image ? item.image : tempImg}
-        alt="Watch Image"
-        width={160}
-        height={109}
-        className={styles.image}
-      />
+      <div className={styles.imgContainer}>
+        <Image
+          src={item?.image ? item.image : tempImg}
+          alt="Watch Image"
+          fill
+          className={styles.image}
+        />
+      </div>
       <div className={styles.content}>
         <div className={styles.title}>
           {item?.title ? truncateString(item.title, 49) : tempTitle}

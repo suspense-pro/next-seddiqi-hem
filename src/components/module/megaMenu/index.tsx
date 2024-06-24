@@ -5,7 +5,7 @@ import NavigationLink from "../navigationLink";
 
 import { StoryCard, ArticleCard, DisplayCard } from "@components/module";
 
-const SubMenuLinks = () => {
+export const SubMenuLinks = () => {
   const headerContext = useContext(HeaderContext);
   const { current, updateCurrent, headerData } = headerContext;
   const currentHeaderData = headerData.sections[current];

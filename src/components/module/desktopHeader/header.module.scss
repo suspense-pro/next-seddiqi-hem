@@ -65,7 +65,7 @@
     padding: 0;
     margin: 0;
 
-    @include breakpoint-max-width("1150px") {
+    @include breakpoint-max-width(rem(1150)) {
       flex-direction: column;
       // justify-content: flex-end;
     }
@@ -78,7 +78,7 @@
       cursor: pointer;
       @include body_regular;
 
-      @include breakpoint-max-width("1150px") {
+      @include breakpoint-max-width(rem(1150)) {
         display: none;
       }
     }
@@ -116,7 +116,7 @@
       align-items: center;
       gap: rem(28.2);
 
-      @include breakpoint-max-width("1150px") {
+      @include breakpoint-max-width(rem(1150)) {
         display: none;
       }
     }

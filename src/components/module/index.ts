@@ -12,6 +12,7 @@ import StoryCard from "./cards/storyCard/storyCard";
 import NavigationLink from "./navigationLink";
 import DesktopHeader from "./desktopHeader";
 import MegaMenu from "./megaMenu";
+import MobileHeader from "./mobileHeader";
 
 export {
   Head,
@@ -27,4 +28,5 @@ export {
   NavigationLink,
   DesktopHeader,
   MegaMenu,
+  MobileHeader,
 };

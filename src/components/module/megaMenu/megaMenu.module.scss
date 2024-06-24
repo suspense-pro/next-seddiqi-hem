@@ -7,7 +7,7 @@
   padding: rem(60 120);
   transition: all 0.3s;
 
-  @include breakpoint-max-width("1150px") {
+  @include breakpoint-max-width(rem(1150)) {
     padding: rem(30 60);
     flex-direction: column;
   }
@@ -24,7 +24,7 @@
     display: flex;
     justify-content: space-between;
 
-    @include breakpoint-max-width("1150px") {
+    @include breakpoint-max-width(rem(1150)) {
       gap: rem(20);
       flex-direction: column;
     }
@@ -63,7 +63,7 @@
   display: flex;
   gap: rem(40);
 
-  @include breakpoint-max-width("1612px") {
+  @include breakpoint-max-width(rem(1612)) {
     flex-direction: column;
     // justify-content: flex-end;
   }
@@ -95,4 +95,10 @@
   @include heading_regular;
   line-height: rem(20);
   letter-spacing: rem(0.4);
+}
+
+.imgContainer {
+  position: relative;
+  width: rem(226);
+  height: rem(301);
 }

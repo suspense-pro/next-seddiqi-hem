@@ -7,9 +7,23 @@
   height: rem(109);
   cursor: pointer;
 
+  @include breakpoint-max-width(rem(768)) {
+    width: 100%;
+  }
+
+  .imgContainer {
+    position: relative;
+    width: rem(160);
+    height: rem(109);
+    @include breakpoint-max-width(rem(768)) {
+      width: rem(146);
+      height: rem(96);
+    }
+  }
+
   .image {
-    border-top-left-radius: rem(6);
-    border-bottom-right-radius: rem(6);
+    border-top-left-radius: rem(16);
+    border-bottom-right-radius: rem(16);
     object-fit: cover;
   }
 
@@ -23,6 +37,10 @@
       @include heading_regular;
       font-size: rem(16);
       line-height: rem(20);
+
+      @include breakpoint-max-width(rem(768)) {
+        font-size: rem(14);
+      }
     }
 
     .subtitle {
@@ -30,6 +48,10 @@
       color: getColorHex("green-dark");
       font-size: rem(14);
       line-height: rem(22);
+
+      @include breakpoint-max-width(rem(768)) {
+        font-size: rem(12);
+      }
     }
   }
 }

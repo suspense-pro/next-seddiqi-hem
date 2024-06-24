@@ -18,6 +18,11 @@
   position: relative;
   overflow: hidden;
 
+  @include breakpoint-max-width(rem(768)) {
+    width: 100%;
+    height: rem(224);
+  }
+
   .backgroundFade {
     z-index: 0;
     position: absolute;
