@@ -42,9 +42,9 @@
     cursor: pointer;
     @include body_light;
     color: getColorHex("green-metallic");
-    font-size: 12px;
+    font-size: rem(12);
     @include lg {
-      font-size: 14px;
+      font-size: rem(14);
     }
   }
 
@@ -56,7 +56,7 @@
 }
 
 .countryDropdown {
-  border-bottom: 1px solid getColorHex("noir");
+  border-bottom: rem(1) solid getColorHex("noir");
   width: rem(240);
 }
 
