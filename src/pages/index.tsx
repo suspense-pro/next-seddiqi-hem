@@ -9,7 +9,7 @@ import {
 } from "@utils/cms/amplience";
 import { mapToID } from "@utils/helpers";
 
-import { getCustomer } from "@utils/sfcc-connector";
+import { getCustomer } from "@utils/sfcc-connector/dataService";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data: any = await getContentItemByKey("homepage");
@@ -26,8 +26,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 export default function Home({ contents }) {
 
-const getCustomerObj = async (e) =>  {
-  e.preventDefault();
+const getCustomerObj = async () =>  {
+
   alert("customer Information!");
   try {
     const response = await getCustomer();
@@ -47,7 +47,7 @@ const getCustomerObj = async (e) =>  {
           key={content?._meta.deliveryId}
         />
       ))}
-      <button type="submit" onClick={ getCustomerObj }> Get Customer </button>
+      <button onClick={getCustomerObj}> Get Customer </button>
     </div>    
   );
 }

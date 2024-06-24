@@ -1,10 +1,26 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
- 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-  return NextResponse.redirect(new URL('/home', request.url))
-}
+import { MiddlewareFactory } from "@utils/middlewares/types";
+import { stackMiddleWares } from "@utils/middlewares/stackMiddleWares";
+import {
+  NextFetchEvent,
+  NextMiddleware,
+  NextRequest,
+  NextResponse,
+} from "next/server";
+
+const test: MiddlewareFactory = (
+  next: NextMiddleware
+) => {
+  return async (req: NextRequest, _next: NextFetchEvent) => {
+
+    const res = NextResponse.next();
+
+    return res;
+  };
+};
+
+const middlewares = [test];
+export default stackMiddleWares(middlewares);
+
 
 export const config = {
   matcher: ["/api/:path*"],

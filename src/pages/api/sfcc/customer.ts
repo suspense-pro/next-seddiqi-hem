@@ -26,7 +26,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     },
                 };
 
-                client
+                return client
                     .getCustomer(options)
                     .then((customer) => console.log("Customer Info: ", customer))
                     .catch((error) => console.log("Error getting customer: ", error));
