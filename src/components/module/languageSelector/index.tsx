@@ -1,4 +1,3 @@
-// LanguageSelector.tsx
 import React, { useContext } from "react";
 import { LanguageContext, LANGUAGE_DICT } from "@contexts/languageContext";
 import styles from "./languageSelector.module.scss";
