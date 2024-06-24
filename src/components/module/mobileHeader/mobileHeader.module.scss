@@ -1,0 +1,30 @@
+@import "./../../../assets//styles//main.scss";
+.mobileHeader {
+  height: rem(120);
+  border-bottom: rem(1) solid getColorHex("grey-light");
+
+  .mobileHeaderContainer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: rem(0 20);
+  }
+}
+
+.menuIcon,
+.rightIcons {
+  display: flex;
+  align-items: center;
+  gap: rem(21.5);
+  cursor: pointer;
+}
+
+.position {
+  background-color: getColorHex("white");
+  // position: fixed;
+  // width: 100%;
+  // left: 0;
+  // z-index: 9999;
+  // top: 0;
+}

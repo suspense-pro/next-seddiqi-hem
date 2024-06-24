@@ -15,6 +15,11 @@
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
+@mixin heading_medium {
+  font-family: "Haboro_Contrast_Medium", sans-serif;
+  font-style: normal;
+  font-variant-numeric: lining-nums proportional-nums;
+}
 
 @mixin heading_regular_italic {
   font-family: "Haboro_Contrast_Italic", sans-serif;

@@ -1,77 +1,75 @@
-
-
 html {
-    box-sizing: border-box;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    background-color: #fff;
-  }
-  
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
-  
-  *:focus {
-    outline: none;
-  }
-  
-  :lang(ar) * {
-    letter-spacing: 0 !important;
-  }
-  
-  body {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  a {
-    color: currentColor;
-    text-decoration: none;
-  }
-  
-  img {
-    max-width: 100%;
-  }
-  
-  p {
-    margin: 0;
-  }
-  
-  strong {
-    font-weight: bold;
-  }
-  
-  [hidden] {
-    display: none !important;
-  }
-  [scroll=false]{
-    overflow: hidden;
-  }
-  
-  .react-loading-skeleton{
-    border-radius: 0;
-    line-height: 2;
-  }
-  
-  .relative-position {
-    position: relative;
-  }
-  
-  .cursorPointer{
-    cursor: pointer;
-  }
-  
-  .cursorGrabbing{
-    cursor: grabbing;
-  }
-  
-  .cursorGrab{
-    cursor: grab;
-  }
-  
-  .no-scroll {
-    overflow: hidden;
-  }
+  box-sizing: border-box;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  background-color: #fff;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+*:focus {
+  outline: none;
+}
+
+:lang(ar) * {
+  letter-spacing: 0 !important;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+p {
+  margin: 0;
+}
+
+strong {
+  font-weight: bold;
+}
+
+[hidden] {
+  display: none !important;
+}
+[scroll="false"] {
+  overflow: hidden;
+}
+
+.react-loading-skeleton {
+  border-radius: 0;
+  line-height: 2;
+}
+
+.relative-position {
+  position: relative;
+}
+
+.cursorPointer {
+  cursor: pointer;
+}
+
+.cursorGrabbing {
+  cursor: grabbing;
+}
+
+.cursorGrab {
+  cursor: grab;
+}
+
+.no-scroll {
+  overflow: hidden;
+}

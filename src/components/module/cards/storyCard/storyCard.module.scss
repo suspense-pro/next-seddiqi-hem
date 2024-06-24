@@ -1,0 +1,57 @@
+@import "./../../../../assets//styles/main.scss";
+
+.storyCardContainer {
+  display: flex;
+  gap: rem(20);
+  width: rem(368);
+  height: rem(109);
+  cursor: pointer;
+
+  @include breakpoint-max-width(rem(768)) {
+    width: 100%;
+  }
+
+  .imgContainer {
+    position: relative;
+    width: rem(160);
+    height: rem(109);
+    @include breakpoint-max-width(rem(768)) {
+      width: rem(146);
+      height: rem(96);
+    }
+  }
+
+  .image {
+    border-top-left-radius: rem(16);
+    border-bottom-right-radius: rem(16);
+    object-fit: cover;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+    width: rem(188);
+
+    .title {
+      @include heading_regular;
+      font-size: rem(16);
+      line-height: rem(20);
+
+      @include breakpoint-max-width(rem(768)) {
+        font-size: rem(14);
+      }
+    }
+
+    .subtitle {
+      @include body_light;
+      color: getColorHex("green-dark");
+      font-size: rem(14);
+      line-height: rem(22);
+
+      @include breakpoint-max-width(rem(768)) {
+        font-size: rem(12);
+      }
+    }
+  }
+}

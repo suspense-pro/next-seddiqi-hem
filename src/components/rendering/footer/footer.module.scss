@@ -19,7 +19,7 @@
       "links3";
     align-items: start;
     margin: rem(48 0);
-    background-color: getColorHex("white");;
+    background-color: getColorHex("white");
 
     @include lg {
       margin: rem(80 0);
@@ -28,14 +28,14 @@
     }
   }
   .languageSelectorTop {
-    display: none; 
+    display: none;
   }
-  
+
   .languageSelectorBottom {
     display: block;
     margin-bottom: rem(48);
   }
-  
+
   @include lg {
     .languageSelectorTop {
       display: block;
@@ -178,5 +178,3 @@
     }
   }
 }
-
-
