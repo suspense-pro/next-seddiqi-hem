@@ -1,0 +1,44 @@
+@import "./../../../assets/styles/main.scss";
+
+.accordian {
+  display: flex;
+  flex-direction: column;
+  // gap: rem(20);
+  transition: all 0.3s;
+
+  // &:hover .accordianContainer {
+  //   height: 100%;
+  // }
+}
+
+.accordianContainer {
+  display: flex;
+  flex-direction: column;
+  gap: rem(22);
+  transition: all 0.3s;
+  height: 0;
+  overflow: hidden;
+  // padding: rem(20 0);
+}
+
+.activeAccordian {
+  height: 100vh;
+}
+
+.activeArrow {
+  transition: all 0.3s;
+  transform: rotate(180deg);
+}
+
+.accordianLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: rem(7 0);
+  cursor: pointer;
+  color: getColorHex("green-dark");
+  border-bottom: rem(2) solid getColorHex("green-dark", 0);
+  @include heading_regular;
+  transition: all 0.3s;
+}
