@@ -1,4 +1,4 @@
-import { Customer } from "commerce-sdk";
+import { Customer, slasHelpers } from "commerce-sdk";
 
 export const clientConfig = {
   headers: {

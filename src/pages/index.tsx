@@ -1,6 +1,4 @@
-import { useRef } from "react";
-import { ProductCard } from "@components/module/";
-import getProducts from "@utils/sfcc-connector";
+import { FormEvent } from 'react'
 import Layout from "@components/layout";
 import ContentBlock from "@components/module/contentBlock";
 import compact from "lodash/compact";
@@ -11,9 +9,12 @@ import {
 } from "@utils/cms/amplience";
 import { mapToID } from "@utils/helpers";
 
+import { getCustomer } from "@utils/sfcc-connector";
+
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data: any = await getContentItemByKey("homepage");
   const contents = await getHierarchyChildren(data._meta.deliveryId);
+
 
   return {
     props: {
@@ -24,6 +25,19 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function Home({ contents }) {
+
+const getCustomerObj = async (e) =>  {
+  e.preventDefault();
+  alert("customer Information!");
+  try {
+    const response = await getCustomer();
+    if (response)
+    alert (response);
+  } catch(err) {
+    console.log('Error submitting form: ' + err.message);
+  }
+}
+
   return (
     <div className="main-content">
       {compact(contents).map((content) => (
@@ -33,7 +47,8 @@ export default function Home({ contents }) {
           key={content?._meta.deliveryId}
         />
       ))}
-    </div>
+      <button type="submit" onClick={ getCustomerObj }> Get Customer </button>
+    </div>    
   );
 }
 

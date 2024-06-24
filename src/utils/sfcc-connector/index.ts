@@ -1,10 +1,10 @@
-import { Product, Search } from "commerce-sdk";
+import { Product, Search, Customer } from "commerce-sdk";
 import initializeShopperConfig, { clientConfig } from "./config";
 import { NextRequest, NextResponse } from "next/server";
 import logger from "@utils/logger";
 
 
-export default async function getProducts(searchQuery) {
+export async function getProducts(searchQuery) {
 
   const configWithAuth = await initializeShopperConfig();
 
@@ -36,6 +36,48 @@ export default async function getProducts(searchQuery) {
   return results;
 }
 
+export async function registerCustomer({ 
+  userData, 
+  method
+}: { 
+    userData: any
+    method: string
+}) {
+  try {
+    const json = {
+      api: "register",
+      action:"registerCustomer"
+    };
+    const config = {
+      method: method,
+      body: JSON.stringify(userData),
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(queryString, config, "register");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+};
+
+export const getCustomer = async () => {
+  try {
+    const json = {
+      api: "customer",
+    };
+    const config = {
+      method: "GET",
+    };
+    const queryString = ""; // new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(queryString, config, "customer");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+};
+
 /** This function is to call the handler in pages > api; This is also used in the Client Side Call*/
 export async function getTestApiCall({ orderId, method }: { orderId: string; method: string }) {
   try {
@@ -59,7 +101,7 @@ export async function getTestApiCall({ orderId, method }: { orderId: string; met
 }
 
 /** This is the fetch call to the pages > api */
-const serverApiCallSfcc = async (query: string, config: any, type: string) => await (await fetch(`/api/sfcc/${type}?${query}`, config)).json();
+const serverApiCallSfcc = async (query: string, config: any, type: string) => await (await fetch(`/api/sfcc/${type}`, config)).json();
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
 // eslint-disable-next-line no-unused-vars
