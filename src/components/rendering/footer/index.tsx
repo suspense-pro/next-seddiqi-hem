@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import styles from "./footer.module.scss";
 import NavigationLink from "@components/module/navigationLink";
-import { TwitterIcon, InstaIcon, FBIcon } from "@assets/images/svg";
+import { TwitterIcon, InstaIcon, FBIcon, ArrowDown } from "@assets/images/svg";
 import { FooterPropType } from "@utils/models";
+import { LanguageContext, LANGUAGE_DICT } from "@contexts/languageContext";
+import LanguageSelector from "@components/module/languageSelector";
 
 const commonLinks = [
   { label: "Watches", url: "" },
@@ -34,6 +36,7 @@ export default function Footer({
       <div className={styles.container}>
         <div className={styles.column} style={{ gridArea: "logo" }}>
           <Image src={logoUrl} alt={logoAltText} width={150} height={50} />
+          <LanguageSelector className={styles.languageSelectorTop} />
         </div>
         {[0, 4].map((offset) => (
           <div
@@ -42,16 +45,25 @@ export default function Footer({
             style={{ gridArea: `links${offset / 4 + 1}` }}
           >
             {commonLinks.slice(offset, offset + 4).map((link) => (
-              <NavigationLink key={link.label} label={link.label} url={link.url} />
+              <NavigationLink
+                key={link.label}
+                label={link.label}
+                url={link.url}
+              />
             ))}
           </div>
         ))}
         <div className={styles.column} style={{ gridArea: "links3" }}>
           {distinctLinks.map((link) => (
-            <NavigationLink key={link.label} label={link.label} url={link.url} />
+            <NavigationLink
+              key={link.label}
+              label={link.label}
+              url={link.url}
+            />
           ))}
         </div>
       </div>
+      <LanguageSelector className={styles.languageSelectorBottom} />
       <hr className={styles.divider} />
       <div className={styles.footer_bottom}>
         <div className={styles.copy_right}>{copyRightText}</div>
