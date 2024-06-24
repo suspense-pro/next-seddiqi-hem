@@ -1,0 +1,68 @@
+@import "../../../assets/styles/main.scss";
+
+.selection {
+  display: flex;
+  flex-direction: column;
+  gap: rem(10);
+  margin-top: rem(20);
+}
+
+.label {
+  @include heading_light;
+  font-size: rem(14);
+  color: getColorHex("green-dark");
+  margin-bottom: rem(5);
+  @include lg {
+    font-size: rem(16);
+  }
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+  padding: rem(13 0 13 0);
+  // background-color: getColorHex("light-gray");
+  cursor: pointer;
+  border: none;
+}
+
+.customSelect {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+
+  select {
+    appearance: none;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    @include body_light;
+    color: getColorHex("green-metallic");
+    font-size: 12px;
+    @include lg {
+      font-size: 14px;
+    }
+  }
+
+  .arrow {
+    position: absolute;
+    right: rem(10);
+    pointer-events: none;
+  }
+}
+
+.countryDropdown {
+  border-bottom: 1px solid getColorHex("noir");
+  width: rem(240);
+}
+
+.languageDropdown {
+  border: none;
+  width: rem(80);
+  @include body_light;
+  color: getColorHex("green-metallic");
+}

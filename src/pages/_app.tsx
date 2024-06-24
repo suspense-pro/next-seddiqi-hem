@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import { PropsWithChildren } from "react";
 import { Head } from "@components/module";
 import React from "react";
+import LanguageProvider from "@contexts/languageContext";
 
 import Router from "next/router";
 import NProgress from "nprogress";
@@ -29,12 +30,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head />
-      <WithVisualization>
-        <Layout pageProps={pageProps}>
-          <Component {...pageProps} />
-        </Layout>
-      </WithVisualization>
+      <LanguageProvider>
+        <Head />
+        <WithVisualization>
+          <Layout pageProps={pageProps}>
+            <Component {...pageProps} />
+          </Layout>
+        </WithVisualization>
+      </LanguageProvider>
     </>
   );
 }
