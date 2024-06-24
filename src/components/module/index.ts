@@ -6,13 +6,14 @@ import Logo from "./logo";
 import Typography from "./typography";
 import Video from "./video";
 
-import ArticleCard from "./cards/articleCard/articleCard";
-import DisplayCard from "./cards/displayCard/displayCard";
-import StoryCard from "./cards/storyCard/storyCard";
+import ArticleCard from "./cards/articleCard";
+import DisplayCard from "./cards/displayCard";
+import StoryCard from "./cards/storyCard";
 import NavigationLink from "./navigationLink";
 import DesktopHeader from "./desktopHeader";
 import MegaMenu from "./megaMenu";
 import MobileHeader from "./mobileHeader";
+import TabbedNavigation from "./tabbedNavigation";
 
 export {
   Head,
@@ -29,4 +30,5 @@ export {
   DesktopHeader,
   MegaMenu,
   MobileHeader,
+  TabbedNavigation,
 };

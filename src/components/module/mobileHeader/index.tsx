@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./mobileHeader.module.scss";
 import {
   AccountIcon,
@@ -8,7 +8,8 @@ import {
   SearchIcon,
 } from "@assets/images/svg";
 import Image from "next/image";
-import TabbedNavigation from "../tabbedNavigation/tabbedNavigation";
+import TabbedNavigation from "../tabbedNavigation";
+import { HeaderContext } from "@contexts/headerContext";
 
 interface MobileHeaderNavbar {
   menuOpen?: boolean;
@@ -19,6 +20,10 @@ export const MobileHeaderNavbar: React.FC<MobileHeaderNavbar> = ({
   toggleMenu,
   menuOpen,
 }) => {
+  const headerContext = useContext(HeaderContext);
+
+  const { headerData } = headerContext;
+
   return (
     <header className={styles.mobileHeader}>
       <div className={styles.mobileHeaderContainer}>
@@ -30,7 +35,7 @@ export const MobileHeaderNavbar: React.FC<MobileHeaderNavbar> = ({
           <Image
             height={16}
             width={82}
-            src={"/images/png/SeddiqiLogo.png"}
+            src={headerData.mobile_siddiqi_logo.imageUrl}
             alt="SeddiqiLogo"
           />
         </div>

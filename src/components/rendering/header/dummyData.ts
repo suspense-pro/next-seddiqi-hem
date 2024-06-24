@@ -18,8 +18,20 @@ export interface Section {
   the_latest?: LatestsubTitle[];
 }
 
+export interface HeaderLogosData {
+  id?: number;
+  width?: number;
+  height?: number;
+  title?: string;
+  imageUrl?: string;
+  url?: string;
+}
+
 export interface HeaderData {
   header: string[];
+  header_logos: HeaderLogosData[];
+  mobile_logos: HeaderLogosData[];
+  mobile_siddiqi_logo: HeaderLogosData;
   sections: Section[];
 }
 
@@ -31,6 +43,61 @@ export const headerDummyData: HeaderData = {
     "titles",
     "Services",
     "Explore",
+  ],
+
+  header_logos: [
+    {
+      id: 1,
+      width: 78.65,
+      height: 46,
+      title: "PatekLogo",
+      imageUrl: "/images/png/PatekLogo.png",
+      url: "/",
+    },
+    {
+      id: 2,
+      width: 120,
+      height: 24,
+      title: "PatekLogo",
+      imageUrl: "/images/png/SeddiqiLogo.png",
+      url: "/",
+    },
+    {
+      id: 3,
+      width: 100.3,
+      height: 46,
+      title: "PatekLogo",
+      imageUrl: "/images/png/ROlexLogo.png",
+      url: "/",
+    },
+  ],
+
+  mobile_siddiqi_logo: {
+    id: 2,
+    width: 82,
+    height: 16,
+    title: "PatekLogo",
+    imageUrl: "/images/png/SeddiqiLogo.png",
+    url: "/",
+  },
+
+  mobile_logos: [
+    {
+      id: 1,
+      width: 82,
+      height: 48,
+      title: "PatekLogo",
+      imageUrl: "/images/png/PatekLogo.png",
+      url: "/",
+    },
+    {
+      id: 3,
+      width: 104,
+      height: 48,
+      title: "PatekLogo",
+      imageUrl: "/images/png/ROlexLogo.png",
+      url: "/",
+    },
   ],
   sections: [
     {

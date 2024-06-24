@@ -13,34 +13,6 @@ import { HeaderContext } from "@contexts/headerContext";
 import Link from "next/link";
 import MegaMenu from "../megaMenu";
 
-// TEMP
-const HEADER_LOGOS = [
-  {
-    id: 1,
-    width: 78.65,
-    height: 46,
-    title: "PatekLogo",
-    imageUrl: "/images/png/PatekLogo.png",
-    url: "/",
-  },
-  {
-    id: 2,
-    width: 120,
-    height: 24,
-    title: "PatekLogo",
-    imageUrl: "/images/png/SeddiqiLogo.png",
-    url: "/",
-  },
-  {
-    id: 3,
-    width: 100.3,
-    height: 46,
-    title: "PatekLogo",
-    imageUrl: "/images/png/ROlexLogo.png",
-    url: "/",
-  },
-];
-
 export default function DesktopHeader() {
   const [scrolled, setScrolled] = useState(false);
   const headerContext = useContext(HeaderContext);
@@ -48,7 +20,7 @@ export default function DesktopHeader() {
   if (!headerContext) {
     return null;
   }
-  const { current, updateCurrent } = headerContext;
+  const { current, updateCurrent, headerData } = headerContext;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +51,7 @@ export default function DesktopHeader() {
         {/* logo bar */}
         <div className={styles.headerMargin}>
           <div className={styles.headerLogoContainer}>
-            {HEADER_LOGOS?.map((logo) => (
+            {headerData?.header_logos.map((logo) => (
               <Link style={{ margin: 0, padding: 0 }} href={logo.url}>
                 <Image
                   key={logo.title}

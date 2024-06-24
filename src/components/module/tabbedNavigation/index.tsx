@@ -4,35 +4,32 @@ import ArrowRight from "@assets/images/svg/ArrowRight";
 import { ArrowDown } from "@assets/images/svg";
 import Image from "next/image";
 import NavigationLink from "@components/module/navigationLink";
-import DisplayCard from "../cards/displayCard/displayCard";
-import { headerDummyData } from "./../desktopHeader/headerDummyData";
+import DisplayCard from "../cards/displayCard";
+import { headerDummyData } from "../desktopHeader/headerDummyData";
 import { HeaderContext } from "@contexts/headerContext";
-import StoryCard from "../cards/storyCard/storyCard";
-import ArticleCard from "../cards/articleCard/articleCard";
+import StoryCard from "../cards/storyCard";
+import ArticleCard from "../cards/articleCard";
 
 export const MobileMenuLogobar = () => {
+  const headerContext = useContext(HeaderContext);
+  const { headerData } = headerContext;
+
   return (
     <div className={styles.bottom}>
       <div className={styles.appointmentBtn}>BOOK APPOINTMENT</div>
       <div className={styles.recommendContainer}>
         <div className={styles.recommendText}>Recommended for you</div>
         <div className={styles.logos}>
-          <Image
-            key={"i"}
-            src={"/images/png/PatekLogo.png"}
-            width={82}
-            height={48}
-            alt={"/"}
-            className={styles.image}
-          />
-          <Image
-            key={"i"}
-            src={"/images/png/RolexLogo.png"}
-            width={104}
-            height={48}
-            alt={"/"}
-            className={styles.image}
-          />
+          {headerData.mobile_logos.map((logo) => (
+            <Image
+              key={logo.imageUrl}
+              src={logo.imageUrl}
+              width={logo.width}
+              height={logo.height}
+              alt={logo.url}
+              className={styles.image}
+            />
+          ))}
         </div>
       </div>
     </div>
@@ -41,12 +38,7 @@ export const MobileMenuLogobar = () => {
 
 export const TabContentProducts = () => {
   const headerContext = useContext(HeaderContext);
-  const { current, updateCurrent, headerData } = headerContext;
-  const currentHeaderData = headerData.sections[current];
-
-  // if (current === null) {
-  //   return null;
-  // }
+  const { headerData } = headerContext;
 
   return (
     <div className={styles.tabContent}>
@@ -100,23 +92,15 @@ export const TabContentProducts = () => {
 };
 export const TabContentExplore = () => {
   const headerContext = useContext(HeaderContext);
-  const { current, updateCurrent, headerData } = headerContext;
-  const currentHeaderData = headerData.sections[current];
-
-  // if (current === null) {
-  //   return null;
-  // }
-
-  // const subMenuStyle = {
-  //   padding,
-  // };
+  const { headerData } = headerContext;
 
   return (
     <div className={styles.tabContent}>
       <div className={styles.mobileMenuLinks}>
         <div className={styles.mobileMenuNavigationContainer}>
           <div style={{ height: "100%" }} className={styles.subMenuContainer}>
-            <div className={styles.subMenu}>
+            <div className={`${styles.removePadding} ${styles.subMenu}`}>
+              {/* TEMP */}
               {headerData.sections[5].categories?.map((item) => (
                 <NavigationLink
                   className={styles.menuLink}
@@ -127,7 +111,7 @@ export const TabContentExplore = () => {
                 />
               ))}
             </div>
-            <div className={styles.subMenu}>
+            <div className={`${styles.removePadding} ${styles.subMenu}`}>
               {headerData.sections[5].special_categories?.map((item) => (
                 <NavigationLink
                   className={styles.menuLink}
@@ -183,7 +167,7 @@ const TabbedNavigation = () => {
           <div
             key={tab.id}
             className={`${styles.tab} ${
-              tab.id === activeTab ? styles.activeTab : ""
+              tab.id === activeTab && styles.activeTab
             }`}
             onClick={() => handleTabClick(tab.id)}
           >

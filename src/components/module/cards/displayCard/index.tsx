@@ -16,23 +16,10 @@ const temPSubTitle = "How to take care of your watch?";
 const DisplayCard: React.FC<DisplayCardProps> = ({ item }) => {
   return (
     <div className={styles.displayCard}>
-      {/* <div style={{ position: "relative" }}>
-        <Image
-          className={styles.storyImg}
-          src={item?.image ? item.image : tempImg}
-          // width={226}
-          // height={301}
-          fill
-          alt=""
-        />
-      </div> */}
-
       <div className={styles.imgContainer}>
         <Image
           className={styles.storyImg}
           src={item?.image ? item.image : tempImg}
-          // width={226}
-          // height={301}
           fill
           alt="story image"
         />
