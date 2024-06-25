@@ -9,7 +9,7 @@ interface LanguageSelectorProps {
 
 const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
   const { language, handleLanguageChange } = useContext(LanguageContext);
-  const getDisplayText = (code: string) => {
+  const getCountryName = (code: string) => {
     if (code === "ar") {
       return "UAE";
     }
@@ -28,7 +28,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
             <option value="en">Country</option>
             {Object.entries(LANGUAGE_DICT).map(([key, name]) => (
               <option key={key} value={key}>
-                {getDisplayText(key)}
+                {getCountryName(key)}
               </option>
             ))}
           </select>
