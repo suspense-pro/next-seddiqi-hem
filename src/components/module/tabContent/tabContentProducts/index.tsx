@@ -32,17 +32,22 @@ const TabContentProducts = () => {
                     />
                   ))}
                 </div>
-                <div className={styles.subMenu}>
-                  {headerData.sections[ind].special_categories?.map((item) => (
-                    <NavigationLink
-                      className={styles.menuLink}
-                      key={item.name}
-                      title={item.name}
-                      arrow={item.expand}
-                      url="/"
-                    />
-                  ))}
-                </div>
+                {headerData.sections[ind].special_categories && (
+                  <div className={styles.subMenu}>
+                    {headerData.sections[ind].special_categories?.map(
+                      (item) => (
+                        <NavigationLink
+                          className={styles.menuLink}
+                          key={item.name}
+                          title={item.name}
+                          arrow={item.expand}
+                          url="/"
+                        />
+                      )
+                    )}
+                  </div>
+                )}
+
                 <div className={styles.subMenu}>
                   <div className={styles.displayCardsTitle}>THE LATEST</div>
                   <DisplayCard />

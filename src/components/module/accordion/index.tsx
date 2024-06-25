@@ -30,6 +30,7 @@ const Accordion = ({ item, children, setSubMenu, subMenu }) => {
             className={styles.headerLink}
             key={item.title}
             title={item.title}
+            hover={false}
           />
         </div>
       </div>
@@ -45,6 +46,7 @@ const Accordion = ({ item, children, setSubMenu, subMenu }) => {
           }}
         >
           <NavigationLink
+            hover={false}
             className={styles.headerLink}
             key={item.title}
             title={item.title}

@@ -14,8 +14,10 @@ const TabContentExplore = () => {
     <div className={styles.tabContent}>
       <div className={styles.mobileMenuLinks}>
         <div className={styles.mobileMenuNavigationContainer}>
-          <div style={{ height: "100%" }} className={styles.subMenuContainer}>
-            <div className={`${styles.removePadding} ${styles.subMenu}`}>
+          <div
+            className={`${styles.customContainer} ${styles.subMenuContainer}`}
+          >
+            <div className={`${styles.padZero} ${styles.subMenu}`}>
               {/* TEMP */}
               {headerData.sections[5].categories?.map((item) => (
                 <NavigationLink
@@ -27,7 +29,7 @@ const TabContentExplore = () => {
                 />
               ))}
             </div>
-            <div className={`${styles.removePadding} ${styles.subMenu}`}>
+            <div className={`${styles.padZero} ${styles.subMenu}`}>
               {headerData.sections[5].special_categories?.map((item) => (
                 <NavigationLink
                   className={styles.menuLink}
@@ -38,7 +40,7 @@ const TabContentExplore = () => {
                 />
               ))}
             </div>
-            <div className={styles.subMenu}>
+            <div className={`${styles.padZero} ${styles.subMenu}`}>
               <div className={styles.displayCardsTitle}>THE LATEST</div>
               <StoryCard />
               <StoryCard />

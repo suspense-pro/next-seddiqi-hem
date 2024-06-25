@@ -54,7 +54,7 @@ export default function DesktopHeader() {
             {headerData?.header_logos.map((logo) => (
               <Link style={{ margin: 0, padding: 0 }} href={logo.url}>
                 <Image
-                  key={logo.title}
+                  key={logo.id}
                   src={logo.imageUrl}
                   width={logo.width}
                   height={logo.height}
@@ -75,8 +75,9 @@ export default function DesktopHeader() {
               {headerDummyData.navigation?.map((link, ind) => (
                 <div onMouseEnter={() => updateCurrent(ind)}>
                   <NavigationLink
+                    hover={false}
                     className={styles.headerLink}
-                    key={link.title}
+                    key={link.id}
                     title={link.title}
                     url={link.url && link.url}
                   />

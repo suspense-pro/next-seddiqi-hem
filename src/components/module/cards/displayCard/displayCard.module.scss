@@ -1,4 +1,4 @@
-@import "./../../../../assets//styles/main.scss";
+@import "./../../../../assets/styles/main.scss";
 
 .displayCard {
   width: rem(226);
@@ -9,7 +9,7 @@
 
   @include breakpoint-max-width(rem(768)) {
     width: 100%;
-    height: rem(336);
+    height: 100%;
   }
 
   .imgContainer {

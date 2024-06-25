@@ -1,0 +1,13 @@
+@import "./../../../assets/styles/main.scss";
+
+.navigationLink {
+  transition: all 0.2s;
+  &:hover {
+    opacity: 0.8;
+    color: getColorHex("green-dark");
+    letter-spacing: rem(1);
+  }
+  &:active {
+    transform: translateY(rem(1));
+  }
+}
