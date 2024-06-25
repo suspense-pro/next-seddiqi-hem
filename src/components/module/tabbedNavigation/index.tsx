@@ -28,8 +28,8 @@ const TabbedNavigation = () => {
         {tabs.map((tab) => (
           <div
             key={tab.id}
-            className={`${styles.tab} ${
-              tab.id === activeTab && styles.activeTab
+            className={`${tab.id === activeTab && styles.activeTab} ${
+              styles.tab
             }`}
             onClick={() => handleTabClick(tab.id)}
           >

@@ -137,23 +137,6 @@
   }
 }
 
-// .headerContainer {
-//   position: fixed;
-//   width: 100%;
-//   top: 0;
-//   z-index: 6000;
-//   opacity: 1;
-//   transition: visibility 0.3s ease;
-
-//   &.scrolled {
-//     height: rem(78);
-//     overflow: hidden;
-//     .headerLogoContainer {
-//       display: none !important;
-//       opacity: 0;
-//     }
-//   }
-// }
 .headerLogoContainer {
   transition: visibility 0.3s ease;
 }

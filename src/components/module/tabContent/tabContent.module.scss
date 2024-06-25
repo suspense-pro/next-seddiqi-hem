@@ -46,8 +46,8 @@
 }
 
 .customContainer {
-  height: 100% !important;
-  gap: rem(40) !important;
+  height: 100%;
+  gap: rem(40);
 }
 
 .displayCardsTitle {
@@ -55,10 +55,9 @@
   @include heading_regular;
   line-height: rem(20);
   letter-spacing: rem(0.4);
-
-  margin-bottom: -10px;
+  margin-bottom: rem(-10);
 }
 
 .padZero {
-  padding: 0 !important;
+  padding: 0;
 }

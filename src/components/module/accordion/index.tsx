@@ -1,75 +1,69 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styles from "./accordion.module.scss";
 import NavigationLink from "../navigationLink";
 import { ArrowDown } from "@assets/images/svg";
 
-const Accordion = ({ item, children, setSubMenu, subMenu }) => {
+interface AccordionProps {
+  item: any;
+  children?: React.ReactNode;
+  setSubMenu?: (id) => void;
+  subMenu?: boolean;
+  showArrow?: boolean;
+}
+
+const Accordion = ({
+  item,
+  children,
+  setSubMenu,
+  subMenu,
+  showArrow,
+}: AccordionProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  // const [height, setHeight] = useState(0);
-  // const contentRef = useRef<HTMLDivElement | null>(null);
+  const [height, setHeight] = useState(0);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
-  // useLayoutEffect(() => {
-  //   typeof window !== "undefined" && contentRef.current
-  //     ? setHeight(contentRef.current.clientHeight + 5)
-  //     : setHeight(0);
-  // }, [isCollapsed]);
+  // DYNAMIC HEIGHT
+  useLayoutEffect(() => {
+    if (typeof window !== "undefined" && contentRef.current && isCollapsed) {
+      setHeight(contentRef.current.scrollHeight);
+    }
+  }, [isCollapsed]);
 
-  // console.log("height", height);
+  // ACTIVE SUBMENU
+  const activeSubMenu = subMenu === item.id && isCollapsed;
 
-  if (item.title === "BRANDS") {
-    return (
-      <div className={styles.accordian}>
-        <div
-          className={styles.accordianLink}
-          onClick={() => {
-            setSubMenu(item.id);
-            setIsCollapsed(!isCollapsed);
-          }}
-        >
-          <NavigationLink
-            className={styles.headerLink}
-            key={item.title}
-            title={item.title}
-            hover={false}
-          />
-        </div>
+  const handleClick = () => {
+    if (showArrow) {
+      setSubMenu(item.id);
+      setIsCollapsed(!isCollapsed);
+    }
+  };
+
+  return (
+    <div className={styles.accordian}>
+      <div className={styles.accordianLink} onClick={handleClick}>
+        <NavigationLink
+          hover={false}
+          className={styles.headerLink}
+          key={item.title}
+          title={item.title}
+        />
+
+        {showArrow && (
+          <ArrowDown className={activeSubMenu && styles.activeArrow} />
+        )}
       </div>
-    );
-  } else {
-    return (
-      <div className={styles.accordian}>
-        <div
-          className={styles.accordianLink}
-          onClick={() => {
-            setSubMenu(item.id);
-            setIsCollapsed(!isCollapsed);
-          }}
-        >
-          <NavigationLink
-            hover={false}
-            className={styles.headerLink}
-            key={item.title}
-            title={item.title}
-          />
-          <ArrowDown
-            className={subMenu === item.id && isCollapsed && styles.activeArrow}
-          />
-        </div>
-
-        <div
-          className={`${
-            subMenu === item.id && isCollapsed && styles.activeAccordian
-          } ${styles.accordianContainer}`}
-          style={{
-            height:
-              subMenu === item.id && isCollapsed && item.height && item.height,
-          }}
-        >
-          {children}
-        </div>
+      <div
+        ref={contentRef}
+        style={{
+          height: activeSubMenu && height,
+        }}
+        className={`${styles.accordianContainer}`}
+      >
+        {children}
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default Accordion;

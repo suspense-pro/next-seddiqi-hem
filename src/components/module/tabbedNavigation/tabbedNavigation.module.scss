@@ -13,6 +13,11 @@
     margin: rem(0 28);
     border-bottom: rem(1) solid getColorHex("grey-light-3");
 
+    .activeTab {
+      border-bottom: rem(2) solid getColorHex("green-dark");
+      color: getColorHex("green-dark");
+    }
+
     .tab {
       @include heading_medium;
       color: getColorHex("brown-grey");
@@ -24,12 +29,7 @@
       letter-spacing: rem(0.6);
       cursor: pointer;
       padding: rem(16);
-      border-bottom: rem(2) solid getColorHex("green-dark", 0);
+      // border-bottom: rem(2) solid getColorHex("green-dark", 0);
     }
   }
-}
-
-.activeTab {
-  border-bottom: rem(2) solid getColorHex("green-dark") !important;
-  color: getColorHex("green-dark") !important;
 }

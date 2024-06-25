@@ -9,7 +9,7 @@
 
   @include breakpoint-max-width(rem(768)) {
     width: 100%;
-    height: 100% !important;
+    height: 100%;
   }
   @include breakpoint-max-width(rem(360)) {
     flex-direction: column;

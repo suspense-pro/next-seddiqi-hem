@@ -6,18 +6,15 @@ export const headerDummyData = {
       title: "WATCHES",
       id: 1,
       openNewTab: false,
-      height: "1138.8px",
     },
     {
       title: "JEWELLERY",
       openNewTab: false,
-      height: "1186px",
       id: 2,
     },
     {
       title: "ACCESSORIES",
       openNewTab: false,
-      height: "843.6px",
       id: 3,
     },
     {
@@ -29,7 +26,6 @@ export const headerDummyData = {
     {
       title: "SERVICES",
       openNewTab: false,
-      height: "843.6px",
       id: 5,
     },
     {

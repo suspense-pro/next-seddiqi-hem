@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import styles from "./../tabContent.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
-import NavigationLink from "@components/module/navigationLink";
 import StoryCard from "@components/module/cards/storyCard";
 import DisplayCard from "@components/module/cards/displayCard";
 import ArticleCard from "@components/module/cards/articleCard";
 import MobileMenuLogobar from "@components/module/mobileMenuLogobar";
+import SubMenu from "@components/module/tabContent/subMenu";
+
 const TabContentExplore = () => {
   const headerContext = useContext(HeaderContext);
   const { headerData } = headerContext;
@@ -17,29 +18,15 @@ const TabContentExplore = () => {
           <div
             className={`${styles.customContainer} ${styles.subMenuContainer}`}
           >
-            <div className={`${styles.padZero} ${styles.subMenu}`}>
-              {/* TEMP */}
-              {headerData.sections[5].categories?.map((item) => (
-                <NavigationLink
-                  className={styles.menuLink}
-                  key={item.name}
-                  title={item.name}
-                  arrow={item.expand}
-                  url="/"
-                />
-              ))}
-            </div>
-            <div className={`${styles.padZero} ${styles.subMenu}`}>
-              {headerData.sections[5].special_categories?.map((item) => (
-                <NavigationLink
-                  className={styles.menuLink}
-                  key={item.name}
-                  title={item.name}
-                  arrow={item.expand}
-                  url="/"
-                />
-              ))}
-            </div>
+            <SubMenu
+              links={headerData.sections[5].categories}
+              className={styles.padZero}
+            />
+            <SubMenu
+              links={headerData.sections[5].special_categories}
+              className={styles.padZero}
+            />
+
             <div className={`${styles.padZero} ${styles.subMenu}`}>
               <div className={styles.displayCardsTitle}>THE LATEST</div>
               <StoryCard />
