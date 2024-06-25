@@ -52,7 +52,7 @@
 
   .arrow {
     position: absolute;
-    right: rem(10);
+    right: rem(0);
     pointer-events: none;
   }
   @include lg-max {
