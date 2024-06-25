@@ -4,14 +4,14 @@ import { Customer } from "commerce-sdk";
 import initializeShopperConfig, { clientConfig } from "@utils/sfcc-connector/config";
  
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-    const requestMethod = "POST"; // req.method;
-    // const body = req?.body !== "" ? JSON.parse(req?.body) : null;
+    const requestMethod = req.method; // "POST"
+    const body = req?.body !== "" ? JSON.parse(req?.body) : null;
     // const query = req.query.api ?? "";
 
     switch (requestMethod) {
         case "POST":
             try {
-                // const { fname, lname, username, email, password } = req.body;
+                const { fname, lname, username, email, password } = body;
                 // const { isError, response } = { isError: false, response: null }; //await function here from utils service;
 
                 const configWithAuth = await initializeShopperConfig();
@@ -22,20 +22,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     Authorization: `Bearer ${configWithAuth}`,
                     },
                     parameters: {
-                    siteId: clientConfig.parameters.siteId,
+                        siteId: clientConfig.parameters.siteId,
+                        organizationId: clientConfig.parameters.organizationId
                     },
                     body: {
-                        password: "password123",
+                        password: password,
                         customer: {
-                            login: "username12",
-                            email: "abuzer12@gmail.com",
-                            firstName: "abufname",
-                            lastName: "zerlname",
+                            login: username,
+                            email: email,
+                            firstName: fname,
+                            lastName: lname,
                         },
                     },
                 };
 
-                client
+                return client
                     .registerCustomer(options)
                     .then((shopper) => console.log("Registerered Shopper: ", shopper))
                     .catch((error) => console.log("Error registering shopper: ", error));

@@ -11,14 +11,31 @@ export async function registerCustomer({
   try {
     const json = {
       api: "register",
-      action: "registerCustomer",
     };
     const config = {
       method: method,
-      body: JSON.stringify(userData),
+      body: userData,
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = await serverApiCallSfcc(queryString, config, "register");
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "register");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function registerCustomer2() {
+  try {
+    const json = {
+      api: "register",
+    };
+    const config = {
+      method: "POST",
+      // body: JSON.stringify(userData),
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "register");
     return res;
   } catch (err) {
     logger.error("API threw Error", err);

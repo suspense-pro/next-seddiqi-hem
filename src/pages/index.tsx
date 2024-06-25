@@ -9,7 +9,9 @@ import {
 } from "@utils/cms/amplience";
 import { mapToID } from "@utils/helpers";
 
-import { getCustomer } from "@utils/sfcc-connector/dataService";
+import { getCustomer, registerCustomer2 } from "@utils/sfcc-connector/dataService";
+import LoginForm from "@components/LoginForm";
+import RegistrationForm from "@components/RegistrationForm";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data: any = await getContentItemByKey("homepage");
@@ -38,6 +40,18 @@ const getCustomerObj = async () =>  {
   }
 }
 
+const rigisterCustomerSFCC = async () =>  {
+
+  console.log("customer Registration!");
+  try {
+    const response = await registerCustomer2();
+    if (response)
+    alert (response);
+  } catch(err) {
+    console.log('Error submitting form: ' + err.message);
+  }
+}
+
   return (
     <div className="main-content">
       {compact(contents).map((content) => (
@@ -47,7 +61,13 @@ const getCustomerObj = async () =>  {
           key={content?._meta.deliveryId}
         />
       ))}
-      <button onClick={getCustomerObj}> Get Customer </button>
+
+      <RegistrationForm />
+      
+      <button onClick={rigisterCustomerSFCC}> Get Customer</button>
+
+      <LoginForm />
+
     </div>    
   );
 }
