@@ -1,24 +1,32 @@
-import React from "react";
+import ArrowRight from "@assets/images/svg/ArrowRight";
+import classNames from "classnames";
 import Link from "next/link";
+import React from "react";
 
 interface NavigationLinkProps {
   url?: string;
-  label: string;
+  title: string;
+  className?: string;
+  arrow?: boolean;
 }
- 
 
-const NavigationLink: React.FC<NavigationLinkProps> = ({ url, label }) => {
- 
+const NavigationLink: React.FC<NavigationLinkProps> = ({
+  url,
+  title,
+  className,
+  arrow,
+}) => {
   if (url) {
     return (
-      <Link href={url} passHref>
-        {label}
+      <Link className={className} href={url || "/"}>
+        <span>{title}</span>
+        {arrow && <ArrowRight />}
       </Link>
     );
   } else {
     return (
-      <div>
-        <span>{label}</span>
+      <div className={className}>
+        <span>{title}</span>
       </div>
     );
   }

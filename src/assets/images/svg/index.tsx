@@ -1,5 +1,12 @@
-export {default as DeleteIcon} from "./DeleteIcon";
-export {default as TwitterIcon} from "./TwitterIcon";
-export {default as InstaIcon} from "./InstaIcon";
-export {default as FBIcon} from "./FBIcon";
-export {default as ArrowDown} from "./ArrowDown";
+export { default as AccountIcon } from "./AccountIcon";
+export { default as MapIcon } from "./MapIcon";
+export { default as SearchIcon } from "./SearchIcon";
+export { default as WishlistIcon } from "./WishlistIcon";
+export { default as DeleteIcon } from "./DeleteIcon";
+export { default as TwitterIcon } from "./TwitterIcon";
+export { default as InstaIcon } from "./InstaIcon";
+export { default as FBIcon } from "./FBIcon";
+export { default as HamburgerIcon } from "./HamburgerIcon";
+export { default as CloseIcon } from "./CloseIcon";
+export { default as ArrowDown } from "./ArrowDown";
+export { default as ArrowRight } from "./ArrowRight";

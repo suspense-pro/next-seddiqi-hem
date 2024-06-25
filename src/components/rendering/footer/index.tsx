@@ -47,7 +47,7 @@ export default function Footer({
             {commonLinks.slice(offset, offset + 4).map((link) => (
               <NavigationLink
                 key={link.label}
-                label={link.label}
+                title={link.label}
                 url={link.url}
               />
             ))}
@@ -57,7 +57,7 @@ export default function Footer({
           {distinctLinks.map((link) => (
             <NavigationLink
               key={link.label}
-              label={link.label}
+              title={link.label}
               url={link.url}
             />
           ))}
