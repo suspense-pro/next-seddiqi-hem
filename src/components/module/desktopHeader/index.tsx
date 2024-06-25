@@ -38,7 +38,10 @@ export default function DesktopHeader() {
   }, []);
 
   return (
-    <div className={styles.desktopHeader}>
+    <div
+      onMouseLeave={() => updateCurrent(null)}
+      className={styles.desktopHeader}
+    >
       <div
         className={`${styles.headerContainer} ${
           scrolled ? styles.scrolled : ""
@@ -66,10 +69,7 @@ export default function DesktopHeader() {
           </div>
 
           {/* links */}
-          <div
-            // onMouseLeave={() => updateCurrent(null)}
-            className={styles.linksContainer}
-          >
+          <div className={styles.linksContainer}>
             <div className={styles.appointmentBtn}>BOOK APPOINTMENT</div>
             <div className={styles.links}>
               {headerDummyData.navigation?.map((link, ind) => (

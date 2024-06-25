@@ -41,7 +41,6 @@ const TabContentExplore = () => {
           </div>
         </div>
       </div>
-      <MobileMenuLogobar />
     </div>
   );
 };

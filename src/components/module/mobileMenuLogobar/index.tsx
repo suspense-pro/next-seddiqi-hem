@@ -2,6 +2,8 @@ import styles from "./mobileMenuLogobar.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import Image from "next/image";
 import { useContext } from "react";
+import { HeaderFooter } from "@components/module";
+
 const MobileMenuLogobar = () => {
   const headerContext = useContext(HeaderContext);
   const { headerData } = headerContext;
@@ -24,6 +26,7 @@ const MobileMenuLogobar = () => {
           ))}
         </div>
       </div>
+      <HeaderFooter className={styles.headerFooter} />
     </div>
   );
 };

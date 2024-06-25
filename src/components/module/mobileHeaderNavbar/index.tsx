@@ -27,7 +27,14 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({
     <header className={styles.mobileHeader}>
       <div className={styles.mobileHeaderContainer}>
         <div className={styles.menuIcon} onClick={toggleMenu}>
-          {menuOpen ? <CloseIcon /> : <HamburgerIcon />}
+          {/* {menuOpen ? <CloseIcon /> : <HamburgerIcon />} */}
+          <div
+            className={`${menuOpen && styles.hamburgerCross} ${
+              styles.hamBurger
+            }`}
+          >
+            &nbsp;
+          </div>
           <AccountIcon fill="#" />
         </div>
         <div className={styles.centerLogo}>

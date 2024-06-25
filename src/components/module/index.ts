@@ -19,6 +19,7 @@ import MobileMenuLogobar from "./mobileMenuLogobar";
 import TabContentExplore from "./tabContent/tabContentExplore";
 import TabContentProducts from "./tabContent/tabContentProducts";
 import SubMenu from "./tabContent/subMenu";
+import HeaderFooter from "./headerFooter/index";
 
 export {
   Head,
@@ -41,4 +42,5 @@ export {
   TabContentExplore,
   TabContentProducts,
   SubMenu,
+  HeaderFooter,
 };

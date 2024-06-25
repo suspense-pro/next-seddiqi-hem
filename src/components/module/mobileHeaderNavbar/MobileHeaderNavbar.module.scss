@@ -22,9 +22,50 @@
 
 .position {
   background-color: getColorHex("white");
-  // position: fixed;
-  // width: 100%;
-  // left: 0;
-  // z-index: 9999;
-  // top: 0;
+}
+
+.hamBurger {
+  position: relative;
+  &,
+  &::before,
+  &::after {
+    display: inline-block;
+    width: rem(18);
+    height: rem(1);
+    text-align: center;
+    background-color: getColorHex("green-dark");
+    transition: all 0.2s;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: rem(-7);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: rem(7);
+    width: 65%;
+  }
+}
+
+.hamburgerCross {
+  transition: all 0.2s;
+
+  & {
+    background-color: transparent;
+  }
+  &::before {
+    transform: rotate(135deg);
+    top: 0;
+  }
+
+  &::after {
+    top: 0;
+    transform: rotate(-135deg);
+    width: 100%;
+  }
 }
