@@ -40,8 +40,8 @@ const Accordion = ({
   };
 
   return (
-    <div className={styles.accordian}>
-      <div className={styles.accordianLink} onClick={handleClick}>
+    <div className={styles.accordion}>
+      <div className={styles.accordionLink} onClick={handleClick}>
         <NavigationLink
           hover={false}
           className={styles.headerLink}
@@ -58,7 +58,7 @@ const Accordion = ({
         style={{
           height: activeSubMenu && height,
         }}
-        className={`${styles.accordianContainer}`}
+        className={`${styles.accordionContainer}`}
       >
         {children}
       </div>
