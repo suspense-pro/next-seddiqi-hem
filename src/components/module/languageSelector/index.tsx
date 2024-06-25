@@ -9,7 +9,12 @@ interface LanguageSelectorProps {
 
 const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
   const { language, handleLanguageChange } = useContext(LanguageContext);
-
+  const getDisplayText = (code: string) => {
+    if (code === "ar") {
+      return "UAE";
+    }
+    return LANGUAGE_DICT[code];
+  };
   return (
     <div className={`${styles.selection} ${className}`}>
       <label className={styles.label}>COUNTRY & LANGUAGE</label>
@@ -17,12 +22,14 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
         <div className={styles.customSelect}>
           <select
             onChange={(e) => handleLanguageChange?.(e.target.value)}
-            value={language || 'en'}
+            value={"ar"}
             disabled
           >
             <option value="en">Country</option>
             {Object.entries(LANGUAGE_DICT).map(([key, name]) => (
-              <option key={key} value={key}>{name}</option>
+              <option key={key} value={key}>
+                {getDisplayText(key)}
+              </option>
             ))}
           </select>
           <ArrowDown className={styles.arrow} />
@@ -32,11 +39,12 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
         <div className={styles.customSelect}>
           <select
             onChange={(e) => handleLanguageChange?.(e.target.value)}
-            value={language || 'en'}
-          >
-            <option value="en">English</option>
+            value={language || "en"}
+          > 
             {Object.entries(LANGUAGE_DICT).map(([key, name]) => (
-              <option key={key} value={key}>{name}</option>
+              <option key={key} value={key}>
+                {name}
+              </option>
             ))}
           </select>
           <ArrowDown className={styles.arrow} />
