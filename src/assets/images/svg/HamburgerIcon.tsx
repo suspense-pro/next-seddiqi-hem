@@ -19,7 +19,7 @@ const HamburgerIcon = ({
       width="15.5"
       height="0.5"
       stroke="#464F4A"
-      stroke-width="0.5"
+      strokeWidth="0.5"
     />
     <rect
       x="2.25"
@@ -27,7 +27,7 @@ const HamburgerIcon = ({
       width="15.5"
       height="0.5"
       stroke="#464F4A"
-      stroke-width="0.5"
+      strokeWidth="0.5"
     />
     <rect
       x="2.25"
@@ -35,7 +35,7 @@ const HamburgerIcon = ({
       width="9.5"
       height="0.5"
       stroke="#464F4A"
-      stroke-width="0.5"
+      strokeWidth="0.5"
     />
   </svg>
 );

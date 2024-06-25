@@ -167,7 +167,6 @@ export const headerDummyData: HeaderData = {
         { name: "Seddigi Accessories", expand: false },
         { name: "Jewellery Accessories", expand: false },
       ],
-      special_categories: [],
       the_latest: [
         {
           title: "Rapport",
@@ -190,7 +189,6 @@ export const headerDummyData: HeaderData = {
         { name: "Free Services", expand: false },
         { name: "All Services", expand: false },
       ],
-      special_categories: [],
       the_latest: [
         {
           title: "Sediqqi Servicing",

@@ -12,6 +12,7 @@ const ArrowRight = ({
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={className}
+    style={{ transition: "all .3s" }}
   >
     <mask id="path-1-inside-1_4912_958" fill="white">
       <path d="M0 -5.24537e-07L6 6L12 0" />
