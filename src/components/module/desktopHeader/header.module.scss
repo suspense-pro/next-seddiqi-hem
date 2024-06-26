@@ -77,6 +77,10 @@
       max-width: rem(250);
       cursor: pointer;
       @include body_regular;
+      font-weight: 400;
+      font-size: rem(14);
+      line-height: rem(18);
+      letter-spacing: rem(1);
 
       @include breakpoint-max-width(rem(1150)) {
         display: none;
@@ -96,13 +100,12 @@
         padding: rem(7 0);
         cursor: pointer;
         color: getColorHex("green-dark");
-        // border-bottom: rem(2) solid getColorHex("green-dark", 0);
         @include heading_regular;
         transition: all 0.3s;
-
-        // &:hover {
-        //   border-bottom: rem(2) solid getColorHex("green-dark");
-        // }
+        font-weight: 400;
+        font-size: rem(16);
+        line-height: rem(20);
+        letter-spacing: rem(0.4);
 
         &::after {
           margin-top: rem(7);

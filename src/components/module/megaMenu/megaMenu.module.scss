@@ -106,6 +106,7 @@
   @include heading_regular;
   line-height: rem(20);
   letter-spacing: rem(0.4);
+  color: getColorHex("green-dark");
 }
 
 .imgContainer {
