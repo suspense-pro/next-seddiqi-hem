@@ -11,10 +11,15 @@ const MobileHeader = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const containerCss: React.CSSProperties = {
+    height: menuOpen && "100vh",
+    overflowY: menuOpen ? "scroll" : "hidden",
+  };
+
   return (
-    <div className={styles.position}>
+    <div style={containerCss} className={styles.position}>
       <MobileHeaderNavbar menuOpen={menuOpen} toggleMenu={toggleMenu} />
-      {menuOpen && <TabbedNavigation />}
+      <TabbedNavigation />
     </div>
   );
 };

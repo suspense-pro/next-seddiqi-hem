@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useLayoutEffect, useRef, useState } from "react";
 import styles from "./tabbedNavigation.module.scss";
 import TabContentExplore from "../tabContent/tabContentExplore";
 import TabContentProducts from "../tabContent/tabContentProducts";

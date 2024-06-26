@@ -3,7 +3,12 @@ import styles from "./megaMenu.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import NavigationLink from "../navigationLink";
 
-import { StoryCard, ArticleCard, DisplayCard } from "@components/module";
+import {
+  StoryCard,
+  ArticleCard,
+  DisplayCard,
+  HeaderFooter,
+} from "@components/module";
 
 export const SubMenuLinks = () => {
   const headerContext = useContext(HeaderContext);
@@ -110,6 +115,7 @@ const MegaMenu = ({ headerHeightClass }) => {
         <SubMenuLinks />
         <ContentBlocks />
       </div>
+      <HeaderFooter className={styles.headerFooter} />
     </section>
   );
 };
