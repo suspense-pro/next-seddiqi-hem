@@ -14,15 +14,10 @@
     margin: rem(0);
     margin: rem(0 28);
     border-bottom: rem(1) solid getColorHex("grey-light-3");
-
-    .activeTab {
-      border-bottom: rem(2) solid getColorHex("green-dark");
-      color: getColorHex("green-dark");
-    }
+    color: getColorHex("brown-grey");
 
     .tab {
       @include heading_medium;
-      color: getColorHex("brown-grey");
       text-transform: uppercase;
       width: 100%;
       text-align: center;
@@ -34,4 +29,9 @@
       // border-bottom: rem(2) solid getColorHex("green-dark", 0);
     }
   }
+}
+
+.activeTab {
+  border-bottom: rem(2) solid getColorHex("green-dark");
+  color: getColorHex("green-dark");
 }
