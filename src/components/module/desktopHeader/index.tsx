@@ -20,7 +20,7 @@ export default function DesktopHeader() {
   if (!headerContext) {
     return null;
   }
-  const { current, updateCurrent, headerData } = headerContext;
+  const { updateCurrent, headerData } = headerContext;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,11 +47,7 @@ export default function DesktopHeader() {
           scrolled ? styles.scrolled : ""
         }`}
       >
-        <MegaMenu
-          headerHeightClass={styles.headerHeight ? styles.headerHeight : ""}
-        />
-
-        {/* logo bar */}
+        <MegaMenu headerHeightClass={styles.headerHeight} />
         <div className={styles.headerMargin}>
           <div className={styles.headerLogoContainer}>
             {headerData?.header_logos.map((logo) => (
@@ -67,8 +63,6 @@ export default function DesktopHeader() {
               </Link>
             ))}
           </div>
-
-          {/* links */}
           <div className={styles.linksContainer}>
             <div className={styles.appointmentBtn}>BOOK APPOINTMENT</div>
             <div className={styles.links}>
