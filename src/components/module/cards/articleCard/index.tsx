@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./articleCard.module.scss";
 import Link from "next/link";
+import styles from "./articleCard.module.scss";
 import { LatestsubTitle } from "@components/rendering/header/dummyData";
 import { truncateString } from "@utils/helpers/truncateString";
 
@@ -8,23 +8,22 @@ interface ArticleCardProps {
   item?: LatestsubTitle;
 }
 
-const ArticleCard: React.FC<ArticleCardProps> = ({ item }) => {
-  const articleCardstyles = {
-    backgroundImage: `url(${
-      item?.image ? item.image : "/images/png/watchImage_02.png"
-    })`,
-  };
+const DEFAULT_IMAGE = "/images/png/watchImage_02.png";
+const DEFAULT_TITLE = "Horology for The Holidays";
+const MAX_TITLE_LENGTH = 49;
 
-  const title = "Horology for The Holidays";
+const ArticleCard: React.FC<ArticleCardProps> = ({ item }) => {
+  const backgroundImage = `url(${item?.image || DEFAULT_IMAGE})`;
+  const title = item?.title
+    ? truncateString(item.title, MAX_TITLE_LENGTH)
+    : DEFAULT_TITLE;
 
   return (
-    <div style={articleCardstyles} className={styles.articleCard}>
-      <div className={styles.backgroundFade}>&nbsp;</div>
-      <div className={styles.articleTitle}>
-        {item?.title ? truncateString(item.title, 49) : title}
-      </div>
-      <Link href={"#"}>
-        <span className={styles.articleBtn}>Read Article</span>
+    <div className={styles.articleCard} style={{ backgroundImage }}>
+      <div className={styles.backgroundFade} />
+      <div className={styles.articleTitle}>{title}</div>
+      <Link href="#" className={styles.articleBtn}>
+        Read Article
       </Link>
     </div>
   );

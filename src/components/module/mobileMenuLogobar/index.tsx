@@ -1,12 +1,12 @@
-import styles from "./mobileMenuLogobar.module.scss";
-import { HeaderContext } from "@contexts/headerContext";
-import Image from "next/image";
 import { useContext } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { HeaderContext } from "@contexts/headerContext";
 import { HeaderFooter } from "@components/module";
+import styles from "./mobileMenuLogobar.module.scss";
 
 const MobileMenuLogobar = () => {
-  const headerContext = useContext(HeaderContext);
-  const { headerData } = headerContext;
+  const { headerData } = useContext(HeaderContext);
 
   return (
     <div className={styles.bottom}>
@@ -14,16 +14,19 @@ const MobileMenuLogobar = () => {
       <div className={styles.recommendContainer}>
         <div className={styles.recommendText}>Recommended for you</div>
         <div className={styles.logos}>
-          {headerData.mobile_logos.map((logo) => (
-            <Image
-              key={logo.imageUrl}
-              src={logo.imageUrl}
-              width={logo.width}
-              height={logo.height}
-              alt={logo.url}
-              className={styles.image}
-            />
-          ))}
+          {headerData.mobile_logos.map(
+            ({ id, url, imageUrl, width, height }) => (
+              <Link key={id} href={url}>
+                <Image
+                  src={imageUrl}
+                  width={width}
+                  height={height}
+                  alt={url}
+                  className={styles.image}
+                />
+              </Link>
+            )
+          )}
         </div>
       </div>
       <HeaderFooter className={styles.headerFooter} />

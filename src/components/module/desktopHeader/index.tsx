@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { useContext, useEffect, useState } from "react";
 import styles from "./header.module.scss";
 import {
   AccountIcon,
@@ -8,33 +10,22 @@ import {
 } from "@assets/images/svg";
 import NavigationLink from "@components/module/navigationLink";
 import { headerDummyData } from "./headerDummyData";
-import { useContext, useEffect, useState } from "react";
 import { HeaderContext } from "@contexts/headerContext";
-import Link from "next/link";
 import MegaMenu from "../megaMenu";
 
 export default function DesktopHeader() {
   const [scrolled, setScrolled] = useState(false);
   const headerContext = useContext(HeaderContext);
 
-  if (!headerContext) {
-    return null;
-  }
+  if (!headerContext) return null;
+
   const { updateCurrent, headerData } = headerContext;
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 40);
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -51,9 +42,12 @@ export default function DesktopHeader() {
         <div className={styles.headerMargin}>
           <div className={styles.headerLogoContainer}>
             {headerData?.header_logos.map((logo) => (
-              <Link style={{ margin: 0, padding: 0 }} href={logo.url}>
+              <Link
+                key={logo.id}
+                href={logo.url}
+                style={{ margin: 0, padding: 0 }}
+              >
                 <Image
-                  key={logo.id}
                   src={logo.imageUrl}
                   width={logo.width}
                   height={logo.height}
@@ -67,22 +61,22 @@ export default function DesktopHeader() {
             <div className={styles.appointmentBtn}>BOOK APPOINTMENT</div>
             <div className={styles.links}>
               {headerDummyData.navigation?.map((link, ind) => (
-                <div onMouseEnter={() => updateCurrent(ind)}>
+                <div key={link.id} onMouseEnter={() => updateCurrent(ind)}>
                   <NavigationLink
                     hover={false}
                     className={styles.headerLink}
-                    key={link.id}
                     title={link.title}
-                    url={link.url && link.url}
+                    url={link.url}
                   />
                 </div>
               ))}
             </div>
             <div className={styles.navIcons}>
-              <SearchIcon fill={"#"} />
-              <AccountIcon fill={"#"} />
-              <MapIcon fill={"#"} />
-              <WishlistIcon fill={"#"} />
+              {[SearchIcon, AccountIcon, MapIcon, WishlistIcon].map(
+                (Icon, index) => (
+                  <Icon key={index} fill="#" />
+                )
+              )}
             </div>
           </div>
         </div>

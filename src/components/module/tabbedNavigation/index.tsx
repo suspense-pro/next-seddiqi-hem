@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import styles from "./tabbedNavigation.module.scss";
 import TabContentExplore from "../tabContent/tabContentExplore";
 import TabContentProducts from "../tabContent/tabContentProducts";
@@ -15,12 +15,9 @@ const tabs = [
     content: <TabContentExplore />,
   },
 ];
-const TabbedNavigation = () => {
-  const [activeTab, setActiveTab] = useState(1);
 
-  const handleTabClick = (id) => {
-    setActiveTab(id);
-  };
+const TabbedNavigation: React.FC = () => {
+  const [activeTab, setActiveTab] = useState(1);
 
   return (
     <div className={styles.tabsContainer}>
@@ -28,20 +25,16 @@ const TabbedNavigation = () => {
         {tabs.map((tab) => (
           <div
             key={tab.id}
-            className={`${tab.id === activeTab && styles.activeTab} ${
-              styles.tab
+            className={`${styles.tab} ${
+              tab.id === activeTab ? styles.activeTab : ""
             }`}
-            onClick={() => handleTabClick(tab.id)}
+            onClick={() => setActiveTab(tab.id)}
           >
             {tab.label}
           </div>
         ))}
       </div>
-      <>
-        {tabs.map((tab) =>
-          activeTab === tab.id ? <div key={tab.id}>{tab.content}</div> : null
-        )}
-      </>
+      {tabs.find((tab) => tab.id === activeTab)?.content}
     </div>
   );
 };

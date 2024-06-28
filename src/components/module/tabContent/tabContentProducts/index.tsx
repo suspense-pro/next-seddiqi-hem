@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useMemo } from "react";
 import styles from "./../tabContent.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import { headerDummyData } from "@components/module/desktopHeader/headerDummyData";
@@ -8,21 +8,29 @@ import Accordion from "@components/module/accordion";
 import SubMenu from "@components/module/tabContent/subMenu";
 
 const TabContentProducts = () => {
-  const headerContext = useContext(HeaderContext);
-  const { headerData } = headerContext;
+  const { headerData } = useContext(HeaderContext);
   const [subMenu, setSubMenu] = useState(false);
 
-  // CHECK FOR SUBMENU DROPDOWN
-  const isDropdown = (ind) => {
-    return (
-      headerData.sections[ind].categories === undefined &&
-      headerData.sections[ind].special_categories === undefined
-    );
-  };
+  const isDropdown = (ind) =>
+    !headerData.sections[ind].categories &&
+    !headerData.sections[ind].special_categories;
 
-  // REMOVE EXPLORE
-  const products = headerDummyData.navigation?.filter(
-    (item) => item.title !== "EXPLORE"
+  const products = useMemo(
+    () =>
+      headerDummyData.navigation?.filter((item) => item.title !== "EXPLORE"),
+    [headerDummyData.navigation]
+  );
+
+  const renderAccordionContent = (ind) => (
+    <>
+      <SubMenu links={headerData.sections[ind].categories} />
+      <SubMenu links={headerData.sections[ind].special_categories} />
+      <div className={styles.subMenu}>
+        <div className={styles.displayCardsTitle}>THE LATEST</div>
+        <DisplayCard />
+        <DisplayCard />
+      </div>
+    </>
   );
 
   return (
@@ -30,25 +38,14 @@ const TabContentProducts = () => {
       <div className={styles.mobileMenuLinks}>
         {products?.map((link, ind) => (
           <div key={link.id} className={styles.mobileMenuNavigationContainer}>
-            {!isDropdown(ind) ? (
-              <Accordion
-                showArrow={!isDropdown(ind)}
-                subMenu={subMenu}
-                setSubMenu={setSubMenu}
-                item={link}
-              >
-                <SubMenu links={headerData.sections[ind].categories} />
-                <SubMenu links={headerData.sections[ind].special_categories} />
-
-                <div className={styles.subMenu}>
-                  <div className={styles.displayCardsTitle}>THE LATEST</div>
-                  <DisplayCard />
-                  <DisplayCard />
-                </div>
-              </Accordion>
-            ) : (
-              <Accordion item={link} />
-            )}
+            <Accordion
+              showArrow={!isDropdown(ind)}
+              subMenu={subMenu}
+              setSubMenu={setSubMenu}
+              item={link}
+            >
+              {!isDropdown(ind) && renderAccordionContent(ind)}
+            </Accordion>
           </div>
         ))}
       </div>

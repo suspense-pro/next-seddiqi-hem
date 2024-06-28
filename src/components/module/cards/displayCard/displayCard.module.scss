@@ -18,16 +18,13 @@
     height: rem(301);
 
     @include breakpoint-max-width(rem(768)) {
-      width: 100%;
       height: rem(224);
     }
   }
+
   .storyImg {
-    border-top-left-radius: rem(16);
-    border-bottom-right-radius: rem(16);
+    border-radius: rem(16 0 16 0);
     object-fit: cover;
-    // width: 100%;
-    // height: 100%;
   }
 
   .displayCardInfo {
@@ -35,6 +32,7 @@
     flex-direction: column;
     gap: rem(8);
     line-height: rem(22);
+
     .title {
       color: getColorHex("green-metallic");
       letter-spacing: rem(0.4);

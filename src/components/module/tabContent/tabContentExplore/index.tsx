@@ -8,8 +8,8 @@ import MobileMenuLogobar from "@components/module/mobileMenuLogobar";
 import SubMenu from "@components/module/tabContent/subMenu";
 
 const TabContentExplore = () => {
-  const headerContext = useContext(HeaderContext);
-  const { headerData } = headerContext;
+  const { headerData } = useContext(HeaderContext);
+  const { categories, special_categories } = headerData.sections[5];
 
   return (
     <div className={styles.tabContent}>
@@ -18,25 +18,13 @@ const TabContentExplore = () => {
           <div
             className={`${styles.customContainer} ${styles.subMenuContainer}`}
           >
-            <SubMenu
-              links={headerData.sections[5].categories}
-              className={styles.padZero}
-            />
-            <SubMenu
-              links={headerData.sections[5].special_categories}
-              className={styles.padZero}
-            />
+            <SubMenu links={categories} className={styles.padZero} />
+            <SubMenu links={special_categories} className={styles.padZero} />
 
             <div className={`${styles.padZero} ${styles.subMenu}`}>
-              <div className={styles.displayCardsTitle}>THE LATEST</div>
-              <StoryCard />
-              <StoryCard />
-              <StoryCard />
-              <div className={styles.displayCardsTitle}>LATEST STORIES</div>
-              <DisplayCard />
-              <DisplayCard />
-              <div className={styles.displayCardsTitle}>LATEST ARTICLE</div>
-              <ArticleCard />
+              {renderSection("THE LATEST", StoryCard, 3)}
+              {renderSection("LATEST STORIES", DisplayCard, 2)}
+              {renderSection("LATEST ARTICLE", ArticleCard, 1)}
             </div>
           </div>
         </div>
@@ -45,5 +33,14 @@ const TabContentExplore = () => {
     </div>
   );
 };
+
+const renderSection = (title, Component, count) => (
+  <>
+    <div className={styles.displayCardsTitle}>{title}</div>
+    {[...Array(count)].map((_, index) => (
+      <Component key={index} />
+    ))}
+  </>
+);
 
 export default TabContentExplore;

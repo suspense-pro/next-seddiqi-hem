@@ -1,14 +1,8 @@
-import {
-  AccountIcon,
-  CloseIcon,
-  HamburgerIcon,
-  MapIcon,
-  SearchIcon,
-} from "@assets/images/svg";
-import styles from "./MobileHeaderNavbar.module.scss";
-import { useContext } from "react";
-import { HeaderContext } from "@contexts/headerContext";
+import React, { useContext } from "react";
 import Image from "next/image";
+import { AccountIcon, MapIcon, SearchIcon } from "@assets/images/svg";
+import styles from "./MobileHeaderNavbar.module.scss";
+import { HeaderContext } from "@contexts/headerContext";
 
 interface MobileHeaderNavbarProps {
   menuOpen?: boolean;
@@ -19,22 +13,17 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({
   toggleMenu,
   menuOpen,
 }) => {
-  const headerContext = useContext(HeaderContext);
-
-  const { headerData } = headerContext;
+  const { headerData } = useContext(HeaderContext);
 
   return (
     <header className={styles.mobileHeader}>
       <div className={styles.mobileHeaderContainer}>
         <div className={styles.menuIcon} onClick={toggleMenu}>
-          {/* {menuOpen ? <CloseIcon /> : <HamburgerIcon />} */}
           <div
-            className={`${menuOpen && styles.hamburgerCross} ${
-              styles.hamBurger
+            className={`${styles.hamBurger} ${
+              menuOpen ? styles.hamburgerCross : ""
             }`}
-          >
-            &nbsp;
-          </div>
+          />
           <AccountIcon fill="#" />
         </div>
         <div className={styles.centerLogo}>
@@ -42,7 +31,7 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({
             height={16}
             width={82}
             src={headerData.mobile_siddiqi_logo.imageUrl}
-            alt="SeddiqiLogo"
+            alt="Seddiqi Logo"
           />
         </div>
         <div className={styles.rightIcons}>
