@@ -23,8 +23,12 @@ const TabContentProducts = () => {
 
   const renderAccordionContent = (ind) => (
     <>
-      <SubMenu links={headerData.sections[ind].categories} />
-      <SubMenu links={headerData.sections[ind].special_categories} />
+      {headerData.sections[ind].categories && (
+        <SubMenu links={headerData.sections[ind].categories} />
+      )}
+      {headerData.sections[ind].special_categories && (
+        <SubMenu links={headerData.sections[ind].special_categories} />
+      )}
       <div className={styles.subMenu}>
         <div className={styles.displayCardsTitle}>THE LATEST</div>
         <DisplayCard />
