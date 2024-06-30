@@ -3,11 +3,7 @@ import Image from "next/image";
 import { AccountIcon, MapIcon, SearchIcon } from "@assets/images/svg";
 import styles from "./MobileHeaderNavbar.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
-
-interface MobileHeaderNavbarProps {
-  menuOpen?: boolean;
-  toggleMenu?: () => void;
-}
+import { MobileHeaderNavbarProps } from "@utils/models";
 
 const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({
   toggleMenu,

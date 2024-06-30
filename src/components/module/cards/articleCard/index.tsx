@@ -1,18 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import styles from "./articleCard.module.scss";
-import { LatestsubTitle } from "@components/rendering/header/dummyData";
 import { truncateString } from "@utils/helpers/truncateString";
-
-interface ArticleCardProps {
-  item?: LatestsubTitle;
-}
+import { CardInfoProps } from "@utils/models";
 
 const DEFAULT_IMAGE = "/images/png/watchImage_02.png";
 const DEFAULT_TITLE = "Horology for The Holidays";
 const MAX_TITLE_LENGTH = 49;
 
-const ArticleCard: React.FC<ArticleCardProps> = ({ item }) => {
+const ArticleCard: React.FC<CardInfoProps> = ({ item }) => {
   const backgroundImage = `url(${item?.image || DEFAULT_IMAGE})`;
   const title = item?.title
     ? truncateString(item.title, MAX_TITLE_LENGTH)

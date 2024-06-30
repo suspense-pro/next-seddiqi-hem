@@ -51,6 +51,8 @@
       line-height: rem(20);
       letter-spacing: rem(0.4);
 
+      @include ellipses;
+
       @include breakpoint-max-width(rem(768)) {
         font-size: rem(14);
       }
@@ -61,6 +63,7 @@
       color: getColorHex("green-dark");
       font-size: rem(14);
       line-height: rem(22);
+      @include ellipses;
 
       @include breakpoint-max-width(rem(768)) {
         font-size: rem(12);

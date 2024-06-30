@@ -2,17 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./accordion.module.scss";
 import NavigationLink from "../navigationLink";
 import { ArrowDown } from "@assets/images/svg";
-
-interface AccordionProps {
-  item: {
-    id: string | number;
-    title: string;
-  };
-  children?: React.ReactNode;
-  setSubMenu?: (id: any) => void;
-  subMenu?: string | number | boolean;
-  showArrow?: boolean;
-}
+import { AccordionProps } from "@utils/models";
 
 const Accordion: React.FC<AccordionProps> = ({
   item,
