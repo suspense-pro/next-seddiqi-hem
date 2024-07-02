@@ -7,10 +7,8 @@ export default function Header() {
   const isDesktop = useDeviceWidth()[0];
 
   return (
-    <HeaderProvider>
-      <header className={styles.header}>
-        {isDesktop ? <DesktopHeader /> : <MobileHeader />}
-      </header>
-    </HeaderProvider>
+    <header className={styles.header}>
+      {isDesktop ? <DesktopHeader /> : <MobileHeader />}
+    </header>
   );
 }

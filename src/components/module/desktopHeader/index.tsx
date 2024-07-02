@@ -19,7 +19,8 @@ export default function DesktopHeader() {
 
   if (!headerContext) return null;
 
-  const { updateCurrent, headerData } = headerContext;
+  const { updateCurrent, headerData, header_data } = headerContext;
+  console.log("Header_data", header_data);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
