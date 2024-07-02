@@ -1,5 +1,5 @@
 import React from 'react';
-import { cmsContent } from '@utils/cms/utils';
+import { CmsContent } from '@utils/cms/utils';
 
 type VideoProps = {} & cmsContent;
 

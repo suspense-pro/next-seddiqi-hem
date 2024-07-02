@@ -12,6 +12,8 @@ import "nprogress/nprogress.css";
 
 import ErrorPage from "next/error";
 import WithVisualization from "@contexts/withVisualizationContext";
+import { WithAppContext } from "@contexts/appContext";
+import { WithCmsContext } from "@contexts/cmsContext";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -32,11 +34,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <LanguageProvider>
         <Head />
-        {/* <WithVisualization> */}
-        <Layout pageProps={pageProps}>
-          <Component {...pageProps} />
-        </Layout>
-        {/* </WithVisualization> */}
+        <WithAppContext value={(pageProps as any).context?.appContext}>
+          <WithCmsContext value={(pageProps as any).context?.cmsContext}>
+            {/* <WithVisualization> */}
+            <Layout pageProps={pageProps}>
+              <Component {...pageProps} />
+            </Layout>
+            {/* </WithVisualization> */}
+          </WithCmsContext>
+        </WithAppContext>
       </LanguageProvider>
     </>
   );
