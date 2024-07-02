@@ -7,8 +7,8 @@ import Slot from '@components/module/slot';
 import { HeroBanner } from '@components/rendering';
 
 export const defaultClientConfig: ContentClientConfigV2 = {
-  hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || '',
-  secureMediaHost: process.env.DYNAMIC_CONTENT_SECURE_MEDIA_HOST || ''
+  hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || 'platinumpanda',
+  secureMediaHost: process.env.DYNAMIC_CONTENT_SECURE_MEDIA_HOST || '',
 };
 
 const schemaUrl = 'https://seddiqi.amplience.com';
@@ -26,3 +26,27 @@ export const ComponentMapping: any = {
   [`${contentUrl}/banner`]: HeroBanner,
   [`${slotsUrl}/container`]: Slot,
 };
+
+
+const defaultConfig = {
+  url: schemaUrl,
+  cms: {
+      hubName: 'platinumpanda',
+      imageHub: 'willow',
+  },
+};
+
+let configObj: any | undefined = undefined;
+
+export function getConfig(): any {
+    if (!configObj) {
+        configObj = defaultClientConfig
+    }
+
+    return configObj as any;
+}
+
+
+export function getHubName() {
+    return getConfig()?.cms?.hubName ?? 'unknown';
+}
