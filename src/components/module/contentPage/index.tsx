@@ -4,7 +4,7 @@ import ContentBlock from '@components/module/contentBlock';
 import Typography from '../typography';
 
 interface ContentPageProps {
-    contentTypes: cmsContent[];
+    contentTypes: CmsContent[];
     seo: any;
 }
 

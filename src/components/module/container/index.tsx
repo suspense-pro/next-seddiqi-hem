@@ -3,7 +3,7 @@ import { CmsContent } from '@utils/cms/utils';
 import ContentBlock from '@components/module/contentBlock';
 
 interface ContainerProps {
-    contentTypes: cmsContent[];
+    contentTypes: CmsContent[];
 }
 
 const Container = ({ contentTypes = [] }: ContainerProps) => {

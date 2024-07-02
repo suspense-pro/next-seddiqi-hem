@@ -8,7 +8,7 @@ export interface LayoutProps extends PropsWithChildren {
 }
 
 const Layout = ({ children, pageProps }: LayoutProps) => {
-  console.log(pageProps.hierarchies.pages.find(data => data.root.key === "header"));
+  console.log(pageProps.hierarchies?.pages?.find(data => data.root.key === "header")); //this is how we will distinguish header and footer for each component's props
   
   return (
     <WithNavigationContext

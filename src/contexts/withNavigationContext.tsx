@@ -11,10 +11,10 @@ export type NavigationItem = {
     children: NavigationItem[];
     parents: NavigationItem[];
 
-    content?: cmsContent;
+    content?: CmsContent;
     category?: any;
 
-    nodeContentItem?: cmsContent;
+    nodeContentItem?: CmsContent;
 };
 
 export type NavigationState = {

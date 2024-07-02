@@ -2,7 +2,7 @@ import { PropsWithChildren, createContext, useContext } from 'react';
 import { CmsContent } from '@utils/cms/utils';
 
 interface CmsSlotProps extends PropsWithChildren {
-    content: cmsContent;
+    content: CmsContent;
 }
 
 type CmsSlotState = {
