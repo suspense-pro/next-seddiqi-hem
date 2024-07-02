@@ -80,6 +80,7 @@
       font-size: rem(14);
       line-height: rem(18);
       letter-spacing: rem(1);
+      text-transform: uppercase;
 
       @include breakpoint-max-width(rem(1150)) {
         display: none;
@@ -104,6 +105,7 @@
         font-size: rem(16);
         line-height: rem(20);
         letter-spacing: rem(0.4);
+        text-transform: uppercase;
 
         &::after {
           margin-top: rem(7);

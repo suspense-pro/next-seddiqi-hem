@@ -12,7 +12,7 @@ const MobileHeader = () => {
   };
 
   const containerCss: React.CSSProperties = {
-    height: menuOpen && "100vh",
+    height: menuOpen ? "100vh" : undefined,
     overflowY: menuOpen ? "scroll" : "hidden",
   };
 

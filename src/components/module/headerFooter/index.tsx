@@ -1,22 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./headerFooter.module.scss";
 import NavigationLink from "@components/module/navigationLink";
+import { HeaderContext } from "@contexts/headerContext";
 
-const footerLinks = [
-  { id: 1, label: "Contact" },
-  { id: 2, label: "Store locator" },
-  { id: 3, label: "About Us" },
-];
+// const footerLinks = [
+//   { id: 1, title: "Contact", url: "/contact" },
+//   { id: 2, title: "Store locator", url: "/store-locator" },
+//   { id: 3, title: "About Us", url: "/about-us" },
+// ];
 
 const HeaderFooter = ({ className }: { className?: any }) => {
+  const { header_data } = useContext(HeaderContext) || {};
+  const footerLinks = header_data?.headerData?.hygiene_links;
+
+  if (!footerLinks) return null;
+
   return (
     <div className={`${className} ${styles.container}`}>
-      {footerLinks.map((data) => (
+      {footerLinks?.map((item) => (
         <NavigationLink
           hover={true}
           className={styles.footerNavigation}
-          title={data.label}
-          key={data.id}
+          title={item.title}
+          key={item.title}
+          url={item.url}
         />
       ))}
     </div>

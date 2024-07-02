@@ -8,18 +8,18 @@ import Accordion from "@components/module/accordion";
 import SubMenu from "@components/module/tabContent/subMenu";
 
 const TabContentProducts = () => {
-  const { headerData } = useContext(HeaderContext);
+  const { headerData, header_data } = useContext(HeaderContext);
   const [subMenu, setSubMenu] = useState(false);
 
   const isDropdown = (ind) =>
     !headerData.sections[ind].categories &&
     !headerData.sections[ind].special_categories;
 
-  const products = useMemo(
-    () =>
-      headerDummyData.navigation?.filter((item) => item.title !== "EXPLORE"),
-    [headerDummyData.navigation]
-  );
+  const products = useMemo(() => {
+    return header_data.headerMainLinks[0];
+  }, [headerDummyData.navigation]);
+
+  if (!products) return null;
 
   const renderAccordionContent = (ind) => (
     <>
@@ -41,7 +41,10 @@ const TabContentProducts = () => {
     <div className={styles.tabContent}>
       <div className={styles.mobileMenuLinks}>
         {products?.map((link, ind) => (
-          <div key={link.id} className={styles.mobileMenuNavigationContainer}>
+          <div
+            key={link.title}
+            className={styles.mobileMenuNavigationContainer}
+          >
             <Accordion
               showArrow={!isDropdown(ind)}
               subMenu={subMenu}

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import styles from "./header.module.scss";
 import {
   AccountIcon,
@@ -15,12 +15,17 @@ import MegaMenu from "../megaMenu";
 
 export default function DesktopHeader() {
   const [scrolled, setScrolled] = useState(false);
-  const headerContext = useContext(HeaderContext);
 
-  if (!headerContext) return null;
+  const { updateCurrent, headerData, header_data } = useContext(HeaderContext);
 
-  const { updateCurrent, headerData, header_data } = headerContext;
-  console.log("Header_data", header_data);
+  const headerMainLinks = useMemo(
+    () => header_data?.headerMainLinks?.flat(),
+    [header_data]
+  );
+
+  const cta = header_data?.headerData?.booking_cta;
+
+  if (!headerMainLinks) return null;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -42,32 +47,32 @@ export default function DesktopHeader() {
         <MegaMenu headerHeightClass={styles.headerHeight} />
         <div className={styles.headerMargin}>
           <div className={styles.headerLogoContainer}>
-            {headerData?.header_logos.map((logo) => (
-              <Link
-                key={logo.id}
-                href={logo.url}
-                style={{ margin: 0, padding: 0 }}
-              >
-                <Image
-                  src={logo.imageUrl}
-                  width={logo.width}
-                  height={logo.height}
-                  alt={logo.title}
-                  className={styles.image}
-                />
-              </Link>
-            ))}
+            {headerData?.header_logos.map(
+              ({ id, url, imageUrl, width, height, title }) => (
+                <Link key={id} href={url} style={{ margin: 0, padding: 0 }}>
+                  <Image
+                    src={imageUrl}
+                    width={width}
+                    height={height}
+                    alt={title}
+                    className={styles.image}
+                  />
+                </Link>
+              )
+            )}
           </div>
           <div className={styles.linksContainer}>
-            <div className={styles.appointmentBtn}>BOOK APPOINTMENT</div>
+            <div className={styles.appointmentBtn}>
+              <NavigationLink hover={false} title={cta?.title} url={cta?.url} />
+            </div>
             <div className={styles.links}>
-              {headerDummyData.navigation?.map((link, ind) => (
-                <div key={link.id} onMouseEnter={() => updateCurrent(ind)}>
+              {headerMainLinks?.map((item, ind) => (
+                <div key={item.title} onMouseEnter={() => updateCurrent(ind)}>
                   <NavigationLink
                     hover={false}
                     className={styles.headerLink}
-                    title={link.title}
-                    url={link.url}
+                    title={item.title}
+                    url={item?.url}
                   />
                 </div>
               ))}
