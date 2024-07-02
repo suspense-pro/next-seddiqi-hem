@@ -8,6 +8,7 @@ export interface LayoutProps extends PropsWithChildren {
 }
 
 const Layout = ({ children, pageProps }: LayoutProps) => {
+  console.log("pageProps----", pageProps)
   return (
     <WithNavigationContext
       pages={null}
@@ -16,7 +17,7 @@ const Layout = ({ children, pageProps }: LayoutProps) => {
       <>
         <Header {...pageProps.header} />
         <main className="mainClass">{children}</main>
-        <Footer {...pageProps.footer} />
+        <Footer {...pageProps.footer} footerData={pageProps.footerData} />
       </>
     </WithNavigationContext>
   );

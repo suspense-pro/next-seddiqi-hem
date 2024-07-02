@@ -13,12 +13,29 @@ import { mapToID } from "@utils/helpers";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data: any = await getContentItemByKey("homepage");
-  const contents = await getHierarchyChildren(data._meta.deliveryId);
+  const contents = await getHierarchyChildren(data._meta.deliveryId); 
+  
+  const footerData: any = await getContentItemByKey("footerNavigation"); 
+  const footerDataContents = await getHierarchyChildren(footerData._meta.deliveryId);
+ 
+  const mainLinks = await Promise.all(
+    footerDataContents.map(async (item) => {
+      const linkData = await getHierarchyChildren(item._meta.deliveryId);
+      return {
+        ...item,
+        links: linkData
+      };
+    })
+  );
 
   return {
     props: {
       ...data,
       contents: contents,
+      footerData: {
+        footerData,
+        mainLinks,
+      },
     },
   };
 }
