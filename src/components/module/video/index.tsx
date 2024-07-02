@@ -1,7 +1,7 @@
 import React from 'react';
 import { CmsContent } from '@utils/cms/utils';
 
-type VideoProps = {} & cmsContent;
+type VideoProps = {} & CmsContent;
 
 const Video = ({ video }: VideoProps) => {
     if (!video) {
