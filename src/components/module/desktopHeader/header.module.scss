@@ -96,12 +96,26 @@
         padding: rem(7 0);
         cursor: pointer;
         color: getColorHex("green-dark");
-        border-bottom: rem(2) solid getColorHex("green-dark", 0);
+        // border-bottom: rem(2) solid getColorHex("green-dark", 0);
         @include heading_regular;
-        transition: all 0.2s;
+        transition: all 0.3s;
 
-        &:hover {
-          border-bottom: rem(2) solid getColorHex("green-dark");
+        // &:hover {
+        //   border-bottom: rem(2) solid getColorHex("green-dark");
+        // }
+
+        &::after {
+          margin-top: rem(7);
+          content: "";
+          display: block;
+          width: 0;
+          height: rem(2);
+          background-color: getColorHex("green-dark");
+          transition: width 0.3s;
+        }
+
+        &:hover::after {
+          width: 100%;
         }
       }
 
@@ -123,23 +137,6 @@
   }
 }
 
-// .headerContainer {
-//   position: fixed;
-//   width: 100%;
-//   top: 0;
-//   z-index: 6000;
-//   opacity: 1;
-//   transition: visibility 0.3s ease;
-
-//   &.scrolled {
-//     height: rem(78);
-//     overflow: hidden;
-//     .headerLogoContainer {
-//       display: none !important;
-//       opacity: 0;
-//     }
-//   }
-// }
 .headerLogoContainer {
   transition: visibility 0.3s ease;
 }

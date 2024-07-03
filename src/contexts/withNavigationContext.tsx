@@ -1,6 +1,6 @@
 import { createContext, useMemo, useContext, PropsWithChildren } from 'react';
 // import {CmsHierarchyNode} from '@lib/cms/fetchHierarchy';
-import { cmsContent } from '@utils/cms/utils';
+import { CmsContent } from '@utils/cms/utils';
 // import walkNavigation, { enrichCmsEntries, getTypeFromSchema } from './walkNavigation';
 // import { useUserContext } from '@lib/user/UserContext';
 
@@ -11,10 +11,10 @@ export type NavigationItem = {
     children: NavigationItem[];
     parents: NavigationItem[];
 
-    content?: cmsContent;
+    content?: CmsContent;
     category?: any;
 
-    nodeContentItem?: cmsContent;
+    nodeContentItem?: CmsContent;
 };
 
 export type NavigationState = {

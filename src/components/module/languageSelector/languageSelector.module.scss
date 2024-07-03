@@ -20,10 +20,12 @@
 .dropdown {
   display: flex;
   align-items: center;
-  padding: rem(13 0 13 0);
-  // background-color: getColorHex("light-gray");
+  padding: rem(10 0 10 0);
   cursor: pointer;
   border: none;
+  @include lg {
+    padding: rem(13 0 13 0);
+  }
 }
 
 .customSelect {
@@ -50,19 +52,34 @@
 
   .arrow {
     position: absolute;
-    right: rem(10);
+    right: rem(0);
     pointer-events: none;
+  }
+  @include lg-max {
+    svg {
+      width: rem(10);
+      opacity: 0.4;
+    }
   }
 }
 
 .countryDropdown {
   border-bottom: rem(1) solid getColorHex("noir");
-  width: rem(240);
+  width: 100%;
+  margin-top: rem(8);
+  @include sm {
+    width: rem(240);
+  }
 }
 
 .languageDropdown {
   border: none;
-  width: rem(80);
+  width: rem(58);
   @include body_light;
   color: getColorHex("green-metallic");
+  margin-top: rem(32);
+  padding: 0;
+  @include sm {
+    width: rem(60);
+  }
 }

@@ -4,8 +4,8 @@
 .megaMenuContainer {
   display: flex;
   justify-content: space-between;
-  padding: rem(60 120);
   transition: all 0.3s;
+  flex-direction: column;
 
   @include breakpoint-max-width(rem(1150)) {
     padding: rem(30 60);
@@ -23,6 +23,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    padding: rem(60 120);
 
     @include breakpoint-max-width(rem(1150)) {
       gap: rem(20);
@@ -35,6 +36,10 @@
       justify-content: space-between;
     }
   }
+}
+
+.headerFooter {
+  padding: rem(60 120);
 }
 
 .menuLink {

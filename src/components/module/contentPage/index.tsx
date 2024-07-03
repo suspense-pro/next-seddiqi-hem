@@ -1,10 +1,10 @@
 import React from 'react';
-import { cmsContent } from '@utils/cms/utils';
+import { CmsContent } from '@utils/cms/utils';
 import ContentBlock from '@components/module/contentBlock';
 import Typography from '../typography';
 
 interface ContentPageProps {
-    contentTypes: cmsContent[];
+    contentTypes: CmsContent[];
     seo: any;
 }
 

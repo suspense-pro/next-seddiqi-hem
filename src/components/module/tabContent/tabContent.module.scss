@@ -1,0 +1,63 @@
+@import "./../../../assets/styles/main.scss";
+
+// PROUDCTS AND EXPLORE
+.tabContent {
+  padding: rem(28);
+}
+
+.mobileMenuLinks {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+
+  .mobileMenuNavigationContainer {
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+  }
+}
+
+.subMenuContainer {
+  display: flex;
+  flex-direction: column;
+  gap: rem(22);
+  transition: all 0.3s;
+  height: 0;
+  overflow: hidden;
+}
+
+.gap {
+  gap: rem(40);
+}
+
+.subMenu {
+  display: flex;
+  flex-direction: column;
+  gap: rem(28);
+  padding: rem(20 12);
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: uppercase;
+  @include body_regular;
+}
+
+.customContainer {
+  height: 100%;
+  gap: rem(40);
+}
+
+.displayCardsTitle {
+  font-size: rem(16);
+  @include heading_regular;
+  line-height: rem(20);
+  letter-spacing: rem(0.4);
+  margin-bottom: rem(-10);
+}
+
+.padZero {
+  padding: 0;
+}

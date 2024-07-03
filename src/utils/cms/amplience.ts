@@ -1,5 +1,6 @@
 import { ContentClient, ContentItem, ContentBody } from 'dc-delivery-sdk-js';
 import {defaultClientConfig} from './config';
+import { CmsHierarchyNode, CmsHierarchyRequest } from './utils';
 
 const client = new ContentClient(defaultClientConfig);
 

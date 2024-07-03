@@ -1,8 +1,8 @@
 import React, { PropsWithChildren, createContext, useContext } from 'react';
-import { cmsContent } from '@utils/cms/utils';
+import { CmsContent } from '@utils/cms/utils';
 
 interface CmsContentItemProps extends PropsWithChildren {
-    content: cmsContent;
+    content: CmsContent;
 }
 
 type CmsContentItemState = {

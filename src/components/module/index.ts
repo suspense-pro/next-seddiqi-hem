@@ -14,6 +14,12 @@ import DesktopHeader from "./desktopHeader";
 import MegaMenu from "./megaMenu";
 import MobileHeader from "./mobileHeader";
 import TabbedNavigation from "./tabbedNavigation";
+import MobileHeaderNavbar from "./mobileHeaderNavbar";
+import MobileMenuLogobar from "./mobileMenuLogobar";
+import TabContentExplore from "./tabContent/tabContentExplore";
+import TabContentProducts from "./tabContent/tabContentProducts";
+import SubMenu from "./tabContent/subMenu";
+import HeaderFooter from "./headerFooter/index";
 
 export {
   Head,
@@ -31,4 +37,10 @@ export {
   MegaMenu,
   MobileHeader,
   TabbedNavigation,
+  MobileHeaderNavbar,
+  MobileMenuLogobar,
+  TabContentExplore,
+  TabContentProducts,
+  SubMenu,
+  HeaderFooter,
 };
