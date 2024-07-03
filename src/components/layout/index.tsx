@@ -10,6 +10,7 @@ export interface LayoutProps extends PropsWithChildren {
 const Layout = ({ children, pageProps }: LayoutProps) => {
   console.log(pageProps.hierarchies?.pages?.find(data => data.root.key === "header")); //this is how we will distinguish header and footer for each component's props
   
+  console.log("pageProps----", pageProps)
   return (
     <WithNavigationContext
       pages={null}
@@ -18,7 +19,7 @@ const Layout = ({ children, pageProps }: LayoutProps) => {
       <>
         <Header {...pageProps.header} />
         <main className="mainClass">{children}</main>
-        <Footer {...pageProps.footer} />
+        <Footer {...pageProps.footer} footerData={pageProps.footerData} />
       </>
     </WithNavigationContext>
   );
