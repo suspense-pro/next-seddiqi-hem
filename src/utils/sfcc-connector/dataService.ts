@@ -25,23 +25,103 @@ export async function registerCustomer({
   }
 }
 
-export async function registerCustomer2() {
+export async function loginCustomer({
+  userData,
+  method,
+}: {
+  userData: any;
+  method: string;
+}) {
   try {
     const json = {
-      api: "register",
+      api: "login",
     };
     const config = {
-      method: "POST",
-      // body: JSON.stringify(userData),
+      method: method,
+      body: userData,
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = await serverApiCallSfcc(`?${queryString}`, config, "register");
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "login");
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
   }
 }
+
+export async function passwordlessLoginCustomer({
+  userData,
+  method,
+}: {
+  userData: any;
+  method: string;
+}) {
+  try {
+    const json = {
+      api: "passwordlessLogin",
+    };
+    const config = {
+      method: method,
+      body: userData,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "passwordlessLogin");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+
+export async function passwordlessAccessToken({
+  userData,
+  method,
+}: {
+  userData: any;
+  method: string;
+}) {
+  try {
+    const json = {
+      api: "passwordlessAccessToken",
+    };
+    const config = {
+      method: method,
+      body: userData,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "passwordlessAccessToken");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function logoutCustomer({
+  userData,
+  method,
+}: {
+  userData: any;
+  method: string;
+}) {
+  try {
+    const json = {
+      api: "logout",
+    };
+    const config = {
+      method: method,
+      body: userData,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "logout");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 
 export const getCustomer = async (): Promise<any> => {
   console.log("CLICKED");

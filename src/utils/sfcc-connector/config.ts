@@ -39,3 +39,10 @@ export default async function initializeShopperConfig() {
 
   return configWithAuth;
 }
+
+export async function basicAuthorization() {
+  const credentials = `${clientConfig.parameters.clientId}:${clientConfig.parameters.clientSecret}`;
+  const base64data = Buffer.from(credentials).toString("base64");
+
+  return base64data;
+}
