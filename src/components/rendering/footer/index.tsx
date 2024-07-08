@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import Image from "next/image";
 import styles from "./footer.module.scss";
 import NavigationLink from "@components/module/navigationLink";
-import { TwitterIcon, InstaIcon, FBIcon, ArrowDown } from "@assets/images/svg";
+import { TwitterIcon, InstaIcon, FBIcon } from "@assets/images/svg";
 import { FooterPropType } from "@utils/models";
-import { LanguageContext, LANGUAGE_DICT } from "@contexts/languageContext";
 import LanguageSelector from "@components/module/languageSelector";
 
 const commonLinks = [
@@ -31,21 +30,17 @@ export default function Footer({
   logoAltText = "Seddiqi Logo", 
   footerData,
 }: FooterPropType) {
-  console.log("footerData---", footerData);
+  // console.log("footerData---", footerData);
 
-  const mainLinks = footerData.mainLinks.find(
-    (link) => link.description === "Main Links"
-  );
-  const secondaryLinks = footerData.mainLinks.find(
-    (link) => link.description === "Secondary Links"
-  );
+  const mainLinks = footerData?.children?.find(child => child.content.title === "Main Links")?.children || [];
+  const secondaryLinks = footerData?.children?.find(child => child.content.title === "Secondary Links")?.children || [];
 
-  const renderLinks = (links) => {
-    return links.map((link) => (
+  const renderLinks = (links, offset) => {
+    return links.slice(offset, offset + 4).map((link) => (
       <NavigationLink
-        key={link._meta.deliveryId}
-        title={link.title}
-        url={link.url}
+        key={link.content._meta.deliveryId}
+        title={link.content.title}
+        url={link.content.url}
       />
     ));
   };
@@ -57,7 +52,7 @@ export default function Footer({
           <Image src={logoUrl} alt={logoAltText} width={150} height={50} />
           <LanguageSelector className={styles.languageSelectorTop} />
         </div>
-        {mainLinks && (
+        {mainLinks.length > 0 && (
           <>
             {[0, 4].map((offset) => (
               <div
@@ -65,21 +60,21 @@ export default function Footer({
                 className={styles.column}
                 style={{ gridArea: `links${offset / 4 + 1}` }}
               >
-                {renderLinks(mainLinks.links.slice(offset, offset + 4))}
+                {renderLinks(mainLinks, offset)}
               </div>
             ))}
           </>
         )}
-        {secondaryLinks && (
+        {secondaryLinks.length > 0 && (
           <div className={styles.column} style={{ gridArea: "links3" }}>
-            {renderLinks(secondaryLinks.links)}
+            {renderLinks(secondaryLinks, 0)}
           </div>
         )}
       </div>
       <LanguageSelector className={styles.languageSelectorBottom} />
       <hr className={styles.divider} />
       <div className={styles.footer_bottom}>
-        <div className={styles.copy_right}>{footerData?.footerData?.footer_bottom?.copyright}</div>
+        <div className={styles.copy_right}>{footerData?.content.footer_bottom?.copyright}</div>
         <div className={styles.social_icons}>
           <TwitterIcon />
           <InstaIcon />
