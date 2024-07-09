@@ -5,33 +5,15 @@ import NavigationLink from "@components/module/navigationLink";
 import { TwitterIcon, InstaIcon, FBIcon } from "@assets/images/svg";
 import { FooterPropType } from "@utils/models";
 import LanguageSelector from "@components/module/languageSelector";
+import { useDeviceWidth } from "@utils/useCustomHooks";
 
-// const commonLinks = [
-//   { label: "Watches", url: "" },
-//   { label: "Jewellery", url: "" },
-//   { label: "Accessories", url: "/accessories" },
-//   { label: "Brands", url: "/brands" },
-//   { label: "Explore", url: "" },
-//   { label: "Services", url: "/services" },
-//   { label: "Contact Us", url: "/contact" },
-//   { label: "Store Locator", url: "/stores" },
-// ];
-
-// const distinctLinks = [
-//   { label: "Boutique Locators", url: "/boutique-locators" },
-//   { label: "FAQs", url: "/faqs" },
-//   { label: "Warranty", url: "/warranty" },
-//   { label: "Return Policy", url: "/return-policy" },
-//   { label: "Terms & Conditions", url: "/terms-conditions" },
-// ];
 
 export default function Footer({
   logoUrl = "/images/Seddiqi-Logo-Text-Only.svg",
   logoAltText = "Seddiqi Logo",
   footerData,
-}: FooterPropType) {
-  // console.log("footerData---", footerData);
-
+}: FooterPropType) { 
+  const isDesktop = useDeviceWidth()[0];
   const mainLinks =
     footerData?.children?.find((child) => child.content.title === "Main Menu")
       ?.children || [];
@@ -40,12 +22,12 @@ export default function Footer({
       (child) => child.content.title === "Secondary Menu"
     )?.children || [];
 
-  console.log(
-    "mainLinks--",
-    mainLinks,
-    "secondaryLinks------======",
-    secondaryLinks
-  );
+  // console.log(
+  //   "mainLinks--",
+  //   mainLinks,
+  //   "secondaryLinks------======",
+  //   secondaryLinks
+  // );
 
   const renderLinks = (links, offset) => {
     return links
@@ -64,7 +46,7 @@ export default function Footer({
       <div className={styles.container}>
         <div className={styles.column} style={{ gridArea: "logo" }}>
           <Image src={logoUrl} alt={logoAltText} width={150} height={50} />
-          <LanguageSelector className={styles.languageSelectorTop} />
+          {isDesktop && <LanguageSelector  />}
         </div>
         {mainLinks.length > 0 && (
           <>
@@ -85,7 +67,7 @@ export default function Footer({
           </div>
         )}
       </div>
-      <LanguageSelector className={styles.languageSelectorBottom} />
+      {!isDesktop && <LanguageSelector  />}
       <hr className={styles.divider} />
       <div className={styles.footer_bottom}>
         <div className={styles.copy_right}>
