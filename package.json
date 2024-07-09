@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^14.2.4",
     "classnames": "^2.3.2",
     "commerce-sdk": "^3.0.0",
     "cookies": "^0.9.1",
