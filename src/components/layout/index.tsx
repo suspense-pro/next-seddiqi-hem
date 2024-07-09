@@ -21,7 +21,7 @@ const Layout = ({ children, pageProps }: LayoutProps) => {
       <>
         <Header {...pageProps.header} />
         <main className="mainClass">{children}</main>
-        <Footer {...pageProps.footer} footerData={footerData} />
+        <Footer footerData={footerData} />
       </>
     </WithNavigationContext>
   );
