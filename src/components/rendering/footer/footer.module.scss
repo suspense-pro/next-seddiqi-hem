@@ -21,21 +21,43 @@
     margin: rem(48 0);
     background-color: getColorHex("white");
 
+    .linkContainer {
+      display: contents;
+      .mainLinks {
+        display: flex;
+        gap: rem(30);
+        @include md {
+          display: contents;
+          gap: rem(0);
+        }
+      }
+
+      .secondaryLinks {
+        display: contents;
+      }
+    }
+
     @include md {
       margin: rem(80 0);
-      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      grid-template-columns: auto;
       grid-template-areas: "logo links1 links2 links3";
     }
   }
- 
 
-  
   .column {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    // grid-template-columns: repeat(2, 1fr);
     gap: rem(20);
     flex-direction: column;
 
+    .logo {
+      width: rem(230);
+      height: rem(25);
+      @include md {
+        width: rem(300);
+        height: rem(30);
+      }
+    }
     span {
       cursor: pointer;
     }
@@ -91,7 +113,7 @@
     }
   }
   .column[style*="links3"] {
-    grid-template-columns: repeat(2, 1fr);
+    // grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto auto;
     grid-auto-flow: row dense;
     @include body_light;
@@ -106,7 +128,7 @@
     }
   }
   .column[style*="links2"] {
-    margin-top: rem(20);
+    // margin-top: rem(20);
 
     @include md {
       margin-top: 0;

@@ -7,12 +7,26 @@ import { FooterPropType } from "@utils/models";
 import LanguageSelector from "@components/module/languageSelector";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 
+const getLogoUrl = (logoData) => {
+  if (logoData?.image) {
+    const { defaultHost, endpoint, name } = logoData.image;
+    return `https://${defaultHost}/i/${endpoint}/${name}`;
+  }
+  return "/images/Seddiqi-Logo-Text-Only.svg";
+};
+const renderLinks = (links, offset) => {
+  return links
+    .slice(offset, offset + 4)
+    .map((link) => (
+      <NavigationLink
+        key={link.content._meta.deliveryId}
+        title={link.content._meta.name}
+        url={link.content._meta.name}
+      />
+    ));
+};
 
-export default function Footer({
-  logoUrl = "/images/Seddiqi-Logo-Text-Only.svg",
-  logoAltText = "Seddiqi Logo",
-  footerData,
-}: FooterPropType) { 
+export default function Footer({ footerData }: FooterPropType) {
   const isDesktop = useDeviceWidth()[0];
   const mainLinks =
     footerData?.children?.find((child) => child.content.title === "Main Menu")
@@ -21,53 +35,51 @@ export default function Footer({
     footerData?.children?.find(
       (child) => child.content.title === "Secondary Menu"
     )?.children || [];
+  const logoUrl = getLogoUrl(footerData?.content?.logo?.logo);
+  const logoAltText =
+    footerData?.content?.logo?.logo?.altText || "Seddiqi Logo";
 
-  // console.log(
-  //   "mainLinks--",
-  //   mainLinks,
-  //   "secondaryLinks------======",
-  //   secondaryLinks
-  // );
-
-  const renderLinks = (links, offset) => {
-    return links
-      .slice(offset, offset + 4)
-      .map((link) => (
-        <NavigationLink
-          key={link.content._meta.deliveryId}
-          title={link.content._meta.name}
-          url={link.content._meta.name}
-        />
-      ));
-  };
+  // console.log("footerData---", footerData);
 
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.column} style={{ gridArea: "logo" }}>
-          <Image src={logoUrl} alt={logoAltText} width={150} height={50} />
-          {isDesktop && <LanguageSelector  />}
+          <Image
+            src={logoUrl}
+            alt={logoAltText}
+            width={300}
+            height={30}
+            className={styles.logo}
+          />
+          {isDesktop && <LanguageSelector />}
         </div>
-        {mainLinks.length > 0 && (
-          <>
-            {[0, 4].map((offset) => (
-              <div
-                key={offset}
-                className={styles.column}
-                style={{ gridArea: `links${offset / 4 + 1}` }}
-              >
-                {renderLinks(mainLinks, offset)}
-              </div>
-            ))}
-          </>
-        )}
-        {secondaryLinks.length > 0 && (
-          <div className={styles.column} style={{ gridArea: "links3" }}>
-            {renderLinks(secondaryLinks, 0)}
+        <div className={styles.linkContainer}>
+          <div className={styles.mainLinks}>
+            {mainLinks.length > 0 && (
+              <>
+                {[0, 4].map((offset) => (
+                  <div
+                    key={offset}
+                    className={styles.column}
+                    style={{ gridArea: `links${offset / 4 + 1}` }}
+                  >
+                    {renderLinks(mainLinks, offset)}
+                  </div>
+                ))}
+              </>
+            )}
           </div>
-        )}
+          <div className={styles.secondaryLinks}>
+            {secondaryLinks.length > 0 && (
+              <div className={styles.column} style={{ gridArea: "links3" }}>
+                {renderLinks(secondaryLinks, 0)}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-      {!isDesktop && <LanguageSelector  />}
+      {!isDesktop && <LanguageSelector />}
       <hr className={styles.divider} />
       <div className={styles.footer_bottom}>
         <div className={styles.copy_right}>

@@ -73,7 +73,7 @@
   width: 100%;
   margin-top: rem(8);
   @include sm {
-    width: rem(240);
+    width: rem(280);
   }
 }
 
@@ -83,6 +83,7 @@
   @include body_light;
   color: getColorHex("green-metallic");
   margin-top: rem(32);
+  margin-bottom: rem(48);
   padding: 0;
   @include sm {
     width: rem(60);
