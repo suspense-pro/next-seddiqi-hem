@@ -16,6 +16,11 @@ module.exports = {
         protocol: "http",
         hostname: "localhost",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.media.amplience.net",
+        port: "",
+      },
     ],
   },
   i18n: {

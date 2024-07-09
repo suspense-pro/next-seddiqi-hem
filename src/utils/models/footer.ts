@@ -1,8 +1,9 @@
  
 
 export interface FooterPropType {
-  logoUrl: string;  
-  logoAltText: string;  
-  copyRightText: string;  
+  logoUrl?: string;  
+  logoAltText?: string;  
+  copyRightText?: string;  
+  footerData?: any;
  
 }

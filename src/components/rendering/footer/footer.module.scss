@@ -6,7 +6,7 @@
   width: 100%;
   padding: rem(0 28 0 28);
 
-  @include lg {
+  @include md {
     padding: rem(0 60 0 60);
   }
   .container {
@@ -21,40 +21,48 @@
     margin: rem(48 0);
     background-color: getColorHex("white");
 
-    @include lg {
+    .linkContainer {
+      display: contents;
+      .mainLinks {
+        display: flex;
+        gap: rem(30);
+        @include md {
+          display: contents;
+          gap: rem(0);
+        }
+      }
+
+      .secondaryLinks {
+        display: contents;
+      }
+    }
+
+    @include md {
       margin: rem(80 0);
-      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      grid-template-columns: auto;
       grid-template-areas: "logo links1 links2 links3";
     }
   }
-  .languageSelectorTop {
-    display: none;
-  }
 
-  .languageSelectorBottom {
-    display: block;
-    margin-bottom: rem(48);
-  }
-
-  @include lg {
-    .languageSelectorTop {
-      display: block;
-    }
-    .languageSelectorBottom {
-      display: none;
-    }
-  }
   .column {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    // grid-template-columns: repeat(2, 1fr);
     gap: rem(20);
     flex-direction: column;
 
+    .logo {
+      width: rem(230);
+      height: rem(25);
+      @include md {
+        width: rem(300);
+        height: rem(30);
+      }
+    }
     span {
       cursor: pointer;
     }
 
-    @include lg {
+    @include md {
       display: flex;
       flex-direction: column;
       gap: rem(36);
@@ -100,12 +108,12 @@
   .column[style*="logo"] {
     margin-bottom: rem(48);
 
-    @include lg {
+    @include md {
       margin-bottom: rem(0);
     }
   }
   .column[style*="links3"] {
-    grid-template-columns: repeat(2, 1fr);
+    // grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto auto;
     grid-auto-flow: row dense;
     @include body_light;
@@ -113,16 +121,16 @@
     font-size: rem(14);
     margin-top: rem(48);
 
-    @include lg {
+    @include md {
       font-size: rem(16);
       gap: rem(20);
       margin-top: 0;
     }
   }
   .column[style*="links2"] {
-    margin-top: rem(20);
+    // margin-top: rem(20);
 
-    @include lg {
+    @include md {
       margin-top: 0;
     }
   }
@@ -133,7 +141,7 @@
     font-size: rem(22);
     color: getColorHex("green-dark");
 
-    @include lg {
+    @include md {
       font-size: rem(26);
     }
   }
@@ -148,7 +156,7 @@
     align-items: center;
     flex-direction: column;
     margin: rem(40 0 40 0);
-    @include lg {
+    @include md {
       margin: rem(28 0 28 0);
       flex-direction: row;
     }
@@ -158,7 +166,7 @@
     @include body_light;
     font-size: rem(12);
     color: getColorHex("green-metallic");
-    @include lg {
+    @include md {
       font-size: rem(16);
     }
   }
@@ -172,7 +180,7 @@
       width: rem(16);
       height: rem(16);
     }
-    @include lg {
+    @include md {
       margin-top: 0;
       gap: rem(16);
     }
