@@ -6,43 +6,57 @@ import { TwitterIcon, InstaIcon, FBIcon } from "@assets/images/svg";
 import { FooterPropType } from "@utils/models";
 import LanguageSelector from "@components/module/languageSelector";
 
-const commonLinks = [
-  { label: "Watches", url: "" },
-  { label: "Jewellery", url: "" },
-  { label: "Accessories", url: "/accessories" },
-  { label: "Brands", url: "/brands" },
-  { label: "Explore", url: "" },
-  { label: "Services", url: "/services" },
-  { label: "Contact Us", url: "/contact" },
-  { label: "Store Locator", url: "/stores" },
-];
+// const commonLinks = [
+//   { label: "Watches", url: "" },
+//   { label: "Jewellery", url: "" },
+//   { label: "Accessories", url: "/accessories" },
+//   { label: "Brands", url: "/brands" },
+//   { label: "Explore", url: "" },
+//   { label: "Services", url: "/services" },
+//   { label: "Contact Us", url: "/contact" },
+//   { label: "Store Locator", url: "/stores" },
+// ];
 
-const distinctLinks = [
-  { label: "Boutique Locators", url: "/boutique-locators" },
-  { label: "FAQs", url: "/faqs" },
-  { label: "Warranty", url: "/warranty" },
-  { label: "Return Policy", url: "/return-policy" },
-  { label: "Terms & Conditions", url: "/terms-conditions" },
-];
+// const distinctLinks = [
+//   { label: "Boutique Locators", url: "/boutique-locators" },
+//   { label: "FAQs", url: "/faqs" },
+//   { label: "Warranty", url: "/warranty" },
+//   { label: "Return Policy", url: "/return-policy" },
+//   { label: "Terms & Conditions", url: "/terms-conditions" },
+// ];
 
 export default function Footer({
   logoUrl = "/images/Seddiqi-Logo-Text-Only.svg",
-  logoAltText = "Seddiqi Logo", 
+  logoAltText = "Seddiqi Logo",
   footerData,
 }: FooterPropType) {
   // console.log("footerData---", footerData);
 
-  const mainLinks = footerData?.children?.find(child => child.content.title === "Main Links")?.children || [];
-  const secondaryLinks = footerData?.children?.find(child => child.content.title === "Secondary Links")?.children || [];
+  const mainLinks =
+    footerData?.children?.find((child) => child.content.title === "Main Menu")
+      ?.children || [];
+  const secondaryLinks =
+    footerData?.children?.find(
+      (child) => child.content.title === "Secondary Menu"
+    )?.children || [];
+
+  console.log(
+    "mainLinks--",
+    mainLinks,
+    "secondaryLinks------======",
+    secondaryLinks
+  );
 
   const renderLinks = (links, offset) => {
-    return links.slice(offset, offset + 4).map((link) => (
-      <NavigationLink
-        key={link.content._meta.deliveryId}
-        title={link.content.title}
-        url={link.content.url}
-      />
-    ));
+    return links
+      .slice(offset, offset + 4)
+      .map((link) => (
+        <NavigationLink
+          key={link.content._meta.deliveryId}
+          title={link.content._meta.name}
+          url={link.content._meta.name}
+        />
+      ));
   };
 
   return (
@@ -74,7 +88,9 @@ export default function Footer({
       <LanguageSelector className={styles.languageSelectorBottom} />
       <hr className={styles.divider} />
       <div className={styles.footer_bottom}>
-        <div className={styles.copy_right}>{footerData?.content.footer_bottom?.copyright}</div>
+        <div className={styles.copy_right}>
+          {footerData?.content.footer_bottom?.copyright}
+        </div>
         <div className={styles.social_icons}>
           <TwitterIcon />
           <InstaIcon />
