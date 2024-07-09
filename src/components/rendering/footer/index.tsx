@@ -71,7 +71,7 @@ export default function Footer({
       <hr className={styles.divider} />
       <div className={styles.footer_bottom}>
         <div className={styles.copy_right}>
-          {footerData?.content.footer_bottom?.copyright}
+          {footerData?.content?.copyright}
         </div>
         <div className={styles.social_icons}>
           <TwitterIcon />

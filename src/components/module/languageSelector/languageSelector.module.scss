@@ -45,6 +45,11 @@
     @include body_light;
     color: getColorHex("green-metallic");
     font-size: rem(12);
+
+    [dir="rtl"] & {
+      position: relative;
+      right: rem(20);
+    }
     @include md {
       font-size: rem(14);
     }
