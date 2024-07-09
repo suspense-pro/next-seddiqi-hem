@@ -11,6 +11,7 @@ export async function registerCustomer({
   try {
     const json = {
       api: "register",
+      action: "registerCustomer"
     };
     const config = {
       method: method,
@@ -35,6 +36,7 @@ export async function loginCustomer({
   try {
     const json = {
       api: "login",
+      action: "loginCustomer"
     };
     const config = {
       method: method,
@@ -59,13 +61,14 @@ export async function passwordlessLoginCustomer({
   try {
     const json = {
       api: "passwordlessLogin",
+      action: "passwordlessLoginCustomer"
     };
     const config = {
       method: method,
       body: userData,
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = await serverApiCallSfcc(`?${queryString}`, config, "passwordlessLogin");
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "login");
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
@@ -84,13 +87,14 @@ export async function passwordlessAccessToken({
   try {
     const json = {
       api: "passwordlessAccessToken",
+      action: "getAccessToken"
     };
     const config = {
       method: method,
       body: userData,
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = await serverApiCallSfcc(`?${queryString}`, config, "passwordlessAccessToken");
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "login");
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
@@ -108,13 +112,14 @@ export async function logoutCustomer({
   try {
     const json = {
       api: "logout",
+      action: "logoutCustomer"
     };
     const config = {
       method: method,
       body: userData,
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = await serverApiCallSfcc(`?${queryString}`, config, "logout");
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "login");
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
@@ -129,12 +134,13 @@ export const getCustomer = async (): Promise<any> => {
   try {
     const json = {
       api: "customer",
+      action: "getCustomer"
     };
     const config = {
       method: "GET",
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "register");
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
