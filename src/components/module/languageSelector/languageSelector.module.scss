@@ -3,7 +3,7 @@
 .selection {
   display: flex;
   flex-direction: column;
-  gap: rem(10);
+  // gap: rem(10);
   margin-top: rem(20);
 }
 
@@ -11,8 +11,8 @@
   @include heading_light;
   font-size: rem(14);
   color: getColorHex("green-dark");
-  margin-bottom: rem(5);
-  @include lg {
+  // margin-bottom: rem(5);
+  @include md {
     font-size: rem(16);
   }
 }
@@ -23,7 +23,7 @@
   padding: rem(10 0 10 0);
   cursor: pointer;
   border: none;
-  @include lg {
+  @include md {
     padding: rem(13 0 13 0);
   }
 }
@@ -45,7 +45,12 @@
     @include body_light;
     color: getColorHex("green-metallic");
     font-size: rem(12);
-    @include lg {
+
+    [dir="rtl"] & {
+      position: relative;
+      right: rem(20);
+    }
+    @include md {
       font-size: rem(14);
     }
   }
@@ -68,7 +73,7 @@
   width: 100%;
   margin-top: rem(8);
   @include sm {
-    width: rem(240);
+    width: rem(280);
   }
 }
 
@@ -78,6 +83,7 @@
   @include body_light;
   color: getColorHex("green-metallic");
   margin-top: rem(32);
+  margin-bottom: rem(48);
   padding: 0;
   @include sm {
     width: rem(60);
