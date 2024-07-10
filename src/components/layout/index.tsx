@@ -12,6 +12,9 @@ const Layout = ({ children, pageProps }: LayoutProps) => {
   let headerData = pageProps?.hierarchies?.pages?.find(
     (data) => data?.root?.key === "headerNavigation"
   );
+  const footerData = pageProps.hierarchies?.pages?.find(
+    (data) => data.root.key === "footerNavigation"
+  );
 
   const cardsData = pageProps?.cardsData;
 
@@ -19,7 +22,7 @@ const Layout = ({ children, pageProps }: LayoutProps) => {
     <HeaderProvider headerData={{ ...headerData, cardsData }}>
       <Header />
       <main className="mainClass">{children}</main>
-      <Footer {...pageProps.footer} />
+      <Footer footerData={footerData} />
     </HeaderProvider>
   );
 };

@@ -10,6 +10,7 @@ async function fetchStandardPageData<
   CT extends FetchMapInput<CmsRequest>,
   CH extends FetchMapInput<CmsHierarchyRequest>
 >(input: FetchPageDataInput<CT, CH>, context: GetServerSidePropsContext) {
+  console.log("input---", input)
   const data = await fetchPageData(
     {
       ...input,

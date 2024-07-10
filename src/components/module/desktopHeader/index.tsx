@@ -32,7 +32,7 @@ export default function DesktopHeader() {
 
   return (
     <div
-      // onMouseLeave={() => updateCurrent(null)}
+      onMouseLeave={() => updateCurrent(null)}
       className={styles.desktopHeader}
     >
       <div className={headerScrollStyles}>
