@@ -21,7 +21,7 @@ const ContentBlocks = () => {
     return (
       <div className={styles.rightSideContainer}>
         <CardSection
-          title={"OTHERS"}
+          title={"OTHER"}
           Component={StoryCard}
           cards={storyCards}
           containerStyle={styles.column1}
@@ -29,7 +29,7 @@ const ContentBlocks = () => {
           titleStyle={styles.displayCardsTitle}
         />
         <CardSection
-          title={"OTHERS"}
+          title={"LATEST STORIES"}
           Component={DisplayCard}
           cards={displayCards}
           containerStyle={styles.column2}
@@ -50,7 +50,7 @@ const ContentBlocks = () => {
 
   return (
     <CardSection
-      title={"OTHERS"}
+      title={"THE LATEST"}
       Component={DisplayCard}
       cards={displayCards}
       containerStyle={styles.displayCardsContainer}
