@@ -1,14 +1,10 @@
-import { FormEvent } from 'react'
+import { FormEvent } from "react";
 import Layout from "@components/layout";
 import ContentBlock from "@components/module/contentBlock";
 import compact from "lodash/compact";
 import { GetServerSidePropsContext } from "next";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { getHierarchyChildren } from "@utils/cms/amplience";
-
-import { getCustomer } from "@utils/sfcc-connector/dataService";
-import LoginForm from "@components/LoginForm";
-import RegistrationForm from "@components/RegistrationForm";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
@@ -26,7 +22,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     header?.content?._meta?.deliveryId
   );
 
-
   return {
     props: {
       ...data,
@@ -36,15 +31,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function Home({ contents }) {
-
   return (
     <div className="main-content">
       {compact(contents).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />
       ))}
-    </div>    
+    </div>
   );
-  
 }
 
 Home.Layout = Layout;

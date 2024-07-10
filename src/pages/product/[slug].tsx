@@ -1,5 +1,5 @@
 import Image from "next/image";
-import getProducts from "@utils/sfcc-connector";
+import {getProducts} from "@utils/sfcc-connector";
 import Layout from "@components/layout";
 
 export async function getStaticProps({ params }) {

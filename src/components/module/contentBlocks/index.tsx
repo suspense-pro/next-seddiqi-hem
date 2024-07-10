@@ -9,33 +9,42 @@ import CardSection from "../cardSection";
 const ContentBlocks = () => {
   const headerContext = useContext(HeaderContext);
   const { current, headerData } = headerContext;
-  const currentHeaderData = headerData?.children[current]?.content;
-  const contentBlock = headerData.cardsData[current]?.contentBlock;
-  const { displayCard: displayCards, storyCard: storyCards } = contentBlock;
 
-  if (current === null) {
+  if (current === null || !headerData) {
     return null;
   }
+
+  const currentHeaderData = headerData?.children[current]?.content;
+  const contentBlock = headerData.cardsData[current]?.contentBlock;
+
+  if (!contentBlock) return null;
+
+  const { displayCard: displayCards, storyCard: storyCards } = contentBlock;
 
   if (currentHeaderData?.type === "Explore") {
     return (
       <div className={styles.rightSideContainer}>
-        <CardSection
-          title={"OTHER"}
-          Component={StoryCard}
-          cards={storyCards}
-          containerStyle={styles.column1}
-          cardStyle={styles.storyCardContainer}
-          titleStyle={styles.displayCardsTitle}
-        />
-        <CardSection
-          title={"LATEST STORIES"}
-          Component={DisplayCard}
-          cards={displayCards}
-          containerStyle={styles.column2}
-          cardStyle={styles.displayCards}
-          titleStyle={styles.displayCardsTitle}
-        />
+        {displayCards && (
+          <CardSection
+            title={"OTHER"}
+            Component={StoryCard}
+            cards={storyCards}
+            containerStyle={styles.column1}
+            cardStyle={styles.storyCardContainer}
+            titleStyle={styles.displayCardsTitle}
+          />
+        )}
+
+        {storyCards && (
+          <CardSection
+            title={"LATEST STORIES"}
+            Component={DisplayCard}
+            cards={displayCards}
+            containerStyle={styles.column2}
+            cardStyle={styles.displayCards}
+            titleStyle={styles.displayCardsTitle}
+          />
+        )}
         {contentBlock && (
           <div className={styles.column2}>
             <div className={styles.displayCardsTitle}>LATEST ARTICLE</div>
