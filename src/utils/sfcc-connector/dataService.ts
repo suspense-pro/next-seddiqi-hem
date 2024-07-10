@@ -18,7 +18,7 @@ export async function registerCustomer({
       body: userData,
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = await serverApiCallSfcc(`?${queryString}`, config, "register");
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
@@ -140,7 +140,7 @@ export const getCustomer = async (): Promise<any> => {
       method: "GET",
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = await serverApiCallSfcc(`?${queryString}`, config, "register");
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
