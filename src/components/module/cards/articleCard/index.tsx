@@ -2,26 +2,22 @@ import React from "react";
 import Link from "next/link";
 import styles from "./articleCard.module.scss";
 import { CardInfoProps } from "@utils/models";
-
-const DEFAULT_IMAGE = "/images/png/watchImage_02.png";
-const DEFAULT_TITLE = "Horology for The Holidays";
-const DEFAULT_BTN = "Read Article";
+import Typography from "@components/module/typography";
 
 const ArticleCard: React.FC<CardInfoProps> = ({ item }) => {
   const image = item?.image?.image;
-  if (!image) return null;
-  const backgroundImage = `url(${
-    `https://${image?.defaultHost}/i/${image?.endpoint}/${image?.name}` ||
-    DEFAULT_IMAGE
-  })`;
+  const backgroundImage = `url(${`https://${image?.defaultHost}/i/${image?.endpoint}/${image?.name}`})`;
 
-  const title = item?.title ? item.title : DEFAULT_TITLE;
-  const linkBtn = item?.linkTitle ? item?.linkTitle : DEFAULT_BTN;
+  const title = item?.title;
+  const linkBtn = item?.linkTitle;
+  if (!image || !title || !linkBtn || !backgroundImage) return null;
 
   return (
     <div className={styles.articleCard} style={{ backgroundImage }}>
       <div className={styles.backgroundFade} />
-      <div className={styles.articleTitle}>{title}</div>
+      <Typography align="left" variant="h3" className={styles.articleTitle}>
+        {title}
+      </Typography>
       <Link href="#" className={styles.articleBtn}>
         {linkBtn}
       </Link>

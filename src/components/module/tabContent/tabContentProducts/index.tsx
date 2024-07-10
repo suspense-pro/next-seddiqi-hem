@@ -47,6 +47,10 @@ const TabContentProducts = () => {
     );
   };
 
+  const toLowerCase = (str) => {
+    return str.toLowerCase();
+  };
+
   return (
     <div className={styles.tabContent}>
       <div className={styles.mobileMenuLinks}>
@@ -57,8 +61,8 @@ const TabContentProducts = () => {
           >
             <Accordion
               showArrow={
-                item?.content?.commonProps?.item_title !== "Brands" &&
-                !isDropdown(ind)
+                toLowerCase(item?.content?.commonProps?.item_title) !==
+                  toLowerCase("Brands") && !isDropdown(ind)
               }
               subMenu={subMenu}
               setSubMenu={setSubMenu}

@@ -45,6 +45,7 @@
     text-transform: uppercase;
     z-index: 1;
     @include ellipses;
+    margin: rem(0);
   }
 
   .articleBtn {

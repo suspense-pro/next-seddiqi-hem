@@ -2,20 +2,16 @@ import React from "react";
 import Image from "next/image";
 import styles from "./displayCard.module.scss";
 import { CardInfoProps } from "@utils/models";
-
-const DEFAULT_IMAGE = "/images/png/watchImage_01.png";
-const DEFAULT_TITLE = "Rolex";
-const DEFAULT_SUBTITLE = "How to take care of your watch?";
+import Typography from "@components/module/typography";
 
 const DisplayCard: React.FC<CardInfoProps> = ({ item }) => {
   const image = item?.image?.image;
-  if (!image) return null;
-  const imageUrl =
-    `https://${image?.defaultHost}/i/${image?.endpoint}/${image?.name}` ||
-    DEFAULT_IMAGE;
-  const altText = item?.image?.altText || "Story Image";
-  const title = item?.title ? item.title : DEFAULT_TITLE;
-  const subtitle = item?.subTitle ? item.subTitle : DEFAULT_SUBTITLE;
+  const imageUrl = `https://${image?.defaultHost}/i/${image?.endpoint}/${image?.name}`;
+  const altText = item?.image?.altText;
+  const title = item?.title;
+  const subtitle = item?.subTitle;
+
+  if (!image || !title || !subtitle || !imageUrl) return null;
 
   return (
     <div className={styles.displayCard}>
@@ -23,7 +19,9 @@ const DisplayCard: React.FC<CardInfoProps> = ({ item }) => {
         <Image className={styles.storyImg} src={imageUrl} fill alt={altText} />
       </div>
       <div className={styles.displayCardInfo}>
-        <div className={styles.title}>{title}</div>
+        <Typography align="left" variant="span" className={styles.title}>
+          {title}
+        </Typography>
         <div className={styles.subTitle}>{subtitle}</div>
       </div>
     </div>

@@ -38,6 +38,8 @@
       letter-spacing: rem(0.4);
       text-transform: uppercase;
       font-size: rem(14);
+      margin: rem(0);
+
       @include body_regular;
       @include ellipses;
     }
