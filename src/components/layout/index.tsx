@@ -1,6 +1,7 @@
 import React, { Component, PropsWithChildren, useEffect } from "react";
 import { Header, Footer } from "@components/rendering";
 import { WithNavigationContext } from "@contexts/withNavigationContext";
+import { HeaderProvider } from "@contexts/headerContext";
 
 export interface LayoutProps extends PropsWithChildren {
   pageProps: any;
@@ -8,17 +9,18 @@ export interface LayoutProps extends PropsWithChildren {
 }
 
 const Layout = ({ children, pageProps }: LayoutProps) => {
+  let headerData = pageProps?.hierarchies?.pages?.find(
+    (data) => data?.root?.key === "headerNavigation"
+  );
+
+  const cardsData = pageProps?.cardsData;
+
   return (
-    <WithNavigationContext
-      pages={null}
-      categories={null}
-    >
-      <>
-        <Header {...pageProps.header} />
-        <main className="mainClass">{children}</main>
-        <Footer {...pageProps.footer} />
-      </>
-    </WithNavigationContext>
+    <HeaderProvider headerData={{ ...headerData, cardsData }}>
+      <Header />
+      <main className="mainClass">{children}</main>
+      <Footer {...pageProps.footer} />
+    </HeaderProvider>
   );
 };
 

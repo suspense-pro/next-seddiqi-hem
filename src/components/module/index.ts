@@ -20,6 +20,8 @@ import TabContentExplore from "./tabContent/tabContentExplore";
 import TabContentProducts from "./tabContent/tabContentProducts";
 import SubMenu from "./tabContent/subMenu";
 import HeaderFooter from "./headerFooter/index";
+import SubMenuLinks from "./sumMenuLinks";
+import ContentBlocks from "./contentBlocks";
 
 export {
   Head,
@@ -43,4 +45,6 @@ export {
   TabContentProducts,
   SubMenu,
   HeaderFooter,
+  SubMenuLinks,
+  ContentBlocks,
 };

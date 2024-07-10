@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   reactStrictMode: true,
@@ -15,6 +15,11 @@ module.exports = {
       {
         protocol: "http",
         hostname: "localhost",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.media.amplience.net",
+        port: "",
       },
     ],
   },

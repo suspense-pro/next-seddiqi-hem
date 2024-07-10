@@ -1,11 +1,9 @@
-import { headerDummyData } from "@components/rendering/header/dummyData";
 import { ReactNode, createContext, useState } from "react";
 
 interface HeaderContextProps {
-  headerData: typeof headerDummyData;
   current: number;
   updateCurrent: (data: number) => void;
-  header_data?: any;
+  headerData?: any;
 }
 
 export const HeaderContext = createContext<HeaderContextProps | undefined>(
@@ -14,15 +12,13 @@ export const HeaderContext = createContext<HeaderContextProps | undefined>(
 
 interface HeaderProviderProps {
   children: ReactNode;
-  header_data?: any;
+  headerData?: any;
 }
 
 export const HeaderProvider: React.FC<HeaderProviderProps> = ({
   children,
-  header_data,
+  headerData,
 }) => {
-  const [headerData, setHeaderData] =
-    useState<typeof headerDummyData>(headerDummyData);
   const [current, setCurrent] = useState<number | null>(null);
 
   const updateCurrent = (data: number | null) => {
@@ -31,7 +27,11 @@ export const HeaderProvider: React.FC<HeaderProviderProps> = ({
 
   return (
     <HeaderContext.Provider
-      value={{ headerData, current, updateCurrent, header_data }}
+      value={{
+        current,
+        updateCurrent,
+        headerData,
+      }}
     >
       {children}
     </HeaderContext.Provider>

@@ -11,10 +11,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: rem(0);
     margin: rem(0 28);
     border-bottom: rem(1) solid getColorHex("grey-light-3");
     color: getColorHex("brown-grey");
+    margin-top: rem(18);
 
     .tab {
       @include heading_medium;
@@ -26,11 +26,12 @@
       letter-spacing: rem(0.6);
       cursor: pointer;
       padding: rem(16);
+      border-bottom: rem(2) solid getColorHex("green-dark", 0);
+    }
+
+    .activeTab {
+      border-bottom: rem(2) solid getColorHex("green-dark");
+      color: getColorHex("green-dark");
     }
   }
-}
-
-.activeTab {
-  border-bottom: rem(2) solid getColorHex("green-dark");
-  color: getColorHex("green-dark");
 }

@@ -1,12 +1,11 @@
 import React from 'react';
-import { cmsContent } from '@utils/cms/utils';
+import { CmsContent } from '@utils/cms/utils';
 
 type typographyProps = {
-    children: string;
     className?: string;
     align: "left" | "center" | "right";
     variant: "h1" | "h2" | "h3" | "h4"| "h5" | "h6" | "p" | "span"
-} & cmsContent;
+} & CmsContent;
 
 const Typography = ({ children, align, variant, className }: typographyProps) => {
     const VariantTag = variant;

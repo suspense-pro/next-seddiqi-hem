@@ -3,14 +3,17 @@ import React from "react";
 import styles from "./../tabContent.module.scss";
 
 const SubMenu = ({ links, className = "" }) => {
+  if (links?.length <= 0) {
+    return null;
+  }
   return (
     <div className={`${className} ${styles.subMenu}`}>
       {links?.map((item) => (
         <NavigationLink
           className={styles.menuLink}
-          key={item.name}
-          title={item.name}
-          arrow={item.expand}
+          key={item?.content?.commonProps?.item_title}
+          title={item?.content?.commonProps?.item_title}
+          arrow={item?.content?.commonProps?.isVisible}
           url="/"
         />
       ))}

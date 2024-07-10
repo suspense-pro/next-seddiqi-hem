@@ -11,6 +11,14 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({
 }) => {
   const { headerData } = useContext(HeaderContext);
 
+  if (!headerData) return null;
+
+  const MAIN_LOGO = headerData?.content?.mainLogo?.image;
+
+  const MOBBILE_SEDDIQI_LOGO =
+    `https://${MAIN_LOGO?.image.defaultHost}/i/${MAIN_LOGO?.image.endpoint}/${MAIN_LOGO?.image.name}` ||
+    "/images/png/SeddiqiLogo.png";
+
   return (
     <header className={styles.mobileHeader}>
       <div className={styles.mobileHeaderContainer}>
@@ -26,7 +34,7 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({
           <Image
             height={16}
             width={82}
-            src={headerData.mobile_siddiqi_logo.imageUrl}
+            src={MOBBILE_SEDDIQI_LOGO}
             alt="Seddiqi Logo"
           />
         </div>

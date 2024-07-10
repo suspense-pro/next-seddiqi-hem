@@ -10,8 +10,8 @@ import { HeaderContext } from "@contexts/headerContext";
 // ];
 
 const HeaderFooter = ({ className }: { className?: any }) => {
-  const { header_data } = useContext(HeaderContext) || {};
-  const footerLinks = header_data?.headerData?.hygiene_links;
+  const { headerData } = useContext(HeaderContext) || {};
+  const footerLinks = headerData?.content?.hygieneLinks;
 
   if (!footerLinks) return null;
 

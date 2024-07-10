@@ -8,14 +8,20 @@ const DEFAULT_TITLE = "Seddiqi Jewellery Show: Where Nature and Luxur...";
 const DEFAULT_SUBTITLE = "The world of watchmaking came to Geneva.";
 
 const StoryCard: React.FC<CardInfoProps> = ({ item }) => {
-  const imageUrl = item?.image || DEFAULT_IMAGE;
+  const image = item?.image?.image;
+  if (!image) return null;
+  const imageUrl =
+    `https://${image?.defaultHost}/i/${image?.endpoint}/${image?.name}` ||
+    DEFAULT_IMAGE;
+  const altText = item?.image?.altText || "Story Image";
+
   const title = item?.title ? item.title : DEFAULT_TITLE;
   const subtitle = item?.subTitle ? item.subTitle : DEFAULT_SUBTITLE;
 
   return (
     <div className={styles.storyCardContainer}>
       <div className={styles.imgContainer}>
-        <Image src={imageUrl} alt="Watch Image" fill className={styles.image} />
+        <Image src={imageUrl} alt={altText} fill className={styles.image} />
       </div>
       <div className={styles.content}>
         <div className={styles.title}>{title}</div>

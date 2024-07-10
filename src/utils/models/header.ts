@@ -41,10 +41,7 @@ export interface MobileHeaderNavbarProps {
 
 // accordion
 export interface AccordionProps {
-  item: {
-    id: string | number;
-    title: string;
-  };
+  item: any;
   children?: React.ReactNode;
   setSubMenu?: (id: any) => void;
   subMenu?: string | number | boolean;
@@ -53,7 +50,16 @@ export interface AccordionProps {
 
 // cards
 export interface CardInfoProps {
-  item?: LatestsubTitle;
+  item: {
+    image: {
+      image?: any;
+      altText?: string;
+    };
+    linkTitle?: string;
+    link?: string;
+    title: string;
+    subTitle: string;
+  };
 }
 
 // navigation links

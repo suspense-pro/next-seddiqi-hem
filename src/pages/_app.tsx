@@ -13,6 +13,8 @@ import "nprogress/nprogress.css";
 import ErrorPage from "next/error";
 import WithVisualization from "@contexts/withVisualizationContext";
 import { HeaderProvider } from "@contexts/headerContext";
+import { WithAppContext } from "@contexts/appContext";
+import { WithCmsContext } from "@contexts/cmsContext";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -29,19 +31,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     return <ErrorPage statusCode={(pageProps as any).statusCode} />;
   }
 
-  console.log("pageProps", pageProps);
-
   return (
     <>
       <LanguageProvider>
-        <HeaderProvider header_data={pageProps.header}>
-          <Head />
-          {/* <WithVisualization> */}
-          <Layout pageProps={pageProps}>
-            <Component {...pageProps} />
-          </Layout>
-          {/* </WithVisualization> */}
-        </HeaderProvider>
+        <Head />
+        <WithAppContext value={(pageProps as any).context?.appContext}>
+          <WithCmsContext value={(pageProps as any).context?.cmsContext}>
+            {/* <WithVisualization> */}
+            <Layout pageProps={pageProps}>
+              <Component {...pageProps} />
+            </Layout>
+            {/* </WithVisualization> */}
+          </WithCmsContext>
+        </WithAppContext>
       </LanguageProvider>
     </>
   );

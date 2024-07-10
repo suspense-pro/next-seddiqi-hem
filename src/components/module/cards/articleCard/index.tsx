@@ -1,25 +1,29 @@
 import React from "react";
 import Link from "next/link";
 import styles from "./articleCard.module.scss";
-import { truncateString } from "@utils/helpers/truncateString";
 import { CardInfoProps } from "@utils/models";
 
 const DEFAULT_IMAGE = "/images/png/watchImage_02.png";
 const DEFAULT_TITLE = "Horology for The Holidays";
-const MAX_TITLE_LENGTH = 49;
+const DEFAULT_BTN = "Read Article";
 
 const ArticleCard: React.FC<CardInfoProps> = ({ item }) => {
-  const backgroundImage = `url(${item?.image || DEFAULT_IMAGE})`;
-  const title = item?.title
-    ? truncateString(item.title, MAX_TITLE_LENGTH)
-    : DEFAULT_TITLE;
+  const image = item?.image?.image;
+  if (!image) return null;
+  const backgroundImage = `url(${
+    `https://${image?.defaultHost}/i/${image?.endpoint}/${image?.name}` ||
+    DEFAULT_IMAGE
+  })`;
+
+  const title = item?.title ? item.title : DEFAULT_TITLE;
+  const linkBtn = item?.linkTitle ? item?.linkTitle : DEFAULT_BTN;
 
   return (
     <div className={styles.articleCard} style={{ backgroundImage }}>
       <div className={styles.backgroundFade} />
       <div className={styles.articleTitle}>{title}</div>
       <Link href="#" className={styles.articleBtn}>
-        Read Article
+        {linkBtn}
       </Link>
     </div>
   );

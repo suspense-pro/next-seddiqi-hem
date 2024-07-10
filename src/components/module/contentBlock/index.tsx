@@ -1,5 +1,5 @@
 import React from 'react';
-import { cmsContent } from '@utils/cms/utils';
+import { CmsContent } from '@utils/cms/utils';
 // import { useContent } from '@components/core/WithVisualization/WithVisualization';
 
 import CmsContentItem from '@components/module/cmsContentItem';
@@ -15,7 +15,7 @@ export type ContentBlockType = 'SLOT' | 'CONTENT';
 interface ContentBlockProps {
     name?: string;
     type?: ContentBlockType;
-    content: cmsContent | null;
+    content: CmsContent | null;
     components?: { [key: string]: any };
 }
 

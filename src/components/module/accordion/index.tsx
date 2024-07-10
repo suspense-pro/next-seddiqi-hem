@@ -38,7 +38,7 @@ const Accordion: React.FC<AccordionProps> = ({
         <NavigationLink
           hover={false}
           className={styles.headerLink}
-          title={item.title}
+          title={item?.title}
         />
         {showArrow && (
           <ArrowDown

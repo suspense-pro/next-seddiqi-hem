@@ -1,0 +1,22 @@
+@import "./../../../assets/styles/main.scss";
+
+.menuLeft {
+  display: flex;
+  gap: rem(87);
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: rem(217);
+  margin-bottom: rem(28);
+  @include body_regular;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: rem(14);
+  line-height: rem(22);
+  letter-spacing: rem(0.4);
+  color: getColorHex("green-dark");
+  cursor: pointer;
+}

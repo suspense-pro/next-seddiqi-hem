@@ -1,6 +1,6 @@
 import React from 'react';
-import { cmsContent } from '@utils/cms/utils';
-import { ImageTransformations, getImageURL } from '@utils/helpers/getImageUrl';
+import { CmsContent } from '@utils/cms/utils';
+import { ImageTransformations, getImageURL } from '@utils/cms/helpers/getImageUrl';
 
 type ImageProps = {
     image: any;
@@ -8,7 +8,7 @@ type ImageProps = {
     format?: string;
     imageAltText?: string;
     di?: string;
-} & cmsContent;
+} & CmsContent;
 
 const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel }: ImageProps) => {
     if (!image) {
