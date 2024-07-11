@@ -1,35 +1,28 @@
 import React from "react";
-import styles from "./storyCard.module.scss";
 import Image from "next/image";
-import { LatestsubTitle } from "@components/rendering/header/dummyData";
-import { truncateString } from "@utils/helpers/truncateString";
+import styles from "./storyCard.module.scss";
+import { CardInfoProps } from "@utils/models";
+import Typography from "@components/module/typography";
 
-interface StoryCardProps {
-  item?: LatestsubTitle;
-}
+const StoryCard: React.FC<CardInfoProps> = ({ item }) => {
+  const image = item?.image?.image;
+  const imageUrl = `https://${image?.defaultHost}/i/${image?.endpoint}/${image?.name}`;
+  const altText = item?.image?.altText;
+  const title = item?.title;
+  const subtitle = item?.subTitle;
 
-const tempImg = "/images/png/watchImage_02.png";
-const tempTitle = "Seddiqi Jewellery Show: Where Nature and Luxur...";
-const temPSubTitle = "The world of watchmaking came to Geneva.";
+  if (!image || !title || !subtitle || !imageUrl) return null; 
 
-const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
   return (
     <div className={styles.storyCardContainer}>
       <div className={styles.imgContainer}>
-        <Image
-          src={item?.image ? item.image : tempImg}
-          alt="Watch Image"
-          fill
-          className={styles.image}
-        />
+        <Image src={imageUrl} alt={altText} fill className={styles.image} />
       </div>
       <div className={styles.content}>
-        <div className={styles.title}>
-          {item?.title ? truncateString(item.title, 49) : tempTitle}
-        </div>
-        <div className={styles.subtitle}>
-          {item?.subTitle ? truncateString(item.subTitle, 49) : temPSubTitle}
-        </div>
+        <Typography align="left" variant="span" className={styles.title}>
+          {title}
+        </Typography>
+        <div className={styles.subtitle}>{subtitle}</div>
       </div>
     </div>
   );

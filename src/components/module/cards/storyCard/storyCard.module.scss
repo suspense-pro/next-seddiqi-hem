@@ -3,7 +3,6 @@
 .storyCardContainer {
   display: flex;
   gap: rem(20);
-  width: rem(368);
   height: rem(109);
   cursor: pointer;
 
@@ -11,6 +10,7 @@
     width: 100%;
     height: 100%;
   }
+
   @include breakpoint-max-width(rem(360)) {
     flex-direction: column;
   }
@@ -19,20 +19,15 @@
     position: relative;
     width: rem(160);
     height: rem(109);
-    @include breakpoint-max-width(rem(768)) {
-      width: rem(146);
-      height: rem(96);
-    }
 
     @include breakpoint-max-width(rem(360)) {
       width: 100%;
-      // height: 100%;
+      height: 100%;
     }
   }
 
   .image {
-    border-top-left-radius: rem(16);
-    border-bottom-right-radius: rem(16);
+    border-radius: rem(16 0 16 0);
     object-fit: cover;
   }
 
@@ -40,7 +35,11 @@
     display: flex;
     flex-direction: column;
     gap: rem(12);
-    width: rem(188);
+    width: rem(220);
+
+    @include breakpoint-max-width(rem(768)) {
+      width: rem(188);
+    }
 
     @include breakpoint-max-width(rem(360)) {
       width: 100%;
@@ -50,6 +49,10 @@
       @include heading_regular;
       font-size: rem(16);
       line-height: rem(20);
+      letter-spacing: rem(0.4);
+      margin: rem(0);
+
+      @include ellipses;
 
       @include breakpoint-max-width(rem(768)) {
         font-size: rem(14);
@@ -61,6 +64,7 @@
       color: getColorHex("green-dark");
       font-size: rem(14);
       line-height: rem(22);
+      @include ellipses;
 
       @include breakpoint-max-width(rem(768)) {
         font-size: rem(12);

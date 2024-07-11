@@ -1,48 +1,41 @@
-import {
-  AccountIcon,
-  CloseIcon,
-  HamburgerIcon,
-  MapIcon,
-  SearchIcon,
-} from "@assets/images/svg";
-import styles from "./MobileHeaderNavbar.module.scss";
-import { useContext } from "react";
-import { HeaderContext } from "@contexts/headerContext";
+import React, { useContext } from "react";
 import Image from "next/image";
-
-interface MobileHeaderNavbarProps {
-  menuOpen?: boolean;
-  toggleMenu?: () => void;
-}
+import { AccountIcon, MapIcon, SearchIcon } from "@assets/images/svg";
+import styles from "./MobileHeaderNavbar.module.scss";
+import { HeaderContext } from "@contexts/headerContext";
+import { MobileHeaderNavbarProps } from "@utils/models";
 
 const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({
   toggleMenu,
   menuOpen,
 }) => {
-  const headerContext = useContext(HeaderContext);
+  const { headerData } = useContext(HeaderContext);
 
-  const { headerData } = headerContext;
+  if (!headerData) return null;
+
+  const MAIN_LOGO = headerData?.content?.mainLogo?.image;
+
+  const MOBBILE_SEDDIQI_LOGO =
+    `https://${MAIN_LOGO?.image.defaultHost}/i/${MAIN_LOGO?.image.endpoint}/${MAIN_LOGO?.image.name}` ||
+    "/images/png/SeddiqiLogo.png";
 
   return (
     <header className={styles.mobileHeader}>
       <div className={styles.mobileHeaderContainer}>
         <div className={styles.menuIcon} onClick={toggleMenu}>
-          {/* {menuOpen ? <CloseIcon /> : <HamburgerIcon />} */}
           <div
-            className={`${menuOpen && styles.hamburgerCross} ${
-              styles.hamBurger
+            className={`${styles.hamBurger} ${
+              menuOpen ? styles.hamburgerCross : ""
             }`}
-          >
-            &nbsp;
-          </div>
+          />
           <AccountIcon fill="#" />
         </div>
         <div className={styles.centerLogo}>
           <Image
             height={16}
             width={82}
-            src={headerData.mobile_siddiqi_logo.imageUrl}
-            alt="SeddiqiLogo"
+            src={MOBBILE_SEDDIQI_LOGO}
+            alt="Seddiqi Logo"
           />
         </div>
         <div className={styles.rightIcons}>

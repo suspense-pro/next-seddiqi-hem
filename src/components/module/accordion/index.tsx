@@ -1,39 +1,32 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./accordion.module.scss";
 import NavigationLink from "../navigationLink";
 import { ArrowDown } from "@assets/images/svg";
+import { AccordionProps } from "@utils/models";
 
-interface AccordionProps {
-  item: any;
-  children?: React.ReactNode;
-  setSubMenu?: (id) => void;
-  subMenu?: boolean;
-  showArrow?: boolean;
-}
-
-const Accordion = ({
+const Accordion: React.FC<AccordionProps> = ({
   item,
   children,
   setSubMenu,
   subMenu,
-  showArrow,
-}: AccordionProps) => {
+  showArrow = false,
+}) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [height, setHeight] = useState(0);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [height, setHeight] = useState<number | undefined>(undefined);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  // DYNAMIC HEIGHT
-  useLayoutEffect(() => {
-    if (typeof window !== "undefined" && contentRef.current && isCollapsed) {
+  const activeSubMenu = subMenu === item.id && isCollapsed;
+
+  useEffect(() => {
+    if (contentRef.current && isCollapsed) {
       setHeight(contentRef.current.scrollHeight);
+    } else {
+      setHeight(undefined);
     }
   }, [isCollapsed]);
 
-  // ACTIVE SUBMENU
-  const activeSubMenu = subMenu === item.id && isCollapsed;
-
   const handleClick = () => {
-    if (showArrow) {
+    if (showArrow && setSubMenu) {
       setSubMenu(item.id);
       setIsCollapsed(!isCollapsed);
     }
@@ -45,20 +38,18 @@ const Accordion = ({
         <NavigationLink
           hover={false}
           className={styles.headerLink}
-          key={item.title}
-          title={item.title}
+          title={item?.title}
         />
-
         {showArrow && (
-          <ArrowDown className={activeSubMenu && styles.activeArrow} />
+          <ArrowDown
+            className={activeSubMenu ? styles.activeArrow : undefined}
+          />
         )}
       </div>
       <div
         ref={contentRef}
-        style={{
-          height: activeSubMenu && height,
-        }}
-        className={`${styles.accordionContainer}`}
+        style={{ height: activeSubMenu ? height : 0 }}
+        className={styles.accordionContainer}
       >
         {children}
       </div>
