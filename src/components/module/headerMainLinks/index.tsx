@@ -8,6 +8,7 @@ import {
   SearchIcon,
   WishlistIcon,
 } from "@assets/images/svg";
+import { generateUniqueId } from "@utils/helpers/uniqueId";
 
 const HeaderMainLinks = () => {
   const { updateCurrent, headerData } = useContext(HeaderContext);
@@ -24,7 +25,7 @@ const HeaderMainLinks = () => {
       <div className={styles.links}>
         {headerMainLinks?.map((item, ind) => (
           <div
-            key={item?.content?.commonProps?.item_title}
+            key={generateUniqueId()}
             onMouseEnter={() => updateCurrent(ind)}
           >
             <NavigationLink
@@ -38,7 +39,7 @@ const HeaderMainLinks = () => {
       </div>
       <div className={styles.navIcons}>
         {[SearchIcon, AccountIcon, MapIcon, WishlistIcon].map((Icon, index) => (
-          <Icon key={index} fill="#" />
+          <Icon key={generateUniqueId()} fill="#" />
         ))}
       </div>
     </div>

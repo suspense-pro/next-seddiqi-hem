@@ -6,6 +6,7 @@ import DisplayCard from "@components/module/cards/displayCard";
 import ArticleCard from "@components/module/cards/articleCard";
 import MobileMenuLogobar from "@components/module/mobileMenuLogobar";
 import SubMenu from "@components/module/tabContent/subMenu";
+import { generateUniqueId } from "@utils/helpers/uniqueId";
 
 const TabContentExplore = () => {
   const { headerData } = useContext(HeaderContext);
@@ -27,7 +28,7 @@ const TabContentExplore = () => {
         <>
           <div className={styles.displayCardsTitle}>{title}</div>
           {cards.map((item, index) => (
-            <CardComponent key={item.title || index} item={item} />
+            <CardComponent key={generateUniqueId()} item={item} />
           ))}
         </>
       )

@@ -1,5 +1,6 @@
 import React, { useContext, useMemo, useState } from "react";
 import styles from "./tabbedNavigation.module.scss";
+import { generateUniqueId } from "@utils/helpers/uniqueId";
 
 const TabbedNavigation: React.FC<{ tabs: any }> = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(1);
@@ -8,7 +9,7 @@ const TabbedNavigation: React.FC<{ tabs: any }> = ({ tabs }) => {
       <div className={styles.tabs}>
         {tabs?.map((tab) => (
           <div
-            key={tab?.title}
+            key={generateUniqueId()}
             className={`${styles.tab} ${
               tab?.id === activeTab && styles.activeTab
             }`}

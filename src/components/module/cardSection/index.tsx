@@ -1,3 +1,5 @@
+import { generateUniqueId } from "@utils/helpers/uniqueId";
+
 const CardSection = ({
   title,
   Component,
@@ -13,7 +15,7 @@ const CardSection = ({
         <div className={titleStyle}>{title}</div>
         <div className={cardStyle}>
           {cards.map((item, index) => (
-            <Component key={item.title || index} item={item} />
+            <Component key={generateUniqueId()} item={item} />
           ))}
         </div>
       </div>

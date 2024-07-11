@@ -5,6 +5,7 @@ import DisplayCard from "@components/module/cards/displayCard";
 import MobileMenuLogobar from "@components/module/mobileMenuLogobar";
 import Accordion from "@components/module/accordion";
 import SubMenu from "@components/module/tabContent/subMenu";
+import { generateUniqueId } from "@utils/helpers/uniqueId";
 
 const TabContentProducts = () => {
   const { headerData } = useContext(HeaderContext);
@@ -39,7 +40,7 @@ const TabContentProducts = () => {
           <div className={styles.subMenu}>
             <div className={styles.displayCardsTitle}>THE LATEST</div>
             {displayCards?.map((item, ind) => (
-              <DisplayCard item={item} key={ind} />
+              <DisplayCard item={item} key={generateUniqueId()} />
             ))}
           </div>
         )}
@@ -56,7 +57,7 @@ const TabContentProducts = () => {
       <div className={styles.mobileMenuLinks}>
         {products?.map((item, ind) => (
           <div
-            key={item?.content?.commonProps?.item_title}
+            key={generateUniqueId()}
             className={styles.mobileMenuNavigationContainer}
           >
             <Accordion
