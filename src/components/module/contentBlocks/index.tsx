@@ -14,17 +14,15 @@ const ContentBlocks = () => {
     return null;
   }
 
-  const currentHeaderData = headerData?.children[current]?.content;
   const contentBlock = headerData.cardsData[current]?.contentBlock;
 
   if (!contentBlock) return null;
-
   const { displayCard: displayCards, storyCard: storyCards } = contentBlock;
 
-  if (currentHeaderData?.type === "Explore") {
+
     return (
       <div className={styles.rightSideContainer}>
-        {displayCards && (
+        {storyCards && (
           <CardSection
             title={"OTHER"}
             Component={StoryCard}
@@ -35,9 +33,9 @@ const ContentBlocks = () => {
           />
         )}
 
-        {storyCards && (
+        {displayCards && (
           <CardSection
-            title={"LATEST STORIES"}
+            title={"THE LATEST"}
             Component={DisplayCard}
             cards={displayCards}
             containerStyle={styles.column2}
@@ -45,7 +43,7 @@ const ContentBlocks = () => {
             titleStyle={styles.displayCardsTitle}
           />
         )}
-        {contentBlock && (
+        {contentBlock && contentBlock?.title && (
           <div className={styles.column2}>
             <div className={styles.displayCardsTitle}>LATEST ARTICLE</div>
             <ArticleCard key={contentBlock?.title} item={contentBlock} />
@@ -53,20 +51,20 @@ const ContentBlocks = () => {
         )}
       </div>
     );
-  }
+  
 
-  if (!displayCards) return null;
+  // if (!displayCards) return null;
 
-  return (
-    <CardSection
-      title={"THE LATEST"}
-      Component={DisplayCard}
-      cards={displayCards}
-      containerStyle={styles.displayCardsContainer}
-      cardStyle={styles.displayCards}
-      titleStyle={styles.displayCardsTitle}
-    />
-  );
+  // return (
+  //   <CardSection
+  //     title={"THE LATEST"}
+  //     Component={DisplayCard}
+  //     cards={displayCards}
+  //     containerStyle={styles.displayCardsContainer}
+  //     cardStyle={styles.displayCards}
+  //     titleStyle={styles.displayCardsTitle}
+  //   />
+  // );
 };
 
 export default ContentBlocks;
