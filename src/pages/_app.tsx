@@ -36,13 +36,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <LanguageProvider>
         <Head />
         <WithAppContext value={(pageProps as any).context?.appContext}>
-          <WithCmsContext value={(pageProps as any).context?.cmsContext}>
-            {/* <WithVisualization> */}
-            <Layout pageProps={pageProps}>
-              <Component {...pageProps} />
-            </Layout>
-            {/* </WithVisualization> */}
-          </WithCmsContext>
+          <WithVisualization>
+            <WithCmsContext value={(pageProps as any).context?.cmsContext}>
+              <Layout pageProps={pageProps}>
+                <Component {...pageProps} />
+              </Layout>
+            </WithCmsContext>
+          </WithVisualization>
         </WithAppContext>
       </LanguageProvider>
     </>
