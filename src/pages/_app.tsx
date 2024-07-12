@@ -12,6 +12,7 @@ import "nprogress/nprogress.css";
 
 import ErrorPage from "next/error";
 import WithVisualization from "@contexts/withVisualizationContext";
+import { HeaderProvider } from "@contexts/headerContext";
 import { WithAppContext } from "@contexts/appContext";
 import { WithCmsContext } from "@contexts/cmsContext";
 

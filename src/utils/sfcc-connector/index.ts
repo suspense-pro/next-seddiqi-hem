@@ -1,12 +1,12 @@
-import { Product, Search } from "commerce-sdk";
+import { Product, Search, Customer } from "commerce-sdk";
 import initializeShopperConfig, { clientConfig } from "./config";
 import { NextRequest, NextResponse } from "next/server";
 import logger from "@utils/logger";
 
 
-export default async function getProducts(searchQuery) {
+export async function getProducts(searchQuery) {
 
-  const configWithAuth = await initializeShopperConfig();
+  const configWithAuth : any = await initializeShopperConfig();
 
   const searchClient = new Search.ShopperSearch(configWithAuth);
   const searchResults = await searchClient.productSearch({
@@ -36,33 +36,3 @@ export default async function getProducts(searchQuery) {
   return results;
 }
 
-/** This function is to call the handler in pages > api; This is also used in the Client Side Call*/
-export async function getTestApiCall({ orderId, method }: { orderId: string; method: string }) {
-  try {
-    const json = {
-      api: "order",
-      orderId: orderId,
-      action: "getOrder",
-    };
-
-    const config = {
-      method: method,
-    };
-    const queryString = new URLSearchParams(json).toString();
-    const res = await serverApiCallSfcc(queryString, config, "login");
-    
-    return res.response;
-  } catch (err) {
-    logger.error("API threw Error", err);
-    throw err;
-  }
-}
-
-/** This is the fetch call to the pages > api */
-const serverApiCallSfcc = async (query: string, config: any, type: string) => await (await fetch(`/api/sfcc/${type}?${query}`, config)).json();
-
-// This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
-// eslint-disable-next-line no-unused-vars
-export async function revalidate(req: NextRequest): Promise<NextResponse> {
-  return NextResponse.json({ status: 200, revalidated: true, now: Date.now() });
-}

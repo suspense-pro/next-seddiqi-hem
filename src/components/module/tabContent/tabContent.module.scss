@@ -2,7 +2,7 @@
 
 // PROUDCTS AND EXPLORE
 .tabContent {
-  padding: rem(28);
+  padding: rem(16 28);
 }
 
 .mobileMenuLinks {
@@ -43,6 +43,11 @@
   justify-content: space-between;
   text-transform: uppercase;
   @include body_regular;
+  cursor: pointer;
+  font-size: rem(14);
+  line-height: rem(22);
+  letter-spacing: rem(0.4);
+  color: getColorHex("green-dark");
 }
 
 .customContainer {
@@ -56,6 +61,7 @@
   line-height: rem(20);
   letter-spacing: rem(0.4);
   margin-bottom: rem(-10);
+  color: getColorHex("green-dark");
 }
 
 .padZero {

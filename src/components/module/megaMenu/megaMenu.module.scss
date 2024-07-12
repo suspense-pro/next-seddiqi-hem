@@ -1,105 +1,35 @@
 @import "./../../../assets/styles/main.scss";
 
-// mega menu
 .megaMenuContainer {
   display: flex;
-  justify-content: space-between;
-  transition: all 0.3s;
   flex-direction: column;
+  position: fixed;
+  top: rem(156);
+  left: 0;
+  z-index: 2000;
+  width: 100%;
+  background-color: getColorHex("white");
+  transition: all 0.3s;
 
   @include breakpoint-max-width(rem(1150)) {
     padding: rem(30 60);
-    flex-direction: column;
   }
 
-  position: fixed;
-  top: rem(156);
-  z-index: 2000;
-  width: 100%;
-  left: 0;
-  background-color: getColorHex("white");
-
   .columns {
-    width: 100%;
     display: flex;
     justify-content: space-between;
+    width: 100%;
     padding: rem(60 120);
 
     @include breakpoint-max-width(rem(1150)) {
-      gap: rem(20);
       flex-direction: column;
-    }
-
-    .menuLeft {
-      display: flex;
-      gap: rem(87);
-      justify-content: space-between;
+      gap: rem(20);
     }
   }
 }
 
 .headerFooter {
   padding: rem(60 120);
-}
-
-.menuLink {
-  display: flex;
-  align-items: center;
-  width: rem(217);
-  justify-content: space-between;
-  margin-bottom: rem(28);
-  text-transform: uppercase;
-  @include body_regular;
-}
-
-// megamenu right side cards
-.displayCardsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: rem(12);
-}
-
-.displayCards {
-  display: flex;
-  gap: rem(24);
-}
-
-.rightSideContainer {
-  display: flex;
-  gap: rem(40);
-
-  @include breakpoint-max-width(rem(1612)) {
-    flex-direction: column;
-    // justify-content: flex-end;
-  }
-
-  .column1 {
-    display: flex;
-    flex-direction: column;
-    gap: rem(12);
-
-    .storyCardContainer {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: rem(12);
-    }
-  }
-
-  .column2 {
-    gap: rem(12);
-
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.displayCardsTitle {
-  font-size: rem(16);
-  @include heading_regular;
-  line-height: rem(20);
-  letter-spacing: rem(0.4);
 }
 
 .imgContainer {

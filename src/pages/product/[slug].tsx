@@ -1,36 +1,36 @@
 import Image from "next/image";
-import getProducts from "@utils/sfcc-connector";
+import {getProducts} from "@utils/sfcc-connector";
 import Layout from "@components/layout";
 
-export async function getStaticProps({ params }) {
-  const searchResults = await getProducts(params.slug);
-  const coffeeProduct = searchResults[0];
+// export async function getStaticProps({ params }) {
+//   const searchResults = await getProducts(params.slug);
+//   const coffeeProduct = searchResults[0];
 
-  return {
-    props: {
-      product: coffeeProduct,
-    },
-  };
-}
+//   return {
+//     props: {
+//       product: coffeeProduct,
+//     },
+//   };
+// }
 
-export async function getStaticPaths() {
-  const coffeeProducts = await getProducts("shirt");
-  let fullPaths = [];
+// export async function getStaticPaths() {
+//   const coffeeProducts = await getProducts("shirt");
+//   let fullPaths = [];
 
-  for (let product of coffeeProducts) {
-    fullPaths.push({ params: { slug: product.id } });
-  }
+//   for (let product of coffeeProducts) {
+//     fullPaths.push({ params: { slug: product.id } });
+//   }
 
-  return {
-    paths: fullPaths,
-    fallback: "blocking",
-  };
-}
+//   return {
+//     paths: fullPaths,
+//     fallback: "blocking",
+//   };
+// }
 
 export default function Product({ product }) {
   return (
     <div className="flex h-screen flex-col justify-between">
-      <div className="mx-auto mt-16 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      {/* <div className="mx-auto mt-16 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="mx-auto flex flex-col sm:flex-row">
           <Image
             alt="coffee"
@@ -52,7 +52,7 @@ export default function Product({ product }) {
             <p className="max-w-xl">{product.longDescription}</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

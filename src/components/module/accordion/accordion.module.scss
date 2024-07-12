@@ -4,30 +4,37 @@
   display: flex;
   flex-direction: column;
   transition: all 0.3s;
-}
 
-.accordionContainer {
-  display: flex;
-  flex-direction: column;
-  transition: all 0.5s ease-in-out;
-  height: 0;
-  overflow: hidden;
+  &Container {
+    display: flex;
+    flex-direction: column;
+    transition: height 0.5s ease-in-out;
+    height: 0;
+    overflow: hidden;
+  }
+
+  &Link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .activeArrow {
-  transition: all 0.3s;
+  transition: transform 0.3s;
   transform: rotate(180deg);
 }
 
-.accordionLink {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
+.headerLink {
   padding: rem(7 0);
   cursor: pointer;
   color: getColorHex("green-dark");
   border-bottom: rem(2) solid getColorHex("green-dark", 0);
   @include heading_regular;
   transition: all 0.3s;
+  font-weight: 400;
+  font-size: rem(18);
+  line-height: rem(20);
+  letter-spacing: rem(0.4);
+  text-transform: uppercase;
 }
