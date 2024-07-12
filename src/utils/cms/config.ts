@@ -5,6 +5,7 @@ import ContentPage from '@components/module/contentPage';
 import Image from '@components/module/image';
 import Slot from '@components/module/slot';
 import { HeroBanner } from '@components/rendering';
+import { ArticleCard, DisplayCard, StoryCard } from '@components/module';
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || 'platinumpanda',
@@ -15,6 +16,7 @@ const schemaUrl = 'https://seddiqi.amplience.com';
 const contentUrl = schemaUrl + '/content';
 const slotsUrl = schemaUrl + '/slots';
 const pageUrl = schemaUrl + '/page';
+const moduleUrl = schemaUrl + '/module';
 
 
 export const ComponentMapping: any = {
@@ -25,6 +27,9 @@ export const ComponentMapping: any = {
   [`${contentUrl}/hero_banner`]: HeroBanner,
   [`${contentUrl}/banner`]: HeroBanner,
   [`${slotsUrl}/container`]: Slot,
+  [`${moduleUrl}/article-card`]: ArticleCard,
+  [`${moduleUrl}/display-card`]: DisplayCard,
+  [`${moduleUrl}/story-card`]: StoryCard,
 };
 
 

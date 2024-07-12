@@ -15,17 +15,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
     context
   );
-  const header = (data?.hierarchies as any)?.pages?.find(
-    (data: any) => data?.root?.key === "headerNavigation"
-  );
-  const cardsData = await getHierarchyChildren(
-    header?.content?._meta?.deliveryId
-  );
 
   return {
     props: {
-      ...data,
-      cardsData,
+      ...data
     },
   };
 }
