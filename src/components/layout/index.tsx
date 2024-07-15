@@ -18,10 +18,8 @@ const Layout = ({ children, pageProps }: LayoutProps) => {
     (data) => data.root.key === "footerNavigation"
   );
 
-  const cardsData = pageProps?.cardsData;
-
   return (
-    <HeaderProvider headerData={{ ...headerData, cardsData }}>
+    <HeaderProvider headerData={{ ...headerData }}>
       <Header />
       <main className="mainClass">{children}</main>
       <Footer footerData={footerData} />

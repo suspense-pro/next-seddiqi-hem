@@ -5,6 +5,7 @@ import StoryCard from "../cards/storyCard";
 import DisplayCard from "../cards/displayCard";
 import ArticleCard from "../cards/articleCard";
 import CardSection from "../cardSection";
+import { ComponentMapping } from "@utils/cms/config";
 
 const ContentBlocks = () => {
   const headerContext = useContext(HeaderContext);
@@ -14,57 +15,30 @@ const ContentBlocks = () => {
     return null;
   }
 
-  const contentBlock = headerData.cardsData[current]?.contentBlock;
+  const contentBlock = headerData.children[current]?.content?.contentBlock;
 
   if (!contentBlock) return null;
-  const { displayCard: displayCards, storyCard: storyCards } = contentBlock;
 
+  return (
+    <div className={styles.rightSideContainer}>
+      {contentBlock.map((card, i) => {
 
-    return (
-      <div className={styles.rightSideContainer}>
-        {storyCards && (
-          <CardSection
-            title={"OTHER"}
-            Component={StoryCard}
-            cards={storyCards}
+          const CardComponent = ComponentMapping[card._meta.schema];
+          const title = card._meta.schema.includes("story") ? "Other" : card._meta.schema.includes("display") ? "The Latest" : "Latest Article";
+          const cardStyle = card._meta.schema.includes("story") ? styles.storyCardContainer : styles.displayCards;
+
+         return <CardSection
+            title={title}
+            Component={CardComponent}
+            cards={card._meta.schema.includes("article") ? card : Object.values(card)[1]}
             containerStyle={styles.column1}
-            cardStyle={styles.storyCardContainer}
+            cardStyle={cardStyle}
             titleStyle={styles.displayCardsTitle}
           />
-        )}
 
-        {displayCards && (
-          <CardSection
-            title={"THE LATEST"}
-            Component={DisplayCard}
-            cards={displayCards}
-            containerStyle={styles.column2}
-            cardStyle={styles.displayCards}
-            titleStyle={styles.displayCardsTitle}
-          />
-        )}
-        {contentBlock && contentBlock?.title && (
-          <div className={styles.column2}>
-            <div className={styles.displayCardsTitle}>LATEST ARTICLE</div>
-            <ArticleCard key={contentBlock?.title} item={contentBlock} />
-          </div>
-        )}
-      </div>
-    );
-  
-
-  // if (!displayCards) return null;
-
-  // return (
-  //   <CardSection
-  //     title={"THE LATEST"}
-  //     Component={DisplayCard}
-  //     cards={displayCards}
-  //     containerStyle={styles.displayCardsContainer}
-  //     cardStyle={styles.displayCards}
-  //     titleStyle={styles.displayCardsTitle}
-  //   />
-  // );
+      })}
+    </div>
+  );
 };
 
 export default ContentBlocks;

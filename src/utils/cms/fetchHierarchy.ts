@@ -20,7 +20,7 @@ async function getChildren(
     },
   };
   const [children] = await fetchContent([childrenRequest], context, {
-    depth: "root",
+    depth: "all",
     format: "inlined",
   });
   const responses: any[] = children?.responses || [];

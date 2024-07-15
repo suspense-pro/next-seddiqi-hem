@@ -8,15 +8,18 @@ const CardSection = ({
   cardStyle,
   titleStyle,
 }) => {
-
   return (
-    cards?.length > 0 && (
+    cards && (
       <div className={containerStyle}>
         <div className={titleStyle}>{title}</div>
         <div className={cardStyle}>
-          {cards.map((item, index) => (
-            <Component key={generateUniqueId()} item={item} />
-          ))}
+          {Array.isArray(cards) && cards.length > 0 ? (
+            cards.map((item, index) => (
+              <Component key={generateUniqueId()} item={item} />
+            ))
+          ) : (
+            <Component key={generateUniqueId()} item={cards} />
+          )}
         </div>
       </div>
     )
