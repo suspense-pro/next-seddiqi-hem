@@ -31,6 +31,11 @@ async function fetchStandardPageData<
               key: "footerNavigation", //change to new delivery key from SANDBOX
             },
           },
+          {
+            tree: {
+              key: "productsGrid", //change to new delivery key from SANDBOX
+            },
+          },
         ],
       },
     },

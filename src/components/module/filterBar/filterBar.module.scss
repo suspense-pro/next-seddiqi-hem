@@ -1,0 +1,24 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: rem(33 0);
+
+  .filterBtns {
+    display: flex;
+    align-items: center;
+    gap: rem(10);
+  }
+
+  .productsLength {
+    @include body_regular;
+    font-size: rem(14);
+    font-weight: 300;
+    line-height: rem(22);
+    letter-spacing: rem(0.4);
+    text-align: left;
+  }
+}
+

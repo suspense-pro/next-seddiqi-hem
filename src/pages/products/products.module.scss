@@ -1,0 +1,33 @@
+@import "./../../assets/styles/main.scss";
+
+.container {
+  padding: rem(24);
+  margin-top: 150px;
+}
+
+.productsContainer {
+  // display: grid;
+  // grid-template-columns: repeat(auto-fit, minmax(rem(348), 1fr));
+  border: rem(1) solid getColorHex("grey-light-4", 0.4);
+}
+
+.productInfo {
+  @include body_regular;
+  font-size: rem(14);
+  font-weight: 400;
+  line-height: rem(20);
+  letter-spacing: rem(0.4);
+  text-align: center;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+  align-items: center;
+  margin: rem(60 0);
+}
+
+.loadMore {
+  background-color: getColorHex("green-dark");
+}

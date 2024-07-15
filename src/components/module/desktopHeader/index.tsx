@@ -38,7 +38,7 @@ export default function DesktopHeader() {
       <div className={headerScrollStyles}>
         <MegaMenu headerHeightClass={styles.headerHeight} />
         <div className={styles.headerMargin}>
-          <HeaderLogoBar />
+          <HeaderLogoBar headerLogoContainer={styles.headerLogoContainer} />
           <HeaderMainLinks />
         </div>
       </div>

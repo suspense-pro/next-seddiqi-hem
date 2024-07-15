@@ -1,0 +1,26 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px 8px 12px;
+  border-radius: rem(5);
+  border: rem(1) solid #E9E8E3;
+  opacity: 0px;
+  cursor: pointer;
+  gap: rem(10);
+
+  
+
+  .text {
+    @include body_regular;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: rem(22);
+    letter-spacing: rem(.4);
+    text-align: left;
+    color: getColorHex("green-metallic");
+    text-transform: uppercase;
+
+  }
+}
