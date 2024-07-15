@@ -155,7 +155,12 @@ $screen-hd-desktop-max: 1023px;
   border-radius: 50%;
 }
 
-@mixin cut-corners($left-top, $right-top: 0, $right-bottom: 0, $left-bottom: 0) {
+@mixin cut-corners(
+  $left-top,
+  $right-top: 0,
+  $right-bottom: 0,
+  $left-bottom: 0
+) {
   $factor: 1px;
 
   clip-path: polygon(
@@ -172,9 +177,15 @@ $screen-hd-desktop-max: 1023px;
 
 @mixin select($parts...) {
   @each $part in $parts {
-      :global(.select__#{$part}) {
-          @content;
-      }
+    :global(.select__#{$part}) {
+      @content;
+    }
   }
 }
 
+@mixin ellipses {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

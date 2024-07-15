@@ -10,13 +10,13 @@ async function fetchStandardPageData<
   CT extends FetchMapInput<CmsRequest>,
   CH extends FetchMapInput<CmsHierarchyRequest>
 >(input: FetchPageDataInput<CT, CH>, context: GetServerSidePropsContext) {
-  console.log("input---", input)
+  // console.log("input---", input)
   const data = await fetchPageData(
     {
       ...input,
       content: {
         ...input.content,
-        configComponents: { key: "config/components" },  //will change when structure of components in Amplience is final
+        configComponents: { key: "config/components" }, //will change when structure of components in Amplience is final
       },
       hierarchies: {
         ...input.hierarchies,
@@ -28,7 +28,7 @@ async function fetchStandardPageData<
           },
           {
             tree: {
-              key: "footerNavigation",  //change to new delivery key from SANDBOX
+              key: "footerNavigation", //change to new delivery key from SANDBOX
             },
           },
         ],
@@ -38,10 +38,10 @@ async function fetchStandardPageData<
   );
 
   const pageNode = findInHierarchy(
-    (data.hierarchies as any).pages,
+    (data.hierarchies as any).pages[0],
     (node: CmsHierarchyNode) => {
       const dk =
-        context.req.url === "/" ? "homepage" : context.req.url?.slice(1);
+        context.req.url === "/" ? "headerNavigation" : context.req.url?.slice(1);
       return node.content?._meta?.deliveryKey === dk;
     }
   );
@@ -51,7 +51,7 @@ async function fetchStandardPageData<
   if (
     pageNode &&
     pageNode.content._meta?.schema?.indexOf(
-      "https://seddiqi.amplience.com/site/pages/"
+      "https://seddiqi.amplience.com/rendering/"
     ) === 0
   ) {
     const pageId = pageNode.content._meta.deliveryId;

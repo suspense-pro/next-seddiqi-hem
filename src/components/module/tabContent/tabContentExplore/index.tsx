@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import styles from "./../tabContent.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import StoryCard from "@components/module/cards/storyCard";
@@ -6,10 +6,30 @@ import DisplayCard from "@components/module/cards/displayCard";
 import ArticleCard from "@components/module/cards/articleCard";
 import MobileMenuLogobar from "@components/module/mobileMenuLogobar";
 import SubMenu from "@components/module/tabContent/subMenu";
+import { generateUniqueId } from "@utils/helpers/uniqueId";
+import { ComponentMapping } from "@utils/cms/config";
+import CardSection from "@components/module/cardSection";
 
 const TabContentExplore = () => {
-  const headerContext = useContext(HeaderContext);
-  const { headerData } = headerContext;
+  const { headerData } = useContext(HeaderContext);
+
+  let explore = headerData?.children.filter(
+    (item) => item?.content?.type !== "Products"
+  )[0];
+
+  if (!explore) return null;
+
+  const contentBlock = explore.content.contentBlock;
+
+  const GetSubMenu = () => {
+    const subMenuLinks = explore.children?.map(
+      (item) => item
+    );
+
+    return subMenuLinks && subMenuLinks.length > 0 ? (
+      <SubMenu links={subMenuLinks} className={styles.padZero} />
+    ) : null;
+  };
 
   return (
     <div className={styles.tabContent}>
@@ -18,25 +38,25 @@ const TabContentExplore = () => {
           <div
             className={`${styles.customContainer} ${styles.subMenuContainer}`}
           >
-            <SubMenu
-              links={headerData.sections[5].categories}
-              className={styles.padZero}
-            />
-            <SubMenu
-              links={headerData.sections[5].special_categories}
-              className={styles.padZero}
-            />
+            <GetSubMenu />
 
             <div className={`${styles.padZero} ${styles.subMenu}`}>
-              <div className={styles.displayCardsTitle}>THE LATEST</div>
-              <StoryCard />
-              <StoryCard />
-              <StoryCard />
-              <div className={styles.displayCardsTitle}>LATEST STORIES</div>
-              <DisplayCard />
-              <DisplayCard />
-              <div className={styles.displayCardsTitle}>LATEST ARTICLE</div>
-              <ArticleCard />
+
+              {contentBlock && contentBlock.map((card, i) => {
+
+                const CardComponent = ComponentMapping[card._meta.schema];
+                const title = card._meta.schema.includes("story") ? "Other" : card._meta.schema.includes("display") ? "The Latest" : "Latest Article";
+    
+                return <CardSection
+                    title={title}
+                    Component={CardComponent}
+                    cards={card._meta.schema.includes("article") ? card : Object.values(card)[1]}
+                    containerStyle={styles.column1}
+                    cardStyle={null}
+                    titleStyle={styles.displayCardsTitle}
+                  />
+
+              })}
             </div>
           </div>
         </div>

@@ -1,47 +1,25 @@
-import React, { useContext, useLayoutEffect, useRef, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import styles from "./tabbedNavigation.module.scss";
-import TabContentExplore from "../tabContent/tabContentExplore";
-import TabContentProducts from "../tabContent/tabContentProducts";
+import { generateUniqueId } from "@utils/helpers/uniqueId";
 
-const tabs = [
-  {
-    id: 1,
-    label: "PRODUCTS",
-    content: <TabContentProducts />,
-  },
-  {
-    id: 2,
-    label: "EXPLORE",
-    content: <TabContentExplore />,
-  },
-];
-const TabbedNavigation = () => {
+const TabbedNavigation: React.FC<{ tabs: any }> = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(1);
-
-  const handleTabClick = (id) => {
-    setActiveTab(id);
-  };
-
   return (
     <div className={styles.tabsContainer}>
       <div className={styles.tabs}>
-        {tabs.map((tab) => (
+        {tabs?.map((tab) => (
           <div
-            key={tab.id}
-            className={`${tab.id === activeTab && styles.activeTab} ${
-              styles.tab
+            key={generateUniqueId()}
+            className={`${styles.tab} ${
+              tab?.id === activeTab && styles.activeTab
             }`}
-            onClick={() => handleTabClick(tab.id)}
+            onClick={() => setActiveTab(tab.id)}
           >
-            {tab.label}
+            {tab?.title}
           </div>
         ))}
       </div>
-      <>
-        {tabs.map((tab) =>
-          activeTab === tab.id ? <div key={tab.id}>{tab.content}</div> : null
-        )}
-      </>
+      {tabs.find((tab) => tab.id === activeTab)?.content}
     </div>
   );
 };

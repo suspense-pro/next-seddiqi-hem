@@ -1,30 +1,25 @@
 import React from "react";
-import styles from "./articleCard.module.scss";
 import Link from "next/link";
-import { LatestsubTitle } from "@components/rendering/header/dummyData";
-import { truncateString } from "@utils/helpers/truncateString";
+import styles from "./articleCard.module.scss";
+import { CardInfoProps } from "@utils/models";
+import Typography from "@components/module/typography";
 
-interface ArticleCardProps {
-  item?: LatestsubTitle;
-}
+const ArticleCard: React.FC<CardInfoProps> = ({ item }) => {
+  const image = item?.image?.image;
+  const backgroundImage = `url(${`https://${image?.defaultHost}/i/${image?.endpoint}/${image?.name}`})`;
 
-const ArticleCard: React.FC<ArticleCardProps> = ({ item }) => {
-  const articleCardstyles = {
-    backgroundImage: `url(${
-      item?.image ? item.image : "/images/png/watchImage_02.png"
-    })`,
-  };
-
-  const title = "Horology for The Holidays";
+  const title = item?.title;
+  const linkBtn = item?.linkTitle;
+  if (!image || !title || !linkBtn || !backgroundImage) return null;
 
   return (
-    <div style={articleCardstyles} className={styles.articleCard}>
-      <div className={styles.backgroundFade}>&nbsp;</div>
-      <div className={styles.articleTitle}>
-        {item?.title ? truncateString(item.title, 49) : title}
-      </div>
-      <Link href={"#"}>
-        <span className={styles.articleBtn}>Read Article</span>
+    <div className={styles.articleCard} style={{ backgroundImage }}>
+      <div className={styles.backgroundFade} />
+      <Typography align="left" variant="h3" className={styles.articleTitle}>
+        {title}
+      </Typography>
+      <Link href="#" className={styles.articleBtn}>
+        {linkBtn}
       </Link>
     </div>
   );

@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^14.2.4",
     "axios": "^1.6.7",
     "chart.js": "^4.4.3",
     "classnames": "^2.3.2",

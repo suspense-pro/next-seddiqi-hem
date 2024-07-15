@@ -1,6 +1,6 @@
-const path = require('path');
+const path = require("path");
 
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
     includePaths: [path.join(__dirname, "src/assets/styles")],
@@ -18,9 +18,16 @@ module.exports = {
       },
       {
         protocol: "https",
-        hostname: "cdn.media.amplience.net",
-        port: "",
+        hostname: "cdn.media.amplience.net"
       },
+      {
+        protocol: "https",
+        hostname: "**.staging.bigcontent.io"
+      },
+      {
+        protocol: "https",
+        hostname: "amp.a.bigcontent.io"
+      }
     ],
   },
   i18n: {
@@ -28,3 +35,10 @@ module.exports = {
     defaultLocale: "en",
   },
 };
+
+
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true"
+});
+
+module.exports = withBundleAnalyzer(nextConfig);

@@ -9,6 +9,7 @@ import { getCustomer } from "@utils/sfcc-connector/dataService";
 import LoginForm from "@components/LoginForm";
 import RegistrationForm from "@components/RegistrationForm";
 import PriceRangeFilter from "@components/module/priceRangeFilter";
+import { getHierarchyChildren } from "@utils/cms/amplience";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
@@ -22,7 +23,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      ...data,
+      ...data
     },
   };
 }

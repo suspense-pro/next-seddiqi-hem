@@ -6,7 +6,7 @@ import logger from "@utils/logger";
 
 export async function getProducts(searchQuery) {
 
-  const configWithAuth = await initializeShopperConfig();
+  const configWithAuth : any = await initializeShopperConfig();
 
   const searchClient = new Search.ShopperSearch(configWithAuth);
   const searchResults = await searchClient.productSearch({

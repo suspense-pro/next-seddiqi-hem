@@ -1,16 +1,8 @@
 import ArrowRight from "@assets/images/svg/ArrowRight";
-import classNames from "classnames";
 import Link from "next/link";
 import React from "react";
 import styles from "./navigationLink.module.scss";
-
-interface NavigationLinkProps {
-  url?: string;
-  title: string;
-  className?: string;
-  arrow?: boolean;
-  hover?: boolean;
-}
+import { NavigationLinkProps } from "@utils/models";
 
 const NavigationLink: React.FC<NavigationLinkProps> = ({
   url,
