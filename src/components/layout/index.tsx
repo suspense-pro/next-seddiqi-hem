@@ -19,7 +19,7 @@ const Layout = ({ children, pageProps }: LayoutProps) => {
       categories={null}
     >
       <>
-        <Header {...pageProps.header} />
+        {/* <Header {...pageProps.header} /> */}
         <main className="mainClass">{children}</main>
         <Footer footerData={footerData} />
       </>
