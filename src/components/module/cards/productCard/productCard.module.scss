@@ -1,0 +1,79 @@
+@import "./../../../../assets/styles/main.scss";
+.productContainer {
+  min-width: rem(348);
+  height: rem(596);
+  background-color: getColorHex("white");
+  padding: rem(16);
+  border: rem(1) solid getColorHex("grey-light-4", 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: rem(40);
+
+  &:hover {
+    cursor: pointer;
+    background-color: getColorHex("green-greyish");
+
+    .newContainer {
+      background-color: getColorHex("white");
+    }
+  }
+
+  .productTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .newContainer {
+    padding: rem(6 12);
+    background-color: getColorHex("green-greyish");
+    display: inline-block;
+    padding: rem(6 12);
+    gap: rem(10);
+    border-radius: rem(4);
+    cursor: pointer;
+
+    .new {
+      font-size: rem(10);
+      font-weight: 400;
+      line-height: rem(14);
+      letter-spacing: rem(0.4);
+      text-align: left;
+      color: getColorHex("green-dark");
+      text-transform: uppercase;
+    }
+  }
+}
+
+.productBottom {
+  display: flex;
+  flex-direction: column;
+  gap: rem(12);
+  align-items: center;
+
+  .title {
+    text-transform: uppercase;
+  }
+
+  .title,
+  .price {
+    @include heading_regular;
+  }
+
+  .type {
+    font-size: rem(18);
+    line-height: rem(28);
+    letter-spacing: rem(0.4);
+    text-align: center;
+    color: getColorHex("green-metallic");
+    @include body_regular;
+  }
+}
+
+.imgContainer {
+  position: relative;
+  width: rem(176);
+  height: rem(273);
+  margin: 0 auto;
+}
