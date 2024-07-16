@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./productCard.module.scss";
 import Image from "next/image";
 import { HeartIcon } from "@assets/images/svg";
+import Typography from "@components/module/typography";
 
 // TEMP
 const DEFAULT_IMAGE = "/images/png/product_watch_01.png";
@@ -28,9 +29,15 @@ const ProductCard = ({ item }: { item: any }) => {
         <Image className={styles.image} fill alt="watch" src={DEFAULT_IMAGE} />
       </div>
       <div className={styles.productBottom}>
-        <div className={styles.title}>{TITLE}</div>
-        <div className={styles.type}>{WATCH_TYPE}</div>
-        <div className={styles.price}>{PRICE}</div>
+        <Typography align="left" variant="p" className={styles.title}>
+          {TITLE}
+        </Typography>
+        <Typography align="left" variant="p" className={styles.type}>
+          {WATCH_TYPE}
+        </Typography>
+        <Typography align="left" variant="p" className={styles.price}>
+          {PRICE}
+        </Typography>
       </div>
     </div>
   );

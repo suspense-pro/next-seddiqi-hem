@@ -58,25 +58,16 @@
 
   .title,
   .price {
-    font-size: rem(16);
-    font-weight: 400;
-    line-height: rem(20);
-    letter-spacing: rem(0.4);
     @include heading_regular;
-    color: getColorHex("black");
   }
 
   .type {
     font-size: rem(18);
-    font-weight: 400;
     line-height: rem(28);
     letter-spacing: rem(0.4);
     text-align: center;
     color: getColorHex("green-metallic");
     @include body_regular;
-  }
-
-  .price {
   }
 }
 
