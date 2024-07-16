@@ -42,3 +42,14 @@
     transition: all 0.3s;
   }
 }
+
+.headerLogoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: rem(46);
+  transition: all 0.3s ease;
+}

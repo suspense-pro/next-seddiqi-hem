@@ -1,5 +1,4 @@
 import Head from "./head";
-import { ProductCard } from "./product";
 import Button from "./button";
 import Image from "./image";
 import Logo from "./logo";
@@ -22,6 +21,9 @@ import SubMenu from "./tabContent/subMenu";
 import HeaderFooter from "./headerFooter/index";
 import SubMenuLinks from "./sumMenuLinks";
 import ContentBlocks from "./contentBlocks";
+import FilterBtn from "./filterBtn";
+import ProductCard from "./cards/productCard";
+import PlpContent from "./plpContent";
 
 export {
   Head,
@@ -47,4 +49,6 @@ export {
   HeaderFooter,
   SubMenuLinks,
   ContentBlocks,
+  FilterBtn,
+  PlpContent
 };
