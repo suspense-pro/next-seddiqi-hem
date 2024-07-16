@@ -1,8 +1,6 @@
 import Layout from "@components/layout";
 import React from "react";
 import styles from "./products.module.scss";
-import { HeartIcon } from "@assets/images/svg";
-import Image from "next/image";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { getHierarchyChildren } from "@utils/cms/amplience";
 import GridWrapper from "@components/module/gridWrapper";
@@ -34,22 +32,25 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
+// TEMP
+const PRODUCT_INFO_TEXT = "Showing 20 out of 210 products";
+const LOAD_MORE_TEXT = "Load More";
+
 const Products = (props) => {
   const products = props?.hierarchies?.pages[2]?.content?.productGridContent;
-
-  const COLS = products[0]?.cols?.length;
+  const cols = products[0]?.cols?.length;
 
   return (
     <div className={styles.container}>
       <FilterBar />
-      <GridWrapper cols={COLS}>
+      <GridWrapper cols={cols}>
         {products?.map((item) => (
           <ProductCard key={item?.tempId} item={item} />
         ))}
       </GridWrapper>
       <div className={styles.bottom}>
-        <div className={styles.productInfo}>Showing 20 out of 210 products</div>
-        <div className={`${styles.loadMore} button`}>Load More</div>
+        <div className={styles.productInfo}>{PRODUCT_INFO_TEXT}</div>
+        <div className={`${styles.loadMore} button`}>{LOAD_MORE_TEXT}</div>
       </div>
     </div>
   );

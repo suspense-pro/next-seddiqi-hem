@@ -6,7 +6,7 @@ const FilterBtn = ({label, icon=false}) => {
   return (
     <div className={styles.container}>
       {icon && <FilterIcon />}
-      <div className={styles.text}>{label ? label: "All Filter & Sort by"}</div>
+      <div className={styles.text}>{label && label}</div>
     </div>
   )
 }

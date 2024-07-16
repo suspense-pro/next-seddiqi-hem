@@ -2,13 +2,17 @@
 
 .container {
   padding: rem(24);
-  margin-top: 150px;
+  margin-top: rem(156);
 }
 
 .productsContainer {
   // display: grid;
   // grid-template-columns: repeat(auto-fit, minmax(rem(348), 1fr));
   border: rem(1) solid getColorHex("grey-light-4", 0.4);
+
+  @include breakpoint-max-width(rem(768)) {
+    grid-template-columns: repeat(auto-fit, minmax(rem(348), 1fr)) !important;
+  }
 }
 
 .productInfo {

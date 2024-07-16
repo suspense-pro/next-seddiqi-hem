@@ -1,0 +1,9 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  display: grid;
+
+  @include breakpoint-max-width(rem(768)) {
+    grid-template-columns: repeat(auto-fit, minmax(rem(348), 1fr)) !important;
+  }
+}
