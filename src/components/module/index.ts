@@ -23,6 +23,7 @@ import SubMenuLinks from "./sumMenuLinks";
 import ContentBlocks from "./contentBlocks";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
+import PlpContent from "./plpContent";
 
 export {
   Head,
@@ -49,4 +50,5 @@ export {
   SubMenuLinks,
   ContentBlocks,
   FilterBtn,
+  PlpContent
 };
