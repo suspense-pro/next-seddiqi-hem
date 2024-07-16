@@ -93,8 +93,8 @@ const PriceRangeFilter = () => {
           display: false,
         },
         border: {
-            display: false,  
-          }
+          display: false,
+        },
       },
       x: {
         grid: {
@@ -104,8 +104,8 @@ const PriceRangeFilter = () => {
           display: false,
         },
         border: {
-            display: false,  
-          }
+          display: false,
+        },
       },
     },
     plugins: {
@@ -123,57 +123,61 @@ const PriceRangeFilter = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.histogram}>
-        <div className={styles.heading}>PRICE</div>
-        <Bar data={data} options={options} />
-      </div>
-      <div className={styles.rangeSlider}>
-        <Range
-          step={1}
-          min={0}
-          max={prices.length - 1}
-          values={priceRange}
-          onChange={(newRange) => setPriceRange(newRange)}
-          renderTrack={({ props, children }) => {
-            const percentageLeft = (priceRange[0] / (prices.length - 1)) * 100;
-            const percentageRight = (priceRange[1] / (prices.length - 1)) * 100;
-            return (
+      <div>
+        <div className={styles.histogram}>
+          {/* <div className={styles.heading}>PRICE</div> */}
+          <Bar data={data} options={options} />
+        </div>
+        <div className={styles.rangeSlider}>
+          <Range
+            step={1}
+            min={0}
+            max={prices.length - 1}
+            values={priceRange}
+            onChange={(newRange) => setPriceRange(newRange)}
+            renderTrack={({ props, children }) => {
+              const percentageLeft =
+                (priceRange[0] / (prices.length - 1)) * 100;
+              const percentageRight =
+                (priceRange[1] / (prices.length - 1)) * 100;
+              return (
+                <div
+                  {...props}
+                  style={{
+                    ...props.style,
+                    height: "2px",
+                    width: "100%",
+                    background: `linear-gradient(to right, #ccc 0%, #ccc ${percentageLeft}%, black ${percentageLeft}%, black ${percentageRight}%, #ccc ${percentageRight}%, #ccc 100%)`,
+                  }}
+                >
+                  {children}
+                </div>
+              );
+            }}
+            renderThumb={({ props }) => (
               <div
                 {...props}
                 style={{
                   ...props.style,
-                  height: "2px",
-                  width: "100%",
-                  background: `linear-gradient(to right, #ccc 0%, #ccc ${percentageLeft}%, black ${percentageLeft}%, black ${percentageRight}%, #ccc ${percentageRight}%, #ccc 100%)`,
+                  height: "15px",
+                  width: "15px",
+                  borderRadius: "50%",
+                  backgroundColor: "black",
                 }}
-              >
-                {children}
-              </div>
-            );
-          }}
-          renderThumb={({ props }) => (
-            <div
-              {...props}
-              style={{
-                ...props.style,
-                height: "15px",
-                width: "15px",
-                borderRadius: "50%",
-                backgroundColor: "black",
-              }}
-            />
-          )}
-        />
-        <div className={styles.labelContainer}>
-          <div>
-            <div className={styles.labels}>Min Price</div>
-            <span className={styles.price}>AED {prices[0]}</span>
-          </div>
-          <div style={{ textAlign: "right" }}>
-            <div className={styles.labels}>Max Price</div>
-            <span className={styles.price}>
-              AED {prices[prices.length - 1]}
-            </span>
+              />
+            )}
+          />
+          <div className={styles.labelContainer}>
+            <div>
+              <div className={styles.labels}>Min Price</div>
+              <span className={styles.price}>AED {prices[0]}</span>
+            </div>
+            <div style={{ textAlign: "right" }}>
+              <div className={styles.labels}>Max Price</div>
+              <span className={styles.price}>
+                AED {prices[prices.length - 1]}
+              </span>
+            </div>
           </div>
         </div>
       </div>

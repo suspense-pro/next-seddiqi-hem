@@ -22,6 +22,7 @@ import SubMenu from "./tabContent/subMenu";
 import HeaderFooter from "./headerFooter/index";
 import SubMenuLinks from "./sumMenuLinks";
 import ContentBlocks from "./contentBlocks";
+import SideDrawer from "./sideDrawer";
 
 export {
   Head,
@@ -47,4 +48,5 @@ export {
   HeaderFooter,
   SubMenuLinks,
   ContentBlocks,
+  SideDrawer
 };
