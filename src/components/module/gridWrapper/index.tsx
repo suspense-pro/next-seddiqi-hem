@@ -12,7 +12,9 @@ const GridWrapper = ({ cols, children }) => {
       className={styles.container}
       style={{
         display: "grid",
-        gridTemplateColumns: `repeat(${cols}, minmax("348px", 1fr))`,
+        gridTemplateColumns: isDesktop
+          ? `repeat(${cols}, minmax(348px, 1fr))`
+          : "repeat(auto-fit, minmax(348px, 1fr))",
       }}
     >
       {children && children}
