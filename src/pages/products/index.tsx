@@ -6,6 +6,7 @@ import { getHierarchyChildren } from "@utils/cms/amplience";
 import GridWrapper from "@components/module/gridWrapper";
 import FilterBar from "@components/module/filterBar";
 import ProductCard from "@components/module/cards/productCard";
+import { GetServerSidePropsContext } from "next";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
