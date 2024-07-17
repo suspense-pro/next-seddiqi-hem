@@ -4,9 +4,6 @@ import styles from "./gridWrapper.module.scss";
 
 const GridWrapper = ({ cols, children }) => {
   const isDesktop = useDeviceWidth()[0];
-
-  console.log("isMobile", isDesktop);
-
   return (
     <div
       className={styles.container}

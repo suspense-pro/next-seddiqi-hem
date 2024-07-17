@@ -7,10 +7,10 @@ import compact from "lodash/compact";
 import { GetServerSidePropsContext } from "next";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 
-import { getCustomer } from "@utils/sfcc-connector/dataService";
-import LoginForm from "@components/LoginForm";
-import RegistrationForm from "@components/RegistrationForm"; 
-import { getHierarchyChildren } from "@utils/cms/amplience"; 
+// import { getCustomer } from "@utils/sfcc-connector/dataService";
+// import LoginForm from "@components/LoginForm";
+// import RegistrationForm from "@components/RegistrationForm"; 
+// import { getHierarchyChildren } from "@utils/cms/amplience"; 
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(

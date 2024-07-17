@@ -27,6 +27,7 @@
     "react-slider": "^2.0.6",
     "sass": "^1.63.4",
     "sass-lint": "^1.13.1",
+    "swiper": "^11.1.5",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
