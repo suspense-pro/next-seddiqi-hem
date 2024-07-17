@@ -10,5 +10,7 @@ export { default as HamburgerIcon } from "./HamburgerIcon";
 export { default as CloseIcon } from "./CloseIcon";
 export { default as ArrowDown } from "./ArrowDown";
 export { default as ArrowRight } from "./ArrowRight";
+export { default as CloseIconV2 } from "./CloseIconV2";
+export { default as ArrowUp } from "./ArrowUp";
 export { default as HeartIcon } from "./HeartIcon";
 export { default as FilterIcon } from "./FilterIcon";

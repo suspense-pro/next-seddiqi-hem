@@ -1,10 +1,16 @@
 import { FormEvent } from "react";
+import React, { useState } from "react";
+import { SideDrawer } from "@components/module";
 import Layout from "@components/layout";
 import ContentBlock from "@components/module/contentBlock";
 import compact from "lodash/compact";
 import { GetServerSidePropsContext } from "next";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
-import { getHierarchyChildren } from "@utils/cms/amplience";
+
+import { getCustomer } from "@utils/sfcc-connector/dataService";
+import LoginForm from "@components/LoginForm";
+import RegistrationForm from "@components/RegistrationForm"; 
+import { getHierarchyChildren } from "@utils/cms/amplience"; 
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
@@ -18,7 +24,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      ...data
+      ...data,
     },
   };
 }
