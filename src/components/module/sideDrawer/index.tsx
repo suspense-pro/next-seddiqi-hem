@@ -10,7 +10,11 @@ interface SideDrawerProps {
   onClose: () => void;
 }
 
-const SideDrawer: React.FC<SideDrawerProps> = ({ children, isOpen, onClose }) => {
+const SideDrawer: React.FC<SideDrawerProps> = ({
+  children,
+  isOpen,
+  onClose,
+}) => {
   return (
     <div className={isOpen ? `${styles.drawer} ${styles.open}` : styles.drawer}>
       <div className={styles.header}>
@@ -19,9 +23,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({ children, isOpen, onClose }) =>
           <CloseIconV2 />
         </span>
       </div>
-      <div className={styles.content}>
-        {children}
-      </div>
+      <div className={styles.content}>{children}</div>
       <div className={styles.footer}>
         <Button title="Clear all" type="transparent" />
         <Button title="Done" type="solid green_dark" />

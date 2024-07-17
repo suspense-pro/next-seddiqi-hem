@@ -1,11 +1,11 @@
 @import "../../../assets/styles/main.scss";
 .container {
-  width: 100%; 
-//   max-width: 374px;
+  width: 100%;
+  //   max-width: 374px;
   margin: auto;
   padding: rem(24) rem(16);
-//   background-color: #fff;
-//   border: 1px solid #e1e1e1;
+  //   background-color: #fff;
+  //   border: 1px solid #e1e1e1;
 }
 
 .heading {
@@ -34,11 +34,12 @@
   }
 }
 
-.rangeSlider div[role="button"] {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background-color: getColorHex("black");
-  border: rem(2) solid white;
-  box-shadow: 0 rem(2) rem(6) rgba(0, 0, 0, 0.3);
+.rangeSlider {
+  .renderThumb {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: getColorHex("black");
+    box-shadow: 0 rem(2) rem(6) rgba(0, 0, 0, 0.3);
+  }
 }

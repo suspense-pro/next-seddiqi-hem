@@ -159,11 +159,8 @@ const PriceRangeFilter = () => {
                 {...props}
                 style={{
                   ...props.style,
-                  height: "15px",
-                  width: "15px",
-                  borderRadius: "50%",
-                  backgroundColor: "black",
                 }}
+                className={styles.renderThumb}
               />
             )}
           />

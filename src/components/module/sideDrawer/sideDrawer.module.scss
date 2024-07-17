@@ -25,16 +25,14 @@
 }
 
 .content {
-  flex: 1;  
-  overflow-y: auto; 
-  overflow-x: hidden; 
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
-
- 
 
 .footer {
   display: flex;
-  justify-content: space-between;  
+  justify-content: space-between;
   padding: rem(16) 0;
   gap: rem(12);
   button {
@@ -50,7 +48,6 @@
   margin-bottom: rem(24);
   @include md {
     margin-bottom: rem(32);
-
   }
 }
 

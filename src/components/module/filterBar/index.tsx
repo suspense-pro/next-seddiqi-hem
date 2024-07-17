@@ -3,7 +3,7 @@ import styles from "./filterBar.module.scss";
 import FilterBtn from "../filterBtn";
 import SideDrawer from "../sideDrawer";
 import PriceRangeFilter from "../priceRangeFilter";
-import Accordion from "../accordion"; 
+import Accordion from "../accordion";
 
 const FILTERS = [
   { icon: true, text: "All Filter & Sort by" },
@@ -49,7 +49,7 @@ const FilterBar = () => {
           showArrow={true}
         >
           <PriceRangeFilter />
-        </Accordion> 
+        </Accordion>
       </SideDrawer>
     </div>
   );
