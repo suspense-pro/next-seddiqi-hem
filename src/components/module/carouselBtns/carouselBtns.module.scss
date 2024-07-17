@@ -1,0 +1,38 @@
+@import './../../../assets/styles/main.scss';
+
+.carousel {
+  display: flex;
+  align-items: center;
+  gap: rem(62);
+}
+
+.btns {
+  display: flex;
+  align-items: flex-end;
+  gap: rem(8);
+
+  .carouselBtn {
+    width: rem(1); 
+    height: rem(8); 
+    border: rem(1) solid getColorHex("green-grey"); 
+    cursor: pointer;
+  }
+
+  .activeCarouselBtn {
+    height: rem(16);
+    border: rem(1) solid getColorHex("green-dark"); 
+  }
+}
+
+.arrowLeft {
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.arrowRight {
+  cursor: pointer;
+}
+
+.image {
+  object-fit: cover;
+}

@@ -1,4 +1,5 @@
 @import "./../../../../assets/styles/main.scss";
+
 .productContainer {
   min-width: rem(348);
   height: rem(596);
@@ -9,9 +10,9 @@
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: rem(40);
-
+  position: relative;
+  transition: background-color 0.3s ease;
   &:hover {
-    cursor: pointer;
     background-color: getColorHex("green-greyish");
 
     .newContainer {
@@ -23,13 +24,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    padding: rem(16);
+    left: 0;
+    top: 0;
   }
 
   .newContainer {
     padding: rem(6 12);
     background-color: getColorHex("green-greyish");
     display: inline-block;
-    padding: rem(6 12);
     gap: rem(10);
     border-radius: rem(4);
     cursor: pointer;
@@ -44,36 +49,33 @@
       text-transform: uppercase;
     }
   }
-}
 
-.productBottom {
-  display: flex;
-  flex-direction: column;
-  gap: rem(12);
-  align-items: center;
+  .productBottom {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+    align-items: center;
 
-  .title {
-    text-transform: uppercase;
+    .title,
+    .price {
+      @include heading_regular; 
+      text-transform: uppercase;
+    }
+
+    .type {
+      font-size: rem(18);
+      line-height: rem(28);
+      letter-spacing: rem(0.4);
+      text-align: center;
+      color: getColorHex("green-metallic");
+      @include body_regular; 
+    }
   }
 
-  .title,
-  .price {
-    @include heading_regular;
+  .imgContainer {
+    position: relative;
+    width: rem(275);
+    height: rem(410);
+    margin: 0 auto;
   }
-
-  .type {
-    font-size: rem(18);
-    line-height: rem(28);
-    letter-spacing: rem(0.4);
-    text-align: center;
-    color: getColorHex("green-metallic");
-    @include body_regular;
-  }
-}
-
-.imgContainer {
-  position: relative;
-  width: rem(176);
-  height: rem(273);
-  margin: 0 auto;
 }
