@@ -1,4 +1,3 @@
-// components/SideDrawer.tsx
 import React, { ReactNode } from "react";
 import styles from "./sideDrawer.module.scss";
 import { CloseIconV2 } from "@assets/images/svg";
