@@ -169,7 +169,7 @@ const PriceRangeFilter = () => {
               <div className={styles.labels}>Min Price</div>
               <span className={styles.price}>AED {prices[0]}</span>
             </div>
-            <div style={{ textAlign: "right" }}>
+            <div className={styles.rightAligned}>
               <div className={styles.labels}>Max Price</div>
               <span className={styles.price}>
                 AED {prices[prices.length - 1]}

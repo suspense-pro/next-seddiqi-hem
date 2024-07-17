@@ -32,6 +32,9 @@
     font-size: rem(12);
     color: getColorHex("grey");
   }
+  .rightAligned {
+    text-align: right;
+  }
 }
 
 .rangeSlider {
