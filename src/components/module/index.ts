@@ -21,6 +21,7 @@ import SubMenu from "./tabContent/subMenu";
 import HeaderFooter from "./headerFooter/index";
 import SubMenuLinks from "./sumMenuLinks";
 import ContentBlocks from "./contentBlocks";
+import SideDrawer from "./sideDrawer";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
@@ -49,6 +50,7 @@ export {
   HeaderFooter,
   SubMenuLinks,
   ContentBlocks,
+  SideDrawer,
   FilterBtn,
   PlpContent
 };
