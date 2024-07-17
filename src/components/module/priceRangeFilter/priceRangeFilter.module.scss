@@ -3,7 +3,7 @@
   width: 100%; 
 //   max-width: 374px;
   margin: auto;
-  padding: 24px 16px;
+  padding: rem(24) rem(16);
 //   background-color: #fff;
 //   border: 1px solid #e1e1e1;
 }
@@ -11,23 +11,26 @@
 .heading {
   @include body_regular;
   color: getColorHex("grey");
-  font-size: 14px;
+  font-size: rem(14);
 }
 
 .labelContainer {
   display: flex;
   justify-content: space-between;
-  margin-top: 12px;
-  font-size: 14px;
+  margin-top: rem(12);
+  font-size: rem(14);
   color: #333;
   .labels {
     @include body_light;
-    font-size: 10px;
-    margin-bottom: 10px;
+    font-size: rem(10);
+    margin-bottom: rem(10);
+    text-transform: uppercase;
+    color: getColorHex("grey-mid");
   }
   .price {
     @include body_regular;
-    font-size: 12px;
+    font-size: rem(12);
+    color: getColorHex("grey");
   }
 }
 
@@ -35,7 +38,7 @@
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background-color: black;
-  border: 2px solid white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: getColorHex("black");
+  border: rem(2) solid white;
+  box-shadow: 0 rem(2) rem(6) rgba(0, 0, 0, 0.3);
 }

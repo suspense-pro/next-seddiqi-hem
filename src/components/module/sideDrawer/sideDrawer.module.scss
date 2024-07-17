@@ -1,23 +1,22 @@
-
-@import "./../../../assets/styles/main.scss";
+@import "../../../assets/styles/main.scss";
 
 .drawer {
   position: fixed;
-  left: -600px;
+  left: rem(-600);
   top: 0;
   width: 100%;
   height: 100%;
-  background: white;
-  box-shadow: 1px 0 18px rgba(0, 0, 0, 0.09);
+  background: getColorHex("white");
+  box-shadow: rem(1) 0 rem(18) rgba(0, 0, 0, 0.09);
   transition: left 0.3s ease-in-out;
-  z-index: 1000;
+  z-index: 10000;
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  
+  padding: rem(16);
+
   @include md {
-    padding: 28px;
-    width: 600px;
+    padding: rem(28);
+    width: rem(600);
   }
 }
 
@@ -25,7 +24,52 @@
   left: 0;
 }
 
+.content {
+  flex: 1;  
+  overflow-y: auto; 
+  overflow-x: hidden; 
+}
+
+ 
+
+.footer {
+  display: flex;
+  justify-content: space-between;  
+  padding: rem(16) 0;
+  gap: rem(12);
+  button {
+    width: 100%;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: rem(24);
+  @include md {
+    margin-bottom: rem(32);
+
+  }
+}
+
+.sortFilterText {
+  @include heading_regular;
+  font-size: rem(16);
+  @include md {
+    font-size: rem(20);
+  }
+}
+
 .closeButton {
   cursor: pointer;
-  align-self: flex-end;
+  svg {
+    width: rem(36);
+    height: rem(36);
+  }
+  @include md {
+    width: rem(40);
+    height: rem(40);
+  }
 }
