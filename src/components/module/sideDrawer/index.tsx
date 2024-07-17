@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import styles from "./sideDrawer.module.scss";
 import { CloseIconV2 } from "@assets/images/svg";
 import Button from "../button";
+import Typography from "../typography";
 
 interface SideDrawerProps {
   children: ReactNode;
@@ -17,7 +18,9 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   return (
     <div className={isOpen ? `${styles.drawer} ${styles.open}` : styles.drawer}>
       <div className={styles.header}>
-        <span className={styles.sortFilterText}>SORT & FILTER</span>
+        <Typography align="left" variant="h5" className={styles.sortFilterText}>
+          SORT & FILTER
+        </Typography>
         <span onClick={onClose} className={styles.closeButton}>
           <CloseIconV2 />
         </span>

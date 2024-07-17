@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import { Range } from "react-range";
 import styles from "./priceRangeFilter.module.scss";
+import Typography from "../typography";
 
 ChartJS.register(
   CategoryScale,
@@ -166,14 +167,20 @@ const PriceRangeFilter = () => {
           />
           <div className={styles.labelContainer}>
             <div>
-              <div className={styles.labels}>Min Price</div>
-              <span className={styles.price}>AED {prices[0]}</span>
+              <Typography align="left" variant="p" className={styles.labels}>
+                Min Price
+              </Typography>
+              <Typography align="left" variant="p" className={styles.price}>
+                AED {prices[0]}
+              </Typography>
             </div>
             <div className={styles.rightAligned}>
-              <div className={styles.labels}>Max Price</div>
-              <span className={styles.price}>
+              <Typography align="left" variant="p" className={styles.labels}>
+                Max Price
+              </Typography>
+              <Typography align="left" variant="p" className={styles.price}>
                 AED {prices[prices.length - 1]}
-              </span>
+              </Typography>
             </div>
           </div>
         </div>

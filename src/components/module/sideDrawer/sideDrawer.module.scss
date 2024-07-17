@@ -12,10 +12,10 @@
   z-index: 10000;
   display: flex;
   flex-direction: column;
-  padding: rem(16);
+  padding: rem(40 16 16);
 
   @include md {
-    padding: rem(28);
+    padding: rem(60 28 28);
     width: rem(600);
   }
 }
@@ -49,15 +49,15 @@
   @include md {
     margin-bottom: rem(32);
   }
-}
-
-.sortFilterText {
-  @include heading_regular;
-  font-size: rem(16);
-  @include md {
-    font-size: rem(20);
+  h5 { 
+    font-size: rem(16);
+    margin: 0;
+    @include md {
+      font-size: rem(20);
+    }
   }
 }
+
 
 .closeButton {
   cursor: pointer;
