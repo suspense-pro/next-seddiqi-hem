@@ -64,9 +64,9 @@
   svg {
     width: rem(36);
     height: rem(36);
-  }
-  @include md {
-    width: rem(40);
-    height: rem(40);
+    @include md {
+      width: rem(40);
+      height: rem(40);
+    }
   }
 }
