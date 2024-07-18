@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styles from "./megaMenu.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
-import { HeaderFooter, SubMenuLinks, ContentBlocks } from "@components/module";
+import { HeaderFooter, SubMenuLinks, NavCardBlocks } from "@components/module";
 
 const MegaMenu = ({ headerHeightClass }) => {
   const headerContext = useContext(HeaderContext);
@@ -21,7 +21,7 @@ const MegaMenu = ({ headerHeightClass }) => {
     <section className={`${headerHeightClass} ${styles.megaMenuContainer}`}>
       <div className={styles.columns}>
         <SubMenuLinks />
-        <ContentBlocks />
+        <NavCardBlocks />
       </div>
       <HeaderFooter className={styles.headerFooter} />
     </section>

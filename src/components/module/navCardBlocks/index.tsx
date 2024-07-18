@@ -1,13 +1,10 @@
 import { HeaderContext } from "@contexts/headerContext";
 import { useContext } from "react";
-import styles from "./contentBlocks.module.scss";
-import StoryCard from "../cards/storyCard";
-import DisplayCard from "../cards/displayCard";
-import ArticleCard from "../cards/articleCard";
+import styles from "./navCardBlocks.module.scss";
 import CardSection from "../cardSection";
 import { ComponentMapping } from "@utils/cms/config";
 
-const ContentBlocks = () => {
+const NavCardBlocks = () => {
   const headerContext = useContext(HeaderContext);
   const { current, headerData } = headerContext;
 
@@ -41,4 +38,4 @@ const ContentBlocks = () => {
   );
 };
 
-export default ContentBlocks;
+export default NavCardBlocks;
