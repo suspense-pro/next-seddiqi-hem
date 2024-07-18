@@ -17,6 +17,7 @@ const contentUrl = schemaUrl + '/content';
 const slotsUrl = schemaUrl + '/slots';
 const pageUrl = schemaUrl + '/page';
 const moduleUrl = schemaUrl + '/module';
+const componentUrl = schemaUrl + '/component';
 
 
 export const ComponentMapping: any = {
@@ -30,6 +31,7 @@ export const ComponentMapping: any = {
   [`${moduleUrl}/article-card`]: ArticleCard,
   [`${moduleUrl}/display-card`]: DisplayCard,
   [`${moduleUrl}/story-card`]: StoryCard,
+  // [`${componentUrl}/two-column-image-copy`]: TwoColumnComponent,
 };
 
 
