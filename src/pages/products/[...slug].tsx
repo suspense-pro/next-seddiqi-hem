@@ -6,26 +6,22 @@ import { GetServerSidePropsContext } from "next";
 import { PlpContent } from "@components/module";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { slug = [] } = context.params || {};
+  const plpKey = Array.isArray(slug) ? slug.join('/') : slug;
+  const { vse } = context.query || {};
+  
   const data = await fetchStandardPageData(
     {
       content: {
-        page: { key: "homepage" },
+        page: { key: `products/${plpKey}` },
       },
     },
     context
-  );
-  const header = (data?.hierarchies as any)?.pages?.find(
-    (data: any) => data?.root?.key === "headerNavigation"
-  );
-  const cardsData = await getHierarchyChildren(
-    header?.content?._meta?.deliveryId
   );
 
   return {
     props: {
       ...data,
-      cardsData,
-      header,
     },
   };
 }
