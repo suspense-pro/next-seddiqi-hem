@@ -2,6 +2,7 @@ import FilterBar from "../filterBar";
 import styles from "./productsContnet.module.scss";
 import GridWrapper from "../gridWrapper";
 import ProductCard from "../cards/productCard";
+import TwoColumnImageCopy from "@components/rendering/twoColumnImageCopy";
 
 // TEMP
 const PRODUCT_INFO_TEXT = "Showing 20 out of 210 products";
@@ -20,6 +21,7 @@ const PlpContent = ({ products }) => {
             <ProductCard key={item?.tempId} item={item} />
           ))}
         </GridWrapper>
+        <TwoColumnImageCopy />
         <div className={styles.bottom}>
           <div className={styles.productInfo}>{PRODUCT_INFO_TEXT}</div>
           <div className={`${styles.loadMore} button`}>{LOAD_MORE_TEXT}</div>
