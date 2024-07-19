@@ -18,14 +18,20 @@ const slides = [
 ];
 
 const ProductCard = ({ item }) => {
+  if(!item) return null
   const { tempId } = item;
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-
+  const gridRowSpan = item?.rows?.pop() || 1;
+  const gridColSpan = item?.cols?.pop() || 1;
   return (
     <div
-      style={{ order: tempId }}
+      style={{
+        order: tempId,
+        gridRowEnd: `span ${gridRowSpan}`,
+        gridColumnEnd: `span ${gridColSpan}`,
+      }}
       className={styles.productContainer}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

@@ -1,7 +1,6 @@
 import Layout from "@components/layout";
 import React from "react";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
-import { getHierarchyChildren } from "@utils/cms/amplience";
 import { GetServerSidePropsContext } from "next";
 import { PlpContent } from "@components/module";
 
@@ -27,7 +26,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 const Products = (props) => {
-  const products = props?.hierarchies?.pages[2]?.content?.productGridContent;
+  const products = props?.content?.page?.productGridContent;
   return <PlpContent products={products} />;
 };
 
