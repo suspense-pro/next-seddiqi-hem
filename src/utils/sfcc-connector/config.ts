@@ -2,6 +2,7 @@ import { Customer, slasHelpers } from "commerce-sdk";
 import { TokenResponse } from "commerce-sdk/dist/helpers/slasClient";
 
 export const clientConfig = {
+  headers: {},
   parameters: {
     clientId: process.env.SFDC_CLIENT_ID,
     clientSecret: process.env.SFDC_SECRET,
