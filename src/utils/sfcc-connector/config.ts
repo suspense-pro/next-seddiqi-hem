@@ -11,6 +11,17 @@ export const clientConfig = {
   },
 };
 
+export const AccountMgrConfig = {
+  parameters: {
+    clientId: process.env.ACCOUNT_MGR_CLIENT_ID,
+    password: process.env.ACCOUNT_MGR_PASSWORD,
+    realmId: process.env.SFCC_REALM_ID,
+    instanceId: process.env.SFCC_INSTANCE_ID,
+    scopes: process.env.SFCC_OAUTH_SCOPES,
+    api: process.env.SFCC_OAUTH_API_URL,
+  },
+};
+
 export default async function initializeShopperConfig() {
   // const credentials = `${clientConfig.parameters.clientId}:${clientConfig.parameters.secret}`;
   // const base64data = Buffer.from(credentials).toString("base64");
@@ -45,4 +56,37 @@ export async function basicAuthorization() {
   const base64data = Buffer.from(credentials).toString("base64");
 
   return base64data;
+}
+
+/** Get OAuth token from account manager */
+
+export async function OAuthTokenFromAM() {
+  const credentials = `${AccountMgrConfig.parameters.clientId}:${AccountMgrConfig.parameters.password}`;
+  const base64data = Buffer.from(credentials).toString("base64");
+  const OAuthBaseUrl = `${AccountMgrConfig.parameters.api}`;
+
+  const headers = {
+    'Authorization': `Basic ${base64data}`,
+    'Content-Type' : 'application/x-www-form-urlencoded',
+  }
+  const body = new URLSearchParams({
+    grant_type: "client_credentials",
+    scope: `SALESFORCE_COMMERCE_API:${AccountMgrConfig.parameters.realmId}_${AccountMgrConfig.parameters.instanceId} ${AccountMgrConfig.parameters.scopes}`
+  });
+
+  const accountMgrAccessToken : any = await fetch(OAuthBaseUrl, {
+    method: 'POST',
+    headers,
+    body: body.toString()
+  })
+  .then((accountMgrAccessToken) => {
+    console.log("Account Manager Access token: ", accountMgrAccessToken);
+    return accountMgrAccessToken;
+  })
+  .catch(error => console.log("Error fetching access token for account manager: ", error));
+  const data = await accountMgrAccessToken.json();
+  
+  var access_token : string = data.access_token;
+
+  return access_token;
 }
