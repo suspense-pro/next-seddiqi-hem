@@ -11,7 +11,7 @@ const LOAD_MORE_TEXT = "Load More";
 
 const PlpContent = ({ products }) => {
   if (!products || products.length === 0) return null;
-  const cols = products[0]?.cols?.length || "auto-fit";
+  const cols = products[0]?.position?.length || "auto-fit";
 
   return (
     <div>
@@ -23,7 +23,6 @@ const PlpContent = ({ products }) => {
             return Component ? <Component key={generateUniqueId()} item={item} />: <ProductCard key={generateUniqueId()} item={item} />
           })}
         </GridWrapper>
-        {/* <TwoColumnImageCopy item={item} /> */}
         <div className={styles.bottom}>
           <div className={styles.productInfo}>{PRODUCT_INFO_TEXT}</div>
           <div className={`${styles.loadMore} button`}>{LOAD_MORE_TEXT}</div>

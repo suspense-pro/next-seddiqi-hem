@@ -25,6 +25,12 @@
   .storyImg {
     border-radius: rem(16 0 16 0);
     object-fit: cover;
+    width: 100%;
+    height: rem(301);
+
+    @include breakpoint-max-width(rem(768)) {
+      height: rem(224);
+    }
   }
 
   .displayCardInfo {

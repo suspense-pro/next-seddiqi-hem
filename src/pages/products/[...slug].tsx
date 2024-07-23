@@ -27,6 +27,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 const Products = (props) => {
   const products = props?.content?.page?.productGridContent;
+  if(!products) return null
   return <PlpContent products={products} />;
 };
 

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Image from "next/image";
+import Image from "@components/module/image";
 import { AccountIcon, MapIcon, SearchIcon } from "@assets/images/svg";
 import styles from "./MobileHeaderNavbar.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
@@ -14,10 +14,7 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({
   if (!headerData) return null;
 
   const MAIN_LOGO = headerData?.content?.mainLogo?.image;
-
-  const MOBBILE_SEDDIQI_LOGO =
-    `https://${MAIN_LOGO?.image.defaultHost}/i/${MAIN_LOGO?.image.endpoint}/${MAIN_LOGO?.image.name}` ||
-    "/images/png/SeddiqiLogo.png";
+  if(!MAIN_LOGO) return null
 
   return (
     <header className={styles.mobileHeader}>
@@ -30,14 +27,11 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({
           />
           <AccountIcon fill="#" />
         </div>
-        <div className={styles.centerLogo}>
           <Image
-            height={16}
-            width={82}
-            src={MOBBILE_SEDDIQI_LOGO}
-            alt="Seddiqi Logo"
+            className={styles.centerLogo}
+            image={MAIN_LOGO?.image}
+            imageAltText={"Seddiqi Logo"}
           />
-        </div>
         <div className={styles.rightIcons}>
           <SearchIcon fill="#" />
           <MapIcon fill="#" />

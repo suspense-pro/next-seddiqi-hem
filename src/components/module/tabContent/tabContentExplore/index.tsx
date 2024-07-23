@@ -52,7 +52,7 @@ const TabContentExplore = () => {
                     Component={CardComponent}
                     cards={card._meta.schema.includes("article") ? card : Object.values(card)[1]}
                     containerStyle={styles.column1}
-                    cardStyle={null}
+                    cardStyle={styles.cardStyle}
                     titleStyle={styles.displayCardsTitle}
                   />
 

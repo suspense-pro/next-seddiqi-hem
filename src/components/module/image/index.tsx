@@ -10,7 +10,7 @@ type ImageProps = {
     di?: string;
 } & CmsContent;
 
-const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel }: ImageProps) => {
+const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel, className }: ImageProps) => {
     if (!image) {
         return null;
     }
@@ -99,7 +99,7 @@ const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel 
                 <img
                     loading="lazy"
                     src={`//${image.endpoint}.a.bigcontent.io/v1/static/${image.name}`}
-                    className="amp-dc-image-pic"
+                    className={`${className} amp-dc-image-pic`}
                     alt={imageAltText}
                     title={seoText}
                 />
@@ -115,7 +115,7 @@ const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel 
                 <img
                     loading="lazy"
                     src={buildSrcUrl({})}
-                    className="amp-dc-image-pic"
+                    className={`${className} amp-dc-image-pic`}
                     alt={imageAltText}
                     title={seoText}
                 />

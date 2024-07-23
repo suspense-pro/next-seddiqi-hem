@@ -6,13 +6,11 @@ import { HeaderFooter, SubMenuLinks, NavCardBlocks } from "@components/module";
 const MegaMenu = ({ headerHeightClass }) => {
   const headerContext = useContext(HeaderContext);
   const { current, headerData } = headerContext;
+  if (current === null) return null;
   const currentHeaderData = headerData?.children[current];
-
-  console.log({currentHeaderData});
-  
-
   if (
-    current === null
+    Array.isArray(currentHeaderData?.children) &&
+    currentHeaderData?.children?.length === 0
   ) {
     return null;
   }

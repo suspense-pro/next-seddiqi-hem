@@ -3,6 +3,7 @@ import { useContext } from "react";
 import styles from "./navCardBlocks.module.scss";
 import CardSection from "../cardSection";
 import { ComponentMapping } from "@utils/cms/config";
+import { generateUniqueId } from "@utils/helpers/uniqueId";
 
 const NavCardBlocks = () => {
   const headerContext = useContext(HeaderContext);
@@ -12,7 +13,7 @@ const NavCardBlocks = () => {
     return null;
   }
 
-  const contentBlock = headerData.children[current]?.content?.contentBlock;
+  const contentBlock = headerData?.children[current]?.content?.contentBlock;
 
   if (!contentBlock) return null;
 
@@ -25,6 +26,7 @@ const NavCardBlocks = () => {
           const cardStyle = card._meta.schema.includes("story") ? styles.storyCardContainer : styles.displayCards;
 
          return <CardSection
+            key={generateUniqueId()}
             title={title}
             Component={CardComponent}
             cards={card._meta.schema.includes("article") ? card : Object.values(card)[1]}

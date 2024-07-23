@@ -15,7 +15,7 @@ const Layout = ({ children, pageProps }: LayoutProps) => {
     (data) => data?.root?.key === "headerNavigation"
   );
   const footerData = pageProps.hierarchies?.pages?.find(
-    (data) => data.root.key === "footerNavigation"
+    (data) => data?.root?.key === "footerNavigation"
   );
 
   return (
