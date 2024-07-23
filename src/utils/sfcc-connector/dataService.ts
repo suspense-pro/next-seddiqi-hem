@@ -148,6 +148,56 @@ export const getCustomer = async (): Promise<any> => {
   }
 };
 
+export async function getProductListing({
+  categoryId,
+  method,
+}: {
+  categoryId: any;
+  method: string;
+}) {
+  try {
+    const json = {
+      api: "product",
+      action: "getProducts"
+    };
+    const config = {
+      method: method,
+      body: categoryId,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function getSearchResults({
+  query,
+  method,
+}: {
+  query: string;
+  method: string;
+}) {
+  try {
+    const json = {
+      api: "search",
+      action: "getProducts",
+      search: query
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "search");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 /** This is the fetch call to the pages > api */
 const serverApiCallSfcc = async (query: string, config: any, type: string) =>
   await (await fetch(`/api/sfcc/${type}${query}`, config)).json();
