@@ -146,14 +146,18 @@ $border-width: rem(1);
 
   &.plain {
     border: none;
-    text-decoration-line: underline;
     padding: 0;
     min-width: auto;
     background-color: transparent;
     border: none;
+
+    color: getColorHex("green-dark");
+    border-color: getColorHex("green-dark");
+
     span {
+      text-transform: capitalize;
       text-decoration-line: underline;
-      text-underline-offset: rem(2.3);
+      text-underline-offset: rem(4);
       text-decoration: underline;
     }
 

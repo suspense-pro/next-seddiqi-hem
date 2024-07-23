@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "@components/module/image";
-import { NavigationLink, Typography } from "@components/module";
+import { Button, NavigationLink, Typography } from "@components/module";
 import styles from "./twoColumnImageCopy.module.scss";
 import RichText from "@components/module/richText";
 
@@ -28,7 +28,7 @@ const TwoColumnImageCopy = ({ item }) => {
   const rightImage = contentRight.image.image;
 
   const cta = contentRight.cta;
-  
+
   return (
     <div
       style={{
@@ -60,7 +60,7 @@ const TwoColumnImageCopy = ({ item }) => {
           <div className={styles.headingSecondary}>
             <RichText align={"center"} text={contentRight?.description} />
           </div>
-          <NavigationLink title={cta?.label} className={styles.discoverBtn} />
+          <Button title={cta?.label} type="plain" />
         </div>
       </div>
     </div>
