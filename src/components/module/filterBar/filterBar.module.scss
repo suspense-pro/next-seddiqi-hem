@@ -27,17 +27,23 @@
     display: flex;
     flex-wrap: wrap;
     margin-bottom: rem(32);
-    gap: rem(8);
+    gap: rem(16);
+    @include md {
+      gap: rem(20); 
+    }
     .selectedOption {
       background-color: getColorHex("green-greyish");
       padding: rem(6 12);
       border-radius: rem(4);
       display: flex;
       align-items: center;
-      gap: rem(4);
+      gap: rem(10);
       .option {
         @include body_light;
-        font-size: rem(14);
+        font-size: rem(10);
+        @include md {
+          font-size: rem(14);
+        }
       }
     }
 
