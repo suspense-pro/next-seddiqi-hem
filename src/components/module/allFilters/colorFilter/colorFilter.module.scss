@@ -45,10 +45,7 @@
 .colorEllipse {
   position: absolute;
   width: rem(36);  
-  height: rem(36);
-  fill: none;
-  stroke: black;
-  stroke-width: 2;
+  height: rem(36); 
 }
 
 .colorLabel:hover .customColor {
