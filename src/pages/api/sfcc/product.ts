@@ -53,17 +53,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             const productResults = await productsClient.searchProducts(options);
             const result : any = {};
             if (productResults.total > 0) {
-                console.log("Product(s): " + JSON.stringify(productResults, null, 4));
+                // console.log("Product(s): " + JSON.stringify(productResults, null, 4));
                 result.productResults = productResults;
 
                 // Price range graph - JSON
                 const priceRangeJson = getProductPriceGraph(productResults);
-                console.log("Price Range Data: " + priceRangeJson);
+                // console.log("Price Range Data: " + priceRangeJson);
                 result.priceRangeJson = priceRangeJson;
 
-                return result;
+                return res.status(200).json({ isError: false, response: result });
             } else {
                 console.log("No product found.");
+                return res.status(400).json({ isError: true, response: "No product found." });
             }
         }
       } catch (err) {
