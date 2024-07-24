@@ -16,7 +16,7 @@ async function fetchStandardPageData<
       ...input,
       content: {
         ...input.content,
-        configComponents: { key: "config/components" }, //will change when structure of components in Amplience is final
+        // configComponents: { key: "config/components" }, //will change when structure of components in Amplience is final
       },
       hierarchies: {
         ...input.hierarchies,
@@ -30,12 +30,7 @@ async function fetchStandardPageData<
             tree: {
               key: "footerNavigation", //change to new delivery key from SANDBOX
             },
-          },
-          {
-            tree: {
-              key: "productsGrid", //change to new delivery key from SANDBOX
-            },
-          },
+          }
         ],
       },
     },
