@@ -11,7 +11,8 @@ import {
 } from "chart.js";
 import { Range } from "react-range";
 import styles from "./priceRangeFilter.module.scss";
-import Typography from "../typography";
+import Typography from "../../typography";
+import { PriceRangeFilterProps } from "@utils/models";
 
 ChartJS.register(
   CategoryScale,
@@ -58,7 +59,7 @@ const dataFromServer = {
   },
 };
 
-const PriceRangeFilter = () => {
+const PriceRangeFilter: React.FC<PriceRangeFilterProps> = () => {
   const prices = Object.keys(dataFromServer.values)
     .map((key) => parseInt(key))
     .sort((a, b) => a - b);

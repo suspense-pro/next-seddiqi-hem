@@ -22,5 +22,32 @@
     text-align: left;
     min-width: rem(85);
   }
-}
 
+  .selectedOptions {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: rem(32);
+    gap: rem(8);
+    .selectedOption {
+      background-color: getColorHex("green-greyish");
+      padding: rem(6 12);
+      border-radius: rem(4);
+      display: flex;
+      align-items: center;
+      gap: rem(4);
+      .option {
+        @include body_light;
+        font-size: rem(14);
+      }
+    }
+
+    .deleteOption {
+      cursor: pointer;
+      svg {
+        width: rem(10);
+        height: rem(10);
+        color: getHexColor("green-dark");
+      }
+    }
+  }
+}

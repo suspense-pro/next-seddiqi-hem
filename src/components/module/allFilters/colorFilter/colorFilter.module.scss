@@ -1,0 +1,67 @@
+@import "../../../../assets/styles/main.scss";
+
+
+.container {
+  // padding: 16px 0;
+}
+
+.colorGroup {
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+}
+
+.colorLabel {
+  display: flex;
+  align-items: center;
+  // margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.colorInput {
+  display: none;
+}
+
+.colorContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(36);  
+  // height: 36px;
+
+  svg{
+    position:absolute;
+    width: rem(30);
+    height: rem(30);
+  }
+}
+
+.customColor {
+  width: rem(16);  
+  height: rem(16);
+  border-radius: 50%;
+  background-color: currentColor;  
+}
+
+.title{
+  font-size: rem(14);
+  color: getColorHex("grey");
+}
+
+.colorEllipse {
+  position: absolute;
+  width: rem(36);  
+  height: rem(36);
+  fill: none;
+  stroke: black;
+  stroke-width: 2;
+}
+
+.colorLabel:hover .customColor {
+  opacity: 0.8;
+}
+
+.colorLabel > .colorEllipse + p {
+  margin: 0;
+}
