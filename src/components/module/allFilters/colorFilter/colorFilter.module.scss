@@ -1,10 +1,5 @@
 @import "../../../../assets/styles/main.scss";
 
-
-.container {
-  // padding: 16px 0;
-}
-
 .colorGroup {
   display: flex;
   flex-direction: column;
@@ -13,8 +8,7 @@
 
 .colorLabel {
   display: flex;
-  align-items: center;
-  // margin-bottom: 12px;
+  align-items: center; 
   cursor: pointer;
 }
 
@@ -27,8 +21,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: rem(36);  
-  // height: 36px;
+  width: rem(36);   
 
   svg{
     position:absolute;
