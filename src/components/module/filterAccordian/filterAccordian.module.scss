@@ -6,8 +6,8 @@
 
 .accordionItem {
   margin-bottom: rem(24);
-  border-bottom: rem(1) solid #ddd;
-
+  border-bottom: rem(1) solid getColorHex("grey-light");
+ 
   @include md {
     margin-bottom: rem(32);
   }
