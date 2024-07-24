@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import logger from "@utils/logger";
+import isServer from "@utils/helpers/isServer";
 
 export async function registerCustomer({
   userData,
@@ -162,11 +163,20 @@ export async function getProductListing({
     };
     const config = {
       method: method,
-      body: categoryId,
+      body: JSON.stringify(categoryId),
     };
     const queryString = new URLSearchParams(json).toString();
+    
     const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
-    return res;
+
+    console.log({res});
+
+    if(!res) {
+      return null;
+    }
+     
+    return res.response;
+    
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -190,7 +200,7 @@ export async function getSearchResults({
       method: method,
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = await serverApiCallSfcc(`?${queryString}`, config, "search");
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "search"));
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
@@ -198,9 +208,23 @@ export async function getSearchResults({
   }
 }
 
+let apiConfig: any;
+
+const cacheApiConfig = () => {
+  if (!isServer()) {
+      return "";
+  }
+
+  if (!apiConfig) {
+      apiConfig = process.env.NEXT_PUBLIC_HOSTED_URL ?? "http://localhost:3000";
+  }
+
+  return apiConfig;
+};
+
 /** This is the fetch call to the pages > api */
 const serverApiCallSfcc = async (query: string, config: any, type: string) =>
-  await (await fetch(`/api/sfcc/${type}${query}`, config)).json();
+  await (await fetch(`${cacheApiConfig()}/api/sfcc/${type}${query}`, config)).json();
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
 // eslint-disable-next-line no-unused-vars
