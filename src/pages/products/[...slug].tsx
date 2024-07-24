@@ -4,6 +4,7 @@ import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { getHierarchyChildren } from "@utils/cms/amplience";
 import { GetServerSidePropsContext } from "next";
 import { PlpContent } from "@components/module";
+import { getProductListing } from "@utils/sfcc-connector/dataService";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
@@ -18,6 +19,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
     context
   );
+
+  const prods = await getProductListing({categoryId: "mens-clothing-suits", method: "POST"});
+  console.log({prods});
+  
 
   return {
     props: {
