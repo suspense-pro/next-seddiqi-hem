@@ -7,7 +7,7 @@
 .accordionItem {
   margin-bottom: rem(24);
   border-bottom: rem(1) solid getColorHex("grey-light");
- 
+
   @include md {
     margin-bottom: rem(32);
   }
@@ -39,6 +39,9 @@
     font-size: rem(14);
     cursor: pointer;
     color: getColorHex("grey");
+    [dir="rtl"] & {
+      margin-left: rem(16);
+    }
   }
 
   .accordionContent {

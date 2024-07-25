@@ -32,6 +32,9 @@
   width: rem(20);
   height: rem(20);
   margin-right: rem(8);
+  [dir="rtl"] & {
+    margin-left: rem(8);
+  }
 }
 
 .radioEllipse {
