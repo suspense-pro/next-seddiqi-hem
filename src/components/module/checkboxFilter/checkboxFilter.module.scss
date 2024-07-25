@@ -7,12 +7,18 @@
   border-bottom: rem(1) solid getColorHex("grey-light-5");
   padding: rem(13 0);
   @include md {
-    margin-bottom: rem(32); 
+    margin-bottom: rem(32);
   }
   .searchIcon {
     margin-right: rem(12);
+    [dir="rtl"] & {
+      margin-left: rem(12);
+    }
     @include md {
-      margin-right: rem(20); 
+      margin-right: rem(20);
+      [dir="rtl"] & {
+        margin-left: rem(20);
+      }
     }
   }
 
@@ -53,6 +59,9 @@
   width: rem(20);
   height: rem(20);
   margin-right: rem(8);
+  [dir="rtl"] & {
+    margin-left: rem(8);
+  }
   .checkboxTickbox {
     position: absolute;
     width: 100%;
@@ -65,6 +74,9 @@
     height: 100%;
     left: 26%;
     top: 7%;
+    [dir="rtl"] & {
+      right: 26%;
+    }
   }
 }
 
