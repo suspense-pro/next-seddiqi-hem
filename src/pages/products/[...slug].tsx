@@ -19,21 +19,21 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  const prods = await getProductListing({categoryId: "mens-clothing-suits", method: "POST"});
-  console.log({prods});
-  
+  const products = await getProductListing({categoryId: "mens-clothing-suits", method: "POST"});  
 
   return {
     props: {
       ...data,
+      products
     },
   };
 }
 
 const Products = (props) => {
-  const products = props?.content?.page?.productGridContent;
-  if(!products) return null
-  return <PlpContent products={products} />;
+  const twoColumnImageCopy = props?.content?.page?.productGridContent;
+  const products = props?.products?.productResults?.hits
+  if(!products || !twoColumnImageCopy) return null
+  return <PlpContent products={products} twoColumnImageCopy={twoColumnImageCopy} />;
 };
 
 export default Products;

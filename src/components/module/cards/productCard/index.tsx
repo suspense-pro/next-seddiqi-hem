@@ -4,6 +4,7 @@ import HeartIcon from "@assets/images/svg/HeartIcon";
 import styles from "./productCard.module.scss";
 import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
+import Image from "next/image";
 
 // TEMP
 const TITLE = "Hublot";
@@ -18,19 +19,20 @@ const slides = [
 ];
 
 const ProductCard = ({ item }) => {
-  if(!item) return null
-  const { tempId } = item;
+  if (!item) return null;
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const gridRowSpan = item?.rows?.pop() || 1;
-  const gridColSpan = item?.cols?.pop() || 1;
+
+  // ITEM ATTRIBS
+  const { name, image, shortDescription, pricePerUnit, priceCurrency } = item;
+
   return (
     <div
       style={{
-        order: tempId,
-        gridRowEnd: `span ${gridRowSpan}`,
-        gridColumnEnd: `span ${gridColSpan}`,
+        order: item?.tempId,
+        gridRowEnd: `span 1`,
+        gridColumnEnd: `span 1`,
       }}
       className={styles.productContainer}
       onMouseEnter={() => setIsHovered(true)}
@@ -43,21 +45,27 @@ const ProductCard = ({ item }) => {
         <HeartIcon fill="#" />
       </div>
       <div className={styles.imgContainer}>
-        <Carousel
+        {/* <Carousel
           slides={slides}
           setSwiper={setSwiper}
           setActiveIndex={setActiveIndex}
+        /> */}
+        <Image
+          layout="fill"
+          objectFit="cover"
+          alt={`Slide`}
+          src={image?.absUrl}
         />
       </div>
       <div className={styles.productBottom}>
-        <Typography align="left" variant="p" className={styles.title}>
-          {TITLE}
+        <Typography align="center" variant="p" className={styles.title}>
+          {name?.default}
         </Typography>
-        <Typography align="left" variant="p" className={styles.type}>
+        <Typography align="center" variant="p" className={styles.type}>
           {WATCH_TYPE}
         </Typography>
-        <Typography align="left" variant="p" className={styles.price}>
-          {PRICE}
+        <Typography align="center" variant="p" className={styles.price}>
+          {priceCurrency} {pricePerUnit}
         </Typography>
         {isHovered && (
           <CarouselBtns

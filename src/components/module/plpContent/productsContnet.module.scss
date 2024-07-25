@@ -10,7 +10,7 @@
   // grid-template-columns: repeat(auto-fit, minmax(rem(348), 1fr));
   border: rem(1) solid getColorHex("grey-light-4", 0.4);
 
-  @include breakpoint-max-width(rem(768)) {
+  @include md-max {
     grid-template-columns: repeat(auto-fit, minmax(rem(348), 1fr)) !important;
   }
 }

@@ -2,4 +2,10 @@
 
 .container {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(rem(348), 1fr));
+  
+  @include lg {
+    grid-template-columns: repeat(4, minmax(rem(348), 1fr));
+  }
+ 
 }

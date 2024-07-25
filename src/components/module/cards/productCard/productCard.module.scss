@@ -29,6 +29,7 @@
     padding: rem(16);
     left: 0;
     top: 0;
+    z-index: 100;
   }
 
   .newContainer {
@@ -77,5 +78,6 @@
     width: rem(275);
     height: rem(410);
     margin: 0 auto;
+    z-index: 10;
   }
 }

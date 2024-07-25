@@ -7,7 +7,7 @@
   gap: rem(24);
   cursor: pointer;
 
-  @include breakpoint-max-width(rem(768)) {
+  @include md-max {
     width: 100%;
     height: 100%;
   }
@@ -17,7 +17,7 @@
     width: 100%;
     height: rem(301);
 
-    @include breakpoint-max-width(rem(768)) {
+    @include md-max {
       height: rem(224);
     }
   }
@@ -28,7 +28,7 @@
     width: 100%;
     height: rem(301);
 
-    @include breakpoint-max-width(rem(768)) {
+    @include md-max {
       height: rem(224);
     }
   }

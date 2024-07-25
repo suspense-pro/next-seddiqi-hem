@@ -18,7 +18,7 @@
   position: relative;
   overflow: hidden;
 
-  @include breakpoint-max-width(rem(768)) {
+  @include md-max {
     width: 100%;
     height: rem(224);
   }

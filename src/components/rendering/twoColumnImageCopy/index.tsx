@@ -9,16 +9,17 @@ const ImageComponent = ({ image, alt }) => (
     className={styles.image}
     image={image}
     imageAltText={alt}
-    query={"h=700"}
+    // query={"h=700"}
   />
 );
 
 const TwoColumnImageCopy = ({ item }) => {
   if (!item) return null;
 
-  const { tempId, rows = [], cols = [], component = {} } = item;
+  const { rows = [], cols = [], component = {}, position = [] } = item;
   const gridRowSpan = rows.pop();
   const gridColSpan = cols.pop();
+  const orderId = position?.pop();
 
   const { contentLeft, contentRight } = component;
 
@@ -32,9 +33,9 @@ const TwoColumnImageCopy = ({ item }) => {
   return (
     <div
       style={{
-        order: tempId,
-        gridRowEnd: `span ${gridRowSpan}`,
-        gridColumnEnd: `span ${gridColSpan}`,
+        order: orderId,
+        // gridRowEnd: `span ${gridRowSpan}`,
+        // gridColumnEnd: `span ${gridColSpan}`,
       }}
       className={styles.container}
     >
