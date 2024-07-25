@@ -19,7 +19,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  const products = await getProductListing({categoryId: "mens-clothing-suits", method: "POST"});  
+  const products = await getProductListing({categoryId: plpKey, method: "POST"});
 
   return {
     props: {
@@ -30,10 +30,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 const Products = (props) => {
-  const twoColumnImageCopy = props?.content?.page?.productGridContent;
+  
+  const productGridContent = props?.content?.page?.productGridContent;
   const products = props?.products?.productResults?.hits
-  if(!products || !twoColumnImageCopy) return null
-  return <PlpContent products={products} twoColumnImageCopy={twoColumnImageCopy} />;
+  if(!products || !productGridContent) return null
+
+  return <PlpContent products={products} productGridContent={productGridContent} />;
 };
 
 export default Products;

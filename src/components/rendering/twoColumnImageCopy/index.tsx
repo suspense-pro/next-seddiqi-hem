@@ -61,7 +61,7 @@ const TwoColumnImageCopy = ({ item }) => {
           <div className={styles.headingSecondary}>
             <RichText align={"center"} text={contentRight?.description} />
           </div>
-          <Button title={cta?.label} type="plain" />
+          <Button title={cta?.label} type="underline" />
         </div>
       </div>
     </div>

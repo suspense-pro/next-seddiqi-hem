@@ -144,21 +144,23 @@ $border-width: rem(1);
 
   }
 
-  &.plain {
+  &.plain,
+  &.underline {
     border: none;
     padding: 0;
     min-width: auto;
     background-color: transparent;
     border: none;
 
-    color: getColorHex("green-dark");
-    border-color: getColorHex("green-dark");
-
     span {
-      text-transform: capitalize;
-      text-decoration-line: underline;
-      text-underline-offset: rem(4);
       text-decoration: underline;
+      text-underline-offset: rem(2.3);
+    }
+  }
+
+  &.plain {
+    span {
+      text-underline-offset: rem(2.3); 
     }
 
     &.white {
@@ -170,8 +172,16 @@ $border-width: rem(1);
         }
       }
     }
-
   }
+
+&.underline {
+  span {
+    color: getColorHex("green-dark");
+    text-decoration-color:  getColorHex("green-dark");
+    text-transform: capitalize;
+    text-underline-offset: rem(4);
+  }
+}
 
   &:disabled,
   &.disabled {
