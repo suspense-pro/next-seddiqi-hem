@@ -22,12 +22,23 @@
 
 .open {
   left: 0;
+  [dir="rtl"] & { 
+    right: 0;
+  }
 }
 
 .content {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
 }
 
 .footer {
@@ -49,7 +60,7 @@
   @include md {
     margin-bottom: rem(32);
   }
-  h5 { 
+  h5 {
     font-size: rem(16);
     margin: 0;
     @include md {
@@ -57,7 +68,6 @@
     }
   }
 }
-
 
 .closeButton {
   cursor: pointer;

@@ -11,7 +11,7 @@ import {
 } from "chart.js";
 import { Range } from "react-range";
 import styles from "./priceRangeFilter.module.scss";
-import Typography from "../typography";
+import Typography from "@components/module/typography";
 
 ChartJS.register(
   CategoryScale,
