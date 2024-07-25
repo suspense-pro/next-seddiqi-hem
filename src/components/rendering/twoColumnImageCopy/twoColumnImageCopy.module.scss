@@ -60,13 +60,5 @@
 }
 
 .discoverBtn {
-  font-size: rem(14);
-  line-height: rem(18);
-  letter-spacing: rem(1);
-  color: getColorHex("green-dark");
-  padding: rem(4 0);
-  @include body_regular;
-  width: fit-content;
-  border-bottom: rem(1) solid getColorHex("green-dark");
-  cursor: pointer;
+  text-transform: capitalize;
 }

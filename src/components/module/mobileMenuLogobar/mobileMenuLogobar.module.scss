@@ -5,21 +5,13 @@
   flex-direction: column;
   margin-top: rem(40);
   gap: rem(44);
+  
+  span.appointmentBtn {
+    text-underline-offset: rem(10);
+    text-align: left;
+  }
 }
 
-.appointmentBtn {
-  padding: rem(4 0);
-  border-bottom: rem(1) solid getColorHex("green-dark");
-  color: getColorHex("green-dark");
-  // max-width: rem(250);
-  width: max-content;
-  cursor: pointer;
-  @include body_regular;
-  font-size: rem(14);
-  line-height: rem(18);
-  letter-spacing: rem(1);
-  text-transform: uppercase;
-}
 
 .recommendContainer {
   display: flex;

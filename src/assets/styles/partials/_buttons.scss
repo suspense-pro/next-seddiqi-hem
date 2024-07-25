@@ -2,14 +2,10 @@
 @import "typography";
 @import "variables";
 
-
-
 $sqrt3: 1.2;
 $hex-height: 3rem;
 $hex-min-width: $hex-height * $sqrt3 / 2;
-$hex-distance: (
-  $hex-height / (2 * $sqrt3)
-);
+$hex-distance: ($hex-height / (2 * $sqrt3));
 $border-width: rem(1);
 
 .button {
@@ -28,8 +24,8 @@ $border-width: rem(1);
   display: inline-block;
   text-align: center;
   position: relative;
-  border-radius: rem( 12 0 12 0);
-  
+  border-radius: rem(12 0 12 0);
+
   @include md {
     padding: rem(12 28);
     font-size: rem(14);
@@ -42,7 +38,7 @@ $border-width: rem(1);
     border: rem(1) solid getColorHex("midnight-brown");
 
     &:hover {
-      background-color:  getColorHex("black");
+      background-color: getColorHex("black");
       color: getColorHex("white");
     }
 
@@ -88,8 +84,6 @@ $border-width: rem(1);
         border: rem(1) solid getColorHex("green-dark");
       }
     }
-
-
   }
 
   &.transparent {
@@ -140,39 +134,26 @@ $border-width: rem(1);
         background-color: getColorHex("green-greyish-light");
       }
     }
-
-
   }
 
   &.plain {
-    border: none;
     text-decoration-line: underline;
     padding: 0;
     min-width: auto;
     background-color: transparent;
     border: none;
+    text-align: left;
     span {
       text-decoration-line: underline;
       text-underline-offset: rem(4);
       text-decoration: underline;
     }
-    
-    &.metallic {
-      span {
-        color: getColorHex("metallic");
-      }
-    }
-    &.uppercase {
-      span {
-        text-transform: uppercase;
-      }
-    }
-    &.capitalize {
-      span {
-        text-transform: capitalize;
-      }
-    }
 
+    &.dark_green {
+      span {
+        color: getColorHex("green-dark");
+      }
+    }
 
     &.white {
       span {
@@ -183,9 +164,7 @@ $border-width: rem(1);
         }
       }
     }
-
   }
-
 
   &:disabled,
   &.disabled {
