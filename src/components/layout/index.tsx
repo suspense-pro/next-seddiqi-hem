@@ -9,6 +9,7 @@ export interface LayoutProps extends PropsWithChildren {
 }
 
 const Layout = ({ children, pageProps }: LayoutProps) => {
+  // console.log("pageProps", pageProps?.hierarchies?.pages);
 
   let headerData = pageProps?.hierarchies?.pages?.find(
     (data) => data?.root?.key === "headerNavigation"

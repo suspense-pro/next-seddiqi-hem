@@ -4,6 +4,7 @@ import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { GetServerSidePropsContext } from "next";
 import { PlpContent } from "@components/module";
 import { getProductListing } from "@utils/sfcc-connector/dataService";
+import { isEmpty } from "@utils/helpers";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
@@ -20,6 +21,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   );
 
   const products = await getProductListing({categoryId: plpKey, method: "POST"});
+
+  // if (isEmpty(data.page)) {
+  //   return {
+  //     redirect: {
+  //       destination: "/page-not-found",
+  //     },
+  //   };
+  // }
+  
 
   return {
     props: {
