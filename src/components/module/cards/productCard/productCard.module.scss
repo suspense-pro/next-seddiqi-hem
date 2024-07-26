@@ -57,10 +57,17 @@
     gap: rem(12);
     align-items: center;
 
+    [dir="rtl"] & { 
+      align-items: flex-start;
+    }
+
     .title,
     .price {
       @include heading_regular; 
       text-transform: uppercase;
+      [dir="rtl"] & { 
+       text-align: right;
+      }
     }
 
     .type {

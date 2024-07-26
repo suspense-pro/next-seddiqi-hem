@@ -32,7 +32,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 const Products = (props) => {
   
   const productGridContent = props?.content?.page?.productGridContent;
-  const products = props?.products?.productResults?.hits
+  const products = props?.products?.productResults
   if(!products || !productGridContent) return null
 
   return <PlpContent products={products} productGridContent={productGridContent} />;

@@ -11,6 +11,10 @@
   grid-row-end: span 2;
   grid-column-end: span 1;
 
+  [dir="rtl"] & { 
+    text-align: right;
+  }
+
   @include md {
     grid-row-end: span 2;
     grid-column-end: span 3;
@@ -30,6 +34,10 @@
       flex-direction: column;
       gap: rem(24);
       align-items: center;
+
+      [dir="rtl"] & { 
+        align-items: flex-start;
+      }
     }
     .image {
       border-radius: rem(16 0);
@@ -51,6 +59,10 @@
   letter-spacing: rem(0.4);
   color: getColorHex("green-dark");
   @include body_regular;
+}
+
+.desc {
+  text-align: center;
 }
 
 .bar {

@@ -42,7 +42,6 @@ const TwoColumnImageCopy = ({ item }) => {
       <div className={styles.columnOne}>
         <div className={styles.columnContent}>
           <Typography
-            align="center"
             variant="h1"
             className={styles.headingPrimary}
           >
@@ -50,7 +49,7 @@ const TwoColumnImageCopy = ({ item }) => {
           </Typography>
           <div className={styles.bar}>&nbsp;</div>
           <div className={styles.headingSecondary}>
-            <RichText align={"center"} text={contentLeft?.description} />
+            <RichText align="" className={styles.desc} text={contentLeft?.description} />
           </div>
         </div>
         <ImageComponent image={leftImage} alt="watch" />
@@ -59,7 +58,7 @@ const TwoColumnImageCopy = ({ item }) => {
         <ImageComponent image={rightImage} alt="watch" />
         <div className={styles.columnContent}>
           <div className={styles.headingSecondary}>
-            <RichText align={"center"} text={contentRight?.description} />
+            <RichText align="" className={styles.desc} text={contentRight?.description} />
           </div>
           <Button
             isLink={true}

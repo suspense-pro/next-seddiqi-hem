@@ -8,7 +8,7 @@ import ContentBlock from "../contentBlock";
 
 type TextProps = {} & CmsContent;
 
-const RichText = ({ text = [], align = "left" }: TextProps) => {
+const RichText = ({ text = [], align = "left", className}: TextProps) => {
   const options = {
     overrides: {
       h1: { component: Typography, props: { variant: "h1" } },
@@ -23,7 +23,8 @@ const RichText = ({ text = [], align = "left" }: TextProps) => {
         component: ({ ...props }) => (
           <li>
             <Typography
-              align={"left"}
+              className={className}
+              align={align}
               variant="p"
               component="span"
               {...props}
@@ -45,7 +46,7 @@ const RichText = ({ text = [], align = "left" }: TextProps) => {
               <div
                 key={index}
                 className="amp-dc-text"
-                style={{ textAlign: align, padding: "10px 0" }}
+                style={{ textAlign: align, }}
               >
                 {data && (
                   <ReactMarkdown options={options}>{data}</ReactMarkdown>
