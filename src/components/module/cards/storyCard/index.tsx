@@ -1,23 +1,20 @@
 import React from "react";
-import Image from "next/image";
+import Image from "@components/module/image";
 import styles from "./storyCard.module.scss";
 import { CardInfoProps } from "@utils/models";
 import Typography from "@components/module/typography";
 
 const StoryCard: React.FC<CardInfoProps> = ({ item }) => {
   const image = item?.image?.image;
-  const imageUrl = `https://${image?.defaultHost}/i/${image?.endpoint}/${image?.name}`;
   const altText = item?.image?.altText;
   const title = item?.title;
   const subtitle = item?.subTitle;
 
-  if (!image || !title || !subtitle || !imageUrl) return null; 
+  if (!image || !title || !subtitle) return null; 
 
   return (
     <div className={styles.storyCardContainer}>
-      <div className={styles.imgContainer}>
-        <Image src={imageUrl} alt={altText} fill className={styles.image} />
-      </div>
+        <Image className={styles.image} image={image} imageAltText={altText} />
       <div className={styles.content}>
         <Typography align="left" variant="span" className={styles.title}>
           {title}

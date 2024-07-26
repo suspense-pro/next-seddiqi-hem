@@ -3,71 +3,70 @@
 .storyCardContainer {
   display: flex;
   gap: rem(20);
-  height: rem(109);
   cursor: pointer;
 
-  @include breakpoint-max-width(rem(768)) {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+
+  @include md {
+    height: rem(109);
   }
 
-  @include breakpoint-max-width(rem(360)) {
-    flex-direction: column;
+  flex-direction: column;
+  @include sm {
+    flex-direction: row;
   }
 
   .imgContainer {
     position: relative;
     width: rem(160);
     height: rem(109);
-
-    @include breakpoint-max-width(rem(360)) {
-      width: 100%;
-      height: 100%;
-    }
   }
 
   .image {
     border-radius: rem(16 0 16 0);
     object-fit: cover;
+    @include sm {
+      width: rem(160);
+      height: rem(109);
+    }
   }
 
   .content {
     display: flex;
     flex-direction: column;
     gap: rem(12);
-    width: rem(220);
 
-    @include breakpoint-max-width(rem(768)) {
-      width: rem(188);
-    }
+    width: 100%;
 
-    @include breakpoint-max-width(rem(360)) {
-      width: 100%;
+    @include sm {
+      width: rem(220);
     }
 
     .title {
       @include heading_regular;
-      font-size: rem(16);
+
+      font-size: rem(14);
       line-height: rem(20);
       letter-spacing: rem(0.4);
       margin: rem(0);
 
       @include ellipses;
 
-      @include breakpoint-max-width(rem(768)) {
-        font-size: rem(14);
+      @include md {
+        font-size: rem(16);
       }
     }
 
     .subtitle {
       @include body_light;
       color: getColorHex("green-dark");
-      font-size: rem(14);
+      font-size: rem(12);
       line-height: rem(22);
       @include ellipses;
 
-      @include breakpoint-max-width(rem(768)) {
-        font-size: rem(12);
+      @include md {
+        font-size: rem(14);
       }
     }
   }

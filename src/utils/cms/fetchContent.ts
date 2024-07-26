@@ -45,30 +45,35 @@ const fetchContent = async (
     const { cms } = await createAppContext();
     
     const host = `${cms.hubName}.cdn.content.amplience.net`;
-    return await Promise.all(
-        items.map((request: CmsRequest): Promise<CmsContent | CmsFilterResponse> => {
-            if (isGetByFilterRequest(request)) {
-                let body = JSON.stringify({
-                    ...request,
-                    parameters,
-                });
-                return fetch(`https://${host}/content/filter`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body,
-                }).then((x) => x.json());
-            } else {
-                let path = isGetByIdRequest(request) ? `id/${request.id}` : `key/${(request as GetByKeyRequest).key}`;
-                let params = {
-                    ...parameters,
-                    locale: context.locale,
-                };
-                return fetch(`https://${host}/content/${path}?${stringify(params)}`)
-                    .then((x) => x.json())
-                    .then((x) => x.content || null);
-            }
-        }),
-    );
+    try {
+        return await Promise.all(
+            items.map((request: CmsRequest): Promise<CmsContent | CmsFilterResponse> => {
+                if (isGetByFilterRequest(request)) {
+                    let body = JSON.stringify({
+                        ...request,
+                        parameters,
+                    });
+                    return fetch(`https://${host}/content/filter`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body,
+                    }).then((x) => x.json());
+                } else {
+                    let path = isGetByIdRequest(request) ? `id/${request.id}` : `key/${(request as GetByKeyRequest).key}`;
+                    let params = {
+                        ...parameters,
+                        locale: context.locale,
+                    };
+                    return fetch(`https://${host}/content/${path}?${stringify(params)}`)
+                        .then((x) => x.json())
+                        .then((x) => x.content || null);
+                }
+            }),
+        );
+    } catch (err) {
+        console.error('Error fetching content:', err);
+        return items.map(() => null);
+    }
 };
 
 export default fetchContent;

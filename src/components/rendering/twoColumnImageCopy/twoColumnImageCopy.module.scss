@@ -1,0 +1,76 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, rem(502));
+  justify-content: center;
+  text-align: center;
+  margin: rem(80 0);
+  gap: rem(120);
+
+  grid-row-end: span 2;
+  grid-column-end: span 1;
+
+  [dir="rtl"] & { 
+    text-align: right;
+  }
+
+  @include md {
+    grid-row-end: span 2;
+    grid-column-end: span 3;
+  }
+  @include lg {
+    grid-row-end: span 2;
+    grid-column-end: span 4;
+  }
+
+  .columnOne,
+  .columnTwo {
+    display: flex;
+    flex-direction: column;
+    gap: rem(60);
+    .columnContent {
+      display: flex;
+      flex-direction: column;
+      gap: rem(24);
+      align-items: center;
+
+      [dir="rtl"] & { 
+        align-items: flex-start;
+      }
+    }
+    .image {
+      border-radius: rem(16 0);
+      object-fit: cover;
+      width: rem(502);
+      height: rem(700);
+    }
+  }
+}
+
+.headingPrimary {
+  color: getColorHex("green-dark");
+  margin: 0;
+  @include heading_regular;
+}
+
+.headingSecondary {
+  line-height: rem(26);
+  letter-spacing: rem(0.4);
+  color: getColorHex("green-dark");
+  @include body_regular;
+}
+
+.desc {
+  text-align: center;
+}
+
+.bar {
+  width: rem(70);
+  height: rem(2);
+  background: getColorHex("metallic-grey");
+}
+
+.discoverBtn {
+  text-transform: capitalize;
+}

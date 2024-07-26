@@ -1,16 +1,9 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import styles from "./header.module.scss";
-import {
-  AccountIcon,
-  MapIcon,
-  SearchIcon,
-  WishlistIcon,
-} from "@assets/images/svg";
-import NavigationLink from "@components/module/navigationLink";
 import { HeaderContext } from "@contexts/headerContext";
 import MegaMenu from "../megaMenu";
 import HeaderLogoBar from "../headerLogoBar";
 import HeaderMainLinks from "../headerMainLinks";
+import styles from "./header.module.scss";
 
 export default function DesktopHeader() {
   const [scrolled, setScrolled] = useState(false);

@@ -4,6 +4,10 @@
   display: flex;
   align-items: center;
   gap: rem(62);
+
+  [dir="rtl"] & { 
+    flex-direction: row-reverse;
+  }
 }
 
 .btns {

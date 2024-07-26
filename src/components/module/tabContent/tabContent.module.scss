@@ -62,8 +62,25 @@
   letter-spacing: rem(0.4);
   margin-bottom: rem(-10);
   color: getColorHex("green-dark");
+  text-transform: uppercase;
 }
 
 .padZero {
   padding: 0;
 }
+
+.column1,
+.cardStyle {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.column1 {
+  gap: rem(20);
+}
+
+.cardStyle {
+  gap: rem(12);
+}
+

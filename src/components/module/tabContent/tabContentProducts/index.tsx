@@ -35,6 +35,8 @@ const TabContentProducts = () => {
 
     const contentBlock = headerData.children[ind]?.content?.contentBlock;
 
+    
+
     return (
       <>
         <GetSubMenu />

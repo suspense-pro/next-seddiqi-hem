@@ -9,6 +9,7 @@ import {
   WishlistIcon,
 } from "@assets/images/svg";
 import { generateUniqueId } from "@utils/helpers/uniqueId";
+import Button from "../button";
 
 const HeaderMainLinks = () => {
   const { updateCurrent, headerData } = useContext(HeaderContext);
@@ -19,15 +20,16 @@ const HeaderMainLinks = () => {
 
   return (
     <div className={styles.linksContainer}>
-      <div className={styles.appointmentBtn}>
-        <NavigationLink hover={false} title={cta?.label} url={cta?.url} />
-      </div>
+      <Button
+        isLink={true}
+        link={cta?.url}
+        className={styles.appointmentBtn}
+        title={cta?.label}
+        type="plain dark_green"
+      />
       <div className={styles.links}>
         {headerMainLinks?.map((item, ind) => (
-          <div
-            key={generateUniqueId()}
-            onMouseEnter={() => updateCurrent(ind)}
-          >
+          <div key={generateUniqueId()} onMouseEnter={() => updateCurrent(ind)}>
             <NavigationLink
               hover={false}
               className={styles.headerLink}

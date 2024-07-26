@@ -29,6 +29,7 @@
     padding: rem(16);
     left: 0;
     top: 0;
+    z-index: 100;
   }
 
   .newContainer {
@@ -56,10 +57,17 @@
     gap: rem(12);
     align-items: center;
 
+    [dir="rtl"] & { 
+      align-items: flex-start;
+    }
+
     .title,
     .price {
       @include heading_regular; 
       text-transform: uppercase;
+      [dir="rtl"] & { 
+       text-align: right;
+      }
     }
 
     .type {
@@ -77,5 +85,6 @@
     width: rem(275);
     height: rem(410);
     margin: 0 auto;
+    z-index: 10;
   }
 }

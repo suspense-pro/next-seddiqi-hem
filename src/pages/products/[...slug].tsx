@@ -1,7 +1,6 @@
 import Layout from "@components/layout";
 import React from "react";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
-import { getHierarchyChildren } from "@utils/cms/amplience";
 import { GetServerSidePropsContext } from "next";
 import { PlpContent } from "@components/module";
 import { getProductListing } from "@utils/sfcc-connector/dataService";
@@ -21,8 +20,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  const prods = await getProductListing({categoryId: "mens-clothing-suits", method: "POST"});
-  console.log({prods});
+  const products = await getProductListing({categoryId: plpKey, method: "POST"});
 
   // if (isEmpty(data.page)) {
   //   return {
@@ -36,13 +34,18 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       ...data,
+      products
     },
   };
 }
 
 const Products = (props) => {
-  const products = props?.hierarchies?.pages[2]?.content?.productGridContent;
-  return <PlpContent products={products} />;
+  
+  const productGridContent = props?.content?.page?.productGridContent;
+  const products = props?.products?.productResults
+  if(!products || !productGridContent) return null
+
+  return <PlpContent products={products} productGridContent={productGridContent} />;
 };
 
 export default Products;

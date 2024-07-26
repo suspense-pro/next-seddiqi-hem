@@ -2,29 +2,27 @@ import { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { HeaderContext } from "@contexts/headerContext";
-import { HeaderFooter, NavigationLink } from "@components/module";
+import { Button, HeaderFooter, NavigationLink } from "@components/module";
 import styles from "./mobileMenuLogobar.module.scss";
 
 const MobileMenuLogobar = () => {
   const { headerData } = useContext(HeaderContext);
-
   const { leftLogo, rightLogo, bookingCTA } = headerData?.content;
+
   const PATEK_LOGO = leftLogo?.image?.url
-    ? leftLogo?.image?.url
-    : "/images/png/PatekLogo.png";
   const ROLEX_LOGO = rightLogo?.image?.url
-    ? rightLogo?.image?.url
-    : "/images/png/ROlexLogo.png";
+    
+  if(!PATEK_LOGO || !ROLEX_LOGO) return null
 
   return (
     <div className={styles.bottom}>
-      <div className={styles.appointmentBtn}>
-        <NavigationLink
-          hover={false}
-          title={bookingCTA?.image?.label}
-          url={bookingCTA?.image?.url}
-        />
-      </div>
+      <Button
+        isLink={true}
+        link={bookingCTA?.image?.url}
+        className={styles.appointmentBtn}
+        title={bookingCTA?.image?.label}
+        type="plain dark_green"
+      />
       <div className={styles.recommendContainer}>
         <div className={styles.recommendText}>Recommended for you</div>
         <div className={styles.logos}>

@@ -20,7 +20,7 @@ import TabContentProducts from "./tabContent/tabContentProducts";
 import SubMenu from "./tabContent/subMenu";
 import HeaderFooter from "./headerFooter/index";
 import SubMenuLinks from "./sumMenuLinks";
-import ContentBlocks from "./contentBlocks";
+import NavCardBlocks from "./navCardBlocks";
 import SideDrawer from "./sideDrawer";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
@@ -49,7 +49,7 @@ export {
   SubMenu,
   HeaderFooter,
   SubMenuLinks,
-  ContentBlocks,
+  NavCardBlocks,
   SideDrawer,
   FilterBtn,
   PlpContent
