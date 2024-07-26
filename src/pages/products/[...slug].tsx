@@ -5,6 +5,7 @@ import { getHierarchyChildren } from "@utils/cms/amplience";
 import { GetServerSidePropsContext } from "next";
 import { PlpContent } from "@components/module";
 import { getProductListing } from "@utils/sfcc-connector/dataService";
+import { isEmpty } from "@utils/helpers";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
@@ -22,6 +23,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const prods = await getProductListing({categoryId: "mens-clothing-suits", method: "POST"});
   console.log({prods});
+
+  // if (isEmpty(data.page)) {
+  //   return {
+  //     redirect: {
+  //       destination: "/page-not-found",
+  //     },
+  //   };
+  // }
   
 
   return {

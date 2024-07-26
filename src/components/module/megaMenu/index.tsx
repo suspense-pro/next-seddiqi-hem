@@ -8,9 +8,6 @@ const MegaMenu = ({ headerHeightClass }) => {
   const { current, headerData } = headerContext;
   const currentHeaderData = headerData?.children[current];
 
-  console.log({currentHeaderData});
-  
-
   if (
     current === null
   ) {
