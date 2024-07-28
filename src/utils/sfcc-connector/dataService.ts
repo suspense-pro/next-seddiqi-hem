@@ -183,6 +183,42 @@ export async function getProductListing({
   }
 }
 
+export async function setFilters({
+  categoryId,
+  filters,
+  method,
+}: {
+  categoryId: any;
+  filters: any;
+  method: string;
+}) {
+  try {
+    const json = {
+      api: "filter",
+      action: "setFilters"
+    };
+    const config = {
+      method: method,
+      body: JSON.stringify({ categoryId, filters }),
+    };
+    const queryString = new URLSearchParams(json).toString();
+    
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
+
+    console.log({res});
+
+    if(!res) {
+      return null;
+    }
+     
+    return res.response;
+    
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 export async function getSearchResults({
   query,
   method,
