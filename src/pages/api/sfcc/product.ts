@@ -149,10 +149,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     const priceRangeJson = getProductPriceGraph(productResults);
                     console.log("Price Range Data: " + priceRangeJson);
                     result.priceRangeJson = priceRangeJson;
-    
-                    return result;
+
+                    return res.status(200).json({ isError: false, response: result });
                 } else {
                     console.log("No product found.");
+                    return res.status(400).json({ isError: true, response: "No product found." });
                 }
             }
         } catch (err) {
