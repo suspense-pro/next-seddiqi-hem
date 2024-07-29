@@ -6,6 +6,7 @@ import Image from '@components/module/image';
 import Slot from '@components/module/slot';
 import { HeroBanner, TwoColumnImageCopy } from '@components/rendering';
 import { ArticleCard, DisplayCard, StoryCard } from '@components/module';
+import BrandHero from '@components/module/brandHero';
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || 'platinumpanda',
@@ -18,7 +19,7 @@ const slotsUrl = schemaUrl + '/slots';
 const pageUrl = schemaUrl + '/page';
 const moduleUrl = schemaUrl + '/module';
 const componentUrl = schemaUrl + '/component';
-
+console.log("schemaUrl---", schemaUrl, "pageUrl", pageUrl)
 
 export const ComponentMapping: any = {
   [`${pageUrl}/landing`]: ContentPage,
@@ -32,6 +33,7 @@ export const ComponentMapping: any = {
   [`${moduleUrl}/display-card`]: DisplayCard,
   [`${moduleUrl}/story-card`]: StoryCard,
   [`${componentUrl}/two-column-image-copy`]: TwoColumnImageCopy,
+  [`${moduleUrl}/brand-landing-page-node`]: BrandHero
 };
 
 

@@ -1,3 +1,5 @@
+// pages/brand/[slug].tsx
+import React from "react";
 import Image from "next/image";
 import { getProducts } from "@utils/sfcc-connector";
 import Layout from "@components/layout";
@@ -8,12 +10,13 @@ import fetchPageData from "@utils/cms/page/fetchPageData";
 import { isEmpty, mapToID, notNull } from "@utils/helpers";
 import { CmsContent } from "@utils/cms/utils";
 import ContentBlock from "@components/module/contentBlock";
+import BrandHero from "@components/module/brandHero";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let { slug } = context.params || {};
   const { vse } = context.query || {};
   const deliveryKey = Array.isArray(slug) ? slug.join("/") : (slug as string);
-  
+
   const data = await fetchStandardPageData(
     {
       content: {
@@ -43,8 +46,6 @@ const BrandPage = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
   const { vse, content } = props;
-//   const [config] = useContent(content.configComponents, vse);
-
 
   return (
     <div className="blog-content">
@@ -53,8 +54,11 @@ const BrandPage = (
         .map((content: CmsContent, index: number) => (
           <ContentBlock content={content} key={index} />
         ))}
+        {/* <BrandHero content={content}    /> */}
     </div>
   );
 };
 
 BrandPage.Layout = Layout;
+
+export default BrandPage;
