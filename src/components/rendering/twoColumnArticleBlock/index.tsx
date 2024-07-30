@@ -7,7 +7,7 @@ import RichText from "@components/module/richText";
 
 const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
   if (!contentLeft || !contentRight) return null;
-  console.log("content", contentLeft)
+  // console.log("content", contentLeft)
   const renderColumn = (content) => {
     return (
       <div className={styles.column}>

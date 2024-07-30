@@ -31,12 +31,12 @@ const ContentBlock = ({
 
     // Get real-time content from original content
     const [liveContent] = useContent(originalContent, vse);
+
     if (!liveContent) {
         return null;
     }
 
     const content = liveContent;
-    
     const Component = components[content?._meta?.schema];
     const children = Component ? <Component {...content} /> : <>{JSON.stringify(content)}</>;
 

@@ -16,9 +16,6 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@lib/*": [
-        "lib/*"
-      ],
       "@pages/*": [
         "pages/*"
       ],

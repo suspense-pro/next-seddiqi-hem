@@ -8,21 +8,21 @@
   margin: rem(80 0);
   gap: rem(120);
 
-  grid-row-end: span 2;
-  grid-column-end: span 1;
+  // grid-row-end: span 2;
+  // grid-column-end: span 1;
 
   [dir="rtl"] & { 
     text-align: right;
   }
 
-  @include md {
-    grid-row-end: span 2;
-    grid-column-end: span 3;
-  }
-  @include lg {
-    grid-row-end: span 2;
-    grid-column-end: span 4;
-  }
+  // @include md {
+  //   grid-row-end: span 2;
+  //   grid-column-end: span 3;
+  // }
+  // @include lg {
+  //   grid-row-end: span 2;
+  //   grid-column-end: span 4;
+  // }
 
   .columnOne,
   .columnTwo {

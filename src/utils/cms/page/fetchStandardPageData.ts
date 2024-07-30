@@ -37,21 +37,35 @@ async function fetchStandardPageData<
     context
   );
 
+  // console.log("fetchData ==>", data);
+  // console.log("context.req.url ==>", context.req.url);
+  
+
+  const url = (context.req.url as string).substring(0, ((context.req.url as string).indexOf('?') > (context.req.url as string).lastIndexOf('/') + 1) ? (context.req.url as string).indexOf('?')  : (context.req.url as string).length);
+
+  // console.log({url}, context.req.url);
+  
+
   const pageNode = findInHierarchy(
-    (data.hierarchies as any).pages[0],
+    (data.hierarchies as any).pages,
     (node: CmsHierarchyNode) => {
       const dk =
-        context.req.url === "/" ? "headerNavigation" : context.req.url?.slice(1);
+        context.req.url === "/" ? "homepage" : url;
       return node.content?._meta?.deliveryKey === dk;
     }
   );
+
+  // console.log("PAGE NODE ==> ", (context.req.url as string).substring(0, ((context.req.url as string).indexOf('?') > (context.req.url as string).lastIndexOf('/') + 1) ? (context.req.url as string).indexOf('?')  : (context.req.url as string).length));
+  
+  // console.log({pageNode});
+  
 
   let page: any = {};
 
   if (
     pageNode &&
     pageNode.content._meta?.schema?.indexOf(
-      "https://seddiqi.amplience.com/rendering/"
+      "https://seddiqi.amplience.com/page/"
     ) === 0
   ) {
     const pageId = pageNode.content._meta.deliveryId;

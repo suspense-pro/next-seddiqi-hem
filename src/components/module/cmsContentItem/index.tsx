@@ -21,8 +21,6 @@ const CmsContentItem = ({ content, children }: CmsContentItemProps) => {
 
     // console.log({content});
     // console.log({children});
-    
-    
 
     if (!content || !content._meta || !content._meta.deliveryId) {
         return <>{children}</>;

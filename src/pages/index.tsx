@@ -4,7 +4,7 @@ import { SideDrawer } from "@components/module";
 import Layout from "@components/layout";
 import ContentBlock from "@components/module/contentBlock";
 import compact from "lodash/compact";
-import { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { isEmpty } from "@utils/helpers";
 
@@ -24,13 +24,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  if (isEmpty(data.page)) {
-    return {
-      redirect: {
-        destination: "/page-not-found",
-      },
-    };
-  }
+  // if (isEmpty(data.page)) {
+  //   return {
+  //     redirect: {
+  //       destination: "/page-not-found",
+  //     },
+  //   };
+  // }
   return {
     props: {
       ...data,
@@ -38,10 +38,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-export default function Home({ contents }) {
+export default function Home({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+
   return (
     <div className="main-content">
-      {compact(contents).map((content) => (
+      {content.page.active && compact(content.page.components).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />
       ))}
     </div>
