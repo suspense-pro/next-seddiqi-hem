@@ -1,0 +1,88 @@
+@import "./../../../assets/styles/main.scss";
+.container {
+  display: flex;
+  margin: rem(60) 0;
+
+  .containerColumns {
+    display: flex;
+    flex-direction: column;
+    gap: rem(52);
+    margin: rem(32);
+
+    @include md {
+      flex-direction: row;
+    }
+    @include lg {
+      margin: rem(60);
+    }
+  }
+
+}
+
+.column {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: rem(32);
+
+  .image {
+    border-radius: rem(16) 0 rem(16) 0;
+    object-fit: cover;
+    width: 100%;
+    height: rem(336);
+  
+    @include md {
+      height: rem(636);
+      width: 100%;
+    }
+  }
+
+  .articleInfo {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16);
+    align-items: center;
+  
+    [dir="rtl"] & {
+      align-items: flex-start;
+    }
+  
+    span.btn {
+      text-transform: capitalize;
+    }
+  }  
+}
+
+.headingPrimary {
+  color: getColorHex("green-dark");
+  margin: 0;
+  @include heading_regular;
+  text-align: center;
+
+  [dir="rtl"] & {
+    text-align: right;
+  }
+
+  @include md {
+    font-size: rem(26);
+  }
+}
+
+.description {
+  color: getColorHex("green-dark");
+  @include body_regular;
+  text-align: center;
+  font-size: rem(14);
+  line-height: rem(22);
+
+  [dir="rtl"] & {
+    text-align: right;
+  }
+
+  @include md {
+    font-size: rem(16);
+    line-height: rem(26);
+    
+  }
+}
+
