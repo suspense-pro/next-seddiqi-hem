@@ -3,6 +3,26 @@
 .container {
   padding: rem(24);
   margin-top: rem(156);
+
+  .contentComponent {
+    display: grid;
+    grid-row-end: span 2;
+    grid-column-end: span 1;
+
+    [dir="rtl"] & {
+      text-align: right;
+    }
+
+    @include md {
+      grid-row-end: span 2;
+      grid-column-end: span 3;
+    }
+
+    @include lg {
+      grid-row-end: span 2;
+      grid-column-end: span 4;
+    }
+  }
 }
 
 .productInfo {

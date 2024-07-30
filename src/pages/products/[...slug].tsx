@@ -5,12 +5,13 @@ import { GetServerSidePropsContext } from "next";
 import { PlpContent } from "@components/module";
 import { getProductListing } from "@utils/sfcc-connector/dataService";
 import { isEmpty } from "@utils/helpers";
+import { useContent } from "@contexts/withVisualizationContext";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
   const plpKey = Array.isArray(slug) ? slug.join('/') : slug;
   const { vse } = context.query || {};
-  
+
   const data = await fetchStandardPageData(
     {
       content: {
@@ -20,8 +21,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  const products = await getProductListing({categoryId: plpKey, method: "POST"});
-
   // if (isEmpty(data.page)) {
   //   return {
   //     redirect: {
@@ -29,23 +28,33 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   //     },
   //   };
   // }
-  
 
+  const products = await getProductListing({categoryId: plpKey, method: "POST"});
+
+  // if (!products) {
+  //   return {
+  //     redirect: {
+  //       destination: "/page-not-found",
+  //     },
+  //   };
+  // }
+  
   return {
     props: {
       ...data,
-      products
+      products,
+      vse: vse || '',
     },
   };
 }
 
 const Products = (props) => {
+  const { vse, products, content } = props;
   
-  const productGridContent = props?.content?.page?.productGridContent;
-  const products = props?.products?.productResults
-  if(!products || !productGridContent) return null
+  const [productGridContent] = useContent(content?.page?.productGridContent, vse);
+  const productResults = products?.productResults;
 
-  return <PlpContent products={products} productGridContent={productGridContent} />;
+  return <PlpContent products={productResults} productGridContent={productGridContent} />;
 };
 
 export default Products;

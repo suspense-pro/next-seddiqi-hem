@@ -11,18 +11,18 @@ const LOAD_MORE_TEXT = "Load More";
 const PlpContent = ({ productGridContent, products }) => {
   if (!products) return null;
 
-  const cols = productGridContent[0]?.position?.pop() || "auto-fit";
+  const cols = "auto-fit";
   const PRODUCT_INFO_TEXT = `Showing ${products?.hits?.length} out of ${products?.total} products`;
 
   return (
     <div>
       <div className={styles.container}>
         <FilterBar />
-        <GridWrapper cols={cols}>
+        <GridWrapper>
           {products?.hits?.map((item, ind) => <ProductCard key={generateUniqueId()} item={{...item, tempId: ind + 1}} />)}
-          {productGridContent?.map(item => {
-            const Component = ComponentMapping[item?.component?._meta?.schema]
-            return <Component key={generateUniqueId()} item={item} />
+          {productGridContent.length > 0 && productGridContent?.map(item => {
+            const Component = ComponentMapping[item?.component?._meta?.schema];
+            return <div className={styles.contentComponent} style={{order: item?.position?.slice(-1)}} key={generateUniqueId()} ><Component {...item.component} /></div>
           })}
         </GridWrapper>
         <div className={styles.bottom}>

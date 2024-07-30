@@ -42,11 +42,11 @@ const BrandPage = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
   const { vse, content } = props;
-//   const [config] = useContent(content.configComponents, vse);
+  const [page] = useContent(content.page, vse as string);
 
   return (
     <div className="blog-content">
-      {content?.page?.contentComponent
+      {page.contentComponent
         ?.filter(notNull)
         .map((cont: CmsContent, index: number) => (
           <ContentBlock content={cont} key={index} />
