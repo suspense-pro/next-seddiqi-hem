@@ -7,6 +7,7 @@ import RichText from "@components/module/richText";
 
 const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
   if (!contentLeft || !contentRight) return null;
+  console.log("content", contentLeft)
   const renderColumn = (content) => {
     return (
       <div className={styles.column}>
@@ -31,7 +32,8 @@ const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
             link={content?.cta?.url}
             className={styles.btn}
             title={content?.cta?.label}
-            type="plain dark_green"
+            color="dark_green"
+            type={content?.cta?.type}
           />
         </div>
       </div>

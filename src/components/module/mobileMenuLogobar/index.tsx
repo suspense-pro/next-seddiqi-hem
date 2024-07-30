@@ -21,7 +21,8 @@ const MobileMenuLogobar = () => {
         link={bookingCTA?.image?.url}
         className={styles.appointmentBtn}
         title={bookingCTA?.image?.label}
-        type="plain dark_green"
+        color="dark_green"
+        type={bookingCTA?.image?.type}
       />
       <div className={styles.recommendContainer}>
         <div className={styles.recommendText}>Recommended for you</div>
