@@ -13,7 +13,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let { slug } = context.params || {};
   const { vse } = context.query || {};
   const deliveryKey = Array.isArray(slug) ? slug.join("/") : (slug as string);
-  
   const data = await fetchStandardPageData(
     {
       content: {
@@ -23,13 +22,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  if (isEmpty(data.page) || !slug) {
-    return {
-      redirect: {
-        destination: "/page-not-found",
-      },
-    };
-  }
+  // if (isEmpty(data.page) || !slug) {
+  //   return {
+  //     redirect: {
+  //       destination: "/page-not-found",
+  //     },
+  //   };
+  // }
 
   return {
     props: {
@@ -45,16 +44,17 @@ const BrandPage = (
   const { vse, content } = props;
 //   const [config] = useContent(content.configComponents, vse);
 
-
   return (
     <div className="blog-content">
-      {content?.page?.components
+      {content?.page?.contentComponent
         ?.filter(notNull)
-        .map((content: CmsContent, index: number) => (
-          <ContentBlock content={content} key={index} />
+        .map((cont: CmsContent, index: number) => (
+          <ContentBlock content={cont} key={index} />
         ))}
     </div>
   );
 };
+
+export default BrandPage
 
 BrandPage.Layout = Layout;
