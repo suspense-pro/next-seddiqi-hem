@@ -14,7 +14,7 @@ import Button from "../button";
 const HeaderMainLinks = () => {
   const { updateCurrent, headerData } = useContext(HeaderContext);
   const headerMainLinks = headerData?.children;
-  const cta = headerData?.content?.bookingCTA?.image;
+  const cta = headerData?.content?.bookingCTA?.cta;
 
   if (!headerMainLinks) return null;
 
