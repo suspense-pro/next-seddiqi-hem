@@ -184,22 +184,32 @@ export async function getProductListing({
 }
 
 export async function setFilters({
+  method,
   categoryId,
   filters,
-  method,
+  sortOption,
+  maxPrice,
+  minPrice
 }: {
-  categoryId: any;
-  filters: any;
   method: string;
+  categoryId?: string;
+  filters?: any;
+  sortOption?: string;
+  maxPrice?: any;
+  minPrice?: any;
 }) {
   try {
     const json = {
       api: "filter",
-      action: "setFilters"
+      action: "setFilters",
+      categoryId: categoryId,
+      filters: JSON.stringify(filters),
+      sort: sortOption,
+      maxPrice: maxPrice,
+      minPrice: minPrice,
     };
     const config = {
       method: method,
-      body: JSON.stringify({ categoryId, filters }),
     };
     const queryString = new URLSearchParams(json).toString();
     
