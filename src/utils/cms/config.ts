@@ -4,7 +4,7 @@ import Container from '@components/module/container';
 import ContentPage from '@components/module/contentPage';
 import Image from '@components/module/image';
 import Slot from '@components/module/slot';
-import { HeroBanner, TwoColumnImageCopy } from '@components/rendering';
+import { HeroBanner, TwoColumnArticleBlock, TwoColumnImageCopy } from '@components/rendering';
 import { ArticleCard, DisplayCard, StoryCard } from '@components/module';
 import BrandHero from '@components/module/brandHero';
 
@@ -19,6 +19,7 @@ const slotsUrl = schemaUrl + '/slots';
 const pageUrl = schemaUrl + '/page';
 const moduleUrl = schemaUrl + '/module';
 const componentUrl = schemaUrl + '/component';
+const renderingUrl = schemaUrl + '/rendering';
 console.log("schemaUrl---", schemaUrl, "pageUrl", pageUrl)
 
 export const ComponentMapping: any = {
@@ -33,7 +34,9 @@ export const ComponentMapping: any = {
   [`${moduleUrl}/display-card`]: DisplayCard,
   [`${moduleUrl}/story-card`]: StoryCard,
   [`${componentUrl}/two-column-image-copy`]: TwoColumnImageCopy,
-  [`${moduleUrl}/brand-landing-page-node`]: BrandHero
+  [`${renderingUrl}/banner`]: BrandHero,
+  [`${componentUrl}/two-column-article-block`]: TwoColumnArticleBlock,
+
 };
 
 

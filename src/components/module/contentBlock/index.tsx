@@ -25,13 +25,14 @@ const ContentBlock: React.FC<ContentBlockProps> = ({
 
     // Get real-time content from original content
     const [liveContent] = useContent(originalContent, vse);
+
     if (!liveContent) {
         return null;
     }
 
     const content = liveContent;
-    console.log("content", content, "type------", type)
     const Component = components[content?._meta?.schema];
+    console.log("content", content, "type------", type)
     const children = Component ? <Component {...content} /> : <>{JSON.stringify(content)}</>;
 
     const wrappedChildren =

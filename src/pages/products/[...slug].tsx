@@ -5,6 +5,7 @@ import { GetServerSidePropsContext } from "next";
 import { PlpContent } from "@components/module";
 import { getProductListing } from "@utils/sfcc-connector/dataService";
 import { isEmpty } from "@utils/helpers";
+import { useContent } from "@contexts/withVisualizationContext";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
@@ -22,8 +23,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  const products = await getProductListing({categoryId: plpKey, method: "POST"});
-
   // if (isEmpty(data.page)) {
   //   return {
   //     redirect: {
@@ -31,31 +30,33 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   //     },
   //   };
   // }
-  
 
+  const products = await getProductListing({categoryId: plpKey, method: "POST"});
+
+  // if (!products) {
+  //   return {
+  //     redirect: {
+  //       destination: "/page-not-found",
+  //     },
+  //   };
+  // }
+  
   return {
     props: {
       ...data,
-      products
+      products,
+      vse: vse || '',
     },
   };
 }
 
 const Products = (props) => {
-  async function getProds() {
-    const category = JSON.stringify("mens-clothing-suits");
-    const response = await getProductListing({method: "POST", categoryId: category});  
-    const resData = await response.json();
-    console.log(resData);
- 
-  }
-  useEffect(()=> {
-    getProds();
-  }, [])
-  const products = props?.content?.page?.productGridContent;
-  const productGridContent = props?.content?.page?.productGridContent;
+  const { vse, products, content } = props;
+  
+  const [productGridContent] = useContent(content?.page?.productGridContent, vse);
+  const productResults = products?.productResults;
 
-  return <PlpContent productGridContent={productGridContent} products={products} />;
+  return <PlpContent products={productResults} productGridContent={productGridContent} />;
 };
 
 export default Products;

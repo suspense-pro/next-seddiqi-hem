@@ -7,12 +7,15 @@ interface BrandHeroProps {
   content: CmsContent;
 }
 
-const BrandHero: React.FC<BrandHeroProps> = ({ content }) => {
+const BrandHero: React.FC<BrandHeroProps> = ({ ...content }) => {
+  console.log("content-------------brandhero----==========-", content);
   return (
     <div className="brand-hero">
-      <h1>{content.title}</h1>
+      {/* <h1>{content.title}</h1>
       <p>{content.description}</p>
-      <Image src={content.imageUrl} alt={content.title} width={600} height={400} />
+      <Image src={content.imageUrl} alt={content.title} width={600} height={400} /> */}
+      <h1>Test</h1>
+      =========0-=-=-=-======-==-=-=-=
     </div>
   );
 };

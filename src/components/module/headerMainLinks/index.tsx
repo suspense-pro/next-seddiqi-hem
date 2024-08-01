@@ -25,7 +25,8 @@ const HeaderMainLinks = () => {
         link={cta?.url}
         className={styles.appointmentBtn}
         title={cta?.label}
-        type="plain dark_green"
+        color="dark_green"
+        type={cta?.type}
       />
       <div className={styles.links}>
         {headerMainLinks?.map((item, ind) => (

@@ -13,30 +13,16 @@ const ImageComponent = ({ image, alt }) => (
   />
 );
 
-const TwoColumnImageCopy = ({ item }) => {
-  if (!item) return null;
-
-  const { rows = [], cols = [], component = {}, position = [] } = item;
-  const gridRowSpan = rows.pop();
-  const gridColSpan = cols.pop();
-  const orderId = position?.pop();
-
-  const { contentLeft, contentRight } = component;
+const TwoColumnImageCopy = ({contentLeft, contentRight}) => {
 
   if (!contentLeft?.image?.image || !contentRight?.image?.image) return null;
 
   const leftImage = contentLeft.image.image;
   const rightImage = contentRight.image.image;
-
   const cta = contentRight.cta;
 
   return (
     <div
-      style={{
-        order: orderId,
-        // gridRowEnd: `span ${gridRowSpan}`,
-        // gridColumnEnd: `span ${gridColSpan}`,
-      }}
       className={styles.container}
     >
       <div className={styles.columnOne}>
@@ -65,7 +51,8 @@ const TwoColumnImageCopy = ({ item }) => {
             link={"/"}
             className={styles.discoverBtn}
             title={cta?.label}
-            type="plain dark_green"
+            color="dark_green"
+            type={cta?.type}
           />
         </div>
       </div>
