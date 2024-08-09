@@ -229,6 +229,31 @@ export async function setFilters({
   }
 }
 
+export async function getProductDetails({
+  productId,
+  method,
+}: {
+  productId: string;
+  method: string;
+}) {
+  try {
+    const json = {
+      api: "productDetail",
+      action: "getProductDetails",
+      pid: productId
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "product"));
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 export async function getSearchResults({
   query,
   method,
