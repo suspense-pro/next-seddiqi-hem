@@ -1,0 +1,160 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  padding: rem(60 0);
+  background: linear-gradient(0deg, getColorHex("midnight-brown"), getColorHex("midnight-brown")),
+    linear-gradient(0deg, getColorHex("black", 0.2), getColorHex("black", 0.2));
+
+  display: flex;
+  flex-direction: column;
+  gap: rem(32);
+  align-items: center;
+
+  @include md {
+    padding: rem(120 60);
+    gap: rem(48);
+  }
+
+  [dir="rtl"] & {
+    align-items: flex-start;
+  }
+}
+
+.containerSlider {
+  position: relative;
+  display: flex;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: rem(0 0 0 28);
+
+  @include lg {
+    width: rem(1320);
+    padding: rem(0);
+  }
+
+  &::-webkit-scrollbar {
+    display: hidden;
+  }
+
+  .leftBtn,
+  .rightBtn {
+    width: rem(40);
+    height: rem(40);
+    border-radius: rem(12) 0 rem(12);
+    background: getColorHex("metallic");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .arrowLeft {
+      transform: rotate(180deg);
+    }
+  }
+
+  .leftBtn {
+    position: absolute;
+    left: rem(-20);
+    z-index: 2000;
+  }
+  .rightBtn {
+    position: absolute;
+    right: rem(-20);
+    z-index: 2000;
+  }
+}
+
+.titleColor {
+  color: getColorHex("white");
+}
+.subTitleColor {
+  color: getColorHex("white");
+}
+
+.sliderItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .image {
+    background-size: cover;
+    object-fit: cover;
+
+    height: rem(463);
+    width: 100%;
+
+    @include lg {
+      width: rem(440);
+      height: rem(605);
+    }
+  }
+
+  .twoColumnImg {
+    width: 100%;
+  }
+
+  .categoryContent {
+    gap: rem(18);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    bottom: rem(36);
+    position: absolute;
+    align-items: center;
+    margin: 0 rem(10);
+
+    .categoryTitle {
+      font-size: rem(26);
+      line-height: rem(32);
+      letter-spacing: rem(0.6);
+      color: getColorHex("white");
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .discoverBtn {
+      text-transform: capitalize;
+    }
+
+    [dir="rtl"] & {
+      align-items: flex-start;
+    }
+  }
+}
+
+.videoContainer,
+.twoColumnVid {
+  position: relative;
+  width: 100%;
+  height: rem(463);
+
+  @include md {
+    width: rem(440);
+    height: rem(605);
+  }
+
+  .video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.8;
+  }
+}
+
+.twoColumnVid {
+  width: 100%;
+}
+
+.mobileVid {
+  background-size: cover;
+  object-fit: cover;
+  width: 100%;
+  height: rem(463);
+}

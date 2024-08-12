@@ -3,18 +3,21 @@ import { CmsContent } from '@utils/cms/utils';
 
 type VideoProps = {} & CmsContent;
 
-const Video = ({ video }: VideoProps) => {
+const Video = ({ video, className, autoPlay, showPlay }: VideoProps) => {
     if (!video) {
         return null;
     }
     return (
         <div>
             <video
-                className="amp-dc-video"
+                className={`${className} amp-dc-video`}
                 style={{ width: '100%' }}
                 poster={`https://${video.defaultHost}/v/${video.endpoint}/${video.name}?protocol=https`}
-                controls
-                src={`https://${video.defaultHost}/v/${video.endpoint}/${video.name}/mp4_720p?protocol=https`}
+                controls={showPlay}
+                autoPlay={autoPlay}
+                loop
+                muted
+                // src={`https://${video.defaultHost}/v/${video.endpoint}/${video.name}/mp4_720p?protocol=https`}
             >
                 <source
                     src={`https://${video.defaultHost}/v/${video.endpoint}/${video.name}/mp4_720p?protocol=https`}
@@ -40,7 +43,7 @@ const Video = ({ video }: VideoProps) => {
                     type="video/webm"
                 />
             </video>
-            <div className="pause-button inactive"></div>
+            {/* <div className="pause-button inactive"></div> */}
         </div>
     );
 };

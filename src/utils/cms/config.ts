@@ -4,7 +4,7 @@ import Container from '@components/module/container';
 import ContentPage from '@components/module/contentPage';
 import Image from '@components/module/image';
 import Slot from '@components/module/slot';
-import { HeroBanner, TwoColumnArticleBlock, TwoColumnImageCopy } from '@components/rendering';
+import { HeroBanner, ThreeItemCarousel, TwoColumnArticleBlock, TwoColumnImageCopy } from '@components/rendering';
 import { ArticleCard, DisplayCard, StoryCard } from '@components/module';
 
 export const defaultClientConfig: ContentClientConfigV2 = {
@@ -33,6 +33,7 @@ export const ComponentMapping: any = {
   [`${moduleUrl}/story-card`]: StoryCard,
   [`${componentUrl}/two-column-image-copy`]: TwoColumnImageCopy,
   [`${componentUrl}/two-column-article-block`]: TwoColumnArticleBlock,
+  [`${componentUrl}/category-list`]: ThreeItemCarousel,
 };
 
 

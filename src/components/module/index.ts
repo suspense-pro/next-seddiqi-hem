@@ -25,6 +25,7 @@ import SideDrawer from "./sideDrawer";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
+import SectionHeader from "./sectionHeader";
 
 export {
   Head,
@@ -52,5 +53,6 @@ export {
   NavCardBlocks,
   SideDrawer,
   FilterBtn,
-  PlpContent
+  PlpContent,
+  SectionHeader
 };
