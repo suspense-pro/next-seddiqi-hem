@@ -12,7 +12,7 @@ import Image from "@components/module/image";
 import Typography from "@components/module/typography";
 import Button from "@components/module/button";
 import Video from "@components/module/video";
-import ContentHeader from "@components/module/contentHeader";
+import { ContentHeader } from "@components/module";
 
 const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] }) => {
   if (!listItems) {
