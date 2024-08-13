@@ -25,7 +25,6 @@ const DefaultContentBlock = ({ ...content }) => {
       <Button
         isLink={true}
         link={cta?.url}
-        className={styles.aboutBtn}
         title={cta?.label}
         color={cta?.color}
         type={cta?.type}
