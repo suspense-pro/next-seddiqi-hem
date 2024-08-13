@@ -12,7 +12,7 @@ import Image from "@components/module/image";
 import Typography from "@components/module/typography";
 import Button from "@components/module/button";
 import Video from "@components/module/video";
-import SectionHeader from "@components/module/sectionHeader";
+import { ContentHeader } from "@components/module";
 
 const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] }) => {
   if (!listItems) {
@@ -78,7 +78,7 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
   return (
     <div className={styles.container}>
       {/* CONTAINER HEADER */}
-      <SectionHeader
+      <ContentHeader
         barColor={styles.barColor}
         subTitleColor={styles.subTitleColor}
         titleColor={styles.titleColor}
