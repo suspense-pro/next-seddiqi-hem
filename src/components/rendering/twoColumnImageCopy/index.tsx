@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "@components/module/image";
-import { Button, NavigationLink, Typography } from "@components/module";
+import { Button, NavigationLink, SectionHeader, Typography } from "@components/module";
 import styles from "./twoColumnImageCopy.module.scss";
 import RichText from "@components/module/richText";
 
@@ -26,18 +26,14 @@ const TwoColumnImageCopy = ({contentLeft, contentRight}) => {
       className={styles.container}
     >
       <div className={styles.columnOne}>
-        <div className={styles.columnContent}>
-          <Typography
-            variant="h1"
-            className={styles.headingPrimary}
-          >
-            {contentLeft?.heading}
-          </Typography>
-          <div className={styles.bar}>&nbsp;</div>
-          <div className={styles.headingSecondary}>
-            <RichText align="" className={styles.desc} text={contentLeft?.description} />
-          </div>
-        </div>
+         <SectionHeader
+          barColor={styles.barColor}
+          subTitleColor={styles.subTitleColor}
+          titleColor={styles.titleColor}
+          hideUnderline={contentLeft?.hideUnderline}
+          mainTitle= {contentLeft?.heading}
+          richText={contentLeft?.description}
+        />
         <ImageComponent image={leftImage} alt="watch" />
       </div>
       <div className={styles.columnTwo}>
