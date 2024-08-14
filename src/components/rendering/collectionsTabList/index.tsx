@@ -1,4 +1,4 @@
-import { Button, Image, SectionHeader, TabbedNavigation, Typography, Video } from "@components/module";
+import { Button, ContentHeader, Image, TabbedNavigation, Video } from "@components/module";
 import React, { useRef, useState } from "react";
 import styles from "./collectionsTabList.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -27,7 +27,7 @@ const CollectionsTabList = ({ ...content }) => {
 
   return (
     <div className={styles.container}>
-      <SectionHeader
+      <ContentHeader
         barColor={styles.barColor}
         subTitleColor={styles.subTitleColor}
         titleColor={styles.titleColor}

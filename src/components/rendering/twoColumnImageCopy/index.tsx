@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "@components/module/image";
-import { Button, NavigationLink, SectionHeader, Typography } from "@components/module";
+import { Button, NavigationLink, ContentHeader, Typography } from "@components/module";
 import styles from "./twoColumnImageCopy.module.scss";
 import RichText from "@components/module/richText";
 
@@ -26,7 +26,7 @@ const TwoColumnImageCopy = ({contentLeft, contentRight}) => {
       className={styles.container}
     >
       <div className={styles.columnOne}>
-         <SectionHeader
+         <ContentHeader
           barColor={styles.barColor}
           subTitleColor={styles.subTitleColor}
           titleColor={styles.titleColor}
