@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./twoColumnFullScreenImage.module.scss";
-import { Image, SectionHeader } from "@components/module";
+import { ContentHeader, Image } from "@components/module";
 
 const TwoColumnFullScreenImage = ({ ...content }) => {
   let leftImage = content?.imageLeft?.image?.image;
@@ -9,7 +9,7 @@ const TwoColumnFullScreenImage = ({ ...content }) => {
 
   return (
     <div className={styles.container}>
-      <SectionHeader
+      <ContentHeader
         barColor={styles.barColor}
         subTitleColor={styles.subTitleColor}
         titleColor={styles.titleColor}

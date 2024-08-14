@@ -25,7 +25,7 @@ import SideDrawer from "./sideDrawer";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
-import SectionHeader from "./sectionHeader";
+import ContentHeader from "./contentHeader";
 
 export {
   Head,
@@ -54,5 +54,5 @@ export {
   SideDrawer,
   FilterBtn,
   PlpContent,
-  SectionHeader
+  ContentHeader
 };
