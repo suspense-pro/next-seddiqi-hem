@@ -1,17 +1,23 @@
 @import "./../../../../assets/styles/main.scss";
 
 .productContainer {
-  min-width: rem(348);
-  height: rem(596);
-  background-color: getColorHex("white");
-  padding: rem(16);
+  height: rem(448);
   border: rem(1) solid getColorHex("grey-light-4", 0.4);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: rem(40);
-  position: relative;
-  transition: background-color 0.3s ease;
+  justify-content: center;
+  padding: rem(32);
+  
+  @include lg {
+    justify-content: space-between;
+    min-width: rem(348);
+    height: rem(596);
+    background-color: getColorHex("white");
+    padding: rem(16);
+    padding-bottom: rem(40);
+    position: relative;
+    transition: background-color 0.3s ease;
+  }
   &:hover {
     background-color: getColorHex("green-greyish");
 
@@ -25,11 +31,26 @@
     align-items: center;
     justify-content: space-between;
     position: absolute;
-    width: 100%;
+
+    width: 90%;
+    @include md {
+      width: 100%;
+    }
     padding: rem(16);
     left: 0;
     top: 0;
     z-index: 100;
+  }
+
+  .image {
+    width: 100%;
+    height: rem(368);
+    object-fit: contain;
+
+    @include lg {
+      height: rem(464);
+    }
+    // margin: rem(25 0);
   }
 
   .newContainer {
@@ -57,16 +78,16 @@
     gap: rem(12);
     align-items: center;
 
-    [dir="rtl"] & { 
+    [dir="rtl"] & {
       align-items: flex-start;
     }
 
     .title,
     .price {
-      @include heading_regular; 
+      @include heading_regular;
       text-transform: uppercase;
-      [dir="rtl"] & { 
-       text-align: right;
+      [dir="rtl"] & {
+        text-align: right;
       }
     }
 
@@ -76,7 +97,7 @@
       letter-spacing: rem(0.4);
       text-align: center;
       color: getColorHex("green-metallic");
-      @include body_regular; 
+      @include body_regular;
     }
   }
 
@@ -87,4 +108,9 @@
     margin: 0 auto;
     z-index: 10;
   }
+}
+
+.image {
+  height: rem(410);
+  object-fit: contain;
 }

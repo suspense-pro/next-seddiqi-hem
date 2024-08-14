@@ -8,6 +8,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import { EffectCoverflow, Navigation } from "swiper/modules";
+import ProductCard from "@components/module/cards/productCard";
 
 const CollectionsTabList = ({ ...content }) => {
   const isMobile = !useDeviceWidth()[0];
@@ -17,12 +18,13 @@ const CollectionsTabList = ({ ...content }) => {
       id: index + 1,
       title: item?.tabLabel,
       content: isMobile ? (
-        <ContainerGridMobile cta={content?.cta} content={content} />
+        <ContainerGridMobile ind={index} cta={content?.cta} content={content} />
       ) : (
-        <ContainerGrid cta={content?.cta} content={content} />
+        <ContainerGridDesktop ind={index} cta={content?.cta} content={content} />
       ),
     };
   });
+
   return (
     <div className={styles.container}>
       <SectionHeader
@@ -33,24 +35,19 @@ const CollectionsTabList = ({ ...content }) => {
         mainTitle={content?.mainTitle}
         richText={content?.richText}
       />
-      <TabbedNavigation
-        gap={isMobile ? 10 : 60}
-        className={styles.tabNavigation}
-        tabs={tabs}
-        // tabs={[...tabs, { id: 2, title: "Collection Category Text", content: "" }]}
-      />
+      <TabbedNavigation gap={isMobile ? 10 : 60} className={styles.tabNavigation} tabs={tabs} />
     </div>
   );
 };
 
 export default CollectionsTabList;
 
-const ContainerGrid = ({ content, cta }) => {
+const ContainerGridDesktop = ({ content, cta, ind }) => {
   return (
     <div className={styles.containerGrid}>
       <div className={styles.containerGridItems}>
-        {content?.tabItem[0]?.collectionItems?.map((item) => {
-          return (
+        {content?.tabItem[ind]?.collectionItems?.map((item) => {
+          return content?.hideUnderline ? (
             <div className={styles.item}>
               {item?.media?.image ? (
                 <Image className={`${styles.image}`} image={item?.media?.image} imageAltText={item.media.altText} />
@@ -62,24 +59,23 @@ const ContainerGrid = ({ content, cta }) => {
               <div className={styles.itemContent}>
                 <div className={styles.category}>{item?.title}</div>
                 <div className={styles.title}>{item?.cta?.label}</div>
-                <div className={styles.itemBar}>&nbsp;</div>
+                {item?.hideUnderline && <div className={styles.itemBar}>&nbsp;</div>}
               </div>
             </div>
+          ) : (
+            <ProductCard
+              item={{ name: { default: item?.title }, image: item?.media?.image, type: item?.cta?.label }}
+              wishlist={false}
+            />
           );
         })}
       </div>
-      <Button
-        isLink={true}
-        link={cta?.url}
-        className={styles.appointmentBtn}
-        title={cta?.label}
-        color={cta?.color}
-        type={cta?.type}
-      />
+      <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />
     </div>
   );
 };
-const ContainerGridMobile = ({ content, cta }) => {
+
+const ContainerGridMobile = ({ content, cta, ind }) => {
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = !useDeviceWidth()[0];
@@ -88,24 +84,33 @@ const ContainerGridMobile = ({ content, cta }) => {
     setActiveIndex(swiper.realIndex);
   };
 
-  const listItems = content?.tabItem[0]?.collectionItems;
+  const listItems = content?.tabItem[ind]?.collectionItems;
 
   const renderSlide = (item, index) => (
     <SwiperSlide className={styles.swiperSlide} key={index} style={isMobile ? { width: "90%" } : {}}>
-      <div className={styles.item}>
-        {item?.media?.image ? (
-          <Image className={`${styles.image}`} image={item.media.image} imageAltText={item.media.altText} />
-        ) : item?.media?.video ? (
-          <div className={styles.videoContainer}>
-            <Video className={isMobile ? styles.mobileVid : styles.video} video={item.media.video} />
+      {content?.hideUnderline ? (
+        <div className={styles.item}>
+          {item?.media?.image ? (
+            <Image className={`${styles.image}`} image={item.media.image} imageAltText={item.media.altText} />
+          ) : item?.media?.video ? (
+            <div className={styles.videoContainer}>
+              <Video className={isMobile ? styles.mobileVid : styles.video} video={item.media.video} />
+            </div>
+          ) : null}
+          <div className={styles.itemContent}>
+            <div className={styles.category}>{item?.title}</div>
+            <div className={styles.title}>{item?.cta?.label}</div>
+            {item?.hideUnderline && <div className={styles.itemBar}>&nbsp;</div>}
           </div>
-        ) : null}
-        <div className={styles.itemContent}>
-          <div className={styles.category}>{item?.title}</div>
-          <div className={styles.title}>{item?.cta?.label}</div>
-          <div className={styles.itemBar}>&nbsp;</div>
         </div>
-      </div>
+      ) : (
+        <div>
+          <ProductCard
+            item={{ name: { default: item?.title }, image: item?.media?.image, type: item?.cta?.label }}
+            wishlist={false}
+          />
+        </div>
+      )}
     </SwiperSlide>
   );
 
@@ -123,14 +128,7 @@ const ContainerGridMobile = ({ content, cta }) => {
         {listItems?.map(renderSlide)}
       </Swiper>
       <div>
-        <Button
-          isLink={true}
-          link={cta?.url}
-          className={styles.appointmentBtn}
-          title={cta?.label}
-          color={cta?.color}
-          type={cta?.type}
-        />
+        <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />
       </div>
     </div>
   );
