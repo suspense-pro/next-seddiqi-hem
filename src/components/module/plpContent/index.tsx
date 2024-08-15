@@ -9,7 +9,6 @@ import { generateUniqueId } from "@utils/helpers/uniqueId";
 const LOAD_MORE_TEXT = "Load More";
 
 const PlpContent = ({ productGridContent, products }) => {
-  console.log("productGridContent, products -----", productGridContent, products )
   if (!products) return null;
 
   const cols = "auto-fit";

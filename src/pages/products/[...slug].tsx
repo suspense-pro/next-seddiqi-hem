@@ -12,7 +12,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const plpKey = Array.isArray(slug) ? slug.join('/') : slug;
   const { vse } = context.query || {};
 
-  console.log("plpKey---------", plpKey)
   
   const data = await fetchStandardPageData(
     {
