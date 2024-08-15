@@ -32,7 +32,6 @@ const ContentBlock: React.FC<ContentBlockProps> = ({
 
     const content = liveContent;
     const Component = components[content?._meta?.schema];
-    console.log("content", content, "type------", type)
     const children = Component ? <Component {...content} /> : <>{JSON.stringify(content)}</>;
 
     const wrappedChildren =

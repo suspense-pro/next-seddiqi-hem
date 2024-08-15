@@ -20,7 +20,6 @@ const pageUrl = schemaUrl + '/page';
 const moduleUrl = schemaUrl + '/module';
 const componentUrl = schemaUrl + '/component';
 const renderingUrl = schemaUrl + '/rendering';
-console.log("schemaUrl---", schemaUrl, "pageUrl", pageUrl)
 
 export const ComponentMapping: any = {
   [`${pageUrl}/landing`]: ContentPage,
@@ -33,10 +32,9 @@ export const ComponentMapping: any = {
   [`${moduleUrl}/article-card`]: ArticleCard,
   [`${moduleUrl}/display-card`]: DisplayCard,
   [`${moduleUrl}/story-card`]: StoryCard,
-  [`${componentUrl}/two-column-image-copy`]: TwoColumnImageCopy,
-  [`${renderingUrl}/banner`]: BrandHero,
+  [`${componentUrl}/two-column-image-copy`]: TwoColumnImageCopy, 
   [`${componentUrl}/two-column-article-block`]: TwoColumnArticleBlock,
-
+  [`${componentUrl}/hero-banner`]: BrandHero,  
 };
 
 

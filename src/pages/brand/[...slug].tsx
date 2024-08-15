@@ -20,13 +20,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
     {
       content: {
-        page: { key: `brand/brandhero` },
+        page: { key: `brand/hublotbanner` },
       },
     },
     context
   );
 
-  console.log("data----==========", data)
 
   // if (isEmpty(data.page) || !slug) {
   //   return {
@@ -49,7 +48,6 @@ const BrandPage = (
 ) => {
   const { vse, content } = props;
   const [page] = useContent(content.page, vse as string);
-  console.log("page-----------=====", page, "props------", props)
 
   return (
     <div className="blog-content">
@@ -57,8 +55,7 @@ const BrandPage = (
         ?.filter(notNull)
         .map((cont: CmsContent, index: number) => (
           <ContentBlock content={cont} key={index} />
-        ))}
-        {/* <BrandHero content={content}    /> */}
+        ))} 
     </div>
   );
 };

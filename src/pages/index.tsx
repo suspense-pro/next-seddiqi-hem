@@ -42,7 +42,7 @@ export default function Home({ content }: InferGetServerSidePropsType<typeof get
 console.log("content---------page---------", content);
   return (
     <div className="main-content">
-      {content.page.active && compact(content.page.components).map((content) => (
+      {  compact(content?.page?.components).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />
       ))}
     </div>

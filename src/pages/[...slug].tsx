@@ -55,7 +55,7 @@ export default function LandingPage({
   
   return (
     <div className="main-content">
-      {page.active && page.components?.filter(notNull)
+      {page?.components?.filter(notNull)
         .map((content: CmsContent, index: number) => (
           <ContentBlock content={content} key={index} />
         ))}
