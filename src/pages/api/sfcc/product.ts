@@ -138,6 +138,44 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(500).json({ msg: err });
         }
         break;
+        case "productDetail":
+            try {
+              if (requestMethod === "GET" && action === "getProductDetails") {
+                const pid = (req.query.pid as string) ?? "";
+                console.log(pid);
+                const accessToken = await initializeShopperConfig();
+                clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
+                const shopperProductsClient = new Product.ShopperProducts(clientConfig);
+                
+                const options = {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                },
+                parameters: {
+                    organizationId: clientConfig.parameters.organizationId,
+                    siteId: clientConfig.parameters.siteId,
+                    id: pid,
+                    },
+                };
+                
+                const productResult = await shopperProductsClient.getProduct(options); 
+                if (productResult) {
+                    // console.log("Product: " + JSON.stringify(productResult, null, 4));
+                    return res.status(200).json({ isError: false, response: productResult });
+                } else {
+                    console.log("No product found.");
+                    return res.status(400).json({ isError: true, response: "No product found." });
+                }
+              }
+            } catch (err) {
+              console.error(err);
+      
+              return {
+                statusCode: 500,
+                body: JSON.stringify({ msg: err }),
+              };
+            }
+        break;
     default:
       return res.status(400).json({ isError: true });
   }

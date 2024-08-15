@@ -39,10 +39,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function Home({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-console.log("content---------page---------", content);
   return (
     <div className="main-content">
-      {  compact(content?.page?.components).map((content) => (
+      {compact(content.page.components).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />
       ))}
     </div>

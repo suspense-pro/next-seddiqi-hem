@@ -28,9 +28,10 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
 
   if (isLink) {
+    console.log("className", className, title)
     return (
       <Link
-        className={classNames(`button`, type?.toLowerCase(), color?.toLowerCase(), disabled && "disabled")}
+        className={classNames(className, `button`, type?.toLowerCase(), color?.toLowerCase(), disabled && "disabled")}
         href={link || "/"}
         target="_blank"
         rel="noopener noreferrer"
