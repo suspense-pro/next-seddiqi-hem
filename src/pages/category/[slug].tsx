@@ -27,7 +27,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  if (data.content.page && !data.content.page.active) {
+  if (data.content.page) {
     data.content.page = null;
   }
 
