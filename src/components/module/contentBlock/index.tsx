@@ -1,7 +1,11 @@
 import React from 'react';
 import { CmsContent } from '@utils/cms/utils';
+// import { useContent } from '@components/core/WithVisualization/WithVisualization';
+
 import CmsContentItem from '@components/module/cmsContentItem';
 import CmsSlot from '@components/module/cmsSlot';
+
+
 import { useRouter } from 'next/router';
 import { ComponentMapping } from '@utils/cms/config';
 import { useContent } from '@contexts/withVisualizationContext';
@@ -15,11 +19,13 @@ interface ContentBlockProps {
     components?: { [key: string]: any };
 }
 
-const ContentBlock: React.FC<ContentBlockProps> = ({
+
+
+const ContentBlock = ({
     content: originalContent,
     type = 'CONTENT',
     components = ComponentMapping,
-}) => {
+}: ContentBlockProps) => {
     const { query } = useRouter() || {};
     const vse = (query?.vse as string) || '';
 
@@ -44,6 +50,7 @@ const ContentBlock: React.FC<ContentBlockProps> = ({
                 {children}
             </CmsContentItem>
         );
+
 
     return wrappedChildren;
 };
