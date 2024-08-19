@@ -4,8 +4,7 @@ import HeartIcon from "@assets/images/svg/HeartIcon";
 import styles from "./productCard.module.scss";
 import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
-// import Image from "next/image";
-import Image from "@components/module/image";
+import Image from "next/image";
 
 // TEMP
 const TITLE = "Hublot";
@@ -19,64 +18,62 @@ const slides = [
   "/images/png/product_watch_04.png",
 ];
 
-const ProductCard = ({ item, isCarousel = false, wishlist=true, isNew=false }) => {
+const ProductCard = ({ item }) => {
   if (!item) return null;
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
   // ITEM ATTRIBS
-  const { name, type, image, shortDescription, pricePerUnit, priceCurrency } = item;
+  const { name, image, shortDescription, pricePerUnit, priceCurrency } = item;
 
   return (
     <div
-      // style={{
-      //   order: item?.tempId,
-      //   gridRowEnd: `span 1`,
-      //   gridColumnEnd: `span 1`,
-      // }}
+      style={{
+        order: item?.tempId,
+        gridRowEnd: `span 1`,
+        gridColumnEnd: `span 1`,
+      }}
       className={styles.productContainer}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className={styles.productTop}>
-        {isNew ? (
-          <div className={styles.newContainer}>
-            <div className={styles.new}>New In</div>
-          </div>
-        ) : (
-          <div>&nbsp;</div>
-        )}
-        {wishlist ? <HeartIcon fill="#" /> : <div>&nbsp;</div>}
+        <div className={styles.newContainer}>
+          <div className={styles.new}>New In</div>
+        </div>
+        <HeartIcon fill="#" />
       </div>
-      {/* <div className={styles.imgContainer}>
-        <Carousel
+      <div className={styles.imgContainer}>
+        {/* <Carousel
           slides={slides}
           setSwiper={setSwiper}
           setActiveIndex={setActiveIndex}
-        />
+        /> */}
         <Image
           layout="fill"
           objectFit="cover"
           alt={`Slide`}
           src={image?.absUrl}
         />
-      </div> */}
-      <Image className={`${styles.image}`} image={image} imageAltText={""} />
+      </div>
       <div className={styles.productBottom}>
         <Typography align="center" variant="p" className={styles.title}>
           {name?.default}
         </Typography>
         <Typography align="center" variant="p" className={styles.type}>
-          {type ? type : WATCH_TYPE}
+          {WATCH_TYPE}
         </Typography>
-        {priceCurrency && (
-          <Typography align="center" variant="p" className={styles.price}>
-            {priceCurrency} {pricePerUnit}
-          </Typography>
+        <Typography align="center" variant="p" className={styles.price}>
+          {priceCurrency} {pricePerUnit}
+        </Typography>
+        {isHovered && (
+          <CarouselBtns
+            swiper={swiper}
+            activeIndex={activeIndex}
+            slides={slides}
+          />
         )}
-
-        {isCarousel && isHovered && <CarouselBtns swiper={swiper} activeIndex={activeIndex} slides={slides} />}
       </div>
     </div>
   );
