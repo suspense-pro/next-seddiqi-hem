@@ -1,0 +1,76 @@
+@import "./../../../assets/styles/main.scss";
+
+.quoteCarouselContainer {
+  width: 100%;
+  padding: rem(60) rem(28);
+  margin: 0 auto;
+  position: relative;
+  @include md {
+    padding: rem(100);
+  }
+}
+
+.quoteBlockContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.logo {
+  margin-bottom: rem(20);
+  img {
+    max-width: rem(100);
+    height: auto;
+  }
+}
+
+.richTextContainer {
+  position: relative;
+  margin-bottom: rem(20);
+}
+
+.richText {
+  @include heading_light;
+  margin-bottom: rem(20);
+  font-size: rem(22);
+  color: getColorHex("green-dark");
+  position: relative;
+  text-align: center;
+
+  @include md {
+    font-size: rem(32);
+  }
+}
+
+.nameSource {
+  @include heading_light;
+  font-size: rem(16);
+  margin-bottom: rem(8);
+  color: getColorHex("grey");
+  h5 {
+    margin: 0;
+  }
+  @include md {
+    font-size: rem(20);
+  }
+}
+
+.nameDesignation {
+  @include body_light;
+  font-size: rem(12);
+  color: getColorHex("grey");
+  p {
+    margin: 0;
+  }
+  @include md {
+    font-size: rem(14);
+  }
+}
+
+.carouselBtnsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: rem(40);
+}

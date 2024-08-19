@@ -9,8 +9,8 @@ const Carousel = ({ slides, setSwiper, setActiveIndex }) => {
     setActiveIndex(swiperInstance.realIndex);
   };
 
-  if(!slides) {
-    return null
+  if (!slides) {
+    return null;
   }
 
   return (
@@ -22,14 +22,16 @@ const Carousel = ({ slides, setSwiper, setActiveIndex }) => {
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={index}>
-          <div>
+          {typeof slide === "string" ? (
             <Image
               layout="fill"
               objectFit="cover"
               alt={`Slide ${index + 1}`}
               src={slide}
             />
-          </div>
+          ) : (
+            slide
+          )}
         </SwiperSlide>
       ))}
     </Swiper>
