@@ -45,13 +45,15 @@ const QuoteBlock = ({ quoteItem }) => {
         setSwiper={setSwiper}
         setActiveIndex={setActiveIndex}
       />
-      <div className={styles.carouselBtnsContainer}>
-        <CarouselBtns
-          swiper={swiper}
-          activeIndex={activeIndex}
-          slides={slides}
-        />
-      </div>
+      {quoteItem?.length > 1 && (
+        <div className={styles.carouselBtnsContainer}>
+          <CarouselBtns
+            swiper={swiper}
+            activeIndex={activeIndex}
+            slides={slides}
+          />
+        </div>
+      )}
     </div>
   );
 };
