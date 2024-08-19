@@ -48,7 +48,7 @@ const MobileHeader = () => {
   return (
     <div style={containerCss} className={styles.position}>
       <MobileHeaderNavbar menuOpen={menuOpen} toggleMenu={toggleMenu} />
-      <TabbedNavigation tabs={tabs} />
+      <TabbedNavigation className={styles.tabNavigation} tabs={tabs} />
     </div>
   );
 };

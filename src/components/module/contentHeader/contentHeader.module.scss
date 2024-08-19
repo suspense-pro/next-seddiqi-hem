@@ -6,8 +6,9 @@
   z-index: 1000;
   padding: rem(0 28);
   gap: rem(20);
-
+  
   @include md {
+    padding: rem(0);
     max-width: rem(800);
     margin: 0 auto;
 

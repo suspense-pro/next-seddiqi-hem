@@ -1,0 +1,82 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  margin: rem(60 0);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: rem(40);
+  [dir="rtl"] & {
+    text-align: right;
+  }
+
+  @include md {
+    margin: rem(120 0);
+  }
+}
+
+.titleColor {
+  color: getColorHex("green-dark");
+}
+
+.subTitleColor {
+  color: getColorHex("green-dark");
+}
+
+.barColor {
+  background: getColorHex("metallic");
+}
+
+.tabNavigation {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 rem(28);
+  justify-content: center;
+
+  @include md {
+    width: rem(800);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: rem(30);
+    margin-bottom: rem(20);
+  }
+}
+
+
+.containerSlider {
+  padding: rem(0 0 0 28);
+  display: flex;
+  flex-direction: column;
+  gap: rem(32);
+
+  width: 100%;
+}
+
+.mySwiper {
+  margin: rem(28);
+  margin: 0;
+}
+
+.containerGrid {
+  padding: 0 rem(60);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(40);
+
+  .containerGridItems {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(rem(360), 1fr));
+    width: 100%;
+
+    @include md {
+      max-width: rem(1082);
+      // margin: 0 auto;
+    }
+  }
+}
