@@ -6,7 +6,7 @@ import Image from '@components/module/image';
 import Slot from '@components/module/slot';
 import { DefaultContentBlock, HeroBanner, ThreeItemCarousel, TwoColumnArticleBlock, TwoColumnFullScreenImage, TwoColumnImageCopy } from '@components/rendering';
 import { ArticleCard, DisplayCard, StoryCard } from '@components/module';
-import BrandHero from '@components/module/brandHero';
+import BrandHero from '@components/rendering/heroBanner';
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || 'platinumpanda',

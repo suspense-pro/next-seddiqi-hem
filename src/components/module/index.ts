@@ -25,7 +25,6 @@ import SideDrawer from "./sideDrawer";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
-import BrandHero from "./brandHero";
 import ContentHeader from "./contentHeader";
 
 export {
@@ -55,6 +54,5 @@ export {
   SideDrawer,
   FilterBtn,
   PlpContent,
-  BrandHero,
   ContentHeader
 };

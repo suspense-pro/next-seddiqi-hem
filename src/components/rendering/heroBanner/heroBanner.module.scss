@@ -1,18 +1,176 @@
-@import "../../../assets/styles/main.scss";
+@import "./../../../assets/styles/main.scss";
 
-.hero_banner_main {
-  height: 100%;
+.heroBanner {
   width: 100%;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
-  &.container {
-    
-    @include md {
-      max-width: calc(#{rem(1312)} + #{rem(40)});
-      padding: rem(0 20);
-      margin: 0 auto;
+  .heroBannerContainer {
+    position: relative;
+    width: 100%;
+    height: rem(880);
+    margin: 0 auto;
+    z-index: 1;
+    video {
+      height: rem(880);
     }
   }
 
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.standardWidth {
+    width: auto;
+  }
+
+  .bannerItem {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+    z-index: 1;
+  }
+
+  .textContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    width: 100%;
+    color: getColorHex("white");
+    padding: rem(28);
+
+    @include md {
+      padding: rem(80);
+      width: 60%;
+    }
+
+    &.bottomPadding {
+      padding-bottom: rem(100);
+    }
+
+    &.left-center {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    &.left-bottom {
+      bottom: 0;
+      left: 0;
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    &.right-center {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    &.right-bottom {
+      bottom: 0;
+      right: 0;
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    &.center-center {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      align-items: center;
+    }
+
+    &.center-bottom {
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      align-items: center;
+    }
+  }
+
+  .logoIcon {
+    width: rem(100);
+    margin-bottom: rem(20);
+  }
+
+  .title {
+    @include heading_regular;
+    font-size: rem(34);
+    text-transform: uppercase;
+    margin-bottom: rem(18);
+
+    h1 {
+      margin: 0;
+    }
+
+    @include md {
+      font-size: rem(48);
+      margin-bottom: rem(20);
+    }
+  }
+
+  .underline {
+    width: rem(70);
+    height: rem(3);
+    background-color: getColorHex("white");
+    margin-bottom: rem(28);
+  }
+
+  .description {
+    @include body_regular;
+    font-size: rem(14);
+    margin-bottom: rem(28);
+
+    @include md {
+      font-size: rem(16);
+    }
+  }
+
+  .carouselBtnsContainer {
+    position: absolute;
+    bottom: rem(28);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    @include md {
+      bottom: rem(41);
+    }
+
+    * {
+      color: getColorHex("white");
+      fill: getColorHex("white");
+    }
+
+    .carouselBtns_carouselBtn {
+      background-color: getColorHex("white");
+    }
+    .carouselBtns_activeCarouselBtn {
+      border: 0.0625rem solid getColorHex("white");
+    }
+
+    .carouselBtns_arrowLeft,
+    .carouselBtns_arrowRight {
+      fill: getColorHex("white");
+    }
+  }
 }

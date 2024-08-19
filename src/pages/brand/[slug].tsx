@@ -9,7 +9,7 @@ import fetchPageData from "@utils/cms/page/fetchPageData";
 import { isEmpty, mapToID, notNull } from "@utils/helpers";
 import { CmsContent } from "@utils/cms/utils";
 import ContentBlock from "@components/module/contentBlock";
-import BrandHero from "@components/module/brandHero";
+import BrandHero from "@components/rendering/heroBanner";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let { slug } = context.params || {};
@@ -19,7 +19,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
     {
       content: {
-        page: { key: `brand/hublotbanner` },
+        page: { key: `brand/${deliveryKey}` },
       },
     },
     context

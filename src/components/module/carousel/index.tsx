@@ -6,6 +6,7 @@ import "swiper/css";
 import Video from "../video";
 
 const Carousel = ({ slides, setSwiper, setActiveIndex }) => {
+  console.log("slides------", slides)
   const onSlideChange = (swiperInstance) => {
     setActiveIndex(swiperInstance.realIndex);
   };
@@ -38,7 +39,11 @@ const Carousel = ({ slides, setSwiper, setActiveIndex }) => {
               //   controls={slide.showPlay}
               //   style={{ width: "100%", height: "100%", objectFit: "cover" }}
               // />
-              <Video  video={slide.url} />
+              <Video
+                video={slide.url}
+                autoPlay={slide.autoPlay}
+                showPlay={slide.showPlay} 
+              />
             ) : null}
           </div>
         </SwiperSlide>
