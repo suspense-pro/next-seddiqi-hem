@@ -18,7 +18,7 @@ const slotsUrl = schemaUrl + '/slots';
 const pageUrl = schemaUrl + '/page';
 const moduleUrl = schemaUrl + '/module';
 const componentUrl = schemaUrl + '/component';
-
+const renderingUrl = schemaUrl + '/rendering';
 
 export const ComponentMapping: any = {
   [`${pageUrl}/landing`]: ContentPage,
@@ -31,8 +31,9 @@ export const ComponentMapping: any = {
   [`${moduleUrl}/article-card`]: ArticleCard,
   [`${moduleUrl}/display-card`]: DisplayCard,
   [`${moduleUrl}/story-card`]: StoryCard,
-  [`${componentUrl}/two-column-image-copy`]: TwoColumnImageCopy,
+  [`${componentUrl}/two-column-image-copy`]: TwoColumnImageCopy, 
   [`${componentUrl}/two-column-article-block`]: TwoColumnArticleBlock,
+  [`${componentUrl}/hero-banner`]: HeroBanner,  
   [`${componentUrl}/category-list`]: ThreeItemCarousel,
   [`${componentUrl}/two-column-fullscreen-image`]: TwoColumnFullScreenImage,
   [`${componentUrl}/content-block`]: DefaultContentBlock,

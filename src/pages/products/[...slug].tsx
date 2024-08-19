@@ -1,5 +1,5 @@
 import Layout from "@components/layout";
-import React from "react";
+import React, {useEffect} from "react";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { GetServerSidePropsContext } from "next";
 import { PlpContent } from "@components/module";
@@ -12,6 +12,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const plpKey = Array.isArray(slug) ? slug.join('/') : slug;
   const { vse } = context.query || {};
 
+  
   const data = await fetchStandardPageData(
     {
       content: {
