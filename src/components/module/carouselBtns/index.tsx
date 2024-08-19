@@ -18,7 +18,7 @@ const CarouselBtns = ({ swiper, activeIndex, slides }) => {
         swiper.slidePrev();
       }
     }
-  }, [swiper, activeIndex, slides.length]);
+  }, [swiper, activeIndex, slides?.length]);
 
   const handleNextClick = useCallback(() => {
     if (swiper) {
@@ -28,7 +28,7 @@ const CarouselBtns = ({ swiper, activeIndex, slides }) => {
         swiper.slideNext();
       }
     }
-  }, [swiper, activeIndex, slides.length]);
+  }, [swiper, activeIndex, slides?.length]);
 
   return (
     <div className={styles.carousel}>
@@ -36,7 +36,7 @@ const CarouselBtns = ({ swiper, activeIndex, slides }) => {
         <ArrowRight className={styles.arrowLeft} />
       </span>
       <div className={styles.btns}>
-        {slides.map((_, index) => (
+        {slides?.map((_, index) => (
           <div
             key={index}
             className={`${styles.carouselBtn} ${

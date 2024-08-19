@@ -17,3 +17,5 @@ export { default as FilterIcon } from "./FilterIcon";
 export { default as Ellipse } from "./Ellipse";
 export { default as Tickbox } from "./Tickbox";
 export { default as Tick } from "./Tick";
+export { default as VideoPause } from "./VideoPause";
+export { default as VideoPlay } from "./VideoPlay";

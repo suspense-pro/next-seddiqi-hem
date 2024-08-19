@@ -4,8 +4,20 @@ import HeroBanner from "./heroBanner";
 import TwoColumnImageCopy from "./twoColumnImageCopy";
 import TwoColumnArticleBlock from "./twoColumnArticleBlock";
 import ThreeItemCarousel from "./threeItemCarousel";
-import TwoColumnFullScreenImage from './twoColumnFullScreenImage/index';
+import TwoColumnFullScreenImage from "./twoColumnFullScreenImage/index";
 import DefaultContentBlock from "./defaultContentBlock";
+import CollectionsTabList from "./collectionsTabList";
 import QuoteBlock from "./quoteBlock";
 
-export { Header, Footer, HeroBanner, TwoColumnImageCopy, TwoColumnArticleBlock, ThreeItemCarousel, TwoColumnFullScreenImage, DefaultContentBlock, QuoteBlock};
+export {
+  Header,
+  Footer,
+  HeroBanner,
+  TwoColumnImageCopy,
+  TwoColumnArticleBlock,
+  ThreeItemCarousel,
+  TwoColumnFullScreenImage,
+  DefaultContentBlock,
+  CollectionsTabList,
+  QuoteBlock
+};

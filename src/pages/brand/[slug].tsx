@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import { getProducts } from "@utils/sfcc-connector";
 import Layout from "@components/layout";
@@ -13,6 +14,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let { slug } = context.params || {};
   const { vse } = context.query || {};
   const deliveryKey = Array.isArray(slug) ? slug.join("/") : (slug as string);
+
   const data = await fetchStandardPageData(
     {
       content: {
@@ -21,6 +23,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
     context
   );
+
 
   // if (isEmpty(data.page) || !slug) {
   //   return {
@@ -50,11 +53,12 @@ const BrandPage = (
         ?.filter(notNull)
         .map((cont: CmsContent, index: number) => (
           <ContentBlock content={cont} key={index} />
-        ))}
+        ))} 
     </div>
   );
 };
 
-export default BrandPage
+export default BrandPage;
 
 BrandPage.Layout = Layout;
+
