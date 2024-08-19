@@ -4,6 +4,7 @@ import Image from "@components/module/image";
 import Video from "@components/module/video";
 
 const CollectionsCard = ({ item }) => {
+  console.log("Item", item);
   return (
     <div className={styles.item}>
       {item?.media?.image ? (
@@ -13,11 +14,13 @@ const CollectionsCard = ({ item }) => {
           <Video className={styles.video} video={item?.media?.video} />
         </div>
       ) : null}
-      <div className={styles.itemContent}>
-        <div className={styles.category}>{item?.title}</div>
-        <div className={styles.title}>{item?.cta?.label}</div>
-        {item?.hideUnderline && <div className={styles.itemBar}>&nbsp;</div>}
-      </div>
+      {!item?.hideOverlay && (
+        <div className={styles.itemContent}>
+          <div className={styles.category}>{item?.title}</div>
+          <div className={styles.title}>{item?.cta?.label}</div>
+          {item?.hideUnderline && <div className={styles.itemBar}>&nbsp;</div>}
+        </div>
+      )}
     </div>
   );
 };
