@@ -32,7 +32,7 @@ const ContentBlock: React.FC<ContentBlockProps> = ({
 
     const content = liveContent;
     const Component = components[content?._meta?.schema];
-    const children = Component ? <Component {...content} /> : <>{JSON.stringify(content)}</>;
+    const children = Component ? <Component {...content} /> : null;
 
     const wrappedChildren =
         type === 'SLOT' ? (
