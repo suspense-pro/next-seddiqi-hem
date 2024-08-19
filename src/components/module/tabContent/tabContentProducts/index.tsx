@@ -53,6 +53,7 @@ const TabContentProducts = () => {
             containerStyle={styles.column1}
             cardStyle={styles.subMenu}
             titleStyle={styles.displayCardsTitle}
+            key={generateUniqueId()}
           />
 
         })}

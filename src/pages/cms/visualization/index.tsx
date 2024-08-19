@@ -35,8 +35,7 @@ export default function Home({
 
   return (
     <div className="main-content">
-      {content.page.active &&
-        compact(page.components).map((content) => (
+      {compact(page.components).map((content) => (
           <ContentBlock content={content} key={content?._meta.deliveryId} />
         ))}
     </div>

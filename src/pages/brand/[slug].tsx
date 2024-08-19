@@ -46,7 +46,7 @@ const BrandPage = (
 
   return (
     <div className="blog-content">
-      {page.contentComponent
+      {page.contentComponents
         ?.filter(notNull)
         .map((cont: CmsContent, index: number) => (
           <ContentBlock content={cont} key={index} />
