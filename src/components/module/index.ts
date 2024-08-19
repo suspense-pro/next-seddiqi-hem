@@ -27,8 +27,6 @@ import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
 import ContentHeader from "./contentHeader";
-import CollectionsTabMobile from "./collectionsTabMobile";
-import CollectionsTabDesktop from "./collectionsTabDesktop";
 
 export {
   Head,
@@ -58,7 +56,5 @@ export {
   FilterBtn,
   PlpContent,
   ContentHeader,
-  CollectionsTabMobile,
-  CollectionsTabDesktop,
   CollectionsCard
 };
