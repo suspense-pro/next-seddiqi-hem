@@ -6,15 +6,15 @@
   gap: rem(28);
   overflow: hidden;
   transition: all 0.5s;
+  align-items: center;
+
 
   .tabs {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: rem(0 28);
     border-bottom: rem(1) solid getColorHex("grey-light-3");
     color: getColorHex("brown-grey");
-    margin-top: rem(18);
 
     .tab {
       @include heading_medium;

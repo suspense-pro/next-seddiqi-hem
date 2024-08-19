@@ -8,6 +8,7 @@ import Video from "./video";
 import ArticleCard from "./cards/articleCard";
 import DisplayCard from "./cards/displayCard";
 import StoryCard from "./cards/storyCard";
+import CollectionsCard from "./cards/collectionsCard";
 import NavigationLink from "./navigationLink";
 import DesktopHeader from "./desktopHeader";
 import MegaMenu from "./megaMenu";
@@ -54,5 +55,6 @@ export {
   SideDrawer,
   FilterBtn,
   PlpContent,
-  ContentHeader
+  ContentHeader,
+  CollectionsCard
 };

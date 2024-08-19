@@ -1,0 +1,76 @@
+@import './../../../../assets/styles/main.scss';
+
+.image {
+  // width: rem(360);
+  height: rem(336);
+  object-fit: cover;
+  width: 100%;
+
+  @include md {
+    height: rem(520);
+  }
+}
+
+.videoContainer {
+  position: relative;
+  width: 100%;
+  height: rem(336);
+
+  @include md {
+    height: rem(520);
+  }
+
+  .video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.8;
+  }
+}
+
+.item {
+  position: relative;
+  border: rem(1) solid getColorHex("grey-light-4", 0.4);
+
+
+  .itemContent {
+    position: absolute;
+    bottom: rem(32);
+    color: getColorHex("white");
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: rem(8);
+
+    .category {
+      @include heading_regular;
+      font-size: rem(16);
+      font-weight: 400;
+      line-height: rem(20);
+      letter-spacing: rem(0.4);
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .title {
+      @include body_regular;
+      font-size: rem(16);
+      line-height: rem(26);
+      letter-spacing: rem(0.4);
+      text-align: center;
+      text-transform: uppercase;
+      margin-top: rem(8);
+    }
+
+    .itemBar {
+      height: rem(2);
+      width: rem(36);
+      background-color: getColorHex("white");
+      margin: 0 auto;
+    }
+  }
+}
