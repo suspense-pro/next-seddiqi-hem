@@ -1,5 +1,5 @@
 import { CollectionsTabDesktop, CollectionsTabMobile, ContentHeader, TabbedNavigation } from "@components/module";
-import React, { useRef, useState } from "react";
+import React from "react";
 import styles from "./collectionsTabList.module.scss";
 
 import "swiper/css";

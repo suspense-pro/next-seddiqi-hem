@@ -7,7 +7,6 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
 import styles from "./collectionsTabMobile.module.scss";
-import ProductCard from "../cards/productCard";
 import Button from "../button";
 import CollectionsCard from "../cards/collectionsCard";
 
@@ -24,16 +23,7 @@ const CollectionsTabMobile = ({ content, cta, ind }) => {
 
   const renderSlide = (item, index) => (
     <SwiperSlide className={styles.swiperSlide} key={index} style={isMobile ? { width: "90%" } : {}}>
-      {content?.hideUnderline ? (
-        <CollectionsCard item={item} />
-      ) : (
-        <div>
-          <ProductCard
-            item={{ name: { default: item?.title }, image: item?.media?.image, type: item?.cta?.label }}
-            wishlist={false}
-          />
-        </div>
-      )}
+      <CollectionsCard item={item} />
     </SwiperSlide>
   );
 

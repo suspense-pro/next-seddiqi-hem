@@ -11,14 +11,7 @@ const CollectionsTabDesktop = ({ content, cta, ind }) => {
     <div className={styles.containerGrid}>
       <div className={styles.containerGridItems}>
         {content?.tabItem[ind]?.collectionItems?.map((item) => {
-          return content?.hideUnderline ? (
-            <CollectionsCard item={item} />
-          ) : (
-            <ProductCard
-              item={{ name: { default: item?.title }, image: item?.media?.image, type: item?.cta?.label }}
-              wishlist={false}
-            />
-          );
+          return <CollectionsCard item={item} />
         })}
       </div>
       <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />
