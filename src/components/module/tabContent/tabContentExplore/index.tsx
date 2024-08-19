@@ -54,6 +54,7 @@ const TabContentExplore = () => {
                     containerStyle={styles.column1}
                     cardStyle={styles.cardStyle}
                     titleStyle={styles.displayCardsTitle}
+                    key={generateUniqueId()}
                   />
 
               })}
