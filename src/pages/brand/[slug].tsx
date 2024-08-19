@@ -9,7 +9,6 @@ import fetchPageData from "@utils/cms/page/fetchPageData";
 import { isEmpty, mapToID, notNull } from "@utils/helpers";
 import { CmsContent } from "@utils/cms/utils";
 import ContentBlock from "@components/module/contentBlock";
-import BrandHero from "@components/rendering/heroBanner";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let { slug } = context.params || {};

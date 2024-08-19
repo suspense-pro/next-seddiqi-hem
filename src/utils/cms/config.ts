@@ -6,7 +6,6 @@ import Image from '@components/module/image';
 import Slot from '@components/module/slot';
 import { DefaultContentBlock, HeroBanner, ThreeItemCarousel, TwoColumnArticleBlock, TwoColumnFullScreenImage, TwoColumnImageCopy } from '@components/rendering';
 import { ArticleCard, DisplayCard, StoryCard } from '@components/module';
-import BrandHero from '@components/rendering/heroBanner';
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || 'platinumpanda',
@@ -34,7 +33,7 @@ export const ComponentMapping: any = {
   [`${moduleUrl}/story-card`]: StoryCard,
   [`${componentUrl}/two-column-image-copy`]: TwoColumnImageCopy, 
   [`${componentUrl}/two-column-article-block`]: TwoColumnArticleBlock,
-  [`${componentUrl}/hero-banner`]: BrandHero,  
+  [`${componentUrl}/hero-banner`]: HeroBanner,  
   [`${componentUrl}/category-list`]: ThreeItemCarousel,
   [`${componentUrl}/two-column-fullscreen-image`]: TwoColumnFullScreenImage,
   [`${componentUrl}/content-block`]: DefaultContentBlock
