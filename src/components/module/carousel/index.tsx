@@ -21,6 +21,7 @@ const Carousel = ({ slides, setSwiper, setActiveIndex }) => {
       onSlideChange={onSlideChange}
       modules={[Pagination]}
       loop={true}
+      autoHeight={true}
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={index}>
@@ -44,7 +45,7 @@ const Carousel = ({ slides, setSwiper, setActiveIndex }) => {
                 autoPlay={slide.autoPlay}
                 showPlay={slide.showPlay} 
               />
-            ) : null}
+            ) : slide}
           </div>
         </SwiperSlide>
       ))}

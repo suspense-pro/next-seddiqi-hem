@@ -7,6 +7,7 @@ import ThreeItemCarousel from "./threeItemCarousel";
 import TwoColumnFullScreenImage from "./twoColumnFullScreenImage/index";
 import DefaultContentBlock from "./defaultContentBlock";
 import CollectionsTabList from "./collectionsTabList";
+import QuoteBlock from "./quoteBlock";
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   TwoColumnFullScreenImage,
   DefaultContentBlock,
   CollectionsTabList,
+  QuoteBlock
 };

@@ -45,7 +45,7 @@ const RichText = ({ text = [], align = "left", className }: TextProps) => {
   }
   return (
     <>
-      {text.map((item: any, index: number) => {
+      {text?.map((item: any, index: number) => {
         const { type, data } = item;
 
         switch (type) {
