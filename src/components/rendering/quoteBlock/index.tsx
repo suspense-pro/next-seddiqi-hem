@@ -16,16 +16,20 @@ const QuoteBlock = ({ quoteItem }) => {
     const { logoIcon, richText, nameSource, nameDesignation } = item;
     return (
       <div key={index} className={styles.quoteBlockContainer}>
-        {logoIcon && logoIcon.image && (
-          <div className={styles.logo}>
+        <div className={styles.logo}>
+          {logoIcon && logoIcon.image ? (
             <Image
               image={logoIcon.image.image}
               imageAltText={logoIcon.image.altText}
             />
+          ) : (
+            <div className={styles.logoPlaceholder}></div>
+          )}
+        </div>
+        <div className={styles.richTextContainer}>
+          <div className={styles.richText}>
+            <RichText align="center" text={richText} />
           </div>
-        )}
-        <div className={styles.richText}>
-          <RichText align="center" text={richText} />
         </div>
         <Typography variant="h5" className={styles.nameSource}>
           {nameSource}
