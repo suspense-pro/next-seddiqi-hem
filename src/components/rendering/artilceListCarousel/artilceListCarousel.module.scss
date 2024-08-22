@@ -97,20 +97,18 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    position: absolute;
+    z-index: 2000;
 
     .arrowLeft {
       transform: rotate(180deg);
     }
   }
   .leftBtn {
-    position: absolute;
     left: rem(32);
-    z-index: 2000;
   }
   .rightBtn {
-    position: absolute;
     right: rem(32);
-    z-index: 2000;
   }
 }
 
