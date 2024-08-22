@@ -4,7 +4,7 @@ import Image from "@components/module/image";
 import Video from "@components/module/video";
 
 const CollectionsCard = ({ item }) => {
-  console.log("Item", item);
+  // console.log("Item", item);
   return (
     <div className={styles.item}>
       {item?.media?.image ? (
