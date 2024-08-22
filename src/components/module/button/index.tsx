@@ -28,7 +28,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
 
   if (isLink) {
-    console.log("className", className, title)
+    // console.log("className", className, title)
     return (
       <Link
         className={classNames(className, `button`, type?.toLowerCase(), color?.toLowerCase(), disabled && "disabled")}

@@ -7,3 +7,4 @@ export type {
   CardInfoProps,
   NavigationLinkProps,
 } from "./header";
+export type {ImageQuoteBlockProps} from "./imageQuoteBlock";

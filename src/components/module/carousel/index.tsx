@@ -6,7 +6,7 @@ import "swiper/css";
 import Video from "../video";
 
 const Carousel = ({ slides, setSwiper, setActiveIndex }) => {
-  console.log("slides------", slides)
+  // console.log("slides------", slides)
   const onSlideChange = (swiperInstance) => {
     setActiveIndex(swiperInstance.realIndex);
   };
@@ -21,7 +21,7 @@ const Carousel = ({ slides, setSwiper, setActiveIndex }) => {
       onSlideChange={onSlideChange}
       modules={[Pagination]}
       loop={true}
-      autoHeight={true}
+      // autoHeight={true}
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={index}>

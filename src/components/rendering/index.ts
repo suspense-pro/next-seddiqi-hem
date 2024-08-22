@@ -8,6 +8,7 @@ import TwoColumnFullScreenImage from "./twoColumnFullScreenImage/index";
 import DefaultContentBlock from "./defaultContentBlock";
 import CollectionsTabList from "./collectionsTabList";
 import QuoteBlock from "./quoteBlock";
+import ImageQuoteBlock from "./imageQuoteBlock";
 
 export {
   Header,
@@ -19,5 +20,6 @@ export {
   TwoColumnFullScreenImage,
   DefaultContentBlock,
   CollectionsTabList,
-  QuoteBlock
+  QuoteBlock,
+  ImageQuoteBlock,
 };
