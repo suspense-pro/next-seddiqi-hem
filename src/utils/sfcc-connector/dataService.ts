@@ -254,6 +254,40 @@ export async function getProductDetails({
   }
 }
 
+export async function getProducts({
+  pids,
+  method,
+}: {
+  pids: any;
+  method: string;
+}) {
+  try {
+    const json = {
+      api: "productList",
+      action: "getMultipleProducts",
+      productIds: pids,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
+
+    console.log({res});
+
+    if(!res) {
+      return null;
+    }
+     
+    return res.response;
+    
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 export async function getSearchResults({
   query,
   method,

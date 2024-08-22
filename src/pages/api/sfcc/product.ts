@@ -176,6 +176,44 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               };
             }
         break;
+        case "productList":
+            try {
+              if (requestMethod === "GET" && action === "getMultipleProducts") {
+                const productIds = (req.query.productIds as string) ?? "";
+                console.log(productIds);
+                const accessToken = await initializeShopperConfig();
+                clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
+                const shopperProductsClient = new Product.ShopperProducts(clientConfig);
+                
+                const options = {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                },
+                parameters: {
+                    organizationId: clientConfig.parameters.organizationId,
+                    siteId: clientConfig.parameters.siteId,
+                    ids: productIds,
+                    },
+                };
+                
+                const productResult = await shopperProductsClient.getProducts(options); 
+                if (productResult) {
+                    // console.log("Product: " + JSON.stringify(productResult, null, 4));
+                    return res.status(200).json({ isError: false, response: productResult });
+                } else {
+                    console.log("No product found.");
+                    return res.status(400).json({ isError: true, response: "No product found." });
+                }
+              }
+            } catch (err) {
+              console.error(err);
+      
+              return {
+                statusCode: 500,
+                body: JSON.stringify({ msg: err }),
+              };
+            }
+        break;
     default:
       return res.status(400).json({ isError: true });
   }
