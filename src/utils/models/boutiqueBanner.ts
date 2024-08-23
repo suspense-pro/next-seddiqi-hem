@@ -1,4 +1,4 @@
-interface MediaType {
+export interface MediaType {
   image?: {
     _meta: {
       schema: string;
@@ -24,7 +24,7 @@ interface MediaType {
   showPlay?: boolean;
 }
 
-interface BoutiqueBannerProps {
+export interface BoutiqueBannerProps {
   backgroundColor: "primary" | "secondary" | "default";
   cta: {
     isNewTab: boolean;
