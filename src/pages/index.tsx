@@ -7,6 +7,7 @@ import compact from "lodash/compact";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { isEmpty } from "@utils/helpers";
+import { getProducts } from "@utils/sfcc-connector/dataService";
 
 // import { getCustomer } from "@utils/sfcc-connector/dataService";
 // import LoginForm from "@components/LoginForm";
@@ -23,6 +24,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
     context
   );
+
+  const response = await getProducts({
+    method: "GET",
+    pids: "25448064M,22416787M,25419334M,22956726M,25148430M,11736753M,25493602M,25493587M,25448068M",
+  });  
+  console.log("prods", response)
+
 
   // if (isEmpty(data.page)) {
   //   return {
