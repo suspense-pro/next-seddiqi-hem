@@ -86,8 +86,6 @@ const Video = ({ video, className = "", autoPlay = true, showPlay = true }) => {
           className={styles.videoPlayer}
           onLoadedData={handleVideoLoad}
           style={{
-            opacity: isLoaded ? 1 : 0,
-            transition: "opacity 1s",
             background: "#000101",
             width: "100%",
             height: "100%",
