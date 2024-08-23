@@ -1,5 +1,5 @@
-export interface ImageType {
-  image: {
+interface MediaType {
+  image?: {
     _meta: {
       schema: string;
     };
@@ -9,20 +9,30 @@ export interface ImageType {
     defaultHost: string;
     mimeType: string;
   };
-  altText: string;
+  video?: {
+    _meta: {
+      schema: string;
+    };
+    id: string;
+    name: string;
+    endpoint: string;
+    defaultHost: string;
+    mimeType: string;
+  };
+  altText?: string;
+  autoPlay?: boolean;
+  showPlay?: boolean;
 }
 
-export interface CtaType {
-  isNewTab: boolean;
-  label: string;
-  type: string;
-  color: string;
-}
-
-export interface BoutiqueBannerProps {
-  backgroundColor: 'primary' | 'secondary';
-  cta: CtaType;
+interface BoutiqueBannerProps {
+  backgroundColor: "primary" | "secondary" | "default";
+  cta: {
+    isNewTab: boolean;
+    label: string;
+    type: string;
+    color: string;
+  };
   mainTitle: string;
-  media: ImageType;
+  media: MediaType;
   richText: string;
 }

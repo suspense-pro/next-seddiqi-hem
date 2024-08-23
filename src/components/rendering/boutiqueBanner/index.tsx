@@ -3,6 +3,7 @@ import styles from "./boutiqueBanner.module.scss";
 import Typography from "../../module/typography";
 import RichText from "../../module/richText";
 import { Image } from "@components/module";
+import Video from "@components/module/video"; 
 import Button from "../../module/button";
 import { BoutiqueBannerProps } from "@utils/models";
 
@@ -14,16 +15,20 @@ const BoutiqueBanner: React.FC<BoutiqueBannerProps> = ({
   richText,
 }) => {
   const bgClass =
-    backgroundColor === "secondary"
+    backgroundColor === "primary"
       ? styles.primaryBackground
-      : backgroundColor === "primary"
+      : backgroundColor === "secondary"
       ? styles.secondaryBackground
       : styles.defaultBackground;
 
   return (
     <div className={`${styles.boutiqueBannerContainer} ${bgClass}`}>
-      <div className={styles.imageContainer}>
-        <Image image={media.image} imageAltText={media.altText} />
+      <div className={styles.mediaContainer}>
+        {media?.image ? (
+          <Image image={media.image} imageAltText={media.altText} />
+        ) : media?.video ? (
+          <Video video={media.video} autoPlay={media.autoPlay} showPlay={media.showPlay} />
+        ) : null}
       </div>
       <div className={styles.contentContainer}>
         <Typography variant="h2" className={styles.title}>
