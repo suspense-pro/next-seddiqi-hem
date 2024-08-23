@@ -4,7 +4,7 @@ import Container from '@components/module/container';
 import ContentPage from '@components/module/contentPage';
 import Image from '@components/module/image';
 import Slot from '@components/module/slot';
-import { CollectionsTabList, DefaultContentBlock, HeroBanner, ThreeItemCarousel, TwoColumnArticleBlock, TwoColumnFullScreenImage, TwoColumnImageCopy, QuoteBlock, ImageQuoteBlock, ArticleListCarousel } from '@components/rendering';
+import { CollectionsTabList, DefaultContentBlock, HeroBanner, ThreeItemCarousel, TwoColumnArticleBlock, TwoColumnFullScreenImage, TwoColumnImageCopy, QuoteBlock, ImageQuoteBlock, BoutiqueBanner, ArticleListCarousel } from '@components/rendering';
 import { ArticleCard, DisplayCard, StoryCard } from '@components/module';
 
 export const defaultClientConfig: ContentClientConfigV2 = {
@@ -40,6 +40,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/quote-block`]: QuoteBlock,
   [`${componentUrl}/image-quote-block`]: ImageQuoteBlock,
   [`${componentUrl}/collections-tab-list`]: CollectionsTabList,
+  [`${componentUrl}/botique-banner`]: BoutiqueBanner,
   [`${componentUrl}/article-list-carousel`]: ArticleListCarousel
 
 };
