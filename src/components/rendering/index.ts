@@ -9,6 +9,7 @@ import DefaultContentBlock from "./defaultContentBlock";
 import CollectionsTabList from "./collectionsTabList";
 import QuoteBlock from "./quoteBlock";
 import ImageQuoteBlock from "./imageQuoteBlock";
+import BoutiqueBanner from "./boutiqueBanner";
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   CollectionsTabList,
   QuoteBlock,
   ImageQuoteBlock,
+  BoutiqueBanner
 };

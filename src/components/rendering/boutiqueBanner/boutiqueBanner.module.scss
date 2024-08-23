@@ -1,0 +1,107 @@
+@import "./../../../assets/styles/main.scss";
+
+.boutiqueBannerContainer {
+  display: flex;
+  align-items: center;
+  padding: rem(60) rem(28);
+  margin: 0 auto;
+  border-radius: rem(8);
+  position: relative;
+  overflow: hidden;
+  flex-direction: column;
+
+  &.primaryBackground {
+    background-color: getColorHex("grey-light-6");
+    background-image: url("/images/png/PatternGrey.png");
+    
+  }
+
+  &.secondaryBackground {
+    background-color: getColorHex("cream");
+    background-image: url("/images/png/PatternLight.png");
+  }
+
+  &.defaultBackground {
+    background-color: getColorHex("grey-light-6");
+    background-image: url("/images/png/PatternGrey.png");
+  }
+
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @include lg {
+    flex-direction: row;
+    padding: rem(100 66);
+  }
+}
+
+.imageContainer {
+  margin-right: rem(0);
+  margin-bottom: rem(32);
+
+  img {
+    width: rem(688);
+    height: auto;
+    border-radius: rem(8) rem(0) rem(8) rem(0);
+    @include xs-max {
+      height: rem(223);
+      width: auto;
+    }
+  }
+  @include lg {
+    margin-right: rem(80);
+    margin-bottom: rem(0);
+    [dir="rtl"] & {
+      margin-right: rem(0);
+      margin-left: rem(80);
+    }
+  }
+}
+
+.contentContainer {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.title {
+  @include heading_regular;
+  margin-bottom: rem(12);
+  font-size: rem(28);
+  color: getColorHex("black");
+  [dir="rtl"] & {
+    text-align: right;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  @include lg {
+    font-size: rem(40);
+    margin-bottom: rem(16);
+  }
+}
+
+.richTextContainer {
+  @include body_regular;
+  margin-bottom: rem(24);
+  font-size: rem(12);
+  color: getColorHex("black-light");
+
+  div {
+    text-align: left;
+
+    [dir="rtl"] & {
+      text-align: right !important;
+    }
+  }
+
+  @include lg {
+    font-size: rem(16);
+    margin-bottom: rem(28);
+  }
+}

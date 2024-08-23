@@ -8,3 +8,5 @@ export type {
   NavigationLinkProps,
 } from "./header";
 export type {ImageQuoteBlockProps} from "./imageQuoteBlock";
+export type {BoutiqueBannerProps} from "./boutiqueBanner";
+
