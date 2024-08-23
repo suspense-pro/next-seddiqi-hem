@@ -9,6 +9,7 @@ import DefaultContentBlock from "./defaultContentBlock";
 import CollectionsTabList from "./collectionsTabList";
 import QuoteBlock from "./quoteBlock";
 import ImageQuoteBlock from "./imageQuoteBlock";
+import BoutiqueBanner from "./boutiqueBanner";
 import ArticleListCarousel from "./artilceListCarousel";
 import HighlightedProductCarousel from "./highlightedProductCarousel";
 
@@ -24,6 +25,7 @@ export {
   CollectionsTabList,
   QuoteBlock,
   ImageQuoteBlock,
-  ArticleListCarousel,
-  HighlightedProductCarousel
+  HighlightedProductCarousel,
+  BoutiqueBanner,
+  ArticleListCarousel
 };
