@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   padding: rem(60) rem(28);
-  margin: 0 auto;
+  margin: rem(60) 0;
   border-radius: rem(8);
   position: relative;
   overflow: hidden;
@@ -13,7 +13,6 @@
   &.primaryBackground {
     background-color: getColorHex("grey-light-6");
     background-image: url("/images/png/PatternGrey.png");
-    
   }
 
   &.secondaryBackground {
@@ -37,34 +36,35 @@
 }
 
 .imageContainer {
-  margin-right: rem(0);
+  flex: 1;
   margin-bottom: rem(32);
 
   img {
-    width: rem(688);
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: rem(8) rem(0) rem(8) rem(0);
-    @include xs-max {
-      height: rem(223);
-      width: auto;
-    }
-  }
-  @include lg {
-    margin-right: rem(80);
-    margin-bottom: rem(0);
-    [dir="rtl"] & {
-      margin-right: rem(0);
-      margin-left: rem(80);
+    @include lg {
+      margin-bottom: rem(0);
     }
   }
 }
 
 .contentContainer {
-  flex: 2;
+  flex: 1; // Take up the other half of the container width
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  padding-left: rem(0);
+
+  @include lg {
+    padding-left: rem(80);
+
+    [dir="rtl"] & {
+      padding-right: rem(80);
+    }
+  }
 }
 
 .title {
@@ -72,6 +72,7 @@
   margin-bottom: rem(12);
   font-size: rem(28);
   color: getColorHex("black");
+
   [dir="rtl"] & {
     text-align: right;
   }
