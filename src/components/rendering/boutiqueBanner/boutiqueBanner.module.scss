@@ -1,14 +1,14 @@
 @import "./../../../assets/styles/main.scss";
 
 .boutiqueBannerContainer {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: rem(60) rem(28);
   margin: rem(60) 0;
-  border-radius: rem(8);
   position: relative;
   overflow: hidden;
-  flex-direction: column;
 
   &.primaryBackground {
     background-color: getColorHex("grey-light-6");
@@ -29,9 +29,17 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-  @include lg {
-    flex-direction: row;
-    padding: rem(100 66);
+  .innerContainer {
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include lg {
+      flex-direction: row;
+      padding: rem(100 66);
+    }
   }
 }
 
@@ -46,6 +54,7 @@
     object-fit: cover;
     border-radius: rem(8) rem(0) rem(8) rem(0);
   }
+
   @include lg {
     margin-bottom: rem(0);
   }
