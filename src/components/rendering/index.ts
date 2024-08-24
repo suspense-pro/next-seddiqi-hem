@@ -11,6 +11,7 @@ import QuoteBlock from "./quoteBlock";
 import ImageQuoteBlock from "./imageQuoteBlock";
 import BoutiqueBanner from "./boutiqueBanner";
 import ArticleListCarousel from "./artilceListCarousel";
+import HighlightedProductCarousel from "./highlightedProductCarousel";
 
 export {
   Header,
@@ -24,6 +25,7 @@ export {
   CollectionsTabList,
   QuoteBlock,
   ImageQuoteBlock,
+  HighlightedProductCarousel,
   BoutiqueBanner,
   ArticleListCarousel
 };

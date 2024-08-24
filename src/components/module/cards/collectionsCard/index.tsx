@@ -14,13 +14,11 @@ const CollectionsCard = ({ item }) => {
           <Video className={styles.video} video={item?.media?.video} />
         </div>
       ) : null}
-      {!item?.hideOverlay && (
-        <div className={styles.itemContent}>
-          <div className={styles.category}>{item?.title}</div>
-          <div className={styles.title}>{item?.cta?.label}</div>
-          {!item?.hideUnderline && <div className={styles.itemBar}>&nbsp;</div>}
-        </div>
-      )}
+      <div className={styles.itemContent}>
+        <div className={styles.category}>{item?.title}</div>
+        <div className={styles.title}>{item?.cta?.label}</div>
+        {!item?.hideUnderline && <div className={styles.itemBar}>&nbsp;</div>}
+      </div>
     </div>
   );
 };
