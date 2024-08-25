@@ -8,3 +8,4 @@ export type {
   NavigationLinkProps,
 } from "./header";
 export type {ImageQuoteBlockProps} from "./imageQuoteBlock";
+export type {BrandBannerProps} from "./brandBanner";

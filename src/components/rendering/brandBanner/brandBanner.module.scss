@@ -1,0 +1,84 @@
+@import "./../../../assets/styles/main.scss";
+
+.brandBannerContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  position: relative;
+  flex-direction: column;
+
+  @include xl {
+    flex-direction: row;
+    margin: 0 auto;
+  }
+}
+
+.textContainer {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: rem(0);
+  padding-top: rem(40);
+
+  @include xl {
+    padding-right: rem(100);
+    padding-top: rem(0);
+  }
+}
+
+.innerContent {
+  max-width: rem(440);
+  width: 100%;
+  text-align: left;
+}
+
+.title {
+  p {
+    @include heading_regular_italic;
+    font-size: rem(40);
+    color: getColorHex("green-dark");
+    margin-bottom: rem(16);
+    text-align: center;
+
+    @include xl {
+      text-align: left;
+    }
+  }
+}
+
+.richTextContainer {
+  @include body_italic;
+  font-size: rem(18);
+  color: getColorHex("green-dark");
+  margin-bottom: rem(24);
+  word-break: break-all;
+  text-align: center;
+  div {
+
+    text-align: center;
+      
+        }
+  @include xl {
+    div {
+
+text-align: left;
+  
+    }
+  }
+
+  
+}
+
+.imageContainer {
+  flex: 1;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @include xl {
+    margin-bottom: rem(0); // Remove bottom margin on larger screens
+  }
+}
