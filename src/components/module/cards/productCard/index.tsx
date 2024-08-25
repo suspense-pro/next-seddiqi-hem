@@ -18,15 +18,15 @@ const slides = [
   "/images/png/product_watch_04.png",
 ];
 
-const ProductCard = ({ item }) => {
+const ProductCard = ({ item, isCarousel=true }) => {
   if (!item) return null;
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
   // ITEM ATTRIBS
-  const { name, image, shortDescription, pricePerUnit, priceCurrency } = item;
-
+  const { name, image, imageGroups, shortDescription, pricePerUnit, currency } = item;
+  console.log('ITEM',item)
   return (
     <div
       style={{
@@ -54,20 +54,21 @@ const ProductCard = ({ item }) => {
           layout="fill"
           objectFit="cover"
           alt={`Slide`}
-          src={image?.absUrl}
+          // src={image?.absUrl}
+          src={imageGroups[1]?.images?.[0]?.link}
         />
       </div>
       <div className={styles.productBottom}>
         <Typography align="center" variant="p" className={styles.title}>
-          {name?.default}
+          {name}
         </Typography>
         <Typography align="center" variant="p" className={styles.type}>
           {WATCH_TYPE}
         </Typography>
         <Typography align="center" variant="p" className={styles.price}>
-          {priceCurrency} {pricePerUnit}
+          {currency} {pricePerUnit}
         </Typography>
-        {isHovered && (
+        {isCarousel && isHovered && (
           <CarouselBtns
             swiper={swiper}
             activeIndex={activeIndex}

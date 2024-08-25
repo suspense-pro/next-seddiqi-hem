@@ -12,6 +12,7 @@ import ImageQuoteBlock from "./imageQuoteBlock";
 import BoutiqueBanner from "./boutiqueBanner";
 import ArticleListCarousel from "./artilceListCarousel";
 import HighlightedProductCarousel from "./highlightedProductCarousel";
+import FeaturedProductCarousel from './featuredProductCarousel/index';
 
 export {
   Header,
@@ -27,5 +28,6 @@ export {
   ImageQuoteBlock,
   HighlightedProductCarousel,
   BoutiqueBanner,
-  ArticleListCarousel
+  ArticleListCarousel,
+  FeaturedProductCarousel
 };
