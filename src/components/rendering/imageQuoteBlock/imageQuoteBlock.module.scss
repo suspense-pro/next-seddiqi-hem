@@ -22,6 +22,10 @@
   @include xl {
     margin-right: rem(108);
     margin-bottom: rem(0);
+    [dir="rtl"] & {
+      margin-right: rem(0);
+      margin-left: rem(108);
+    }
   }
   img {
     height: rem(338);

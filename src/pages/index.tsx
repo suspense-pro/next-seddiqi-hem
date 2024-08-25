@@ -7,6 +7,7 @@ import compact from "lodash/compact";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { isEmpty } from "@utils/helpers";
+import { getProducts } from "@utils/sfcc-connector/dataService";
 
 // import { getCustomer } from "@utils/sfcc-connector/dataService";
 // import LoginForm from "@components/LoginForm";
@@ -23,6 +24,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
     context
   );
+
 
   // if (isEmpty(data.page)) {
   //   return {
