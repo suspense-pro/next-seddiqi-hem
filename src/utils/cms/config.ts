@@ -14,6 +14,7 @@ import {
   TwoColumnImageCopy,
   QuoteBlock,
   ImageQuoteBlock,
+  BrandBanner,
   BoutiqueBanner,
   ArticleListCarousel,
   HighlightedProductCarousel,
@@ -55,6 +56,8 @@ export const ComponentMapping: any = {
   [`${componentUrl}/image-quote-block`]: ImageQuoteBlock,
   [`${componentUrl}/collections-tab-list`]: CollectionsTabList,
   [`${componentUrl}/article-list-carousel`]: ArticleListCarousel,
+  [`${componentUrl}/brand-banner`]: BrandBanner,
+
   [`${componentUrl}/highlighted-product-carousel`]: HighlightedProductCarousel,
   [`${componentUrl}/botique-banner`]: BoutiqueBanner,
   [`${componentUrl}/product-carousel`]: FeaturedProductCarousel,
