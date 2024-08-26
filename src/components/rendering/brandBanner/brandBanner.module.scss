@@ -18,33 +18,34 @@
 .textContainer {
   flex: 1;
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   padding: rem(60 28 40);
-  position: relative; 
+  position: relative;
 
   @include xl {
-    padding: rem(0 100 0 0); 
+    padding: rem(0 100 0 0);
     [dir="rtl"] & {
-      padding: rem(0 0 0 100); 
-
+      padding: rem(0 0 0 100);
     }
   }
 }
 
 .brandBannerIcon {
   position: absolute;
-  left: rem(-40); 
-  top: rem(10); 
-  width: rem(80); 
+  left: rem(-40);
+  top: rem(10);
+  width: rem(80);
   height: auto;
-  svg{
+  svg {
     height: rem(300);
   }
-
+  [dir="rtl"] & {
+    right: rem(-40);
+  }
   @include xl {
     top: 50%;
-    transform: translateY(-50%); 
-    svg{
+    transform: translateY(-50%);
+    svg {
       height: auto;
     }
   }
@@ -74,7 +75,7 @@
 .richTextContainer {
   @include body_italic;
   font-size: rem(16);
-  color: getColorHex("green-dark"); 
+  color: getColorHex("green-dark");
   word-break: break-all;
   text-align: center;
 
@@ -105,4 +106,3 @@
     margin-bottom: rem(0);
   }
 }
-
