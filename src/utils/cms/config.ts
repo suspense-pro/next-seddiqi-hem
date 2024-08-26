@@ -18,6 +18,7 @@ import {
   BoutiqueBanner,
   ArticleListCarousel,
   HighlightedProductCarousel,
+  FeaturedProductCarousel,
 } from "@components/rendering";
 import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 
@@ -59,6 +60,8 @@ export const ComponentMapping: any = {
 
   [`${componentUrl}/highlighted-product-carousel`]: HighlightedProductCarousel,
   [`${componentUrl}/botique-banner`]: BoutiqueBanner,
+  [`${componentUrl}/product-carousel`]: FeaturedProductCarousel,
+
 };
 
 const defaultConfig = {

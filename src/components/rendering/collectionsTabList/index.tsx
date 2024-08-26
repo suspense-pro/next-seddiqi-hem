@@ -48,7 +48,7 @@ const CollectionsTabDesktop = ({ content, cta, ind }) => {
     <div className={styles.containerGrid}>
       <div className={styles.containerGridItems}>
         {content?.tabItem[ind]?.collectionItems?.map((item) => {
-          return <CollectionsCard item={item} />
+          return <CollectionsCard item={item} type={content?.type} />
         })}
       </div>
       <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />
@@ -69,7 +69,7 @@ const CollectionsTabMobile = ({ content, cta, ind }) => {
 
   const renderSlide = (item, index) => (
     <SwiperSlide className={styles.swiperSlide} key={index} style={isMobile ? { width: "90%" } : {}}>
-      <CollectionsCard item={item} />
+      <CollectionsCard item={item} type={content?.type} />
     </SwiperSlide>
   );
 

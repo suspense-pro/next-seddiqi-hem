@@ -1,6 +1,7 @@
-@import './../../../../assets/styles/main.scss';
+@import "./../../../../assets/styles/main.scss";
 
-.image {
+.image,
+.productImg {
   // width: rem(360);
   height: rem(336);
   object-fit: cover;
@@ -8,6 +9,14 @@
 
   @include md {
     height: rem(520);
+  }
+}
+
+.productImg {
+  height: rem(384);
+  object-fit: contain;
+  @include md {
+    height: rem(464);
   }
 }
 
@@ -32,12 +41,20 @@
   }
 }
 
+.productItem {
+  height: rem(448);
+
+  @include md {
+    height: rem(562);
+  }
+}
+
 .item {
   position: relative;
   border: rem(1) solid getColorHex("grey-light-4", 0.4);
 
-
-  .itemContent {
+  .itemContent,
+  .productContent {
     position: absolute;
     bottom: rem(32);
     color: getColorHex("white");
@@ -72,5 +89,9 @@
       background-color: getColorHex("white");
       margin: 0 auto;
     }
+  }
+
+  .productContent {
+    color: getColorHex("green-dark");
   }
 }

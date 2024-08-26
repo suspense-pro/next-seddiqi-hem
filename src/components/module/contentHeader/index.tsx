@@ -3,17 +3,31 @@ import styles from "./contentHeader.module.scss";
 
 import Typography from "../typography";
 import RichText from "../richText";
+import { ContentHeaderProps } from "@utils/models";
 
-const ContentHeader = ({ titleColor, subTitleColor, barColor, mainTitle, hideUnderline, richText }) => {
+const ContentHeader: React.FC<ContentHeaderProps> = ({
+  titleColor = "",
+  subTitleColor = "",
+  barColor = "",
+  mainTitle = "",
+  hideUnderline = true,
+  richText = "",
+}) => {
   return (
     <div className={styles.containerHeader}>
-      <Typography variant="h2" className={`${titleColor} ${styles.headingPrimary}`}>
-        {mainTitle}
-      </Typography>
-      {!hideUnderline && <div className={`${barColor} ${styles.bar}`}>&nbsp;</div>}
-      <div className={`${subTitleColor} ${styles.headingSecondary}`}>
-        <RichText align="" className={`${subTitleColor} ${styles.headingSecondary}`} text={richText} />
-      </div>
+      {mainTitle && (
+        <Typography variant="h2" className={`${titleColor} ${styles.headingPrimary}`}>
+          {mainTitle}
+        </Typography>
+      )}
+      {!hideUnderline && (
+        <div className={`${barColor} ${styles.bar}`}>&nbsp;</div>
+      )}
+      {richText && (
+        <div className={`${subTitleColor} ${styles.headingSecondary}`}>
+          <RichText align="" className={`${subTitleColor} ${styles.headingSecondary}`} text={richText} />
+        </div>
+      )}
     </div>
   );
 };
