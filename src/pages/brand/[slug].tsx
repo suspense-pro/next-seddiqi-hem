@@ -57,7 +57,6 @@ const BrandPage = (
           <ContentBlock content={cont} key={index} />
         ))}  */}
         <ImageGalleryCarousel />
-        <ProductZoom />
     </div>
   );
 };
