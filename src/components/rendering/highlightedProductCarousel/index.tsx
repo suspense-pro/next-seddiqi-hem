@@ -55,8 +55,8 @@ const HighlightedProductCarousel = ({ highlightCard, highlightProduct }) => {
     fetchProducts();
   }, [highlightProduct]);
 
-  const slides = useMemo(() => 
-    products?.map((item, index) => <ProductSlide key={item.id || index} item={item} />),
+  const slides = useMemo(
+    () => products?.map((item, index) => <ProductSlide key={item.id || index} item={item} />),
     [products]
   );
 
@@ -70,14 +70,16 @@ const HighlightedProductCarousel = ({ highlightCard, highlightProduct }) => {
 
   return (
     <div className={styles.container}>
-      {!isMobile && Title}
-      <div className={styles.containerImg}>
-        <HighlightedImage media={highlightCard?.media} />
-      </div>
-      <div className={styles.productsContainer}>
-        {isMobile && Title}
-        <Carousel slides={slides} setSwiper={setSwiper} setActiveIndex={setActiveIndex} />
-        <CarouselBtns slides={products} activeIndex={activeIndex} swiper={swiper} />
+      <div className={styles.containerContent}>
+        {!isMobile && Title}
+        <div className={styles.containerImg}>
+          <HighlightedImage media={highlightCard?.media} />
+        </div>
+        <div className={styles.productsContainer}>
+          {isMobile && Title}
+          <Carousel slides={slides} setSwiper={setSwiper} setActiveIndex={setActiveIndex} />
+          <CarouselBtns slides={products} activeIndex={activeIndex} swiper={swiper} />
+        </div>
       </div>
     </div>
   );

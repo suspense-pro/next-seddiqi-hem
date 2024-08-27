@@ -9,6 +9,8 @@ import fetchPageData from "@utils/cms/page/fetchPageData";
 import { isEmpty, mapToID, notNull } from "@utils/helpers";
 import { CmsContent } from "@utils/cms/utils";
 import ContentBlock from "@components/module/contentBlock";
+import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
+import ProductZoom from "@components/module/productZoom";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let { slug } = context.params || {};
@@ -49,11 +51,13 @@ const BrandPage = (
 
   return (
     <div className="blog-content">
-      {page.contentComponents
+      {/* {page.contentComponents
         ?.filter(notNull)
         .map((cont: CmsContent, index: number) => (
           <ContentBlock content={cont} key={index} />
-        ))} 
+        ))}  */}
+        <ImageGalleryCarousel />
+        <ProductZoom />
     </div>
   );
 };

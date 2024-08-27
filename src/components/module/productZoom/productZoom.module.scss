@@ -1,0 +1,43 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-color: rebeccapurple;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(33);
+  padding: rem(60);
+
+  .spotlight {
+    overflow: hidden;
+    width: 100%;
+    .image {
+      width: rem(800);
+      height: rem(800);
+      object-fit: cover;
+    }
+  }
+
+  .thumbnails {
+    display: flex;
+    align-items: center;
+    gap: rem(12);
+
+    .activeImage {
+      border: rem(1) solid #787775;
+    }
+
+    .image {
+      width: rem(90);
+      height: rem(90);
+      object-fit: cover;
+      cursor: pointer;
+    }
+  }
+}

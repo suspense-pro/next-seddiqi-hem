@@ -41,6 +41,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function Home({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  console.log('BRAND CONTENT', content)
   return (
     <div className="main-content">
       {compact(content.page.components).map((content) => (

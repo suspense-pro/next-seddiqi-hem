@@ -1,0 +1,67 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  position: relative;
+  .sliderItem {
+    height: rem(368);
+    position: relative;
+    width: 100%;
+  }
+}
+
+.imgContainer {
+  // height: rem(368);
+  object-fit: cover;
+  .image {
+    height: rem(368);
+    object-fit: cover;
+    width: 100%;
+    z-index: -1;
+  }
+}
+
+.sliderContent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: rem(28);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+
+  .contentInfo {
+    display: flex;
+    flex-direction: column;
+    gap: rem(4);
+    .label {
+      color: getColorHex("white");
+
+      @include heading_regular;
+      font-size: rem(16);
+      line-height: rem(20);
+      letter-spacing: rem(0.4);
+      text-transform: uppercase;
+    }
+
+    .desc {
+      @include body_regular;
+      color: getColorHex("white");
+      font-size: rem(14);
+      line-height: rem(22);
+      letter-spacing: rem(0.4);
+    }
+  }
+
+  .iconBg {
+    display: flex;
+    width: rem(36);
+    height: rem(36);
+    justify-content: center;
+    align-items: center;
+    border-radius: rem(40);
+    background-color: getColorHex("white", 0.3);
+    cursor: pointer;
+  }
+}
