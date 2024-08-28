@@ -54,13 +54,16 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
   return (
     <>
       <div className={`${styles.heroBanner} ${containerClass}`}>
-        <div className={styles.heroBannerContainer}>
-          <Carousel
-            slides={slides}
-            setSwiper={setSwiper}
-            setActiveIndex={setActiveIndex}
-          />
-        </div>
+      <div className={styles.heroBannerContainer}>
+        <Carousel
+          slides={slides}
+          setSwiper={setSwiper}
+          setActiveIndex={setActiveIndex}
+          setTransition={'fade'}
+          setSpeed={2000}
+          isAnimated={"yes"}
+        />
+      </div>
 
         {activeBanner && (
           <div className={styles.bannerItem}>
