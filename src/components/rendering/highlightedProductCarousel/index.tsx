@@ -76,7 +76,7 @@ const HighlightedProductCarousel = ({ highlightCard, highlightProduct }) => {
       </div>
       <div className={styles.productsContainer}>
         {isMobile && Title}
-        <Carousel slides={slides} setSwiper={setSwiper} setActiveIndex={setActiveIndex} />
+        <Carousel slides={slides} setSwiper={setSwiper} setActiveIndex={setActiveIndex} setEffect={'slide'} setSpeed={500} isHeroBanner={"no"} />
         <CarouselBtns slides={products} activeIndex={activeIndex} swiper={swiper} />
       </div>
     </div>

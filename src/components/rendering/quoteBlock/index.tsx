@@ -48,6 +48,9 @@ const QuoteBlock = ({ quoteItem }) => {
         slides={slides}
         setSwiper={setSwiper}
         setActiveIndex={setActiveIndex}
+        setEffect={'slide'}
+        setSpeed={500}
+        isHeroBanner={"no"}
       />
       {quoteItem?.length > 1 && (
         <div className={styles.carouselBtnsContainer}>
