@@ -14,17 +14,20 @@
   display: flex;
   align-items: flex-end;
   gap: rem(8);
+  height: rem(16);
 
   .carouselBtn {
     width: rem(1); 
     height: rem(8); 
     border: rem(1) solid getColorHex("green-grey"); 
     cursor: pointer;
+    transition: height 0.3s ease;
   }
 
   .activeCarouselBtn {
     height: rem(16);
     border: rem(1) solid getColorHex("green-dark"); 
+    transition: height 0.3s ease;
   }
 }
 

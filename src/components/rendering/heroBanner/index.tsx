@@ -53,6 +53,9 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
           slides={slides}
           setSwiper={setSwiper}
           setActiveIndex={setActiveIndex}
+          setEffect={'fade'}
+          setSpeed={2000}
+          isHeroBanner={"yes"}
         />
       </div>
 
