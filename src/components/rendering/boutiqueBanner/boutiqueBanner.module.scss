@@ -80,7 +80,6 @@
 .title {
   @include heading_regular;
   margin-bottom: rem(12);
-  font-size: rem(28);
   color: getColorHex("black");
 
   [dir="rtl"] & {
@@ -88,11 +87,14 @@
   }
 
   h2 {
+    font-size: rem(28);
     margin: 0;
   }
 
   @include lg {
-    font-size: rem(40);
+    h2 {
+      font-size: rem(40);
+    }
     margin-bottom: rem(16);
   }
 }

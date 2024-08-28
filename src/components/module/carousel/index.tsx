@@ -30,8 +30,9 @@ const Carousel = ({ slides, setSwiper, setActiveIndex, setEffect, setSpeed, isHe
       // autoHeight={true}
       className={`${isHeroBanner === "yes" ? styles.swiperScaleEffect : "" }`}
     >
-      {slides.map((slide, index) => (
-        <SwiperSlide key={index} className={isHeroBanner === "yes" ? styles.swiperSlide : ""}>
+      {slides.map((slide, index) => {
+        return (
+          <SwiperSlide key={index} className={isHeroBanner === "yes" ? styles.swiperSlide : ""}>
           {isHeroBanner === "yes" ?
             <div style={
               slide.type === "image" ? { backgroundImage: "url(" + slide.url + ")", backgroundRepeat: "no-repeat", transformOrigin: "50% 50%" } : { position: "relative", width: "100%", height: "100%" }
@@ -48,7 +49,7 @@ const Carousel = ({ slides, setSwiper, setActiveIndex, setEffect, setSpeed, isHe
                 />
               ) : slide}
             </div>
-          :
+            :
             <div style={{ position: "relative", width: "100%", height: "100%" }}>
               {slide.type === "image" ? (
                 <Image
@@ -65,15 +66,18 @@ const Carousel = ({ slides, setSwiper, setActiveIndex, setEffect, setSpeed, isHe
                 //   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 // />
                 <Video
-                  video={slide.url}
-                  autoPlay={slide.autoPlay}
-                  showPlay={slide.showPlay} 
+                  video={slide?.video}
+                  autoPlay={slide?.autoPlay}
+                  showPlay={slide?.showPlay}
                 />
-              ) : slide}
+              ) : (
+                slide
+              )}
             </div>
-          }
-        </SwiperSlide>
-      ))}
+          } 
+          </SwiperSlide>
+        );
+      })}
     </Swiper>
   );
 };

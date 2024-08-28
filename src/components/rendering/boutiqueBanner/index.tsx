@@ -37,7 +37,7 @@ const BoutiqueBanner: React.FC<BoutiqueBannerProps> = ({
         </div>
         <div className={styles.contentContainer}>
           <Typography variant="h2" className={styles.title}>
-            {mainTitle}
+            {mainTitle?.toUpperCase()}
           </Typography>
           <div className={styles.richTextContainer}>
             <RichText align="left" text={richText} />
