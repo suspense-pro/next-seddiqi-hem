@@ -32,7 +32,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
       } else if (banner.media.video) {
         return {
           type: "video",
-          url: `https://${banner.media.video.defaultHost}/i/${banner.media.video.endpoint}/${banner.media.video.name}`,
+          video: banner.media.video,
           autoPlay: banner.media.autoPlay,
           showPlay: banner.media.showPlay,
         };
@@ -46,75 +46,82 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
     activeBanner?.verticalAlignment || "center"
   }`;
 
-  return (
-    <div className={`${styles.heroBanner} ${containerClass}`}>
-      <div className={styles.heroBannerContainer}>
-        <Carousel
-          slides={slides}
-          setSwiper={setSwiper}
-          setActiveIndex={setActiveIndex}
-        />
-      </div>
+  const contentAlign =
+    activeBanner?.horizontalAlignment === "right"
+      ? "left"
+      : activeBanner?.horizontalAlignment || "center";
 
-      {activeBanner && (
-        <div className={styles.bannerItem}>
-          {activeBanner.overlay && <div className={styles.overlay} />}
-          <div
-            className={`${styles.textContainer} ${styles[alignmentClass]} ${
-              activeBanner.verticalAlignment === "bottom"
-                ? styles.bottomPadding
-                : ""
-            }`}
-          >
-            {activeBanner.logoIcon && activeBanner.logoIcon.image && (
-              <div className={styles.logo}>
-                <Image
-                  className={styles.logoIcon}
-                  image={activeBanner.logoIcon.image.image}
-                  imageAltText={activeBanner.logoIcon.altText}
-                />
-              </div>
-            )}
-            {activeBanner.mainTitle && (
-              <Typography
-                align={activeBanner.horizontalAlignment || "center"}
-                variant="h1"
-                className={styles.title}
-              >
-                {activeBanner.mainTitle}
-              </Typography>
-            )}
-            {activeBanner.hideUnderline && (
-              <div className={styles.underline}></div>
-            )}
-            {activeBanner.richText && (
-              <RichText
-                align={activeBanner.horizontalAlignment || "center"}
-                className={styles.description}
-                text={activeBanner.richText}
-              />
-            )}
-            {activeBanner.cta && activeBanner.cta.length > 0 && (
-              <div className={styles.ctaButton}>
-                <Button
-                  title={activeBanner.cta[0]?.label}
-                  type={activeBanner.cta[0]?.type}
-                />
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-      {slides && slides.length > 1 && (
-        <div className={styles.carouselBtnsContainer}>
-          <CarouselBtns
-            swiper={swiper}
-            activeIndex={activeIndex}
+  return (
+    <>
+      <div className={`${styles.heroBanner} ${containerClass}`}>
+        <div className={styles.heroBannerContainer}>
+          <Carousel
             slides={slides}
+            setSwiper={setSwiper}
+            setActiveIndex={setActiveIndex}
           />
         </div>
-      )}
-    </div>
+
+        {activeBanner && (
+          <div className={styles.bannerItem}>
+            {activeBanner.overlay && <div className={styles.overlay} />}
+            <div
+              className={`${styles.textContainer} ${styles[alignmentClass]} ${
+                activeBanner.verticalAlignment === "bottom"
+                  ? styles.bottomPadding
+                  : ""
+              }`}
+            >
+              {activeBanner.logoIcon && activeBanner.logoIcon.image && (
+                <div className={styles.logo}>
+                  <Image
+                    className={styles.logoIcon}
+                    image={activeBanner.logoIcon.image.image}
+                    imageAltText={activeBanner.logoIcon.altText}
+                  />
+                </div>
+              )}
+              {activeBanner.mainTitle && (
+                <Typography
+                  align={contentAlign}
+                  variant="h1"
+                  className={styles.title}
+                >
+                  {activeBanner.mainTitle}
+                </Typography>
+              )}
+              {activeBanner.hideUnderline && (
+                <div className={styles.underline}></div>
+              )}
+              {activeBanner.richText && (
+                <RichText
+                  align={contentAlign}
+                  className={styles.description}
+                  text={activeBanner.richText}
+                />
+              )}
+              {activeBanner.cta && activeBanner.cta.length > 0 && (
+                <div className={styles.ctaButton}>
+                  <Button
+                    title={activeBanner.cta[0]?.label}
+                    type={activeBanner.cta[0]?.type}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+        {slides && slides.length > 1 && (
+          <div className={styles.carouselBtnsContainer}>
+            <CarouselBtns
+              swiper={swiper}
+              activeIndex={activeIndex}
+              slides={slides}
+            />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

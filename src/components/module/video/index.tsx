@@ -29,7 +29,6 @@ const Video = ({ video, className = "", autoPlay = true, showPlay = true }) => {
       });
       observer.observe(videoRef.current);
     }
-    // console.log("videoRef.current----", videoRef.current);
 
     return () => {
       if (videoRef.current) {
