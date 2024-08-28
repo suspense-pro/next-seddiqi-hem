@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 import styles from "./carousel.module.scss";
 import Video from "../video";
 
-const Carousel = ({ slides, setSwiper, setActiveIndex, setEffect, setSpeed, isHeroBanner }) => {
+const Carousel = ({ slides, setSwiper, setActiveIndex, setTransition, setSpeed, isAnimated }) => {
   // console.log("slides------", slides)
   const onSlideChange = (swiperInstance) => {
     setActiveIndex(swiperInstance.realIndex);
@@ -22,18 +22,18 @@ const Carousel = ({ slides, setSwiper, setActiveIndex, setEffect, setSpeed, isHe
     <Swiper
       onSwiper={setSwiper}
       onSlideChange={onSlideChange}
-      effect={setEffect}
+      effect={setTransition}
       fadeEffect={{ crossFade: true }}
       modules={[EffectFade, Pagination]}
       speed={setSpeed}
       loop={true}
       // autoHeight={true}
-      className={`${isHeroBanner === "yes" ? styles.swiperScaleEffect : "" }`}
+      className={`${isAnimated === "yes" ? styles.swiperScaleEffect : "" }`}
     >
       {slides.map((slide, index) => {
         return (
-          <SwiperSlide key={index} className={isHeroBanner === "yes" ? styles.swiperSlide : ""}>
-          {isHeroBanner === "yes" ?
+          <SwiperSlide key={index} className={isAnimated === "yes" ? styles.swiperSlide : ""}>
+          {isAnimated === "yes" ?
             <div style={
               slide.type === "image" ? { backgroundImage: "url(" + slide.url + ")", backgroundRepeat: "no-repeat", transformOrigin: "50% 50%" } : { position: "relative", width: "100%", height: "100%" }
               }

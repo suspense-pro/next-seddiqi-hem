@@ -45,7 +45,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
   const alignmentClass = `${activeBanner?.horizontalAlignment || "center"}-${
     activeBanner?.verticalAlignment || "center"
   }`;
-  
+
   const contentAlign =
     activeBanner?.horizontalAlignment === "right"
       ? "left"
@@ -59,9 +59,9 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
           slides={slides}
           setSwiper={setSwiper}
           setActiveIndex={setActiveIndex}
-          setEffect={'fade'}
+          setTransition={'fade'}
           setSpeed={2000}
-          isHeroBanner={"yes"}
+          isAnimated={"yes"}
         />
       </div>
 
