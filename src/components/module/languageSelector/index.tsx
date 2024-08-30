@@ -22,10 +22,9 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
         <div className={styles.customSelect}>
           <select
             onChange={(e) => handleLanguageChange?.(e.target.value)}
-            value={"ar"}
-            disabled
+            value={language || "en"}
           >
-            <option value="en">Country</option>
+            {" "}
             {Object.entries(LANGUAGE_DICT).map(([key, name]) => (
               <option key={key} value={key}>
                 {getCountryName(key)}
@@ -35,7 +34,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
           <ArrowDown className={styles.arrow} />
         </div>
       </div>
-      <div className={`${styles.dropdown} ${styles.languageDropdown}`}>
+      {/* <div className={`${styles.dropdown} ${styles.languageDropdown}`}>
         <div className={styles.customSelect}>
           <select
             onChange={(e) => handleLanguageChange?.(e.target.value)}
@@ -49,7 +48,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
           </select>
           <ArrowDown className={styles.arrow} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

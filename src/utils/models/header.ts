@@ -69,4 +69,5 @@ export interface NavigationLinkProps {
   className?: string;
   arrow?: boolean;
   hover?: boolean;
+  isNewTab?: boolean; 
 }

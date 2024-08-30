@@ -10,12 +10,15 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
   className,
   arrow,
   hover = true,
+  isNewTab = false,   
 }) => {
   if (url) {
     return (
       <Link
         className={`${hover && styles.navigationLink} ${className}`}
         href={url || "/"}
+        target={isNewTab ? "_blank" : "_self"}
+        rel={isNewTab ? "noopener noreferrer" : ""}
       >
         <span>{title}</span>
         {arrow && <ArrowRight />}
