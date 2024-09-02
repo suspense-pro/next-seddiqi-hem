@@ -60,7 +60,7 @@ const ProductCard = ({ item, isCarousel = true }) => {
       </div>
       <div className={styles.productBottom}>
         <Typography align="center" variant="p" className={styles.title}>
-          {name}
+          {name?.default ? name?.default : name}
         </Typography>
         <Typography align="center" variant="p" className={styles.type}>
           {WATCH_TYPE}

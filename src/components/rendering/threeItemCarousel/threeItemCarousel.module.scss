@@ -2,13 +2,12 @@
 
 .container {
   padding: rem(60 0);
-  background: linear-gradient(0deg, getColorHex("midnight-brown"), getColorHex("midnight-brown")),
-    linear-gradient(0deg, getColorHex("black", 0.2), getColorHex("black", 0.2));
 
   display: flex;
   flex-direction: column;
   gap: rem(32);
   align-items: center;
+  background: linear-gradient(0deg, getColorHex("black-dark", 0.2) 0%, getColorHex("black-dark", 0.2) 100%), getColorHex("midnight-brown");
 
   @include md {
     padding: rem(120 60);
@@ -105,6 +104,7 @@
     position: absolute;
     align-items: center;
     margin: 0 rem(10);
+    z-index: 1000;
 
     .categoryTitle {
       font-size: rem(26);

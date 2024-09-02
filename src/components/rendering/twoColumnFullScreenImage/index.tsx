@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./twoColumnFullScreenImage.module.scss";
-import { ContentHeader, Image } from "@components/module";
+import { ContentHeader, GradientOverlay, Image } from "@components/module";
 
 const TwoColumnFullScreenImage = ({ ...content }) => {
   let leftImage = content?.imageLeft?.image?.image;
@@ -18,16 +18,20 @@ const TwoColumnFullScreenImage = ({ ...content }) => {
         richText={content?.description}
       />
       <div style={{ gridTemplateColumns: isSingleColumn && "1fr" }} className={styles.containerImgs}>
-        <Image
-          className={`${isSingleColumn && styles.imgHeight} ${styles.image}`}
-          image={leftImage}
-          imageAltText={leftImage?.altText}
-        />
-        <Image
-          className={`${isSingleColumn && styles.imgHeight} ${styles.image}`}
-          image={rightImage}
-          imageAltText={rightImage?.altText}
-        />
+        <GradientOverlay opacity={content?.imageLeft?.opacity?.opacity}>
+          <Image
+            className={`${isSingleColumn && styles.imgHeight} ${styles.image}`}
+            image={leftImage}
+            imageAltText={leftImage?.altText}
+          />
+        </GradientOverlay>
+        <GradientOverlay opacity={content?.imageRight?.opacity?.opacity}>
+          <Image
+            className={`${isSingleColumn && styles.imgHeight} ${styles.image}`}
+            image={rightImage}
+            imageAltText={rightImage?.altText}
+          />
+        </GradientOverlay>
       </div>
     </div>
   );

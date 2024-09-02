@@ -13,7 +13,6 @@ const PlpContent = ({ productGridContent, products }) => {
 
   const cols = "auto-fit";
   const PRODUCT_INFO_TEXT = `Showing ${products?.hits?.length} out of ${products?.total} products`;
-
   return (
     <div>
       <div className={styles.container}>

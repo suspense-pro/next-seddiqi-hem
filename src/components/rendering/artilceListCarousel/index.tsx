@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from "react";
 import styles from "./artilceListCarousel.module.scss";
-import { Button, ContentHeader, Image, Typography } from "@components/module";
+import { Button, ContentHeader, GradientOverlay, Image, Typography, Video } from "@components/module";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,8 +12,7 @@ import "swiper/css/pagination";
 import RichText from "@components/module/richText";
 
 const ArticleListCarousel = ({ ...content }) => {
-
-  const listItems = content?.listItems[0].storyCard;
+  const listItems = content?.listItems;
   const isMobile = !useDeviceWidth()[0];
 
   const swiperRef = useRef(null);
@@ -70,16 +69,24 @@ const ArticleListCarousel = ({ ...content }) => {
           {listItems?.map((item, index) => {
             return (
               <SwiperSlide className={styles.swiperSlide} key={index}>
-                <div className={styles.articleItem}>
-                  <div className={styles.containerImg}>
-                    <Image className={styles.image} image={item?.image?.image} />
+                <GradientOverlay opacity={item?.opacity?.opacity} className={styles.containerImg}>
+                  <div className={styles.articleItem}>
+                    {item?.media?.image && <Image className={styles.image} image={item?.media?.image} />}
+                    {item?.media?.video && (
+                      <Video
+                        className={styles.image}
+                        video={item?.media?.video}
+                        autoPlay={item?.media?.autoPlay}
+                        showPlay={item?.media?.showPlay}
+                      />
+                    )}
+                    <div className={styles.articleContent}>
+                      <div className={styles.label}>{item?.readTime}</div>
+                      <div className={styles.title}>{item?.title}</div>
+                      <div className={styles.desc}>{item?.subTitle}</div>
+                    </div>
                   </div>
-                  <div className={styles.articleContent}>
-                    <div className={styles.label}>{item?.readTime}</div>
-                    <div className={styles.title}>{item?.title}</div>
-                    <div className={styles.desc}>{item?.subTitle}</div>
-                  </div>
-                </div>
+                </GradientOverlay>
               </SwiperSlide>
             );
           })}

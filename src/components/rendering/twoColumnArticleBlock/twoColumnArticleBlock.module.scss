@@ -30,6 +30,8 @@
     object-fit: cover;
     width: 100%;
     height: rem(336);
+    z-index: -1;
+    position: relative;
   
     @include md {
       height: rem(636);
