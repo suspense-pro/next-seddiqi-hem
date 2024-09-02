@@ -6,6 +6,8 @@ import { TwitterIcon, InstaIcon, FBIcon } from "@assets/images/svg";
 import { FooterPropType } from "@utils/models";
 import LanguageSelector from "@components/module/languageSelector";
 import { useDeviceWidth } from "@utils/useCustomHooks";
+import { Typography } from "@components/module";
+import NewsletterSignup from "@components/module/newsletterSignup";
 
 const getLogoUrl = (logoData) => {
   if (logoData?.image) {
@@ -14,32 +16,35 @@ const getLogoUrl = (logoData) => {
   }
   return "/images/Seddiqi-Logo-Text-Only.svg";
 };
+
 const renderLinks = (links, offset) => {
   return links
     .slice(offset, offset + 4)
     .map((link) => (
       <NavigationLink
         key={link.content._meta.deliveryId}
-        title={link.content._meta.name}
-        url={link.content._meta.name}
+        title={link.content.link.label}
+        url={link.content.link.url}
+        isNewTab={link.content.link.isNewTab}
       />
     ));
 };
 
 export default function Footer({ footerData }: FooterPropType) {
   const isDesktop = useDeviceWidth()[0];
+
   const mainLinks =
-    footerData?.children?.find((child) => child.content.title === "Main Menu")
-      ?.children || [];
+    footerData?.children?.filter(
+      (child) => child.content.link && child.content.link.type === "Primary"
+    ) || [];
   const secondaryLinks =
-    footerData?.children?.find(
-      (child) => child.content.title === "Secondary Menu"
-    )?.children || [];
+    footerData?.children?.filter(
+      (child) => child.content.link && child.content.link.type === "Secondary"
+    ) || [];
+
   const logoUrl = getLogoUrl(footerData?.content?.logo?.logo);
   const logoAltText =
     footerData?.content?.logo?.logo?.altText || "Seddiqi Logo";
-
-  // console.log("footerData---", footerData);
 
   return (
     <footer className={styles.footer}>
@@ -52,7 +57,13 @@ export default function Footer({ footerData }: FooterPropType) {
             height={30}
             className={styles.logo}
           />
-          {isDesktop && <LanguageSelector />}
+
+          {isDesktop && (
+            <>
+              <NewsletterSignup />
+              <LanguageSelector />
+            </>
+          )}
         </div>
         <div className={styles.linkContainer}>
           <div className={styles.mainLinks}>
@@ -79,7 +90,12 @@ export default function Footer({ footerData }: FooterPropType) {
           </div>
         </div>
       </div>
-      {!isDesktop && <LanguageSelector />}
+      {!isDesktop && (
+        <>
+          <NewsletterSignup />
+          <LanguageSelector />
+        </>
+      )}
       <hr className={styles.divider} />
       <div className={styles.footer_bottom}>
         <div className={styles.copy_right}>

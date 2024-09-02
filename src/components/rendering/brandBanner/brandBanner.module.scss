@@ -9,7 +9,7 @@
   background-color: getColorHex("cream");
   flex-direction: column;
 
-  @include xl {
+  @include lg {
     flex-direction: row;
     margin: 0 auto;
   }
@@ -65,7 +65,7 @@
     margin-bottom: rem(16);
     text-align: center;
 
-    @include xl {
+    @include lg {
       text-align: left;
       font-size: rem(40);
     }
@@ -82,12 +82,12 @@
   .richTextContainer > div {
     text-align: center;
 
-    @include xl {
+    @include lg {
       text-align: left;
     }
   }
 
-  @include xl {
+  @include lg {
     font-size: rem(18);
     text-align: left;
   }

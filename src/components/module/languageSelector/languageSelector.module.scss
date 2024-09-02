@@ -4,7 +4,9 @@
   display: flex;
   flex-direction: column;
   // gap: rem(10);
-  margin-top: rem(20);
+  @include md-max {
+    margin-top: rem(48);
+  }
 }
 
 .label {
@@ -72,8 +74,10 @@
   border-bottom: rem(1) solid getColorHex("noir");
   width: 100%;
   margin-top: rem(8);
+  margin-bottom: rem(48);
+
   @include sm {
-    width: rem(280);
+    width: rem(350);
   }
 }
 
