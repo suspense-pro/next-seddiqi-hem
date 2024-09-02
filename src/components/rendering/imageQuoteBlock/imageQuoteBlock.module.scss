@@ -134,7 +134,7 @@
 }
 
 .nameSource {
-  @include heading_regular_italic;
+  @include heading_light_italic;
   font-size: rem(20);
   margin-bottom: rem(8);
   color: getColorHex("grey");
