@@ -14,6 +14,7 @@ import ArticleListCarousel from "./artilceListCarousel";
 import BrandBanner from "./brandBanner";
 import HighlightedProductCarousel from "./highlightedProductCarousel";
 import FeaturedProductCarousel from "./featuredProductCarousel";
+import PdpTabs from "./pdpTabs";
 
 export {
   Header,
@@ -31,5 +32,6 @@ export {
   HighlightedProductCarousel,
   BoutiqueBanner,
   ArticleListCarousel,
-  FeaturedProductCarousel
+  FeaturedProductCarousel,
+  PdpTabs
 };
