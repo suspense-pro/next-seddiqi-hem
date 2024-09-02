@@ -24,7 +24,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-
   // if (isEmpty(data.page) || !slug) {
   //   return {
   //     redirect: {
@@ -41,9 +40,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-const BrandPage = (
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
-) => {
+const BrandPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { vse, content } = props;
   const [page] = useContent(content.page, vse as string);
 
@@ -61,4 +58,3 @@ const BrandPage = (
 export default BrandPage;
 
 BrandPage.Layout = Layout;
-

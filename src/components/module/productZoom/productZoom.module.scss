@@ -1,0 +1,82 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background-color: getColorHex("white");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(33);
+  padding: rem(20);
+
+  @include md {
+    padding: rem(60);
+  }
+
+  .mySwiper {
+    height: 70vh;
+  }
+
+  .swiperSlide {
+    height: 70vh;
+    width: 100vw;
+
+    .image {
+      height: 70vh;
+      object-fit: cover;
+    }
+  }
+
+  .thumbnails {
+    display: flex;
+    align-items: center;
+    gap: rem(12);
+    flex-wrap: wrap;
+
+    .thumbnail {
+      width: rem(78);
+      height: rem(78);
+      cursor: pointer;
+      overflow: hidden;
+      border: rem(1) solid getColorHex("grey-mid", 0);
+
+      @include md {
+        width: rem(90);
+        height: rem(90);
+      }
+
+      .image {
+        width: rem(78);
+        height: rem(78);
+        object-fit: cover;
+
+        @include md {
+          width: rem(90);
+          height: rem(90);
+        }
+      }
+    }
+
+    .activeImage {
+      border: rem(1) solid getColorHex("grey-mid", 1);
+    }
+  }
+}
+
+.closeIcon {
+  position: absolute;
+  right: rem(28);
+  top: rem(40);
+  cursor: pointer;
+  z-index: 1000;
+
+  @include md {
+    right: rem(40);
+    top: rem(80);
+  }
+}

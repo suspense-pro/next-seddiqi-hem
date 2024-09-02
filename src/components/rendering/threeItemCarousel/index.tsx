@@ -12,7 +12,7 @@ import Image from "@components/module/image";
 import Typography from "@components/module/typography";
 import Button from "@components/module/button";
 import Video from "@components/module/video";
-import { ContentHeader } from "@components/module";
+import { ContentHeader, GradientOverlay } from "@components/module";
 
 const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] }) => {
   if (!listItems) {
@@ -40,35 +40,40 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
   const renderSlide = (item, index) => {
     const isVideo = item?.media?.video;
     const isImage = item?.media?.image;
+    const opacity = item?.opacity?.opacity;
 
     return (
       <SwiperSlide className={styles.swiperSlide} key={index} style={isMobile ? { width: "90%" } : {}}>
-        <div className={styles.sliderItem}>
-          {isImage && <Image className={imageClassNames} image={item.media.image} imageAltText={item.media.altText} />}
-          {isVideo && (
-            <div className={videoContainerClassNames}>
-              <Video
-                className={videoClassNames}
-                video={item.media.video}
-                autoPlay={item?.media?.autoPlay}
-                showPlay={item?.media?.showPlay}
+        <GradientOverlay opacity={opacity}>
+          <div className={styles.sliderItem}>
+            {isImage && (
+              <Image className={imageClassNames} image={item.media?.image} imageAltText={item.media?.altText} />
+            )}
+            {isVideo && (
+              <div className={videoContainerClassNames}>
+                <Video
+                  className={videoClassNames}
+                  video={item.media.video}
+                  autoPlay={item?.media?.autoPlay}
+                  showPlay={item?.media?.showPlay}
+                />
+              </div>
+            )}
+            <div className={styles.categoryContent}>
+              <Typography className={styles.categoryTitle} variant="h4">
+                {item.title}
+              </Typography>
+              <Button
+                isLink={true}
+                link={item.cta.url}
+                className={styles.discoverBtn}
+                title={item.cta.label}
+                color={item.cta.color}
+                type={item.cta.type}
               />
             </div>
-          )}
-          <div className={styles.categoryContent}>
-            <Typography className={styles.categoryTitle} variant="h4">
-              {item.title}
-            </Typography>
-            <Button
-              isLink={true}
-              link={item.cta.url}
-              className={styles.discoverBtn}
-              title={item.cta.label}
-              color={item.cta.color}
-              type={item.cta.type}
-            />
           </div>
-        </div>
+        </GradientOverlay>
       </SwiperSlide>
     );
   };
@@ -112,7 +117,7 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
           onSlideChange={onSlideChange}
           className={styles.mySwiper}
         >
-          {listItems?.map(renderSlide)}
+          {listItems?.map((item, ind) => renderSlide(item, ind))}
         </Swiper>
       </div>
     </div>

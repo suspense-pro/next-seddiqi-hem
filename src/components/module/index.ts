@@ -27,6 +27,7 @@ import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
 import ContentHeader from "./contentHeader";
+import GradientOverlay from "./gradientOverlay";
 
 export {
   Head,
@@ -56,5 +57,6 @@ export {
   FilterBtn,
   PlpContent,
   ContentHeader,
-  CollectionsCard
+  CollectionsCard,
+  GradientOverlay
 };

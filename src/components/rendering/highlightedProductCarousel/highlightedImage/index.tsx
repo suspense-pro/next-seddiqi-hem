@@ -1,10 +1,14 @@
-import { Image } from "@components/module";
+import { GradientOverlay, Image } from "@components/module";
 import React from "react";
 
 import styles from "./highlightedImage.module.scss";
 
-const HighlightedImage = ({ media }) => {
-  return <Image className={styles.leftImage} image={media?.image} imageAltText={media?.altText} />;
+const HighlightedImage = ({ media, opacity }) => {
+  return (
+    <GradientOverlay opacity={opacity?.opacity} className={styles.imgContainer}>
+      <Image className={styles.leftImage} image={media?.image} imageAltText={media?.altText} />
+    </GradientOverlay>
+  );
 };
 
 export default HighlightedImage;

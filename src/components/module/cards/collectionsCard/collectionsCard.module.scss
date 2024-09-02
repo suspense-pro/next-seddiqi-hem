@@ -55,6 +55,7 @@
 
   .itemContent,
   .productContent {
+    z-index: 100;
     position: absolute;
     bottom: rem(32);
     color: getColorHex("white");

@@ -118,12 +118,6 @@
   @include lg {
     height: rem(540);
   }
-  .containerImg {
-    background: linear-gradient(180deg, getColorHex("black-dark", 0) 0%, getColorHex("black-dark", 0.6) 100%),
-      linear-gradient(0deg, getColorHex("black-dark", 0.2), getColorHex("black-dark", 0.2));
-    z-index: 100;
-    border-radius: rem(16) 0 rem(16) 0;
-  }
   .image {
     border-radius: rem(16) 0 rem(16) 0;
     width: 100%;
@@ -134,13 +128,17 @@
   }
 }
 
+.containerImg {
+  border-radius: rem(16) 0 rem(16) 0;
+}
+
 .articleContent {
   position: absolute;
   color: getColorHex("white");
   padding: rem(0 16);
   bottom: rem(20);
   text-align: left;
-
+  z-index: 200;
   [dir="rtl"] & {
     text-align: right;
   }

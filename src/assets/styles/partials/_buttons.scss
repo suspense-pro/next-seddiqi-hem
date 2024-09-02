@@ -116,7 +116,7 @@ $border-width: rem(1);
         background-color: getColorHex("bronze-grey");
       }
     }
-    &.dark_green {
+    &.green_dark {
       color: getColorHex("green-dark");
       border-color: getColorHex("green-dark");
 
@@ -148,7 +148,7 @@ $border-width: rem(1);
       text-decoration: underline;
     }
 
-    &.dark_green {
+    &.green_dark {
       span {
         color: getColorHex("green-dark");
       }
