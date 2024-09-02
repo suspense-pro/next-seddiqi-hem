@@ -1,46 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./imageQuoteBlock.module.scss";
 import Typography from "../../module/typography";
 import RichText from "../../module/richText";
 import { Image } from "@components/module";
+import Carousel from "@components/module/carousel";
+import CarouselBtns from "@components/module/carouselBtns";
 import { ImageQuoteBlockProps } from "@utils/models";
 
-const ImageQuoteBlock: React.FC<ImageQuoteBlockProps> = ({
-  image,
-  logoIcon,
-  nameDesignation,
-  nameSource,
-  richText,
+const ImageQuoteBlock: React.FC<{ quoteItems: ImageQuoteBlockProps[] }> = ({
+  quoteItems,
 }) => {
-  return (
-    <div className={styles.imageQuoteBlockContainer}>
+  if (!quoteItems || quoteItems.length === 0) return null;
+
+  const [swiper, setSwiper] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const slides = quoteItems.map((item, index) => (
+    <div className={styles.imageQuoteBlockContainer} key={index}>
       <div className={styles.imageContainer}>
-        {image && <Image image={image.image} imageAltText={image.altText} />}
+        {item.image && (
+          <Image image={item.image.image} imageAltText={item.image.altText} />
+        )}
       </div>
       <div className={styles.quoteContentContainer}>
         <div className={styles.logo}>
-          {logoIcon && logoIcon.image ? (
+          {item.logoIcon && item.logoIcon.image ? (
             <Image
-              image={logoIcon.image.image}
-              imageAltText={logoIcon.image.altText}
+              image={item.logoIcon.image.image}
+              imageAltText={item.logoIcon.image.altText}
             />
-          ) : (
-            <div className={styles.logoPlaceholder}></div>
-          )}
+          ) : null}
         </div>
         <div className={styles.richTextContainer}>
           <div className={styles.richText}>
-            <RichText align="center" text={richText} />
+            <RichText align="center" text={item.richText} />
           </div>
         </div>
         <Typography variant="h5" className={styles.nameSource}>
-          {nameSource}
+          {item.nameSource}
         </Typography>
-
         <Typography variant="p" className={styles.nameDesignation}>
-          {nameDesignation}
+          {item.nameDesignation}
         </Typography>
+        {quoteItems?.length > 1 && (
+          <div className={styles.carouselBtnsContainer}>
+            <CarouselBtns
+              swiper={swiper}
+              activeIndex={activeIndex}
+              slides={quoteItems}
+            />
+          </div>
+        )}
       </div>
+    </div>
+  ));
+
+  return (
+    <div className={styles.carouselContainer}>
+      <Carousel
+        slides={slides}
+        setSwiper={setSwiper}
+        setActiveIndex={setActiveIndex}
+        setTransition={"slide"}
+        setSpeed={500}
+        isAnimated={"no"}
+      />
     </div>
   );
 };

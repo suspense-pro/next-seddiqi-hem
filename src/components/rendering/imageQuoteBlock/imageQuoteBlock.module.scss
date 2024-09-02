@@ -1,5 +1,12 @@
 @import "./../../../assets/styles/main.scss";
 
+.carouselContainer {
+  width: 100%;
+  max-width: rem(1440);
+  margin: 0 auto;
+  position: relative;
+}
+
 .imageQuoteBlockContainer {
   display: flex;
   align-items: center;
@@ -7,32 +14,36 @@
   margin: 0 auto;
   width: auto;
   flex-direction: column;
+
   @include lg {
-    padding: rem(100);
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: rem(100) rem(28);
   }
+
   @include xl {
     width: rem(1440);
-    flex-direction: row;
   }
 }
 
 .imageContainer {
   margin-right: rem(0);
   margin-bottom: rem(28);
-  @include xl {
-    margin-right: rem(108);
+
+  @include lg {
+    // margin-right: rem(108);
     margin-bottom: rem(0);
-    [dir="rtl"] & {
-      margin-right: rem(0);
-      margin-left: rem(108);
-    }
+    width: 50%;
   }
+
   img {
     height: rem(338);
     width: 100%;
     object-fit: cover;
     border-top-left-radius: rem(8);
     border-bottom-right-radius: rem(8);
+
     @include xl {
       height: rem(500);
       width: rem(500);
@@ -46,6 +57,12 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+
+  // @include lg {
+  //   align-items: center;
+  //   text-align: left;
+  //   width: 50%;
+  // }
 }
 
 .logo {
@@ -68,6 +85,7 @@
 }
 
 .richTextContainer {
+  white-space: break-spaces;
   position: relative;
   width: 100%;
 }
@@ -77,12 +95,10 @@
   font-size: rem(22);
   color: getColorHex("green-dark");
   position: relative;
-  text-align: center;
-  margin: rem(34) 0 rem(20) 0;
+  margin: rem(20) 0 rem(20) 0;
 
   @include lg {
     font-size: rem(32);
-    margin: rem(40) 0 rem(20) 0;
   }
 
   &:before,
@@ -97,7 +113,7 @@
   }
 
   &:before {
-    top: rem(20);
+    top: rem(0);
     left: rem(15);
     transform: translate(-100%, -50%);
     content: "“";
@@ -108,17 +124,17 @@
 
   &:after {
     bottom: rem(-35);
-    right: rem(45);
+    right: rem(75);
     transform: translate(100%, 50%);
     content: "”";
     @include lg {
-      bottom: rem(-15);
+      bottom: rem(-35);
     }
   }
 }
 
 .nameSource {
-  @include heading_light_italic;
+  @include heading_regular_italic;
   font-size: rem(20);
   margin-bottom: rem(8);
   color: getColorHex("grey");
@@ -136,5 +152,14 @@
   }
   @include lg {
     font-size: rem(14);
+  }
+}
+
+.carouselBtnsContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: rem(28);
+  @include lg {
+    margin-top: rem(60);
   }
 }
