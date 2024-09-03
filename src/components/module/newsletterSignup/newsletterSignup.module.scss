@@ -2,6 +2,9 @@
 
 .newsletter {
   text-align: left;
+  [dir="rtl"] & {
+    text-align: right;
+  }
 }
 
 .newsletterTitle {
@@ -55,8 +58,11 @@
   color: getColorHex("green-dark");
   cursor: pointer;
   font-size: rem(12);
-  button {
-    padding: 0;
+  padding: 0;
+
+  [dir="rtl"] & {
+    left: rem(0);
+    right: auto;
   }
 
   @include md {
@@ -72,13 +78,16 @@
   color: getColorHex("dark-gray");
 
   input {
-    margin: 0
+    margin: 0;
   }
   label {
     @include body_regular;
     margin-left: rem(8);
     font-size: rem(10);
     color: getColorHex("grey-mid");
+    [dir="rtl"] & {
+      margin-right: rem(8);
+    }
 
     a {
       text-decoration: underline;
