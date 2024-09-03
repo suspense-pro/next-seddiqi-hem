@@ -43,30 +43,32 @@ const QuoteBlock = ({ quoteItem, backgroundColor }) => {
     );
   });
 
-  const containerClass = classNames(styles.quoteCarouselContainer, {
+  const wrapperClass = classNames(styles.quoteCarouselWrapper, {
     [styles.primary]: backgroundColor === "primary",
     [styles.secondary]: backgroundColor === "secondary",
   });
 
   return (
-    <div className={containerClass}>
-      <Carousel
-        slides={slides}
-        setSwiper={setSwiper}
-        setActiveIndex={setActiveIndex}
-        setTransition={'slide'}
-        setSpeed={500}
-        isAnimated={"no"}
-      />
-      {quoteItem?.length > 1 && (
-        <div className={styles.carouselBtnsContainer}>
-          <CarouselBtns
-            swiper={swiper}
-            activeIndex={activeIndex}
-            slides={slides}
-          />
-        </div>
-      )}
+    <div className={wrapperClass}>
+      <div className={styles.quoteCarouselContainer}>
+        <Carousel
+          slides={slides}
+          setSwiper={setSwiper}
+          setActiveIndex={setActiveIndex}
+          setTransition={'slide'}
+          setSpeed={500}
+          isAnimated={"no"}
+        />
+        {quoteItem?.length > 1 && (
+          <div className={styles.carouselBtnsContainer}>
+            <CarouselBtns
+              swiper={swiper}
+              activeIndex={activeIndex}
+              slides={slides}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
