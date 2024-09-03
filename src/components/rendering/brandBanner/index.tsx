@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./brandBanner.module.scss";
 import Typography from "../../module/typography";
 import RichText from "../../module/richText";
-import { Image } from "@components/module";
+import { Image, Video } from "@components/module";
 import { BrandBannerProps } from "@utils/models";
 import BrandBannerIcon from "@assets/images/svg/BrandBannerIcon";
 
@@ -26,8 +26,16 @@ const BrandBanner: React.FC<BrandBannerProps> = ({
           </div>
         </div>
       </div>
-      <div className={styles.imageContainer}>
-        <Image image={media.image} imageAltText={media.altText} />
+      <div className={styles.mediaContainer}>
+        {media?.video ? (
+          <Video
+            video={media.video}
+            autoPlay={media.autoPlay}
+            showPlay={media.showPlay}
+          />
+        ) : (
+          <Image image={media.image} imageAltText={media.altText} />
+        )}
       </div>
     </div>
   );

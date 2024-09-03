@@ -7,11 +7,11 @@
   height: auto;
   position: relative;
   background-color: getColorHex("cream");
-  flex-direction: column;
+  flex-direction: column-reverse; 
+  margin: rem(60) 0;
 
   @include lg {
-    flex-direction: row;
-    margin: 0 auto;
+    flex-direction: row;  
   }
 }
 
@@ -19,7 +19,7 @@
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  padding: rem(60 28 40);
+  padding: rem(40 28 40);
   position: relative;
 
   @include xl {
@@ -33,18 +33,26 @@
 .brandBannerIcon {
   position: absolute;
   left: rem(-40);
-  top: rem(10);
+  top: 78%;
+  transform: translateY(-50%);
   width: rem(80);
   height: auto;
+
   svg {
     height: rem(300);
   }
+
   [dir="rtl"] & {
     right: rem(-40);
+    left: auto;
   }
-  @include xl {
+
+  @include md-max {
+    top: 72%;
+  }
+  @include lg {
     top: 50%;
-    transform: translateY(-50%);
+
     svg {
       height: auto;
     }
@@ -93,10 +101,23 @@
   }
 }
 
-.imageContainer {
+.mediaContainer {
   flex: 1;
+  height: rem(580);
+  width: 100%;
+  position: relative;
 
   img {
+    width: 100%;
+    height: rem(315);
+    object-fit: cover;
+
+    @include sm {
+      height: rem(580);
+    }
+  }
+
+  video {
     width: 100%;
     height: 100%;
     object-fit: cover;
