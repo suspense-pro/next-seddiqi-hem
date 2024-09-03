@@ -6,6 +6,15 @@
   margin: 0 auto;
   position: relative;
   width: auto;
+  background-color: getColorHex("white");
+
+  &.primary {
+    background-color: getColorHex("white");
+  }
+
+  &.secondary {
+    background-color: getColorHex("light-cream");
+  }
 
   @include xl {
     padding: rem(100);

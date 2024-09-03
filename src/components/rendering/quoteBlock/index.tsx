@@ -5,8 +5,9 @@ import RichText from "../../module/richText";
 import { Image } from "@components/module";
 import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
+import classNames from "classnames";
 
-const QuoteBlock = ({ quoteItem }) => {
+const QuoteBlock = ({ quoteItem, backgroundColor }) => {
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -42,8 +43,13 @@ const QuoteBlock = ({ quoteItem }) => {
     );
   });
 
+  const containerClass = classNames(styles.quoteCarouselContainer, {
+    [styles.primary]: backgroundColor === "primary",
+    [styles.secondary]: backgroundColor === "secondary",
+  });
+
   return (
-    <div className={styles.quoteCarouselContainer}>
+    <div className={containerClass}>
       <Carousel
         slides={slides}
         setSwiper={setSwiper}
