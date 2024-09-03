@@ -5,10 +5,12 @@
   flex-direction: column;
   gap: rem(32);
   margin-bottom: rem(40);
+  padding-top: rem(150); //To be removed later
 
   @include md {
     gap: rem(40);
     margin-bottom: rem(12);
+    padding-top: rem(200); //To be removed later
   }
 }
 
@@ -280,12 +282,12 @@
     @include md {
       flex-direction: row;
       flex-wrap: wrap;
-      column-gap: 8%;
+      column-gap: 6.25%; //8%;
       row-gap: rem(80);
     }
 
     @include lg {
-      column-gap: 6.25%;
+      //column-gap: 6.25%;
     }
 
     .spec{
@@ -300,12 +302,12 @@
         //gap: rem(25);
         padding-bottom: 0;
         border: none;
-        width: 28%;
+        width: 20.31%; //28%;
       }
 
       @include lg {
         //gap: rem(30);
-        width: 20.31%;
+        //width: 20.31%;
       }
 
       &Title{

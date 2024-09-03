@@ -1,6 +1,9 @@
 import Image from "next/image";
 import {getProducts} from "@utils/sfcc-connector";
 import Layout from "@components/layout";
+import { GetServerSidePropsContext } from "next";
+import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
+import { PdpTabs } from "@components/rendering";
 
 // export async function getStaticProps({ params }) {
 //   const searchResults = await getProducts(params.slug);
@@ -27,9 +30,36 @@ import Layout from "@components/layout";
 //   };
 // }
 
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+
+  const data = await fetchStandardPageData(
+    {
+      content: {
+        page: { key: "homepage" },
+      },
+    },
+    context
+  );
+
+
+  // if (isEmpty(data.page)) {
+  //   return {
+  //     redirect: {
+  //       destination: "/page-not-found",
+  //     },
+  //   };
+  // }
+  return {
+    props: {
+      ...data,
+    },
+  };
+}
 export default function Product({ product }) {
   return (
     <div className="flex h-screen flex-col justify-between">
+      <PdpTabs />
+
       {/* <div className="mx-auto mt-16 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="mx-auto flex flex-col sm:flex-row">
           <Image

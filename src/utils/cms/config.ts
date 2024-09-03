@@ -19,7 +19,6 @@ import {
   ArticleListCarousel,
   HighlightedProductCarousel,
   FeaturedProductCarousel,
-  PdpTabs
 } from "@components/rendering";
 import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
@@ -64,8 +63,6 @@ export const ComponentMapping: any = {
   [`${componentUrl}/botique-banner`]: BoutiqueBanner,
   [`${componentUrl}/product-carousel`]: FeaturedProductCarousel,
   [`${componentUrl}/image-gallery-carousel`]: ImageGalleryCarousel,
-
-  [`${componentUrl}/product-carousel`]: PdpTabs,
 };
 
 const defaultConfig = {

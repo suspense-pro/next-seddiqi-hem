@@ -22,8 +22,6 @@ const PdpTabs: React.FC = () => {
   useEffect(() => {
     if (contentRef.current) {
       setContentHeight(contentRef.current.scrollHeight);
-
-      console.log("Content Height:", contentHeight);
     }
   }, [isOpen]);
 
@@ -33,30 +31,12 @@ const PdpTabs: React.FC = () => {
     if (contentRef.current) {
       contentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-      // Adjust the scroll position by the offset
       setTimeout(() => {
         window.scrollBy(0, 0); // Adjust the offset value as needed
       }, 500); // Delay to match the smooth scroll duration
-
-      /*const scrollToElementWithCustomOffset = (selector: any, offset: number) => {
-        const element = selector;
-        if (!element) return;
-    
-        const elementRect = element.getBoundingClientRect();
-        const elementTop = elementRect.top + window.scrollY;
-        const targetPosition = elementTop - offset;
-    
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-        });
-      }
-
-      scrollToElementWithCustomOffset(contentRef.current, 300);*/
     }
 
     const targetEl:any = document.querySelector(".techSpecsContainerClass");
-
     targetEl.classList.remove("techSpecsContainerClassOpened");
     targetEl.style.height = targetEl.clientHeight;
   }
@@ -65,7 +45,7 @@ const PdpTabs: React.FC = () => {
 
   /**** The codes below this comment are for the Tech Specs List Accordion ****/
   const techSpecsData = TechSpecsDummyData.specsData;
-  const [openItemIndex, setOpenItemIndex] = useState<number | null>(null);
+  const [openItemIndex, setOpenItemIndex] = useState<number>(0); // Open the first item by default
 
   // Create a ref array dynamically based on the number of items
   const contentRefs = useRef<HTMLUListElement[]>([]);
@@ -82,11 +62,6 @@ const PdpTabs: React.FC = () => {
     contentRefs.current.forEach((ref, index) => {
       if (ref) {
         const height = openItemIndex === index ? ref.scrollHeight : 0;
-        /*setItemsListHeights(prevHeights => {
-          const newHeights = [...prevHeights];
-          newHeights[index] = height;
-          return newHeights;
-        });*/
         ref.style.height = `${height}px`;
       }
     });
@@ -95,7 +70,6 @@ const PdpTabs: React.FC = () => {
     const classToAdd = document.querySelector(".techSpecsContainerClassOpened");
 
     if(isOpen === true) { 
-      
       if(classToAdd === null || classToAdd === undefined){
         targetEl.classList.add("techSpecsContainerClassOpened");
       }
@@ -208,7 +182,7 @@ const PdpTabs: React.FC = () => {
         </div>
 
         <button className={`${styles.viewMoreDetails} ${isOpen ? styles.isOpened : ''} button plain dark_green`} onClick={handleToggle}>
-          <span>View More Details</span>
+          <span>{isOpen ? 'View Less Details' : 'View More Details'}</span>
         </button>
       </div>
     </div>
