@@ -2,6 +2,8 @@ import Layout from "@components/layout";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { getProductDetails } from "@utils/sfcc-connector/dataService";
 import { GetServerSidePropsContext } from "next";
+import compact from "lodash/compact";
+import ContentBlock from "@components/module/contentBlock";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
@@ -29,10 +31,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-export default function Product({ product }) {
-  console.log('PRODUCT', product)
+export default function Product({ content }) {
   return (
-    <div></div>
+    <div className="main-content">
+      {compact(content?.page?.components).map((content) => (
+        <ContentBlock content={content} key={content?._meta.deliveryId} />
+      ))}
+    </div>
   );
 }
 
