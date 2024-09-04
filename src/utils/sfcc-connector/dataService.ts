@@ -313,6 +313,37 @@ export async function getSearchResults({
   }
 }
 
+export async function getStores({
+  method,
+  brand,
+  city,
+  name,
+}: {
+  method: string;
+  brand: string;
+  city: string;
+  name: string;
+}) {
+  try {
+    const json = {
+      api: "search",
+      action: "getStores",
+      ...(brand && { brand }),      // Include brand filter if provided
+      ...(city && { city }),        // Include city filter if provided
+      ...(name && { name }), // Include location filter if provided
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "store"));
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 let apiConfig: any;
 
 const cacheApiConfig = () => {
