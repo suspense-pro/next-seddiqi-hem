@@ -12,11 +12,12 @@ const ContentHeader: React.FC<ContentHeaderProps> = ({
   mainTitle = "",
   hideUnderline = true,
   richText = "",
+  textColor = ""
 }) => {
   return (
     <div className={styles.containerHeader}>
       {mainTitle && (
-        <Typography variant="h2" className={`${titleColor} ${styles.headingPrimary}`}>
+        <Typography textColor={textColor} variant="h2" className={`${titleColor} ${styles.headingPrimary}`}>
           {mainTitle}
         </Typography>
       )}
@@ -24,7 +25,7 @@ const ContentHeader: React.FC<ContentHeaderProps> = ({
         <div className={`${barColor} ${styles.bar}`}>&nbsp;</div>
       )}
       {richText && (
-        <div className={`${subTitleColor} ${styles.headingSecondary}`}>
+        <div style={{color: textColor }} className={`${subTitleColor} ${styles.headingSecondary}`}>
           <RichText align="" className={`${subTitleColor} ${styles.headingSecondary}`} text={richText} />
         </div>
       )}
