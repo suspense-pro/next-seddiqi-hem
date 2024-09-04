@@ -13,27 +13,34 @@ const SubMenuLinks = () => {
     return null;
   }
 
-  const renderLinks = (position) => {
-    return currentHeaderData
-      ?.filter((item) => item?.content?.menuPosition === position)
-      ?.map(({ content }) => {
-        const { item_title, isVisible } = content?.commonProps || {};
-        return (
-          <NavigationLink
-            className={styles.menuLink}
-            key={generateUniqueId()}
-            title={item_title}
-            arrow={isVisible}
-            url="/"
-          />
-        );
-      });
+  const renderLinks = (links) => {
+    return links?.map(({ content }) => {
+      const { item_title, isVisible } = content?.commonProps || {};
+      return (
+        <NavigationLink
+          className={styles.menuLink}
+          key={generateUniqueId()}
+          title={item_title}
+          arrow={isVisible}
+          url="/"
+        />
+      );
+    });
   };
+
+  const columnOne = currentHeaderData[0]?.content?.commonProps?.item_title;
+  const columnTwo = currentHeaderData[1]?.content?.commonProps?.item_title;
 
   return (
     <div className={styles.menuLeft}>
-      <div className={styles.columnCategories}>{renderLinks("Left")}</div>
-      <div className={styles.columnFilters}>{renderLinks("Right")}</div>
+      <div className={styles.columnCategories}>
+        <div className={styles.label}>{columnOne}</div>
+        {renderLinks(currentHeaderData[0]?.children)}
+      </div>
+      <div className={styles.columnFilters}>
+        <div className={styles.label}>{columnTwo}</div>
+        {renderLinks(currentHeaderData[1]?.children)}
+      </div>
     </div>
   );
 };
