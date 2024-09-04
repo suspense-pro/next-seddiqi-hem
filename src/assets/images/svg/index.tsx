@@ -20,3 +20,4 @@ export { default as Tick } from "./Tick";
 export { default as VideoPause } from "./VideoPause";
 export { default as VideoPlay } from "./VideoPlay";
 export { default as PlusIcon } from "./PlusIcon";
+export { default as CalendarIcon } from "./Calendar";

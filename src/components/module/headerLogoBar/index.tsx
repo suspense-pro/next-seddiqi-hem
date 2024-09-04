@@ -28,9 +28,9 @@ const HeaderLogoBar = ({ headerLogoContainer }) => {
 
   return (
     <div className={headerLogoContainer && headerLogoContainer}>
-      {leftLogo && <LogoLink logo={leftLogo?.image} className={styles.patakLogo} />}
+      {/* {leftLogo && <LogoLink logo={leftLogo?.image} className={styles.patakLogo} />} */}
       {mainLogo && <LogoLink logo={mainLogo?.image} className={styles.mainLogo} />}
-      {rightLogo && <LogoLink logo={rightLogo?.image} className={styles.rolexLogo} />}
+      {/* {rightLogo && <LogoLink logo={rightLogo?.image} className={styles.rolexLogo} />} */}
     </div>
   );
 };

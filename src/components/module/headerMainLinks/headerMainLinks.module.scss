@@ -71,5 +71,25 @@
     @include breakpoint-max-width(rem(1150)) {
       display: none;
     }
+
+    svg {
+      cursor: pointer;
+    }
+  }
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: rem(12);
+
+  .patakLogo {
+    width: rem(78.65);
+    height: rem(46);
+  }
+
+  .rolexLogo {
+    width: rem(100.3);
+    height: rem(46);
   }
 }

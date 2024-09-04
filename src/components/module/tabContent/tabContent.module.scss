@@ -5,6 +5,18 @@
   padding: rem(16 28);
 }
 
+.label {
+  color:getColorHex("grey-mid");
+  @include body_regular;
+  font-size: rem(14);
+  font-style: normal;
+  line-height: rem(22);
+  letter-spacing: rem(0.4);
+  text-transform: uppercase;
+  padding: rem(20 0);
+}
+
+
 .mobileMenuLinks {
   display: flex;
   flex-direction: column;
@@ -34,7 +46,7 @@
   display: flex;
   flex-direction: column;
   gap: rem(28);
-  padding: rem(20 12);
+  padding-top: rem(20);
 }
 
 .menuLink {

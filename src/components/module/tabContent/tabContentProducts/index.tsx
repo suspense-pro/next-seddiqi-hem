@@ -14,50 +14,55 @@ const TabContentProducts = () => {
   const [subMenu, setSubMenu] = useState(false);
 
   const isDropdown = (ind) => headerData.children[ind].children.length > 0;
-  
-  let products = headerData?.children.filter(
-    (item) => item?.content?.type !== "Explore"
-  );
+
+  let products = headerData?.children.filter((item) => item?.content?.type !== "Explore");
 
   if (!products) return null;
 
   const renderAccordionContent = (ind) => {
-
     const GetSubMenu = () => {
-      const subMenuLinks = products[ind].children?.map(
-        (item) => item
-      );
+      const subMenuLinks = products[ind].children?.map((item) => item).map((item) => item?.children);
+      const columnOne = products[ind].children[0]?.content?.commonProps?.item_title
+      const columnTwo = products[ind].children[1]?.content?.commonProps?.item_title
+      
 
       return subMenuLinks && subMenuLinks.length > 0 ? (
-        <SubMenu links={subMenuLinks} />
+        <div>
+          <div className={styles.label}>{columnOne}</div>
+          <SubMenu links={subMenuLinks[0]} />
+          <div className={styles.label}>{columnTwo}</div>
+          <SubMenu links={subMenuLinks[1]} />
+        </div>
       ) : null;
     };
 
     const contentBlock = headerData.children[ind]?.content?.contentBlock;
 
-    
-
     return (
       <>
         <GetSubMenu />
 
-        {contentBlock && contentBlock.map((card, i) => {
+        {contentBlock &&
+          contentBlock.map((card, i) => {
+            const CardComponent = ComponentMapping[card._meta.schema];
+            const title = card._meta.schema.includes("story")
+              ? "Other"
+              : card._meta.schema.includes("display")
+              ? "The Latest"
+              : "Latest Article";
 
-          const CardComponent = ComponentMapping[card._meta.schema];
-          const title = card._meta.schema.includes("story") ? "Other" : card._meta.schema.includes("display") ? "The Latest" : "Latest Article";
-
-          return <CardSection
-            title={title}
-            Component={CardComponent}
-            cards={card._meta.schema.includes("article") ? card : Object.values(card)[1]}
-            containerStyle={styles.column1}
-            cardStyle={styles.subMenu}
-            titleStyle={styles.displayCardsTitle}
-            key={generateUniqueId()}
-          />
-
-        })}
-
+            return (
+              <CardSection
+                title={title}
+                Component={CardComponent}
+                cards={card._meta.schema.includes("article") ? card : Object.values(card)[1]}
+                containerStyle={styles.column1}
+                cardStyle={styles.subMenu}
+                titleStyle={styles.displayCardsTitle}
+                key={generateUniqueId()}
+              />
+            );
+          })}
       </>
     );
   };
@@ -66,14 +71,9 @@ const TabContentProducts = () => {
     <div className={styles.tabContent}>
       <div className={styles.mobileMenuLinks}>
         {products?.map((item, ind) => (
-          <div
-            key={generateUniqueId()}
-            className={styles.mobileMenuNavigationContainer}
-          >
+          <div key={generateUniqueId()} className={styles.mobileMenuNavigationContainer}>
             <Accordion
-              showArrow={
-                isDropdown(ind)
-              }
+              showArrow={isDropdown(ind)}
               subMenu={subMenu}
               setSubMenu={setSubMenu}
               item={{
