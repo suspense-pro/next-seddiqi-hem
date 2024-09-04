@@ -24,28 +24,44 @@ export const AccountMgrConfig = {
 };
 
 export default async function initializeShopperConfig() {
-  // const credentials = `${clientConfig.parameters.clientId}:${clientConfig.parameters.secret}`;
-  // const base64data = Buffer.from(credentials).toString("base64");
-  // const headers = { Authorization: `Basic ${base64data}` };
+  const credentials = `${clientConfig.parameters.clientId}:${clientConfig.parameters.clientSecret}`;
+  const base64data = Buffer.from(credentials).toString("base64");
   const client = new Customer.ShopperLogin(clientConfig);
+  const options = {
+    headers: {
+      Authorization: `Basic ${base64data}`
+    },
+    parameters: {
+      organizationId: clientConfig.parameters.organizationId,
+    },
+    body: {
+        client_id: clientConfig.parameters.clientId,
+        channel_id: clientConfig.parameters.siteId,
+        redirect_uri: process.env.REDIRECT_URI,
+        grant_type: "client_credentials"
+      },
+  };
 
-  const guestTokenResponse = await slasHelpers.loginGuestUserPrivate(client, 
-    { clientSecret: clientConfig.parameters.clientSecret }
-  )
+    const guestTokenResponse = await client.getAccessToken(options)
+    .then((guestTokenResponse) => {
+      console.log("Guest Token Response: ", guestTokenResponse.access_token);
+      const access_token = guestTokenResponse.access_token;
+      return access_token;
+    })
+    .catch(error => console.log("Error fetching token for guest login: ", error));
+
+
+    /*const guestTokenResponse = await slasHelpers.loginGuestUserPrivate(client, 
+      { clientSecret: clientConfig.parameters.clientSecret,
+       },
+    )
     .then((guestTokenResponse) => {
       console.log("Guest Token Response: ", guestTokenResponse);
       const access_token = guestTokenResponse.access_token;
       return access_token;
     })
-    .catch(error => console.log("Error fetching token for guest login: ", error));
-  
+    .catch(error => console.log("Error fetching token for guest login: ", error));*/
 
-  /* const shopperToken = await client.getAccessToken({
-    headers,
-    body: {
-      grant_type: "client_credentials",
-    },
-  }); */
 
   const configWithAuth = guestTokenResponse;
 
