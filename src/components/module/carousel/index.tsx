@@ -35,7 +35,7 @@ const Carousel = ({ slides, setSwiper, setActiveIndex, setTransition, setSpeed, 
           <SwiperSlide key={index} className={isAnimated === "yes" ? styles.swiperSlide : ""}>
           {isAnimated === "yes" ?
             <div style={
-              slide.type === "image" ? { backgroundImage: "url(" + slide.url + ")", backgroundRepeat: "no-repeat", transformOrigin: "50% 50%" } : { position: "relative", width: "100%", height: "100%" }
+              slide.type === "image" ? { backgroundImage: "url('" + slide.url + "')", backgroundRepeat: "no-repeat", transformOrigin: "50% 50%" } : { position: "relative", width: "100%", height: "100%" }
               }
               className={`${slide.type === "image" ? styles.swiperSlideCover : ""}`}
             >
@@ -43,9 +43,9 @@ const Carousel = ({ slides, setSwiper, setActiveIndex, setTransition, setSpeed, 
                 ""
               ) : slide.type === "video" ? (
                 <Video
-                  video={slide.url}
-                  autoPlay={slide.autoPlay}
-                  showPlay={slide.showPlay} 
+                  video={slide?.video}
+                  autoPlay={slide?.autoPlay}
+                  showPlay={slide?.showPlay}
                 />
               ) : slide}
             </div>

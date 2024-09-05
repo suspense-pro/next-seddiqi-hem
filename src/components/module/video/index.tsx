@@ -90,6 +90,8 @@ const Video = ({ video, className = "", autoPlay = true, showPlay = true }) => {
             height: "100%",
             objectFit: "cover",
           }}
+          poster={`https://${video.defaultHost}/v/${video.endpoint}/${video.name}?protocol=https`}
+          src={`https://${video.defaultHost}/v/${video.endpoint}/${video.name}/mp4_720p?protocol=https`}
         >
           <source
             src={`https://${video.defaultHost}/v/${video.endpoint}/${video.name}/mp4_720p?protocol=https`}
