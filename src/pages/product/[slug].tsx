@@ -35,12 +35,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function Product({ content, product }) {
   return (
     <div className="main-content">
-      {compact(content?.page?.components).map((content) => (
-        <ContentBlock content={content} key={content?._meta.deliveryId} />
-      ))}
       <ProductDetailInfo product={product?.response} />
       <ScrollToTop />
       <StickyWhatsapp />
+      {compact(content?.page?.components).map((content) => (
+        <ContentBlock content={content} key={content?._meta.deliveryId} />
+      ))}
     </div>
   );
 }
