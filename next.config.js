@@ -18,16 +18,24 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "cdn.media.amplience.net"
+        hostname: "cdn.media.amplience.net",
       },
       {
         protocol: "https",
-        hostname: "**.staging.bigcontent.io"
+        hostname: "**.staging.bigcontent.io",
       },
       {
         protocol: "https",
-        hostname: "amp.a.bigcontent.io"
-      }
+        hostname: "amp.a.bigcontent.io",
+      },
+      {
+        protocol: "https",
+        hostname: "zaeger.com.au",
+      },
+      {
+        protocol: "https",
+        hostname: "edge.disstg.commercecloud.salesforce.com",
+      },
     ],
   },
   i18n: {
@@ -36,9 +44,8 @@ const nextConfig = {
   },
 };
 
-
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true"
+  enabled: process.env.ANALYZE === "true",
 });
 
 module.exports = withBundleAnalyzer(nextConfig);

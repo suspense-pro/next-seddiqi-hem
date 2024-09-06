@@ -15,7 +15,7 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = !useDeviceWidth()[0];
   const [showZoom, setShowZoom] = useState(false);
-  const [currentImage, setCurrentImage] = useState("");
+  const [currentImage, setCurrentImage] = useState(null);
 
   const onSlideChange = useCallback((swiper) => {
     setActiveIndex(swiper.realIndex);
@@ -27,20 +27,30 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
     }
   }, []);
 
-  const hasMultipleItems = galleryItems?.length > 2;
-  const slidesPerView = isMobile ? 1.4 : Math.min(galleryItems?.length, 3);
+  const slidesPerView = isMobile ? 1.2 : Math.min(galleryItems?.length, 3);
+
+  const showLeftArrow = activeIndex > 0;
+  const showRightArrow = isMobile
+    ? activeIndex < galleryItems.length - slidesPerView
+    : activeIndex < galleryItems.length - 3;
+
+  const currentImg = currentImage?.listItems[0]?.image;
+  let productItem = {
+    disBaseLink: `https://${currentImg?.defaultHost}/i/${currentImg?.endpoint}/${encodeURIComponent(currentImg?.name)}`,
+    alt: "product",
+  };
 
   return (
     <div className={styles.container}>
-      {showZoom && <ProductZoom setShowZoom={setShowZoom} listitems={currentImage} />}
-      {hasMultipleItems && !isMobile && (
+      {showZoom && <ProductZoom setShowZoom={setShowZoom} listitems={[productItem]} thumbnails={false} />}
+      {(showLeftArrow || showRightArrow) && (
         <>
-          {activeIndex > 0 && (
+          {showLeftArrow && (
             <div className={styles.leftBtn} onClick={() => handleSlide("prev")}>
               <ArrowRight fill="black" className={styles.arrowLeft} />
             </div>
           )}
-          {activeIndex < galleryItems.length - 3 && (
+          {showRightArrow && (
             <div className={styles.rightBtn} onClick={() => handleSlide("next")}>
               <ArrowRight fill="black" className={styles.arrowRight} />
             </div>
