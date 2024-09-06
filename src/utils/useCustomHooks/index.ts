@@ -1,5 +1,5 @@
 import useDeviceWidth from "./useDeviceWidth";
-import useWindowWidth from "./usewindowWidth";
+import useWindowWidth from "./useWindowWidth";
 import {useDebounce} from "./useDebounce";
 import {useEventListener} from "./useEventListener";
 import {useGlobalScroll} from "./useGlobalScroll";
