@@ -25,11 +25,17 @@
   z-index: 1000;
   align-items: center;
   justify-content: center;
+  width: 100%;
   padding: rem(0 0 0 28);
+  
+  @include md {
+    padding: rem(0);
+
+  }
 
   @include lg {
-    width: rem(1320);
-    padding: rem(0);
+    width: 100%;
+    max-width: rem(1320);
   }
 
   &::-webkit-scrollbar {
@@ -85,7 +91,7 @@
     width: 100%;
 
     @include lg {
-      width: rem(440);
+      // width: rem(440);
       height: rem(605);
     }
   }
@@ -131,8 +137,8 @@
   width: 100%;
   height: rem(463);
 
-  @include md {
-    width: rem(440);
+  @include lg {
+    // width: rem(440);
     height: rem(605);
   }
 
