@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectCoverflow } from "swiper/modules";
 import { ArrowRight } from "@assets/images/svg";
@@ -6,22 +6,35 @@ import styles from "./threeItemCarousel.module.scss";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import { useDeviceWidth } from "@utils/useCustomHooks";
 
 import Image from "@components/module/image";
 import Typography from "@components/module/typography";
 import Button from "@components/module/button";
 import Video from "@components/module/video";
 import { ContentHeader, GradientOverlay } from "@components/module";
+import { useWindowWidth } from "@utils/useCustomHooks";
 
 const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] }) => {
-  if (!listItems) {
-    return null;
-  }
+  const [slidesPerView, setSlidesPerView] = useState(3); 
+  const [isMobile, setIsMobile] = useState(false);
 
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const isMobile = !useDeviceWidth()[0];
+
+  const windowWidth = useWindowWidth();
+
+  useEffect(() => {
+    if (windowWidth < 768) {
+      setSlidesPerView(1.2);
+      setIsMobile(true);
+    } else if (windowWidth < 1250) {
+      setSlidesPerView(2);
+      setIsMobile(false);
+    } else {
+      setSlidesPerView(3);
+      setIsMobile(false);
+    }
+  }, [windowWidth]);
 
   const handleSlide = useCallback((direction) => {
     if (swiperRef.current) {
@@ -78,7 +91,7 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
     );
   };
 
-  const hasMultipleItems = listItems.length > 3;
+  const hasMultipleItems = listItems.length > slidesPerView;
 
   return (
     <div className={styles.container}>
@@ -93,14 +106,14 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
       />
       <div className={styles.containerSlider}>
         {/* SLIDER BTNS */}
-        {hasMultipleItems && !isMobile && (
+        {hasMultipleItems && !isMobile &&  (
           <>
             {activeIndex > 0 && (
               <div className={styles.leftBtn} onClick={() => handleSlide("prev")}>
                 <ArrowRight fill="white" className={styles.arrowLeft} />
               </div>
             )}
-            {activeIndex < listItems.length - 3 && (
+            {activeIndex < listItems.length - slidesPerView && (
               <div className={styles.rightBtn} onClick={() => handleSlide("next")}>
                 <ArrowRight fill="white" className={styles.arrowRight} />
               </div>
@@ -113,7 +126,7 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}
-          slidesPerView={isMobile ? "auto" : listItems?.length < 3 ? listItems?.length : 3}
+          slidesPerView={slidesPerView}
           onSlideChange={onSlideChange}
           className={styles.mySwiper}
         >
