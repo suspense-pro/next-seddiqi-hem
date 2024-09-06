@@ -6,7 +6,13 @@ import { PdpTabsDummyData, TechSpecsDummyData } from './dummyData';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-const PdpTabs: React.FC = () => {
+interface PdpTabsProps {
+  productTechSpecs: any;
+}
+
+const PdpTabs: React.FC<PdpTabsProps> = (props) => {
+  const productTechSpecs = props.productTechSpecs;
+
   const tabsData = PdpTabsDummyData.tabsData;
   const [activeTab, setActiveTab] = useState<number>(1);
 

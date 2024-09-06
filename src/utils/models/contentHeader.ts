@@ -5,4 +5,5 @@ export interface ContentHeaderProps {
   mainTitle?: string;
   hideUnderline?: boolean;
   richText?: string;
+  textColor?: string;
 }

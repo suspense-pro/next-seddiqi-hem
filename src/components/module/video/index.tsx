@@ -75,7 +75,7 @@ const Video = ({ video, className = "", autoPlay = true, showPlay = true }) => {
 
   return (
     <div className={classNames(styles.videoPlayerWrapper, className)}>
-      {!isLoaded && <div className={styles.skeleton}></div>}
+      {/* {!isLoaded && <div className={styles.skeleton}></div>} */}
       {video && (
         <video
           ref={videoRef}

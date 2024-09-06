@@ -82,7 +82,7 @@ export const PdpTabsDummyData:PdpTabsData = {
 export const TechSpecsDummyData:TechSpecsData = {
   specsData: [
     {
-      mainTitle: "Technical Specifications",
+      mainTitle: "DETAIL SPECIFICATIONS",
       specs: [
         {
           id: 1,

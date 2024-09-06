@@ -1,88 +1,47 @@
-import Image from "next/image";
-import {getProducts} from "@utils/sfcc-connector";
 import Layout from "@components/layout";
-import { GetServerSidePropsContext } from "next";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
+import { getProductDetails } from "@utils/sfcc-connector/dataService";
+import { GetServerSidePropsContext } from "next";
+import compact from "lodash/compact";
+import ContentBlock from "@components/module/contentBlock";
 import { PdpTabs } from "@components/rendering";
 
-// export async function getStaticProps({ params }) {
-//   const searchResults = await getProducts(params.slug);
-//   const coffeeProduct = searchResults[0];
-
-//   return {
-//     props: {
-//       product: coffeeProduct,
-//     },
-//   };
-// }
-
-// export async function getStaticPaths() {
-//   const coffeeProducts = await getProducts("shirt");
-//   let fullPaths = [];
-
-//   for (let product of coffeeProducts) {
-//     fullPaths.push({ params: { slug: product.id } });
-//   }
-
-//   return {
-//     paths: fullPaths,
-//     fallback: "blocking",
-//   };
-// }
-
 export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { slug = [] } = context.params || {};
+  const plpKey = Array.isArray(slug) ? slug.join('/') : slug;
+  const { vse } = context.query || {};
 
+  
   const data = await fetchStandardPageData(
     {
       content: {
-        page: { key: "homepage" },
+        page: { key: `product/${plpKey}` },
       },
     },
     context
   );
 
+  const product = await getProductDetails({productId: "22416787M", method: "GET"});
 
-  // if (isEmpty(data.page)) {
-  //   return {
-  //     redirect: {
-  //       destination: "/page-not-found",
-  //     },
-  //   };
-  // }
   return {
     props: {
       ...data,
+      product,
+      vse: vse || '',
     },
   };
 }
-export default function Product({ product }) {
-  return (
-    <div className="flex h-screen flex-col justify-between">
-      <PdpTabs />
 
-      {/* <div className="mx-auto mt-16 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div className="mx-auto flex flex-col sm:flex-row">
-          <Image
-            alt="coffee"
-            className="rounded-lg"
-            src={product.imageGroups[0].images[0].link}
-            width={560}
-            height={640}
-          />
-          <div className="mt-10 flex flex-col sm:mt-0 sm:ml-10">
-            <h1 className="mt-1 text-4xl font-bold uppercase text-gray-900 sm:text-5xl sm:tracking-tight lg:text-5xl">
-              {product.name}
-            </h1>
-            <h1 className="mt-3 text-4xl font-bold text-gray-500 sm:text-3xl sm:tracking-tight lg:text-3xl">
-              ${product.price}
-            </h1>
-            <div className="mt-10 mb-5 border-t border-gray-200 pt-10 font-bold">
-              Description
-            </div>
-            <p className="max-w-xl">{product.longDescription}</p>
-          </div>
-        </div>
-      </div> */}
+export default function Product({ content, product }) {
+  const productTechSpecs = product.techSpecs;
+
+  return (
+    <div className="main-content">
+      {compact(content?.page?.components).map((content) => (
+        <ContentBlock content={content} key={content?._meta.deliveryId} />
+      ))}
+
+      <PdpTabs productTechSpecs={productTechSpecs} />
     </div>
   );
 }

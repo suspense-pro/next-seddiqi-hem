@@ -14,6 +14,7 @@ import { EffectCoverflow, Navigation } from "swiper/modules";
 
 const CollectionsTabList = ({ ...content }) => {
   const isMobile = !useDeviceWidth()[0];
+  console.log('COLLECTIONS TABL LIST', content)
 
   let tabs = content?.tabItem?.map((item, index) => {
     return {
@@ -27,8 +28,16 @@ const CollectionsTabList = ({ ...content }) => {
     };
   });
 
+  const containerStyle = {
+    backgroundColor: content?.backgroundColor
+  }
+
+  const textColor = {
+    color: content?.textColor
+  }
+
   return (
-    <div className={styles.container}>
+    <div style={containerStyle} className={styles.container}>
       <ContentHeader
         barColor={styles.barColor}
         subTitleColor={styles.subTitleColor}
@@ -36,6 +45,7 @@ const CollectionsTabList = ({ ...content }) => {
         hideUnderline={content?.hideUnderline}
         mainTitle={content?.mainTitle}
         richText={content?.richText}
+        textColor={content?.textColor}
       />
       <TabbedNavigation gap={isMobile ? 10 : 60} className={styles.tabNavigation} tabs={tabs} />
     </div>

@@ -1,15 +1,27 @@
 @import "./../../../assets/styles/main.scss";
 
-.quoteCarouselContainer {
+.quoteCarouselWrapper {
   width: 100%;
+  background-color: getColorHex("white"); 
+
+  &.primary {
+    background-color: getColorHex("white"); 
+  }
+
+  &.secondary {
+    background-color: getColorHex("light-cream"); 
+  }
+}
+
+.quoteCarouselContainer {
   padding: rem(60) rem(28);
   margin: 0 auto;
   position: relative;
-  width: auto;
+  max-width: rem(1440);  
+  width: 100%; 
 
   @include xl {
     padding: rem(100);
-    width: rem(1440);
   }
 }
 

@@ -5,8 +5,9 @@ import RichText from "../../module/richText";
 import { Image } from "@components/module";
 import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
+import classNames from "classnames";
 
-const QuoteBlock = ({ quoteItem }) => {
+const QuoteBlock = ({ quoteItem, backgroundColor }) => {
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -42,25 +43,32 @@ const QuoteBlock = ({ quoteItem }) => {
     );
   });
 
+  const wrapperClass = classNames(styles.quoteCarouselWrapper, {
+    [styles.primary]: backgroundColor === "primary",
+    [styles.secondary]: backgroundColor === "secondary",
+  });
+
   return (
-    <div className={styles.quoteCarouselContainer}>
-      <Carousel
-        slides={slides}
-        setSwiper={setSwiper}
-        setActiveIndex={setActiveIndex}
-        setTransition={'slide'}
-        setSpeed={500}
-        isAnimated={"no"}
-      />
-      {quoteItem?.length > 1 && (
-        <div className={styles.carouselBtnsContainer}>
-          <CarouselBtns
-            swiper={swiper}
-            activeIndex={activeIndex}
-            slides={slides}
-          />
-        </div>
-      )}
+    <div className={wrapperClass}>
+      <div className={styles.quoteCarouselContainer}>
+        <Carousel
+          slides={slides}
+          setSwiper={setSwiper}
+          setActiveIndex={setActiveIndex}
+          setTransition={'slide'}
+          setSpeed={500}
+          isAnimated={"no"}
+        />
+        {quoteItem?.length > 1 && (
+          <div className={styles.carouselBtnsContainer}>
+            <CarouselBtns
+              swiper={swiper}
+              activeIndex={activeIndex}
+              slides={slides}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
