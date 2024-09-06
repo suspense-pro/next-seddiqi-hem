@@ -15,7 +15,7 @@ const PlpContent = ({ productGridContent, products }) => {
   if (!products) return null;
 
   const allProducts = dummyProducts();
-  const allHits = allProducts.hits;
+  const allHits = products?.hits; //allProducts for dummy
 
   // console.log(
   //   "products------",
