@@ -14,7 +14,6 @@ import ArticleListCarousel from "./artilceListCarousel";
 import BrandBanner from "./brandBanner";
 import HighlightedProductCarousel from "./highlightedProductCarousel";
 import FeaturedProductCarousel from "./featuredProductCarousel";
-import ProductDetailInfo from "./productDetailInfo";
 
 export {
   Header,
@@ -33,5 +32,4 @@ export {
   BoutiqueBanner,
   ArticleListCarousel,
   FeaturedProductCarousel,
-  ProductDetailInfo
 };

@@ -1,15 +1,14 @@
-import styles from "./productZoom.module.scss";
+import styles from "./productImageFullScreen.module.scss";
 import React, { useCallback, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import { useDeviceWidth } from "@utils/useCustomHooks";
 import { ArrowRight, CloseIconV2 } from "@assets/images/svg";
 import Image from "next/image";
 
-const ProductZoom = ({ setShowZoom, listitems, thumbnails = true }) => {
+const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true }) => {
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
@@ -133,4 +132,4 @@ const ProductZoom = ({ setShowZoom, listitems, thumbnails = true }) => {
   );
 };
 
-export default ProductZoom;
+export default ProductImageFullScreen;

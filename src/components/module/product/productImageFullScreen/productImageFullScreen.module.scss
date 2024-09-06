@@ -1,4 +1,4 @@
-@import "./../../../assets/styles/main.scss";
+@import "./../../../../assets/styles/main.scss";
 
 .container {
   position: fixed;
@@ -85,8 +85,6 @@
     top: rem(80);
   }
 }
-
-.sliderBtns {}
 
 .leftBtn,
 .rightBtn {

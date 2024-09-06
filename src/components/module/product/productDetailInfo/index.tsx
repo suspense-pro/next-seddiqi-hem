@@ -6,7 +6,7 @@ import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
-import ProductZoom from "@components/module/productZoom";
+import ProductImageFullScreen from "../productImageFullScreen";
 
 const ProductDetailInfo = ({ product }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -50,7 +50,7 @@ const ProductDetailInfo = ({ product }) => {
 
   return (
     <div className={styles.container}>
-      {showZoom && <ProductZoom listitems={product?.imageGroups[0]?.images} setShowZoom={setShowZoom} />}
+      {showZoom && <ProductImageFullScreen listitems={product?.imageGroups[0]?.images} setShowZoom={setShowZoom} />}
       {isMobile && (
         <div className={styles.backBtn}>
           <ArrowRight /> Back

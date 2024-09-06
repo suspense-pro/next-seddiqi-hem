@@ -4,10 +4,9 @@ import { Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import styles from "./imageGalleryCarousel.module.scss";
-import { GradientOverlay, Image } from "@components/module";
+import { GradientOverlay, Image, ProductImageFullScreen } from "@components/module";
 import { ArrowRight, PlusIcon } from "@assets/images/svg";
 import { useDeviceWidth } from "@utils/useCustomHooks";
-import ProductZoom from "@components/module/productZoom";
 
 const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
   if (!galleryItems) return null;
@@ -42,7 +41,7 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
 
   return (
     <div className={styles.container}>
-      {showZoom && <ProductZoom setShowZoom={setShowZoom} listitems={[productItem]} thumbnails={false} />}
+      {showZoom && <ProductImageFullScreen setShowZoom={setShowZoom} listitems={[productItem]} thumbnails={false} />}
       {(showLeftArrow || showRightArrow) && (
         <>
           {showLeftArrow && (

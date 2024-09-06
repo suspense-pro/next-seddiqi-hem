@@ -4,8 +4,7 @@ import { getProductDetails } from "@utils/sfcc-connector/dataService";
 import { GetServerSidePropsContext } from "next";
 import compact from "lodash/compact";
 import ContentBlock from "@components/module/contentBlock";
-import { ProductDetailInfo } from "@components/rendering";
-import { ScrollToTop, StickyWhatsapp } from "@components/module";
+import { ProductDetailInfo, ScrollToTop, StickyWhatsapp } from "@components/module";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};

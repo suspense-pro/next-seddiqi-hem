@@ -30,6 +30,8 @@ import ContentHeader from "./contentHeader";
 import GradientOverlay from "./gradientOverlay";
 import ScrollToTop from "./scrollToTop";
 import StickyWhatsapp from "./stickyWhatsapp";
+import ProductImageFullScreen from "./product/productImageFullScreen";
+import ProductDetailInfo from "./product/productDetailInfo";
 
 export {
   Head,
@@ -62,5 +64,7 @@ export {
   CollectionsCard,
   GradientOverlay,
   ScrollToTop,
-  StickyWhatsapp
+  StickyWhatsapp,
+  ProductImageFullScreen,
+  ProductDetailInfo
 };
