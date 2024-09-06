@@ -10,7 +10,7 @@ import { useDeviceWidth } from "@utils/useCustomHooks";
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation } from "swiper/modules";
-
+import { BackgroundStyle }  from '@utils/helpers/backgroundStyle';
 
 const CollectionsTabList = ({ ...content }) => {
   const isMobile = !useDeviceWidth()[0];
@@ -28,24 +28,18 @@ const CollectionsTabList = ({ ...content }) => {
     };
   });
 
-  const containerStyle = {
-    backgroundColor: content?.backgroundColor
-  }
-
-  const textColor = {
-    color: content?.textColor
-  }
-
-  return (
-    <div style={containerStyle} className={styles.container}>
+  const backgroundColor = content?.backgroundColor;         //Getting Bgcolor from props
+  const textColor = BackgroundStyle({ backgroundColor });   //Using utility function to select textcolor based on bgcolor selection
+    return (
+    <div style={{ backgroundColor, color: textColor }} className={styles.container}>
       <ContentHeader
-        barColor={styles.barColor}
+        barColor={textColor}
         subTitleColor={styles.subTitleColor}
         titleColor={styles.titleColor}
         hideUnderline={content?.hideUnderline}
         mainTitle={content?.mainTitle}
         richText={content?.richText}
-        textColor={content?.textColor}
+        textColor={textColor}
       />
       <TabbedNavigation gap={isMobile ? 10 : 60} className={styles.tabNavigation} tabs={tabs} />
     </div>

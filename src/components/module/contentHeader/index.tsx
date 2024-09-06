@@ -22,7 +22,7 @@ const ContentHeader: React.FC<ContentHeaderProps> = ({
         </Typography>
       )}
       {!hideUnderline && (
-        <div className={`${barColor} ${styles.bar}`}>&nbsp;</div>
+        <div style={{ backgroundColor: barColor }} className={`${barColor} ${styles.bar}`}>&nbsp;</div>
       )}
       {richText && (
         <div style={{color: textColor }} className={`${subTitleColor} ${styles.headingSecondary}`}>
