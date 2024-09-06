@@ -31,5 +31,5 @@ export {
   HighlightedProductCarousel,
   BoutiqueBanner,
   ArticleListCarousel,
-  FeaturedProductCarousel
+  FeaturedProductCarousel,
 };
