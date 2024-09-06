@@ -54,8 +54,8 @@ const ProductCard = ({ item, isCarousel = true }) => {
           layout="fill"
           objectFit="cover"
           alt={`Slide`}
-          // src={image?.absUrl}
-          src={imageGroups[1]?.images?.[0]?.link}
+          src={image?.absUrl}
+          // src={imageGroups[1]?.images?.[0]?.link}
         />
       </div>
       <div className={styles.productBottom}>
