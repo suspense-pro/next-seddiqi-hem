@@ -5,20 +5,20 @@ interface BackgroundStyleProps {
 
 // Define text color mapping based on background styles
 const textColorForBackground = {
-  'bg-white-text-dark-green': 'dark-green',
-  'bg-cream-text-midnight-brown': 'midnight-brown',
-  "bg-default-text-green": 'dark-green'
+  'bgWhiteTextDarkGreen': 'greenDark',
+  'bgCreamTextMidnightBrown': 'midnightBrown',
+  "bgDefaultTextGreen": 'greenDark'
 };
 
 // Get the background style class based on the background color
 const getBackgroundStyle = (backgroundColor: string): string => {
   switch (backgroundColor) {
     case 'white':
-      return 'bg-white-text-dark-green';
+      return 'bgWhiteTextDarkGreen';
     case 'cream':
-      return 'bg-cream-text-midnight-brown';
+      return 'bgCreamTextMidnightBrown';
     default:
-      return 'bg-default-text-green';
+      return 'bgDefaultTextGreen';
   }
 };
 

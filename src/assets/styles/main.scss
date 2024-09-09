@@ -60,30 +60,30 @@
 }
 
 /*Customized Background -Text Color Combinations */
-.bg-white-text-dark-green {
+.bgWhiteTextDarkGreen {
   background-color:  getColorHex("white");
   color:  getColorHex("green-dark"); /* Dark-Green text */  
 }
 
-.bg-cream-text-midnight-brown {
+.bgCreamTextMidnightBrown {
   background-color:  getColorHex("cream");
   color:  getColorHex("midnight-brown"); /* Midnight-brown text */
 }
 
-.bg-default-text-green {
+.bgDefaultTextGreen {
   background-color: getColorHex("white");
   color: getColorHex("green-dark"); /* dark-green text */
 }
 
 
 //Customized Hideunderline Color based on Textcolor
-.custombarcolor {
+.customBarColor {
 
-  &.dark-green {
+  &.greenDark {
     background-color: getColorHex("green-dark")!important
   }
 
-  &.midnight-brown {
+  &.midnightBrown {
     background-color: getColorHex("midnight-brown")!important
   }
 }
