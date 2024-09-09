@@ -63,8 +63,8 @@ const PlpContent = ({ productGridContent, products }) => {
               item={{ ...item, tempId: ind + 1 }}
             />
           ))}
-          {productGridContent.length > 0 &&
-            productGridContent.map((item) => {
+          {productGridContent?.length > 0 &&
+            productGridContent?.map((item) => {
               const Component =
                 ComponentMapping[item?.component?._meta?.schema];
               return (
