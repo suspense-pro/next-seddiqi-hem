@@ -59,3 +59,31 @@
   color: getColorHex("sand");
 }
 
+/*Customized Background -Text Color Combinations */
+.bg-white-text-dark-green {
+  background-color:  getColorHex("white");
+  color:  getColorHex("green-dark"); /* Dark-Green text */  
+}
+
+.bg-cream-text-midnight-brown {
+  background-color:  getColorHex("cream");
+  color:  getColorHex("midnight-brown"); /* Midnight-brown text */
+}
+
+.bg-default-text-green {
+  background-color: getColorHex("white");
+  color: getColorHex("green-dark"); /* dark-green text */
+}
+
+
+//Customized Hideunderline Color based on Textcolor
+.custombarcolor {
+
+  &.dark-green {
+    background-color: getColorHex("green-dark")!important
+  }
+
+  &.midnight-brown {
+    background-color: getColorHex("midnight-brown")!important
+  }
+}

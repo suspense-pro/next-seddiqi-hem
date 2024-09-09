@@ -28,10 +28,10 @@ const CollectionsTabList = ({ ...content }) => {
     };
   });
 
-  const backgroundColor = content?.backgroundColor;         //Getting Bgcolor from props
-  const textColor = BackgroundStyle({ backgroundColor });   //Using utility function to select textcolor based on bgcolor selection
-    return (
-    <div style={{ backgroundColor, color: textColor }} className={styles.container}>
+  const backgroundColor = content?.backgroundColor;
+  const { backgroundStyle, textColor } = BackgroundStyle({ backgroundColor });
+  return (
+    <div className={`${styles.container} ${backgroundStyle}`}>
       <ContentHeader
         barColor={textColor}
         subTitleColor={styles.subTitleColor}

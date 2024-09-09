@@ -17,12 +17,12 @@ const ContentHeader: React.FC<ContentHeaderProps> = ({
   return (
     <div className={styles.containerHeader}>
       {mainTitle && (
-        <Typography textColor={textColor} variant="h2" className={`${titleColor} ${styles.headingPrimary}`}>
+        <Typography textColor={textColor} variant="h2" className={`${titleColor} ${textColor} ${styles.headingPrimary}`}>
           {mainTitle}
         </Typography>
       )}
       {!hideUnderline && (
-        <div style={{ backgroundColor: barColor }} className={`${barColor} ${styles.bar}`}>&nbsp;</div>
+        <div className={"custombarcolor "+`${barColor} ${styles.bar}`}>&nbsp;</div>
       )}
       {richText && (
         <div style={{color: textColor }} className={`${subTitleColor} ${styles.headingSecondary}`}>
