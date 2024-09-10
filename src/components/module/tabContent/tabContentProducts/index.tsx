@@ -27,7 +27,7 @@ const TabContentProducts = () => {
       
 
       return subMenuLinks && subMenuLinks.length > 0 ? (
-        <div>
+        <div style={{marginBottom: "48px"}}>
           <div className={styles.label}>{columnOne}</div>
           <SubMenu links={subMenuLinks[0]} />
           <div className={styles.label}>{columnTwo}</div>

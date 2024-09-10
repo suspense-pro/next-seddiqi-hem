@@ -53,6 +53,7 @@
       // width: 100%;
       height: rem(448);
       border-radius: rem(16) 0 rem(16) 0;
+      overflow: hidden;
 
       @include md {
         padding: 0;
