@@ -86,7 +86,7 @@
   display: none;
 
   @include xl {
-    display: block;
+    display: flex;
   }
 
   .patakLogo {
