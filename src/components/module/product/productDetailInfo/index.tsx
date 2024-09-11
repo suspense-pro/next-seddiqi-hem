@@ -8,6 +8,9 @@ import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
 import {SizeGuide, SizeSelector} from "@components/module";
+import ProductDescriptionFlyoutCard from "../productDescriptionFlyoutCard";
+import ProductCareAndWarrantyFlyoutCard from "../productCareAndWarrantyFlyoutCard";
+import ProductShippingDetailsFlyCard from "../productShippingDetailsFlyCard";
 
 const ProductDetailInfo = ({ product, content }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -147,12 +150,15 @@ const ProductDetailInfo = ({ product, content }) => {
             </div> */}
 
              {/* Size Selector */}
-            <div className={styles.sizeGuide}>
+            {/* <div className={styles.sizeGuide}>
                 <SizeSelector
                   title="SIZE"
                   description= {"Some description"}
                 />  
-            </div>
+            </div> */}
+            {/* <ProductDescriptionFlyoutCard /> */}
+            {/* <ProductCareAndWarrantyFlyoutCard /> */}
+            <ProductShippingDetailsFlyCard />
           </div>
           <div className={styles.bottom}>
             <div className={styles.tab}>Editors View</div>

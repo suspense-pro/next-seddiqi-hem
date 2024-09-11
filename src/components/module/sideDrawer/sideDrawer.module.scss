@@ -57,6 +57,7 @@
   align-items: center;
   width: 100%;
   margin-bottom: rem(24);
+  text-transform: uppercase;
   @include md {
     margin-bottom: rem(32);
   }
