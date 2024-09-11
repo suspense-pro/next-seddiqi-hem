@@ -5,6 +5,7 @@ import { GetServerSidePropsContext } from "next";
 import compact from "lodash/compact";
 import ContentBlock from "@components/module/contentBlock";
 import { PdpTabs } from "@components/rendering";
+import { ProductDetailInfo, ScrollToTop, StickyWhatsapp } from "@components/module";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
@@ -37,6 +38,9 @@ export default function Product({ content, product }) {
 
   return (
     <div className="main-content">
+      <ProductDetailInfo product={product?.response} />
+      <ScrollToTop />
+      <StickyWhatsapp />
       {compact(content?.page?.components).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />
       ))}

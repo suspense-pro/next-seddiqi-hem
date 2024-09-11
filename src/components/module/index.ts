@@ -28,6 +28,10 @@ import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
 import ContentHeader from "./contentHeader";
 import GradientOverlay from "./gradientOverlay";
+import ScrollToTop from "./scrollToTop";
+import StickyWhatsapp from "./stickyWhatsapp";
+import ProductImageFullScreen from "./product/productImageFullScreen";
+import ProductDetailInfo from "./product/productDetailInfo";
 
 export {
   Head,
@@ -58,5 +62,9 @@ export {
   PlpContent,
   ContentHeader,
   CollectionsCard,
-  GradientOverlay
+  GradientOverlay,
+  ScrollToTop,
+  StickyWhatsapp,
+  ProductImageFullScreen,
+  ProductDetailInfo
 };

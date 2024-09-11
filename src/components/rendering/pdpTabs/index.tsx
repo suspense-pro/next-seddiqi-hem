@@ -11,8 +11,11 @@ interface PdpTabsProps {
 }
 
 const PdpTabs: React.FC<any> = (props) => {
-  const productTechSpecs = props.productTechSpecs;
+  const productTechSpecs = props.productTechSpecs.specsData;
+  const nonTabProductTechSpecs = props.productTechSpecs.nonTabSpecsData[0];
   const amplienceData = props.amplienceData;
+
+  console.log("productTechSpecs: ", productTechSpecs);
 
   const tabsData = PdpTabsDummyData.tabsData;
   const [activeTab, setActiveTab] = useState<number>(1);
@@ -116,43 +119,20 @@ const PdpTabs: React.FC<any> = (props) => {
     amplienceData === null || amplienceData === undefined ? 
       <div className={styles.pdpNonTabContainer}>
         <h2 className={styles.nonTabTitle}>Detail Specifications</h2>
-
+        
         <div className={styles.specsContainer}>
-          <div className={styles.specs}>
-            <div className={styles.spec}>
-              <h5>Case</h5>
-              <p>Titanium</p>
-            </div>
-
-            <div className={styles.spec}>
-              <h5>Size</h5>
-              <p>Diameter 43mm</p>
-            </div>
-          </div>
-
-          <div className={styles.specs}>
-            <div className={styles.spec}>
-              <h5>Movement</h5>
-              <p>UN-230 Manufacture movement</p>
-            </div>
-
-            <div className={styles.spec}>
-              <h5>Mechanism</h5>
-              <p>Self winding</p>
-            </div>
-          </div>
-
-          <div className={styles.specs}>
-            <div className={styles.spec}>
-              <h5>Bracelet</h5>
-              <p>Blue Alligator Leather Strap</p>
-            </div>
-
-            <div className={styles.spec}>
-              <h5>Dial</h5>
-              <p>Sapphire</p>
-            </div>
-          </div>
+            {nonTabProductTechSpecs.nonTabSpecs.map((specs, itemIndex) => (
+              <div className={styles.specs}>
+              {specs.items.map((item, itemIndex) => (
+                item.specsDescription && (
+                  <div key={itemIndex} className={styles.spec}>
+                    <h5>{item.specsTitle}</h5>
+                    <p>{item.specsDescription}</p>
+                  </div>
+                )
+              ))}
+              </div>
+            ))}
         </div>
       </div>
     :
@@ -209,10 +189,10 @@ const PdpTabs: React.FC<any> = (props) => {
         
         <div className={styles.techSpecsContent}>
           <div className={`${[styles.techSpecsContainer]} techSpecsContainerClass`} style={{ height: isOpen ? `${contentHeight}px` : '0' }} ref={contentRef}>
-            <h3 className={`${[styles.techSpecsMainTitle]}`}>{techSpecsData[0].mainTitle}</h3>
+            <h3 className={`${[styles.techSpecsMainTitle]}`}>{productTechSpecs[0].mainTitle}</h3>
 
             <ul className={styles.mainSpecsList}>
-              {techSpecsData[0].specs.map((spec, index) => (
+              {productTechSpecs[0].specs.map((spec, index) => (
                 <li key={spec.id} className={styles.spec}>
                   <h4 className={`${styles.specTitle} ${openItemIndex === index ? styles.openedSpec : ''}`} onClick={() => toggleAccordion(index)}>
                     {spec.specsTitle}
@@ -224,10 +204,12 @@ const PdpTabs: React.FC<any> = (props) => {
                     style={{ height: `${itemsListHeights[index]}px` }}
                   >
                     {spec.items.map((item, itemIndex) => (
-                      <li key={itemIndex} className={styles.item}>
-                        <h5 className={styles.itemTitle}>{item.itemTitle}</h5>
-                        <p className={styles.itemDescription}>{item.itemDescription}</p>
-                      </li>
+                      item.itemDescription && (
+                        <li key={itemIndex} className={styles.item}>
+                          <h5 className={styles.itemTitle}>{item.itemTitle}</h5>
+                          <p className={styles.itemDescription}>{item.itemDescription}</p>
+                        </li>
+                      )
                     ))}
                   </ul>
                 </li>

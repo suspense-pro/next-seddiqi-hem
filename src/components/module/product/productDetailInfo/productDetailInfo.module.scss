@@ -1,0 +1,370 @@
+@import "./../../../../assets/styles/main.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  margin: rem(0);
+  height: 100%;
+  gap: rem(39.2);
+
+  @include lg {
+    height: rem(820);
+    flex-direction: row;
+    gap: rem(0);
+  }
+}
+
+.imgContainer {
+  width: 100%;
+  height: rem(370);
+  position: relative;
+
+  @include lg {
+    height: rem(828);
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    // object-fit: contain;
+  }
+}
+
+.backBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: rem(44);
+  gap: rem(8);
+  position: absolute;
+  z-index: 100;
+  cursor: pointer;
+
+  svg {
+    transform: rotate(180deg);
+  }
+}
+
+.exclusive {
+  display: flex;
+  padding: rem(6 12);
+  align-items: center;
+  gap: rem(10);
+  border-radius: rem(4) 0 rem(4) 0;
+  background: getColorHex("metallic");
+  color: getColorHex("white");
+  top: rem(0);
+  left: rem(0);
+  z-index: 100;
+  margin-right: rem(20);
+
+  @include body_regular;
+  font-size: rem(10);
+  line-height: rem(14);
+  letter-spacing: rem(0.4);
+  text-transform: uppercase;
+  position: relative;
+
+  @include lg {
+    position: absolute;
+    top: rem(60);
+    left: rem(56);
+  }
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: rem(370);
+
+  @include lg {
+    flex: 2;
+    width: 55%;
+    height: 100%;
+    flex: 1;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .plus {
+    display: flex;
+    width: rem(40);
+    height: rem(40);
+    justify-content: center;
+    align-items: center;
+    border-radius: rem(40);
+    background: getColorHex("metallic-grey");
+    position: absolute;
+    left: rem(20);
+    z-index: 100;
+    cursor: pointer;
+    bottom: rem(0);
+
+    @include lg {
+      bottom: rem(75);
+      left: rem(56);
+    }
+  }
+
+  .threesixty {
+    display: flex;
+    flex-direction: column;
+    gap: rem(6);
+    align-items: center;
+    width: rem(25);
+    position: absolute;
+    right: rem(20);
+    bottom: rem(0);
+
+    .degree {
+      color: getColorHex("midnight-brown");
+      text-align: center;
+      @include body_regular;
+      font-size: rem(12);
+      font-weight: 500;
+      line-height: rem(14);
+      text-transform: uppercase;
+    }
+
+    @include lg {
+      bottom: rem(75);
+      right: rem(55);
+    }
+  }
+
+  .carouselBtns {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    z-index: 1000;
+    bottom: rem(0);
+
+    @include lg {
+      bottom: rem(34);
+    }
+  }
+}
+
+// Right Section
+.right {
+  display: flex;
+  flex: 1.2;
+  margin: rem(28);
+
+  @include lg {
+    margin: rem(80);
+  }
+}
+
+.save {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+
+  svg {
+    margin-top: rem(6);
+  }
+}
+
+// Product Details
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  gap: rem(32);
+
+  @include lg {
+    flex: 4;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    color: getColorHex("green-dark");
+    @include heading_regular;
+    font-size: rem(14);
+    line-height: rem(20);
+    letter-spacing: rem(0.4);
+    text-transform: uppercase;
+
+    @include lg {
+      font-size: rem(16);
+    }
+  }
+
+  .title {
+    @include heading_regular;
+    font-size: rem(22);
+    font-style: normal;
+    font-weight: 500;
+    line-height: rem(30);
+    letter-spacing: rem(0.6);
+    text-transform: uppercase;
+
+    @include lg {
+      font-size: rem(32);
+      line-height: rem(36);
+    }
+  }
+
+  .price {
+    color: getColorHex("brown-dark");
+    @include heading_regular;
+    font-size: rem(18);
+    font-style: normal;
+    font-weight: 500;
+    line-height: rem(28);
+    letter-spacing: rem(0.6);
+    text-transform: uppercase;
+
+    @include lg {
+      font-size: rem(20);
+    }
+  }
+}
+
+.productHead {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16);
+}
+
+.size {
+  display: flex;
+  align-items: center;
+  display: flex;
+  padding-bottom: rem(12);
+  justify-content: space-between;
+  flex: 1 0 0;
+  border-bottom: 1px solid getColorHex("grey-light-5");
+
+  .lable {
+    color: getColorHex("grey-mid");
+    @include body_regular;
+    font-size: rem(12);
+    font-weight: 400;
+    line-height: rem(20);
+    letter-spacing: rem(0.4);
+
+    @include lg {
+      font-size: rem(14);
+      line-height: rem(22);
+    }
+  }
+}
+
+// .boutiqueBtn {
+//   background: getColrHex("metallic");
+// }
+
+// Appointment Section
+.appointment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .appointmentLeft {
+    display: flex;
+    align-items: center;
+    gap: rem(16);
+  }
+
+  .appointmentBtn {
+    text-transform: capitalize;
+    color: getColorHex("grey-mid");
+    @include body_regular;
+    font-size: rem(14);
+    font-style: normal;
+    line-height: rem(16);
+    letter-spacing: rem(1);
+    text-transform: capitalize;
+
+    @include lg {
+      line-height: rem(18);
+    }
+  }
+}
+
+.productText {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+
+  .productLabel {
+    color: getColorHex("brown-dark");
+    @include heading_regular;
+    font-size: rem(14);
+    line-height: rem(20);
+    letter-spacing: rem(0.4);
+    text-transform: uppercase;
+
+    @include lg {
+      font-size: rem(16);
+    }
+  }
+
+  .productDesc {
+    color: getColorHex("grey-mid");
+    @include body_regular;
+    font-size: rem(14);
+    line-height: rem(22);
+    letter-spacing: rem(0.4);
+
+    @include lg {
+      font-size: rem(16);
+      line-height: rem(26);
+    }
+  }
+
+  .readMore {
+    color: getColorHex("brown-dark");
+    @include body_regular;
+    font-size: rem(14);
+    line-height: rem(18);
+    letter-spacing: rem(1);
+    text-transform: capitalize;
+  }
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  gap: rem(16);
+  justify-content: space-between;
+  @include lg {
+    justify-content: flex-start;
+  }
+
+  .tab {
+    @include body_regular;
+    font-size: rem(12);
+    line-height: rem(20);
+    letter-spacing: rem(0.4);
+    text-align: left;
+
+    @include lg {
+      font-size: rem(16);
+      line-height: rem(26);
+    }
+  }
+
+  .vline {
+    color: getColorHex("grey-light-5");
+    @include body_regular;
+    width: rem(2);
+    height: rem(16);
+    background-color: #cccbc7;
+    font-size: rem(14);
+    line-height: rem(18);
+    letter-spacing: rem(1);
+    text-transform: capitalize;
+  }
+}

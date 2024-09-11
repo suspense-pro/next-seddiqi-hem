@@ -21,3 +21,7 @@ export { default as VideoPause } from "./VideoPause";
 export { default as VideoPlay } from "./VideoPlay";
 export { default as PlusIcon } from "./PlusIcon";
 export { default as CalendarIcon } from "./Calendar";
+export { default as ScrollTopIcon } from "./ScrollTopIcon";
+export { default as WhatsappIcon } from "./WhatsappIcon";
+export { default as ShareIcon } from "./ShareIcon";
+export { default as CubeIcon } from "./CubeIcon";

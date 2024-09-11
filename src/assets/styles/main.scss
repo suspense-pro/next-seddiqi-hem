@@ -59,3 +59,31 @@
   color: getColorHex("sand");
 }
 
+/*Customized Background -Text Color Combinations */
+.bgWhiteTextDarkGreen {
+  background-color:  getColorHex("white");
+  color:  getColorHex("green-dark"); /* Dark-Green text */  
+}
+
+.bgCreamTextMidnightBrown {
+  background-color:  getColorHex("cream");
+  color:  getColorHex("midnight-brown"); /* Midnight-brown text */
+}
+
+.bgDefaultTextGreen {
+  background-color: getColorHex("white");
+  color: getColorHex("green-dark"); /* dark-green text */
+}
+
+
+//Customized Hideunderline Color based on Textcolor
+.customBarColor {
+
+  &.greenDark {
+    background-color: getColorHex("green-dark")!important
+  }
+
+  &.midnightBrown {
+    background-color: getColorHex("midnight-brown")!important
+  }
+}
