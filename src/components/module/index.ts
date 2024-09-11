@@ -23,6 +23,7 @@ import HeaderFooter from "./headerFooter/index";
 import SubMenuLinks from "./sumMenuLinks";
 import NavCardBlocks from "./navCardBlocks";
 import SideDrawer from "./sideDrawer";
+import SizeGuide from "./sizeGuide";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
@@ -58,6 +59,7 @@ export {
   SubMenuLinks,
   NavCardBlocks,
   SideDrawer,
+  SizeGuide,
   FilterBtn,
   PlpContent,
   ContentHeader,

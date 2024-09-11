@@ -33,9 +33,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function Product({ content, product }) {
+  // console.log("Product Info", content)
   return (
     <div className="main-content">
-      <ProductDetailInfo product={product?.response} />
+      <ProductDetailInfo product={product?.response}  content ={content}/>
       <ScrollToTop />
       <StickyWhatsapp />
       {compact(content?.page?.components).map((content) => (

@@ -80,3 +80,21 @@
     }
   }
 }
+
+.backButtonText{
+  @include body_regular;
+  font-size: rem(10);
+  font-weight: normal;
+  line-height: rem(14);
+  letter-spacing: rem(0.4);
+  text-transform: uppercase;  
+}
+
+.arrowLeft {
+  transform: rotate(180deg);
+  height: rem(8);
+}
+
+.arrowLeftWrapper {
+  margin-right: rem(8)
+}

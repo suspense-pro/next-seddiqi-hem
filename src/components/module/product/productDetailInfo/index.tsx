@@ -7,8 +7,9 @@ import CarouselBtns from "@components/module/carouselBtns";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
+import {SizeGuide} from "@components/module";
 
-const ProductDetailInfo = ({ product }) => {
+const ProductDetailInfo = ({ product, content }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
@@ -47,6 +48,9 @@ const ProductDetailInfo = ({ product }) => {
   const slides = product?.imageGroups[0]?.images?.map((item, index) =>
     item?.videoLink1 ? <VideoSlide item={item} key={index} /> : <ImageSlide item={item} key={index} />
   );
+  
+  const data = content;
+  const sizeGuideProps = content?.page?.components[1].sizeGuide;
 
   return (
     <div className={styles.container}>
@@ -130,6 +134,17 @@ const ProductDetailInfo = ({ product }) => {
                 type={"Plain"}
               />
             </div>
+
+            {/* Size Guide  */}
+            {/* <div className={styles.sizeGuide}>
+                <SizeGuide
+                  primaryTitle={sizeGuideProps.primaryTitle}
+                  primaryDescription= {sizeGuideProps.primaryDescription}
+                  secondaryTitle={sizeGuideProps.secondaryTitle}
+                  secondaryDescription= {sizeGuideProps.secondaryDescription} 
+                  items={sizeGuideProps.listItems}        
+                />  
+            </div> */}
           </div>
           <div className={styles.bottom}>
             <div className={styles.tab}>Editors View</div>
