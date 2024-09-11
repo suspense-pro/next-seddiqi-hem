@@ -7,7 +7,7 @@ import CarouselBtns from "@components/module/carouselBtns";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
-import {SizeGuide} from "@components/module";
+import {SizeGuide, SizeSelector} from "@components/module";
 
 const ProductDetailInfo = ({ product, content }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -145,6 +145,14 @@ const ProductDetailInfo = ({ product, content }) => {
                   items={sizeGuideProps.listItems}        
                 />  
             </div> */}
+
+             {/* Size Selector */}
+            <div className={styles.sizeGuide}>
+                <SizeSelector
+                  title="SIZE"
+                  description= {"Some description"}
+                />  
+            </div>
           </div>
           <div className={styles.bottom}>
             <div className={styles.tab}>Editors View</div>
