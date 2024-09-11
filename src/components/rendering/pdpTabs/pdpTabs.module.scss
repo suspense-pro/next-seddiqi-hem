@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: rem(32);
   margin-bottom: rem(40);
-  padding-top: rem(150); //To be removed later
+  //padding-top: rem(150); //To be removed later
 
   @include md {
     gap: rem(40);
@@ -41,6 +41,10 @@
 
   &:last-child{
     margin-right: 0 !important;
+
+    [dir="rtl"] & {
+      margin-left: 0 !important;
+    }
   }
 }
 
@@ -140,7 +144,11 @@
   width: 100%;
   height: 100%;
   left: 0;
-  padding: 0 2.375rem 0 3.9375rem;
+  padding: 0 rem(38) 0 rem(63);
+
+  [dir="rtl"] & {
+    padding: 0 rem(63) 0 rem(38);
+  }
 }
 
 .specsContainer{
@@ -466,3 +474,140 @@
     }
   }
 }
+
+
+
+//Non-Tab CSS
+.pdpNonTabContainer{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 rem(28);
+  //row-gap: rem(40);
+  //padding-top: rem(150); //To be removed later
+
+  .nonTabTitle{
+    @include heading_regular;
+    font-size: rem(22);
+    font-weight: 500;
+    line-height: rem(30);
+    letter-spacing: rem(0.6);
+    color: getColorHex("green-dark");
+    text-transform: uppercase;
+    margin: 0 0 rem(40);
+    text-align: center;
+  
+    @include md {
+      font-size: rem(32);
+      line-height: rem(36);
+      margin: 0 0 rem(50);
+    }
+  
+    @include lg {
+      margin: 0 0 rem(60);
+    }
+
+    &:empty{
+      display: none;
+    }
+  }
+
+  .specsContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: rem(1280);
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    gap: 0;
+
+    @include md {
+      align-items: stretch;
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
+
+    .specs{
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      border-bottom: rem(1) solid getColorHex("grey-light");
+      padding: rem(24) 0;
+      width: 100%;
+      column-gap: rem(28);
+
+      @include md {
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        border: none;
+        border-right: rem(1) solid getColorHex("grey-light");
+        padding: rem(44) rem(20);
+        max-width: rem(400);
+        column-gap: 0;
+        row-gap: rem(36);
+
+        [dir="rtl"] & {
+          border-right: none;
+          border-left: rem(1) solid getColorHex("grey-light");
+        }
+      }
+
+      &:last-child{
+        border: none;
+      }
+
+      .spec{
+        display: flex;
+        flex-direction: column;
+        row-gap: rem(4);
+        width: calc(50% - 14px);
+
+        @include md{
+          row-gap: rem(8);
+          width: 100%;
+        }
+
+        h5{
+          @include heading_regular;
+          font-weight: 500;
+          font-size: rem(14);
+          line-height: rem(20);
+          letter-spacing: rem(0.4);
+          color: getColorHex("green-dark");
+          margin: 0;
+          text-align: center;
+          text-transform: uppercase;
+    
+          @include md {
+            font-weight: 500;
+            font-size: rem(20);
+            line-height: rem(28);
+            letter-spacing: rem(0.6);
+          }
+        }
+    
+        p{
+          @include heading_light;
+          font-weight: 300;
+          font-size: rem(14);
+          line-height: rem(22);
+          letter-spacing: rem(0.4);
+          color: getColorHex("green-metallic");
+          margin: 0;
+          text-align: center;
+    
+          @include md {
+            @include heading_regular;
+            font-weight: 400;
+            font-size: rem(16);
+            line-height: rem(26);
+          }
+        }
+      }
+    }
+  }
+}
+

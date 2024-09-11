@@ -10,8 +10,9 @@ interface PdpTabsProps {
   productTechSpecs: any;
 }
 
-const PdpTabs: React.FC<PdpTabsProps> = (props) => {
+const PdpTabs: React.FC<any> = (props) => {
   const productTechSpecs = props.productTechSpecs;
+  const amplienceData = props.amplienceData;
 
   const tabsData = PdpTabsDummyData.tabsData;
   const [activeTab, setActiveTab] = useState<number>(1);
@@ -63,6 +64,7 @@ const PdpTabs: React.FC<PdpTabsProps> = (props) => {
     setOpenItemIndex(prevIndex => (prevIndex === index ? null : index));
   };
 
+  
   // Function to update content heights dynamically
   const updateHeights = () => {
     contentRefs.current.forEach((ref, index) => {
@@ -84,114 +86,161 @@ const PdpTabs: React.FC<PdpTabsProps> = (props) => {
 
   // Effect to handle changes in openItemIndex and resize events
   useEffect(() => {
-    // Update heights on openItemIndex change
-    updateHeights();
 
-    // Add resize event listener
-    const handleResize = () => {
-      // Update heights on resize
+    if(amplienceData != null || amplienceData != undefined){
+      // Update heights on openItemIndex change
       updateHeights();
 
-      const targetEl:any = document.querySelector(".techSpecsContainerClass");
-      targetEl.classList.remove("techSpecsContainerClassOpened");
+      // Add resize event listener
+      const handleResize = () => {
+        // Update heights on resize
+        updateHeights();
 
-      setIsOpen(false);
-    };
+        const targetEl:any = document.querySelector(".techSpecsContainerClass");
+        targetEl.classList.remove("techSpecsContainerClassOpened");
 
-    window.addEventListener('resize', handleResize);
+        setIsOpen(false);
+      };
 
-    // Cleanup event listener on unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+      window.addEventListener('resize', handleResize);
+
+      // Cleanup event listener on unmount
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }
   }, [openItemIndex]);
   /**** End for Tech Specs List Accordion codes ****/
-
+  
   return (
-    <div className={styles.pdpTabsContainer}>
-      <div className={styles.tabsContainer}>
-        <Swiper
-          slidesPerView={"auto"}
-          spaceBetween={16}
-          breakpoints={{
-            800: {
-              spaceBetween: 60,
-            }
-          }}
-          className={styles.tabHeaders}
-        >
-          {tabsData.map(tab => (
-            <SwiperSlide key={tab.id} className={styles.tabSlide}>
-              <button
-                className={`${styles.tabButton} ${activeTab === tab.id ? styles.active : ''}`}
-                onClick={() => handleTabClick(tab.id)}
-              >
-                {tab.tabTitle}
-              </button>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+    amplienceData === null || amplienceData === undefined ? 
+      <div className={styles.pdpNonTabContainer}>
+        <h2 className={styles.nonTabTitle}>Detail Specifications</h2>
 
-        <div className={styles.tabContent}>
-          <div className={styles.tabDataContent}>
-            {tabsData.map(tab => (
-              <div
-                key={tab.id}
-                className={`${styles.tabPane} ${activeTab === tab.id ? styles.fadeIn : styles.fadeOut}`}
-              >
-                <ul className={styles.specsContainer}>
-                  {tab.specs.map(specs => (
-                    <li key={specs.title}>
-                      <h5>{specs.title}</h5>
-                      <p>{specs.description}</p>
-                    </li>
-                  ))}
-                </ul>
+        <div className={styles.specsContainer}>
+          <div className={styles.specs}>
+            <div className={styles.spec}>
+              <h5>Case</h5>
+              <p>Titanium</p>
+            </div>
 
-                <img
-                  src={tab.productImageUrl}
-                  className={styles.productImage}
-                  alt=""
-                />
-              </div>
-            ))}
+            <div className={styles.spec}>
+              <h5>Size</h5>
+              <p>Diameter 43mm</p>
+            </div>
+          </div>
+
+          <div className={styles.specs}>
+            <div className={styles.spec}>
+              <h5>Movement</h5>
+              <p>UN-230 Manufacture movement</p>
+            </div>
+
+            <div className={styles.spec}>
+              <h5>Mechanism</h5>
+              <p>Self winding</p>
+            </div>
+          </div>
+
+          <div className={styles.specs}>
+            <div className={styles.spec}>
+              <h5>Bracelet</h5>
+              <p>Blue Alligator Leather Strap</p>
+            </div>
+
+            <div className={styles.spec}>
+              <h5>Dial</h5>
+              <p>Sapphire</p>
+            </div>
           </div>
         </div>
       </div>
-      
-      <div className={styles.techSpecsContent}>
-        <div className={`${[styles.techSpecsContainer]} techSpecsContainerClass`} style={{ height: isOpen ? `${contentHeight}px` : '0' }} ref={contentRef}>
-          <h3 className={`${[styles.techSpecsMainTitle]}`}>{techSpecsData[0].mainTitle}</h3>
-
-          <ul className={styles.mainSpecsList}>
-            {techSpecsData[0].specs.map((spec, index) => (
-              <li key={spec.id} className={styles.spec}>
-                <h4 className={`${styles.specTitle} ${openItemIndex === index ? styles.openedSpec : ''}`} onClick={() => toggleAccordion(index)}>
-                  {spec.specsTitle}
-                </h4>
-                
-                <ul
-                  className={styles.itemsList}
-                  ref={el => contentRefs.current[index] = el}
-                  style={{ height: `${itemsListHeights[index]}px` }}
+    :
+      <div className={styles.pdpTabsContainer}>
+        <div className={styles.tabsContainer}>
+          <Swiper
+            slidesPerView={"auto"}
+            spaceBetween={16}
+            breakpoints={{
+              800: {
+                spaceBetween: 60,
+              }
+            }}
+            className={styles.tabHeaders}
+          >
+            {tabsData.map(tab => (
+              <SwiperSlide key={tab.id} className={styles.tabSlide}>
+                <button
+                  className={`${styles.tabButton} ${activeTab === tab.id ? styles.active : ''}`}
+                  onClick={() => handleTabClick(tab.id)}
                 >
-                  {spec.items.map((item, itemIndex) => (
-                    <li key={itemIndex} className={styles.item}>
-                      <h5 className={styles.itemTitle}>{item.itemTitle}</h5>
-                      <p className={styles.itemDescription}>{item.itemDescription}</p>
-                    </li>
-                  ))}
-                </ul>
-              </li>
+                  {tab.tabTitle}
+                </button>
+              </SwiperSlide>
             ))}
-          </ul>
-        </div>
+          </Swiper>
 
-        <button className={`${styles.viewMoreDetails} ${isOpen ? styles.isOpened : ''} button plain dark_green`} onClick={handleToggle}>
-          <span>{isOpen ? 'View Less Details' : 'View More Details'}</span>
-        </button>
+          <div className={styles.tabContent}>
+            <div className={styles.tabDataContent}>
+              {tabsData.map(tab => (
+                <div
+                  key={tab.id}
+                  className={`${styles.tabPane} ${activeTab === tab.id ? styles.fadeIn : styles.fadeOut}`}
+                >
+                  <ul className={styles.specsContainer}>
+                    {tab.specs.map(specs => (
+                      <li key={specs.title}>
+                        <h5>{specs.title}</h5>
+                        <p>{specs.description}</p>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <img
+                    src={tab.productImageUrl}
+                    className={styles.productImage}
+                    alt=""
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <div className={styles.techSpecsContent}>
+          <div className={`${[styles.techSpecsContainer]} techSpecsContainerClass`} style={{ height: isOpen ? `${contentHeight}px` : '0' }} ref={contentRef}>
+            <h3 className={`${[styles.techSpecsMainTitle]}`}>{techSpecsData[0].mainTitle}</h3>
+
+            <ul className={styles.mainSpecsList}>
+              {techSpecsData[0].specs.map((spec, index) => (
+                <li key={spec.id} className={styles.spec}>
+                  <h4 className={`${styles.specTitle} ${openItemIndex === index ? styles.openedSpec : ''}`} onClick={() => toggleAccordion(index)}>
+                    {spec.specsTitle}
+                  </h4>
+                  
+                  <ul
+                    className={styles.itemsList}
+                    ref={el => contentRefs.current[index] = el}
+                    style={{ height: `${itemsListHeights[index]}px` }}
+                  >
+                    {spec.items.map((item, itemIndex) => (
+                      <li key={itemIndex} className={styles.item}>
+                        <h5 className={styles.itemTitle}>{item.itemTitle}</h5>
+                        <p className={styles.itemDescription}>{item.itemDescription}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <button className={`${styles.viewMoreDetails} ${isOpen ? styles.isOpened : ''} button plain dark_green`} onClick={handleToggle}>
+            <span>{isOpen ? 'View Less Details' : 'View More Details'}</span>
+          </button>
+        </div>
+        
       </div>
-    </div>
   );
 };
 
