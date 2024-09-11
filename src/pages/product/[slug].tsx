@@ -45,7 +45,7 @@ export default function Product({ content, product }) {
         <ContentBlock content={content} key={content?._meta.deliveryId} />
       ))}
 
-      <PdpTabs productTechSpecs={productTechSpecs} amplienceData={null} />
+      <PdpTabs productTechSpecs={productTechSpecs} amplienceData={""} />
     </div>
   );
 }
