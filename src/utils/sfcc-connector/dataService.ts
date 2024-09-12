@@ -248,7 +248,7 @@ export async function getProductDetails({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = (await serverApiCallSfcc(`?${queryString}`, config, "product"));
-    //console.log("res: ", res);
+    console.log("res: ", res);
     const techSpecs = transformTechSpecsDetails(res.response);
 
     return {...res, techSpecs};

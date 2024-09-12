@@ -15,7 +15,7 @@ const PdpTabs: React.FC<any> = (props) => {
   const nonTabProductTechSpecs = props.productTechSpecs.nonTabSpecsData[0];
   const amplienceData = props.amplienceData;
 
-  console.log("productTechSpecs: ", productTechSpecs);
+  //console.log("productTechSpecs: ", productTechSpecs);
 
   const tabsData = PdpTabsDummyData.tabsData;
   const [activeTab, setActiveTab] = useState<number>(1);
@@ -119,7 +119,7 @@ const PdpTabs: React.FC<any> = (props) => {
     amplienceData === null || amplienceData === undefined ? 
       <div className={styles.pdpNonTabContainer}>
         <h2 className={styles.nonTabTitle}>Detail Specifications</h2>
-        
+
         <div className={styles.specsContainer}>
             {nonTabProductTechSpecs.nonTabSpecs.map((specs, itemIndex) => (
               <div className={styles.specs}>

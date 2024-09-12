@@ -9,36 +9,36 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
           specs: [
             {
               id: 1,
-              specsTitle: "Movement",
+              specsTitle: data.c_movementLabel,
               items:[
                 {
                   id: 1,
-                  itemTitle: "Caliber",
+                  itemTitle: data.c_caliberLabel,
                   itemDescription: data.c_techSpec_caliber
                 },
                 {
                   id: 2,
-                  itemTitle: "Movement",
+                  itemTitle: data.c_movementLabel,
                   itemDescription: data.c_techSpec_movement
                 },
                 {
                   id: 3,
-                  itemTitle: "Power Reserve",
+                  itemTitle: data.c_powerReserveLabel,
                   itemDescription: data.c_techSpec_powerReserve
                 },
                 {
                   id: 4,
-                  itemTitle: "Chronograph",
+                  itemTitle: data.c_chronographLabel,
                   itemDescription: data.c_techSpec_chronograph
                 },
                 {
                   id: 5,
-                  itemTitle: "Vibration",
+                  itemTitle: data.c_vibrationLabel,
                   itemDescription: data.c_techSpec_vibration
                 },
                 {
                   id: 6,
-                  itemTitle: "Cylinder",
+                  itemTitle: data.c_cylinderLabel,
                   itemDescription: data.c_techSpec_cylinder
                 }
               ]
@@ -49,32 +49,32 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items:[
                 {
                   id: 1,
-                  itemTitle: "Case Material",
+                  itemTitle: data.c_caseMaterialLabel,
                   itemDescription: data.c_techSpec_caseMaterial
                 },
                 {
                   id: 2,
-                  itemTitle: "Caseback",
+                  itemTitle: data.c_caseBackLabel,
                   itemDescription: data.c_techSpec_caseBack
                 },
                 {
                   id: 3,
-                  itemTitle: "Water Resistance",
+                  itemTitle: data.c_waterResistanceLabel,
                   itemDescription: data.c_techSpec_waterResistance === true ? data.c_techSpec_waterResistanceDepth + " " + data.c_techSpec_waterResistanceDepthUnit : ""
                 },
                 {
                   id: 4,
-                  itemTitle: "Bezel",
+                  itemTitle: data.c_bezelTypeLabel,
                   itemDescription: data.c_techSpec_bezelType
                 },
                 {
                   id: 5,
-                  itemTitle: "Crown",
+                  itemTitle: data.c_crownLabel,
                   itemDescription: data.c_techSpec_crown
                 },
                 {
                   id: 6,
-                  itemTitle: "Crystal",
+                  itemTitle: data.c_crystalLabel,
                   itemDescription: data.c_techSpec_crystal
                 }
               ]
@@ -85,32 +85,32 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items:[
                 {
                   id: 1,
-                  itemTitle: "Product Weight",
+                  itemTitle: data.c_productWeightLabel,
                   itemDescription: data.c_techSpec_productWeight
                 },
                 {
                   id: 2,
-                  itemTitle: "Watch Head Weight",
+                  itemTitle: data.c_watchHeadWeightLabel,
                   itemDescription: data.c_techSpec_watchHeadWeight
                 },
                 {
                   id: 3,
-                  itemTitle: "Diameter",
+                  itemTitle: data.c_diameterLabel,
                   itemDescription: data.c_techSpec_diameter
                 },
                 {
                   id: 4,
-                  itemTitle: "Thickness",
+                  itemTitle: data.c_thicknessLabel,
                   itemDescription: data.c_techSpec_thickness
                 },
                 {
                   id: 5,
-                  itemTitle: "Height",
+                  itemTitle: data.c_heightLabel,
                   itemDescription: data.c_techSpec_height
                 },
                 {
                   id: 6,
-                  itemTitle: "Lug Width",
+                  itemTitle: data.c_lugWidthLabel,
                   itemDescription: data.c_techSpec_lugWidth
                 }
               ]
@@ -121,37 +121,37 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items:[
                 {
                   id: 1,
-                  itemTitle: "Strap Material",
+                  itemTitle: data.c_strapMaterialLabel,
                   itemDescription: data.c_techSpec_strapMaterial
                 },
                 {
                   id: 2,
-                  itemTitle: "Strap Color",
+                  itemTitle: data.c_strapColorLabel,
                   itemDescription: data.c_techSpec_strapColor
                 },
                 {
                   id: 3,
-                  itemTitle: "Strap Type",
+                  itemTitle: data.c_strapTypeLabel,
                   itemDescription: data.c_techSpec_strapType
                 },
                 {
                   id: 4,
-                  itemTitle: "Lug",
+                  itemTitle: data.c_lugLabel,
                   itemDescription: data.c_techSpec_lug
                 },
                 {
                   id: 5,
-                  itemTitle: "Buckle Material",
+                  itemTitle: data.c_buckleMaterialLabel,
                   itemDescription: data.c_techSpec_buckleMaterial
                 },
                 {
                   id: 6,
-                  itemTitle: "Buckle Type",
+                  itemTitle: data.c_buckleTypeLabel,
                   itemDescription: data.c_techSpec_buckleType
                 },
                 {
                   id: 7,
-                  itemTitle: "Buckle Size",
+                  itemTitle: data.c_buckleSizeLabel,
                   itemDescription: data.c_techSpec_buckleSize
                 }
               ]
@@ -173,7 +173,7 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
                 },
                 {
                   id: 2,
-                  specsTitle: "Size",
+                  specsTitle: data.c_sizeLabel,
                   specsDescription: data.c_size
                 }
               ]
@@ -183,7 +183,7 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items: [
                 {
                   id: 1,
-                  specsTitle: "Movement",
+                  specsTitle: data.c_movementLabel,
                   specsDescription: data.c_movement
                 },
                 {
