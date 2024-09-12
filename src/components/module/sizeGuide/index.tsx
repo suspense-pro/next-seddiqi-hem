@@ -10,39 +10,47 @@ interface SizeGuideProps {
   secondaryTitle: string;
   secondaryDescription: string;
   items: ListItems[];
+  onClose: () => void;
+  isOpen:boolean;
 }
 
 interface ListItems {
   size: string;
   measurement: string;
 }
-const SizeGuide: React.FC<SizeGuideProps> = ({...SizeGuideProps}) => {
+const SizeGuide: React.FC<SizeGuideProps> = ({primaryTitle,
+  primaryDescription,
+  secondaryTitle,
+  secondaryDescription,
+  items,
+  isOpen,
+  onClose
+}) => {
 
-const sizeMeasurement = SizeGuideProps.items;
 
   return (
     <SideDrawer
-      isOpen={true}
-      onClose={() => console.log("Closed")}
+      isOpen={isOpen}
       showFooter={false}
       showBackButton={true}
+      onClose={onClose}
     >
       <div className={styles.contentWrapper}>
         <div className={styles.content}>
           <Typography variant="p" className={styles.title}>
-            {SizeGuideProps.primaryTitle}
+            {primaryTitle}
           </Typography>
           <Typography variant="p" className={styles.description}>
-            {SizeGuideProps.primaryDescription}
+            {primaryDescription}
           </Typography>
         </div>
 
         <div className={styles.tableWrapper}>
           <Typography variant="p" className={styles.sizeGuidetableTitle}>
-            {SizeGuideProps.secondaryTitle}
+            {secondaryTitle}
           </Typography>
           <Typography variant="p" className={styles.sizeGuidetableDesc}>
-            {SizeGuideProps.secondaryDescription}
+            {secondaryDescription}
           </Typography>
         </div>
         <table className={styles.tableContent}>
@@ -53,7 +61,7 @@ const sizeMeasurement = SizeGuideProps.items;
         </tr>
       </thead>
       <tbody>
-        {sizeMeasurement.map((item, index) => (
+        {items.map((item, index) => (
           <tr key={index}>
             <td>{item.size}</td>
             <td>{item.measurement}</td>

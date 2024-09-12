@@ -14,6 +14,25 @@ const ProductDetailInfo = ({ product, content }) => {
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
   const isMobile = !useDeviceWidth()[0];
+  const handleSizeSelectorClose = () => setSizeSelectorOpen(false);
+  const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false); // Default to true to open SizeSelector initially
+  const [isSizeGuideOpen, setSizeGuideOpen] = useState(false);
+
+  const handleSizeSelectorOpen = () => {
+    setSizeSelectorOpen(true);
+    setSizeGuideOpen(false);
+  };
+
+  const handleSizeGuideOpen = () => {
+    setSizeSelectorOpen(false); // Close SizeSelector
+    setSizeGuideOpen(true);    // Open SizeGuide
+  };
+
+  const handleSizeGuideClose = () => {
+    setSizeGuideOpen(false);  // Close SizeGuide
+    setSizeSelectorOpen(true); // Reopen SizeSelector
+  };
+
 
   if(!product) return null
 
@@ -48,9 +67,16 @@ const ProductDetailInfo = ({ product, content }) => {
   const slides = product?.imageGroups[0]?.images?.map((item, index) =>
     item?.videoLink1 ? <VideoSlide item={item} key={index} /> : <ImageSlide item={item} key={index} />
   );
+
   
-  const data = content;
-  const sizeGuideProps = content?.page?.components[1].sizeGuide;
+  // Getting Variants in Size Selector Pop up
+  const sizeSelectorVariants = product.variants
+    .map(item => item.variationValues?.size)
+    .filter(size => size) // Filter out any undefined sizes
+    .sort((a, b) => parseInt(a, 10) - parseInt(b, 10)); // Sort numerically
+  
+  //Size Guide Props
+  const sizeGuideInfo = content?.page?.components[1].sizeGuide;
 
   return (
     <div className={styles.container}>
@@ -96,7 +122,7 @@ const ProductDetailInfo = ({ product, content }) => {
             </div>
           </div>
           <div className={styles.size}>
-            <div className={styles.label}>Select Size</div>
+            <div className={styles.label} onClick={handleSizeSelectorOpen}>Select Size</div>
             <ArrowRight />
           </div>
           <Button
@@ -134,25 +160,31 @@ const ProductDetailInfo = ({ product, content }) => {
                 type={"Plain"}
               />
             </div>
-
             {/* Size Guide  */}
-            {/* <div className={styles.sizeGuide}>
-                <SizeGuide
-                  primaryTitle={sizeGuideProps.primaryTitle}
-                  primaryDescription= {sizeGuideProps.primaryDescription}
-                  secondaryTitle={sizeGuideProps.secondaryTitle}
-                  secondaryDescription= {sizeGuideProps.secondaryDescription} 
-                  items={sizeGuideProps.listItems}        
-                />  
-            </div> */}
-
-             {/* Size Selector */}
+            {isSizeGuideOpen && (
             <div className={styles.sizeGuide}>
-                <SizeSelector
-                  title="SIZE"
-                  description= {"Some description"}
+                <SizeGuide
+                  isOpen={isSizeGuideOpen} 
+                  onClose={handleSizeGuideClose}
+                  primaryTitle={sizeGuideInfo.primaryTitle}
+                  primaryDescription= {sizeGuideInfo.primaryDescription}
+                  secondaryTitle={sizeGuideInfo.secondaryTitle}
+                  secondaryDescription= {sizeGuideInfo.secondaryDescription} 
+                  items={sizeGuideInfo.listItems}        
                 />  
-            </div>
+            </div>)}
+             {/* Size Selector */}
+            {isSizeSelectorOpen && (
+            <div className={styles.sizeSelector}>
+                <SizeSelector
+                  isOpen={isSizeSelectorOpen} 
+                  onClose={handleSizeSelectorClose}
+                  title={"SIZE"}
+                  description= {`"Frivole ring, 8 flowers, 18K rose gold, rhodium-plated 18K white gold, round diamonds; diamond quality DEF, IF to VVS."`}
+                  sizes={sizeSelectorVariants}
+                  onSizeGuideClick={handleSizeGuideOpen}              
+               />  
+            </div>)}
           </div>
           <div className={styles.bottom}>
             <div className={styles.tab}>Editors View</div>
