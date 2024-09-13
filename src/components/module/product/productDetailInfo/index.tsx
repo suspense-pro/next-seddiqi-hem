@@ -160,31 +160,6 @@ const ProductDetailInfo = ({ product, content }) => {
                 type={"Plain"}
               />
             </div>
-            {/* Size Guide  */}
-            {isSizeGuideOpen && (
-            <div className={styles.sizeGuide}>
-                <SizeGuide
-                  isOpen={isSizeGuideOpen} 
-                  onClose={handleSizeGuideClose}
-                  primaryTitle={sizeGuideInfo.primaryTitle}
-                  primaryDescription= {sizeGuideInfo.primaryDescription}
-                  secondaryTitle={sizeGuideInfo.secondaryTitle}
-                  secondaryDescription= {sizeGuideInfo.secondaryDescription} 
-                  items={sizeGuideInfo.listItems}        
-                />  
-            </div>)}
-             {/* Size Selector */}
-            {isSizeSelectorOpen && (
-            <div className={styles.sizeSelector}>
-                <SizeSelector
-                  isOpen={isSizeSelectorOpen} 
-                  onClose={handleSizeSelectorClose}
-                  title={"SIZE"}
-                  description= {`"Frivole ring, 8 flowers, 18K rose gold, rhodium-plated 18K white gold, round diamonds; diamond quality DEF, IF to VVS."`}
-                  sizes={sizeSelectorVariants}
-                  onSizeGuideClick={handleSizeGuideOpen}              
-               />  
-            </div>)}
           </div>
           <div className={styles.bottom}>
             <div className={styles.tab}>Editors View</div>
@@ -198,6 +173,31 @@ const ProductDetailInfo = ({ product, content }) => {
           <HeartIcon fill="#" />
         </div>
       </div>
+      {/* Size Guide  */}
+      {isSizeGuideOpen && (
+        <div className={styles.sizeGuide}>
+            <SizeGuide
+              isOpen={isSizeGuideOpen} 
+              onClose={handleSizeGuideClose}
+              primaryTitle={sizeGuideInfo.primaryTitle}
+              primaryDescription= {sizeGuideInfo.primaryDescription}
+              secondaryTitle={sizeGuideInfo.secondaryTitle}
+              secondaryDescription= {sizeGuideInfo.secondaryDescription} 
+              items={sizeGuideInfo.listItems}        
+            />  
+        </div>)}
+      {/* Size Selector */}
+      {isSizeSelectorOpen && (
+        <div className={styles.sizeSelector}>
+            <SizeSelector
+              isOpen={isSizeSelectorOpen} 
+              onClose={handleSizeSelectorClose}
+              title={"SIZE"}
+              description= {`"Frivole ring, 8 flowers, 18K rose gold, rhodium-plated 18K white gold, round diamonds; diamond quality DEF, IF to VVS."`}
+              sizes={sizeSelectorVariants}
+              onSizeGuideClick={handleSizeGuideOpen}              
+            />  
+        </div>)}
     </div>
   );
 };
