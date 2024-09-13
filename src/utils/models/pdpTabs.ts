@@ -10,12 +10,6 @@ export interface TabsData {
   productImageUrl?: string;
 }
 
-export interface PdpTabsData {
-  tabsData?: TabsData[];
-}
-
-
-
 
 
 export interface ItemsData {
@@ -51,6 +45,8 @@ export interface NonTabListSpecsData {
 }
 
 export interface TechSpecsData {
+  tabsData?: TabsData[];
+  category: string;
   specsData?: ListSpecsData[];
   nonTabSpecsData?: NonTabListSpecsData[];
   // caliber: string;

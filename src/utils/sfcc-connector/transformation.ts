@@ -3,42 +3,116 @@ import { TechSpecsData } from "@utils/models/pdpTabs";
 const transformTechSpecsDetails = (data: any):TechSpecsData => {
    
     return {
+      tabsData: [
+        {
+          id: 1,
+          tabTitle: "Case",
+          specs: [
+            {
+              title: "Case",
+              description: data.c_caseMaterial
+            },
+            {
+              title: "Size",
+              description: data.c_size
+            },
+            {
+              title: "Water Resistance",
+              description: data.c_waterResistance === true ? data.c_waterResistanceDepth + " " + data.c_waterResistanceDepthUnit : ""
+            }
+          ],
+          productImageUrl: "/images/png/watch1.png"
+        },
+    
+        {
+          id: 2,
+          tabTitle: "Movement",
+          specs: [
+            {
+              title: "Movement",
+              description: data.c_movement
+            },
+            {
+              title: "Power Reserve",
+              description: data.c_powerReserve
+            }
+          ],
+          productImageUrl: "/images/png/watch1.png"
+        },
+    
+        {
+          id: 3,
+          tabTitle: "Dial",
+          specs: [
+            {
+              title: "Dial",
+              description: data.c_dialMaterial
+            },
+            {
+              title: "Power Reserve",
+              description: data.c_powerReseve
+            }
+          ],
+          productImageUrl: "/images/png/watch1.png"
+        },
+    
+        {
+          id: 4,
+          tabTitle: "Bracelet",
+          specs: [
+            {
+              title: "Bracelet",
+              description: "Microblasted and Polished Black Ceramic"
+            },
+            {
+              title: "Size",
+              description: "42 mm"
+            },
+            {
+              title: "Water Resistance",
+              description: "100M OR 10 ATM"
+            }
+          ],
+          productImageUrl: "/images/png/watch1.png"
+        },
+      ],
+      category: data.c_categoryName,
       specsData: [
         {
           mainTitle: "DETAIL SPECIFICATIONS",
           specs: [
             {
               id: 1,
-              specsTitle: data.c_movementLabel,
+              specsTitle: "Movement",
               items:[
                 {
                   id: 1,
-                  itemTitle: data.c_caliberLabel,
+                  itemTitle: "Caliber",
                   itemDescription: data.c_techSpec_caliber
                 },
                 {
                   id: 2,
-                  itemTitle: data.c_movementLabel,
+                  itemTitle: "Movement",
                   itemDescription: data.c_techSpec_movement
                 },
                 {
                   id: 3,
-                  itemTitle: data.c_powerReserveLabel,
+                  itemTitle: "Power Reserve",
                   itemDescription: data.c_techSpec_powerReserve
                 },
                 {
                   id: 4,
-                  itemTitle: data.c_chronographLabel,
+                  itemTitle: "Chronograph",
                   itemDescription: data.c_techSpec_chronograph
                 },
                 {
                   id: 5,
-                  itemTitle: data.c_vibrationLabel,
+                  itemTitle: "Vibration",
                   itemDescription: data.c_techSpec_vibration
                 },
                 {
                   id: 6,
-                  itemTitle: data.c_cylinderLabel,
+                  itemTitle: "Cylinder",
                   itemDescription: data.c_techSpec_cylinder
                 }
               ]
@@ -49,32 +123,32 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items:[
                 {
                   id: 1,
-                  itemTitle: data.c_caseMaterialLabel,
+                  itemTitle: "Case Material",
                   itemDescription: data.c_techSpec_caseMaterial
                 },
                 {
                   id: 2,
-                  itemTitle: data.c_caseBackLabel,
+                  itemTitle: "Caseback",
                   itemDescription: data.c_techSpec_caseBack
                 },
                 {
                   id: 3,
-                  itemTitle: data.c_waterResistanceLabel,
+                  itemTitle: "Water Resistance",
                   itemDescription: data.c_techSpec_waterResistance === true ? data.c_techSpec_waterResistanceDepth + " " + data.c_techSpec_waterResistanceDepthUnit : ""
                 },
                 {
                   id: 4,
-                  itemTitle: data.c_bezelTypeLabel,
+                  itemTitle: "Bezel",
                   itemDescription: data.c_techSpec_bezelType
                 },
                 {
                   id: 5,
-                  itemTitle: data.c_crownLabel,
+                  itemTitle: "Crown",
                   itemDescription: data.c_techSpec_crown
                 },
                 {
                   id: 6,
-                  itemTitle: data.c_crystalLabel,
+                  itemTitle: "Crystal",
                   itemDescription: data.c_techSpec_crystal
                 }
               ]
@@ -85,32 +159,32 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items:[
                 {
                   id: 1,
-                  itemTitle: data.c_productWeightLabel,
+                  itemTitle: "Product Weight",
                   itemDescription: data.c_techSpec_productWeight
                 },
                 {
                   id: 2,
-                  itemTitle: data.c_watchHeadWeightLabel,
+                  itemTitle: "Watch-Head Weight",
                   itemDescription: data.c_techSpec_watchHeadWeight
                 },
                 {
                   id: 3,
-                  itemTitle: data.c_diameterLabel,
+                  itemTitle: "Diameter",
                   itemDescription: data.c_techSpec_diameter
                 },
                 {
                   id: 4,
-                  itemTitle: data.c_thicknessLabel,
+                  itemTitle: "Thickness",
                   itemDescription: data.c_techSpec_thickness
                 },
                 {
                   id: 5,
-                  itemTitle: data.c_heightLabel,
+                  itemTitle: "Height",
                   itemDescription: data.c_techSpec_height
                 },
                 {
                   id: 6,
-                  itemTitle: data.c_lugWidthLabel,
+                  itemTitle: "Lug Width",
                   itemDescription: data.c_techSpec_lugWidth
                 }
               ]
@@ -121,37 +195,37 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items:[
                 {
                   id: 1,
-                  itemTitle: data.c_strapMaterialLabel,
+                  itemTitle: "Strap Material",
                   itemDescription: data.c_techSpec_strapMaterial
                 },
                 {
                   id: 2,
-                  itemTitle: data.c_strapColorLabel,
+                  itemTitle: "Strap Color",
                   itemDescription: data.c_techSpec_strapColor
                 },
                 {
                   id: 3,
-                  itemTitle: data.c_strapTypeLabel,
+                  itemTitle: "Strap Type",
                   itemDescription: data.c_techSpec_strapType
                 },
                 {
                   id: 4,
-                  itemTitle: data.c_lugLabel,
+                  itemTitle: "Lug",
                   itemDescription: data.c_techSpec_lug
                 },
                 {
                   id: 5,
-                  itemTitle: data.c_buckleMaterialLabel,
+                  itemTitle: "Buckle Material",
                   itemDescription: data.c_techSpec_buckleMaterial
                 },
                 {
                   id: 6,
-                  itemTitle: data.c_buckleTypeLabel,
+                  itemTitle: "Buckle Type",
                   itemDescription: data.c_techSpec_buckleType
                 },
                 {
                   id: 7,
-                  itemTitle: data.c_buckleSizeLabel,
+                  itemTitle: "Buckle Size",
                   itemDescription: data.c_techSpec_buckleSize
                 }
               ]
@@ -159,7 +233,6 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
           ]
         }
       ],
-
       nonTabSpecsData: [
         {
           nonTabSpecs: [
@@ -168,13 +241,8 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items: [
                 {
                   id: 1,
-                  specsTitle: "Case",
-                  specsDescription: data.c_caseMaterial
-                },
-                {
-                  id: 2,
-                  specsTitle: data.c_sizeLabel,
-                  specsDescription: data.c_size
+                  specsTitle: "Stone",
+                  specsDescription: "Stone Description"
                 }
               ]
             },
@@ -183,13 +251,8 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items: [
                 {
                   id: 1,
-                  specsTitle: data.c_movementLabel,
-                  specsDescription: data.c_movement
-                },
-                {
-                  id: 2,
-                  specsTitle: "Mechanism",
-                  specsDescription: data.c_mechanism
+                  specsTitle: "Metal",
+                  specsDescription: "Metal Description"
                 }
               ]
               
@@ -199,13 +262,8 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items: [
                 {
                   id: 1,
-                  specsTitle: "Bracelet",
-                  specsDescription: data.c_braceletMaterial
-                },
-                {
-                  id: 2,
-                  specsTitle: "Dial",
-                  specsDescription: data.c_dialMaterial
+                  specsTitle: "Collection",
+                  specsDescription: "Collection Description"
                 }
               ] 
             }

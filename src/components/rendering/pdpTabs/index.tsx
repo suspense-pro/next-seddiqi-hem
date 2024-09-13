@@ -11,11 +11,12 @@ interface PdpTabsProps {
 }
 
 const PdpTabs: React.FC<any> = (props) => {
+  const productCategory = props.productTechSpecs.category;
   const productTechSpecs = props.productTechSpecs.specsData;
   const nonTabProductTechSpecs = props.productTechSpecs.nonTabSpecsData[0];
   const amplienceData = props.amplienceData;
 
-  //console.log("productTechSpecs: ", productTechSpecs);
+  console.log("productTechSpecs: ", nonTabProductTechSpecs.nonTabSpecs[0].items.length);
 
   const tabsData = PdpTabsDummyData.tabsData;
   const [activeTab, setActiveTab] = useState<number>(1);
@@ -116,16 +117,16 @@ const PdpTabs: React.FC<any> = (props) => {
   /**** End for Tech Specs List Accordion codes ****/
   
   return (
-    amplienceData === null || amplienceData === undefined ? 
+    productCategory.toLowerCase() === "jewellery" || productCategory.toLowerCase() === "jewelleries" ? 
       <div className={styles.pdpNonTabContainer}>
         <h2 className={styles.nonTabTitle}>Detail Specifications</h2>
 
-        <div className={styles.specsContainer}>
+        <div className={`${[styles.specsContainer]}`}>
             {nonTabProductTechSpecs.nonTabSpecs.map((specs, itemIndex) => (
               <div className={styles.specs}>
               {specs.items.map((item, itemIndex) => (
                 item.specsDescription && (
-                  <div key={itemIndex} className={styles.spec}>
+                  <div key={itemIndex} className={`${[styles.spec]} ${item.length >= 2 ? styles.hasMoreItems : ""}`}>
                     <h5>{item.specsTitle}</h5>
                     <p>{item.specsDescription}</p>
                   </div>

@@ -562,12 +562,23 @@
       .spec{
         display: flex;
         flex-direction: column;
-        row-gap: rem(4);
-        width: calc(50% - 14px);
+        //row-gap: rem(4);
+        //width: calc(50% - 14px);
+        width: 100%;
 
         @include md{
-          row-gap: rem(8);
-          width: 100%;
+          //row-gap: rem(8);
+          //width: 100%;
+        }
+
+        &.hasMoreItems{
+          row-gap: rem(4);
+          width: calc(50% - 14px);
+
+          @include md{
+            row-gap: rem(8);
+            width: 100%;
+          }
         }
 
         h5{
