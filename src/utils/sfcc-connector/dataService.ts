@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import logger from "@utils/logger";
 import isServer from "@utils/helpers/isServer";
+import { transformTechSpecsDetails } from "./transformation";
 
 export async function registerCustomer({
   userData,
@@ -247,7 +248,10 @@ export async function getProductDetails({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = (await serverApiCallSfcc(`?${queryString}`, config, "product"));
-    return res;
+    console.log("res: ", res);
+    const techSpecs = transformTechSpecsDetails(res.response);
+
+    return {...res, techSpecs};
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -274,7 +278,7 @@ export async function getProducts({
     
     const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
 
-    console.log({res});
+    //console.log({res});
 
     if(!res) {
       return null;
