@@ -63,7 +63,6 @@ export const ComponentMapping: any = {
   [`${componentUrl}/botique-banner`]: BoutiqueBanner,
   [`${componentUrl}/product-carousel`]: FeaturedProductCarousel,
   [`${componentUrl}/image-gallery-carousel`]: ImageGalleryCarousel,
-
 };
 
 const defaultConfig = {
