@@ -1,0 +1,69 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  display: none;
+  flex-direction: column;
+  gap: rem(48);
+  justify-content: center;
+  align-items: center;
+  margin: rem(20 0);
+
+  @include lg {
+    display: flex
+  }
+
+  .title {
+    @include heading_regular;
+    color: getColorHex("green-dark");
+    text-align: center;
+    font-size: rem(40);
+    font-style: normal;
+    font-weight: 500;
+    line-height: rem(46);
+    letter-spacing: rem(0.4);
+    text-transform: uppercase;
+    max-width: rem(840);
+  }
+}
+
+.cards {
+  display: flex;
+  gap: rem(24);
+  margin: 0 rem(80);
+  flex-wrap: wrap;
+  @include lg {
+    flex-wrap: nowrap;
+  }
+}
+
+.infoListCard {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+  padding: rem(32);
+  border-radius: 16px 0px;
+  background: rgba(199, 201, 198, 0.1);
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+  }
+
+  .infoTitle {
+    color: getColorHex("green-dark");
+
+    @include heading_regular;
+    font-size: rem(26);
+    font-weight: 500;
+    line-height: rem(36);
+    letter-spacing: rem(0.6);
+  }
+
+  .infoDesc {
+    color: getColorHex("green-metallic");
+    font-size: rem(16);
+    line-height: rem(26);
+    letter-spacing: rem(0.2);
+  }
+}

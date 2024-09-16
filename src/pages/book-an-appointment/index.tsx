@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./index.module.scss";
 import StepOne from "./stepOne";
+import { CloseIconV2 } from "@assets/images/svg";
 
 // Step Components
 const Step1 = () => <StepOne />;
@@ -64,11 +65,16 @@ const BookAnAppointment = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Show a loading state until localStorage is checked
+    return <div>Loading...</div>;
   }
 
   return (
-    <div>
+    <div className={styles.container}>
+      <div className={styles.heading}>
+        <div className={styles.title}>Book an appointment</div>
+        <CloseIconV2 />
+      </div>
+
       {/* Breadcrumb Navigation */}
       <div className={styles.breadcrumb}>
         {steps.map((step, index) => (

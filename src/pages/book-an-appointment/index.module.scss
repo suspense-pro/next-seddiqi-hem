@@ -1,7 +1,42 @@
+@import "././../../assets/styles/main.scss";
+
+.container {
+  margin: rem(40 28);
+
+  .heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include md {
+      display: none;
+    }
+
+    .title {
+      @include heading_regular;
+      color: getColorHex("green-dark");
+      font-size: rem(14);
+      font-weight: 500;
+      line-height: rem(20);
+      letter-spacing: rem(0.4);
+      text-transform: uppercase;
+    }
+  }
+
+  @include md {
+    margin: rem(80 28);
+  }
+}
+
 .breadcrumb {
+  margin: rem(32 28);
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @include lg {
+    margin: rem(60 28);
+  }
 }
 
 .breadcrumbItem {
@@ -10,49 +45,48 @@
 }
 
 .circle {
-  width: 40px;
-  height: 40px;
   border-radius: 50%;
-  background-color: #f0f0f0;
-  color: #bbb;
+  color: getColorHex("brown-grey");
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  font-size: 1.2rem;
+  font-size: rem(14);
   transition: all 0.3s ease;
-  border: 1px solid #f0f0f0;
+  border: rem(1) solid getColorHex("grey-light");
   cursor: pointer;
+  width: rem(22);
+  height: rem(22);
 
-  display: flex;
-  width: 36px;
-  height: 36px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
+  @include md {
+    font-size: rem(16);
+    width: rem(36);
+    height: rem(36);
+  }
 
   &:hover {
-    border: 1px solid #7e6952;
-    color: #7e6952;
+    border: rem(1) solid getColorHex("chocolate-brown");
+    color: getColorHex("chocolate-brown");
   }
 }
 
 .active {
-  background: #7e6952;
-  
-  border: 2px solid #7e6952;
-  color: white;
+  background: getColorHex("chocolate-brown");
+  border: rem(1) solid getColorHex("chocolate-brown");
+  color: getColorHex("white");
 
   &:hover {
-    color: white;
+    color: getColorHex("white");
   }
 }
 
 .line {
-  width: 50px;
-  height: 2px;
-  background-color: #ddd;
-  margin: 0 10px;
+  width: rem(40.5);
+  height: rem(1);
+  background: getColorHex("grey-light");
+  margin: 0 rem(8);
+
+  @include md {
+    margin: 0 rem(12);
+    width: rem(72);
+  }
 }
