@@ -15,41 +15,29 @@ const image = {
   mimeType: "image/png",
 };
 
-const StepOne = () => {
+const StepOne = ({ content }) => {
+  if (!content) return null;
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
-        <div className={styles.title}>Choose an experience</div>
-        <div className={styles.desc}>
-          Step into a realm where luxury meets warmth and sophistication. Our stores beckon with an ambiance crafted to
-          embrace every visitor in comfort and elegance.
-        </div>
+        <div className={styles.title}>{content?.title}</div>
+        <div className={styles.desc}>{content?.description}</div>
       </div>
 
       <div className={styles.serviceCards}>
-        <div className={styles.serviceCard}>
-          <Image className={styles.serviceImage} image={image} imageAltText="image" />
-          <div className={styles.serviceInfo}>
-            <div className={styles.serviceTitle}>Product Discovery</div>
-            <div className={styles.serviceDesc}>
-              Embark on a journey through time with our exquisite collection of watch adn jewellery products, blending
-              precision craftsmanship.
+        {content?.listItems?.map((item) => (
+          <div className={styles.serviceCard}>
+            <Image
+              className={styles.serviceImage}
+              image={item?.media?.image}
+              imageAltText={item?.media?.altText}
+            />
+            <div className={styles.serviceInfo}>
+              <div className={styles.serviceTitle}>{item?.title}</div>
+              <div className={styles.serviceDesc}>{item?.description}</div>
             </div>
           </div>
-        </div>
-        <div className={styles.serviceCard}>
-          <Image className={styles.serviceImage} image={image} imageAltText="image" />
-          <div className={styles.serviceInfo}>
-            <div className={styles.serviceTitle}>Product Discovery</div>
-            <div className={styles.serviceDesc}>
-              Embark on a journey through time with our exquisite collection of watch adn jewellery products, blending
-              precision craftsmanship.
-            </div>
-            {/* <CareIcon />
-            <ProtectionIcon />
-            <WatchIcon /> */}
-          </div>
-        </div>
+        ))}
       </div>
       <ExclusiveInfoCards />
     </div>

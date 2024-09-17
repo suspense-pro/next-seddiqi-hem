@@ -3,15 +3,41 @@ import Link from "next/link";
 import styles from "./index.module.scss";
 import StepOne from "./stepOne";
 import { CloseIconV2 } from "@assets/images/svg";
+import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 
 // Step Components
-const Step1 = () => <StepOne />;
 const Step2 = () => <div>Content for Step 2</div>;
 const Step3 = () => <div>Content for Step 3</div>;
 const Step4 = () => <div>Content for Step 4</div>;
 const Step5 = () => <div>Content for Step 5</div>;
 
-const BookAnAppointment = () => {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const data = await fetchStandardPageData(
+    {
+      content: {
+        page: { key: "book-an-appointment" },
+      },
+    },
+    context
+  );
+
+  // if (isEmpty(data.page)) {
+  //   return {
+  //     redirect: {
+  //       destination: "/page-not-found",
+  //     },
+  //   };
+  // }
+  return {
+    props: {
+      ...data,
+    },
+  };
+}
+
+const BookAnAppointment = ({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log("CONTENT", content);
   const steps = [
     { href: "/step1", label: "Step 1" },
     { href: "/step2", label: "Step 2" },
@@ -19,6 +45,9 @@ const BookAnAppointment = () => {
     { href: "/step4", label: "Step 4" },
     { href: "/step5", label: "Step 5" },
   ];
+  
+  const stepOne = content?.page?.setpOne;
+  const Step1 = () => <StepOne content={stepOne} />;
 
   // State for the current step and loading state
   const [currentStep, setCurrentStep] = useState(null); // Set to null initially
