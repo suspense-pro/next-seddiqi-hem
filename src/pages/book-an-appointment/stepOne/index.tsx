@@ -3,6 +3,7 @@ import styles from "./index.module.scss";
 import { Image } from "@components/module";
 import { CareIcon, ProtectionIcon, WatchIcon } from "@assets/images/svg";
 import ExclusiveInfoCards from "../exclusiveInfoCards";
+import ServiceCard from "../serviceCard";
 
 const image = {
   _meta: {
@@ -15,7 +16,7 @@ const image = {
   mimeType: "image/png",
 };
 
-const StepOne = ({ content }) => {
+const StepOne = ({ content, handleStepChange, setSelectedCard }) => {
   if (!content) return null;
   return (
     <div className={styles.container}>
@@ -26,16 +27,13 @@ const StepOne = ({ content }) => {
 
       <div className={styles.serviceCards}>
         {content?.listItems?.map((item) => (
-          <div className={styles.serviceCard}>
-            <Image
-              className={styles.serviceImage}
-              image={item?.media?.image}
-              imageAltText={item?.media?.altText}
-            />
-            <div className={styles.serviceInfo}>
-              <div className={styles.serviceTitle}>{item?.title}</div>
-              <div className={styles.serviceDesc}>{item?.description}</div>
-            </div>
+          <div
+            onClick={() => {
+              setSelectedCard(item)
+              handleStepChange(2);
+            }}
+          >
+            <ServiceCard item={item} />
           </div>
         ))}
       </div>

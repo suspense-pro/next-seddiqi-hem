@@ -7,7 +7,7 @@ import RichText from "@components/module/richText";
 const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
   if (!contentLeft || !contentRight) return null;
   const renderColumn = (content) => {
-    const opacity = content?.opacity?.opacity
+    const opacity = content?.opacity?.opacity;
     return (
       <div className={styles.column}>
         <GradientOverlay opacity={opacity}>
@@ -25,7 +25,7 @@ const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
             link={content?.cta?.url}
             className={styles.btn}
             title={content?.cta?.label}
-            color="dark_green"
+            color={content?.cta?.color}
             type={content?.cta?.type}
           />
         </div>

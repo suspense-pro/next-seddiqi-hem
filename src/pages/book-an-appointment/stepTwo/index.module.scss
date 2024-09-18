@@ -1,0 +1,94 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  max-width: rem(800);
+  display: flex;
+  flex-direction: column;
+  gap: rem(60);
+}
+
+.seriveCard {
+  max-width: rem(800);
+  width: 100%;
+  border: rem(1) solid getColorHex("grey-mid");
+}
+
+.tabNavigation {
+  width: 100%;
+}
+
+.brandItem {
+  display: flex;
+  align-items: center;
+  gap: rem(8);
+
+  .checkbox {
+    width: rem(20);
+    height: rem(20);
+    cursor: pointer;
+    border: 1px solid #847b72;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tick {
+    display: none;
+  }
+
+  .inputCheckbox:checked + .checkbox .tick {
+    display: block;
+  }
+
+  .brandName {
+    color: var(--GreyShades-Mid-Grey, #787775);
+    cursor: pointer;
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px; /* 162.5% */
+    letter-spacing: 0.2px;
+  }
+}
+
+.suggestionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16);
+}
+
+.suggestionItems {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: rem(16);
+  column-gap: rem(80);
+  align-items: center;
+}
+
+.suggestionTitle {
+  color: var(--GreyShades-Grey, #403f3d);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.brandItem {
+  display: flex;
+  gap: rem(8);
+  min-width: rem(190);
+}
+
+.brandBtn {
+  text-transform: capitalize;
+  margin-top: rem(28);
+}
