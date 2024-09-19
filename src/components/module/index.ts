@@ -22,6 +22,7 @@ import SubMenu from "./tabContent/subMenu";
 import HeaderFooter from "./headerFooter/index";
 import SubMenuLinks from "./sumMenuLinks";
 import NavCardBlocks from "./navCardBlocks";
+import CategoryList from "./categoryList";
 import SideDrawer from "./sideDrawer";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
@@ -66,5 +67,6 @@ export {
   ScrollToTop,
   StickyWhatsapp,
   ProductImageFullScreen,
-  ProductDetailInfo
+  ProductDetailInfo,
+  CategoryList,
 };
