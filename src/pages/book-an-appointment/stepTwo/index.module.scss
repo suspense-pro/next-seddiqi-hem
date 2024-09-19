@@ -30,6 +30,12 @@
   align-items: center;
   gap: rem(8);
 
+  .checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+  }
+
   .checkbox {
     width: rem(20);
     height: rem(20);
@@ -39,15 +45,17 @@
     align-items: center;
     justify-content: center;
     border-left: 1px solid #847b72;
+
+   
   }
 
   .tick {
     display: none;
   }
 
-  // .inputCheckbox {
-  //   display: none;
-  // }
+  .inputCheckbox {
+    display: none;
+  }
 
   .inputCheckbox:checked + .checkbox {
     .tick {

@@ -89,10 +89,12 @@ const WatchesContent = () => {
           <div className={styles.suggestionItems}>
             {brandSUggestions.map((item) => (
               <div className={styles.brandItem} key={item}>
-                {/* <input className={styles.inputCheckbox} type="checkbox" /> */}
-                <div className={styles.checkbox}>{/* <Tick className={styles.tick} /> */}</div>
-                <label htmlFor="name" className={styles.brandName}>
-                  {item}
+                <label htmlFor={`checkbox-${item}`} className={styles.checkboxLabel}>
+                  <input className={styles.inputCheckbox} type="checkbox" id={`checkbox-${item}`} />
+                  <div className={styles.checkbox}>
+                    <Tick className={styles.tick} />
+                  </div>
+                  <span className={styles.brandName}>{item}</span>
                 </label>
               </div>
             ))}
@@ -121,14 +123,14 @@ const WatchesContent = () => {
               <div className={styles.char}>{char}</div>
               {watchBrands[char]?.map((item) => (
                 <div className={styles.brandItem} key={item}>
+                <label htmlFor={`checkbox-${item}`} className={styles.checkboxLabel}>
                   <input className={styles.inputCheckbox} type="checkbox" id={`checkbox-${item}`} />
                   <div className={styles.checkbox}>
                     <Tick className={styles.tick} />
                   </div>
-                  <label htmlFor={`checkbox-${item}`} className={styles.brandName}>
-                    {item}
-                  </label>
-                </div>
+                  <span className={styles.brandName}>{item}</span>
+                </label>
+              </div>
               ))}
             </div>
           ))}
