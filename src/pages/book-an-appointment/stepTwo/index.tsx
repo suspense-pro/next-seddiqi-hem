@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./index.module.scss";
 import ServiceCard from "../serviceCard";
 import { Button, TabbedNavigation } from "@components/module";
 import { Tick, Tickbox } from "@assets/images/svg";
+import ExclusiveInfoCards from "../exclusiveInfoCards";
+
+const brandSUggestions = [
+  "Rolex",
+  "Bell & Ross",
+  "Bvlgari",
+  "Patek Philippe",
+  "Emmanuel Bouchet",
+  "H Moser & Cie",
+  "Audemars Piguet",
+  "Dior",
+  "Moritz Grossmann",
+  "Hublot",
+  "Ferdinand Berthoud",
+  "Tag Heuer",
+];
+
+const watchBrands = {
+  A: ["Akrivia", "Aramedes", "Artya", "Audemars Piguet"],
+  B: ["Bell & Ross", "Bernard Favre", "Bovet", "Breitling", "Bvlgari"],
+  C: ["Cabestan", "Chopard", "Christian Van der Klaauw", "Christophe Claret", "Claude Meylan"],
+  D: ["Debethune", "Dior"],
+  E: ["Emmanuel Bouchet"],
+  F: ["F.p. Journe", "Ferdinand Berthoud", "Frederique Constant"],
+};
 
 const StepTwo = ({ item, handleStepChange, setSelectedCard }) => {
   if (!item) return null;
@@ -10,7 +35,7 @@ const StepTwo = ({ item, handleStepChange, setSelectedCard }) => {
   let data = [
     {
       tabLabel: "Watches",
-      content: "Watches",
+      content: <WatchesContent />,
     },
     {
       tabLabel: "Jewellery",
@@ -37,29 +62,87 @@ const StepTwo = ({ item, handleStepChange, setSelectedCard }) => {
           type={true}
         />
         <TabbedNavigation className={styles.tabNavigation} tabs={tabs} />
-
-        <div className={styles.suggestionContainer}>
-          <div className={styles.suggestionTitle}>Top Suggestions</div>
-          <div className={styles.suggestionItems}>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 20, 11, 12].map((item) => {
-              return (
-                <div className={styles.brandItem}>
-                  {/* <input className={styles.inputCheckbox} type="checkbox" /> */}
-                  <div className={styles.checkbox}>
-                    <Tick className={styles.tick} />
-                  </div>
-                  <label htmlFor="name" className={styles.brandName}>
-                    Patek Philippe
-                  </label>
-                </div>
-              );
-            })}
-          </div>
-          <Button title="View all brands" className={styles.brandBtn} type="plain" color="green_dark" />
-        </div>
       </div>
+      <ExclusiveInfoCards />
     </div>
   );
 };
 
 export default StepTwo;
+
+const WatchesContent = () => {
+  const [showAlphabetical, setShowAlphabetical] = useState(false);
+
+  const handleViewAllBrandsClick = () => {
+    setShowAlphabetical(!showAlphabetical);
+  };
+
+  const handleBackClick = () => {
+    setShowAlphabetical(false);
+  };
+
+  return (
+    <>
+      {!showAlphabetical ? (
+        <div className={styles.suggestionContainer}>
+          <div className={styles.suggestionTitle}>Top Suggestions</div>
+          <div className={styles.suggestionItems}>
+            {brandSUggestions.map((item) => (
+              <div className={styles.brandItem} key={item}>
+                {/* <input className={styles.inputCheckbox} type="checkbox" /> */}
+                <div className={styles.checkbox}>{/* <Tick className={styles.tick} /> */}</div>
+                <label htmlFor="name" className={styles.brandName}>
+                  {item}
+                </label>
+              </div>
+            ))}
+          </div>
+          <Button
+            clickHandler={handleViewAllBrandsClick}
+            isLink={false}
+            title="View all brands"
+            className={styles.brandBtn}
+            type="plain"
+            color="green_dark"
+          />
+        </div>
+      ) : (
+        <div className={styles.alphabeticalContainer}>
+          {/* <Button
+            clickHandler={handleBackClick}
+            isLink={false}
+            title="Back to suggestions"
+            className={styles.backBtn}
+            type="plain"
+            color="green_dark"
+          /> */}
+          {Object.keys(watchBrands).map((char) => (
+            <div className={styles.charContainer} key={char}>
+              <div className={styles.char}>{char}</div>
+              {watchBrands[char]?.map((item) => (
+                <div className={styles.brandItem} key={item}>
+                  <input className={styles.inputCheckbox} type="checkbox" id={`checkbox-${item}`} />
+                  <div className={styles.checkbox}>
+                    <Tick className={styles.tick} />
+                  </div>
+                  <label htmlFor={`checkbox-${item}`} className={styles.brandName}>
+                    {item}
+                  </label>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+      <div className={styles.selectBrandBtn}>
+        <Button
+          clickHandler={() => console.log("Hello")}
+          isLink={false}
+          title="Select Brands"
+          type="solid"
+          color="metallic"
+        />
+      </div>
+    </>
+  );
+};

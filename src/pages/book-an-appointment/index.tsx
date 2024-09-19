@@ -39,6 +39,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 const BookAnAppointment = ({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   console.log("CONTENT", content);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedBrands, setSelectedBrands] = useState([])
   const steps = [
     { href: "/step1", label: "Step 1" },
     { href: "/step2", label: "Step 2" },
@@ -47,9 +48,26 @@ const BookAnAppointment = ({ content }: InferGetServerSidePropsType<typeof getSe
     { href: "/step5", label: "Step 5" },
   ];
 
+  const [completedSteps, setCompletedSteps] = useState([false, false, false, false, false]);
+
   // Function to handle navigation between steps
   const handleStepChange = (step) => {
+    if (selectedCard) {
+      setCompletedSteps((prev) => {
+        const updated = [...prev];
+        updated[0] = true;
+        return updated;
+      });
+    }
     setCurrentStep(step);
+  };
+
+  const markStepCompleted = () => {
+    setCompletedSteps((prev) => {
+      const updated = [...prev];
+      updated[currentStep - 1] = true;
+      return updated;
+    });
   };
 
   const stepOne = content?.page?.setpOne;
@@ -115,7 +133,13 @@ const BookAnAppointment = ({ content }: InferGetServerSidePropsType<typeof getSe
         {steps.map((step, index) => (
           <div key={index} className={styles.breadcrumbItem}>
             <div onClick={() => handleStepChange(index + 1)}>
-              <span className={`${styles.circle} ${index + 1 === currentStep ? styles.active : ""}`}>{index + 1}</span>
+              <span
+                className={`${styles.circle} ${completedSteps[index] && styles.completed} ${
+                  index + 1 === currentStep ? styles.active : ""
+                }`}
+              >
+                {index + 1}
+              </span>
             </div>
             {index < steps.length - 1 && <span className={styles.line}></span>}
           </div>

@@ -70,6 +70,11 @@
 }
 
 .active {
+  border: rem(1) solid getColorHex("chocolate-brown");
+  color: getColorHex("chocolate-brown");
+}
+
+.completed {
   background: getColorHex("chocolate-brown");
   border: rem(1) solid getColorHex("chocolate-brown");
   color: getColorHex("white");
