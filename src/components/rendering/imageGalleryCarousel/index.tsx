@@ -4,11 +4,12 @@ import { Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import styles from "./imageGalleryCarousel.module.scss";
-import { GradientOverlay, Image, ProductImageFullScreen } from "@components/module";
+import { GradientOverlay, Image, ProductImageFullScreen, Video } from "@components/module";
 import { ArrowRight, PlusIcon } from "@assets/images/svg";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 
 const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
+  console.log("galleryItems", galleryItems);
   if (!galleryItems) return null;
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -34,10 +35,15 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
     : activeIndex < galleryItems.length - 3;
 
   const currentImg = currentImage?.listItems[0]?.image;
-  let productItem = {
-    disBaseLink: `https://${currentImg?.defaultHost}/i/${currentImg?.endpoint}/${encodeURIComponent(currentImg?.name)}`,
-    alt: "product",
-  };
+  let productItem;
+  if (currentImg) {
+    productItem = {
+      disBaseLink: `https://${currentImg?.defaultHost}/i/${currentImg?.endpoint}/${encodeURIComponent(
+        currentImg?.name
+      )}`,
+      alt: "product",
+    };
+  }
 
   return (
     <div className={styles.container}>
@@ -70,7 +76,17 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
           <SwiperSlide key={item?.id || ind} className={styles.swiperSlide}>
             <div className={styles.sliderItem}>
               <GradientOverlay opacity={item?.opacity?.opacity}>
-                <Image className={styles.image} image={item?.listItems[0]?.image} imageAltText="image" />
+                {item?.listItems[0]?.image && (
+                  <Image className={styles.image} image={item?.listItems[0]?.image} imageAltText="image" />
+                )}
+                {item?.listItems[0]?.video && (
+                  <Video
+                    className={styles.image}
+                    video={item?.listItems[0]?.video}
+                    autoPlay={item?.listItems[0]?.autoPlay}
+                    showPlay={item?.listItems[0]?.showPlay}
+                  />
+                )}
               </GradientOverlay>
               <div className={styles.sliderContent}>
                 <div className={styles.contentInfo}>

@@ -14,7 +14,6 @@ import { BackgroundStyle }  from '@utils/helpers/backgroundStyle';
 
 const CollectionsTabList = ({ ...content }) => {
   const isMobile = !useDeviceWidth()[0];
-  console.log('COLLECTIONS TABL LIST', content)
 
   let tabs = content?.tabItem?.map((item, index) => {
     return {

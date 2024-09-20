@@ -13,7 +13,7 @@
   line-height: rem(22);
   letter-spacing: rem(0.4);
   text-transform: uppercase;
-  padding: rem(20 0);
+  padding-top: rem(24);
 }
 
 
@@ -59,7 +59,7 @@
   font-size: rem(14);
   line-height: rem(22);
   letter-spacing: rem(0.4);
-  color: getColorHex("green-dark");
+  color: getColorHex("grey-dark");
 }
 
 .customContainer {
