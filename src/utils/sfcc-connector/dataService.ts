@@ -348,6 +348,31 @@ export async function getStores({
   }
 }
 
+export async function getCategory({
+  method,
+  cgid,
+}: {
+  method: string;
+  cgid: string;
+}) {
+  try {
+    const json = {
+      api: "category",
+      action: "getCategory",
+      cgid: cgid,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "category"));
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 let apiConfig: any;
 
 const cacheApiConfig = () => {
