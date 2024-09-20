@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import styles from "./checkboxFilter.module.scss";
-import Typography from "@components/module/typography";
+import Typography from "../typography";
 import { Tickbox, SearchIcon, Tick } from "@assets/images/svg";
 
 interface CheckboxFilterProps {
   title: string;
   options: string[];
   hasSearch?: boolean;
-  onOptionChange: (option: string) => void;
+  onOptionChange: (filterKey: string, option: string) => void;
   selectedOptions: string[];
+  filterKey: string;
 }
 
 const CheckboxFilter: React.FC<CheckboxFilterProps> = ({
@@ -17,13 +18,14 @@ const CheckboxFilter: React.FC<CheckboxFilterProps> = ({
   hasSearch,
   onOptionChange,
   selectedOptions,
+  filterKey,
 }) => {
   const [showAll, setShowAll] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    onOptionChange(value);
+    onOptionChange(filterKey, value);
   };
 
   const handleViewMore = () => {
@@ -66,13 +68,10 @@ const CheckboxFilter: React.FC<CheckboxFilterProps> = ({
               />
               <div className={styles.customCheckbox}>
                 <div className={styles.checkboxTickbox}>
-                  {" "}
                   <Tickbox />
                 </div>
-
                 {selectedOptions.includes(option) && (
                   <div className={styles.tickIcon}>
-                    {" "}
                     <Tick />
                   </div>
                 )}

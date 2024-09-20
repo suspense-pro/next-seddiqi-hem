@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./filterBar.module.scss";
 import FilterBtn from "../filterBtn";
 import SideDrawer from "../sideDrawer";
@@ -20,6 +20,7 @@ const FILTERS = [
 ];
 
 const brandOptions = [
+  "VAN CLEEF & ARPELS",
   "Rolex",
   "Patek Philippe",
   "Akrivia",
@@ -62,26 +63,66 @@ const faceShapeOptions = [
   "Square",
 ];
 
-const FilterBar = () => {
+const goldOptions = ["18", "22", "24"];
+const availabilityOptions = ["true", "false"];
+const productMetalOptions = ["YELLOW GOLD", "SILVER", "BRONZE"];
+
+const FilterBar = ({ filters: initialFilters, onFilterChange }) => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [filters, setFiltersState] = useState(initialFilters || {});
+
+  useEffect(() => {
+    setFiltersState(initialFilters || {});
+  }, [initialFilters]);
+
+  useEffect(() => {
+    if (!isDrawerOpen) {
+      setFiltersState(initialFilters || {});
+    }
+  }, [initialFilters, isDrawerOpen]);
 
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
   };
 
-  const handleOptionChange = (option: string) => {
-    setSelectedOptions((prevSelected) =>
-      prevSelected.includes(option)
-        ? prevSelected.filter((selected) => selected !== option)
-        : [...prevSelected, option]
-    );
+  const handleOptionChange = (filterKey, option) => {
+    setFiltersState((prevFilters) => {
+      const prevSelectedOptions = prevFilters[filterKey] || [];
+      const newSelectedOptions = prevSelectedOptions.includes(option)
+        ? prevSelectedOptions.filter((selected) => selected !== option)
+        : [...prevSelectedOptions, option];
+
+      return { ...prevFilters, [filterKey]: newSelectedOptions };
+    });
   };
 
-  const handleDelete = (option: string) => {
-    setSelectedOptions((prevSelected) =>
-      prevSelected.filter((selected) => selected !== option)
-    );
+  const handleDelete = (filterKey, option) => {
+    setFiltersState((prevFilters) => {
+      const prevSelectedOptions = prevFilters[filterKey] || [];
+      const newSelectedOptions = prevSelectedOptions.filter(
+        (selected) => selected !== option
+      );
+
+      return { ...prevFilters, [filterKey]: newSelectedOptions };
+    });
+  };
+
+  const handleSubmit = () => {
+    const filteredFilters = Object.keys(filters).reduce((acc, key) => {
+      if (filters[key].length > 0) {
+        acc[key] = filters[key];
+      }
+      return acc;
+    }, {});
+
+    if (onFilterChange) {
+      onFilterChange(filteredFilters);
+    }
+    setDrawerOpen(false);
+  };
+
+  const handleClearAll = () => {
+    setFiltersState({});
   };
 
   return (
@@ -99,24 +140,29 @@ const FilterBar = () => {
         ))}
       </div>
       <div className={styles.productsLength}>328 Products</div>
-      <SideDrawer isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
-        {selectedOptions && selectedOptions.length > 0 && (
-          <div className={styles.selectedOptions}>
-            {selectedOptions.map((option, index) => (
+      <SideDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onSubmit={handleSubmit}
+        onClearAll={handleClearAll}
+      >
+        <div className={styles.selectedOptions}>
+          {Object.keys(filters).map((filterKey) =>
+            filters[filterKey].map((option, index) => (
               <div key={index} className={styles.selectedOption}>
                 <Typography align="left" variant="p" className={styles.option}>
                   {option}
-                </Typography>{" "}
+                </Typography>
                 <div
                   className={styles.deleteOption}
-                  onClick={() => handleDelete(option)}
+                  onClick={() => handleDelete(filterKey, option)}
                 >
                   <CloseIcon />
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+            ))
+          )}
+        </div>
         <FilterAccordian>
           <FilterAccordionItem title="Sort">
             <SortFilter />
@@ -126,40 +172,72 @@ const FilterBar = () => {
               title="Brand"
               options={brandOptions}
               hasSearch={true}
+              filterKey="brand"
               onOptionChange={handleOptionChange}
-              selectedOptions={selectedOptions}
+              selectedOptions={filters["brand"] || []}
             />
           </FilterAccordionItem>
           <FilterAccordionItem title="Size">
             <CheckboxFilter
               title="Size"
               options={sizeOptions}
+              filterKey="size"
               onOptionChange={handleOptionChange}
-              selectedOptions={selectedOptions}
+              selectedOptions={filters["size"] || []}
             />
           </FilterAccordionItem>
           <FilterAccordionItem title="Movement">
             <CheckboxFilter
               title="Movement"
               options={movementOptions}
+              filterKey="movement"
               onOptionChange={handleOptionChange}
-              selectedOptions={selectedOptions}
+              selectedOptions={filters["movement"] || []}
             />
           </FilterAccordionItem>
           <FilterAccordionItem title="Strap Material">
             <CheckboxFilter
               title="Strap Material"
               options={strapOptions}
+              filterKey="strapMaterial"
               onOptionChange={handleOptionChange}
-              selectedOptions={selectedOptions}
+              selectedOptions={filters["strapMaterial"] || []}
             />
           </FilterAccordionItem>
           <FilterAccordionItem title="Face Shape">
             <CheckboxFilter
               title="Face Shape"
               options={faceShapeOptions}
+              filterKey="faceShape"
               onOptionChange={handleOptionChange}
-              selectedOptions={selectedOptions}
+              selectedOptions={filters["faceShape"] || []}
+            />
+          </FilterAccordionItem>
+          <FilterAccordionItem title="Karat">
+            <CheckboxFilter
+              title="Karat"
+              options={goldOptions}
+              filterKey="c_karat"
+              onOptionChange={handleOptionChange}
+              selectedOptions={filters["c_karat"] || []}
+            />
+          </FilterAccordionItem>
+          <FilterAccordionItem title="Availability">
+            <CheckboxFilter
+              title="Availability"
+              options={availabilityOptions}
+              filterKey="availability"
+              onOptionChange={handleOptionChange}
+              selectedOptions={filters["availability"] || []}
+            />
+          </FilterAccordionItem>
+          <FilterAccordionItem title="Product Metal">
+            <CheckboxFilter
+              title="Product Metal"
+              options={productMetalOptions}
+              filterKey="c_productMetal"
+              onOptionChange={handleOptionChange}
+              selectedOptions={filters["c_productMetal"] || []}
             />
           </FilterAccordionItem>
           <FilterAccordionItem title="Color">

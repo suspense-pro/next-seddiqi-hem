@@ -49,6 +49,15 @@
   button {
     width: 100%;
   }
+  @include md {
+    button:nth-child(1) {
+      width: rem(125);
+    }
+
+    button:nth-child(2) {
+      width: rem(415);
+    }
+  }
 }
 
 .header {
