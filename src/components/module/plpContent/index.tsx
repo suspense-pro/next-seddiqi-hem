@@ -159,7 +159,7 @@ const PlpContent = ({ productGridContent, products }) => {
   return (
     <div ref={productsRef}>
       <div className={styles.container}>
-        <FilterBar filters={filters || {}} onFilterChange={setFiltersState} />
+        <FilterBar filters={filters || {}} onFilterChange={setFiltersState} totalProducts={totalProducts} />
 
         {displayedProducts.length > 0 ? (
           <>

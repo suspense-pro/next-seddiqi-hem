@@ -67,7 +67,7 @@ const goldOptions = ["18", "22", "24"];
 const availabilityOptions = ["true", "false"];
 const productMetalOptions = ["YELLOW GOLD", "SILVER", "BRONZE"];
 
-const FilterBar = ({ filters: initialFilters, onFilterChange }) => {
+const FilterBar = ({ filters: initialFilters, onFilterChange, totalProducts }) => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [filters, setFiltersState] = useState(initialFilters || {});
 
@@ -139,7 +139,7 @@ const FilterBar = ({ filters: initialFilters, onFilterChange }) => {
           />
         ))}
       </div>
-      <div className={styles.productsLength}>328 Products</div>
+      <div className={styles.productsLength}>{totalProducts} Products</div>
       <SideDrawer
         isOpen={isDrawerOpen}
         onClose={() => setDrawerOpen(false)}
