@@ -1,20 +1,7 @@
 import React from "react";
 import styles from "./index.module.scss";
-import { Image } from "@components/module";
-import { CareIcon, ProtectionIcon, WatchIcon } from "@assets/images/svg";
 import ExclusiveInfoCards from "../exclusiveInfoCards";
 import ServiceCard from "../serviceCard";
-
-const image = {
-  _meta: {
-    schema: "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link",
-  },
-  id: "7942dffb-3623-47dd-8b4d-dba5e376a026",
-  name: "column_image_01",
-  endpoint: "likedigital",
-  defaultHost: "cdn.media.amplience.net",
-  mimeType: "image/png",
-};
 
 const StepOne = ({ content, handleStepChange, setSelectedCard }) => {
   if (!content) return null;
@@ -29,11 +16,11 @@ const StepOne = ({ content, handleStepChange, setSelectedCard }) => {
         {content?.listItems?.map((item) => (
           <div
             onClick={() => {
-              setSelectedCard(item)
+              setSelectedCard(item);
               handleStepChange(2);
             }}
           >
-            <ServiceCard item={item} />
+            <ServiceCard handleStepChange={handleStepChange} setSelectedCard={setSelectedCard} item={item} />
           </div>
         ))}
       </div>

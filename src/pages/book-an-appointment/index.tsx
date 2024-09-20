@@ -30,6 +30,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 const index = ({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log("PAGE_CONTENT", content)
   return (
     <BookAppointmentProvider>
       <BookAnAppointment content={content} />

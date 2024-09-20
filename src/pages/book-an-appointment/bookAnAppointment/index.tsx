@@ -33,6 +33,7 @@ const BookAnAppointment = ({ content }) => {
 
   // State for the current step and loading state
   const [loading, setLoading] = useState(false);
+  console.log("currentStep", currentStep)
 
   const renderStepContent = () => {
     switch (currentStep) {
