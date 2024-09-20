@@ -4,6 +4,7 @@ import { getProductDetails } from "@utils/sfcc-connector/dataService";
 import { GetServerSidePropsContext } from "next";
 import compact from "lodash/compact";
 import ContentBlock from "@components/module/contentBlock";
+import { PdpTabs } from "@components/rendering";
 import { ProductDetailInfo, ScrollToTop, StickyWhatsapp } from "@components/module";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -21,7 +22,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  const product = await getProductDetails({productId: plpKey, method: "GET"});
+  const product = await getProductDetails({productId: "22416787M", method: "GET"});
 
   return {
     props: {
@@ -33,6 +34,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function Product({ content, product }) {
+  const productTechSpecs = product.techSpecs;
+
   return (
     <div className="main-content">
       <ProductDetailInfo product={product?.response} />
@@ -41,6 +44,8 @@ export default function Product({ content, product }) {
       {compact(content?.page?.components).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />
       ))}
+
+      <PdpTabs productTechSpecs={productTechSpecs} amplienceData={""} />
     </div>
   );
 }
