@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import ServiceCard from "../serviceCard";
 import { Button, TabbedNavigation } from "@components/module";
 import { Tick, Tickbox } from "@assets/images/svg";
 import ExclusiveInfoCards from "../exclusiveInfoCards";
+import { getCategory } from "@utils/sfcc-connector/dataService";
 
-const brandSUggestions = [
-  "Rolex",
-  "Bell & Ross",
-  "Bvlgari",
-  "Patek Philippe",
-  "Emmanuel Bouchet",
-  "H Moser & Cie",
-  "Audemars Piguet",
-  "Dior",
-  "Moritz Grossmann",
-  "Hublot",
-  "Ferdinand Berthoud",
-  "Tag Heuer",
-];
+// const brandSUggestions = [
+//   "Rolex",
+//   "Bell & Ross",
+//   "Bvlgari",
+//   "Patek Philippe",
+//   "Emmanuel Bouchet",
+//   "H Moser & Cie",
+//   "Audemars Piguet",
+//   "Dior",
+//   "Moritz Grossmann",
+//   "Hublot",
+//   "Ferdinand Berthoud",
+//   "Tag Heuer",
+// ];
 
 const watchBrands = {
   A: ["Akrivia", "Aramedes", "Artya", "Audemars Piguet"],
@@ -70,7 +71,7 @@ const StepTwo = ({ item, handleStepChange, setSelectedCard }) => {
 
 export default StepTwo;
 
-const WatchesContent = () => {
+const WatchesContent = ({ type = "watches" }) => {
   const [showAlphabetical, setShowAlphabetical] = useState(false);
 
   const handleViewAllBrandsClick = () => {
@@ -81,20 +82,34 @@ const WatchesContent = () => {
     setShowAlphabetical(false);
   };
 
+  const [watchSuggestions, setWatchSuggestions] = useState(null);
+  const [jewellerySuggestions, setJewellerySuggestions] = useState(null);
+
+  const fetchSuggestions = async () => {
+    const watchs = await getCategory({ cgid: "watches", method: "GET" });
+    const jewellery = await getCategory({ cgid: "watches", method: "GET" });
+    console.log("RESPONSE", watchs);
+    setWatchSuggestions(jewellery?.response?.categories);
+    setJewellerySuggestions(jewellery?.response?.categories);
+  };
+  useEffect(() => {
+    fetchSuggestions();
+  }, []);
+
   return (
     <>
       {!showAlphabetical ? (
         <div className={styles.suggestionContainer}>
           <div className={styles.suggestionTitle}>Top Suggestions</div>
           <div className={styles.suggestionItems}>
-            {brandSUggestions.map((item) => (
+            {watchSuggestions?.map((item) => (
               <div className={styles.brandItem} key={item}>
-                <label htmlFor={`checkbox-${item}`} className={styles.checkboxLabel}>
-                  <input className={styles.inputCheckbox} type="checkbox" id={`checkbox-${item}`} />
+                <label htmlFor={`checkbox-${item?.name}`} className={styles.checkboxLabel}>
+                  <input className={styles.inputCheckbox} type="checkbox" id={`checkbox-${item?.name}`} />
                   <div className={styles.checkbox}>
                     <Tick className={styles.tick} />
                   </div>
-                  <span className={styles.brandName}>{item}</span>
+                  <span className={styles.brandName}>{item?.name}</span>
                 </label>
               </div>
             ))}
@@ -123,14 +138,14 @@ const WatchesContent = () => {
               <div className={styles.char}>{char}</div>
               {watchBrands[char]?.map((item) => (
                 <div className={styles.brandItem} key={item}>
-                <label htmlFor={`checkbox-${item}`} className={styles.checkboxLabel}>
-                  <input className={styles.inputCheckbox} type="checkbox" id={`checkbox-${item}`} />
-                  <div className={styles.checkbox}>
-                    <Tick className={styles.tick} />
-                  </div>
-                  <span className={styles.brandName}>{item}</span>
-                </label>
-              </div>
+                  <label htmlFor={`checkbox-${item}`} className={styles.checkboxLabel}>
+                    <input className={styles.inputCheckbox} type="checkbox" id={`checkbox-${item}`} />
+                    <div className={styles.checkbox}>
+                      <Tick className={styles.tick} />
+                    </div>
+                    <span className={styles.brandName}>{item}</span>
+                  </label>
+                </div>
               ))}
             </div>
           ))}
