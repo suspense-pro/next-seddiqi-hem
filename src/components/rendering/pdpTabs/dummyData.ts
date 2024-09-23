@@ -1,6 +1,6 @@
-import { PdpTabsData, TechSpecsData } from "@utils/models/pdpTabs";
+//import { PdpTabsData, TechSpecsData } from "@utils/models/pdpTabs";
 
-export const PdpTabsDummyData:PdpTabsData = {
+export const PdpTabsDummyData:any = {
   tabsData: [
     {
       id: 1,
@@ -79,7 +79,7 @@ export const PdpTabsDummyData:PdpTabsData = {
 
 
 
-export const TechSpecsDummyData:TechSpecsData = {
+export const TechSpecsDummyData:any = {
   specsData: [
     {
       mainTitle: "DETAIL SPECIFICATIONS",

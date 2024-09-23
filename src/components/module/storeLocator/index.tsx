@@ -18,6 +18,19 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
   const [abuDhabiStores, setAbuDhabiStores] = useState([]);
 
   useEffect(() => {
+    // Load Google Maps API
+    const loadGoogleMapsApi = () => {
+      const existingScript = document.getElementById('google-maps');
+      if (!existingScript) {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places`;
+        script.id = 'google-maps';
+        document.body.appendChild(script);
+      }
+    };
+
+    loadGoogleMapsApi();
+
     const fetchStores = async () => {
       try {
         const result = await getStores({
@@ -34,7 +47,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
         setAbuDhabiStores(filteredAbuDhabiStores);
         setStores(result.response.data);
         
-        console.log("RES: ", result.response.data);
+        //console.log("RES: ", result.response.data);
       } catch (err) {
         console.error(err);
         setError('Failed to fetch stores');
@@ -152,7 +165,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
           {/* {nearestStore && <MapView 
             userLocation={userLocation} 
             nearestStore={nearestStore} 
-          />} */}
+          />}  */}
           <img src="/images/jpg/map-image.jpg" />
         </div>
         
