@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import FilterBar from "../filterBar";
 import styles from "./productsContnet.module.scss";
 import GridWrapper from "../gridWrapper";
@@ -9,17 +9,19 @@ import { generateUniqueId } from "@utils/helpers/uniqueId";
 import Button from "../button";
 import { setFilters } from "@utils/sfcc-connector/dataService";
 import Typography from "../typography";
+import Loader from "@components/rendering/Loader";
 
 const LOAD_MORE_TEXT = "Load More";
 
 const PlpContent = ({ productGridContent, products }) => {
-  // console.log("products---", products);
+  // console.log("products", products);
+
   if (!products) return null;
 
   const router = useRouter();
 
   const categoryId =
-    products?.query?.TermQuery?.values?.[0] || "default-category-id";
+    products?.query?.TermQuery?.values?.[0] || "mens-clothing-suits";
 
   const allHits = products?.hits || [];
 
@@ -32,6 +34,8 @@ const PlpContent = ({ productGridContent, products }) => {
   const [isLoading, setIsLoading] = useState(false);
   const productsRef = useRef(null);
   const isButtonDisabled = displayedProducts.length <= 24 || isAllLoaded;
+
+  const [hasInitializedFilters, setHasInitializedFilters] = useState(false);
 
   const loadMoreProducts = () => {
     const currentScrollPos = window.scrollY;
@@ -51,16 +55,16 @@ const PlpContent = ({ productGridContent, products }) => {
       behavior: "smooth",
     });
   };
- 
+
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!router.isReady || hasInitializedFilters) return;
 
     const initializeFiltersFromUrl = () => {
       const urlFilters = {};
 
       Object.keys(router.query).forEach((key) => {
-        if (key.startsWith('filter_')) {
-          const filterKey = key.replace('filter_', '');
+        if (key.startsWith("filter_")) {
+          const filterKey = key.replace("filter_", "");
           const value = router.query[key];
 
           if (Array.isArray(value)) {
@@ -69,67 +73,79 @@ const PlpContent = ({ productGridContent, products }) => {
             urlFilters[filterKey] = [value];
           }
         }
+
+        if (key === "sort") {
+          urlFilters["sortOption"] = router.query[key];
+        }
       });
 
       setFiltersState(urlFilters);
+      setHasInitializedFilters(true);
     };
 
     initializeFiltersFromUrl();
-  }, [router.isReady]);
- 
+  }, [router.isReady, hasInitializedFilters]);
+
   useEffect(() => {
     if (filters === null) return;
 
     const updateUrlWithFilters = () => {
-      const query = { ...router.query };
- 
-      Object.keys(query).forEach((key) => {
-        if (key.startsWith('filter_')) {
-          delete query[key];
+      const newQuery = { ...router.query };
+
+      Object.keys(newQuery).forEach((key) => {
+        if (key.startsWith("filter_") || key === "sort") {
+          delete newQuery[key];
         }
       });
 
       Object.keys(filters).forEach((filterKey) => {
-        const filterValues = filters[filterKey];
-        if (Array.isArray(filterValues)) {
-          query[`filter_${filterKey}`] = filterValues;
+        if (filterKey === "sortOption") {
+          newQuery["sort"] = filters[filterKey];
         } else {
-          query[`filter_${filterKey}`] = [filterValues];
+          const filterValues = filters[filterKey];
+          if (Array.isArray(filterValues)) {
+            newQuery[`filter_${filterKey}`] = filterValues;
+          } else if (filterValues) {
+            newQuery[`filter_${filterKey}`] = [filterValues];
+          }
         }
       });
 
-      router.replace(
-        {
-          pathname: router.pathname,
-          query: query,
-        },
-        undefined,
-        { shallow: true }
-      );
+      const isSameQuery =
+        JSON.stringify(newQuery) === JSON.stringify(router.query);
+      if (!isSameQuery) {
+        router.replace(
+          {
+            pathname: router.pathname,
+            query: newQuery,
+          },
+          undefined,
+          { shallow: true }
+        );
+      }
     };
 
     updateUrlWithFilters();
-  }, [filters]);
- 
+  }, [filters, router]);
+
   useEffect(() => {
     if (filters === null) return;
 
     const fetchFilteredProducts = async () => {
-      console.log("Fetching products with filters:", filters);
       setIsLoading(true);
       try {
-        if (Object.keys(filters).length === 0) { 
-          console.log("no filters applied. ussing initial products---");
+        if (Object.keys(filters).length === 0) {
           setDisplayedProducts(allHits.slice(0, 24));
           setCurrentIndex(24);
           setIsAllLoaded(allHits.length <= 24);
-        } else { 
+        } else {
+          const { sortOption, ...otherFilters } = filters;
           const res = await setFilters({
             method: "GET",
             categoryId: categoryId,
-            filters: filters,
+            filters: otherFilters,
+            sortOption: sortOption,
           });
- 
 
           if (res && res.hits) {
             setDisplayedProducts(res.hits.slice(0, 24));
@@ -152,14 +168,18 @@ const PlpContent = ({ productGridContent, products }) => {
     fetchFilteredProducts();
   }, [filters, categoryId]);
 
-  // console.log("displayedProducts---", displayedProducts.length);
   const totalProducts = products?.total || allHits.length;
   const PRODUCT_INFO_TEXT = `Showing ${displayedProducts.length} out of ${totalProducts} products`;
 
   return (
     <div ref={productsRef}>
       <div className={styles.container}>
-        <FilterBar filters={filters || {}} onFilterChange={setFiltersState} totalProducts={totalProducts} />
+        <FilterBar
+          filters={filters || {}}
+          onFilterChange={setFiltersState}
+          totalProducts={totalProducts}
+          categoryId={categoryId}
+        />
 
         {displayedProducts.length > 0 ? (
           <>
@@ -205,11 +225,7 @@ const PlpContent = ({ productGridContent, products }) => {
           </Typography>
         )}
 
-        {isLoading && (
-          <div className={styles.loaderOverlay}>
-            <div className={styles.loaderSpinner}></div>
-          </div>
-        )}
+        {isLoading && <Loader />}
       </div>
     </div>
   );
