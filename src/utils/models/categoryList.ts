@@ -23,16 +23,11 @@ export interface MediaType {
   autoPlay?: boolean;
   showPlay?: boolean;
 }
-
-export interface OpacityType {
-  opacity?:number;
-}
-
-export interface items {
+export interface CategoryItem {
   media: MediaType;
-  title:string;
+  title: string;
   description: string;
-  opacity: OpacityType;
+  opacity?: number;
 }
 
 export interface CategoryListProps {
@@ -43,5 +38,5 @@ export interface CategoryListProps {
     type: string;
     color: string;
   };
-  listItems: items[];
+  listItems: CategoryItem[];
 }

@@ -9,6 +9,7 @@ import ArticleCard from "./cards/articleCard";
 import DisplayCard from "./cards/displayCard";
 import StoryCard from "./cards/storyCard";
 import CollectionsCard from "./cards/collectionsCard";
+import CategoryCard from "./cards/categoryCard";
 import NavigationLink from "./navigationLink";
 import DesktopHeader from "./desktopHeader";
 import MegaMenu from "./megaMenu";
@@ -69,6 +70,7 @@ export {
   StickyWhatsapp,
   ProductImageFullScreen,
   ProductDetailInfo,
-  CategoryList,,
+  CategoryList,
+  CategoryCard,
   Loader
 };
