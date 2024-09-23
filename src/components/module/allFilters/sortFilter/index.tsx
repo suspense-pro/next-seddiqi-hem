@@ -1,33 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../allFIlters.module.scss";
 import Typography from "@components/module/typography";
 import { Ellipse } from "@assets/images/svg";
 
-const sortOptions = [
-  "Featured",
-  "Most Popular",
-  "Price (low to high)",
-  "Price (high to low)",
-  "Name (A-Z)",
-  "Name (Z-A)",
-];
-
-const SortFilter = () => {
-  const [selectedOption, setSelectedOption] = useState(sortOptions[0]);
-
+const SortFilter = ({ sortingOptions, selectedSortOption, onSortChange }) => {
   const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+    onSortChange(event.target.value);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.radioGroup}>
-        {sortOptions.map((option) => (
-          <label key={option} className={styles.radioLabel}>
+        {sortingOptions.map((option) => (
+          <label key={option.id} className={styles.radioLabel}>
             <input
               type="radio"
-              value={option}
-              checked={selectedOption === option}
+              value={option.id} 
+              checked={selectedSortOption === option.id}
               onChange={handleOptionChange}
               className={styles.radioInput}
             />
@@ -36,7 +25,7 @@ const SortFilter = () => {
               <div className={styles.radioDot} />
             </div>
             <Typography align="left" variant="p" className={styles.title}>
-              {option}
+              {option.label}
             </Typography>
           </label>
         ))}

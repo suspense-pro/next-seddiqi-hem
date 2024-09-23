@@ -33,6 +33,7 @@ import ScrollToTop from "./scrollToTop";
 import StickyWhatsapp from "./stickyWhatsapp";
 import ProductImageFullScreen from "./product/productImageFullScreen";
 import ProductDetailInfo from "./product/productDetailInfo";
+import Loader from "./loader";
 
 export {
   Head,
@@ -68,5 +69,6 @@ export {
   StickyWhatsapp,
   ProductImageFullScreen,
   ProductDetailInfo,
-  CategoryList,
+  CategoryList,,
+  Loader
 };

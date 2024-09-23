@@ -8,12 +8,16 @@ interface SideDrawerProps {
   children: ReactNode;
   isOpen: boolean;
   onClose: () => void;
+  onSubmit: () => void;
+  onClearAll: () => void;
 }
 
 const SideDrawer: React.FC<SideDrawerProps> = ({
   children,
   isOpen,
   onClose,
+  onSubmit,
+  onClearAll,
 }) => {
   return (
     <div className={isOpen ? `${styles.drawer} ${styles.open}` : styles.drawer}>
@@ -27,8 +31,8 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
       </div>
       <div className={styles.content}>{children}</div>
       <div className={styles.footer}>
-        <Button title="Clear all" type="transparent" />
-        <Button title="Done" type="solid green_dark" />
+        <Button title="Clear all" type="transparent" clickHandler={onClearAll} />
+        <Button title="Done" type="solid green_dark" clickHandler={onSubmit} />
       </div>
     </div>
   );
