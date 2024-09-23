@@ -1,0 +1,158 @@
+@import './../../../assets/styles/main.scss';
+
+
+
+.content {
+  max-width: rem(800);
+  display: flex;
+  flex-direction: column;
+  gap: rem(60);
+}
+
+.seriveCard {
+  max-width: rem(800);
+  width: 100%;
+  border: rem(1) solid getColorHex("grey-mid");
+}
+
+.tabNavigation {
+  width: 100%;
+}
+
+.brandItem {
+  display: flex;
+  align-items: center;
+  gap: rem(8);
+
+  .checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+  }
+
+  .checkbox {
+    width: rem(20);
+    height: rem(20);
+    cursor: pointer;
+    border: 2px solid #847b72;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #847b72;
+  }
+
+  .tick {
+    display: none;
+  }
+
+  .inputCheckbox {
+    display: none;
+  }
+
+  .inputCheckbox:checked + .checkbox {
+    .tick {
+      display: block; // Show the tick when the checkbox is checked
+    }
+  }
+  .brandName {
+    color: var(--GreyShades-Mid-Grey, #787775);
+    cursor: pointer;
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px; /* 162.5% */
+    letter-spacing: 0.2px;
+  }
+}
+
+
+
+
+.suggestionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: rem(28);
+  }
+  
+  .suggestionItems {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: rem(16);
+    column-gap: rem(80);
+    align-items: center;
+  }
+  
+  .suggestionTitle {
+    color: var(--GreyShades-Grey, #403f3d);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px; /* 162.5% */
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    margin-bottom: rem(8);
+    margin-bottom: rem(-10);
+  }
+  
+  .brandItem {
+    display: flex;
+    gap: rem(8);
+    min-width: rem(190);
+  }
+  
+  .brandBtn {
+    text-transform: capitalize;
+  }
+  .selectBrandBtn {
+    width: rem(320);
+    text-transform: uppercase;
+    margin: auto;
+  
+    button {
+      width: 100%;
+    }
+  }
+  
+  // alphabeticalContainer
+  .alphabeticalContainer {
+    max-width: rem(800);
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(32);
+    justify-content: space-between;
+    height: rem(392);
+    overflow-y: scroll;
+  
+    &::-webkit-scrollbar {
+      width: rem(5);
+      height: rem(102);
+      cursor: pointer;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      height: rem(102);
+      cursor: pointer;
+      background: #d2cbc2; /* Custom background color */
+      border-radius: 2px; /* Border radius for the scrollbar */
+    }
+  
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #d2cbc2; /* Optional: darker shade on hover */
+    }
+  
+    .charContainer {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: rem(16);
+      .char {
+        @include heading_regular;
+        color: getColorHex("metallic");
+        font-size: rem(26);
+        font-weight: 500;
+        line-height: rem(36);
+        letter-spacing: rem(0.6);
+      }
+    }
+  }

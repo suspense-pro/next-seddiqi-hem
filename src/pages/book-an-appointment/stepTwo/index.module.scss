@@ -45,8 +45,6 @@
     align-items: center;
     justify-content: center;
     border-left: 1px solid #847b72;
-
-   
   }
 
   .tick {
@@ -74,88 +72,76 @@
   }
 }
 
-.suggestionContainer {
-  display: flex;
-  flex-direction: column;
-  gap: rem(28);
-}
 
-.suggestionItems {
+
+.serviceCard {
+  background: getColorHex("white");
   display: flex;
-  flex-wrap: wrap;
-  row-gap: rem(16);
-  column-gap: rem(80);
   align-items: center;
-}
+  padding: rem(16);
+  gap: rem(24);
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  border: rem(1) solid getColorHex("grey-mid");
 
-.suggestionTitle {
-  color: var(--GreyShades-Grey, #403f3d);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 26px; /* 162.5% */
-  letter-spacing: 0.2px;
-  text-transform: uppercase;
-}
-
-.brandItem {
-  display: flex;
-  gap: rem(8);
-  min-width: rem(190);
-}
-
-.brandBtn {
-  text-transform: capitalize;
-}
-.selectBrandBtn {
-  width: rem(320);
-  text-transform: uppercase;
-  margin: auto;
-
-  button {
-    width: 100%;
-  }
-}
-
-// alphabeticalContainer
-.alphabeticalContainer {
-  max-width: rem(800);
-  display: flex;
-  flex-wrap: wrap;
-  gap: rem(32);
-  justify-content: space-between;
-  height: rem(392);
-  overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    width: rem(5);
-    height: rem(102);
-    cursor: pointer;
+  @include md {
+    padding: rem(28);
   }
 
-  &::-webkit-scrollbar-thumb {
-    height: rem(102);
-    cursor: pointer;
-    background: #d2cbc2; /* Custom background color */
-    border-radius: 2px; /* Border radius for the scrollbar */
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: #d2cbc2; /* Optional: darker shade on hover */
-  }
-
-  .charContainer {
-    flex: 1;
+  .serviceImage {
     display: flex;
-    flex-direction: column;
-    gap: rem(16);
-    .char {
-      @include heading_regular;
-      color: getColorHex("metallic");
-      font-size: rem(26);
-      font-weight: 500;
-      line-height: rem(36);
-      letter-spacing: rem(0.6);
+    min-width: rem(32);
+    width: rem(32);
+    height: rem(43);
+    object-fit: cover;
+
+    @include md {
+      min-width: rem(113);
+      height: rem(151);
     }
   }
+
+  .serviceInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: rem(12);
+    .serviceTitle {
+      @include heading_regular;
+      color: getColorHex("black-dark");
+      font-size: rem(18);
+      font-weight: 500;
+      line-height: rem(26);
+      letter-spacing: rem(0.4);
+
+      @include md {
+        font-size: rem(26);
+        line-height: rem(36);
+        letter-spacing: rem(0.6);
+      }
+    }
+
+    .serviceDesc {
+      color: getColorHex("green-metallic");
+      font-size: rem(12);
+      line-height: rem(20);
+      letter-spacing: rem(0.2);
+      display: none;
+      
+      @include md {
+        display: block;
+        font-size: rem(14);
+        line-height: rem(22);
+      }
+    }
+  }
+}
+
+.closeIcon {
+  position: absolute;
+  right: rem(29);
+  top: rem(29);
+  width: rem(12.73);
+  height: rem(12.73);
 }

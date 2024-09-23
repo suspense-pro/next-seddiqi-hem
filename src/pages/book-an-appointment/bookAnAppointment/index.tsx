@@ -25,10 +25,11 @@ const BookAnAppointment = ({ content }) => {
 
   const stepOne = content?.page?.setpOne;
   const Step1 = () => (
-    <StepOne content={stepOne} handleStepChange={handleStepChange} setSelectedCard={setSelectedCard} />
+    <StepOne content={stepOne} />
   );
+
   const Step2 = () => (
-    <StepTwo item={selectedCard} handleStepChange={handleStepChange} setSelectedCard={setSelectedCard} />
+    <StepTwo />
   );
 
   // State for the current step and loading state

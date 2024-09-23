@@ -11,6 +11,7 @@ interface BookAppointmentContextProps {
   setCurrentStep: (step: number) => void;
   handleStepChange: (step: number) => void;
   markStepCompleted: () => void;
+  updateStep: (stepNumber: number, isCompleted: boolean) => void;
 }
 
 export const BookAppointmentContext = createContext<BookAppointmentContextProps | undefined>(undefined);
@@ -32,13 +33,6 @@ export const BookAppointmentProvider = ({ children }) => {
 
   // Handle Step Change
   const handleStepChange = (step: number) => {
-    if (selectedCard) {
-      setCompletedSteps((prev) => {
-        const updated = [...prev];
-        updated[0] = true;
-        return updated;
-      });
-    }
     setCurrentStep(step);
   };
 
@@ -50,14 +44,36 @@ export const BookAppointmentProvider = ({ children }) => {
     });
   };
 
-  // On component mount, check if there's a saved step in localStorage
+  const updateStep = (stepNumber: number, isCompleted: boolean) => {
+    if (stepNumber < 1 || stepNumber > completedSteps.length) {
+      console.error("Invalid step number");
+      return;
+    }
+  
+    setCompletedSteps((prev) => {
+      const updated = [...prev];
+      updated[stepNumber - 1] = isCompleted; // Update the step at the index stepNumber - 1
+      return updated;
+    });
+  };
+
+  console.log("selectedCard", selectedCard);
+
+  // On component mount, load saved data from localStorage
   useEffect(() => {
     const savedStep = localStorage.getItem("currentStep");
+    const savedCompletedSteps = localStorage.getItem("completedSteps");
+
     if (savedStep) {
       setCurrentStep(Number(savedStep));
     } else {
       setCurrentStep(1); // Default to step 1 if nothing is in localStorage
     }
+
+    if (savedCompletedSteps) {
+      setCompletedSteps(JSON.parse(savedCompletedSteps));
+    }
+
     setLoading(false); // Finished loading
   }, []);
 
@@ -67,6 +83,22 @@ export const BookAppointmentProvider = ({ children }) => {
       localStorage.setItem("currentStep", JSON.stringify(currentStep));
     }
   }, [currentStep]);
+
+  // Save completed steps in localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("completedSteps", JSON.stringify(completedSteps));
+  }, [completedSteps]);
+
+  // When selectedCard changes, mark the first step as completed
+  useEffect(() => {
+    if (selectedCard) {
+      setCompletedSteps((prev) => {
+        const updated = [...prev];
+        updated[0] = true; // Mark the first step as completed
+        return updated;
+      });
+    }
+  }, [selectedCard]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -85,6 +117,7 @@ export const BookAppointmentProvider = ({ children }) => {
         setCurrentStep,
         handleStepChange,
         markStepCompleted,
+        updateStep
       }}
     >
       {children}

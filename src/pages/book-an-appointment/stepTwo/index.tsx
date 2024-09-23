@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import ServiceCard from "../serviceCard";
-import { Button, TabbedNavigation } from "@components/module";
-import { Tick, Tickbox } from "@assets/images/svg";
+import { Button, Image, TabbedNavigation } from "@components/module";
+import { CloseIcon, Tick, Tickbox } from "@assets/images/svg";
 import ExclusiveInfoCards from "../exclusiveInfoCards";
 import { getCategory } from "@utils/sfcc-connector/dataService";
+import WatchesContent from "../watchesContent";
+import JewelleryContent from "../jewelleryContent";
+import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
 
 // const brandSUggestions = [
 //   "Rolex",
@@ -21,17 +24,9 @@ import { getCategory } from "@utils/sfcc-connector/dataService";
 //   "Tag Heuer",
 // ];
 
-const watchBrands = {
-  A: ["Akrivia", "Aramedes", "Artya", "Audemars Piguet"],
-  B: ["Bell & Ross", "Bernard Favre", "Bovet", "Breitling", "Bvlgari"],
-  C: ["Cabestan", "Chopard", "Christian Van der Klaauw", "Christophe Claret", "Claude Meylan"],
-  D: ["Debethune", "Dior"],
-  E: ["Emmanuel Bouchet"],
-  F: ["F.p. Journe", "Ferdinand Berthoud", "Frederique Constant"],
-};
-
-const StepTwo = ({ item, handleStepChange, setSelectedCard }) => {
-  if (!item) return null;
+const StepTwo = () => {
+  const { selectedCard, updateStep, handleStepChange, setSelectedCard } = useContext(BookAppointmentContext);
+  if (!selectedCard) return null;
 
   let data = [
     {
@@ -40,7 +35,7 @@ const StepTwo = ({ item, handleStepChange, setSelectedCard }) => {
     },
     {
       tabLabel: "Jewellery",
-      content: "Hello",
+      content: <JewelleryContent />,
     },
   ];
 
@@ -55,13 +50,26 @@ const StepTwo = ({ item, handleStepChange, setSelectedCard }) => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <ServiceCard
-          handleStepChange={handleStepChange}
-          setSelectedCard={setSelectedCard}
-          className={styles.seriveCard}
-          item={item}
-          type={true}
-        />
+        <div className={`${styles.serviceCard}`}>
+          <Image
+            className={`${true && styles.serviceImg} ${styles.serviceImage}`}
+            image={selectedCard?.media?.image}
+            imageAltText={selectedCard?.media?.altText}
+          />
+          <div className={styles.serviceInfo}>
+            <div className={styles.serviceTitle}>{selectedCard?.title}</div>
+            <div className={styles.serviceDesc}>{selectedCard?.description}</div>
+          </div>
+          <div
+            onClick={() => {
+              handleStepChange(1);
+              setSelectedCard(null);
+              updateStep(1, false);
+            }}
+          >
+            <CloseIcon className={styles.closeIcon} />
+          </div>
+        </div>
         <TabbedNavigation className={styles.tabNavigation} tabs={tabs} />
       </div>
       <ExclusiveInfoCards />
@@ -70,96 +78,3 @@ const StepTwo = ({ item, handleStepChange, setSelectedCard }) => {
 };
 
 export default StepTwo;
-
-const WatchesContent = ({ type = "watches" }) => {
-  const [showAlphabetical, setShowAlphabetical] = useState(false);
-
-  const handleViewAllBrandsClick = () => {
-    setShowAlphabetical(!showAlphabetical);
-  };
-
-  const handleBackClick = () => {
-    setShowAlphabetical(false);
-  };
-
-  const [watchSuggestions, setWatchSuggestions] = useState(null);
-  const [jewellerySuggestions, setJewellerySuggestions] = useState(null);
-
-  const fetchSuggestions = async () => {
-    const watchs = await getCategory({ cgid: "watches", method: "GET" });
-    const jewellery = await getCategory({ cgid: "watches", method: "GET" });
-    console.log("RESPONSE", watchs);
-    setWatchSuggestions(jewellery?.response?.categories);
-    setJewellerySuggestions(jewellery?.response?.categories);
-  };
-  useEffect(() => {
-    fetchSuggestions();
-  }, []);
-
-  return (
-    <>
-      {!showAlphabetical ? (
-        <div className={styles.suggestionContainer}>
-          <div className={styles.suggestionTitle}>Top Suggestions</div>
-          <div className={styles.suggestionItems}>
-            {watchSuggestions?.map((item) => (
-              <div className={styles.brandItem} key={item}>
-                <label htmlFor={`checkbox-${item?.name}`} className={styles.checkboxLabel}>
-                  <input className={styles.inputCheckbox} type="checkbox" id={`checkbox-${item?.name}`} />
-                  <div className={styles.checkbox}>
-                    <Tick className={styles.tick} />
-                  </div>
-                  <span className={styles.brandName}>{item?.name}</span>
-                </label>
-              </div>
-            ))}
-          </div>
-          <Button
-            clickHandler={handleViewAllBrandsClick}
-            isLink={false}
-            title="View all brands"
-            className={styles.brandBtn}
-            type="plain"
-            color="green_dark"
-          />
-        </div>
-      ) : (
-        <div className={styles.alphabeticalContainer}>
-          {/* <Button
-            clickHandler={handleBackClick}
-            isLink={false}
-            title="Back to suggestions"
-            className={styles.backBtn}
-            type="plain"
-            color="green_dark"
-          /> */}
-          {Object.keys(watchBrands).map((char) => (
-            <div className={styles.charContainer} key={char}>
-              <div className={styles.char}>{char}</div>
-              {watchBrands[char]?.map((item) => (
-                <div className={styles.brandItem} key={item}>
-                  <label htmlFor={`checkbox-${item}`} className={styles.checkboxLabel}>
-                    <input className={styles.inputCheckbox} type="checkbox" id={`checkbox-${item}`} />
-                    <div className={styles.checkbox}>
-                      <Tick className={styles.tick} />
-                    </div>
-                    <span className={styles.brandName}>{item}</span>
-                  </label>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      )}
-      <div className={styles.selectBrandBtn}>
-        <Button
-          clickHandler={() => console.log("Hello")}
-          isLink={false}
-          title="Select Brands"
-          type="solid"
-          color="metallic"
-        />
-      </div>
-    </>
-  );
-};
