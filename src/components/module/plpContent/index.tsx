@@ -9,7 +9,7 @@ import { generateUniqueId } from "@utils/helpers/uniqueId";
 import Button from "../button";
 import { setFilters } from "@utils/sfcc-connector/dataService";
 import Typography from "../typography";
-import Loader from "@components/rendering/Loader";
+import Loader from "../loader";
 
 const LOAD_MORE_TEXT = "Load More";
 
