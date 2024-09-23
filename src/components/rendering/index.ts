@@ -16,6 +16,8 @@ import HighlightedProductCarousel from "./highlightedProductCarousel";
 import FeaturedProductCarousel from "./featuredProductCarousel";
 import PdpTabs from "./pdpTabs";
 
+
+
 export {
   Header,
   Footer,
@@ -33,5 +35,5 @@ export {
   BoutiqueBanner,
   ArticleListCarousel,
   FeaturedProductCarousel,
-  PdpTabs
+  PdpTabs,
 };
