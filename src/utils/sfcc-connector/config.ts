@@ -23,6 +23,17 @@ export const AccountMgrConfig = {
   },
 };
 
+export const middlewareConfig = {
+  parameters: {
+    client_id: process.env.MIDDLEWARE_CLIENT_ID,
+    client_secret: process.env.MIDDLEWARE_CLIENT_SECRET,
+    storeCode: process.env.MIDDLEWARE_STORE_CODE,
+    x_correlation_id: process.env.MIDDLEWARE_CORRELATION_ID,
+    source: process.env.MIDDLEWARE_SOURCE,
+    api: process.env.MIDDLEWARE_API_URL
+  },
+};
+
 export default async function initializeShopperConfig() {
   const credentials = `${clientConfig.parameters.clientId}:${clientConfig.parameters.clientSecret}`;
   const base64data = Buffer.from(credentials).toString("base64");
