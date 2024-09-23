@@ -40,11 +40,11 @@
     width: rem(20);
     height: rem(20);
     cursor: pointer;
-    border: 2px solid #847b72;
+    border: rem(2) solid getColorHex("grey-brown");
     display: flex;
     align-items: center;
     justify-content: center;
-    border-left: 1px solid #847b72;
+    border-left: rem(1) solid getColorHex("grey-brown");
   }
 
   .tick {
@@ -57,22 +57,18 @@
 
   .inputCheckbox:checked + .checkbox {
     .tick {
-      display: block; // Show the tick when the checkbox is checked
+      display: block;
     }
   }
   .brandName {
-    color: var(--GreyShades-Mid-Grey, #787775);
+    color: getColorHex("grey-mid");
     cursor: pointer;
 
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 26px; /* 162.5% */
-    letter-spacing: 0.2px;
+    font-size: rem(16);
+    line-height: rem(26);
+    letter-spacing: rem(0.2);
   }
 }
-
-
 
 .serviceCard {
   background: getColorHex("white");
@@ -128,7 +124,7 @@
       line-height: rem(20);
       letter-spacing: rem(0.2);
       display: none;
-      
+
       @include md {
         display: block;
         font-size: rem(14);

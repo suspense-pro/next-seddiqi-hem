@@ -41,8 +41,8 @@
   flex-direction: column;
   gap: rem(24);
   padding: rem(32);
-  border-radius: 16px 0px;
-  background: rgba(199, 201, 198, 0.1);
+  border-radius: rem(16) 0;
+  background-color: getColorHex("grey-high", 0.1);
 
   .info {
     display: flex;

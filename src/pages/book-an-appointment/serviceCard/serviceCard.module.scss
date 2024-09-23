@@ -10,6 +10,7 @@
   width:100%;
   cursor: pointer;
   position: relative;
+  transition: all .3s ease-in-out;
 
   &:hover {
     border: rem(1) solid getColorHex("grey-mid");

@@ -9,21 +9,6 @@ import WatchesContent from "../watchesContent";
 import JewelleryContent from "../jewelleryContent";
 import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
 
-// const brandSUggestions = [
-//   "Rolex",
-//   "Bell & Ross",
-//   "Bvlgari",
-//   "Patek Philippe",
-//   "Emmanuel Bouchet",
-//   "H Moser & Cie",
-//   "Audemars Piguet",
-//   "Dior",
-//   "Moritz Grossmann",
-//   "Hublot",
-//   "Ferdinand Berthoud",
-//   "Tag Heuer",
-// ];
-
 const StepTwo = () => {
   const { selectedCard, updateStep, handleStepChange, setSelectedCard } = useContext(BookAppointmentContext);
   if (!selectedCard) return null;

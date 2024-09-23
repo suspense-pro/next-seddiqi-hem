@@ -12,6 +12,10 @@ interface BookAppointmentContextProps {
   handleStepChange: (step: number) => void;
   markStepCompleted: () => void;
   updateStep: (stepNumber: number, isCompleted: boolean) => void;
+  selectedWatches: any[];
+  setSelectedWatches: (watches: any[]) => void;
+  selectedJewellery: any[];
+  setSelectedJewellery: (jewellery: any[]) => void;
 }
 
 export const BookAppointmentContext = createContext<BookAppointmentContextProps | undefined>(undefined);
@@ -27,6 +31,8 @@ export const useBookAppointmentContext = () => {
 export const BookAppointmentProvider = ({ children }) => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [selectedBrands, setSelectedBrands] = useState<any[]>([]);
+  const [selectedWatches, setSelectedWatches] = useState<any[]>([]);
+  const [selectedJewellery, setSelectedJewellery] = useState<any[]>([]);
   const [completedSteps, setCompletedSteps] = useState<boolean[]>([false, false, false, false, false]);
   const [currentStep, setCurrentStep] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
@@ -49,20 +55,22 @@ export const BookAppointmentProvider = ({ children }) => {
       console.error("Invalid step number");
       return;
     }
-  
+
     setCompletedSteps((prev) => {
       const updated = [...prev];
-      updated[stepNumber - 1] = isCompleted; // Update the step at the index stepNumber - 1
+      updated[stepNumber - 1] = isCompleted;
+      localStorage.setItem("completedSteps", JSON.stringify(updated));
       return updated;
     });
   };
-
-  console.log("selectedCard", selectedCard);
 
   // On component mount, load saved data from localStorage
   useEffect(() => {
     const savedStep = localStorage.getItem("currentStep");
     const savedCompletedSteps = localStorage.getItem("completedSteps");
+    const savedSelectedCard = localStorage.getItem("selectedCard");
+    const savedWatches = localStorage.getItem("selectedWatches");
+    const savedJewellery = localStorage.getItem("selectedJewellery");
 
     if (savedStep) {
       setCurrentStep(Number(savedStep));
@@ -72,6 +80,18 @@ export const BookAppointmentProvider = ({ children }) => {
 
     if (savedCompletedSteps) {
       setCompletedSteps(JSON.parse(savedCompletedSteps));
+    }
+
+    if (savedSelectedCard) {
+      setSelectedCard(JSON.parse(savedSelectedCard));
+    }
+
+    if (savedWatches) {
+      setSelectedWatches(JSON.parse(savedWatches));
+    }
+
+    if (savedJewellery) {
+      setSelectedJewellery(JSON.parse(savedJewellery));
     }
 
     setLoading(false); // Finished loading
@@ -88,6 +108,22 @@ export const BookAppointmentProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("completedSteps", JSON.stringify(completedSteps));
   }, [completedSteps]);
+
+  // Save selectedCard in localStorage whenever it changes
+  useEffect(() => {
+    if (selectedCard) {
+      localStorage.setItem("selectedCard", JSON.stringify(selectedCard));
+    }
+  }, [selectedCard]);
+
+  // Save selectedWatches in localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("selectedWatches", JSON.stringify(selectedWatches));
+  }, [selectedWatches]);
+  // Save selectedJewellery in localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("selectedJewellery", JSON.stringify(selectedJewellery));
+  }, [selectedJewellery]);
 
   // When selectedCard changes, mark the first step as completed
   useEffect(() => {
@@ -117,7 +153,11 @@ export const BookAppointmentProvider = ({ children }) => {
         setCurrentStep,
         handleStepChange,
         markStepCompleted,
-        updateStep
+        updateStep,
+        selectedWatches,
+        setSelectedWatches,
+        selectedJewellery,
+        setSelectedJewellery,
       }}
     >
       {children}
