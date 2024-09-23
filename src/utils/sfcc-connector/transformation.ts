@@ -21,7 +21,7 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               description: data.c_waterResistance === true ? data.c_waterResistanceDepth + " " + data.c_waterResistanceDepthUnit : ""
             }
           ],
-          productImageUrl: "/images/png/watch1.png"
+          productImageUrl: data.c_dialTabImage
         },
     
         {
@@ -37,7 +37,7 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               description: data.c_powerReserve
             }
           ],
-          productImageUrl: "/images/png/watch1.png"
+          productImageUrl: data.c_movementTabImage
         },
     
         {
@@ -53,7 +53,7 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               description: data.c_powerReserve
             }
           ],
-          productImageUrl: "/images/png/watch1.png"
+          productImageUrl: data.c_caseTabImage
         },
     
         {
@@ -73,7 +73,7 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               description: "100M OR 10 ATM"
             }
           ],
-          productImageUrl: "/images/png/watch1.png"
+          productImageUrl: data.c_braceletTabImage
         },
       ],
       category: data.c_categoryName,
@@ -88,32 +88,32 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
                 {
                   id: 1,
                   itemTitle: "Caliber",
-                  itemDescription: data.c_techSpec_caliber
+                  itemDescription: data.c_caliber
                 },
                 {
                   id: 2,
                   itemTitle: "Movement",
-                  itemDescription: data.c_techSpec_movement
+                  itemDescription: data.c_movement
                 },
                 {
                   id: 3,
                   itemTitle: "Power Reserve",
-                  itemDescription: data.c_techSpec_powerReserve
+                  itemDescription: data.c_powerReserve
                 },
                 {
                   id: 4,
                   itemTitle: "Chronograph",
-                  itemDescription: data.c_techSpec_chronograph
+                  itemDescription: data.c_chronograph
                 },
                 {
                   id: 5,
                   itemTitle: "Vibration",
-                  itemDescription: data.c_techSpec_vibration
+                  itemDescription: data.c_vibration
                 },
                 {
                   id: 6,
                   itemTitle: "Cylinder",
-                  itemDescription: data.c_techSpec_cylinder
+                  itemDescription: data.c_cylinder
                 }
               ]
             },
@@ -124,32 +124,32 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
                 {
                   id: 1,
                   itemTitle: "Case Material",
-                  itemDescription: data.c_techSpec_caseMaterial
+                  itemDescription: data.c_caseMaterial
                 },
                 {
                   id: 2,
                   itemTitle: "Caseback",
-                  itemDescription: data.c_techSpec_caseBack
+                  itemDescription: data.c_caseBack
                 },
                 {
                   id: 3,
                   itemTitle: "Water Resistance",
-                  itemDescription: data.c_techSpec_waterResistance === true ? data.c_techSpec_waterResistanceDepth + " " + data.c_techSpec_waterResistanceDepthUnit : ""
+                  itemDescription: data.c_waterResistance === true ? data.c_waterResistanceDepth + " " + data.c_waterResistanceDepthUnit : ""
                 },
                 {
                   id: 4,
                   itemTitle: "Bezel",
-                  itemDescription: data.c_techSpec_bezelType
+                  itemDescription: data.c_bezelType
                 },
                 {
                   id: 5,
                   itemTitle: "Crown",
-                  itemDescription: data.c_techSpec_crown
+                  itemDescription: data.c_crown
                 },
                 {
                   id: 6,
                   itemTitle: "Crystal",
-                  itemDescription: data.c_techSpec_crystal
+                  itemDescription: data.c_crystal
                 }
               ]
             },
@@ -160,32 +160,32 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
                 {
                   id: 1,
                   itemTitle: "Product Weight",
-                  itemDescription: data.c_techSpec_productWeight
+                  itemDescription: data.c_productWeight
                 },
                 {
                   id: 2,
                   itemTitle: "Watch-Head Weight",
-                  itemDescription: data.c_techSpec_watchHeadWeight
+                  itemDescription: data.c_watchHeadWeight
                 },
                 {
                   id: 3,
                   itemTitle: "Diameter",
-                  itemDescription: data.c_techSpec_diameter
+                  itemDescription: data.c_diameter
                 },
                 {
                   id: 4,
                   itemTitle: "Thickness",
-                  itemDescription: data.c_techSpec_thickness
+                  itemDescription: data.c_thickness
                 },
                 {
                   id: 5,
                   itemTitle: "Height",
-                  itemDescription: data.c_techSpec_height
+                  itemDescription: data.c_height
                 },
                 {
                   id: 6,
                   itemTitle: "Lug Width",
-                  itemDescription: data.c_techSpec_lugWidth
+                  itemDescription: data.c_lugWidth
                 }
               ]
             },
@@ -196,37 +196,37 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
                 {
                   id: 1,
                   itemTitle: "Strap Material",
-                  itemDescription: data.c_techSpec_strapMaterial
+                  itemDescription: data.c_strapMaterial
                 },
                 {
                   id: 2,
                   itemTitle: "Strap Color",
-                  itemDescription: data.c_techSpec_strapColor
+                  itemDescription: data.c_strapColor
                 },
                 {
                   id: 3,
                   itemTitle: "Strap Type",
-                  itemDescription: data.c_techSpec_strapType
+                  itemDescription: data.c_strapType
                 },
                 {
                   id: 4,
                   itemTitle: "Lug",
-                  itemDescription: data.c_techSpec_lug
+                  itemDescription: data.c_lug
                 },
                 {
                   id: 5,
                   itemTitle: "Buckle Material",
-                  itemDescription: data.c_techSpec_buckleMaterial
+                  itemDescription: data.c_buckleMaterial
                 },
                 {
                   id: 6,
                   itemTitle: "Buckle Type",
-                  itemDescription: data.c_techSpec_buckleType
+                  itemDescription: data.c_buckleType
                 },
                 {
                   id: 7,
                   itemTitle: "Buckle Size",
-                  itemDescription: data.c_techSpec_buckleSize
+                  itemDescription: data.c_buckleSize
                 }
               ]
             }
@@ -276,32 +276,3 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
   export {
     transformTechSpecsDetails
   };
-
-
-  /*caliber: data.c_techSpec_caliber,
-  movement: data.c_techSpec_movement,
-  powerReserve: data.c_techSpec_powerReserve,
-  chronograph: data.c_techSpec_chronograph,
-  vibration: data.c_techSpec_vibration,
-  cylinder: data.c_techSpec_cylinder,
-  caseMaterial: data.c_techSpec_caseMaterial,
-  caseback: data.c_techSpec_caseBack,
-  waterResistance: data.c_techSpecs_waterResistance,
-  waterResistanceDepth: data.c_techSpec_waterResistanceDepth,
-  waterResistanceDepthUnit: data.c_techSpec_waterResistanceDepthUnit,
-  bezel: data.c_techSpec_bezelType,
-  crown: data.c_techSpec_crown,
-  crystal: data.c_techSpec_crystal,
-  productWeight: data.c_techSpec_productWeight,
-  watchHeadWeight: data.c_techSpec_watchHeadWeight,
-  diameter: data.c_techSpec_diameter,
-  thickness: data.c_techSpec_thickness,
-  height: data.c_techSpec_height,
-  lugWidth: data.c_techSpec_lugWidth,
-  strapMaterial: data.c_techSpec_strapMaterial,
-  strapColor: data.c_techSpec_strapColor,
-  strapType: data.c_techSpec_strapType,
-  lug: data.c_techSpec_lug,
-  buckleMaterial: data.c_techSpec_buckleMaterial,
-  buckleType: data.c_techSpec_buckleType,
-  buckleSize: data.c_techSpec_buckleSize*/
