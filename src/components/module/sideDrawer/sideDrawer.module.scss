@@ -2,7 +2,7 @@
 
 .drawer {
   position: fixed;
-  left: rem(-600);
+  left: rem(-800);
   top: 0;
   width: 100%;
   height: 100%;
@@ -17,6 +17,21 @@
   @include md {
     padding: rem(60 28 28);
     width: rem(600);
+  }
+
+  &.right{
+    left: auto;
+    right: rem(-800);
+    transition: right 0.3s ease-in-out;
+
+    &.open{
+      left: auto;
+      right: 0;
+      [dir="rtl"] & { 
+        left: 0;
+        right: auto;
+      }
+    }
   }
 }
 
@@ -63,6 +78,7 @@
   h5 {
     font-size: rem(16);
     margin: 0;
+    text-transform: uppercase;
     @include md {
       font-size: rem(20);
     }

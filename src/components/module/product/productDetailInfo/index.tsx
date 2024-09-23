@@ -1,18 +1,20 @@
 import React, { useMemo, useState } from "react";
 import styles from "./productDetailInfo.module.scss";
 import { ArrowRight, CalendarIcon, CubeIcon, HeartIcon, PlusIcon, ShareIcon } from "@assets/images/svg";
-import { Button } from "@components/module";
+import { Button, SideDrawer } from "@components/module";
 import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
 import {SizeGuide, SizeSelector} from "@components/module";
+import StoreLocator from "@components/module/storeLocator";
 
 const ProductDetailInfo = ({ product, content }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
+  const [storeLocatorPopup, showStoreLocatorPopup] = useState(true);
   const isMobile = !useDeviceWidth()[0];
   const handleSizeSelectorClose = () => setSizeSelectorOpen(false);
   const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false); // Default to true to open SizeSelector initially
@@ -78,7 +80,12 @@ const ProductDetailInfo = ({ product, content }) => {
   //Size Guide Props
   const sizeGuideInfo = content?.page?.components[1].sizeGuide;
 
+  const openStoreLocator = () => {
+    showStoreLocatorPopup(true);
+  }
+
   return (
+    <>
     <div className={styles.container}>
       {showZoom && <ProductImageFullScreen listitems={product?.imageGroups[0]?.images} setShowZoom={setShowZoom} />}
       {isMobile && (
@@ -126,12 +133,13 @@ const ProductDetailInfo = ({ product, content }) => {
             <ArrowRight />
           </div>
           <Button
-            isLink={true}
-            link={"/"}
+            isLink={false}
+            link={""}
             className={styles.boutiqueBtn}
             title={"Find in BOUTIQUE"}
             color="metallic"
             type={"solid"}
+            clickHandler={openStoreLocator}
           />
           <div className={styles.appointment}>
             <div className={styles.appointmentLeft}>
@@ -199,7 +207,27 @@ const ProductDetailInfo = ({ product, content }) => {
             />  
         </div>)}
     </div>
-  );
+
+    <SideDrawer
+      isOpen={storeLocatorPopup}
+      onClose={() => showStoreLocatorPopup(false)}
+      showFooter={false}
+      showBackButton={false}
+      title = "Find product in Boutique"
+      position = {"right"}>
+        
+        <StoreLocator 
+        productImgAlt={product?.imageGroups[0]?.images[0].alt}
+        productImgSrc={product?.imageGroups[0]?.images[0].disBaseLink} 
+        productBrand={product?.brand}
+        productName={product?.name}
+        productPrice={product?.price}
+        productCurrency={product?.currency}
+        />
+
+    </SideDrawer>
+    </>
+  );  
 };
 
 export default ProductDetailInfo;

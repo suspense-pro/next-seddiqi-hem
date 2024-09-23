@@ -12,6 +12,7 @@ interface SideDrawerProps {
   showBackButton: boolean;
   onClose: () => void;
   title?: string; 
+  position: string;
 }
 
 const SideDrawer: React.FC<SideDrawerProps> = ({
@@ -21,9 +22,10 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   showFooter = true,
   showBackButton = false,
   title = "SORT & FILTER", // Default title
+  position
 }) => {
   return (
-    <div className={isOpen ? `${styles.drawer} ${styles.open}` : styles.drawer}>
+    <div className={`${isOpen ? `${styles.drawer} ${styles.open}` : styles.drawer} ${position === "right" ? styles.right : ""}`}>
       <div className={styles.header}>
       {showBackButton? (
           <span onClick={onClose} className={styles.backButton}>

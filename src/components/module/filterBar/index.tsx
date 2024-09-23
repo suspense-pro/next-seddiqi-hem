@@ -99,7 +99,7 @@ const FilterBar = () => {
         ))}
       </div>
       <div className={styles.productsLength}>328 Products</div>
-      <SideDrawer isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)}>
+      <SideDrawer isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)} showFooter={false} showBackButton={false} position={""}>
         {selectedOptions && selectedOptions.length > 0 && (
           <div className={styles.selectedOptions}>
             {selectedOptions.map((option, index) => (

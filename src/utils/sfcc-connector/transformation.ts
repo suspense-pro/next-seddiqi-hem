@@ -50,7 +50,7 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
             },
             {
               title: "Power Reserve",
-              description: data.c_powerReseve
+              description: data.c_powerReserve
             }
           ],
           productImageUrl: "/images/png/watch1.png"

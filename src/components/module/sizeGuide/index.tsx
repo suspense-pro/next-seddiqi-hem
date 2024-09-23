@@ -34,6 +34,7 @@ const SizeGuide: React.FC<SizeGuideProps> = ({primaryTitle,
       showFooter={false}
       showBackButton={true}
       onClose={onClose}
+      position={""}
     >
       <div className={styles.contentWrapper}>
         <div className={styles.content}>

@@ -36,6 +36,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
         showFooter={false}
         showBackButton={false}
         title={title}
+        position={"left"}
         >
         <div className={styles.contentWrapper}>
           <div className={styles.content}>

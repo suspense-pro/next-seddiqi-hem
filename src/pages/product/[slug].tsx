@@ -22,7 +22,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  const product = await getProductDetails({productId: plpKey, method: "GET"});
+  const product = await getProductDetails({productId: '22416787M', method: "GET"});
 
   return {
     props: {
