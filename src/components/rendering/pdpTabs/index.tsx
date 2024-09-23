@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "../../module/image";
 import styles from "./pdpTabs.module.scss";
 import Typography from "../../module/typography";
-import { PdpTabsDummyData, TechSpecsDummyData } from './dummyData';
+import { TechSpecsDummyData } from './dummyData';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
@@ -15,11 +15,10 @@ const PdpTabs: React.FC<any> = (props) => {
   const productTechSpecs = props.productTechSpecs.specsData;
   const nonTabProductTechSpecs = props.productTechSpecs.nonTabSpecsData[0];
   const amplienceData = props.amplienceData;
-
-  console.log("productTechSpecs: ", nonTabProductTechSpecs.nonTabSpecs[0].items.length);
-
-  const tabsData = PdpTabsDummyData.tabsData;
+  const tabsData = props.productTechSpecs.tabsData; //PdpTabsDummyData.tabsData;
   const [activeTab, setActiveTab] = useState<number>(1);
+
+  console.log("productTechSpecs3: ", tabsData[0].productImageUrl);
 
   const handleTabClick = (id: number) => {
     setActiveTab(id);
@@ -117,7 +116,9 @@ const PdpTabs: React.FC<any> = (props) => {
   /**** End for Tech Specs List Accordion codes ****/
   
   return (
-    productCategory.toLowerCase() === "jewellery" || productCategory.toLowerCase() === "jewelleries" ? 
+    //productCategory.toLowerCase() === "jewellery" || productCategory.toLowerCase() === "jewelleries" ? 
+    ((tabsData[0].productImageUrl === "" && tabsData[1].productImageUrl === "" && tabsData[2].productImageUrl === "" && tabsData[3].productImageUrl === "")
+    || tabsData[0].productImageUrl === undefined && tabsData[1].productImageUrl === undefined && tabsData[2].productImageUrl === undefined && tabsData[3].productImageUrl === undefined) ?
       <div className={styles.pdpNonTabContainer}>
         <h2 className={styles.nonTabTitle}>Detail Specifications</h2>
 
