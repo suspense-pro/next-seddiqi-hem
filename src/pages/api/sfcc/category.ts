@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Product } from "commerce-sdk";
+import { Product, Search } from "commerce-sdk";
 import initializeShopperConfig, { clientConfig } from "@utils/sfcc-connector/config";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -34,6 +34,49 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     } else {
                         console.log("No category found.");
                         return res.status(400).json({ isError: true, response: "No category found." });
+                    }
+                }
+
+            } catch(err) {
+                console.error(err);
+      
+                return {
+                    statusCode: 500,
+                    body: JSON.stringify({ msg: err }),
+                };
+            }
+        break;
+        case "filters":
+            try {
+                if (requestMethod === "GET" && action === "getFilters") {
+                    const accessToken = await initializeShopperConfig();
+                    clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
+                    const refineParams = [`cgid=${categoryId}`];
+
+                    const options = {
+                        headers: {
+                          Authorization: `Bearer ${accessToken}`
+                        },
+                        parameters: {
+                          organizationId: clientConfig.parameters.organizationId,
+                          siteId: clientConfig.parameters.siteId,
+                          refine: refineParams,
+                        },
+                    };
+
+                    const shopperSearchClient = new Search.ShopperSearch(clientConfig);
+                    const categoryResults = await shopperSearchClient.productSearch(options);
+                    const result : any = {};
+                    console.log("category results: "+ categoryResults.total);
+
+                    if (categoryResults.total > 0) {
+                        result.refinements = categoryResults.refinements;
+                        result.sortingOptions = categoryResults.sortingOptions;
+                        // console.log("Filters : " + JSON.stringify(result, null, 4));
+                        return res.status(200).json({ isError: false, response: result });
+                    } else {
+                        console.log("No filters found.");
+                        return res.status(400).json({ isError: true, response: "No filters found." });
                     }
                 }
 
