@@ -128,7 +128,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
         {storesList.map(store => (
           <li className={styles.store} key={store.id}>
             <div className={styles.storeImageContainer}>
-              <img src={store.image} alt={store.name} className={styles.storeImage} />
+              <img src={store.c_storeImage} alt={store.name} className={styles.storeImage} />
 
               {activeToggle ? (
                 <>
@@ -184,7 +184,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
                 </div>
               </div>
 
-              <a href="" className={`${[styles.storeMapLink]} button plain green_dark`}><span>Get Directions</span></a>
+              <a href={store.c_googleMapLocation} target="_blank" className={`${[styles.storeMapLink]} button plain green_dark`}><span>Get Directions</span></a>
             </li>
           ))}
         </ul>

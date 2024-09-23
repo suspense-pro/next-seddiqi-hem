@@ -14,7 +14,7 @@ const ProductDetailInfo = ({ product, content }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
-  const [storeLocatorPopup, showStoreLocatorPopup] = useState(true);
+  const [storeLocatorPopup, showStoreLocatorPopup] = useState(false);
   const isMobile = !useDeviceWidth()[0];
   const handleSizeSelectorClose = () => setSizeSelectorOpen(false);
   const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false); // Default to true to open SizeSelector initially
@@ -213,8 +213,8 @@ const ProductDetailInfo = ({ product, content }) => {
       onClose={() => showStoreLocatorPopup(false)}
       showFooter={false}
       showBackButton={false}
-      title = "Find product in Boutique"
-      position = {"right"}>
+      title="Find product in Boutique"
+      position={"right"}>
         
         <StoreLocator 
         productImgAlt={product?.imageGroups[0]?.images[0].alt}
