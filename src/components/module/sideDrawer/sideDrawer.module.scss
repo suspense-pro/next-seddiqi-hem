@@ -24,9 +24,16 @@
     right: rem(-800);
     transition: right 0.3s ease-in-out;
 
+    [dir="rtl"] & { 
+      transition: left 0.3s ease-in-out;
+      right: auto;
+      left: rem(-800);
+    }
+
     &.open{
       left: auto;
       right: 0;
+      
       [dir="rtl"] & { 
         left: 0;
         right: auto;

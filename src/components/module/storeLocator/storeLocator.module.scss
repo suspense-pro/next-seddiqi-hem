@@ -460,6 +460,13 @@
       }
     }
   }
+
+  &Link{
+
+    [dir="rtl"] & {
+      text-align: right;
+    }
+  }
 }
 
 .mapContainer{
