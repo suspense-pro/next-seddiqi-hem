@@ -407,6 +407,31 @@ export async function getCategory({
   }
 }
 
+export async function subscribedToNewsletter({
+  method,
+  userData,
+}: {
+  method: string;
+  userData: any;
+}) {
+  try {
+    const json = {
+      api: "newsletter",
+      action: "subscription",
+    };
+    const config = {
+      method: method,
+      body: JSON.stringify(userData),
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "newsletter"));
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 let apiConfig: any;
 
 const cacheApiConfig = () => {
