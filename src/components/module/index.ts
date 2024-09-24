@@ -33,6 +33,8 @@ import StickyWhatsapp from "./stickyWhatsapp";
 import ProductImageFullScreen from "./product/productImageFullScreen";
 import ProductDetailInfo from "./product/productDetailInfo";
 import Loader from "./loader";
+import BookAnAppointment from "./bookAnAppointment";
+
 
 export {
   Head,
@@ -68,5 +70,6 @@ export {
   StickyWhatsapp,
   ProductImageFullScreen,
   ProductDetailInfo,
-  Loader
+  Loader,
+  BookAnAppointment
 };
