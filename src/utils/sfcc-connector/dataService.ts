@@ -224,7 +224,7 @@ export async function setFilters({
   filters,
   sortOption,
   maxPrice,
-  minPrice
+  minPrice,
 }: {
   method: string;
   categoryId?: string;
@@ -233,36 +233,37 @@ export async function setFilters({
   maxPrice?: any;
   minPrice?: any;
 }) {
-  try {
-    const json = {
+  try { 
+    const json: any = {
       api: "filter",
-      action: "setFilters",
+      action: "setProducts",
       categoryId: categoryId,
       filters: JSON.stringify(filters),
       sort: sortOption,
       maxPrice: maxPrice,
       minPrice: minPrice,
     };
+
     const config = {
       method: method,
     };
     const queryString = new URLSearchParams(json).toString();
-    
+
     const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
 
-    console.log({res});
+    console.log({ res });
 
-    if(!res) {
+    if (!res) {
       return null;
     }
-     
+
     return res.response;
-    
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
   }
 }
+
 
 export async function getProductDetails({
   productId,

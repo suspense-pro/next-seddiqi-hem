@@ -34,6 +34,7 @@ import ScrollToTop from "./scrollToTop";
 import StickyWhatsapp from "./stickyWhatsapp";
 import ProductImageFullScreen from "./product/productImageFullScreen";
 import ProductDetailInfo from "./product/productDetailInfo";
+import Loader from "./loader";
 
 export {
   Head,
@@ -70,5 +71,6 @@ export {
   ScrollToTop,
   StickyWhatsapp,
   ProductImageFullScreen,
-  ProductDetailInfo
+  ProductDetailInfo,
+  Loader
 };
