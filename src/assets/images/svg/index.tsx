@@ -25,3 +25,7 @@ export { default as ScrollTopIcon } from "./ScrollTopIcon";
 export { default as WhatsappIcon } from "./WhatsappIcon";
 export { default as ShareIcon } from "./ShareIcon";
 export { default as CubeIcon } from "./CubeIcon";
+export { default as WatchIcon } from "./WatchIcon";
+export { default as ProtectionIcon } from "./ProtectionIcon";
+export { default as CareIcon } from "./CareIcon";
+

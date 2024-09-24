@@ -25,7 +25,7 @@ const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
             link={content?.cta?.url}
             className={styles.btn}
             title={content?.cta?.label}
-            color="dark_green"
+            color={content?.cta?.color}
             type={content?.cta?.type}
           />
         </div>
