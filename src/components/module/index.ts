@@ -9,6 +9,7 @@ import ArticleCard from "./cards/articleCard";
 import DisplayCard from "./cards/displayCard";
 import StoryCard from "./cards/storyCard";
 import CollectionsCard from "./cards/collectionsCard";
+import CategoryCard from "./cards/categoryCard";
 import NavigationLink from "./navigationLink";
 import DesktopHeader from "./desktopHeader";
 import MegaMenu from "./megaMenu";
@@ -22,6 +23,7 @@ import SubMenu from "./tabContent/subMenu";
 import HeaderFooter from "./headerFooter/index";
 import SubMenuLinks from "./sumMenuLinks";
 import NavCardBlocks from "./navCardBlocks";
+import CategoryList from "./categoryList";
 import SideDrawer from "./sideDrawer";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
@@ -70,6 +72,8 @@ export {
   StickyWhatsapp,
   ProductImageFullScreen,
   ProductDetailInfo,
+  CategoryList,
+  CategoryCard,
   Loader,
   BookAnAppointment
 };

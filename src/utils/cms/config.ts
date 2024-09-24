@@ -4,6 +4,7 @@ import Container from "@components/module/container";
 import ContentPage from "@components/module/contentPage";
 import Image from "@components/module/image";
 import Slot from "@components/module/slot";
+import CategoryList from "@components/module/categoryList";
 import {
   CollectionsTabList,
   DefaultContentBlock,
@@ -63,6 +64,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/botique-banner`]: BoutiqueBanner,
   [`${componentUrl}/product-carousel`]: FeaturedProductCarousel,
   [`${componentUrl}/image-gallery-carousel`]: ImageGalleryCarousel,
+  [`${componentUrl}/brand-category-list`]: CategoryList,
 };
 
 const defaultConfig = {

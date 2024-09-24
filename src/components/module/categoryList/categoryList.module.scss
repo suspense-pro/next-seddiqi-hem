@@ -1,0 +1,67 @@
+@import "./../../../assets/styles/main.scss";
+.catogeryListContainer {
+  padding: rem(60 0);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  [dir="rtl"] & {
+    text-align: right;
+  }
+
+  @include md {
+    padding-top: rem(120);
+  }
+
+  .title {
+    @include heading_regular;
+    text-transform: uppercase;
+    color: getColorHex("midnight-brown");
+    width: rem(800);
+    margin: 0 auto;
+  }
+
+  .containerGrid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: rem(18 0);
+
+    @include md {
+      padding: rem(42 0);
+    }
+  }
+
+  .categoryListCarousel {
+    width: 100%;
+    margin-left: rem(28);
+    margin-top: rem(24);
+    margin-bottom: rem(18);
+    @include md {
+      margin-bottom: rem(0);
+    }
+
+    .swiperSlide {
+      width: rem(200) !important;
+      margin-right: rem(20);
+    }
+  }
+
+  .containerGridItems {
+    display: flex;
+
+    @include md {
+      gap: rem(24);
+    }
+  }
+
+  .gridItem {
+    flex: 0 0 auto;
+    width: rem(200);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
