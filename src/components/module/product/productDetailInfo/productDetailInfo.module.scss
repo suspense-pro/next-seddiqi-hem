@@ -20,6 +20,7 @@
   width: 100%;
   height: rem(370);
   position: relative;
+  cursor: zoom-in;
 
   @include lg {
     height: rem(828);
