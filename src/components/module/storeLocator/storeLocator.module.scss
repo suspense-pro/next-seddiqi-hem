@@ -395,6 +395,10 @@
       border-top-right-radius: rem(24);
       border-bottom-left-radius: rem(24);
     }
+
+    .storeMapLink{
+      display: block;
+    }
   }
 
   &Details{
@@ -462,6 +466,7 @@
   }
 
   &Link{
+    display: none;
 
     [dir="rtl"] & {
       text-align: right;
