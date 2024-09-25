@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./filterBar.module.scss";
 import FilterBtn from "../filterBtn";
 import SideDrawer from "../sideDrawer";
@@ -9,6 +9,7 @@ import CheckboxFilter from "../checkboxFilter";
 import ColorFilter from "../allFilters/colorFilter";
 import Typography from "../typography";
 import { CloseIcon } from "@assets/images/svg";
+import { getCategoryFilters } from "@utils/sfcc-connector/dataService";
 
 const FILTERS = [
   { icon: true, text: "All Filter & Sort by" },
@@ -19,69 +20,112 @@ const FILTERS = [
   { icon: false, text: "Bvlgari" },
 ];
 
-const brandOptions = [
-  "Rolex",
-  "Patek Philippe",
-  "Akrivia",
-  "Audemars Piguet",
-  "Bell & Ross",
-  "Bovet",
-  "Breitling",
-  "Bvlgari",
-  "Brand I",
-  "Brand J",
-  "Brand K",
-  "Brand L",
-];
-
-const sizeOptions = ["Small (<31mm)", "Medium (31mm - 39mm)", "Large (>39mm)"];
-
-const movementOptions = [
-  "Automatic Movement",
-  "Quartz Movement",
-  "Manual Movement",
-  "Mechanical Movement",
-  "Hybrid Movement",
-];
-
-const strapOptions = [
-  "Alligator",
-  "Beef",
-  "Ceramic",
-  "Fabric",
-  "Gold/Steel",
-  "Kevlar",
-];
-
-const faceShapeOptions = [
-  "Oval",
-  "Cushion",
-  "Octagonal",
-  "Rectangular",
-  "Round",
-  "Square",
-];
-
-const FilterBar = () => {
+const FilterBar = ({
+  filters: initialFilters,
+  onFilterChange,
+  totalProducts,
+  categoryId,
+}) => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [filters, setFiltersState] = useState(initialFilters || {});
+  const [filterOptions, setFilterOptions] = useState([]);
+  const [sortingOptions, setSortingOptions] = useState([]);
+
+  useEffect(() => {
+    const fetchCategoryFilters = async () => {
+      try {
+        const response = await getCategoryFilters({
+          method: "GET",
+          cgid: categoryId,
+        });
+        console.log("response-------", response);
+        if (response && response.refinements) {
+          setFilterOptions(response.refinements);
+        }
+
+        if (response && response.sortingOptions) {
+          setSortingOptions(response.sortingOptions);
+        }
+      } catch (error) {
+        console.error("error-", error);
+      }
+    };
+
+    fetchCategoryFilters();
+  }, [categoryId]);
+
+  useEffect(() => {
+    setFiltersState(initialFilters || {});
+  }, [initialFilters]);
+
+  useEffect(() => {
+    if (!isDrawerOpen) {
+      setFiltersState(initialFilters || {});
+    }
+  }, [initialFilters, isDrawerOpen]);
 
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
   };
 
-  const handleOptionChange = (option: string) => {
-    setSelectedOptions((prevSelected) =>
-      prevSelected.includes(option)
-        ? prevSelected.filter((selected) => selected !== option)
-        : [...prevSelected, option]
-    );
+  const handleOptionChange = (filterKey, option) => {
+    setFiltersState((prevFilters) => {
+      const prevSelectedOptions = prevFilters[filterKey] || [];
+      const newSelectedOptions = prevSelectedOptions.includes(option)
+        ? prevSelectedOptions.filter((selected) => selected !== option)
+        : [...prevSelectedOptions, option];
+
+      return { ...prevFilters, [filterKey]: newSelectedOptions };
+    });
   };
 
-  const handleDelete = (option: string) => {
-    setSelectedOptions((prevSelected) =>
-      prevSelected.filter((selected) => selected !== option)
-    );
+  const handleSortChange = (selectedSortOption) => {
+    setFiltersState((prevFilters) => ({
+      ...prevFilters,
+      sortOption: selectedSortOption,
+    }));
+  };
+
+  const handleDelete = (filterKey, option) => {
+    setFiltersState((prevFilters) => {
+      if (filterKey === "sortOption") {
+        return { ...prevFilters, sortOption: undefined };
+      }
+
+      const prevSelectedOptions = prevFilters[filterKey] || [];
+
+      if (Array.isArray(prevSelectedOptions)) {
+        const newSelectedOptions = prevSelectedOptions.filter(
+          (selected) => selected !== option
+        );
+
+        return { ...prevFilters, [filterKey]: newSelectedOptions };
+      }
+
+      return prevFilters;
+    });
+  };
+
+  const handleSubmit = () => {
+    const filteredFilters = Object.keys(filters).reduce((acc, key) => {
+      if (
+        (Array.isArray(filters[key]) && filters[key].length > 0) ||
+        (typeof filters[key] === "string" && filters[key].length > 0) ||
+        key === "sortOption"
+      ) {
+        acc[key] = filters[key];
+      }
+      return acc;
+    }, {});
+
+    if (onFilterChange) {
+      onFilterChange(filteredFilters);
+    }
+    setDrawerOpen(false);
+  };
+
+  const handleClearAll = () => {
+    setFiltersState({});
   };
 
   return (
@@ -98,75 +142,84 @@ const FilterBar = () => {
           />
         ))}
       </div>
-      <div className={styles.productsLength}>328 Products</div>
-      <SideDrawer isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)} showFooter={false} showBackButton={false} position={""}>
-        {selectedOptions && selectedOptions.length > 0 && (
-          <div className={styles.selectedOptions}>
-            {selectedOptions.map((option, index) => (
-              <div key={index} className={styles.selectedOption}>
-                <Typography align="left" variant="p" className={styles.option}>
-                  {option}
-                </Typography>{" "}
-                <div
-                  className={styles.deleteOption}
-                  onClick={() => handleDelete(option)}
-                >
-                  <CloseIcon />
-                </div>
+      <div className={styles.productsLength}>{totalProducts} Products</div>
+      <SideDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onSubmit={handleSubmit}
+        onClearAll={handleClearAll}
+        showFooter={true}
+        showBackButton={false}
+        position={""}
+      >
+        <div className={styles.selectedOptions}>
+          {Object.keys(filters).map((filterKey) =>
+            Array.isArray(filters[filterKey])
+              ? filters[filterKey].map((option, index) => (
+                  <div key={index} className={styles.selectedOption}>
+                    <Typography
+                      align="left"
+                      variant="p"
+                      className={styles.option}
+                    >
+                      {option}
+                    </Typography>
+                    <div
+                      className={styles.deleteOption}
+                      onClick={() => handleDelete(filterKey, option)}
+                    >
+                      <CloseIcon />
+                    </div>
+                  </div>
+                ))
+              : null
+          )}
+          {filters.sortOption && (
+            <div className={styles.selectedOption}>
+              <Typography align="left" variant="p" className={styles.option}>
+                {sortingOptions.find(
+                  (option) => option.id === filters.sortOption
+                )?.label || filters.sortOption}
+              </Typography>
+              <div
+                className={styles.deleteOption}
+                onClick={() => handleDelete("sortOption", filters.sortOption)}
+              >
+                <CloseIcon />
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          )}
+        </div>
+
         <FilterAccordian>
           <FilterAccordionItem title="Sort">
-            <SortFilter />
-          </FilterAccordionItem>
-          <FilterAccordionItem title="Brand">
-            <CheckboxFilter
-              title="Brand"
-              options={brandOptions}
-              hasSearch={true}
-              onOptionChange={handleOptionChange}
-              selectedOptions={selectedOptions}
+            <SortFilter
+              sortingOptions={sortingOptions}
+              selectedSortOption={filters.sortOption}
+              onSortChange={handleSortChange}
             />
           </FilterAccordionItem>
-          <FilterAccordionItem title="Size">
-            <CheckboxFilter
-              title="Size"
-              options={sizeOptions}
-              onOptionChange={handleOptionChange}
-              selectedOptions={selectedOptions}
-            />
-          </FilterAccordionItem>
-          <FilterAccordionItem title="Movement">
-            <CheckboxFilter
-              title="Movement"
-              options={movementOptions}
-              onOptionChange={handleOptionChange}
-              selectedOptions={selectedOptions}
-            />
-          </FilterAccordionItem>
-          <FilterAccordionItem title="Strap Material">
-            <CheckboxFilter
-              title="Strap Material"
-              options={strapOptions}
-              onOptionChange={handleOptionChange}
-              selectedOptions={selectedOptions}
-            />
-          </FilterAccordionItem>
-          <FilterAccordionItem title="Face Shape">
-            <CheckboxFilter
-              title="Face Shape"
-              options={faceShapeOptions}
-              onOptionChange={handleOptionChange}
-              selectedOptions={selectedOptions}
-            />
+          {filterOptions.map((filterItem) => (
+            <FilterAccordionItem
+              key={filterItem.attributeId}
+              title={filterItem.label}
+            >
+              {filterItem.values && (
+                <CheckboxFilter
+                  title={filterItem.label}
+                  options={filterItem.values.map((val) => val.label)}
+                  filterKey={filterItem.attributeId}
+                  onOptionChange={handleOptionChange}
+                  selectedOptions={filters[filterItem.attributeId] || []}
+                />
+              )}
+            </FilterAccordionItem>
+          ))}
+          <FilterAccordionItem title="Price">
+            <PriceRangeFilter />
           </FilterAccordionItem>
           <FilterAccordionItem title="Color">
             <ColorFilter />
-          </FilterAccordionItem>
-          <FilterAccordionItem title="Price">
-            <PriceRangeFilter />
           </FilterAccordionItem>
         </FilterAccordian>
       </SideDrawer>

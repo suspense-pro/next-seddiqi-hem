@@ -13,6 +13,8 @@ interface SideDrawerProps {
   onClose: () => void;
   title?: string; 
   position: string;
+  onSubmit: () => void;
+  onClearAll: () => void;
 }
 
 const SideDrawer: React.FC<SideDrawerProps> = ({
@@ -22,7 +24,9 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   showFooter = true,
   showBackButton = false,
   title = "SORT & FILTER", // Default title
-  position
+  position,
+  onSubmit,
+  onClearAll,
 }) => {
   return (
     <div className={`${isOpen ? `${styles.drawer} ${styles.open}` : styles.drawer} ${position === "right" ? styles.right : ""}`}>
@@ -45,8 +49,8 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
       <div className={styles.content}>{children}</div>
       {showFooter && 
       <div className={styles.footer}>
-        <Button title="Clear all" type="transparent" />
-        <Button title="Done" type="solid green_dark" />
+        <Button title="Clear all" type="transparent" clickHandler={onClearAll} />
+        <Button title="Done" type="solid green_dark" clickHandler={onSubmit} />
       </div>
       }
     </div>

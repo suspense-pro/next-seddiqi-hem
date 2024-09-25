@@ -32,6 +32,8 @@ const SizeGuide: React.FC<SizeGuideProps> = ({primaryTitle,
     <SideDrawer
       isOpen={isOpen}
       showFooter={false}
+      onSubmit={null}
+      onClearAll={null}
       showBackButton={true}
       onClose={onClose}
       position={""}

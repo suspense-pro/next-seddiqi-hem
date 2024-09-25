@@ -212,6 +212,8 @@ const ProductDetailInfo = ({ product, content }) => {
       isOpen={storeLocatorPopup}
       onClose={() => showStoreLocatorPopup(false)}
       showFooter={false}
+      onSubmit={null}
+      onClearAll={null}
       showBackButton={false}
       title="Find product in Boutique"
       position={"right"}>
