@@ -8,13 +8,17 @@ import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
 
-const ProductDetailInfo = ({ product }) => {
+const ProductDetailInfo = ({ product, content, shippingData, warrantyData }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
   const isMobile = !useDeviceWidth()[0];
 
-  if(!product) return null
+  const [isDescriptionCardOpen, setDescriptionCardOpen] = useState(false);
+  const [isCareAndWarrantyCardOpen, setCareAndWarrantyCardOpen] = useState(false);
+  const [isShippingCardOpen, setShippingCardOpen] = useState(false);
+
+  if (!product) return null;
 
   const ImageSlide = ({ item }) => {
     return (
@@ -131,6 +135,27 @@ const ProductDetailInfo = ({ product }) => {
               />
             </div>
           </div>
+          {/* {isDescriptionCardOpen && (
+              <ProductDescriptionFlyoutCard
+                isDescriptionCardOpen={isDescriptionCardOpen}
+                setDescriptionCardOpen={setDescriptionCardOpen}
+                editorsView={editorsView}
+              />
+            )}
+            {isCareAndWarrantyCardOpen && (
+              <ProductCareAndWarrantyFlyoutCard
+                isCareAndWarrantyCardOpen={isCareAndWarrantyCardOpen}
+                setCareAndWarrantyCardOpen={setCareAndWarrantyCardOpen}
+                warrantyAndCare={warrantyData}
+              />
+            )}
+            {isShippingCardOpen && (
+              <ProductShippingDetailsFlyoutCard
+                isShippingCardOpen={isShippingCardOpen}
+                setShippingCardOpen={setShippingCardOpen}
+                shippingDetails={shippingData}
+              />
+            )} */}
           <div className={styles.bottom}>
             <div className={styles.tab}>Editors View</div>
             <div className={styles.vline}>&nbsp;</div>

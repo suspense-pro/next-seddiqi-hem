@@ -9,10 +9,9 @@ import { ProductDetailInfo, ScrollToTop, StickyWhatsapp } from "@components/modu
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
-  const plpKey = Array.isArray(slug) ? slug.join('/') : slug;
+  const plpKey = Array.isArray(slug) ? slug.join("/") : slug;
   const { vse } = context.query || {};
 
-  
   const data = await fetchStandardPageData(
     {
       content: {
@@ -22,23 +21,52 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  const product = await getProductDetails({productId: "22416787M", method: "GET"});
+  const product = await getProductDetails({ productId: "22416787M", method: "GET" });
+
+  const shippingData = await fetchStandardPageData(
+    {
+      content: {
+        page: {
+          key: `shipping/${product?.response?.c_shippingContent ? product?.response?.brand.toLowerCase() : "global"}`,
+        },
+      },
+    },
+    context
+  );
+
+  const warrantyData = await fetchStandardPageData(
+    {
+      content: {
+        page: {
+          key: `warranty/${product?.response?.warrantyData ? product?.response?.brand.toLowerCase() : "global"}`,
+        },
+      },
+    },
+    context
+  );
 
   return {
     props: {
       ...data,
       product,
-      vse: vse || '',
+      shippingData,
+      warrantyData,
+      vse: vse || "",
     },
   };
 }
 
-export default function Product({ content, product }) {
+export default function Product({ content, product, shippingData, warrantyData }) {
   const productTechSpecs = product.techSpecs;
 
   return (
     <div className="main-content">
-      <ProductDetailInfo product={product?.response} />
+      <ProductDetailInfo
+        shippingData={shippingData?.content?.page}
+        warrantyData={warrantyData?.content?.page}
+        product={product?.response}
+        content={content}
+      />
       <ScrollToTop />
       <StickyWhatsapp />
       {compact(content?.page?.components).map((content) => (
