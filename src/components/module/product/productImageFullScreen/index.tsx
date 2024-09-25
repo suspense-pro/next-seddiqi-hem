@@ -12,10 +12,10 @@ import Image from "next/image";
 const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true, activeImage=0 }) => {
   const [activeIndex, setActiveIndex] = useState(activeImage);
   const [swiper, setSwiper] = useState(null);
-  const [zoomLevel, setZoomLevel] = useState(1); // New state to track zoom level
+  const [zoomLevel, setZoomLevel] = useState(1);
   const maxZoomLevel = 3;
   const minZoomLevel = 1;
-  const zoomStep = 0.5; // Incremental step
+  const zoomStep = 0.5;
 
   const onSlideChange = useCallback((swiper) => {
     setActiveIndex(swiper.realIndex);
@@ -96,7 +96,7 @@ const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true, act
 
   const zoomOut = () => {
     if (swiper && swiper.zoom && zoomLevel > minZoomLevel) {
-      const newZoomLevel = Math.max(minZoomLevel, zoomLevel - zoomStep); // Ensure newZoomLevel doesn't go below minZoomLevel
+      const newZoomLevel = Math.max(minZoomLevel, zoomLevel - zoomStep);
       setZoomLevel(newZoomLevel);
       swiper.zoom.in(newZoomLevel);
     }
@@ -105,7 +105,7 @@ const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true, act
   const zoomReset = () => {
     if (swiper && swiper.zoom) {
       setZoomLevel(1);
-      swiper.zoom.out(); // Reset to the default zoom level
+      swiper.zoom.out();
     }
   };
 

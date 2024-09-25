@@ -15,8 +15,7 @@ const ProductDetailInfo = ({ product }) => {
   const isMobile = !useDeviceWidth()[0];
 
   if(!product) return null
-  console.log('PRODUCT', product)
-
+  
   const ImageSlide = ({ item }) => {
     return (
       <div onClick={() => setShowZoom(true)} className={styles.imgContainer}>
