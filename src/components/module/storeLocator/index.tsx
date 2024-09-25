@@ -130,13 +130,13 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
             <div className={styles.storeImageContainer}>
               <img src={store.c_storeImage} alt={store.name} className={styles.storeImage} />
 
-              {activeToggle ? (
+              {/* {activeToggle ? (
                 <>
                   {nearestStore && nearestStore.id === store.id && (
                     <h3 className={styles.nearestStore}>Nearest Store</h3>
                   )}
                 </>
-              ) : null}
+              ) : null} */}
             </div>
 
             <div className={styles.storeDetails}>
