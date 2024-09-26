@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./sizeSelector.module.scss";
 import Typography from "../typography";
 import SideDrawer from "../sideDrawer";
 import { Button } from "@components/module";
 import { getProducts } from "@utils/sfcc-connector/dataService";
 import SizeGuide from "@components/module/sizeGuide";
+import { SizeGuideProviderContext } from "@contexts/sizeGuideSelectorContext";
 
 interface SizeSelectorProps {
-  title: string;
-  description: string;
+  title: string | null;
+  description: string | null;
   onClose: () => void;
   isOpen: boolean;
   productId?: string;
-  sizeGuideDataMenWatches: any;
-  sizeGuideDataWomenWatches: any;
-  sizeGuideDataJewelleryMen: any;
-  sizeGuideDataJewelleryWomen: any;
 }
 
 const SizeSelector: React.FC<SizeSelectorProps> = ({
@@ -24,11 +21,11 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
   onClose,
   isOpen,
   productId,
-  sizeGuideDataMenWatches,
-  sizeGuideDataWomenWatches,
-  sizeGuideDataJewelleryMen,
-  sizeGuideDataJewelleryWomen,
 }) => {
+  const { sizeGuideDataMenWatches, sizeGuideDataWomenWatches } = useContext(
+    SizeGuideProviderContext
+  );
+
   const [gender, setGender] = useState<"Gents" | "Ladies" | "Unisex" | null>(
     null
   );
@@ -37,8 +34,6 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
     []
   );
   const [productCategory, setProductCategory] = useState<string | null>(null);
-
-  // State for SizeGuide
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const [sizeGuideInfo, setSizeGuideInfo] = useState({
     primaryTitle: "",
@@ -84,20 +79,24 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
   const openSizeGuide = (gender: "Gents" | "Ladies") => {
     let sizeGuideData;
 
-    // Check the product category and set size guide data accordingly
-    if (productCategory === "Jewellery") {
-      sizeGuideData =
-        gender === "Gents"
-          ? sizeGuideDataJewelleryMen
-          : sizeGuideDataJewelleryWomen;
+    // Assign sizeGuideData based on gender using context data
+    if (gender === "Gents") {
+      sizeGuideData = sizeGuideDataMenWatches;
     } else {
-      sizeGuideData =
-        gender === "Gents"
-          ? sizeGuideDataMenWatches
-          : sizeGuideDataWomenWatches;
+      sizeGuideData = sizeGuideDataWomenWatches;
+    }
+
+    if (!sizeGuideData) {
+      console.error("Size guide data is undefined for gender:", gender);
+      return;
     }
 
     const { content } = sizeGuideData;
+    if (!content) {
+      console.error("Content is undefined in size guide data:", sizeGuideData);
+      return;
+    }
+
     const { page } = content;
 
     // Extract data from size guide page
@@ -115,7 +114,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
       primaryDescription,
       secondaryTitle,
       secondaryDescription,
-      items, // Pass the items array
+      items,
       category: productCategory,
       gender,
     });
@@ -144,25 +143,6 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
               clickHandler={() => openSizeGuide("Ladies")}
             />
           )}
-          {/* Add condition for both Gents and Ladies */}
-          {/* {gender === 'Gents' && gender === 'Ladies' && (
-            <>
-              <Button
-                className={styles.sizeGuideBtn}
-                title={"Men's Size Guide"}
-                color="green_dark"
-                type={"Plain"}
-                clickHandler={() => openSizeGuide('Gents')}
-              />
-              <Button
-                className={styles.sizeGuideBtn}
-                title={"Women's Size Guide"}
-                color="green_dark"
-                type={"Plain"}
-                clickHandler={() => openSizeGuide('Ladies')}
-              />
-            </>
-          )} */}
         </>
       );
     }
@@ -176,7 +156,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
         onClose={onClose}
         showFooter={false}
         showBackButton={false}
-        title={title}
+        title={title || "Size Selector"}
         onSubmit={null}
         onClearAll={null}
       >

@@ -1,21 +1,34 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useContext, useEffect } from "react";
 import styles from "./productDetailInfo.module.scss";
-import { ArrowRight, CalendarIcon, CubeIcon, HeartIcon, PlusIcon, ShareIcon } from "@assets/images/svg";
+import {
+  ArrowRight,
+  CalendarIcon,
+  CubeIcon,
+  HeartIcon,
+  PlusIcon,
+  ShareIcon,
+} from "@assets/images/svg";
 import { Button } from "@components/module";
 import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
-import {SizeGuide, SizeSelector} from "@components/module";
+import { SizeGuide, SizeSelector } from "@components/module";
+import { SizeGuideProvider } from "@contexts/sizeGuideSelectorContext";
 
-const ProductDetailInfo = ({ product, content, sizeGuideDataMenWatches, sizeGuideDataWomenWatches}) => {
+const ProductDetailInfo = ({
+  product,
+  content,
+  sizeGuideDataMenWatches,
+  sizeGuideDataWomenWatches,
+}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
   const isMobile = !useDeviceWidth()[0];
   const handleSizeSelectorClose = () => setSizeSelectorOpen(false);
-  const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false); 
+  const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false);
   const [isSizeGuideOpen, setSizeGuideOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
@@ -23,26 +36,30 @@ const ProductDetailInfo = ({ product, content, sizeGuideDataMenWatches, sizeGuid
     setSelectedProductId(product.id);
     setSizeSelectorOpen(true);
     setSizeGuideOpen(false);
-};
+  };
 
   const handleSizeGuideOpen = () => {
-    setSizeSelectorOpen(false); 
-    setSizeGuideOpen(true);   
+    setSizeSelectorOpen(false);
+    setSizeGuideOpen(true);
   };
 
   const handleSizeGuideClose = () => {
     setSelectedProductId(null);
-    setSizeGuideOpen(false); 
+    setSizeGuideOpen(false);
     setSizeSelectorOpen(false);
   };
 
-
-  if(!product) return null
+  if (!product) return null;
 
   const ImageSlide = ({ item }) => {
     return (
       <div className={styles.imgContainer}>
-        <Image fill className={styles.image} alt={item?.alt} src={item?.disBaseLink} />
+        <Image
+          fill
+          className={styles.image}
+          alt={item?.alt}
+          src={item?.disBaseLink}
+        />
       </div>
     );
   };
@@ -68,13 +85,21 @@ const ProductDetailInfo = ({ product, content, sizeGuideDataMenWatches, sizeGuid
   };
 
   const slides = product?.imageGroups[0]?.images?.map((item, index) =>
-    item?.videoLink1 ? <VideoSlide item={item} key={index} /> : <ImageSlide item={item} key={index} />
+    item?.videoLink1 ? (
+      <VideoSlide item={item} key={index} />
+    ) : (
+      <ImageSlide item={item} key={index} />
+    )
   );
-
 
   return (
     <div className={styles.container}>
-      {showZoom && <ProductImageFullScreen listitems={product?.imageGroups[0]?.images} setShowZoom={setShowZoom} />}
+      {showZoom && (
+        <ProductImageFullScreen
+          listitems={product?.imageGroups[0]?.images}
+          setShowZoom={setShowZoom}
+        />
+      )}
       {isMobile && (
         <div className={styles.backBtn}>
           <ArrowRight /> Back
@@ -100,7 +125,11 @@ const ProductDetailInfo = ({ product, content, sizeGuideDataMenWatches, sizeGuid
         </div>
 
         <div className={styles.carouselBtns}>
-          <CarouselBtns slides={slides} activeIndex={activeIndex} swiper={swiper} />
+          <CarouselBtns
+            slides={slides}
+            activeIndex={activeIndex}
+            swiper={swiper}
+          />
         </div>
       </div>
       <div className={styles.right}>
@@ -116,7 +145,9 @@ const ProductDetailInfo = ({ product, content, sizeGuideDataMenWatches, sizeGuid
             </div>
           </div>
           <div className={styles.size}>
-            <div className={styles.label} onClick={handleSizeSelectorOpen}>Select Size</div>
+            <div className={styles.label} onClick={handleSizeSelectorOpen}>
+              Select Size
+            </div>
             <ArrowRight />
           </div>
           <Button
@@ -168,20 +199,21 @@ const ProductDetailInfo = ({ product, content, sizeGuideDataMenWatches, sizeGuid
         </div>
       </div>
       {/* Size Selector  */}
-      
-      { isSizeSelectorOpen && (<SizeSelector
-      isOpen={isSizeSelectorOpen}
-      onClose={handleSizeGuideClose}
-      productId={product.id}
-      title={"SIZE"}
-      description={""}
-      sizeGuideDataMenWatches= {sizeGuideDataMenWatches}
-      sizeGuideDataWomenWatches= {sizeGuideDataWomenWatches}
-      sizeGuideDataJewelleryMen= {""}
-      sizeGuideDataJewelleryWomen= {""}
-      />
-      )}
 
+      {isSizeSelectorOpen && (
+        <SizeGuideProvider
+          sizeGuideDataMenWatches={sizeGuideDataMenWatches}
+          sizeGuideDataWomenWatches={sizeGuideDataWomenWatches}
+        >
+          <SizeSelector
+            isOpen={isSizeSelectorOpen}
+            onClose={handleSizeGuideClose}
+            productId={product.id}
+            title={"SIZE"}
+            description={""}
+          />
+        </SizeGuideProvider>
+      )}
     </div>
   );
 };
