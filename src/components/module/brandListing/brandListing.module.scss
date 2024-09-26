@@ -1,0 +1,152 @@
+@import "./../../../assets/styles/main.scss";
+
+.brandSectionContainer {
+  display: flex;
+  flex-direction: column;
+  // padding: 20px;
+  margin: rem(120 0);
+
+  @include lg {
+    margin: rem(120);
+  }
+}
+
+.alphabetNav {
+  display: flex;
+  justify-content: space-between; /* Align letters to the start */
+  margin: rem(40 0);
+  overflow-x: auto;
+  gap: rem(36); /* Space between alphabet letters */
+  // padding-bottom: rem(16);
+
+  margin-left: rem(28);
+
+  @include lg {
+    margin-left: rem(0);
+  }
+
+  &::-webkit-scrollbar {
+    height: rem(5);
+    width: rem(102);
+    cursor: pointer;
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: rem(102);
+    cursor: pointer;
+    background-color: getColorHex("grey-light-4");
+    background: var(--Secondary-Dark-Brown, #2b2219);
+    border-radius: rem(2);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: getColorHex("grey-light-4");
+    background: var(--Secondary-Dark-Brown, #2b2219);
+  }
+
+  .alphabetLetter {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+
+    color: var(--Secondary-Dark-Green, #464f4a);
+
+    @include heading_regular;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px; /* 125% */
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+    white-space: nowrap; /* Ensure that each letter stays on one line */
+  }
+
+  .enabled {
+    color: var(--Secondary-Dark-Green, #464f4a);
+  }
+
+  .disabled {
+    color: var(--GreyShades-Light-Grey, #cccbc7);
+    pointer-events: none;
+  }
+}
+
+.brandList {
+  max-height: 400px;
+  overflow-y: auto;
+  // display: flex;
+  // flex-direction: column;
+  // flex-wrap: wrap;
+  margin: 0 rem(28);
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Auto-fit columns, min 200px width */
+  grid-gap: 20px; /* Add space between columns */
+
+  @include lg {
+    margin: 0;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &::-webkit-scrollbar {
+    width: rem(5);
+    height: rem(102);
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: rem(102);
+    cursor: pointer;
+    background-color: getColorHex("grey-light-4");
+    background: var(--Secondary-Dark-Brown, #2b2219);
+    border-radius: rem(2);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: getColorHex("grey-light-4");
+    background: var(--Secondary-Dark-Brown, #2b2219);
+  }
+  .brandGroup {
+    margin-bottom: 30px;
+
+    h4 {
+      font-size: 24px;
+      margin-bottom: 10px;
+
+      color: var(--Primary-Metallic, #a98e76);
+
+      @include heading_regular;
+      font-size: 26px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 36px; /* 138.462% */
+      letter-spacing: 0.6px;
+      margin-bottom: rem(20);
+    }
+
+    .brandColumn {
+      display: flex;
+      flex-direction: column;
+      gap: rem(20);
+
+      .brandName {
+        margin-bottom: 10px;
+        font-size: 18px;
+
+        color: var(--GreyShades-Mid-Grey, #787775);
+
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 26px; /* 162.5% */
+        letter-spacing: 0.2px;
+      }
+    }
+  }
+}
+
+.btnContainer {
+  margin: 0 auto;
+  margin-top: rem(60);
+}
