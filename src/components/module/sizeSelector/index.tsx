@@ -5,15 +5,9 @@ import SideDrawer from "../sideDrawer";
 import { Button } from "@components/module";
 import { getProducts } from "@utils/sfcc-connector/dataService";
 import SizeGuide from "@components/module/sizeGuide";
+import {SizeSelectorProps} from "@utils/models/sizeSelector"
 import { SizeGuideProviderContext } from "@contexts/sizeGuideSelectorContext";
 
-interface SizeSelectorProps {
-  title: string | null;
-  description: string | null;
-  onClose: () => void;
-  isOpen: boolean;
-  productId?: string;
-}
 
 const SizeSelector: React.FC<SizeSelectorProps> = ({
   title,

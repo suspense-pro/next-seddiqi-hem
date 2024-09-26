@@ -246,6 +246,7 @@
   justify-content: space-between;
   flex: 1 0 0;
   border-bottom: 1px solid getColorHex("grey-light-5");
+  cursor: pointer;
 
   .lable {
     color: getColorHex("grey-mid");

@@ -2,21 +2,7 @@ import React from "react";
 import styles from "./sizeGuide.module.scss";
 import Typography from "../typography";
 import SideDrawer from "../sideDrawer";
-
-interface SizeGuideProps {
-  primaryTitle: string;
-  primaryDescription: string;
-  secondaryTitle: string;
-  secondaryDescription: string;
-  items: ProductSize[];
-  onClose: () => void;
-  isOpen: boolean;
-}
-
-interface ProductSize {
-  label: string;
-  listItems: string[];
-}
+import { SizeGuideProps } from "@utils/models/sizeGuide";
 
 const SizeGuide: React.FC<SizeGuideProps> = ({
   primaryTitle,
@@ -47,7 +33,7 @@ const SizeGuide: React.FC<SizeGuideProps> = ({
         </div>
 
         <div className={styles.tableWrapper}>
-          <Typography variant="p" className={styles.sizeGuidetableTitle}>
+          <Typography variant="h5" className={styles.sizeGuidetableTitle}>
             {secondaryTitle}
           </Typography>
           <Typography variant="p" className={styles.sizeGuidetableDesc}>
