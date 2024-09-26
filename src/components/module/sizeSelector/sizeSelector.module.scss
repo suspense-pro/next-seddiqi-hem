@@ -95,3 +95,9 @@
 .sizeSelectorDivider {
   border-top: rem(1) solid getColorHex("bronze-grey");
 }
+
+.sizeGuideBtnWrapper {
+  button {
+    margin-right: rem(32);
+  }
+}

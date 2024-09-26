@@ -9,28 +9,31 @@ import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
 import {SizeGuide, SizeSelector} from "@components/module";
 
-const ProductDetailInfo = ({ product, content }) => {
+const ProductDetailInfo = ({ product, content, sizeGuideDataMenWatches, sizeGuideDataWomenWatches}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
   const isMobile = !useDeviceWidth()[0];
   const handleSizeSelectorClose = () => setSizeSelectorOpen(false);
-  const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false); // Default to true to open SizeSelector initially
+  const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false); 
   const [isSizeGuideOpen, setSizeGuideOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   const handleSizeSelectorOpen = () => {
+    setSelectedProductId(product.id);
     setSizeSelectorOpen(true);
     setSizeGuideOpen(false);
-  };
+};
 
   const handleSizeGuideOpen = () => {
-    setSizeSelectorOpen(false); // Close SizeSelector
-    setSizeGuideOpen(true);    // Open SizeGuide
+    setSizeSelectorOpen(false); 
+    setSizeGuideOpen(true);   
   };
 
   const handleSizeGuideClose = () => {
-    setSizeGuideOpen(false);  // Close SizeGuide
-    setSizeSelectorOpen(true); // Reopen SizeSelector
+    setSelectedProductId(null);
+    setSizeGuideOpen(false); 
+    setSizeSelectorOpen(false);
   };
 
 
@@ -68,15 +71,6 @@ const ProductDetailInfo = ({ product, content }) => {
     item?.videoLink1 ? <VideoSlide item={item} key={index} /> : <ImageSlide item={item} key={index} />
   );
 
-  
-  // Getting Variants in Size Selector Pop up
-  const sizeSelectorVariants = product.variants
-    .map(item => item.variationValues?.size)
-    .filter(size => size) // Filter out any undefined sizes
-    .sort((a, b) => parseInt(a, 10) - parseInt(b, 10)); // Sort numerically
-  
-  //Size Guide Props
-  const sizeGuideInfo = content?.page?.components[1].sizeGuide;
 
   return (
     <div className={styles.container}>
@@ -173,31 +167,21 @@ const ProductDetailInfo = ({ product, content }) => {
           <HeartIcon fill="#" />
         </div>
       </div>
-      {/* Size Guide  */}
-      {isSizeGuideOpen && (
-        <div className={styles.sizeGuide}>
-            <SizeGuide
-              isOpen={isSizeGuideOpen} 
-              onClose={handleSizeGuideClose}
-              primaryTitle={sizeGuideInfo.primaryTitle}
-              primaryDescription= {sizeGuideInfo.primaryDescription}
-              secondaryTitle={sizeGuideInfo.secondaryTitle}
-              secondaryDescription= {sizeGuideInfo.secondaryDescription} 
-              items={sizeGuideInfo.listItems}        
-            />  
-        </div>)}
-      {/* Size Selector */}
-      {isSizeSelectorOpen && (
-        <div className={styles.sizeSelector}>
-            <SizeSelector
-              isOpen={isSizeSelectorOpen} 
-              onClose={handleSizeSelectorClose}
-              title={"SIZE"}
-              description= {`"Frivole ring, 8 flowers, 18K rose gold, rhodium-plated 18K white gold, round diamonds; diamond quality DEF, IF to VVS."`}
-              sizes={sizeSelectorVariants}
-              onSizeGuideClick={handleSizeGuideOpen}              
-            />  
-        </div>)}
+      {/* Size Selector  */}
+      
+      { isSizeSelectorOpen && (<SizeSelector
+      isOpen={isSizeSelectorOpen}
+      onClose={handleSizeGuideClose}
+      productId={product.id}
+      title={"SIZE"}
+      description={""}
+      sizeGuideDataMenWatches= {sizeGuideDataMenWatches}
+      sizeGuideDataWomenWatches= {sizeGuideDataWomenWatches}
+      sizeGuideDataJewelleryMen= {""}
+      sizeGuideDataJewelleryWomen= {""}
+      />
+      )}
+
     </div>
   );
 };
