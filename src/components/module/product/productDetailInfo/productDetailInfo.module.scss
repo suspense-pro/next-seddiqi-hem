@@ -20,6 +20,7 @@
   width: 100%;
   height: rem(370);
   position: relative;
+  cursor: zoom-in;
 
   @include lg {
     height: rem(828);
@@ -245,6 +246,7 @@
   justify-content: space-between;
   flex: 1 0 0;
   border-bottom: 1px solid getColorHex("grey-light-5");
+  cursor: pointer;
 
   .lable {
     color: getColorHex("grey-mid");
