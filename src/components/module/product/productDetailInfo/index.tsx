@@ -50,15 +50,15 @@ const ProductDetailInfo = ({
   };
 
   if (!product) return null;
-
+  
   const ImageSlide = ({ item }) => {
     return (
-      <div className={styles.imgContainer}>
+      <div onClick={() => setShowZoom(true)} className={styles.imgContainer}>
         <Image
           fill
           className={styles.image}
           alt={item?.alt}
-          src={item?.disBaseLink}
+          src={item?.link}
         />
       </div>
     );
@@ -98,7 +98,7 @@ const ProductDetailInfo = ({
         <ProductImageFullScreen
           listitems={product?.imageGroups[0]?.images}
           setShowZoom={setShowZoom}
-        />
+        activeImage={activeIndex} />
       )}
       {isMobile && (
         <div className={styles.backBtn}>
