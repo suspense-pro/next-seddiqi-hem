@@ -4,17 +4,12 @@ import { CategoryListProps } from "@utils/models";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import {
   Button,
-  ContentHeader,
-  GradientOverlay,
-  Image,
   Typography,
-  Video,
 } from "@components/module";
 
 import { Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CategoryCard } from "@components/module";
@@ -32,6 +27,13 @@ const CategoryList: React.FC<CategoryListProps> = ({
     setActiveIndex(swiper.realIndex);
   }, []);
 
+  const hasMultipleItems = listItems.length > 1;
+
+  // Return null if there are not multiple items
+  if (!hasMultipleItems) {
+    return null;
+  }
+
   return (
     <div className={styles.catogeryListContainer}>
       <Typography variant="h2" className={styles.title}>
@@ -45,10 +47,8 @@ const CategoryList: React.FC<CategoryListProps> = ({
             onBeforeInit={(swiper) => {
               swiperRef.current = swiper;
             }}
-            slidesPerView={2}
-            spaceBetween={20}
+            slidesPerView={isMobile ? "auto" : 6}
             onSlideChange={onSlideChange}
-            loop={false}
             className={styles.mySwiper}
           >
             {listItems?.map((item, index) => (
