@@ -56,7 +56,7 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
     const opacity = item?.opacity?.opacity;
 
     return (
-      <SwiperSlide className={styles.swiperSlide} key={index} style={isMobile ? { width: "90%" } : {}}>
+      <SwiperSlide className={styles.swiperSlide} key={index}>
         <GradientOverlay opacity={opacity}>
           <div className={styles.sliderItem}>
             {isImage && (

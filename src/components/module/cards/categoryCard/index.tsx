@@ -6,25 +6,30 @@ import Video from "@components/module/video";
 import GradientOverlay from "@components/module/gradientOverlay";
 
 const CategoryCard: React.FC<any> = ({ item }) => {
+  // Check if at least one media (image or video) is present
+  const hasMedia = item?.media?.image || item?.media?.video;
+
   return (
     <div>
-      <GradientOverlay
-        opacity={item?.opacity?.opacity}
-        className={styles.containerImg}
-      >
-        <div className={styles.categoryListItem}>
-          {item?.media?.image ? (
-            <Image className={styles.image} image={item?.media?.image} />
-          ) : item?.media?.video ? (
-            <Video
-              className={styles.image}
-              video={item?.media?.video}
-              autoPlay={item?.media?.autoPlay}
-              showPlay={item?.media?.showPlay}
-            />
-          ) : null}
-        </div>
-      </GradientOverlay>
+      {hasMedia && (
+        <GradientOverlay
+          opacity={item?.opacity?.opacity}
+          className={styles.containerImg}
+        >
+          <div className={styles.categoryListItem}>
+            {item?.media?.image ? (
+              <Image className={styles.image} image={item?.media?.image} />
+            ) : item?.media?.video ? (
+              <Video
+                className={styles.image}
+                video={item?.media?.video}
+                autoPlay={item?.media?.autoPlay}
+                showPlay={item?.media?.showPlay}
+              />
+            ) : null}
+          </div>
+        </GradientOverlay>
+      )}
       <div className={styles.contentWrapper}>
         {item?.title && (
           <div className={styles.titleContainer}>
