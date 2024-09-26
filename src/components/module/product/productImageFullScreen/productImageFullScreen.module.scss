@@ -32,6 +32,7 @@
       height: 100%;
       // height: 70vh;
       object-fit: contain;
+      
     }
   }
 
@@ -113,22 +114,37 @@
   right: rem(50);
 }
 
-
 .slideBtns {
-
   display: flex;
   gap: rem(4);
-  
-
 
   .slideItem {
     width: rem(28);
     height: rem(2);
-    background: var(--GreyShades-Light-Grey, #CCCBC7);
+    background: var(--GreyShades-Light-Grey, #cccbc7);
     cursor: pointer;
   }
 
   .slideActive {
-    background: var(--Primary-Metallic, #A98E76);
+    background: var(--Primary-Metallic, #a98e76);
+  }
+}
+
+.zoomControls {
+  display: flex;
+  gap: rem(20);
+
+  .plus,
+  .minus,
+  .reset {
+    font-size: rem(26);
+    cursor: pointer;
+    color: getColorHex("black"); // Normal color
+    transition: color 0.3s ease;
+
+    &.disabled {
+      color: getColorHex("grey-mid", 0.5); // Light grey when disabled
+      // pointer-events: none; // Disable click events
+    }
   }
 }

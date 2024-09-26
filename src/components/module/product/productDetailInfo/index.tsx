@@ -15,11 +15,11 @@ const ProductDetailInfo = ({ product }) => {
   const isMobile = !useDeviceWidth()[0];
 
   if(!product) return null
-
+  
   const ImageSlide = ({ item }) => {
     return (
-      <div className={styles.imgContainer}>
-        <Image fill className={styles.image} alt={item?.alt} src={item?.disBaseLink} />
+      <div onClick={() => setShowZoom(true)} className={styles.imgContainer}>
+        <Image fill className={styles.image} alt={item?.alt} src={item?.link} />
       </div>
     );
   };
@@ -50,7 +50,7 @@ const ProductDetailInfo = ({ product }) => {
 
   return (
     <div className={styles.container}>
-      {showZoom && <ProductImageFullScreen listitems={product?.imageGroups[0]?.images} setShowZoom={setShowZoom} />}
+      {showZoom && <ProductImageFullScreen listitems={product?.imageGroups[0]?.images} setShowZoom={setShowZoom} activeImage={activeIndex} />}
       {isMobile && (
         <div className={styles.backBtn}>
           <ArrowRight /> Back
