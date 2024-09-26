@@ -2,15 +2,10 @@ import React, { useCallback, useRef, useState } from "react";
 import styles from "./categoryList.module.scss";
 import { CategoryListProps } from "@utils/models";
 import { useDeviceWidth } from "@utils/useCustomHooks";
-import {
-  Button,
-  Typography,
-} from "@components/module";
-
+import { Button, Typography } from "@components/module";
 import { Navigation, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CategoryCard } from "@components/module";
 
@@ -27,9 +22,17 @@ const CategoryList: React.FC<CategoryListProps> = ({
     setActiveIndex(swiper.realIndex);
   }, []);
 
-  const hasMultipleItems = listItems.length > 1;
+  // Check if there's at least one item with media
+  const hasMediaItems = listItems.some(
+    (item) => item.media?.image || item.media?.video
+  );
 
-  // Return null if there are not multiple items
+  if (!hasMediaItems) {
+    return null;
+  }
+
+  // Check for multiple items
+  const hasMultipleItems = listItems.length >= 1;
   if (!hasMultipleItems) {
     return null;
   }
