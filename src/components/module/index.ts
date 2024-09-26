@@ -25,6 +25,8 @@ import SubMenuLinks from "./sumMenuLinks";
 import NavCardBlocks from "./navCardBlocks";
 import CategoryList from "./categoryList";
 import SideDrawer from "./sideDrawer";
+import SizeGuide from "./sizeGuide";
+import SizeSelector from "./sizeSelector";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
@@ -63,6 +65,8 @@ export {
   SubMenuLinks,
   NavCardBlocks,
   SideDrawer,
+  SizeGuide,
+  SizeSelector,
   FilterBtn,
   PlpContent,
   ContentHeader,
