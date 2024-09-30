@@ -13,6 +13,7 @@ const ProductDescriptionFlyoutCard = ({ isDescriptionCardOpen, setDescriptionCar
       showFooter={false}
       showBackButton={false}
       title={"Product Description"}
+      position="right"
     >
       <Typography variant="p" className={styles.description}>
         With the Big Bang Unico Ice Bang, Hublot has taken a radical stance while remaining faithful to the powerful

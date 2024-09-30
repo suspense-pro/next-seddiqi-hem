@@ -4,8 +4,6 @@ import styles from "./productShippingDetailsFlyoutCard.module.scss";
 import { MailIcon, PhoneIcon } from "@assets/images/svg";
 
 const ProductShippingDetailsFlyoutCard = ({ isShippingCardOpen, setShippingCardOpen, shippingDetails }) => {
-  console.log("shippingDetails", shippingDetails);
-
   return (
     <SideDrawer
       isOpen={isShippingCardOpen}
@@ -13,6 +11,7 @@ const ProductShippingDetailsFlyoutCard = ({ isShippingCardOpen, setShippingCardO
       showFooter={false}
       showBackButton={false}
       title={shippingDetails?.primaryTitle}
+      position="right"
     >
       <ul className={styles.accordianDesc}>
         {shippingDetails?.primaryDescription?.map((item) => {

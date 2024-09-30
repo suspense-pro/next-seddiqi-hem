@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useContext, useEffect } from "react";
 import styles from "./productDetailInfo.module.scss";
 import { ArrowRight, CalendarIcon, CubeIcon, HeartIcon, PlusIcon, ShareIcon } from "@assets/images/svg";
 import { Button } from "@components/module";
@@ -7,23 +7,61 @@ import CarouselBtns from "@components/module/carouselBtns";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
+import { SizeGuide, SizeSelector } from "@components/module";
+import { SizeGuideProvider } from "@contexts/sizeGuideSelectorContext";
+import ProductDescriptionFlyoutCard from "../productDescriptionFlyoutCard";
+import ProductCareAndWarrantyFlyoutCard from "../productCareAndWarrantyFlyoutCard";
+import ProductShippingDetailsFlyoutCard from "../productShippingDetailsFlyoutCard";
 
-const ProductDetailInfo = ({ product, content, shippingData, warrantyData }) => {
+const ProductDetailInfo = ({
+  product,
+  content,
+  sizeGuideDataMenWatches,
+  sizeGuideDataWomenWatches,
+  shippingData,
+  warrantyData,
+  editorsView
+}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
   const isMobile = !useDeviceWidth()[0];
+  const handleSizeSelectorClose = () => setSizeSelectorOpen(false);
+  const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false);
+  const [isSizeGuideOpen, setSizeGuideOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   const [isDescriptionCardOpen, setDescriptionCardOpen] = useState(false);
   const [isCareAndWarrantyCardOpen, setCareAndWarrantyCardOpen] = useState(false);
   const [isShippingCardOpen, setShippingCardOpen] = useState(false);
 
+  const productInfo = content?.page?.components[1];
+  // const editorsView = productInfo?.editorsView;
+
+  if (!product) return null;
+  const handleSizeSelectorOpen = () => {
+    setSelectedProductId(product.id);
+    setSizeSelectorOpen(true);
+    setSizeGuideOpen(false);
+  };
+
+  const handleSizeGuideOpen = () => {
+    setSizeSelectorOpen(false);
+    setSizeGuideOpen(true);
+  };
+
+  const handleSizeGuideClose = () => {
+    setSelectedProductId(null);
+    setSizeGuideOpen(false);
+    setSizeSelectorOpen(false);
+  };
+
   if (!product) return null;
 
   const ImageSlide = ({ item }) => {
     return (
-      <div className={styles.imgContainer}>
-        <Image fill className={styles.image} alt={item?.alt} src={item?.disBaseLink} />
+      <div onClick={() => setShowZoom(true)} className={styles.imgContainer}>
+        <Image fill className={styles.image} alt={item?.alt} src={item?.link} />
       </div>
     );
   };
@@ -54,7 +92,13 @@ const ProductDetailInfo = ({ product, content, shippingData, warrantyData }) => 
 
   return (
     <div className={styles.container}>
-      {showZoom && <ProductImageFullScreen listitems={product?.imageGroups[0]?.images} setShowZoom={setShowZoom} />}
+      {showZoom && (
+        <ProductImageFullScreen
+          listitems={product?.imageGroups[0]?.images}
+          setShowZoom={setShowZoom}
+          activeImage={activeIndex}
+        />
+      )}
       {isMobile && (
         <div className={styles.backBtn}>
           <ArrowRight /> Back
@@ -96,7 +140,9 @@ const ProductDetailInfo = ({ product, content, shippingData, warrantyData }) => 
             </div>
           </div>
           <div className={styles.size}>
-            <div className={styles.label}>Select Size</div>
+            <div className={styles.label} onClick={handleSizeSelectorOpen}>
+              Select Size
+            </div>
             <ArrowRight />
           </div>
           <Button
@@ -126,48 +172,70 @@ const ProductDetailInfo = ({ product, content, shippingData, warrantyData }) => 
             <div className={styles.productDesc}>
               {product?.shortDescription}
               <Button
-                isLink={true}
                 link={"/"}
                 className={styles.readMore}
                 title={"Read More"}
                 color="green_dark"
                 type={"Plain"}
+                clickHandler={() => setDescriptionCardOpen(true)}
               />
             </div>
           </div>
-          {/* {isDescriptionCardOpen && (
-              <ProductDescriptionFlyoutCard
-                isDescriptionCardOpen={isDescriptionCardOpen}
-                setDescriptionCardOpen={setDescriptionCardOpen}
-                editorsView={editorsView}
-              />
-            )}
-            {isCareAndWarrantyCardOpen && (
-              <ProductCareAndWarrantyFlyoutCard
-                isCareAndWarrantyCardOpen={isCareAndWarrantyCardOpen}
-                setCareAndWarrantyCardOpen={setCareAndWarrantyCardOpen}
-                warrantyAndCare={warrantyData}
-              />
-            )}
-            {isShippingCardOpen && (
-              <ProductShippingDetailsFlyoutCard
-                isShippingCardOpen={isShippingCardOpen}
-                setShippingCardOpen={setShippingCardOpen}
-                shippingDetails={shippingData}
-              />
-            )} */}
+          {isDescriptionCardOpen && (
+            <ProductDescriptionFlyoutCard
+              isDescriptionCardOpen={isDescriptionCardOpen}
+              setDescriptionCardOpen={setDescriptionCardOpen}
+              editorsView={editorsView}
+            />
+          )}
+          {isCareAndWarrantyCardOpen && (
+            <ProductCareAndWarrantyFlyoutCard
+              isCareAndWarrantyCardOpen={isCareAndWarrantyCardOpen}
+              setCareAndWarrantyCardOpen={setCareAndWarrantyCardOpen}
+              warrantyAndCare={warrantyData}
+            />
+          )}
+          {isShippingCardOpen && (
+            <ProductShippingDetailsFlyoutCard
+              isShippingCardOpen={isShippingCardOpen}
+              setShippingCardOpen={setShippingCardOpen}
+              shippingDetails={shippingData}
+            />
+          )}
           <div className={styles.bottom}>
-            <div className={styles.tab}>Editors View</div>
+            <div onClick={() => setDescriptionCardOpen(true)} className={styles.tab}>
+              Editors View
+            </div>
             <div className={styles.vline}>&nbsp;</div>
-            <div className={styles.tab}>Warranty & Care</div>
+            <div onClick={() => setCareAndWarrantyCardOpen(true)} className={styles.tab}>
+              Warranty & Care
+            </div>
             <div className={styles.vline}>&nbsp;</div>
-            <div className={styles.tab}>Shipping</div>
+            <div onClick={() => setShippingCardOpen(true)} className={styles.tab}>
+              Shipping
+            </div>
           </div>
         </div>
         <div className={styles.save}>
           <HeartIcon fill="#" />
         </div>
       </div>
+      {/* Size Selector  */}
+
+      {isSizeSelectorOpen && (
+        <SizeGuideProvider
+          sizeGuideDataMenWatches={sizeGuideDataMenWatches}
+          sizeGuideDataWomenWatches={sizeGuideDataWomenWatches}
+        >
+          <SizeSelector
+            isOpen={isSizeSelectorOpen}
+            onClose={handleSizeGuideClose}
+            productId={product.id}
+            title={"SIZE"}
+            description={""}
+          />
+        </SizeGuideProvider>
+      )}
     </div>
   );
 };

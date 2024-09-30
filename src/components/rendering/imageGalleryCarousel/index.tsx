@@ -38,7 +38,7 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
   let productItem;
   if (currentImg) {
     productItem = {
-      disBaseLink: `https://${currentImg?.defaultHost}/i/${currentImg?.endpoint}/${encodeURIComponent(
+      link: `https://${currentImg?.defaultHost}/i/${currentImg?.endpoint}/${encodeURIComponent(
         currentImg?.name
       )}`,
       alt: "product",

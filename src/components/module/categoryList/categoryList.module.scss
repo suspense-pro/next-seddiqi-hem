@@ -4,6 +4,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+  margin:0;
 
   [dir="rtl"] & {
     text-align: right;
@@ -17,9 +18,12 @@
     @include heading_regular;
     text-transform: uppercase;
     color: getColorHex("midnight-brown");
-    width: rem(800);
-    margin: 0 auto;
-  }
+    text-align: center;
+    @include md {
+        padding-left: rem(60);
+        padding-right: rem(60);
+    }
+}
 
   .containerGrid {
     display: flex;
@@ -34,7 +38,6 @@
   }
 
   .categoryListCarousel {
-    width: 100%;
     margin-left: rem(28);
     margin-top: rem(24);
     margin-bottom: rem(18);
@@ -45,6 +48,9 @@
     .swiperSlide {
       width: rem(200) !important;
       margin-right: rem(20);
+      &:last-child {
+        margin-right: 0; // No right margin for the last slide
+      }
     }
   }
 

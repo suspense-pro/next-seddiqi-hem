@@ -1,17 +1,21 @@
 import styles from "./productImageFullScreen.module.scss";
 import React, { useCallback, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectCoverflow } from "swiper/modules";
+import { Navigation, EffectCoverflow, Zoom } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import "swiper/css/zoom";
 import { ArrowRight, CloseIconV2 } from "@assets/images/svg";
 import Image from "next/image";
 
-const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true }) => {
-  const swiperRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true, activeImage=0 }) => {
+  const [activeIndex, setActiveIndex] = useState(activeImage);
   const [swiper, setSwiper] = useState(null);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const maxZoomLevel = 3;
+  const minZoomLevel = 1;
+  const zoomStep = 0.5;
 
   const onSlideChange = useCallback((swiper) => {
     setActiveIndex(swiper.realIndex);
@@ -26,7 +30,7 @@ const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true }) =
 
   const VideoSlide = ({ item }) => {
     return (
-      <div className={styles.imgContainer}>
+      <div className={`${styles.imgContainer} swiper-zoom-container`}>
         <video
           loop
           muted
@@ -51,9 +55,10 @@ const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true }) =
         {item?.videoLink1 ? (
           <VideoSlide item={item} />
         ) : (
-          <Image fill className={styles.image} src={item?.disBaseLink} alt={item?.alt} />
+          <div className="swiper-zoom-container">
+            <Image fill className={styles.image} src={item?.link} alt={item?.alt} />
+          </div>
         )}
-        <Image fill className={styles.image} src={item?.disBaseLink} alt={item?.alt} />
       </SwiperSlide>
     ));
 
@@ -67,15 +72,42 @@ const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true }) =
         {item?.videoLink1 ? (
           <VideoSlide item={item} />
         ) : (
-          <Image fill className={styles.image} src={item?.disBaseLink} alt={item?.alt} />
+          <Image fill className={styles.image} src={item?.link} alt={item?.alt} />
         )}
       </div>
     ));
-  const handleSlide = useCallback((direction) => {
-    if (swiperRef.current) {
-      swiperRef.current[direction === "prev" ? "slidePrev" : "slideNext"]();
+
+  const handleSlide = useCallback(
+    (direction) => {
+      if (swiper) {
+        swiper[direction === "prev" ? "slidePrev" : "slideNext"]();
+      }
+    },
+    [swiper]
+  );
+
+  const zoomIn = () => {
+    if (swiper && swiper.zoom && zoomLevel < maxZoomLevel) {
+      const newZoomLevel = zoomLevel + zoomStep;
+      setZoomLevel(newZoomLevel);
+      swiper.zoom.in(newZoomLevel);
     }
-  }, []);
+  };
+
+  const zoomOut = () => {
+    if (swiper && swiper.zoom && zoomLevel > minZoomLevel) {
+      const newZoomLevel = Math.max(minZoomLevel, zoomLevel - zoomStep);
+      setZoomLevel(newZoomLevel);
+      swiper.zoom.in(newZoomLevel);
+    }
+  };
+
+  const zoomReset = () => {
+    if (swiper && swiper.zoom) {
+      setZoomLevel(1);
+      swiper.zoom.out();
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -97,17 +129,19 @@ const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true }) =
       <div onClick={() => setShowZoom(false)} className={styles.closeIcon}>
         <CloseIconV2 />
       </div>
+
       <Swiper
         style={{ height: !thumbnails ? "100%" : "" }}
         onSwiper={setSwiper}
-        modules={[Navigation, EffectCoverflow]}
-        onBeforeInit={(swiper) => {
-          swiperRef.current = swiper;
-        }}
+        modules={[Navigation, EffectCoverflow, Zoom]}
         slidesPerView={1}
         onSlideChange={onSlideChange}
         className={styles.mySwiper}
         spaceBetween={0}
+        zoom={{
+          maxRatio: maxZoomLevel,
+          minRatio: minZoomLevel,
+        }}
       >
         {renderSlides()}
       </Swiper>
@@ -128,6 +162,18 @@ const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true }) =
           </div>
         </>
       )}
+
+      <div className={styles.zoomControls}>
+        <div className={`${styles.minus} ${zoomLevel === minZoomLevel ? styles.disabled : ""}`} onClick={zoomOut}>
+          −
+        </div>
+        <div className={`${styles.reset} ${zoomLevel === 1 ? styles.disabled : ""}`} onClick={zoomReset}>
+          ⟳
+        </div>
+        <div className={`${styles.plus} ${zoomLevel === maxZoomLevel ? styles.disabled : ""}`} onClick={zoomIn}>
+          +
+        </div>
+      </div>
     </div>
   );
 };

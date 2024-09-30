@@ -15,10 +15,13 @@ const ProductCareAndWarrantyFlyoutCard = ({
   return (
     <SideDrawer
       isOpen={isCareAndWarrantyCardOpen}
-      onClose={() => setCareAndWarrantyCardOpen(false)}
+      onClose={() => {
+        setCareAndWarrantyCardOpen(false);
+      }}
       showFooter={false}
       showBackButton={false}
       title={warrantyAndCare?.primaryTitle}
+      position="right"
     >
       {warrantyAndCare?.listItems?.map((item) => {
         return (
