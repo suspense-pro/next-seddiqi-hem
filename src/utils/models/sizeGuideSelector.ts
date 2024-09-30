@@ -1,5 +1,3 @@
 export interface SizeGuideSelectorContextProps {
-    sizeGuideDataWomenWatches:any,
-    sizeGuideDataMenWatches:any,
-  }
-  
+  sizeGuideData: any;
+}

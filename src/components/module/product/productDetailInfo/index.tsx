@@ -20,8 +20,7 @@ import { SizeGuideProvider } from "@contexts/sizeGuideSelectorContext";
 const ProductDetailInfo = ({
   product,
   content,
-  sizeGuideDataMenWatches,
-  sizeGuideDataWomenWatches,
+  sizeGuideData
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
@@ -202,8 +201,7 @@ const ProductDetailInfo = ({
 
       {isSizeSelectorOpen && (
         <SizeGuideProvider
-          sizeGuideDataMenWatches={sizeGuideDataMenWatches}
-          sizeGuideDataWomenWatches={sizeGuideDataWomenWatches}
+        sizeGuideData={sizeGuideData}
         >
           <SizeSelector
             isOpen={isSizeSelectorOpen}
