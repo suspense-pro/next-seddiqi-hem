@@ -149,6 +149,13 @@ export async function getGuestTokenResponse() {
 
     const loginClient = new Customer.ShopperLogin(clientConfig); // Initialize ShopperLogin client
     const authResponse = await loginClient.authorizeCustomer(authOptions, true);
+
+    if (authResponse.status != 303) {
+      const errorBody = await authResponse.text()
+      console.log({ errorBody })
+      throw authResponse
+    }
+
     const response = await authResponse;
     console.log("Status: "+ JSON.stringify(response.status));
     console.log("Headers: "+ JSON.stringify(response.headers.get("location")));
@@ -160,6 +167,85 @@ export async function getGuestTokenResponse() {
     const tokenOptions = {
       body: {
         client_id: process.env.SFDC_PUBLIC_CLIENT_ID,
+        code_verifier: code_verifier,
+        code: code,
+        grant_type: 'authorization_code_pkce',
+        redirect_uri: process.env.REDIRECT_URI,
+        usid: usid,
+        channel_id: clientConfig.parameters.siteId,
+      },
+    };
+
+    const tokenResponse = await loginClient.getAccessToken(tokenOptions);
+
+    if (tokenResponse.hasOwnProperty('status_code')) {
+      throw new Error(`Token exchange failed: ${tokenResponse}`);
+    }
+
+    return tokenResponse;
+  } catch (error) {
+    console.error('Error during guest token exchange', error);
+    throw error;
+  }
+}
+
+/** Get guest customer Shopper Token (JWT) */
+
+export async function getShopperTokenResponse(options) {
+  try {
+    const code_verifier = await generateRandomString(128);
+    const code_challenge = await generateCodeChallenge(code_verifier);
+    console.log("verifier: " + code_verifier);
+    console.log("challenge: " + code_challenge);
+
+    const {username, password} = {
+      username: process.env.SFCC_CUSTOMER_USERNAME,
+      password: process.env.SFCC_CUSTOMER_PASSWORD
+    };
+
+    const credentials = `${username}:${password}`;
+    const base64data = Buffer.from(credentials).toString("base64");
+
+    // 1. Get a SLAS `code`
+    const authOptions = {
+      headers: {
+        Authorization: `Basic ${base64data}`
+      },
+      body: {
+        redirect_uri: process.env.REDIRECT_URI,
+        client_id: clientConfig.parameters.clientId,
+        code_challenge: code_challenge,
+        organizationId: clientConfig.parameters.organizationId,
+        channel_id: clientConfig.parameters.siteId,
+        usid: options.usid ? options.usid : null,
+      },
+    }
+
+    const loginClient = new Customer.ShopperLogin(clientConfig); // Initialize ShopperLogin client
+    const authResponse = await loginClient.authenticateCustomer(authOptions, true);
+    
+    if (authResponse.status != 303) {
+      const errorBody = await authResponse.text()
+      console.log({ errorBody })
+      throw authResponse
+    }
+
+    const response = await authResponse;
+    // 2) Exchange the code for `access_token`
+
+    console.log("Status: "+ JSON.stringify(response.status));
+    console.log("Headers: "+ JSON.stringify(response.headers.get("location")));
+    const { usid, code } = Object.fromEntries(new URL(response.headers.get("location")).searchParams);
+    console.log("code: "+ code);
+    console.log("usid: "+ usid);
+
+    // pass the code and usid to /token and get the access_token
+    const tokenOptions = {
+      headers: {
+        Authorization: `Basic ${await basicAuthorization()}`,
+      },
+      body: {
+        client_id: clientConfig.parameters.clientId,
         code_verifier: code_verifier,
         code: code,
         grant_type: 'authorization_code_pkce',
