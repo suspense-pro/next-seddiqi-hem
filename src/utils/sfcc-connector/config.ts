@@ -129,8 +129,6 @@ export async function getGuestTokenResponse() {
   try {
     const code_verifier = await generateRandomString(128);
     const code_challenge = await generateCodeChallenge(code_verifier);
-    console.log("verifier: " + code_verifier);
-    console.log("challenge: " + code_challenge);
 
     // 1. Get a SLAS `code`
     const authOptions = {
@@ -157,11 +155,7 @@ export async function getGuestTokenResponse() {
     }
 
     const response = await authResponse;
-    console.log("Status: "+ JSON.stringify(response.status));
-    console.log("Headers: "+ JSON.stringify(response.headers.get("location")));
     const { usid, code } = Object.fromEntries(new URL(response.headers.get("location")).searchParams);
-    console.log("code: "+ code);
-    console.log("usid: "+ usid);
 
     // pass the code and usid to /token and get the access_token
     const tokenOptions = {
@@ -195,12 +189,10 @@ export async function getShopperTokenResponse(options) {
   try {
     const code_verifier = await generateRandomString(128);
     const code_challenge = await generateCodeChallenge(code_verifier);
-    console.log("verifier: " + code_verifier);
-    console.log("challenge: " + code_challenge);
 
     const {username, password} = {
-      username: process.env.SFCC_CUSTOMER_USERNAME,
-      password: process.env.SFCC_CUSTOMER_PASSWORD
+      username: options.username ? options.username : null,
+      password: options.password ? options.password : null,
     };
 
     const credentials = `${username}:${password}`;
@@ -233,11 +225,7 @@ export async function getShopperTokenResponse(options) {
     const response = await authResponse;
     // 2) Exchange the code for `access_token`
 
-    console.log("Status: "+ JSON.stringify(response.status));
-    console.log("Headers: "+ JSON.stringify(response.headers.get("location")));
     const { usid, code } = Object.fromEntries(new URL(response.headers.get("location")).searchParams);
-    console.log("code: "+ code);
-    console.log("usid: "+ usid);
 
     // pass the code and usid to /token and get the access_token
     const tokenOptions = {
