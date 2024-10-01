@@ -5,9 +5,8 @@ import SideDrawer from "../sideDrawer";
 import { Button } from "@components/module";
 import { getProducts } from "@utils/sfcc-connector/dataService";
 import SizeGuide from "@components/module/sizeGuide";
-import {SizeSelectorProps} from "@utils/models/sizeSelector"
-import { SizeGuideProviderContext } from "@contexts/sizeGuideSelectorContext";
-
+import { SizeSelectorProps } from "@utils/models/sizeSelector";
+import { useSizeGuideProviderContext } from "@contexts/sizeGuideSelectorContext";
 
 const SizeSelector: React.FC<SizeSelectorProps> = ({
   title,
@@ -16,11 +15,10 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
   isOpen,
   productId,
 }) => {
-  const { sizeGuideDataMenWatches, sizeGuideDataWomenWatches } = useContext(
-    SizeGuideProviderContext
-  );
+  const { sizeGuideData } = useSizeGuideProviderContext();
+  const sizeGuidedeliveryKey = sizeGuideData?.content?.page?._meta?.deliveryKey;
 
-  const [gender, setGender] = useState<"Gents" | "Ladies" | "Unisex" | null>(
+  const [gender, setGender] = useState<"gents" | "ladies" | "unisex" | null>(
     null
   );
   const [longDescription, setLongDescription] = useState<string>("");
@@ -35,8 +33,8 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
     secondaryTitle: "",
     secondaryDescription: "",
     items: [],
-    category: "Watches",
-    gender: "Gents",
+    category: "watches",
+    gender: "gents",
   });
 
   useEffect(() => {
@@ -47,8 +45,8 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
           const product = data?.data?.find((p: any) => p.id === productId);
 
           if (product) {
-            const productGender = product?.c_gender;
-            const category = product?.c_categoryName;
+            const productGender = product?.c_gender?.toLowerCase();
+            const category = product?.c_categoryName?.toLowerCase();
 
             setGender(productGender);
             setProductCategory(category);
@@ -70,30 +68,34 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
     fetchProductDetails();
   }, [productId]);
 
-  const openSizeGuide = (gender: "Gents" | "Ladies") => {
-    let sizeGuideData;
+  const openSizeGuide = () => {
+    // Extract the last part of the deliveryKey to determine the size guide
+    const sizeGuideDeliveryKeyParts = sizeGuidedeliveryKey?.split("/");
+    const sizeGuideKey = sizeGuideDeliveryKeyParts?.[1];
+    let sizeGuideDataToUse;
 
-    // Assign sizeGuideData based on gender using context data
-    if (gender === "Gents") {
-      sizeGuideData = sizeGuideDataMenWatches;
+    if (sizeGuideKey === "gents-watches") {
+      sizeGuideDataToUse = sizeGuideData;
+    } else if (sizeGuideKey === "ladies-watches") {
+      sizeGuideDataToUse = sizeGuideData;
     } else {
-      sizeGuideData = sizeGuideDataWomenWatches;
-    }
-
-    if (!sizeGuideData) {
-      console.error("Size guide data is undefined for gender:", gender);
+      console.error(
+        "Size guide data is undefined for gender-category:",
+        sizeGuideKey
+      );
       return;
     }
 
-    const { content } = sizeGuideData;
+    const { content } = sizeGuideDataToUse;
     if (!content) {
-      console.error("Content is undefined in size guide data:", sizeGuideData);
+      console.error(
+        "Content is undefined in size guide data:",
+        sizeGuideDataToUse
+      );
       return;
     }
 
     const { page } = content;
-
-    // Extract data from size guide page
     const {
       primaryTitle,
       primaryDescription,
@@ -110,34 +112,21 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
       secondaryDescription,
       items,
       category: productCategory,
-      gender,
+      gender: gender || "gents", // Default to gents if not set
     });
     setIsSizeGuideOpen(true);
   };
 
   const renderSizeGuideLinks = () => {
-    if (productCategory === "Watches" || productCategory === "Jewellery") {
+    if (productCategory === "watches" || productCategory === "jewellery") {
       return (
-        <>
-          {gender === "Gents" && (
-            <Button
-              className={styles.sizeGuideBtn}
-              title={"Size Guide"}
-              color="green_dark"
-              type={"Plain"}
-              clickHandler={() => openSizeGuide("Gents")}
-            />
-          )}
-          {gender === "Ladies" && (
-            <Button
-              className={styles.sizeGuideBtn}
-              title={"Size Guide"}
-              color="green_dark"
-              type={"Plain"}
-              clickHandler={() => openSizeGuide("Ladies")}
-            />
-          )}
-        </>
+        <Button
+          className={styles.sizeGuideBtn}
+          title={"Size Guide"}
+          color="green_dark"
+          type={"Plain"}
+          clickHandler={openSizeGuide}
+        />
       );
     }
     return null;

@@ -18,37 +18,39 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   }, context);
 
-  const sizeGuideDataWomenWatches = await fetchStandardPageData({
-    content: {
-      page: { key: `product-size-guide/womens-watches` },
-    },
-  }, context);
-
-  const sizeGuideDataMenWatches = await fetchStandardPageData({
-    content: {
-      page: { key: `product-size-guide/mens-watches` },
-    },
-  }, context);
-
   const product = await getProductDetails({ productId: plpKey, method: "GET" });
+
+  const sizeGuideDataKeyGender = product?.response?.c_gender?.toLowerCase();
+  const sizeGuideDataKeyCategory = product?.response?.c_categoryName?.toLowerCase();
+  const sizeGuidePlpKey= `${sizeGuideDataKeyGender}-${sizeGuideDataKeyCategory}`;
+
+  const sizeGuideData = await fetchStandardPageData({
+    content: {
+      page: { key: `product-size-guide/${sizeGuidePlpKey}` },
+    },  },
+  context);
+
 
   return {
     props: {
       ...data,
-      sizeGuideDataWomenWatches,
-      sizeGuideDataMenWatches,
+      sizeGuideData,
       product,
       vse: vse || '',
     },
   };
 }
 
-export default function ProductPage({ content, product, sizeGuideDataWomenWatches, sizeGuideDataMenWatches }) {
+export default function ProductPage({ content, product, sizeGuideData }) {
   const productTechSpecs = product.techSpecs;
 
   return (
     <div className="main-content">
-      <ProductDetailInfo product={product?.response} content={content} sizeGuideDataMenWatches={sizeGuideDataMenWatches} sizeGuideDataWomenWatches={sizeGuideDataWomenWatches} />
+      <ProductDetailInfo 
+        product={product?.response} 
+        content={content} 
+        sizeGuideData={sizeGuideData}
+      />
       {/* Other components like ScrollToTop and StickyWhatsapp */}
       {compact(content?.page?.components).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />
