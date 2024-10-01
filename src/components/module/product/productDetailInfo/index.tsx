@@ -14,7 +14,7 @@ import CarouselBtns from "@components/module/carouselBtns";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
-import { SizeGuide, SizeSelector } from "@components/module";
+import { SizeGuide, SizeSelector , StoreLocationDetails} from "@components/module";
 import { SizeGuideProvider } from "@contexts/sizeGuideSelectorContext";
 
 const ProductDetailInfo = ({
@@ -31,6 +31,7 @@ const ProductDetailInfo = ({
   const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false);
   const [isSizeGuideOpen, setSizeGuideOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [isBoutiqueLocationDetailsOpen, setBoutiqueLocationDetailsOpen] = useState(false); 
 
   const handleSizeSelectorOpen = () => {
     setSelectedProductId(product.id);
@@ -47,6 +48,15 @@ const ProductDetailInfo = ({
     setSelectedProductId(null);
     setSizeGuideOpen(false);
     setSizeSelectorOpen(false);
+  };
+
+  const handleBoutiqueLocationDetailsOpen = () => {
+    setBoutiqueLocationDetailsOpen(true); // Close Boutique Location Details Popup
+
+  };
+
+  const handleBoutiqueLocationDetailsClose = () => {
+    setBoutiqueLocationDetailsOpen(false);  // Close Boutique Location Details Popup
   };
 
   if (!product) return null;
@@ -193,6 +203,16 @@ const ProductDetailInfo = ({
             <div className={styles.vline}>&nbsp;</div>
             <div className={styles.tab}>Shipping</div>
           </div>
+          <div className={styles.label} onClick={handleBoutiqueLocationDetailsOpen}>Boutique Location Details</div>
+            {isBoutiqueLocationDetailsOpen && (
+                <div className={styles.sizeSelector}>
+                  <StoreLocationDetails
+                    isOpen={isBoutiqueLocationDetailsOpen} 
+                    onClose={handleBoutiqueLocationDetailsClose}
+                    storeId={""}
+                  />           
+                </div>
+            )}
         </div>
         <div className={styles.save}>
           <HeartIcon fill="#" />

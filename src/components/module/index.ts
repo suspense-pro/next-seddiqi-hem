@@ -27,6 +27,8 @@ import CategoryList from "./categoryList";
 import SideDrawer from "./sideDrawer";
 import SizeGuide from "./sizeGuide";
 import SizeSelector from "./sizeSelector";
+import StoreLocationDetails from "./storeLocationDetails";
+import StoreDetails from "./storeLocationDetails/storeDetails";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
@@ -67,6 +69,8 @@ export {
   SideDrawer,
   SizeGuide,
   SizeSelector,
+  StoreLocationDetails,
+  StoreDetails,
   FilterBtn,
   PlpContent,
   ContentHeader,
