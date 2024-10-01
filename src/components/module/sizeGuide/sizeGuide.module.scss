@@ -2,51 +2,32 @@
 
 .title {
   @include heading_regular;
-  font-size: rem(18);
-  line-height: rem(26);
-  font-weight: 500;
-  letter-spacing: rem(0.4);
   text-transform: uppercase;
   margin-bottom: rem(24);
 
   @include md {
-    font-size: rem(26);
-    line-height: rem(32);
-    letter-spacing: rem(0.6);
     margin-bottom: rem(20);
   }
 }
 
 .sizeGuidetableTitle {
   @include heading_regular;
-  font-size: rem(14);
-  font-weight: 500;
-  line-height: rem(20);
-  letter-spacing: rem(0.4);
+
   text-transform: uppercase;
   margin-bottom: rem(12);
-
-  @include md {
-    font-size: rem(20);
-    line-height: rem(28);
-    letter-spacing: rem(0.6);
-    font-weight: 400;
-  }
 }
 
 .description,
 .sizeGuidetableDesc {
   @include body_regular;
   font-size: rem(14);
-  font-weight: 300;
   line-height: rem(22);
-  letter-spacing: rem(0.4);
+  letter-spacing: rem(0.2);
   margin-bottom: rem(24);
 
   @include md {
     font-size: rem(16);
-    font-weight: 400;
-    line-height: rem(26);
+    line-height: rem(28);
     margin-bottom: rem(24);
   }
 }
@@ -56,9 +37,9 @@
   tr {
     width: 100%;
     display: flex;
-    padding-bottom: 20px;
+    padding-bottom: rem(20);
     align-items: flex-start;
-    gap: 32px;
+    gap: rem(32);
     border-bottom: rem(1) solid getColorHex("grey-light");
   }
 
@@ -72,14 +53,13 @@
   th {
     @include heading_regular;
     font-size: rem(12);
-    font-weight: 500;
     line-height: rem(18);
     letter-spacing: rem(0.8);
+    font-weight:400;
     text-transform: capitalize;
 
     @include md {
       font-size: rem(16);
-      font-weight: 400;
       line-height: rem(20);
       letter-spacing: rem(0.4);
     }
@@ -88,13 +68,11 @@
   td {
     @include body_regular;
     font-size: rem(14);
-    font-weight: 300;
     line-height: rem(22);
     letter-spacing: rem(0.4);
 
     @include md {
       font-size: rem(16);
-      font-weight: 400;
       line-height: rem(26);
     }
   }

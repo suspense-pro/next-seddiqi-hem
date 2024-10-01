@@ -4,7 +4,6 @@
   @include heading_regular;
   font-size: rem(18);
   line-height: rem(26);
-  font-weight: 500;
   letter-spacing: rem(0.4);
   text-transform: uppercase;
   margin-bottom: rem(24);
@@ -20,14 +19,12 @@
 .description {
   @include body_regular;
   font-size: rem(14);
-  font-weight: 300;
   line-height: rem(22);
   letter-spacing: rem(0.4);
   margin-bottom: rem(24);
 
   @include md {
     font-size: rem(16);
-    font-weight: 400;
     line-height: rem(26);
     margin-bottom: rem(24);
   }
@@ -46,13 +43,12 @@
   align-items: center;
   width: rem(65);
   height: rem(36);
-  border: 1px solid;
+  border: rem(1) solid;
   border-color: getColorHex("grey-light");
   padding: rem(8) rem(12);
   background: getColorHex("white");
   color: getColorHex("green-metallic");
   font-size: rem(12);
-  font-weight: 400;
   line-height: rem(20);
   letter-spacing: rem(0.4);
   text-transform: uppercase;
@@ -94,4 +90,10 @@
 
 .sizeSelectorDivider {
   border-top: rem(1) solid getColorHex("bronze-grey");
+}
+
+.sizeGuideBtnWrapper {
+  button {
+    margin-right: rem(32);
+  }
 }

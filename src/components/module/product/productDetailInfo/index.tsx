@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useContext, useEffect } from "react";
 import styles from "./productDetailInfo.module.scss";
 import { ArrowRight, CalendarIcon, CubeIcon, HeartIcon, PlusIcon, ShareIcon } from "@assets/images/svg";
 import { Button, SideDrawer } from "@components/module";
@@ -7,41 +7,54 @@ import CarouselBtns from "@components/module/carouselBtns";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
-import {SizeGuide, SizeSelector} from "@components/module";
+import {SizeSelector} from "@components/module";
 import StoreLocator from "@components/module/storeLocator";
+import { SizeGuideProvider } from "@contexts/sizeGuideSelectorContext";
 
-const ProductDetailInfo = ({ product, content }) => {
+const ProductDetailInfo = ({
+  product,
+  content,
+  sizeGuideDataMenWatches,
+  sizeGuideDataWomenWatches,
+}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
   const [storeLocatorPopup, showStoreLocatorPopup] = useState(false);
   const isMobile = !useDeviceWidth()[0];
   const handleSizeSelectorClose = () => setSizeSelectorOpen(false);
-  const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false); // Default to true to open SizeSelector initially
+  const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false);
   const [isSizeGuideOpen, setSizeGuideOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   const handleSizeSelectorOpen = () => {
+    setSelectedProductId(product.id);
     setSizeSelectorOpen(true);
     setSizeGuideOpen(false);
   };
 
   const handleSizeGuideOpen = () => {
-    setSizeSelectorOpen(false); // Close SizeSelector
-    setSizeGuideOpen(true);    // Open SizeGuide
+    setSizeSelectorOpen(false);
+    setSizeGuideOpen(true);
   };
 
   const handleSizeGuideClose = () => {
-    setSizeGuideOpen(false);  // Close SizeGuide
-    setSizeSelectorOpen(true); // Reopen SizeSelector
+    setSelectedProductId(null);
+    setSizeGuideOpen(false);
+    setSizeSelectorOpen(false);
   };
 
-
-  if(!product) return null
-
+  if (!product) return null;
+  
   const ImageSlide = ({ item }) => {
     return (
-      <div className={styles.imgContainer}>
-        <Image fill className={styles.image} alt={item?.alt} src={item?.disBaseLink} />
+      <div onClick={() => setShowZoom(true)} className={styles.imgContainer}>
+        <Image
+          fill
+          className={styles.image}
+          alt={item?.alt}
+          src={item?.link}
+        />
       </div>
     );
   };
@@ -67,7 +80,11 @@ const ProductDetailInfo = ({ product, content }) => {
   };
 
   const slides = product?.imageGroups[0]?.images?.map((item, index) =>
-    item?.videoLink1 ? <VideoSlide item={item} key={index} /> : <ImageSlide item={item} key={index} />
+    item?.videoLink1 ? (
+      <VideoSlide item={item} key={index} />
+    ) : (
+      <ImageSlide item={item} key={index} />
+    )
   );
 
   
@@ -87,7 +104,12 @@ const ProductDetailInfo = ({ product, content }) => {
   return (
     <>
     <div className={styles.container}>
-      {showZoom && <ProductImageFullScreen listitems={product?.imageGroups[0]?.images} setShowZoom={setShowZoom} />}
+      {showZoom && (
+        <ProductImageFullScreen
+          listitems={product?.imageGroups[0]?.images}
+          setShowZoom={setShowZoom}
+        activeImage={activeIndex} />
+      )}
       {isMobile && (
         <div className={styles.backBtn}>
           <ArrowRight /> Back
@@ -113,7 +135,11 @@ const ProductDetailInfo = ({ product, content }) => {
         </div>
 
         <div className={styles.carouselBtns}>
-          <CarouselBtns slides={slides} activeIndex={activeIndex} swiper={swiper} />
+          <CarouselBtns
+            slides={slides}
+            activeIndex={activeIndex}
+            swiper={swiper}
+          />
         </div>
       </div>
       <div className={styles.right}>
@@ -129,7 +155,9 @@ const ProductDetailInfo = ({ product, content }) => {
             </div>
           </div>
           <div className={styles.size}>
-            <div className={styles.label} onClick={handleSizeSelectorOpen}>Select Size</div>
+            <div className={styles.label} onClick={handleSizeSelectorOpen}>
+              Select Size
+            </div>
             <ArrowRight />
           </div>
           <Button
@@ -181,31 +209,22 @@ const ProductDetailInfo = ({ product, content }) => {
           <HeartIcon fill="#" />
         </div>
       </div>
-      {/* Size Guide  */}
-      {isSizeGuideOpen && (
-        <div className={styles.sizeGuide}>
-            <SizeGuide
-              isOpen={isSizeGuideOpen} 
-              onClose={handleSizeGuideClose}
-              primaryTitle={sizeGuideInfo.primaryTitle}
-              primaryDescription= {sizeGuideInfo.primaryDescription}
-              secondaryTitle={sizeGuideInfo.secondaryTitle}
-              secondaryDescription= {sizeGuideInfo.secondaryDescription} 
-              items={sizeGuideInfo.listItems}        
-            />  
-        </div>)}
-      {/* Size Selector */}
+      {/* Size Selector  */}
+
       {isSizeSelectorOpen && (
-        <div className={styles.sizeSelector}>
-            <SizeSelector
-              isOpen={isSizeSelectorOpen} 
-              onClose={handleSizeSelectorClose}
-              title={"SIZE"}
-              description= {`"Frivole ring, 8 flowers, 18K rose gold, rhodium-plated 18K white gold, round diamonds; diamond quality DEF, IF to VVS."`}
-              sizes={sizeSelectorVariants}
-              onSizeGuideClick={handleSizeGuideOpen}              
-            />  
-        </div>)}
+        <SizeGuideProvider
+          sizeGuideDataMenWatches={sizeGuideDataMenWatches}
+          sizeGuideDataWomenWatches={sizeGuideDataWomenWatches}
+        >
+          <SizeSelector
+            isOpen={isSizeSelectorOpen}
+            onClose={handleSizeGuideClose}
+            productId={product.id}
+            title={"SIZE"}
+            description={""}
+          />
+        </SizeGuideProvider>
+      )}
     </div>
 
     <SideDrawer

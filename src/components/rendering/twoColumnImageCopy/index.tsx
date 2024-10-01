@@ -62,7 +62,7 @@ const TwoColumnImageCopy = ({ contentLeft, contentRight, ...content }) => {
             link={"/"}
             className={styles.discoverBtn}
             title={cta?.label}
-            color="dark_green"
+            color={cta?.color}
             type={cta?.type}
           />
         </div>
