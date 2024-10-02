@@ -22,7 +22,6 @@ const brandsData = {
 };
 
 const BrandListing = ({ ...content }) => {
-  console.log('CONTENT', content)
   if(!content) return null;
   const [selectedLetter, setSelectedLetter] = useState("A");
   const availableLetters = useMemo(() => Object.keys(brandsData).map((letter) => letter.toUpperCase()), []);
@@ -58,10 +57,10 @@ const BrandListing = ({ ...content }) => {
     alphabetNavRef.current.scrollLeft = scrollLeftRef.current - (x - startXRef.current) * 2;
   };
 
-  // const fetchSuggestions = async () => {
-  //   const brands = await getCategory({ cgid: "seddiqi-storefront-catalog", method: "GET" });
-  //   setBrands(brands?.response?.categories);
-  // };
+  const fetchBrands = async () => {
+    const brands = await getCategory({ cgid: "seddiqi-storefront-catalog", method: "GET" });
+    setBrands(brands?.response?.categories);
+  };
 
   return (
     <div className={styles.brandSectionContainer}>
