@@ -17,10 +17,11 @@ const SizeGuide: React.FC<SizeGuideProps> = ({
     <SideDrawer
       isOpen={isOpen}
       showFooter={false}
-      showBackButton={true}
-      onClose={onClose}
       onSubmit={null}
       onClearAll={null}
+      showBackButton={true}
+      onClose={onClose}
+      position={""}
     >
       <div className={styles.contentWrapper}>
         <div className={styles.content}>
