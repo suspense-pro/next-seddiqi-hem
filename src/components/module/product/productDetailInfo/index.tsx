@@ -1,31 +1,25 @@
 import React, { useMemo, useState, useContext, useEffect } from "react";
 import styles from "./productDetailInfo.module.scss";
-import {
-  ArrowRight,
-  CalendarIcon,
-  CubeIcon,
-  HeartIcon,
-  PlusIcon,
-  ShareIcon,
-} from "@assets/images/svg";
-import { Button } from "@components/module";
+import { ArrowRight, CalendarIcon, CubeIcon, HeartIcon, PlusIcon, ShareIcon } from "@assets/images/svg";
+import { Button, SideDrawer } from "@components/module";
 import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
 import { SizeGuide, SizeSelector , StoreLocationDetails} from "@components/module";
+import StoreLocator from "@components/module/storeLocator";
 import { SizeGuideProvider } from "@contexts/sizeGuideSelectorContext";
 
 const ProductDetailInfo = ({
   product,
   content,
-  sizeGuideDataMenWatches,
-  sizeGuideDataWomenWatches,
+  sizeGuideData
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
+  const [storeLocatorPopup, showStoreLocatorPopup] = useState(false);
   const isMobile = !useDeviceWidth()[0];
   const handleSizeSelectorClose = () => setSizeSelectorOpen(false);
   const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false);
@@ -102,7 +96,22 @@ const ProductDetailInfo = ({
     )
   );
 
+  
+  // Getting Variants in Size Selector Pop up
+  const sizeSelectorVariants = product.variants
+    .map(item => item.variationValues?.size)
+    .filter(size => size) // Filter out any undefined sizes
+    .sort((a, b) => parseInt(a, 10) - parseInt(b, 10)); // Sort numerically
+  
+  //Size Guide Props
+  const sizeGuideInfo = content?.page?.components[1].sizeGuide;
+
+  const openStoreLocator = () => {
+    showStoreLocatorPopup(true);
+  }
+
   return (
+    <>
     <div className={styles.container}>
       {showZoom && (
         <ProductImageFullScreen
@@ -161,12 +170,13 @@ const ProductDetailInfo = ({
             <ArrowRight />
           </div>
           <Button
-            isLink={true}
-            link={"/"}
+            isLink={false}
+            link={""}
             className={styles.boutiqueBtn}
             title={"Find in BOUTIQUE"}
             color="metallic"
             type={"solid"}
+            clickHandler={openStoreLocator}
           />
           <div className={styles.appointment}>
             <div className={styles.appointmentLeft}>
@@ -222,8 +232,7 @@ const ProductDetailInfo = ({
 
       {isSizeSelectorOpen && (
         <SizeGuideProvider
-          sizeGuideDataMenWatches={sizeGuideDataMenWatches}
-          sizeGuideDataWomenWatches={sizeGuideDataWomenWatches}
+        sizeGuideData={sizeGuideData}
         >
           <SizeSelector
             isOpen={isSizeSelectorOpen}
@@ -235,7 +244,29 @@ const ProductDetailInfo = ({
         </SizeGuideProvider>
       )}
     </div>
-  );
+
+    <SideDrawer
+      isOpen={storeLocatorPopup}
+      onClose={() => showStoreLocatorPopup(false)}
+      showFooter={false}
+      onSubmit={null}
+      onClearAll={null}
+      showBackButton={false}
+      title="Find product in Boutique"
+      position={"right"}>
+        
+        <StoreLocator 
+        productImgAlt={product?.imageGroups[0]?.images[0].alt}
+        productImgSrc={product?.imageGroups[0]?.images[0].disBaseLink} 
+        productBrand={product?.brand}
+        productName={product?.name}
+        productPrice={product?.price}
+        productCurrency={product?.currency}
+        />
+
+    </SideDrawer>
+    </>
+  );  
 };
 
 export default ProductDetailInfo;

@@ -1,4 +1,4 @@
-import { TechSpecsData } from "@utils/models/pdpTabs";
+//import { PdpTabsData, TechSpecsData } from "@utils/models/pdpTabs";
 
 export const PdpTabsDummyData:any = {
   tabsData: [
