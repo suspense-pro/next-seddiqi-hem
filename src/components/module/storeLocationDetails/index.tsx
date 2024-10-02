@@ -71,6 +71,7 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
         onClose={onClose}
         onSubmit={null}
         onClearAll={null}
+        position={"right"}
       >
         {selectedStore && <StoreDetails store={selectedStore} />}
       </SideDrawer>

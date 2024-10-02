@@ -230,7 +230,6 @@ const ProductDetailInfo = ({
       </div>
       {/* Size Selector  */}
 
-      {isSizeSelectorOpen && (
         <SizeGuideProvider
         sizeGuideData={sizeGuideData}
         >
@@ -242,7 +241,6 @@ const ProductDetailInfo = ({
             description={""}
           />
         </SizeGuideProvider>
-      )}
     </div>
 
     <SideDrawer

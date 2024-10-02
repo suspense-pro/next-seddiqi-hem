@@ -12,9 +12,11 @@ import { BrandsIcon } from "@assets/images/svg";
 import { WhatsappIcon } from "@assets/images/svg";
 import { MapIcon } from "@assets/images/svg";
 import { StoreDetailsProps } from "@utils/models/storeLocatorDetails";
+import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
 
 const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
   const [mapView, setMapView] = useState(false);
+  const [activeToggle, setActiveToggle] = useState(true);
   const storeImage = store?.c_storeImage;
   const storeHoursString = store.storeHours;
 
@@ -26,8 +28,18 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
       return { days: days.trim(), timings: timings.trim() };
     });
 
+
+    const handleToggleChange = (toggle) => {
+      setTimeout(() => {
+        setActiveToggle(toggle)
+      }, 300);
+    };
+
   return (
     <div className={styles.contentWrapper}>
+      <div className={styles.mapViewBtn}>
+        <SlidingRadioSwitch toggleLabel={"Map View"} onToggle={handleToggleChange} />
+      </div>
       <div className={styles.content}>
         <Typography variant="h3" className={styles.title}>
           {store?.name}
@@ -59,7 +71,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
       </div>
 
       <div className={styles.storeImageWrapper}>
-        {mapView ? (
+        {!activeToggle ? (
           <div className={styles.mapContainer}>
             {/* Replace with actual Map component */}
             {/* <MapComponent store={store} /> */}
@@ -77,11 +89,11 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
           {mapView ? "IMAGE VIEW" : "MAP VIEW"}
         </Typography>
       </div> */}
-      <div className={styles.mapViewBtn}>
+      {/* <div className={styles.mapViewBtn}>
         <Typography variant="p" className={styles.mapViewBtnLabel}>
           {"MAP VIEW"}
         </Typography>
-      </div>
+      </div> */}
 
       <div className={styles.storeContactWrapper}>
         <div className={styles.leftSection}>
