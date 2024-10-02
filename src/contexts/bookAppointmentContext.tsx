@@ -18,7 +18,7 @@ export const BookAppointmentProvider = ({ children }) => {
   const [selectedWatches, setSelectedWatches] = useState<any[]>([]);
   const [selectedJewellery, setSelectedJewellery] = useState<any[]>([]);
   const [completedSteps, setCompletedSteps] = useState<boolean[]>([false, false, false, false, false]);
-  const [currentStep, setCurrentStep] = useState<number | null>(null);
+  const [currentStep, setCurrentStep] = useState<number | null>(4);
   const [loading, setLoading] = useState(true);
 
   // Handle Step Change
