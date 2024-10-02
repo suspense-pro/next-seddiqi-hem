@@ -23,6 +23,7 @@ import {
 } from "@components/rendering";
 import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
+import BrandListing from './../../components/module/brandListing/index';
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || "platinumpanda",
@@ -65,6 +66,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/product-carousel`]: FeaturedProductCarousel,
   [`${componentUrl}/image-gallery-carousel`]: ImageGalleryCarousel,
   [`${componentUrl}/brand-category-list`]: CategoryList,
+  [`${componentUrl}/brand-listing`]: BrandListing,
 };
 
 const defaultConfig = {
