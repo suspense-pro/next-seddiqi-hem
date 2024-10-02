@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import styles from "./brandListing.module.scss";
 import Button from "../button";
+import { getCategory } from "@utils/sfcc-connector/dataService";
 
 const brandsData = {
   A: ["Akrivia", "Aramedes", "Artya", "Audemars Piguet", "Arnold & Son", "Angelus"],
@@ -25,6 +26,7 @@ const BrandListing = ({ ...content }) => {
   if(!content) return null;
   const [selectedLetter, setSelectedLetter] = useState("A");
   const availableLetters = useMemo(() => Object.keys(brandsData).map((letter) => letter.toUpperCase()), []);
+  const [brands, setBrands] = useState(null)
   
   const alphabetNavRef = useRef(null);
   const isDraggingRef = useRef(false);
@@ -55,6 +57,11 @@ const BrandListing = ({ ...content }) => {
     const x = e.pageX - alphabetNavRef.current.offsetLeft;
     alphabetNavRef.current.scrollLeft = scrollLeftRef.current - (x - startXRef.current) * 2;
   };
+
+  // const fetchSuggestions = async () => {
+  //   const brands = await getCategory({ cgid: "seddiqi-storefront-catalog", method: "GET" });
+  //   setBrands(brands?.response?.categories);
+  // };
 
   return (
     <div className={styles.brandSectionContainer}>
