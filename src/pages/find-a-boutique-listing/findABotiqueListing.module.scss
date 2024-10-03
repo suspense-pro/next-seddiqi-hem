@@ -1,11 +1,13 @@
-@import "../../../assets/styles/main.scss";
+@import "../../assets/styles/main.scss";
 
 .storeLocatorContainer{
+  padding: rem(150) rem(28) 0; 
   display: flex;
   flex-direction: column;
   row-gap: rem(40);
 
   @include md{
+    padding: rem(250) rem(60) 0;
     row-gap: rem(32);
   }
 }
@@ -99,6 +101,42 @@
 .tabsSwiperContainer {
   width: 100%;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+
+  @include md{
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}
+
+.filtersContainer{
+  display: flex;
+  width: auto;
+
+  .filterButton{
+    display: flex;
+    align-items: center;
+    column-gap: rem(8);
+    flex-wrap: nowrap;
+    height: rem(40);
+    min-width: rem(145);
+    padding: rem(8) rem(12);
+    border-radius: rem(4);
+    border: rem(1) solid getColorHex("grey-light");
+    background: none;
+
+    span{
+      @include body_regular;
+      font-weight: 400;
+      font-size: rem(14);
+      line-height: rem(22);
+      letter-spacing: rem(0.4);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+  }
 }
 
 .tabsSwiper {
@@ -106,9 +144,13 @@
   padding: 0;
   //margin-bottom: rem(20);
   border-bottom: rem(1) solid getColorHex("grey-light");
+  width: 100%;
 
   @include md {
     //margin-bottom: rem(32);
+    align-self: flex-end;
+    width: auto;
+    margin: 0;
   }
 
   /*& > div{
@@ -217,6 +259,20 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
+  position: relative;
+  //row-gap: rem(32);
+
+  @include sm{
+    //row-gap: rem(60);
+  }
+}
+
+.loadMore{
+  margin: rem(32) auto 0;
+
+  @include sm{
+    margin: rem(60) auto 0;
+  }
 }
 
 .storeList{
@@ -229,7 +285,12 @@
   padding: 0;
 
   @include sm{
-    row-gap: rem(20);
+    //row-gap: rem(20);
+    padding: 0 rem(20);
+  }
+
+  @include md{
+    row-gap: rem(60);
   }
 
   .store{
@@ -254,6 +315,8 @@
       border-top-left-radius: rem(16);
       border-bottom-right-radius: rem(16);
       min-height: rem(224);
+
+      
 
       @include sm{
         -webkit-border-top-left-radius: rem(30);
@@ -354,6 +417,51 @@
   }
 }
 
+.storeMapListContainer{
+  display: flex;
+  flex-direction: column;
+
+  @include md{
+    position: absolute;
+    left: rem(40);
+    top: rem(72);
+    background: getColorHex("white");
+    width: 70%;
+    max-width: rem(512);
+    max-height: rem(676);
+    min-height: rem(676);
+    padding: rem(40) 0 rem(18) rem(40);
+    overflow: hidden;
+
+    [dir="rtl"] & {
+      padding: rem(40) rem(40) rem(18) 0;
+    }
+  }
+
+  @include lg{
+    left: rem(80);
+    width: 100%;
+  }
+
+  .storeMapListSwiper{
+
+    & > div:last-of-type{
+      right: rem(20);
+      background: none;
+      width: rem(6);
+      
+      [dir="rtl"] & {
+        right: auto;
+        left: rem(20);
+      }
+
+      & > div{
+        background: getColorHex("dark-brown");;
+      }
+    }
+  }
+}
+
 .storeMapList{
   display: flex;
   flex-direction: column;
@@ -362,8 +470,11 @@
   margin: 0;
   padding: 0;
 
-  @include sm{
+  @include md{
     gap: rem(32);
+    background: #fff;
+    width: 100%;
+    height: auto;
   }
 }
 
@@ -372,12 +483,20 @@
   flex-direction: column;
   row-gap: rem(16);
   transition: all 0.3s ease;
+  border-bottom: rem(1) solid getColorHex("grey-light");
+  padding-bottom: rem(20);
 
   @include sm{
     row-gap: rem(36);
   }
 
-  &:hover{
+  @include md{
+    padding: 0 0 rem(32) rem(28);
+    width: calc(100% - 42px);
+    box-sizing: border-box;
+  }
+
+  /*&:hover{
     padding: rem(20);
     border: rem(1) solid getColorHex("green-dark");
     -webkit-border-top-rght-radius: rem(16);
@@ -388,7 +507,7 @@
     border-bottom-left-radius: rem(16);
 
     @include sm{
-      padding: rem(32);
+      padding: rem(28);
       -webkit-border-top-rght-radius: rem(24);
       -webkit-border-bottom-left-radius: rem(24);
       -moz-border-radius-topright: rem(24);
@@ -399,6 +518,69 @@
 
     .storeMapLink{
       display: block;
+    }
+  }*/
+
+  &.isActive{
+    padding: rem(20);
+    border: rem(1) solid getColorHex("green-dark");
+    -webkit-border-top-right-radius: rem(16);
+    -webkit-border-bottom-left-radius: rem(16);
+    -moz-border-radius-topright: rem(16);
+    -moz-border-radius-bottomleft: rem(16);
+    border-top-right-radius: rem(16);
+    border-bottom-left-radius: rem(16);
+
+    [dir="rtl"] & {
+      -webkit-border-top-left-radius: rem(16);
+      -webkit-border-top-right-radius: 0;
+      -webkit-border-bottom-right-radius: rem(16);
+      -webkit-border-bottom-left-radius: 0;
+      -moz-border-radius-topleft: rem(16);
+      -moz-border-radius-topright: 0;
+      -moz-border-radius-bottomright: rem(16);
+      -moz-border-radius-bottomleft: 0;
+      border-top-left-radius: rem(16);
+      border-top-right-radius: 0;
+      border-bottom-right-radius: rem(16);
+      border-bottom-left-radius: 0;
+    }
+
+    @include sm{
+      padding: rem(28);
+      -webkit-border-top-right-radius: rem(24);
+      -webkit-border-bottom-left-radius: rem(24);
+      -moz-border-radius-topright: rem(24);
+      -moz-border-radius-bottomleft: rem(24);
+      border-top-right-radius: rem(24);
+      border-bottom-left-radius: rem(24);
+
+      [dir="rtl"] & {
+        -webkit-border-top-left-radius: rem(24);
+        -webkit-border-top-right-radius: 0;
+        -webkit-border-bottom-right-radius: rem(24);
+        -webkit-border-bottom-left-radius: 0;
+        -moz-border-radius-topleft: rem(24);
+        -moz-border-radius-topright: 0;
+        -moz-border-radius-bottomright: rem(24);
+        -moz-border-radius-bottomleft: 0;
+        border-top-left-radius: rem(24);
+        border-top-right-radius: 0;
+        border-bottom-right-radius: rem(24);
+        border-bottom-left-radius: 0;
+      }
+    }
+
+    .storeMapLinksContainer{
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: rem(20);
+      row-gap: rem(10);
+    }
+
+    .storeMapLink{
+      display: block;
+      text-transform: none;
     }
   }
 
@@ -421,6 +603,11 @@
     color: getColorHex("green-dark");
     display: block;
     margin: 0;
+    text-align: left;
+
+    [dir="rtl"] & {
+      text-align: right;
+    }
 
     @include sm{
       font-size: rem(26);
@@ -431,8 +618,17 @@
 
   &Location{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: rem(3);
+    column-gap: rem(12);
+    row-gap: rem(5);
+    justify-content: space-between;
+  
+    .locationContainer{
+      display: flex;
+      align-items: center;
+      column-gap: rem(3);
+    }
 
     p{
       @include body_light;
@@ -466,6 +662,14 @@
     }
   }
 
+  &Distance{
+    display: block;
+
+    /*@include md{
+      display: none !important;
+    }*/
+  }
+
   &Link{
     display: none;
 
@@ -473,6 +677,7 @@
       text-align: right;
     }
   }
+
 }
 
 .mapContainer{
@@ -486,14 +691,17 @@
   -moz-border-radius-bottomright: rem(16);
   border-top-left-radius: rem(16);
   border-bottom-right-radius: rem(16);
+  height: rem(363);
 
-  @include sm{
+  @include md{
     -webkit-border-top-left-radius: rem(30);
     -webkit-border-bottom-right-radius: rem(30);
     -moz-border-radius-topleft: rem(30);
     -moz-border-radius-bottomright: rem(30);
     border-top-left-radius: rem(30);
     border-bottom-right-radius: rem(30);
+    height: rem(860);
+    margin: 0;
   }
 }
 
@@ -502,9 +710,10 @@
   width: 100%;
   max-height: rem(224);
   height: rem(500);
+  max-height: rem(363);
 
   @include md{
-    max-height: rem(363);
+    max-height: rem(860);
   }
 }
 
