@@ -42,6 +42,7 @@ import ProductImageFullScreen from "./product/productImageFullScreen";
 import ProductDetailInfo from "./product/productDetailInfo";
 import Loader from "./loader";
 import BookAnAppointment from "./bookAnAppointment";
+import BrandPopup from "./storeLocationDetails/brandPopUp";
 
 
 export {

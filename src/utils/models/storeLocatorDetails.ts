@@ -21,3 +21,10 @@ export interface StoreLocationDetailsProps {
     isOpen: boolean;
     storeId: string;
   }
+
+  
+export interface BrandPopUpProps {
+  brands: string[]; 
+  isOpen: boolean; 
+  onClose: () => void;
+}
