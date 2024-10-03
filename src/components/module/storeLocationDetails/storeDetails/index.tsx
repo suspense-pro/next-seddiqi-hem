@@ -13,6 +13,8 @@ import { WhatsappIcon } from "@assets/images/svg";
 import { MapIcon } from "@assets/images/svg";
 import { StoreDetailsProps } from "@utils/models/storeLocatorDetails";
 import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
+import { MapComponent } from "@components/module";
+import { ArrowRight } from "@assets/images/svg";
 
 const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
   const [mapView, setMapView] = useState(false);
@@ -28,17 +30,27 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
       return { days: days.trim(), timings: timings.trim() };
     });
 
+  const handleDirection = () => {
+    const destination = encodeURIComponent(
+      `${store?.address1}, ${store?.city}`
+    );
+    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
+    window.open(googleMapsUrl, "_blank");
+  };
 
-    const handleToggleChange = (toggle) => {
-      setTimeout(() => {
-        setActiveToggle(toggle)
-      }, 300);
-    };
+  const handleToggleChange = (toggle) => {
+    setTimeout(() => {
+      setActiveToggle(toggle);
+    }, 300);
+  };
 
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.mapViewBtn}>
-        <SlidingRadioSwitch toggleLabel={"Map View"} onToggle={handleToggleChange} />
+        <SlidingRadioSwitch
+          toggleLabel={"Map View"}
+          onToggle={handleToggleChange}
+        />
       </div>
       <div className={styles.content}>
         <Typography variant="h3" className={styles.title}>
@@ -65,7 +77,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             title={"Get directions"}
             color="green_dark"
             type={"Plain"}
-            // clickHandler={handleDirection}
+            clickHandler={handleDirection}
           />
         </span>
       </div>
@@ -73,27 +85,22 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
       <div className={styles.storeImageWrapper}>
         {!activeToggle ? (
           <div className={styles.mapContainer}>
-            {/* Replace with actual Map component */}
-            {/* <MapComponent store={store} /> */}
+            <MapComponent
+              latitude={store.latitude}
+              longitude={store.longitude}
+              storeName={store.name}
+            />
           </div>
         ) : (
-          <div className={styles.storeImageWrapper}>
-            <img className={styles.storeImg} src={store?.c_storeImage} />
+          <div className={styles.imageContainer}>
+            <img
+              className={styles.storeImg}
+              src={storeImage}
+              alt={store?.name}
+            />
           </div>
         )}
       </div>
-
-      {/* Toogle Button for Map View */}
-      {/* <div className={styles.mapViewBtn} onClick={() => setMapView(!mapView)}>
-        <Typography variant="p" className={styles.mapViewBtnLabel}>
-          {mapView ? "IMAGE VIEW" : "MAP VIEW"}
-        </Typography>
-      </div> */}
-      {/* <div className={styles.mapViewBtn}>
-        <Typography variant="p" className={styles.mapViewBtnLabel}>
-          {"MAP VIEW"}
-        </Typography>
-      </div> */}
 
       <div className={styles.storeContactWrapper}>
         <div className={styles.leftSection}>
@@ -133,7 +140,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             {formattedStoreHours.map((item, index) => (
               <div className={styles.timingDetail} key={index}>
                 <Typography variant="p" className={styles.storeOpenDay}>
-                  {item.days} {/* Display days */}
+                  {item.days}
                 </Typography>
                 <Typography variant="p" className={styles.storeOpenTiming}>
                   {item.timings} {/* Display timings */}

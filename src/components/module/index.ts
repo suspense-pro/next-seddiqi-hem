@@ -27,8 +27,10 @@ import CategoryList from "./categoryList";
 import SideDrawer from "./sideDrawer";
 import SizeGuide from "./sizeGuide";
 import SizeSelector from "./sizeSelector";
+import MapComponent from "./mapComponent";
 import StoreLocationDetails from "./storeLocationDetails";
 import StoreDetails from "./storeLocationDetails/storeDetails";
+import StoreDetailsPage from "./storeLocationDetails/storeDetailsPage"
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
@@ -71,6 +73,7 @@ export {
   SizeSelector,
   StoreLocationDetails,
   StoreDetails,
+  StoreDetailsPage,
   FilterBtn,
   PlpContent,
   ContentHeader,
@@ -83,5 +86,6 @@ export {
   CategoryList,
   CategoryCard,
   Loader,
-  BookAnAppointment
+  BookAnAppointment,
+  MapComponent
 };

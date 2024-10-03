@@ -214,7 +214,7 @@ const ProductDetailInfo = ({
             <div className={styles.tab}>Shipping</div>
           </div>
           <div className={styles.label} onClick={handleBoutiqueLocationDetailsOpen}>Boutique Location Details</div>
-            {isBoutiqueLocationDetailsOpen && (
+            {(
                 <div className={styles.sizeSelector}>
                   <StoreLocationDetails
                     isOpen={isBoutiqueLocationDetailsOpen} 
@@ -251,7 +251,8 @@ const ProductDetailInfo = ({
       onClearAll={null}
       showBackButton={false}
       title="Find product in Boutique"
-      position={"right"}>
+      position={"right"}
+      className={""}>
         
         <StoreLocator 
         productImgAlt={product?.imageGroups[0]?.images[0].alt}

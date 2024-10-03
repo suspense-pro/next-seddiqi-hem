@@ -143,6 +143,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
         title={title || "Size Selector"}
         onSubmit={null}
         onClearAll={null}
+        className={""}
       >
         <div className={styles.contentWrapper}>
           <div className={styles.content}>

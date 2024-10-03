@@ -15,6 +15,7 @@ interface SideDrawerProps {
   position: string;
   onSubmit: () => void;
   onClearAll: () => void;
+  className:string;
 }
 
 const SideDrawer: React.FC<SideDrawerProps> = ({
@@ -27,6 +28,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   position,
   onSubmit,
   onClearAll,
+  className,
 }) => {
   return (
     <div className={`${isOpen ? `${styles.drawer} ${styles.open}` : styles.drawer} ${position === "right" ? styles.right : ""}`}>

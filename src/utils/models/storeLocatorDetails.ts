@@ -11,6 +11,8 @@ export interface Store {
     c_services?: [];
     c_availableBrands?: [];
     c_storeImage: string;
+    latitude?:number;
+    longitude?:number;
   }
   
 

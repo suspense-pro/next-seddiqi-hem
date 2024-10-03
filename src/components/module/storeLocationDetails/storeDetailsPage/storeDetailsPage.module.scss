@@ -1,19 +1,12 @@
 @import "../../../../assets/styles/main.scss";
 
-.title {
-  color: getColorHex("green-dark");
-  letter-spacing: rem(0.6);
-  margin-block-end: rem(12);
-  margin-block-start: rem(20);
-}
-
 .mapViewBtnLabel,
 .contactLabel,
 .storeOpenDay,
 .storeOpenTiming,
 .storeServiceInfo,
 .storeBrandsInfo,
-.availableBrandsTiitle,
+.availableBrandsTitle,
 .brandsName {
   font-size: rem(12);
   font-weight: 400;
@@ -32,23 +25,15 @@
 }
 
 .vline {
-  height: rem(16);
+  height: rem(22);
+  border-left: rem(1) solid getColorHex("green-dark");
   margin: 0 rem(5);
-  background-color: getColorHex("green-dark");
-  width: rem(1);
-}
-
-.storeImage {
-  position: relative;
-  height: rem(224);
-  width: 100%;
-  margin-bottom: rem(28);
 }
 
 .storeImg {
   border-radius: rem(16 0 16 0);
   object-fit: cover;
-  height: rem(224);
+  height: rem(608);
   width: 100%;
 }
 
@@ -115,8 +100,8 @@
 
 .divider {
   border-top: rem(1) solid getColorHex("grey-light");
-  margin-top: rem(16);
-  margin-bottom: rem(28);
+  margin-top: rem(20);
+  margin-bottom: rem(32);
 }
 
 .mapViewBtnLabel {
@@ -133,6 +118,7 @@
   height: rem(16);
   width: rem(16);
 }
+
 .WhatsappIcon {
   margin-right: rem(12);
   color: getColorHex("green-dark");
@@ -157,6 +143,7 @@
 .iconWrapper {
   margin-right: rem(12);
 }
+
 .timeIcon,
 .serviceIcon,
 .brandsIcon {
@@ -195,16 +182,6 @@
   flex: 1;
 }
 
-.serviceList {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.serviceList li {
-  margin-bottom: rem(8);
-}
-
 .appointmentBtn,
 .viewAllBrandsBtn,
 .getDirectionBtn {
@@ -233,46 +210,159 @@
   flex: 1;
 }
 
-.mapContainer {
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: rem(20);
+}
+
+.contentWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: rem(0) rem(100) rem(60) rem(100);
+}
+
+.infoTwoColumn {
+  flex: 1;
+  margin-right: rem(60);
+}
+
+.mapColumn {
+  flex: 1;
+}
+
+.storeImageWrapper {
   position: relative;
-  height: rem(224);
+  width: rem(100%);
+  margin-bottom: rem(28);
+}
+
+.title {
+  color: getColorHex("green-dark");
+  letter-spacing: rem(0.6);
+  margin-block-end: rem(42);
+  margin-block-start: rem(60);
+}
+
+.mapViewWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: rem(16);
+  margin-right: rem(100);
+}
+
+.mainWrapper {
+  margin-top: rem(200);
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  margin-left: rem(60);
+  cursor: pointer;
+}
+
+.arrowLeftWrapper {
+  margin-right: rem(8);
+  display: flex;
+  align-items: center;
+}
+
+.arrowLeft {
+  transform: rotate(180deg);
+}
+
+.backButtonContent {
+  position: relative;
+}
+
+.backButtonText {
+  @include body_regular;
+  font-size: rem(14);
+  font-weight: normal;
+  line-height: rem(18);
+  letter-spacing: rem(0.6);
+  display: inline-block;
+  color: getColorHex("green-dark");
+}
+
+.underline {
+  height: rem(1);
+  background-color: getColorHex("green-dark");
+  margin-top: rem(2);
+  width: 100%;
+}
+
+.mainWrapper {
+  position: relative;
+}
+
+.twoColumnLayout {
+  display: flex;
+}
+
+.imageContainer {
+  flex: 1;
+}
+
+.storeImageWrapper {
+  position: relative;
+  height: rem(608);
   width: 100%;
   margin-bottom: rem(28);
 }
 
-.imageContainer,
 .mapContainer {
-  margin-bottom: rem(28);
+  width: 100%;
+  height: rem(700);
 }
 
-.contentWrapper {
-  padding: rem(16);
+.infoOverlay {
+  position: absolute;
+  width: rem(500);
+  height: rem(650);
+  left: rem(40);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: rem(20);
+  background: getColorHex("white");
+  z-index: 10;
+  overflow: hidden;
+  border-radius: rem(16) 0 rem(16) 0;
 }
 
-.twoColumnLayout {
+.mapOuterContainer {
+  position: relative;
   display: flex;
-  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
-.twoColumnLayout {
-  @include md {
-    flex-direction: row;
-  }
+.mapContainer {
+  flex: 1;
+  position: relative;
+}
+
+.mainWrapper {
+  position: relative;
+  margin-top: rem(200);
 }
 
 .infoColumn {
   flex: 1;
+  margin-right: rem(20);
 }
 
-.imageColumn {
-  flex: 0 0 rem(300);
+.imageContainer {
+  flex: 1;
+}
+
+.twoColumnLayout {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-.storeContactWrapper,
-.storeTimingWrapper,
-.serviceWrapper,
-.storeBrandsInfo {
+.mapViewWrapper {
   margin-bottom: rem(16);
+  margin-right: rem(100);
 }
