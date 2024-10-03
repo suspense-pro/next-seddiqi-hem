@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./auth.module.scss"; // Assuming you are using a CSS module
+import Button from "@components/module/button";
 
 interface Errors {
   email?: string;
@@ -16,19 +17,16 @@ export default function LoginForm() {
   const validateForm = (): Errors => {
     const validationErrors: Errors = {};
 
-    // Email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       validationErrors.email = "Please enter a valid email.";
     }
 
-    // Phone validation (basic validation assuming 6-15 digits)
     const phonePattern = /^[0-9]{6,15}$/;
     if (!phonePattern.test(phone)) {
       validationErrors.phone = "Please enter a valid phone number.";
     }
 
-    // Password validation
     if (!password) {
       validationErrors.password = "Password is required.";
     }
@@ -40,7 +38,6 @@ export default function LoginForm() {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
-      // Submit the form logic here
       console.log("Form is valid. Submitting...");
     } else {
       setErrors(validationErrors);
@@ -49,7 +46,6 @@ export default function LoginForm() {
 
   const handleSendOTP = () => {
     if (phone) {
-      // Logic to send OTP
       console.log("Sending OTP...");
     } else {
       setErrors((prevErrors) => ({
@@ -61,67 +57,83 @@ export default function LoginForm() {
 
   return (
     <div className={styles.container}>
-      {/* Left Side: Email and Password */}
       <div className={styles.leftSide}>
-        <form onSubmit={handleSubmit}>
-          <div className={styles.inputGroup}>
-            <label>Email*</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={errors.email ? styles.inputError : ""}
-              required
-            />
-            {errors.email && <span className={styles.errorMessage}>{errors.email}</span>}
-          </div>
+        <form className={styles.signin} onSubmit={handleSubmit}>
+          <div className={styles.formGroup}>
+            <div className={styles.inputGroup}>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={errors.email ? styles.inputError : ""}
+                placeholder=" " // keep the input from being empty for floating effect
+                required
+              />
+              <label>Email*</label>
+              {errors.email && <span className={styles.errorMessage}>{errors.email}</span>}
+            </div>
 
-          <div className={styles.inputGroup}>
-            <label>Password*</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={errors.password ? styles.inputError : ""}
-              required
-            />
-            {errors.password && <span className={styles.errorMessage}>{errors.password}</span>}
+            <div className={styles.inputGroup}>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={errors.password ? styles.inputError : ""}
+                placeholder=" "
+                required
+              />
+              <label>Password*</label>
+              {errors.password && <span className={styles.errorMessage}>{errors.password}</span>}
+            </div>
           </div>
+          <Button
+            className={styles.forgotBtn}
+            title="Forgot your password?"
+            isLink={true}
+            type="Plain"
+            color="green_darK"
+          />
 
-          <button type="submit" className={styles.submitButton}>
-            Submit
-          </button>
+          <div className={styles.submitBtnContainer}>
+            <Button className={styles.submitBtn} title="Sign In" isLink={true} type="solid" color="green_darK" />
+          </div>
         </form>
       </div>
 
-      {/* Right Side: OR and Phone Number */}
       <div className={styles.rightSide}>
         <div className={styles.orDivider}>
           <span>OR</span>
         </div>
 
         <div className={styles.inputGroup}>
-          <label>Phone*</label>
           <div className={styles.phoneWrapper}>
             <select required>
               <option value="+971">+971</option>
               <option value="+1">+1</option>
             </select>
-            <input
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className={errors.phone ? styles.inputError : ""}
-              placeholder="Phone*"
-              required
-            />
+            <div className={styles.inputGroup}>
+              <input
+                type="tel"
+                value={password}
+                onChange={(e) => setPhone(e.target.value)}
+                className={errors.phone ? styles.inputError : ""}
+                placeholder=" "
+                required
+              />
+              <label>Phone*</label>
+              {errors.phone && <span className={styles.errorMessage}>{errors.phone}</span>}
+            </div>
           </div>
-          {errors.phone && <span className={styles.errorMessage}>{errors.phone}</span>}
         </div>
-
-        <button type="button" className={styles.otpButton} onClick={handleSendOTP}>
-          Send One Time Password
-        </button>
+        <div onClick={handleSendOTP}>
+          <Button
+            className={styles.oneBtn}
+            title="Send One Time Password"
+            isLink={true}
+            type="transparent"
+            color="green_darK"
+          />
+        </div>
       </div>
     </div>
   );

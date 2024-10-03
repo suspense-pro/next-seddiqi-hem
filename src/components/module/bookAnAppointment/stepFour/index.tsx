@@ -233,7 +233,7 @@ const StepFour = () => {
         </div>
       </div>
 
-      <TabbedNavigation className={styles.tabNavigation} tabs={tabs} />
+      <TabbedNavigation gap={0} className={styles.tabNavigation} tabs={tabs} />
     </div>
   );
 };

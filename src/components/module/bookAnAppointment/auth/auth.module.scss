@@ -1,76 +1,170 @@
+@import "./../../../../assets/styles/main.scss";
+
 .container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .leftSide, .rightSide {
-    width: 48%; /* Adjusts width of each section */
-  }
-  
-  .inputGroup {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  .inputGroup label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+  gap: rem(40);
+}
+
+.leftSide,
+.rightSide {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.rightSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.signin {
+  padding-top: rem(60);
+  width: 100%;
+}
+
+.forgotBtn {
+  text-transform: capitalize;
+  margin-top: rem(8);
+}
+.submitBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.submitBtn {
+  margin-top: rem(36);
+ width: rem(252);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: rem(40);
+}
+
+.inputGroup {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  height: 48px;
+  width: 100%;
+
+  input,
+  select {
+    border: none;
+    border-bottom: 1px solid var(--GreyShades-Lighter-Grey, #e9e8e3);
+    // padding: 10px 0;
     font-size: 16px;
-    margin-bottom: 5px;
-  }
-  
-  .inputGroup input,
-  .phoneWrapper select {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     width: 100%;
+    transition: border-color 0.3s;
+    background-color: transparent;
+    height: 100%;
+
+    &:focus {
+      outline: none;
+      border-bottom-color: #000;
+    }
   }
-  
-  .phoneWrapper {
-    display: flex;
-    gap: 10px;
+
+  label {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 16px;
+    color: #787775;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    transform-origin: left bottom;
+    transform: translateY(0);
+    top: 50%;
+    transform: translateY(-50%);
   }
-  
+
+  input:focus + label,
+  input:not(:placeholder-shown) + label {
+    transform: translateY(-130%) scale(0.8);
+    color: #000;
+  }
+
+  /* Handle errors */
   .inputError {
-    border-color: red;
+    border-bottom-color: red;
   }
-  
+
   .errorMessage {
     color: red;
     font-size: 12px;
     margin-top: 5px;
   }
-  
-  .orDivider {
-    text-align: center;
-    font-size: 14px;
-    color: #787775;
-    margin: 20px 0;
-  }
-  
-  .submitButton, .otpButton {
+}
+
+.phoneWrapper {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+
+  select {
+    border-bottom: 2px solid #ccc;
     padding: 10px;
-    background-color: #000;
-    color: #fff;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    width: 100%;
+    background-color: transparent;
+    width: 80px;
+
+    &:focus {
+      outline: none;
+      border-bottom-color: #000;
+    }
   }
-  
-  .submitButton:hover, .otpButton:hover {
-    background-color: #333;
-  }
-  
-  .submitButton {
-    margin-top: 10px;
-  }
-  
-  .otpButton {
-    margin-top: 10px;
-  }
-  
+}
+
+.orDivider {
+  text-align: center;
+  font-size: 14px;
+  color: #787775;
+  margin-bottom: 20px;
+
+  border-radius: 16px 0px;
+  background: var(--GreyShades-Lighter-Grey, #e9e8e3);
+  display: flex;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 46px;
+  height: 44px;
+}
+
+.submitButton,
+.otpButton {
+  padding: 10px;
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.submitButton:hover,
+.otpButton:hover {
+  background-color: #333;
+}
+
+.submitButton {
+  margin-top: 10px;
+}
+
+.otpButton {
+  margin-top: 10px;
+}
+
+.oneBtn {
+  width: 100%;
+  margin-top: rem(62);
+}
