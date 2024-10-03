@@ -186,6 +186,7 @@ const ProductDetailInfo = ({
               isDescriptionCardOpen={isDescriptionCardOpen}
               setDescriptionCardOpen={setDescriptionCardOpen}
               editorsView={editorsView}
+              product={product}
             />
           )}
           {isCareAndWarrantyCardOpen && (

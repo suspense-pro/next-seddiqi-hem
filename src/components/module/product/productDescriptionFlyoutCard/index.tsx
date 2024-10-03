@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import styles from "./productDescriptionFlyoutCard.module.scss";
 import Accordion from "@components/module/accordion";
 
-const ProductDescriptionFlyoutCard = ({ isDescriptionCardOpen, setDescriptionCardOpen, editorsView }) => {
+const ProductDescriptionFlyoutCard = ({ isDescriptionCardOpen, setDescriptionCardOpen, editorsView, product }) => {
   const [subMenu, setSubMenu] = useState(false);
+  console.log('PRODUCTVIEW', product)
   return (
     <SideDrawer
       isOpen={isDescriptionCardOpen}

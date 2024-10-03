@@ -16,7 +16,7 @@
   .descItem {
     display: flex;
     align-items: center;
-    color: var(--Secondary-Metallic-Green, #686f5d);
+    color: getColorHex("green-metallic");
     font-size: rem(16);
     line-height: rem(26);
     letter-spacing: rem(0.4);
@@ -28,7 +28,7 @@
   border-radius: 50%;
   height: rem(3);
   width: rem(3);
-  background-color: var(--Secondary-Metallic-Green, #686f5d);
+  background-color: getColorHex("green-metallic");
   margin: 0 rem(20);
 }
 

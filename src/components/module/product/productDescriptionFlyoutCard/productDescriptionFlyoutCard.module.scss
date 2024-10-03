@@ -14,9 +14,8 @@
 }
 
 .accordianDesc {
-  color: var(--Secondary-Metallic-Green, #686f5d);
-    
   @include body_regular;
+  color: getColorHex("green-metallic");
   font-size: rem(16);
   line-height: rem(26);
   letter-spacing: rem(0.4);
