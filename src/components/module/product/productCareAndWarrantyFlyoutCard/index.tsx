@@ -50,24 +50,29 @@ const ProductCareAndWarrantyFlyoutCard = ({
       })}
 
       <div className={styles.btns}>
-        <Button
-          isLink={true}
-          link={warrantyAndCare?.servicesCta?.url}
-          className={styles.serviceBtn}
-          title={warrantyAndCare?.servicesCta?.label}
-          color={warrantyAndCare?.servicesCta?.color}
-          type={warrantyAndCare?.servicesCta?.type}
-          new_tab={warrantyAndCare?.servicesCta?.isNewTab}
-        />
-        <Button
-          isLink={true}
-          link={warrantyAndCare?.downloadCta?.url}
-          className={styles.serviceBtn}
-          title={warrantyAndCare?.downloadCta?.label}
-          color={warrantyAndCare?.downloadCta?.color}
-          type={warrantyAndCare?.downloadCta?.type}
-          new_tab={warrantyAndCare?.downloadCta?.isNewTab}
-        />
+        {warrantyAndCare?.servicesCta && (
+          <Button
+            isLink={true}
+            link={warrantyAndCare?.servicesCta?.url}
+            className={styles.serviceBtn}
+            title={warrantyAndCare?.servicesCta?.label}
+            color={warrantyAndCare?.servicesCta?.color}
+            type={warrantyAndCare?.servicesCta?.type}
+            new_tab={warrantyAndCare?.servicesCta?.isNewTab}
+          />
+        )}
+
+        {warrantyAndCare?.downloadCta && (
+          <Button
+            isLink={true}
+            link={warrantyAndCare?.downloadCta?.url}
+            className={styles.serviceBtn}
+            title={warrantyAndCare?.downloadCta?.label}
+            color={warrantyAndCare?.downloadCta?.color}
+            type={warrantyAndCare?.downloadCta?.type}
+            new_tab={warrantyAndCare?.downloadCta?.isNewTab}
+          />
+        )}
       </div>
     </SideDrawer>
   );
