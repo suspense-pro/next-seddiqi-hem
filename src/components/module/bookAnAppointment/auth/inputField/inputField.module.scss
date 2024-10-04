@@ -1,0 +1,54 @@
+.inputGroup {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 48px;
+    width: 100%;
+  
+    input,
+    select {
+      border: none;
+      border-bottom: 1px solid var(--GreyShades-Lighter-Grey, #e9e8e3);
+      font-size: 16px;
+      width: 100%;
+      transition: border-color 0.3s;
+      background-color: transparent;
+      height: 100%;
+  
+      &:focus {
+        outline: none;
+        border-bottom-color: #000;
+      }
+    }
+  
+    label {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      font-size: 16px;
+      color: #787775;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      transform-origin: left bottom;
+      transform: translateY(0);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  
+    input:focus + label,
+    input:not(:placeholder-shown) + label {
+      transform: translateY(-130%) scale(0.8);
+      color: #000;
+    }
+  
+    .inputError {
+      border-bottom-color: red;
+    }
+  
+    .errorMessage {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+  }
+  

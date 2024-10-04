@@ -3,6 +3,7 @@ import styles from "./index.module.scss";
 import { ArrowRight } from "@assets/images/svg";
 import TabbedNavigation from "@components/module/tabbedNavigation";
 import LoginForm from "../auth";
+import Register from "../auth/register";
 
 // Get available dates for a month
 export const getAvailableDates = (month, year) => {
@@ -129,7 +130,7 @@ const StepFour = () => {
     {
       id: 2,
       title: "Register",
-      content: "Jello",
+      content: <Register />,
     },
   ];
   return (
