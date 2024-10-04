@@ -6,7 +6,6 @@ import Accordion from "@components/module/accordion";
 
 const ProductDescriptionFlyoutCard = ({ isDescriptionCardOpen, setDescriptionCardOpen, editorsView, product }) => {
   const [subMenu, setSubMenu] = useState(false);
-  console.log('PRODUCTVIEW', product)
   return (
     <SideDrawer
       isOpen={isDescriptionCardOpen}
@@ -17,10 +16,7 @@ const ProductDescriptionFlyoutCard = ({ isDescriptionCardOpen, setDescriptionCar
       position="right"
     >
       <Typography variant="p" className={styles.description}>
-        With the Big Bang Unico Ice Bang, Hublot has taken a radical stance while remaining faithful to the powerful
-        aesthetic of the original model released in 2006, creating a sophisticated watch with a stunning array of
-        high-tech materials and features which make it a must-have piece... Limited to 100 pieces, this model will be
-        available exclusively on hublot.com e-commerce boutique.
+        {product?.longDescription}
       </Typography>
       <div className={styles.bar}>&nbsp;</div>
       {editorsView?.listItems?.map((item) => {
@@ -36,9 +32,7 @@ const ProductDescriptionFlyoutCard = ({ isDescriptionCardOpen, setDescriptionCar
               }}
               key={1}
             >
-              <div className={styles.accordianDesc}>
-                {item?.description}
-              </div>
+              <div className={styles.accordianDesc}>{item?.description}</div>
               <div className={styles.bar}>&nbsp;</div>
             </Accordion>
           </div>

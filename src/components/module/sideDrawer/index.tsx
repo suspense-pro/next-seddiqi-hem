@@ -11,8 +11,8 @@ interface SideDrawerProps {
   showFooter: boolean;
   showBackButton: boolean;
   onClose: () => void;
-  title?: string; 
-  position?: string; 
+  title?: string;
+  position?: string;
   onSubmit?: () => void;
   onClearAll?: () => void;
 }
@@ -29,19 +29,11 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   position = "left",
 }) => {
   return (
-    <div
-      className={`${styles.drawer} ${position === "right" ? styles.right : ""} ${
-        isOpen ? styles.open : ""
-      }`}
-    >
+    <div className={`${styles.drawer} ${position === "right" ? styles.right : ""} ${isOpen ? styles.open : ""}`}>
       <div className={styles.header}>
         {showBackButton ? (
           <span onClick={onClose} className={styles.backButton}>
-            <Typography
-              align="left"
-              variant="span"
-              className={styles.backButtonText}
-            >
+            <Typography align="left" variant="span" className={styles.backButtonText}>
               <span className={styles.arrowLeftWrapper}>
                 <ArrowRight fill="black" className={styles.arrowLeft} />
               </span>
@@ -68,5 +60,4 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   );
 };
 
-
-export default SideDrawer
+export default SideDrawer;

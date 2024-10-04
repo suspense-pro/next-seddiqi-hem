@@ -72,12 +72,30 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
+  const sizeGuideDataKeyGender = product?.response?.c_gender?.toLowerCase();
+  const sizeGuideDataKeyCategory = product?.response?.c_categoryName?.toLowerCase();
+  const sizeGuidePlpKey = `${sizeGuideDataKeyGender}-${sizeGuideDataKeyCategory}`;
+
+  const sizeGuideData = await fetchStandardPageData(
+    {
+      content: {
+        page: { key: `product-size-guide/${sizeGuidePlpKey}` },
+      },
+    },
+    context
+  );
+
+  const productTechSpecs = product?.techSpecs || {};
+  productTechSpecs.category = productTechSpecs?.category || null;
+
   return {
     props: {
       ...data,
-      sizeGuideDataWomenWatches,
-      sizeGuideDataMenWatches,
-      product,
+      sizeGuideData,
+      product: {
+        ...product,
+        techSpecs: productTechSpecs, // Ensure techSpecs have default values
+      },
       shippingData,
       warrantyData,
       editorsView,
@@ -93,9 +111,10 @@ export default function ProductPage({
   sizeGuideDataMenWatches,
   shippingData,
   warrantyData,
-  editorsView
+  editorsView,
+  sizeGuideData,
 }) {
-  const productTechSpecs = product.techSpecs;
+  const productTechSpecs = product?.techSpecs;
 
   return (
     <div className="main-content">
@@ -107,6 +126,7 @@ export default function ProductPage({
         editorsView={editorsView?.content?.page}
         sizeGuideDataMenWatches={sizeGuideDataMenWatches}
         sizeGuideDataWomenWatches={sizeGuideDataWomenWatches}
+        sizeGuideData={sizeGuideData}
       />
       {/* Other components like ScrollToTop and StickyWhatsapp */}
       {compact(content?.page?.components).map((content) => (

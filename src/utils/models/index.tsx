@@ -11,6 +11,8 @@ export type {ImageQuoteBlockProps} from "./imageQuoteBlock";
 export type {BrandBannerProps} from "./brandBanner";
 export type {BoutiqueBannerProps} from "./boutiqueBanner";
 export type { ContentHeaderProps } from "./contentHeader";
+export type { ExploreBrandProps } from "./exploreBrand";
+
 export type { CategoryListProps } from "./categoryList";
 
 
