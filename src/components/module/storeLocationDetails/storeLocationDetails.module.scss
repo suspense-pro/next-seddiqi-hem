@@ -1,0 +1,10 @@
+@import "../../../assets/styles/main.scss";
+.storeDetailsWrapper{
+.sideDrawer_header{
+    margin-bottom: rem(0);
+    @include md{
+        margin-bottom: rem(0);
+
+    }
+}
+}

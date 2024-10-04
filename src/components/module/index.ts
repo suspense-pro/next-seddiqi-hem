@@ -27,6 +27,8 @@ import CategoryList from "./categoryList";
 import SideDrawer from "./sideDrawer";
 import SizeGuide from "./sizeGuide";
 import SizeSelector from "./sizeSelector";
+import StoreLocationDetails from "./storeLocationDetails";
+import StoreDetails from "./storeLocationDetails/storeDetails";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
@@ -38,6 +40,7 @@ import ProductImageFullScreen from "./product/productImageFullScreen";
 import ProductDetailInfo from "./product/productDetailInfo";
 import Loader from "./loader";
 import BookAnAppointment from "./bookAnAppointment";
+import BrandListing from "./brandListing";
 
 
 export {
@@ -67,6 +70,8 @@ export {
   SideDrawer,
   SizeGuide,
   SizeSelector,
+  StoreLocationDetails,
+  StoreDetails,
   FilterBtn,
   PlpContent,
   ContentHeader,
@@ -79,5 +84,6 @@ export {
   CategoryList,
   CategoryCard,
   Loader,
-  BookAnAppointment
+  BookAnAppointment,
+  BrandListing
 };
