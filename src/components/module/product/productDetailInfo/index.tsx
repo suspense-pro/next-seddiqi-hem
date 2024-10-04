@@ -37,19 +37,18 @@ const ProductDetailInfo = ({
   const [storeLocatorPopup, showStoreLocatorPopup] = useState(false);
   const isMobile = !useDeviceWidth()[0];
   const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false);
-  const [isCardOpen, setCardOpen] = useState(null); // Manage which card is open
-
+  const [isCardOpen, setCardOpen] = useState(null); 
   const productInfo = content?.page?.components[1];
   
   if (!product) return null;
 
   const handleSizeSelectorOpen = () => {
     setSizeSelectorOpen(true);
-    setCardOpen(null); // Close any open cards
+    setCardOpen(null);
   };
 
   const handleCardToggle = (card) => {
-    setCardOpen((prev) => (prev === card ? null : card)); // Toggle current card, close others
+    setCardOpen((prev) => (prev === card ? null : card));
   };
 
   const ImageSlide = ({ item }) => {
