@@ -1,0 +1,82 @@
+import React, { useState, useEffect, Component } from "react";
+import styles from "./storeLocationDetails.module.scss";
+import Typography from "../typography";
+import RichText from "../richText";
+import SideDrawer from "../sideDrawer";
+import { Button } from "@components/module";
+import Image from "@components/module/image";
+import { getStores } from "@utils/sfcc-connector/dataService";
+import { StoreDetails } from "@components/module";
+import {
+  StoreLocationDetailsProps,
+  Store,
+} from "@utils/models/storeLocatorDetails";
+
+const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
+  storeId,
+  isOpen,
+  onClose,
+}) => {
+  const [storeDetails, setStoreDetails] = useState<Store[]>([]);
+  const [selectedStore, setSelectedStore] = useState<Store | null>(null);
+
+  useEffect(() => {
+    const fetchStoresData = async () => {
+      try {
+        const response = await getStores({
+          method: "GET",
+          brand: "",
+          city: "",
+          name: "",
+        });
+        const storeDetails = response?.response?.data;
+        if (Array.isArray(storeDetails)) {
+          setStoreDetails(storeDetails);
+        } else {
+          throw new Error("No data found in response");
+        }
+        setStoreDetails(storeDetails);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchStoresData();
+  }, []);
+
+  useEffect(() => {
+    //  Pass Stroe id coming from Parent Component
+    // if (storeId && storeDetails.length > 0) {
+
+    if (storeDetails.length > 0) {
+      const storeDetailsMatch = storeDetails.find((store) => {
+        //return store.id === storeId;
+        return store.id === "store10"; // Dummy Entry
+      });
+
+      if (storeDetailsMatch) {
+        setSelectedStore(storeDetailsMatch);
+      } else {
+        console.log("No matching store found for storeId:", storeId);
+      }
+    }
+  }, [storeId, storeDetails]);
+
+  return (
+    <div className={styles.storeDetailsWrapper}>
+      <SideDrawer
+        isOpen={isOpen}
+        showFooter={false}
+        showBackButton={true}
+        onClose={onClose}
+        onSubmit={null}
+        onClearAll={null}
+        position={"right"}
+      >
+        {selectedStore && <StoreDetails store={selectedStore} />}
+      </SideDrawer>
+    </div>
+  );
+};
+
+export default StoreLocationDetails;

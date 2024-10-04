@@ -1,20 +1,13 @@
 import React, { useMemo, useState } from "react";
 import styles from "./productDetailInfo.module.scss";
-import {
-  ArrowRight,
-  CalendarIcon,
-  CubeIcon,
-  HeartIcon,
-  PlusIcon,
-  ShareIcon,
-} from "@assets/images/svg";
+import { ArrowRight, CalendarIcon, CubeIcon, HeartIcon, PlusIcon, ShareIcon } from "@assets/images/svg";
 import { Button, SideDrawer } from "@components/module";
 import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
-import { SizeSelector } from "@components/module";
+import { SizeGuide, SizeSelector, StoreLocationDetails } from "@components/module";
 import StoreLocator from "@components/module/storeLocator";
 import { SizeGuideProvider } from "@contexts/sizeGuideSelectorContext";
 import ProductDescriptionFlyoutCard from "../productDescriptionFlyoutCard";
@@ -29,7 +22,7 @@ const ProductDetailInfo = ({
   warrantyData,
   editorsView,
   sizeGuideDataMenWatches,
-  sizeGuideDataWomenWatches
+  sizeGuideDataWomenWatches,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
@@ -37,10 +30,13 @@ const ProductDetailInfo = ({
   const [storeLocatorPopup, showStoreLocatorPopup] = useState(false);
   const isMobile = !useDeviceWidth()[0];
   const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false);
-  const [isCardOpen, setCardOpen] = useState(null); 
+  const [isCardOpen, setCardOpen] = useState(null);
   const productInfo = content?.page?.components[1];
-  
+
   if (!product) return null;
+  const [isSizeGuideOpen, setSizeGuideOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [isBoutiqueLocationDetailsOpen, setBoutiqueLocationDetailsOpen] = useState(false);
 
   const handleSizeSelectorOpen = () => {
     setSizeSelectorOpen(true);
@@ -49,6 +45,20 @@ const ProductDetailInfo = ({
 
   const handleCardToggle = (card) => {
     setCardOpen((prev) => (prev === card ? null : card));
+  };
+
+  const handleSizeGuideClose = () => {
+    setSelectedProductId(null);
+    setSizeGuideOpen(false);
+    setSizeSelectorOpen(false);
+  };
+
+  const handleBoutiqueLocationDetailsOpen = () => {
+    setBoutiqueLocationDetailsOpen(true); // Close Boutique Location Details Popup
+  };
+
+  const handleBoutiqueLocationDetailsClose = () => {
+    setBoutiqueLocationDetailsOpen(false); // Close Boutique Location Details Popup
   };
 
   const ImageSlide = ({ item }) => {
@@ -87,7 +97,6 @@ const ProductDetailInfo = ({
   const openStoreLocator = () => {
     showStoreLocatorPopup(true);
   };
-
   return (
     <>
       <div className={styles.container}>
@@ -179,7 +188,7 @@ const ProductDetailInfo = ({
                 />
               </div>
             </div>
-            {isCardOpen === "description" && (
+            {(editorsView || product?.longDescription) && isCardOpen === "description" && (
               <ProductDescriptionFlyoutCard
                 isDescriptionCardOpen={isCardOpen === "description"}
                 setDescriptionCardOpen={() => handleCardToggle("description")}
@@ -187,14 +196,15 @@ const ProductDetailInfo = ({
                 product={product}
               />
             )}
-            {isCardOpen === "careAndWarranty" && (
+
+            {warrantyData && isCardOpen === "careAndWarranty" && (
               <ProductCareAndWarrantyFlyoutCard
                 isCareAndWarrantyCardOpen={isCardOpen === "careAndWarranty"}
                 setCareAndWarrantyCardOpen={() => handleCardToggle("careAndWarranty")}
                 warrantyAndCare={warrantyData}
               />
             )}
-            {isCardOpen === "shipping" && (
+            {shippingData && isCardOpen === "shipping" && (
               <ProductShippingDetailsFlyoutCard
                 isShippingCardOpen={isCardOpen === "shipping"}
                 setShippingCardOpen={() => handleCardToggle("shipping")}
@@ -202,10 +212,15 @@ const ProductDetailInfo = ({
               />
             )}
             <div className={styles.bottom}>
-              <div onClick={() => handleCardToggle("description")} className={styles.tab}>
-                Editors View
-              </div>
-              <div className={styles.vline}>&nbsp;</div>
+              {editorsView && (
+                <>
+                  <div onClick={() => handleCardToggle("description")} className={styles.tab}>
+                    Editors View
+                  </div>
+                  <div className={styles.vline}>&nbsp;</div>
+                </>
+              )}
+
               <div onClick={() => handleCardToggle("careAndWarranty")} className={styles.tab}>
                 Warranty & Care
               </div>
@@ -219,21 +234,17 @@ const ProductDetailInfo = ({
             <HeartIcon fill="#" />
           </div>
         </div>
+        {/* Size Selector  */}
 
-        {isSizeSelectorOpen && (
-          <SizeGuideProvider sizeGuideData={sizeGuideData}>
-            <SizeSelector
-              isOpen={isSizeSelectorOpen}
-              onClose={() => {
-                setSizeSelectorOpen(false);
-                setCardOpen(null); // Close any open cards
-              }}
-              productId={product.id}
-              title={"SIZE"}
-              description={""}
-            />
-          </SizeGuideProvider>
-        )}
+        <SizeGuideProvider sizeGuideData={sizeGuideData}>
+          <SizeSelector
+            isOpen={isSizeSelectorOpen}
+            onClose={handleSizeGuideClose}
+            productId={product.id}
+            title={"SIZE"}
+            description={""}
+          />
+        </SizeGuideProvider>
       </div>
 
       <SideDrawer

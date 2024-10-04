@@ -30,4 +30,7 @@ export { default as ProtectionIcon } from "./ProtectionIcon";
 export { default as CareIcon } from "./CareIcon";
 export { default as MailIcon } from "./MailIcon";
 export { default as PhoneIcon } from "./PhoneIcon";
+export { default as TimeIcon } from "./TimeIcon";
+export { default as ServiceIcon } from "./ServiceIcon";
+export { default as BrandsIcon } from "./BrandsIcon";
 

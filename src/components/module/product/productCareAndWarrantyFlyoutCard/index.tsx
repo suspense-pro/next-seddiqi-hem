@@ -12,6 +12,10 @@ const ProductCareAndWarrantyFlyoutCard = ({
 }) => {
   const [subMenu, setSubMenu] = useState(false);
 
+  if (!warrantyAndCare) {
+    return null;
+  }
+
   return (
     <SideDrawer
       isOpen={isCareAndWarrantyCardOpen}
