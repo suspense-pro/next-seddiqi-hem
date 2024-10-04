@@ -28,6 +28,8 @@ const ProductDetailInfo = ({
   shippingData,
   warrantyData,
   editorsView,
+  sizeGuideDataMenWatches,
+  sizeGuideDataWomenWatches
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
