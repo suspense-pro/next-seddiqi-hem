@@ -5,6 +5,7 @@ import { getStores } from "@utils/sfcc-connector/dataService";
 import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import compact from "lodash/compact";
 import Layout from "@components/layout";
 import NeedMoreHelp from "@components/rendering/needMoreHelp";
 
@@ -13,6 +14,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/scrollbar';
 
 import { FreeMode, Scrollbar, Mousewheel } from 'swiper/modules';
+import ContentBlock from "@components/module/contentBlock";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
@@ -32,7 +34,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 
-export default function FindABoutiqueListing({ content }) {
+export default function FindABoutiqueListing({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [stores, setStores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -45,6 +47,7 @@ export default function FindABoutiqueListing({ content }) {
   const [abuDhabiStores, setAbuDhabiStores] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0); // Initialize active index
+  const [itemsToShow, setItemsToShow] = useState(8);
 
   const handleStoreClick = (index) => {
     setActiveIndex(index); // Set the clicked store as active
@@ -149,11 +152,17 @@ export default function FindABoutiqueListing({ content }) {
     return R * c; // Distance in kilometers
   };
 
+  const handleLoadMore = () => {
+    setItemsToShow(prevItems => prevItems + 8); // Increment items to show by 8
+  };
+
   const handleTabChange = (tab) => {
     setFadeList(true);
     setTimeout(() => {
       setActiveTab(tab);
+      setItemsToShow(8);
       setFadeList(false);
+
       const storesToCalculate = tab === 'All' ? stores : tab === 'Dubai' ? dubaiStores : abuDhabiStores;
       const nearest = calculateNearestStore(storesToCalculate);
       setNearestStore(nearest);
@@ -169,39 +178,35 @@ export default function FindABoutiqueListing({ content }) {
   };
 
   const renderStores = (storesList) => {
+    const displayedStores = storesList.slice(0, itemsToShow);
+
     return (
       <>
         <ul className={styles.storeList}>
-          {storesList.map(store => (
-            <li className={styles.store} key={store.id}>
-              <div className={styles.storeImageContainer}>
-                <img src={store.c_storeImage} alt={store.name} className={styles.storeImage} />
+        {displayedStores.map(store => (
+          <li className={styles.store} key={store.id}>
+            <div className={styles.storeImageContainer}>
+              <img src={store.c_storeImage} alt={store.name} className={styles.storeImage} />
+            </div>
 
-                {/* {activeToggle ? (
-                  <>
-                    {nearestStore && nearestStore.id === store.id && (
-                      <h3 className={styles.nearestStore}>Nearest Store</h3>
-                    )}
-                  </>
-                ) : null} */}
+            <div className={styles.storeDetails}>
+              <h4 className={styles.storeName}>{store.name}</h4>
+
+              <div className={styles.storeLocation}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.99999 15.4692C8.49655 14.9778 9.88758 13.5512 11.159 11.7874C12.4417 10.0081 13.6 7.88985 13.6 6.04364C13.6 4.58157 13.01 3.1795 11.96 2.14571C10.9096 1.11157 9.48517 0.530884 7.99999 0.530884C6.51482 0.530884 5.09034 1.11157 4.03999 2.14571C2.98999 3.1795 2.39999 4.58157 2.39999 6.0433C2.39999 7.89054 3.38482 9.34744 4.55758 10.7623C5.27083 11.6228 6.2494 12.6427 6.99788 13.4M7.99999 8.28847C7.54896 8.28847 7.10793 8.15675 6.73275 7.9102C6.35758 7.66364 6.06551 7.31295 5.89275 6.90261C5.72034 6.49226 5.67517 6.04123 5.7631 5.60571C5.85103 5.17019 6.06827 4.77019 6.38724 4.4564C6.7062 4.14226 7.11241 3.92847 7.55517 3.84192C7.99758 3.75537 8.4562 3.79985 8.8731 3.96985C9.28999 4.13985 9.6462 4.42744 9.89655 4.79675C10.1472 5.16606 10.2807 5.59985 10.2807 6.04399C10.28 6.63916 10.0396 7.20985 9.61206 7.63054C9.18448 8.05157 8.60482 8.28778 7.99999 8.28847Z" stroke="#464F4A"/>
+                </svg>
+
+                <p><span>{store.city}</span><span>{store.address1}</span></p>
               </div>
-
-              <div className={styles.storeDetails}>
-                <h4 className={styles.storeName}>{store.name}</h4>
-
-                <div className={styles.storeLocation}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.99999 15.4692C8.49655 14.9778 9.88758 13.5512 11.159 11.7874C12.4417 10.0081 13.6 7.88985 13.6 6.04364C13.6 4.58157 13.01 3.1795 11.96 2.14571C10.9096 1.11157 9.48517 0.530884 7.99999 0.530884C6.51482 0.530884 5.09034 1.11157 4.03999 2.14571C2.98999 3.1795 2.39999 4.58157 2.39999 6.0433C2.39999 7.89054 3.38482 9.34744 4.55758 10.7623C5.27083 11.6228 6.2494 12.6427 6.99788 13.4M7.99999 8.28847C7.54896 8.28847 7.10793 8.15675 6.73275 7.9102C6.35758 7.66364 6.06551 7.31295 5.89275 6.90261C5.72034 6.49226 5.67517 6.04123 5.7631 5.60571C5.85103 5.17019 6.06827 4.77019 6.38724 4.4564C6.7062 4.14226 7.11241 3.92847 7.55517 3.84192C7.99758 3.75537 8.4562 3.79985 8.8731 3.96985C9.28999 4.13985 9.6462 4.42744 9.89655 4.79675C10.1472 5.16606 10.2807 5.59985 10.2807 6.04399C10.28 6.63916 10.0396 7.20985 9.61206 7.63054C9.18448 8.05157 8.60482 8.28778 7.99999 8.28847Z" stroke="#464F4A"/>
-                  </svg>
-
-                  <p><span>{store.city}</span><span>{store.address1}</span></p>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        <button className={`${[styles.loadMore]} button transparent`}>Load More</button>
+            </div>
+          </li>
+        ))}
+      </ul>
+      
+      {storesList.length > itemsToShow && (
+        <button className={`${[styles.loadMore]} button transparent`} onClick={handleLoadMore}>Load More</button>
+      )}
       </>
     );
   };
@@ -313,8 +318,16 @@ export default function FindABoutiqueListing({ content }) {
     'Abu Dhabi': abuDhabiStores.length,
   };
 
+  console.log("CONTENT: ", content);
+
   return (
     <>
+      <div className={styles.heroBannerWrapper}>
+      {compact(content?.page?.components).map((content) => (
+        <ContentBlock content={content} key={content?._meta.deliveryId} />
+      ))}
+      </div>
+
       <div className={styles.storeLocatorContainer}>
         
         <div className={styles.tabsSwiperContainer}>
@@ -382,62 +395,78 @@ const MapView = ({ userLocation, nearestStore, stores, activeStore }) => {
       const { google } = window;
       if (google && (nearestStore || activeStore)) {
         const map = new google.maps.Map(mapRef.current, {
-          center: { lat: (activeStore ? activeStore.latitude : nearestStore.latitude), lng: (activeStore ? activeStore.longitude : nearestStore.longitude) },
+          center: { 
+            lat: (activeStore ? activeStore.latitude : nearestStore.latitude), 
+            lng: (activeStore ? activeStore.longitude : nearestStore.longitude) 
+          },
           zoom: 12,
         });
-
+    
+        // Function to get icon size based on screen width
+        const getIconSize = () => {
+          const width = window.innerWidth;
+          if (width < 600) { // Mobile size
+            return new google.maps.Size(36, 49); // Smaller size for mobile
+          } else { // Default size
+            return new google.maps.Size(50, 68); // Adjust size as needed
+          }
+        };
+    
         // Define custom icon URLs
         const nearestStoreIcon = {
-          url: "/images/png/map-pin.png", // Custom icon for nearest store
-          scaledSize: new google.maps.Size(50, 68) // Adjust size as needed
+          url: "/images/png/map-pin.png",
+          scaledSize: getIconSize()
         };
-
+    
         const userLocationIcon = {
-          url: "/images/png/map-pin.png", // Custom icon for nearest store
-          scaledSize: new google.maps.Size(50, 68) // Adjust size as needed
+          url: "/images/png/map-pin.png",
+          scaledSize: getIconSize()
         };
-
+    
         const storeIcon = {
-          url: "/images/png/map-pin.png", // Custom icon for nearest store
-          scaledSize: new google.maps.Size(50, 68) // Adjust size as needed
+          url: "/images/png/map-pin.png",
+          scaledSize: getIconSize()
         };
-
+    
         // Marker for the nearest store
         if (nearestStore) {
           new google.maps.Marker({
             position: { lat: nearestStore.latitude, lng: nearestStore.longitude },
             map: map,
             title: nearestStore.name,
-            icon: nearestStoreIcon // Use custom icon
+            icon: nearestStoreIcon
           });
         }
-
+    
         // Marker for the user location
         if (userLocation) {
           new google.maps.Marker({
             position: userLocation,
             map: map,
             title: "Your Location",
-            icon: userLocationIcon // Use custom icon
+            icon: userLocationIcon
           });
         }
-
+    
         // Marker for all stores
         stores.forEach(store => {
           new google.maps.Marker({
             position: { lat: store.latitude, lng: store.longitude },
             map: map,
             title: store.name,
-            icon: storeIcon // Use custom icon
+            icon: storeIcon
           });
         });
-
+    
         // Center the map on the active store if selected
         if (activeStore) {
           map.setCenter({ lat: activeStore.latitude, lng: activeStore.longitude });
         }
       }
     };
+    
+    // Optionally, listen for window resize events to update marker sizes
+    window.addEventListener('resize', loadMap);
 
     loadMap();
   }, [userLocation, nearestStore, stores, activeStore]);
