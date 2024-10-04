@@ -21,7 +21,7 @@ const SizeGuide: React.FC<SizeGuideProps> = ({
       onClearAll={null}
       showBackButton={true}
       onClose={onClose}
-      position={""}
+      position={"right"}
     >
       <div className={styles.contentWrapper}>
         <div className={styles.content}>
