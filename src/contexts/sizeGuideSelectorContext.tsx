@@ -1,5 +1,5 @@
 import { SizeGuideSelectorContextProps } from "@utils/models/sizeGuideSelector";
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useContext } from "react";
 
 export const SizeGuideProviderContext = createContext<SizeGuideSelectorContextProps | undefined>(undefined);
 
@@ -11,10 +11,9 @@ export const useSizeGuideProviderContext = () => {
   return context;
 };
 
-export const SizeGuideProvider = ({ children, sizeGuideDataMenWatches, sizeGuideDataWomenWatches }) => {
+export const SizeGuideProvider = ({ children, sizeGuideData }) => {
   const value = {
-    sizeGuideDataMenWatches,
-    sizeGuideDataWomenWatches,
+    sizeGuideData,
   };
 
   return (

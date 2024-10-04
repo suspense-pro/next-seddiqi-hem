@@ -1,5 +1,6 @@
 import { Customer, slasHelpers } from "commerce-sdk";
 import { TokenResponse } from "commerce-sdk/dist/helpers/slasClient";
+import { generateRandomString, generateCodeChallenge }from "@utils/sfcc-connector/customerUtils";
 
 export const clientConfig = {
   headers: {},
@@ -9,6 +10,9 @@ export const clientConfig = {
     organizationId: process.env.SFDC_ORGANIZATIONID,
     shortCode: process.env.SFDC_SHORTCODE,
     siteId: process.env.SFDC_SITEID,
+  },
+  fetchOptions: {
+    redirect: "manual",
   },
 };
 
@@ -117,4 +121,137 @@ export async function OAuthTokenFromAM() {
   var access_token : string = data.access_token;
 
   return access_token;
+}
+
+/** Get guest customer Shopper Token (JWT) */
+
+export async function getGuestTokenResponse() {
+  try {
+    const code_verifier = await generateRandomString(128);
+    const code_challenge = await generateCodeChallenge(code_verifier);
+
+    // 1. Get a SLAS `code`
+    const authOptions = {
+      headers: {
+        "Content-Type": `application/x-www-form-urlencoded`,
+      },
+      parameters: {
+        redirect_uri: process.env.REDIRECT_URI,
+        response_type: "code",
+        client_id: process.env.SFDC_PUBLIC_CLIENT_ID,
+        code_challenge: code_challenge,
+        hint: "guest",
+        organizationId: clientConfig.parameters.organizationId,
+      },
+    }
+
+    const loginClient = new Customer.ShopperLogin(clientConfig); // Initialize ShopperLogin client
+    const authResponse = await loginClient.authorizeCustomer(authOptions, true);
+
+    if (authResponse.status != 303) {
+      const errorBody = await authResponse.text()
+      console.log({ errorBody })
+      throw authResponse
+    }
+
+    const response = await authResponse;
+    const { usid, code } = Object.fromEntries(new URL(response.headers.get("location")).searchParams);
+
+    // pass the code and usid to /token and get the access_token
+    const tokenOptions = {
+      body: {
+        client_id: process.env.SFDC_PUBLIC_CLIENT_ID,
+        code_verifier: code_verifier,
+        code: code,
+        grant_type: 'authorization_code_pkce',
+        redirect_uri: process.env.REDIRECT_URI,
+        usid: usid,
+        channel_id: clientConfig.parameters.siteId,
+      },
+    };
+
+    const tokenResponse = await loginClient.getAccessToken(tokenOptions);
+
+    if (tokenResponse.hasOwnProperty('status_code')) {
+      throw new Error(`Token exchange failed: ${tokenResponse}`);
+    }
+
+    return tokenResponse;
+  } catch (error) {
+    console.error('Error during guest token exchange', error);
+    throw error;
+  }
+}
+
+/** Get guest customer Shopper Token (JWT) */
+
+export async function getShopperTokenResponse(options) {
+  try {
+    const code_verifier = await generateRandomString(128);
+    const code_challenge = await generateCodeChallenge(code_verifier);
+
+    const {username, password} = {
+      username: options.username ? options.username : null,
+      password: options.password ? options.password : null,
+    };
+
+    const credentials = `${username}:${password}`;
+    const base64data = Buffer.from(credentials).toString("base64");
+
+    // 1. Get a SLAS `code`
+    const authOptions = {
+      headers: {
+        Authorization: `Basic ${base64data}`
+      },
+      body: {
+        redirect_uri: process.env.REDIRECT_URI,
+        client_id: clientConfig.parameters.clientId,
+        code_challenge: code_challenge,
+        organizationId: clientConfig.parameters.organizationId,
+        channel_id: clientConfig.parameters.siteId,
+        usid: options.usid ? options.usid : null,
+      },
+    }
+
+    const loginClient = new Customer.ShopperLogin(clientConfig); // Initialize ShopperLogin client
+    const authResponse = await loginClient.authenticateCustomer(authOptions, true);
+    
+    if (authResponse.status != 303) {
+      const errorBody = await authResponse.text()
+      console.log({ errorBody })
+      throw authResponse
+    }
+
+    const response = await authResponse;
+    // 2) Exchange the code for `access_token`
+
+    const { usid, code } = Object.fromEntries(new URL(response.headers.get("location")).searchParams);
+
+    // pass the code and usid to /token and get the access_token
+    const tokenOptions = {
+      headers: {
+        Authorization: `Basic ${await basicAuthorization()}`,
+      },
+      body: {
+        client_id: clientConfig.parameters.clientId,
+        code_verifier: code_verifier,
+        code: code,
+        grant_type: 'authorization_code_pkce',
+        redirect_uri: process.env.REDIRECT_URI,
+        usid: usid,
+        channel_id: clientConfig.parameters.siteId,
+      },
+    };
+
+    const tokenResponse = await loginClient.getAccessToken(tokenOptions);
+
+    if (tokenResponse.hasOwnProperty('status_code')) {
+      throw new Error(`Token exchange failed: ${tokenResponse}`);
+    }
+
+    return tokenResponse;
+  } catch (error) {
+    console.error('Error during guest token exchange', error);
+    throw error;
+  }
 }

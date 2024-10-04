@@ -148,6 +148,9 @@ const FilterBar = ({
         onClose={() => setDrawerOpen(false)}
         onSubmit={handleSubmit}
         onClearAll={handleClearAll}
+        showFooter={true}
+        showBackButton={false}
+        position={""}
       >
         <div className={styles.selectedOptions}>
           {Object.keys(filters).map((filterKey) =>

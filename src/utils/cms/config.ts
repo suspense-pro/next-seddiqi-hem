@@ -20,6 +20,7 @@ import {
   ArticleListCarousel,
   HighlightedProductCarousel,
   FeaturedProductCarousel,
+  ExploreBrand,
 } from "@components/rendering";
 import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
@@ -65,6 +66,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/botique-banner`]: BoutiqueBanner,
   [`${componentUrl}/product-carousel`]: FeaturedProductCarousel,
   [`${componentUrl}/image-gallery-carousel`]: ImageGalleryCarousel,
+  [`${componentUrl}/explore-brand`]: ExploreBrand,
   [`${componentUrl}/brand-category-list`]: CategoryList,
   [`${componentUrl}/brand-listing`]: BrandListing,
 };
