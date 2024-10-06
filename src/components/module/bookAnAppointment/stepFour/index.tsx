@@ -4,6 +4,7 @@ import { ArrowRight } from "@assets/images/svg";
 import TabbedNavigation from "@components/module/tabbedNavigation";
 import LoginForm from "../auth";
 import Register from "../auth/register";
+import OtpComponent from "../opt";
 
 // Get available dates for a month
 export const getAvailableDates = (month, year) => {
@@ -130,7 +131,8 @@ const StepFour = () => {
     {
       id: 2,
       title: "Register",
-      content: <Register />,
+      // content: <Register />,
+      content: <OtpComponent />,
     },
   ];
   return (
