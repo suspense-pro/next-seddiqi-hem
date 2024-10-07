@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import styles from "./register.module.scss"; // Assuming you're importing this
 import InputField from "../inputField"; // Make sure this path is correct
 import Button from "@components/module/button";
+import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
 
 // Define types for the form errors
 interface FormErrors {
@@ -11,6 +12,7 @@ interface FormErrors {
   firstName?: string;
   lastName?: string;
   phone?: string;
+  title?: string;
 }
 
 const Register: React.FC = () => {
@@ -21,6 +23,8 @@ const Register: React.FC = () => {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
+  const [title, setTitle] = useState<string>(""); // Added state for title
+
   const [errors, setErrors] = useState<FormErrors>({}); // Using the FormErrors type
 
   // Handle input change with type annotations
@@ -44,6 +48,9 @@ const Register: React.FC = () => {
         break;
       case "phone":
         setPhone(value);
+        break;
+      case "title": // Added case for title
+        setTitle(value);
         break;
       default:
         break;
@@ -83,6 +90,10 @@ const Register: React.FC = () => {
       formErrors.phone = "Phone number is required.";
     }
 
+    if (!title) {
+      formErrors.title = "Title is required."; // Validation for title
+    }
+
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
   };
@@ -102,16 +113,26 @@ const Register: React.FC = () => {
         <div className={styles.formGroup}>
           <div className={styles.doubleForm}>
             {/* First Name */}
-            <InputField
-              type="text"
-              name="firstName"
-              value={firstName}
-              onChange={handleInputChange}
-              label="First Name"
-              errorMessage={errors.firstName}
-              required
-            />
-
+            <div className={styles.optionSelector}>
+              <InputField
+                name="title"
+                label="Title"
+                value={title}
+                onChange={handleInputChange}
+                options={["Mr", "Mrs", "Ms"]}
+                errorMessage={errors.title}
+                required
+              />
+              <InputField
+                type="text"
+                name="firstName"
+                value={firstName}
+                onChange={handleInputChange}
+                label="First Name"
+                errorMessage={errors.firstName}
+                required
+              />
+            </div>
             {/* Last Name */}
             <InputField
               type="text"
@@ -139,10 +160,10 @@ const Register: React.FC = () => {
             {/* Confirm Email */}
             <InputField
               type="email"
-              name="confirmEmail"
+              name="repeatEmail"
               value={confirmEmail}
               onChange={handleInputChange}
-              label="Confirm Email"
+              label="Repeat Email"
               errorMessage={errors.confirmEmail}
               required
             />
@@ -160,11 +181,19 @@ const Register: React.FC = () => {
             />
 
             {/* Phone Number */}
-            <div className={styles.phoneWrapper}>
-              <select className={styles.phoneSelect} defaultValue="+971">
-                <option value="+971">+971</option>
-                {/* Add more country codes as needed */}
-              </select>
+
+            {/* First Name */}
+            <div className={styles.optionSelector}>
+              <InputField
+                type="tel"
+                name="phone"
+                value={phone}
+                onChange={handleInputChange}
+                // label="Phone Number"
+                errorMessage={errors.phone}
+                required
+                options={["+91"]}
+              />
               <InputField
                 type="tel"
                 name="phone"
@@ -175,13 +204,27 @@ const Register: React.FC = () => {
                 required
               />
             </div>
-            {errors.phone && <span className={styles.errorMessage}>{errors.phone}</span>}
           </div>
 
-          <div className={styles.submitBtnContainer}>
-            <Button className={styles.submitBtn} title="Sign In" isLink={true} type="solid" color="green_darK" />
+          <div className={styles.doubleForm}>
+            <div className={styles.slidingSwitch}>
+              <SlidingRadioSwitch onToggle={() => console.log("")} />
+              <p className={styles.switchLabel}>
+                I have read and agree to Ahmed Seddiqi’s Terms of Service and Privacy Policy*{" "}
+              </p>
+            </div>
+            <div className={styles.slidingSwitch}>
+              <SlidingRadioSwitch onToggle={() => console.log("")} />
+              <p className={styles.switchLabel}>
+              I would also like to receive marketing information about Ahmed Seddiqi’s products or services.
+              </p>
+            </div>
           </div>
+
         </div>
+          <div className={styles.submitBtnContainer}>
+            <Button className={styles.submitBtn} title="Register" isLink={true} type="solid" color="metallic" />
+          </div>
       </form>
     </div>
   );
