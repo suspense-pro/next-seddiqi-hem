@@ -9,53 +9,130 @@ import { PdpTabs } from "@components/rendering";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
-  const plpKey = Array.isArray(slug) ? slug.join('/') : slug;
+  const plpKey = Array.isArray(slug) ? slug.join("/") : slug;
   const { vse } = context.query || {};
 
-  const data = await fetchStandardPageData({
-    content: {
-      page: { key: `product/${plpKey}` },
+  const data = await fetchStandardPageData(
+    {
+      content: {
+        page: { key: `product/${plpKey}` },
+      },
     },
-  }, context);
+    context
+  );
 
   const product = await getProductDetails({ productId: plpKey, method: "GET" });
 
+  const shippingData = await fetchStandardPageData(
+    {
+      content: {
+        page: {
+          key: `shipping/${product?.response?.c_shippingContent ? product?.response?.brand.toLowerCase() : "global"}`,
+        },
+      },
+    },
+    context
+  );
+
+  const warrantyData = await fetchStandardPageData(
+    {
+      content: {
+        page: {
+          key: `warranty/${product?.response?.warrantyData ? product?.response?.brand.toLowerCase() : "global"}`,
+        },
+      },
+    },
+    context
+  );
+  const editorsView = await fetchStandardPageData(
+    {
+      content: {
+        page: {
+          key: `product/editors-view`,
+        },
+      },
+    },
+    context
+  );
+  const sizeGuideDataWomenWatches = await fetchStandardPageData(
+    {
+      content: {
+        page: { key: `product-size-guide/womens-watches` },
+      },
+    },
+    context
+  );
+
+  const sizeGuideDataMenWatches = await fetchStandardPageData(
+    {
+      content: {
+        page: { key: `product-size-guide/mens-watches` },
+      },
+    },
+    context
+  );
+
   const sizeGuideDataKeyGender = product?.response?.c_gender?.toLowerCase();
   const sizeGuideDataKeyCategory = product?.response?.c_categoryName?.toLowerCase();
-  const sizeGuidePlpKey= `${sizeGuideDataKeyGender}-${sizeGuideDataKeyCategory}`;
+  const sizeGuidePlpKey = `${sizeGuideDataKeyGender}-${sizeGuideDataKeyCategory}`;
 
-  const sizeGuideData = await fetchStandardPageData({
-    content: {
-      page: { key: `product-size-guide/${sizeGuidePlpKey}` },
-    },  },
-  context);
+  const sizeGuideData = await fetchStandardPageData(
+    {
+      content: {
+        page: { key: `product-size-guide/${sizeGuidePlpKey}` },
+      },
+    },
+    context
+  );
 
+  const productTechSpecs = product?.techSpecs || {};
+  productTechSpecs.category = productTechSpecs?.category || null;
 
   return {
     props: {
       ...data,
       sizeGuideData,
-      product,
-      vse: vse || '',
+      product: {
+        ...product,
+        techSpecs: productTechSpecs, // Ensure techSpecs have default values
+      },
+      shippingData,
+      warrantyData,
+      editorsView,
+      vse: vse || "",
     },
   };
 }
 
-export default function ProductPage({ content, product, sizeGuideData }) {
-  const productTechSpecs = product.techSpecs;
+export default function ProductPage({
+  content,
+  product,
+  sizeGuideDataWomenWatches,
+  sizeGuideDataMenWatches,
+  shippingData,
+  warrantyData,
+  editorsView,
+  sizeGuideData,
+}) {
+  const productTechSpecs = product?.techSpecs;
 
   return (
     <div className="main-content">
-      <ProductDetailInfo 
-        product={product?.response} 
-        content={content} 
+      <ProductDetailInfo
+        product={product?.response}
+        content={content}
+        shippingData={shippingData?.content?.page}
+        warrantyData={warrantyData?.content?.page}
+        editorsView={editorsView?.content?.page}
+        sizeGuideDataMenWatches={sizeGuideDataMenWatches}
+        sizeGuideDataWomenWatches={sizeGuideDataWomenWatches}
         sizeGuideData={sizeGuideData}
       />
       {/* Other components like ScrollToTop and StickyWhatsapp */}
       {compact(content?.page?.components).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />
       ))}
-      <PdpTabs productTechSpecs={productTechSpecs} amplienceData={""} />     
+      <PdpTabs productTechSpecs={productTechSpecs} amplienceData={""} />
     </div>
   );
 }

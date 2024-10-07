@@ -11,14 +11,14 @@ interface PdpTabsProps {
 }
 
 const PdpTabs: React.FC<any> = (props) => {
-  const productCategory = props.productTechSpecs.category;
-  const productTechSpecs = props.productTechSpecs.specsData;
-  const nonTabProductTechSpecs = props.productTechSpecs.nonTabSpecsData[0];
-  const amplienceData = props.amplienceData;
-  const tabsData = props.productTechSpecs.tabsData; //PdpTabsDummyData.tabsData;
+  const productCategory = props?.productTechSpecs?.category;
+  const productTechSpecs = props?.productTechSpecs?.specsData;
+  const nonTabProductTechSpecs = props?.productTechSpecs?.nonTabSpecsData[0];
+  const amplienceData = props?.amplienceData;
+  const tabsData = props?.productTechSpecs?.tabsData; //PdpTabsDummyData.tabsData;
   const [activeTab, setActiveTab] = useState<number>(1);
 
-  console.log("productTechSpecs3: ", tabsData[0].productImageUrl);
+  console.log("productTechSpecs3: ", tabsData[0]?.productImageUrl);
 
   const handleTabClick = (id: number) => {
     setActiveTab(id);
@@ -173,7 +173,7 @@ const PdpTabs: React.FC<any> = (props) => {
                     {tab.specs.map(specs => (
                       <li key={specs.title}>
                         <h5>{specs.title}</h5>
-                        <p>{specs.description}</p>
+                        <p>{specs?.description}</p>
                       </li>
                     ))}
                   </ul>

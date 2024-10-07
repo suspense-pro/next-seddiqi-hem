@@ -2,53 +2,41 @@
 
 .drawer {
   position: fixed;
-  left: rem(-800);
   top: 0;
   width: 100%;
   height: 100%;
   background: getColorHex("white");
   box-shadow: rem(1) 0 rem(18) rgba(0, 0, 0, 0.09);
-  transition: left 0.3s ease-in-out;
+  transition: left 0.3s ease-in-out, right 0.3s ease-in-out;
   z-index: 10000;
   display: flex;
   flex-direction: column;
   padding: rem(40 16 16);
+
+  left: rem(-600);
 
   @include md {
     padding: rem(60 28 28);
     width: rem(600);
   }
 
-  &.right{
-    left: auto;
-    right: rem(-800);
-    transition: right 0.3s ease-in-out;
-
-    [dir="rtl"] & { 
-      transition: left 0.3s ease-in-out;
-      right: auto;
-      left: rem(-800);
-    }
-
-    &.open{
-      left: auto;
-      right: 0;
-      
-      [dir="rtl"] & { 
-        left: 0;
-        right: auto;
-      }
-    }
+  &.right {
+    left: auto; 
+    right: rem(-600);
   }
 }
 
 .open {
   left: 0;
-  [dir="rtl"] & { 
+  [dir="rtl"] & {
     right: 0;
   }
-}
 
+  &.right {
+    right: 0;
+    left: auto;
+  }
+}
 .content {
   flex: 1;
   overflow-y: auto;
