@@ -12,7 +12,7 @@ interface ButtonProps {
   new_tab?: boolean;
   link?: string;
   isLink?: boolean;
-  className?: any
+  className?: any;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -24,9 +24,8 @@ const Button: React.FC<ButtonProps> = ({
   new_tab,
   link,
   isLink = false,
-  className
+  className,
 }) => {
-
   if (isLink) {
     // console.log("className", className, title)
     return (
@@ -46,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({
         disabled={disabled}
         onClick={clickHandler ? clickHandler : () => router.push(link || "/")}
       >
-       <span className={className}>{title}</span>
+        <span className={className}>{title}</span>
       </button>
     );
   }

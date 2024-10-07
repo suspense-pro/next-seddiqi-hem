@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./otp.module.scss";
 import CustomCheckbox from "../auth/customCheckbox";
+import Button from "@components/module/button";
 
 const OtpComponent = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -66,7 +67,10 @@ const OtpComponent = () => {
   return (
     <div className={styles.otpContainer}>
       <h2>Enter your OTP</h2>
-      <p>Please enter the code we have sent to your phone +971 ********57.</p>
+      <div>
+        <p>Please enter the code we have sent to your phone</p>
+        <p>+971 *********57. This is a one time verification.</p>
+      </div>
       <div className={styles.otpInputs}>
         {otp.map((data, index) => (
           <input
@@ -82,24 +86,29 @@ const OtpComponent = () => {
       </div>
       <div className={styles.resendSection}>
         {timer === 0 ? (
-          <button className={styles.resendBtn} onClick={handleResend}>
-            Send Again
-          </button>
+          <div className={styles.timer}>
+            <span onClick={handleResend} className={styles.optTimer}>
+              Send Again
+            </span>
+          </div>
         ) : (
-          <span className={styles.timer}>Send Again In {timer}s</span>
+          <span className={styles.timer}>
+            Didn’t receive a come? <span className={styles.optTimer}>Send again in {timer}s</span>
+          </span>
         )}
       </div>
-      <button className={styles.submitBtn} onClick={handleSubmit}>
-        SIGN IN
-      </button>
-      <CustomCheckbox
+
+      <div className={styles.submitBtn}>
+        <Button className={styles.signinBtn} color={"metallic"} isLink={false} clickHandler={handleSubmit} title="Sign In" type={'solid'}  />
+      </div>
+      {/* <CustomCheckbox
         label="I have read and agree to Ahmed Seddiqi's Terms of Service and Privacy Policy"
         subText=""
       />
       <CustomCheckbox
         label="I would also like to receive marketing information about Ahmed Seddiqi's products or services."
         subText=""
-      />
+      /> */}
     </div>
   );
 };

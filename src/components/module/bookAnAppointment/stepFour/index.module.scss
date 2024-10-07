@@ -1,9 +1,6 @@
 @import "./../../../../assets/styles/main.scss";
 
 .dateSelector {
-  // border: 2px solid #a855f7;
-  // padding: 20px;
-  // border-radius: 10px;
   max-width: 800px;
   margin: auto;
 }
@@ -16,30 +13,25 @@
 
 .h2 {
   @include heading_regular;
-  color: var(--Primary-Black, #000);
+  color: getColorHex("black");
   text-align: center;
-
-  /* Desktop/Headings/H4 */
-  font-size: 26px;
-  font-style: normal;
+  font-size: rem(26);
   font-weight: 500;
-  line-height: 36px; /* 138.462% */
-  letter-spacing: 0.6px;
+  line-height: rem(36);
+  letter-spacing: rem(0.6);
   margin-bottom: rem(20);
 }
 
 .monthNav {
   display: flex;
-  // justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: rem(15);
   text-transform: uppercase;
 }
 
 .button {
   background: none;
   cursor: pointer;
-  color: #000;
   min-width: rem(28);
   height: rem(28);
   padding: 0;
@@ -50,113 +42,78 @@
 }
 
 .dateContainer {
-  overflow-x: auto; /* Enable horizontal scrolling */
-  white-space: nowrap; /* Prevent items from wrapping */
+  white-space: nowrap;
   overflow-x: hidden;
 }
 
 .dates {
   display: flex;
   justify-content: flex-start;
-  gap: 10px;
-  width: max-content; /* Ensure the flex container doesn't shrink */
+  gap: rem(10);
+  width: max-content;
 }
 
 .dateItem,
 .timeItem {
-  min-width: 60px; /* Ensure minimum size for horizontal scrolling */
-  height: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid #e0e0e0;
+  border: 2px solid getColorHex("grey-light");
   cursor: pointer;
   transition: 0.2s;
-  display: flex;
-  width: 96px;
-  height: 104px;
-  padding: 12px 8px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: var(--Primary-Black, #000);
+  width: rem(96);
+  height: rem(104);
+  padding: rem(12) rem(8);
+  color: getColorHex("black");
 
   .day {
-    text-align: center;
     @include heading_regular;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px; /* 140% */
-    letter-spacing: 0.2px;
+    text-align: center;
+    font-size: rem(10);
+    line-height: rem(14);
+    letter-spacing: rem(0.2);
     text-transform: uppercase;
   }
 
   .date {
-    text-align: center;
-
     @include heading_regular;
-    font-size: 26px;
-    font-style: normal;
+    text-align: center;
+    font-size: rem(26);
     font-weight: 500;
-    line-height: 32px; /* 123.077% */
-    letter-spacing: 0.6px;
+    line-height: rem(32);
+    letter-spacing: rem(0.6);
     text-transform: uppercase;
   }
 }
 .timeItem {
-  min-width: 60px; /* Ensure minimum size for horizontal scrolling */
-  height: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid #e0e0e0;
-  cursor: pointer;
-  transition: 0.2s;
-  display: flex;
-  width: 96px;
-  height: 104px;
-  padding: 12px 8px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: var(--Primary-Black, #000);
-
-  width: 96px;
-  height: 50px;
-  padding: 12px 8px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: var(--Primary-Black, #000);
-  text-align: center;
-
   @include heading_regular;
-  font-size: 20px;
-  font-style: normal;
+  width: rem(96);
+  height: rem(50);
+  padding: rem(12) rem(8);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: getColorHex("black");
+  font-size: rem(20);
   font-weight: 500;
-  line-height: 28px; /* 140% */
-  letter-spacing: 0.6px;
+  line-height: rem(28);
+  letter-spacing: rem(0.6);
   text-transform: uppercase;
 }
 
 .dateItem:hover,
 .timeItem:hover {
-  border-color: #7e6952;
+  border: 2px solid getColorHex("grey-light");
+  background-color: getColorHex("grey-tint");
+  color: getColorHex("grey-brown");
 }
 
-.selected {
-  border: 0px solid var(--Primary-Noir, #513629);
-  background: var(--Secondary-Chocolate-brown, #7e6952);
-  color: white;
-}
-
+.selected,
 .selectedTime {
-  border: 0px solid var(--Primary-Noir, #513629);
-  background: var(--Secondary-Chocolate-brown, #7e6952);
-  color: white;
+  border: 0 solid getColorHex("noir");
+  background: getColorHex("chocolate-brown");
+  color: getColorHex("white");
 }
 
 .disabled {
@@ -165,44 +122,39 @@
 }
 
 .timeContainer {
-  overflow-x: auto; /* Enable horizontal scrolling for time slots */
-  white-space: nowrap; /* Prevent wrapping */
+  overflow-x: auto;
+  white-space: nowrap;
   margin-top: 20px;
-  // overflow-x: hidden;
-  overflow-x: scroll; /* Allow horizontal scrolling */
-  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  overflow-x: scroll;
+  scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
 .times {
   display: flex;
   justify-content: flex-start;
-  gap: 10px;
-  width: max-content; /* Ensure the flex container doesn't shrink */
+  gap: rem(10);
+  width: max-content; 
 }
 
-// .dateContainer::-webkit-scrollbar, .timeContainer::-webkit-scrollbar {
-//   display: none; /* Hide scrollbar in webkit browsers */
-// }
-
 .preferenceContainer {
-  background-color: #fff;
+  background-color: getColorHex("white");
   margin-top: rem(60);
 }
 
 .heading {
   @include heading_regular;
-  font-size: 26px;
+  font-size: rem(26);
   font-weight: 500;
-  line-height: 36px;
-  letter-spacing: 0.6px;
+  line-height: rem(36);
+  letter-spacing: rem(0.6);
   margin-bottom: rem(24);
-  color: var(--Primary-Black, #000);
+  color: getColorHex("black");
 }
 
 .options {
   display: flex;
-  gap: 15px; /* Space between options */
+  gap: rem(15);
 }
 
 .customRadio {
@@ -212,72 +164,62 @@
   position: relative;
 
   input {
-    display: none; /* Hide the default radio button */
+    display: none;
   }
 
   .radioCircle {
-    width: 20px; /* Customize the size */
-    height: 20px;
+    width: rem(20);
+    height: rem(20);
     border-radius: 50%;
-    border: 1px solid #513629; /* Border color */
+    border: rem(1) solid getColorHex("noir");
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 10px; /* Space between circle and label text */
+    margin-right: rem(8);
     position: relative;
-    background: white; /* Background color for the circle */
-    transition: background 0.2s, border 0.2s;
+    background-color: getColorHex("white");
+    transition: background-color 0.2s, border 0.2s;
 
     &::after {
       content: "";
-      width: 6px; /* Inner circle size */
-      height: 6px;
+      width: rem(6); 
+      height: rem(6);
       border-radius: 50%;
-      background: #513629; /* Inner circle color */
+      background: getColorHex("midnight-brown"); 
       position: absolute;
-      transform: scale(0); /* Start hidden */
+      transform: scale(0);
       transition: transform 0.2s;
     }
   }
 
   input:checked + .radioCircle::after {
-    transform: scale(1); /* Show the inner circle on check */
+    transform: scale(1);
   }
 }
 
-// Selected and Not Selected Styles
 .selected {
-  border-color: var(--Primary-Black, #000); /* Selected border color */
+  border-color: getColorHex("black");
 }
 
 .notSelected {
-  border-color: var(--GreyShades-Mid-Grey, #787775); /* Not selected border color */
+  border-color: getColorHex("grey-mid");
 }
 
 .selectedText {
-  color: var(--Primary-Black, #000); /* Selected text color */
+  color: getColorHex("black");
   text-align: center;
-
-  /* Desktop/BodyCopy/Small */
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px; /* 157.143% */
-  letter-spacing: 0.2px;
+  font-size: rem(14);
+  line-height: rem(22);
+  letter-spacing: rem(0.2);
 }
 
 .notSelectedText {
-  color: var(--GreyShades-Mid-Grey, #787775); /* Not selected text color */
+  color: getColorHex("grey-mid"); 
   text-align: center;
-
-  /* Desktop/BodyCopy/Small */
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px; /* 157.143% */
-  letter-spacing: 0.2px;
+  font-size: rem(14);
+  line-height: rem(22);
+  letter-spacing: rem(0.2);
 }
-
 
 .tabNavigation {
   width: 100%;

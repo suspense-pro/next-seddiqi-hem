@@ -1,12 +1,12 @@
 @import './../../../../../assets/styles/main.scss';
 
 .form {
-  max-width: 500px;
+  max-width: rem(500);
   margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: rem(20);
+  background-color: getColorHex("white");
+  border-radius: rem(8);
+  box-shadow: 0 0 rem(10) rgba(0, 0, 0, 0.1);
 }
 
 .inputGroup {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./auth.module.scss"; // Assuming you are using a CSS module
 import Button from "@components/module/button";
+import InputField from "./inputField";
 
 interface Errors {
   email?: string;
@@ -60,31 +61,25 @@ export default function LoginForm() {
       <div className={styles.leftSide}>
         <form className={styles.signin} onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
-            <div className={styles.inputGroup}>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className={errors.email ? styles.inputError : ""}
-                placeholder=" " // keep the input from being empty for floating effect
-                required
-              />
-              <label>Email*</label>
-              {errors.email && <span className={styles.errorMessage}>{errors.email}</span>}
-            </div>
+            <InputField
+              name="email"
+              label="Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              errorMessage={errors.email}
+              required={true}
+            />
 
-            <div className={styles.inputGroup}>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className={errors.password ? styles.inputError : ""}
-                placeholder=" "
-                required
-              />
-              <label>Password*</label>
-              {errors.password && <span className={styles.errorMessage}>{errors.password}</span>}
-            </div>
+            <InputField
+              name="password"
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              errorMessage={errors.password}
+              required={true}
+            />
           </div>
           <Button
             className={styles.forgotBtn}
@@ -95,7 +90,7 @@ export default function LoginForm() {
           />
 
           <div className={styles.submitBtnContainer}>
-            <Button className={styles.submitBtn} title="Sign In" isLink={true} type="solid" color="green_darK" />
+            <Button className={styles.submitBtn} title="Sign In" isLink={true} type="solid" color="metallic" />
           </div>
         </form>
       </div>
@@ -129,7 +124,7 @@ export default function LoginForm() {
           <Button
             className={styles.oneBtn}
             title="Send One Time Password"
-            isLink={true}
+            isLink={false}
             type="transparent"
             color="green_darK"
           />
