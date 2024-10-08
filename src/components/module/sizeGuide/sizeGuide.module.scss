@@ -4,6 +4,7 @@
   @include heading_regular;
   text-transform: uppercase;
   margin-bottom: rem(24);
+  color:  getColorHex("green-dark");
 
   @include md {
     margin-bottom: rem(20);
@@ -12,7 +13,7 @@
 
 .sizeGuidetableTitle {
   @include heading_regular;
-
+  color:  getColorHex("green-dark");
   text-transform: uppercase;
   margin-bottom: rem(12);
 }
@@ -24,6 +25,7 @@
   line-height: rem(22);
   letter-spacing: rem(0.2);
   margin-bottom: rem(24);
+  color: getColorHex("green-metallic");
 
   @include md {
     font-size: rem(16);
@@ -57,6 +59,7 @@
     letter-spacing: rem(0.8);
     font-weight:400;
     text-transform: capitalize;
+    color:  getColorHex("green-dark");
 
     @include md {
       font-size: rem(16);
@@ -70,6 +73,7 @@
     font-size: rem(14);
     line-height: rem(22);
     letter-spacing: rem(0.4);
+    color: getColorHex("green-metallic");
 
     @include md {
       font-size: rem(16);
