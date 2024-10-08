@@ -1,7 +1,9 @@
 import { useState } from "react";
-import styles from "./auth.module.scss"; // Assuming you are using a CSS module
+import styles from "./signIn.module.scss"; // Assuming you are using a CSS module
 import Button from "@components/module/button";
-import InputField from "./inputField";
+import InputField from "../inputField";
+import OtpComponent from "../../opt";
+import { loginCustomer } from "@utils/sfcc-connector/dataService";
 
 interface Errors {
   email?: string;
@@ -9,10 +11,12 @@ interface Errors {
   password?: string;
 }
 
-export default function LoginForm() {
+export default function SignIn() {
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
+  const [phoneCode, setPhoneCode] = useState<string>("+91"); // Default phone code
   const [password, setPassword] = useState<string>("");
+  const [otpForm, setOtpForm] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
 
   const validateForm = (): Errors => {
@@ -23,11 +27,6 @@ export default function LoginForm() {
       validationErrors.email = "Please enter a valid email.";
     }
 
-    const phonePattern = /^[0-9]{6,15}$/;
-    if (!phonePattern.test(phone)) {
-      validationErrors.phone = "Please enter a valid phone number.";
-    }
-
     if (!password) {
       validationErrors.password = "Password is required.";
     }
@@ -35,26 +34,59 @@ export default function LoginForm() {
     return validationErrors;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validatePhoneNumber = () => {
+    const validationErrors: Errors = {};
+
+    const phonePattern = /^[0-9]{6,15}$/;
+    if (!phonePattern.test(phone)) {
+      validationErrors.phone = "Please enter a valid phone number.";
+    }
+
+    return validationErrors;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
-      console.log("Form is valid. Submitting...");
+      console.log("Form is valid. Logging in...");
+
+      // Prepare userData
+      const userData = {
+        username: email,
+        password,
+      };
+
+      try {
+        // Call loginCustomer API
+        const response = await loginCustomer({
+          userData: JSON.stringify(userData), // userData as a JSON string
+          method: "POST",
+        });
+
+        // Log the response
+        console.log("Login response:", response);
+      } catch (error) {
+        console.error("Login error:", error);
+      }
     } else {
       setErrors(validationErrors);
     }
   };
 
   const handleSendOTP = () => {
-    if (phone) {
-      console.log("Sending OTP...");
+    const validationErrors = validatePhoneNumber();
+    if (Object.keys(validationErrors).length === 0) {
+      console.log("Phone number is valid. Sending OTP...");
+      setOtpForm(true);
     } else {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        phone: "Phone number is required to send OTP.",
-      }));
+      setErrors(validationErrors);
     }
   };
+
+  if (otpForm) {
+    return <OtpComponent />;
+  }
 
   return (
     <div className={styles.container}>
@@ -90,7 +122,14 @@ export default function LoginForm() {
           />
 
           <div className={styles.submitBtnContainer}>
-            <Button className={styles.submitBtn} title="Sign In" isLink={true} type="solid" color="metallic" />
+            <Button
+              clickHandler={(e) => handleSubmit(e)}
+              className={styles.submitBtn}
+              title="Sign In"
+              isLink={false}
+              type="solid"
+              color="metallic"
+            />
           </div>
         </form>
       </div>
@@ -99,29 +138,29 @@ export default function LoginForm() {
         <div className={styles.orDivider}>
           <span>OR</span>
         </div>
-
-        <div className={styles.inputGroup}>
-          <div className={styles.phoneWrapper}>
-            <select required>
-              <option value="+971">+971</option>
-              <option value="+1">+1</option>
-            </select>
-            <div className={styles.inputGroup}>
-              <input
-                type="tel"
-                value={password}
-                onChange={(e) => setPhone(e.target.value)}
-                className={errors.phone ? styles.inputError : ""}
-                placeholder=" "
-                required
-              />
-              <label>Phone*</label>
-              {errors.phone && <span className={styles.errorMessage}>{errors.phone}</span>}
-            </div>
-          </div>
+        <div className={styles.formGroupPhone}>
+          <InputField
+            name="phone code"
+            label=""
+            value={phoneCode}
+            onChange={(e) => setPhoneCode(e.target.value)}
+            options={["+91", "+44", "+61"]}
+            required
+          />
+          <InputField
+            name="phone"
+            label="Phone"
+            type="number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            errorMessage={errors.phone}
+            required={true}
+          />
         </div>
-        <div onClick={handleSendOTP}>
+
+        <div>
           <Button
+            clickHandler={() => handleSendOTP()}
             className={styles.oneBtn}
             title="Send One Time Password"
             isLink={false}

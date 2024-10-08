@@ -28,4 +28,5 @@ export { default as CubeIcon } from "./CubeIcon";
 export { default as WatchIcon } from "./WatchIcon";
 export { default as ProtectionIcon } from "./ProtectionIcon";
 export { default as CareIcon } from "./CareIcon";
+export { default as EditIcon } from "./EditIcon";
 

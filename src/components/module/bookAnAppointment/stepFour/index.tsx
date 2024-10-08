@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./index.module.scss";
 import { ArrowRight } from "@assets/images/svg";
 import TabbedNavigation from "@components/module/tabbedNavigation";
-import LoginForm from "../auth";
 import Register from "../auth/register";
 import OtpComponent from "../opt";
+import SelectedCard from "../selectedCard";
+import SelectedLocation from "../selectedLocation";
+import SignIn from "../auth/signIn";
 
 // Get available dates for a month
 export const getAvailableDates = (month, year) => {
@@ -126,7 +128,7 @@ const StepFour = () => {
     {
       id: 1,
       title: "Sign In",
-      content: <LoginForm />,
+      content: <SignIn />,
     },
     {
       id: 2,
@@ -137,6 +139,10 @@ const StepFour = () => {
   ];
   return (
     <div className={styles.dateSelector}>
+      <div className={styles.selectedData}>
+        <SelectedCard />
+        <SelectedLocation />
+      </div>
       <div className={styles.header}>
         <div className={styles.h2}>Select a Date & Time</div>
         <div className={styles.monthNav}>

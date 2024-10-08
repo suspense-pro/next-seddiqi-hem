@@ -120,7 +120,7 @@ const Register: React.FC = () => {
                 value={title}
                 onChange={handleInputChange}
                 options={["Mr", "Mrs", "Ms"]}
-                errorMessage={errors.title}
+                // errorMessage={errors.title}
                 required
               />
               <InputField
@@ -160,7 +160,7 @@ const Register: React.FC = () => {
             {/* Confirm Email */}
             <InputField
               type="email"
-              name="repeatEmail"
+              name="confirmEmail"
               value={confirmEmail}
               onChange={handleInputChange}
               label="Repeat Email"
@@ -190,7 +190,7 @@ const Register: React.FC = () => {
                 value={phone}
                 onChange={handleInputChange}
                 // label="Phone Number"
-                errorMessage={errors.phone}
+                // errorMessage={errors.phone}
                 required
                 options={["+91"]}
               />
@@ -223,7 +223,7 @@ const Register: React.FC = () => {
 
         </div>
           <div className={styles.submitBtnContainer}>
-            <Button className={styles.submitBtn} title="Register" isLink={true} type="solid" color="metallic" />
+            <Button clickHandler={() => validateForm()} className={styles.submitBtn} title="Register" isLink={false} type="solid" color="metallic" />
           </div>
       </form>
     </div>

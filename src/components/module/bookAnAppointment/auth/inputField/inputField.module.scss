@@ -1,6 +1,5 @@
 @import "./../../../../../assets/styles/main.scss";
 
-
 .inputGroup,
 .selectGroup {
   position: relative;
@@ -43,15 +42,15 @@
     box-sizing: border-box; /* Include padding and border in width calculation */
 
     &:focus {
-        outline: none;
-        border-bottom-color: getColorHex("black");
+      outline: none;
+      border-bottom-color: getColorHex("black");
     }
 
     /* Hides the dropdown arrow for Internet Explorer */
     select::-ms-expand {
-        display: none;
+      display: none;
     }
-}
+  }
 
   label {
     @include heading_regular;
@@ -79,22 +78,12 @@
   .inputError {
     border-bottom-color: getColorHex("dark-red");
   }
-
-  .errorMessage {
-    @include heading_regular;
-    color: getColorHex("dark-red");
-    margin-top: rem(8);
-    font-size: rem(10);
-    line-height: rem(14);
-    letter-spacing: rem(0.2);
-  }
 }
 
 .selectGroup {
   width: rem(61);
   label {
     transform: translateY(-180%) scale(0.8);
-
   }
 
   option {
@@ -102,3 +91,11 @@
   }
 }
 
+.errorMessage {
+  @include heading_regular;
+  color: getColorHex("dark-red");
+  margin-top: rem(8);
+  font-size: rem(10);
+  line-height: rem(14);
+  letter-spacing: rem(0.2);
+}

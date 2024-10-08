@@ -1,4 +1,4 @@
-@import "./../../../../assets/styles/main.scss";
+@import "./../../../../../assets/styles/main.scss";
 
 .container {
   display: flex;
@@ -44,9 +44,14 @@
 }
 
 .formGroup {
-  display: flex;
   flex-direction: column;
   gap: rem(40);
+  display: flex;
+}
+
+.formGroupPhone {
+  display: flex;
+  gap: rem(12);
 }
 
 .inputGroup {
@@ -113,10 +118,10 @@
     border-bottom: rem(1) solid getColorHex("grey-light");
     background-color: transparent;
     width: rem(64);
-    color: getColorHex('grey');
+    color: getColorHex("grey");
     font-size: rem(16);
     line-height: rem(26);
-    letter-spacing:rem(0.2);
+    letter-spacing: rem(0.2);
 
     &:focus {
       outline: none;

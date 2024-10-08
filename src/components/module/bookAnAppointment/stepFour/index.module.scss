@@ -5,10 +5,17 @@
   margin: auto;
 }
 
+.selectedData {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+}
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: rem(60);
 }
 
 .h2 {
