@@ -193,7 +193,7 @@
     }
   }
 
-  button{
+  .tabButton{
     @include heading_regular;
     font-size: rem(14);
     line-height: rem(20);
@@ -437,6 +437,7 @@
 .storeMapListContainer{
   display: flex;
   flex-direction: column;
+  z-index: 0;
 
   @include md{
     position: absolute;

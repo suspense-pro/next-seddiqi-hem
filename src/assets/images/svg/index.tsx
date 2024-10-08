@@ -31,4 +31,5 @@ export { default as CareIcon } from "./CareIcon";
 export { default as TimeIcon } from "./TimeIcon";
 export { default as ServiceIcon } from "./ServiceIcon";
 export { default as BrandsIcon } from "./BrandsIcon";
+export { default as LocationIcon } from "./LocationIcon";
 
