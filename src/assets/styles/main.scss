@@ -1,0 +1,89 @@
+@import "configs/baseConfig";
+@import "partials/base";
+
+.error-page {
+  height: 100vh;
+  padding: rem(80);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: getColorHex("tint-broze");
+  color: getColorHex("midnight-brown");
+
+  h1 {
+    font-size: rem(65);
+    @include heading_regular;
+    margin: 0 0 rem(16);
+  }
+
+  p {
+    @include body_regular;
+    font-size: rem(14);
+    line-height: rem(18);
+    text-align: center;
+    margin-bottom: rem(28);
+  }
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.image_overlay {
+  height: 100%;
+  width: 100%;
+  background-color: getColorHex("black");
+  position: relative;
+}
+
+.bg-green {
+  background-color: getColorHex("green");
+  color: getColorHex("sand");
+}
+
+.bg-white {
+  background-color: getColorHex("white");
+  color: getColorHex("black");
+}
+
+.bg-sand {
+  background-color: getColorHex("sand");
+  color: getColorHex("green");
+}
+
+.bg-black {
+  background-color: getColorHex("black");
+  color: getColorHex("sand");
+}
+
+/*Customized Background -Text Color Combinations */
+.bgWhiteTextDarkGreen {
+  background-color:  getColorHex("white");
+  color:  getColorHex("green-dark"); /* Dark-Green text */  
+}
+
+.bgCreamTextMidnightBrown {
+  background-color:  getColorHex("cream");
+  color:  getColorHex("midnight-brown"); /* Midnight-brown text */
+}
+
+.bgDefaultTextGreen {
+  background-color: getColorHex("white");
+  color: getColorHex("green-dark"); /* dark-green text */
+}
+
+
+//Customized Hideunderline Color based on Textcolor
+.customBarColor {
+
+  &.greenDark {
+    background-color: getColorHex("green-dark")!important
+  }
+
+  &.midnightBrown {
+    background-color: getColorHex("midnight-brown")!important
+  }
+}

@@ -1,0 +1,60 @@
+@import "./../../../../assets/styles/main.scss";
+
+.displayCard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+  cursor: pointer;
+
+  @include md {
+    width: rem(226);
+  }
+
+  .imgContainer {
+    position: relative;
+    height: rem(224);
+
+    @include md {
+      width: 100%;
+      height: rem(301);
+    }
+  }
+
+  .storyImg {
+    border-radius: rem(16 0 16 0);
+    object-fit: cover;
+    height: rem(224);
+    width: 100%;
+
+    @include md {
+      height: rem(301);
+    }
+  }
+
+  .displayCardInfo {
+    display: flex;
+    flex-direction: column;
+    gap: rem(8);
+    line-height: rem(22);
+
+    .title {
+      color: getColorHex("green-metallic");
+      letter-spacing: rem(0.4);
+      text-transform: uppercase;
+      font-size: rem(14);
+      margin: rem(0);
+
+      @include body_regular;
+      @include ellipses;
+    }
+
+    .subTitle {
+      color: getColorHex("green-dark");
+      font-size: rem(16);
+      @include heading_regular;
+      @include ellipses;
+    }
+  }
+}

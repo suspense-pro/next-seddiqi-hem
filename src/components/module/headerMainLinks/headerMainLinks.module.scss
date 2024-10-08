@@ -1,0 +1,101 @@
+@import "./../../../assets/styles/main.scss";
+
+.linksContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  padding: 0;
+  margin: 0;
+
+  @include breakpoint-max-width(rem(1400)) {
+    flex-direction: column;
+    // justify-content: flex-end;
+  }
+
+  span.appointmentBtn {
+    max-width: rem(250);
+    text-underline-offset: rem(10);
+    @include breakpoint-max-width(rem(1400)) {
+      display: none;
+    }
+  }
+
+  .links {
+    @include heading_regular;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+    gap: rem(36);
+
+    .headerLink {
+      padding: rem(7 0);
+      cursor: pointer;
+      color: getColorHex("green-dark");
+      @include heading_regular;
+      transition: all 0.3s;
+      font-size: rem(16);
+      line-height: rem(20);
+      letter-spacing: rem(0.4);
+      text-transform: uppercase;
+      margin-top: rem(9);
+
+      &::after {
+        margin-top: rem(7);
+        content: "";
+        display: block;
+        width: 0;
+        height: rem(2);
+        background-color: getColorHex("green-dark");
+        transition: width 0.3s;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+
+    .headerLinkActive {
+      border-bottom: rem(2) solid getColorHex("green-dark");
+    }
+  }
+
+  .navIcons {
+    max-width: rem(250);
+    display: flex;
+    align-items: center;
+    gap: rem(28.2);
+
+    @include breakpoint-max-width(rem(1400)) {
+      display: none;
+    }
+
+    svg {
+      cursor: pointer;
+    }
+  }
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: rem(12);
+  min-width: rem(180);
+  display: none;
+
+  @include xl {
+    display: flex;
+  }
+
+  .patakLogo {
+    width: rem(78.65);
+    height: rem(46);
+  }
+
+  .rolexLogo {
+    width: rem(100.3);
+    height: rem(46);
+  }
+}

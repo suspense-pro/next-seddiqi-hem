@@ -1,0 +1,17 @@
+@import "./../../../assets/styles/main.scss";
+
+.position {
+  background-color: getColorHex("white");
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  top: 0;
+  height: rem(120);
+  transition: all 0.3s ease-in-out;
+}
+
+.tabNavigation {
+  margin-top: rem(36);
+  width: 100%;
+  padding: 0 rem(28);
+}

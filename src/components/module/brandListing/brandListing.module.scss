@@ -1,0 +1,119 @@
+@import "./../../../assets/styles/main.scss";
+
+.brandSectionContainer {
+  display: flex;
+  flex-direction: column;
+  margin: rem(120 0);
+
+  @include lg {
+    margin: rem(120);
+  }
+}
+
+.alphabetNav {
+  display: flex;
+  justify-content: space-between;
+  margin: rem(40 0);
+  overflow-x: auto;
+  gap: rem(36);
+  margin-left: rem(28);
+
+  @include lg {
+    margin-left: rem(0);
+  }
+
+  &::-webkit-scrollbar {
+    height: rem(5);
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: getColorHex("grey-mid");
+    border-radius: rem(2);
+
+    &:hover {
+      background-color: getColorHex("grey-mid");
+    }
+  }
+
+  .alphabetLetter {
+    @include heading_regular;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: getColorHex("green-dark");
+    font-size: rem(16);
+    line-height: rem(20);
+    letter-spacing: rem(0.4);
+    text-transform: capitalize;
+    white-space: nowrap;
+
+    &.enabled {
+      color: getColorHex("green-dark");
+    }
+
+    &.disabled {
+      color: getColorHex("grey-light-5");
+      pointer-events: none;
+    }
+  }
+}
+
+.brandList {
+  max-height: rem(400);
+  overflow-y: auto;
+  margin: 0 rem(28);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(rem(250), 1fr));
+  gap: rem(20);
+
+  @include lg {
+    margin: 0;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &::-webkit-scrollbar {
+    width: rem(5);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: getColorHex("grey-light-4");
+    border-radius: rem(2);
+
+    &:hover {
+      background-color: getColorHex("grey-light-4");
+    }
+  }
+
+  .brandGroup {
+    margin-bottom: rem(30);
+
+    h4 {
+      @include heading_regular;
+      font-size: rem(26);
+      font-weight: 500;
+      line-height: rem(36);
+      letter-spacing: rem(0.6);
+      color: getColorHex("metallic");
+      margin-bottom: rem(20);
+    }
+
+    .brandColumn {
+      display: flex;
+      flex-direction: column;
+      gap: rem(20);
+
+      .brandName {
+        color: getColorHex("grey-mid");
+        font-size: rem(16);
+        line-height: rem(26);
+        margin-bottom: rem(10);
+      }
+    }
+  }
+}
+
+.btnContainer {
+  margin: 0 auto;
+  margin-top: rem(60);
+}
