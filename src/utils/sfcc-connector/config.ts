@@ -255,3 +255,36 @@ export async function getShopperTokenResponse(options) {
     throw error;
   }
 }
+
+/** Get Refresh Shopper Token (JWT) */
+
+export async function getRefereshTokenResponse(refreshToken: string) {
+  try {
+    /** Get the session object
+     * compare expiresAt with the current time
+     * refresh the token if needed, otherwise don't change
+     * update the session object, if the refresh token has been generated 
+     */
+    const loginClient = new Customer.ShopperLogin(clientConfig); // Initialize ShopperLogin client
+    const authOptions = {
+      headers: {
+        Authorization: `Basic ${await basicAuthorization()}`
+      },
+      body: {
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+      },
+    }
+
+    const tokenResponse = await loginClient.getAccessToken(authOptions);
+
+    if (tokenResponse.hasOwnProperty('status_code')) {
+      throw new Error(`Refresh Token Failed: ${tokenResponse}`);
+    }
+
+    return tokenResponse;
+  } catch (error) {
+    console.error('Error during refresh token creation', error);
+    throw error;
+  }
+}
