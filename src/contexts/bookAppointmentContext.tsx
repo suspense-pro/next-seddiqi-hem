@@ -20,6 +20,8 @@ export const BookAppointmentProvider = ({ children }) => {
   const [completedSteps, setCompletedSteps] = useState<boolean[]>([false, false, false, false, false]);
   const [currentStep, setCurrentStep] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedStore, setSelectedStore] = useState(null);
+
 
   // Handle Step Change
   const handleStepChange = (step: number) => {
@@ -142,6 +144,8 @@ export const BookAppointmentProvider = ({ children }) => {
         setSelectedWatches,
         selectedJewellery,
         setSelectedJewellery,
+        selectedStore,  
+        setSelectedStore, 
       }}
     >
       {children}

@@ -9,9 +9,13 @@ import { Button } from "@components/module";
 import { MapIcon } from "@assets/images/svg";
 
 const StepThree = () => {
-  const { selectedCard, updateStep, handleStepChange, setSelectedCard } =
-    useContext(BookAppointmentContext);
-  if (!selectedCard) return null;
+  const {
+    handleStepChange,
+    selectedCard,
+    setSelectedCard,
+    setSelectedStore,
+    updateStep,
+  } = useContext(BookAppointmentContext);
 
   const [stores, setStores] = useState([]);
   const [cities, setCities] = useState([]);
@@ -20,6 +24,15 @@ const StepThree = () => {
 
   const [selectedStoreId, setSelectedStoreId] = useState(null);
   const [isMapView, setIsMapView] = useState(false);
+
+  const handleSelectBoutique = () => {
+    const selectedStore = stores.find((store) => store.id === selectedStoreId);
+    if (selectedStore) {
+      setSelectedStore(selectedStore);
+      updateStep(3, true);
+      handleStepChange(4);
+    }
+  };
 
   const handleMapViewToggle = () => {
     setIsMapView(!isMapView);
@@ -243,7 +256,7 @@ const StepThree = () => {
               >
                 <div className={styles.storeName}>{store.name}</div>
                 <div className={styles.storeAddress}>
-                  {store.city} | {store.address1}
+                  <MapIcon /> {store.city} | {store.address1}
                 </div>
                 {selectedStoreId === store.id && (
                   <a
@@ -261,7 +274,12 @@ const StepThree = () => {
         )}
 
         <div className={styles.appointmentBtn}>
-          <Button title={"Select Boutique"} color="metallic" type="solid" />
+          <Button
+            title={"Select Boutique"}
+            color="metallic"
+            type="solid"
+            clickHandler={handleSelectBoutique}
+          />
         </div>
       </div>
       <ExclusiveInfoCards />
