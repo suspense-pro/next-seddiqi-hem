@@ -58,14 +58,14 @@
   position: relative;
   display: flex;
   flex-direction: column-reverse;
-  height: 48px;
+  height: rem(48);
   width: 100%;
 
   input,
   select {
     border: none;
     border-bottom: 1px solid getColorHex("grey-light");
-    font-size: 16px;
+    font-size: rem(16);
     width: 100%;
     transition: border-color 0.3s;
     background-color: transparent;
@@ -165,11 +165,11 @@
 }
 
 .submitButton {
-  margin-top: 10px;
+  margin-top: rem(10);
 }
 
 .otpButton {
-  margin-top: 10px;
+  margin-top: rem(10);
 }
 
 .oneBtn {

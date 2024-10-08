@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./otp.module.scss";
-import CustomCheckbox from "../auth/customCheckbox";
 import Button from "@components/module/button";
 
 const OtpComponent = () => {
@@ -101,14 +100,6 @@ const OtpComponent = () => {
       <div className={styles.submitBtn}>
         <Button className={styles.signinBtn} color={"metallic"} isLink={false} clickHandler={handleSubmit} title="Sign In" type={'solid'}  />
       </div>
-      {/* <CustomCheckbox
-        label="I have read and agree to Ahmed Seddiqi's Terms of Service and Privacy Policy"
-        subText=""
-      />
-      <CustomCheckbox
-        label="I would also like to receive marketing information about Ahmed Seddiqi's products or services."
-        subText=""
-      /> */}
     </div>
   );
 };

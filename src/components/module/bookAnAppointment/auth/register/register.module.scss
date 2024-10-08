@@ -135,3 +135,31 @@
 .submitBtn {
   width: rem(264);
 }
+
+.passwordCriteria {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  div {
+    font-size: 14px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .valid {
+    color: green;
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+
+    font-size: rem(10);
+    line-height: rem(14);
+    letter-spacing: rem(0.2);
+  }
+
+  .invalid {
+    color: red;
+  }
+}

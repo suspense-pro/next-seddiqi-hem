@@ -39,7 +39,7 @@
     height: 100%;
     cursor: pointer;
     transition: border-color 0.3s;
-    box-sizing: border-box; /* Include padding and border in width calculation */
+    box-sizing: border-box;
 
     &:focus {
       outline: none;

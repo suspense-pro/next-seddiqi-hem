@@ -29,4 +29,5 @@ export { default as WatchIcon } from "./WatchIcon";
 export { default as ProtectionIcon } from "./ProtectionIcon";
 export { default as CareIcon } from "./CareIcon";
 export { default as EditIcon } from "./EditIcon";
+export { default as GreenTick } from "./GreenTick";
 
