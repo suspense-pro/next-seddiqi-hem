@@ -78,7 +78,6 @@ export async function passwordlessLoginCustomer({
   }
 }
 
-
 export async function passwordlessAccessToken({
   userData,
   method,
@@ -97,6 +96,289 @@ export async function passwordlessAccessToken({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "login");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function updateCustomer({
+  userData,
+  method,
+  customerId,
+  access_token
+}: {
+  userData: any;
+  method: string;
+  customerId: string; 
+  access_token: string;
+}) {
+  try {
+    const json = {
+      api: "updateProfile",
+      action: "updateCustomer",
+      customerId: customerId,
+      accessToken: access_token,
+    };
+    const config = {
+      method: method,
+      body: userData,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function createCustomerAddress({
+  userData,
+  method,
+  customerId,
+  access_token
+}: {
+  userData: any;
+  method: string;
+  customerId: string; 
+  access_token: string;
+}) {
+  try {
+    const json = {
+      api: "newAddress",
+      action: "createAddress",
+      customerId: customerId,
+      accessToken: access_token,
+    };
+    const config = {
+      method: method,
+      body: userData,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function updateCustomerAddress({
+  userData,
+  addressName,
+  method,
+  customerId,
+  access_token
+}: {
+  addressName: string;
+  method: string;
+  customerId: string; 
+  access_token: string;
+  userData: any;
+}) {
+  try {
+    const json = {
+      api: "updateAddress",
+      action: "updateCustomerAddress",
+      customerId: customerId,
+      accessToken: access_token,
+      addressName: addressName,
+    };
+    const config = {
+      method: method,
+      body: userData,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function getCustomerAddress({
+  addressName,
+  method,
+  customerId,
+  access_token
+}: {
+  addressName: string;
+  method: string;
+  customerId: string; 
+  access_token: string;
+}) {
+  try {
+    const json = {
+      api: "address",
+      action: "getAddress",
+      customerId: customerId,
+      accessToken: access_token,
+      addressName: addressName,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function removeCustomerAddress({
+  addressName,
+  method,
+  customerId,
+  access_token
+}: {
+  addressName: string;
+  method: string;
+  customerId: string; 
+  access_token: string;
+}) {
+  try {
+    const json = {
+      api: "removeAddress",
+      action: "removeAddress",
+      customerId: customerId,
+      accessToken: access_token,
+      addressName: addressName,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function updateCustomerPassword({
+  userData,
+  method,
+  customerId,
+  access_token
+}: {
+  userData: any;
+  method: string;
+  customerId: string; 
+  access_token: string;
+}) {
+  try {
+    const json = {
+      api: "password",
+      action: "updatePassword",
+      customerId: customerId,
+      accessToken: access_token,
+    };
+    const config = {
+      method: method,
+      body: userData,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function deleteCustomerAccount({
+  emailAddress,
+  method,
+  customerId,
+  access_token
+}: {
+  emailAddress: string;
+  method: string;
+  customerId: string; 
+  access_token: string;
+}) {
+  try {
+    const json = {
+      api: "account",
+      action: "deleteShopper",
+      customerId: customerId,
+      accessToken: access_token,
+      emailAddress: emailAddress,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function getPasswordResetToken({
+  method,
+  userId,
+  access_token
+}: {
+  method: string;
+  userId: string; 
+  access_token: string;
+}) {
+  try {
+    const json = {
+      api: "resetPassword",
+      action: "resetToken",
+      userId: userId,
+      accessToken: access_token,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function resetPassword ({
+  method,
+  userId,
+  codeVerifier,
+  access_token,
+  userData,
+
+}: {
+  method: string;
+  userId: string;
+  codeVerifier: string; 
+  access_token: string;
+  userData: any
+}) {
+  try {
+    const json = {
+      api: "setPassword",
+      action: "resetPassword",
+      userId: userId,
+      accessToken: access_token,
+      codeVerifier: codeVerifier,
+    };
+    const config = {
+      method: method,
+      body: userData,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
@@ -130,13 +412,13 @@ export async function logoutCustomer({
 }
 
 
-export const getCustomer = async (): Promise<any> => {
-  console.log("CLICKED");
-
+export const getCustomer = async (customerId: string, access_token: string): Promise<any> => {
   try {
     const json = {
       api: "customer",
-      action: "getCustomer"
+      action: "getCustomer",
+      customerId: customerId,
+      accessToken: access_token
     };
     const config = {
       method: "GET",
