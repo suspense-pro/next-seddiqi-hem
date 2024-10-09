@@ -14,60 +14,6 @@
   box-shadow: 0 0 rem(10) rgba(0, 0, 0, 0.1);
 }
 
-.inputGroup {
-  position: relative;
-  margin-bottom: 20px;
-
-  input {
-    width: 100%;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s ease;
-
-    &:focus {
-      border-color: #007bff;
-      outline: none;
-    }
-
-    &:not(:placeholder-shown) + label,
-    &:focus + label {
-      top: -10px;
-      font-size: 12px;
-      color: #007bff;
-      background-color: #fff;
-      padding: 0 5px;
-      left: 10px;
-    }
-  }
-
-  label {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    font-size: 16px;
-    color: #999;
-    transition: all 0.3s ease;
-    pointer-events: none;
-  }
-
-  .inputError {
-    border-color: red;
-
-    &:focus {
-      border-color: red;
-    }
-  }
-}
-
-.errorMessage {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-}
 
 .submitButton {
   width: 100%;
@@ -136,30 +82,30 @@
   width: rem(264);
 }
 
-.passwordCriteria {
-  margin-top: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+// .passwordCriteria {
+//   margin-top: 10px;
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
 
-  div {
-    font-size: 14px;
-    margin: 5px 0;
-    display: flex;
-    align-items: center;
-  }
+//   div {
+//     font-size: 14px;
+//     margin: 5px 0;
+//     display: flex;
+//     align-items: center;
+//   }
 
-  .valid {
-    color: green;
-    display: flex;
-    align-items: center;
-    gap: rem(8);
+//   .valid {
+//     color: green;
+//     display: flex;
+//     align-items: center;
+//     gap: rem(8);
 
-    font-size: rem(10);
-    line-height: rem(14);
-    letter-spacing: rem(0.2);
-  }
+//     font-size: rem(10);
+//     line-height: rem(14);
+//     letter-spacing: rem(0.2);
+//   }
 
-  .invalid {
-    color: red;
-  }
-}
+//   .invalid {
+//     color: red;
+//   }
+// }

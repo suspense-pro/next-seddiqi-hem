@@ -12,7 +12,7 @@
   select {
     border: none;
     border-bottom: rem(1) solid getColorHex("grey-light");
-    font-size: 16px;
+    font-size: rem(16);
     width: 100%;
     transition: border-color 0.3s;
     background-color: transparent;
@@ -26,15 +26,15 @@
 
   select {
     width: rem(61);
-    margin-left: -3px;
+    margin-left: rem(-3);
     // appearance: none;
     // -webkit-appearance: none;
     // -moz-appearance: none;
 
     background: transparent;
     border: none;
-    border-bottom: 1px solid getColorHex("grey-light");
-    font-size: 16px;
+    border-bottom: rem(1) solid getColorHex("grey-light");
+    font-size: rem(16);
     color: getColorHex("grey");
     height: 100%;
     cursor: pointer;
@@ -46,7 +46,6 @@
       border-bottom-color: getColorHex("black");
     }
 
-    /* Hides the dropdown arrow for Internet Explorer */
     select::-ms-expand {
       display: none;
     }
