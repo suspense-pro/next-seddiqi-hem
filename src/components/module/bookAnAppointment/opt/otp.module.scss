@@ -2,99 +2,85 @@
 
 .otpContainer {
   text-align: center;
-  padding: 20px;
+  padding: rem(20);
   display: flex;
   flex-direction: column;
   gap: rem(36);
 
   h2 {
     @include heading_regular;
-    font-size: 24px;
+    font-size: rem(24);
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-bottom: rem(10);
 
-    color: var(--Secondary-Dark-Green, #464f4a);
+    color: getColorHex("green-dark");
     text-align: center;
 
-    font-size: 32px;
-    font-style: normal;
+    font-size: rem(32);
     font-weight: 500;
-    line-height: 44px; /* 137.5% */
-    letter-spacing: 0.6px;
+    line-height: rem(44);
+    letter-spacing: rem(0.6);
   }
 
   p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 20px;
+    color: getColorHex("grey");
+    text-align: center;
+    font-size: rem(16);
+    line-height: rem(26);
+    letter-spacing: rem(0.2);
+    margin-bottom: rem(20);
   }
 
   .otpInputs {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: rem(20);
+    margin-bottom: rem(20);
 
     input {
-      width: 117px;
-      height: 48px;
-      font-size: 24px;
+      width: rem(117);
+      height: rem(48);
+      font-size: rem(24);
       text-align: center;
       border: none;
-      border-bottom: 1px solid #ccc;
-      // border-radius: 4px;
+      border-bottom: rem(1) solid getColorHex("grey-light");
       outline: none;
       transition: border-color 0.3s ease-in-out;
 
       &:focus {
-        border-color: #555;
+        border-color: getColorHex("black");
       }
     }
   }
 
   .resendSection {
-    margin-bottom: 20px;
+    margin-bottom: rem(20);
     text-align: left;
+    color: getColorHex("grey");
+    font-size: rem(16);
+    line-height: rem(26);
+    letter-spacing: rem(0.2);
 
     .timer {
-      font-size: 14px;
-      color: #888;
-
-      color: var(--GreyShades-Grey, #403f3d);
-
-      /* Desktop/BodyCopy/Default */
-      @include heading_regular;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 26px; /* 162.5% */
-      letter-spacing: 0.2px;
+      color: getColorHex("green-dark");
+      font-size: rem(16);
+      line-height: rem(26);
+      letter-spacing: rem(0.2);
+      text-transform: capitalize;
 
       .optTimer {
         @include heading_regular;
-        font-size: 14px;
-        font-style: normal;
+        font-size: rem(14);
         font-weight: 500;
-        line-height: 18px; /* 128.571% */
-        letter-spacing: 1px;
+        line-height: rem(18);
+        letter-spacing: rem(1);
         text-transform: capitalize;
         cursor: pointer;
-        border-bottom: 1px solid var(--Secondary-Dark-Green, #464f4a);
+        border-bottom: rem(1) solid getColorHex("green-dark");
       }
     }
 
-    .resendBtn {
-      background: none;
-      border: none;
-      color: #555;
-      text-decoration: underline;
-      cursor: pointer;
-      font-size: 14px;
-
-      &:hover {
-        color: #333;
-      }
-    }
+  
   }
 
   .submitBtn {

@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import styles from "./index.module.scss";
 import { ArrowRight } from "@assets/images/svg";
 import TabbedNavigation from "@components/module/tabbedNavigation";
 import Register from "../auth/register";
-import OtpComponent from "../opt";
 import SelectedCard from "../selectedCard";
 import SelectedLocation from "../selectedLocation";
 import SignIn from "../auth/signIn";
+import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
 
 // Get available dates for a month
 export const getAvailableDates = (month, year) => {
@@ -38,12 +38,12 @@ export const getTimeSlotsForDate = (selectedDate) => {
 };
 
 const StepFour = () => {
+  const { selectedDate, setSelectedDate, selectedTime, setSelectedTime } = useContext(BookAppointmentContext);
+
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [selectedDate, setSelectedDate] = useState(null);
   const [availableDates, setAvailableDates] = useState([]);
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
-  const [selectedTime, setSelectedTime] = useState(null);
   const [noSlotsMessage, setNoSlotsMessage] = useState(false);
 
   const dateContainerRef = useRef(null);
@@ -202,7 +202,7 @@ const StepFour = () => {
       {selectedDate && selectedTime && (
         <div className={styles.confirmation}>
           <p>
-            Selected Date: <strong>{selectedDate.fullDate.toLocaleDateString()}</strong>
+            Selected Date: <strong>{selectedDate?.fullDate?.toLocaleDateString()}</strong>
           </p>
           <p>
             Selected Time: <strong>{selectedTime}</strong>

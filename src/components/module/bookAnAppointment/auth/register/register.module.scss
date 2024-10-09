@@ -1,60 +1,26 @@
 @import "./../../../../../assets/styles/main.scss";
 
-.optionSelector {
-  display: flex;
-  gap: rem(12);
-}
-
-.form {
-  max-width: rem(500);
-  margin: 0 auto;
-  padding: rem(20);
-  background-color: getColorHex("white");
-  border-radius: rem(8);
-  box-shadow: 0 0 rem(10) rgba(0, 0, 0, 0.1);
-}
-
-
-.submitButton {
+.container {
   width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: #fff;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #0056b3;
-  }
 }
 
-/* Additional styles for required inputs */
-.requiredInput:focus {
-  border-color: #28a745;
-}
-
-.optionalLabel:after {
-  content: " *";
-  color: red;
-}
 
 .formGroup {
   display: flex;
   flex-direction: column;
   gap: rem(44);
 }
-.container {
-  width: 100%;
-}
-
 .doubleForm {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: rem(40);
 }
+
+.optionSelector {
+  display: flex;
+  gap: rem(12);
+}
+
 
 .slidingSwitch {
   display: flex;
@@ -62,14 +28,10 @@
   gap: rem(14);
 }
 .switchLabel {
-  color: var(--GreyShades-Grey, #403f3d);
-
-  /* Desktop/BodyCopy/XSmall-Default */
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 14px; /* 140% */
-  letter-spacing: 0.2px;
+  color: getColorHex("grey");
+  font-size: rem(10);
+  line-height: rem(14);
+  letter-spacing:rem(0.2);
 }
 
 .submitBtnContainer {
@@ -82,30 +44,29 @@
   width: rem(264);
 }
 
-// .passwordCriteria {
-//   margin-top: 10px;
-//   display: grid;
-//   grid-template-columns: 1fr 1fr;
+.passwordCriteria {
+  margin-top: rem(10);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-//   div {
-//     font-size: 14px;
-//     margin: 5px 0;
-//     display: flex;
-//     align-items: center;
-//   }
+  div {
+    font-size: rem(14);
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+  }
 
-//   .valid {
-//     color: green;
-//     display: flex;
-//     align-items: center;
-//     gap: rem(8);
+  .valid {
+    color: getColorHex("green-dark");
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+    font-size: rem(10);
+    line-height: rem(14);
+    letter-spacing: rem(0.2);
+  }
 
-//     font-size: rem(10);
-//     line-height: rem(14);
-//     letter-spacing: rem(0.2);
-//   }
-
-//   .invalid {
-//     color: red;
-//   }
-// }
+  .invalid {
+    color: getColorHex("dark-red");
+  }
+}

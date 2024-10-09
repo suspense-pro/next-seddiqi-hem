@@ -21,6 +21,10 @@ export const BookAppointmentProvider = ({ children }) => {
   const [currentStep, setCurrentStep] = useState<number | null>(4);
   const [loading, setLoading] = useState(true);
 
+    // Adding selectedDate and selectedTime to context
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedTime, setSelectedTime] = useState(null);
+
   // Handle Step Change
   const handleStepChange = (step: number) => {
     setCurrentStep(step);
@@ -54,6 +58,8 @@ export const BookAppointmentProvider = ({ children }) => {
     const savedSelectedCard = localStorage.getItem("selectedCard");
     const savedWatches = localStorage.getItem("selectedWatches");
     const savedJewellery = localStorage.getItem("selectedJewellery");
+    const savedSelectedDate = localStorage.getItem("selectedDate");
+    const savedSelectedTime = localStorage.getItem("selectedTime");
 
     if (savedStep) {
       setCurrentStep(Number(savedStep));
@@ -75,6 +81,14 @@ export const BookAppointmentProvider = ({ children }) => {
 
     if (savedJewellery) {
       setSelectedJewellery(JSON.parse(savedJewellery));
+    }
+
+    if (savedSelectedDate) {
+      setSelectedDate(new Date(JSON.parse(savedSelectedDate)));
+    }
+
+    if (savedSelectedTime) {
+      setSelectedTime(JSON.parse(savedSelectedTime));
     }
 
     setLoading(false); 
@@ -120,6 +134,19 @@ export const BookAppointmentProvider = ({ children }) => {
     }
   }, [selectedCard]);
 
+    // Save selectedDate and selectedTime whenever they change
+    useEffect(() => {
+      if (selectedDate) {
+        localStorage.setItem("selectedDate", JSON.stringify(selectedDate));
+      }
+    }, [selectedDate]);
+  
+    useEffect(() => {
+      if (selectedTime) {
+        localStorage.setItem("selectedTime", JSON.stringify(selectedTime));
+      }
+    }, [selectedTime]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -142,6 +169,10 @@ export const BookAppointmentProvider = ({ children }) => {
         setSelectedWatches,
         selectedJewellery,
         setSelectedJewellery,
+        selectedDate,
+        setSelectedDate,
+        selectedTime,
+        setSelectedTime,
       }}
     >
       {children}
