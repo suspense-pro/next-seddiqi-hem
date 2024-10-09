@@ -2,16 +2,19 @@
 
 .container {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   flex-direction: column;
   margin: rem(28);
   margin-right: rem(0);
   gap: rem(32);
   flex-wrap: wrap;
+  
 
   @include lg {
     flex-direction: row;
     gap: rem(40);
+    margin-left: rem(80);
+
   }
 
   .headerItem {
@@ -83,8 +86,9 @@
   align-items: center;
 
   @include lg {
-    width: rem(916);
-    // width: 100%;
+    // width: rem(916);
+    width: 100%;
+    width: calc(100% - 473px);
   }
 
   .leftBtn,

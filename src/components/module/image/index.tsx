@@ -10,7 +10,7 @@ type ImageProps = {
     di?: string;
 } & CmsContent;
 
-const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel, className }: ImageProps) => {
+const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel, className, height }: ImageProps) => {
     if (!image) {
         return null;
     }
@@ -122,7 +122,7 @@ const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel,
             </picture>
         );
 
-    return <div style={{ position: 'relative', width: 'auto' }}>{imageTag}</div>;
+    return <div className={height} style={{ position: 'relative', width: 'auto' }}>{imageTag}</div>;
 };
 
 export default Image;

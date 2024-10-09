@@ -14,6 +14,7 @@ const CollectionsCard = ({ item, type }) => {
             className={`${isProduct && styles.productImg} ${styles.image}`}
             image={item?.media?.image}
             imageAltText={item.media.altText}
+            height={styles.height}
           />
         ) : item?.media?.video ? (
           <div className={styles.videoContainer}>

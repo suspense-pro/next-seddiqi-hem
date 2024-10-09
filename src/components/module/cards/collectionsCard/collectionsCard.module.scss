@@ -1,5 +1,13 @@
 @import "./../../../../assets/styles/main.scss";
 
+.height {
+  height: rem(336);
+
+  @include md {
+    height: rem(520);
+  }
+}
+
 .image,
 .productImg {
   // width: rem(360);
@@ -9,6 +17,7 @@
 
   @include md {
     height: rem(520);
+    overflow: hidden;
   }
 }
 
@@ -53,7 +62,6 @@
   position: relative;
   border: rem(1) solid getColorHex("grey-light-4", 0.4);
   z-index: 100;
-
 
   .itemContent,
   .productContent {
