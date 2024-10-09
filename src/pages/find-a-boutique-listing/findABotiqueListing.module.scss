@@ -1,11 +1,30 @@
-@import "../../../assets/styles/main.scss";
+@import "../../assets/styles/main.scss";
+
+.heroBannerWrapper{
+
+  & > div > div:first-child{
+    height: rem(420);
+  }
+
+  & > div > div:last-child > div:first-child{
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5))
+  }
+
+  & > div > div:last-child > div > div:last-child{
+    display: none;
+  }
+}
 
 .storeLocatorContainer{
+  padding: 0 rem(28); 
   display: flex;
   flex-direction: column;
   row-gap: rem(40);
+  margin-top: rem(32);
 
   @include md{
+    margin-top: rem(60);
+    padding: 0 rem(60);
     row-gap: rem(32);
   }
 }
@@ -99,115 +118,40 @@
 .tabsSwiperContainer {
   width: 100%;
   margin: auto;
-}
-
-.tabsSwiper {
   display: flex;
-  padding: 0;
-  //margin-bottom: rem(20);
-  border-bottom: rem(1) solid getColorHex("grey-light");
-
-  @include md {
-    //margin-bottom: rem(32);
-  }
-
-  /*& > div{
-    width: auto;
-    align-self: flex-start;
-    margin: 0 auto;
-  }*/
-}
-
-.tabsSwiperSlide{
-  width: auto;
-  min-width: 33.33%;
+  flex-direction: column;
+  gap: rem(20);
 
   @include md{
-    min-width: rem(181);
-  }
-
-  &:last-child{
-    margin-right: 0 !important;
-
-    [dir="rtl"] & {
-      margin-left: 0 !important;
-    }
-  }
-
-  button{
-    @include heading_regular;
-    font-size: rem(14);
-    line-height: rem(20);
-    font-weight: 500;
-    letter-spacing: rem(0.4);
-    color: getColorHex("brown-grey");
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    background: none;
-    padding: 0 rem(10) rem(8);
-    border: none;
-    text-align: center;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    position: relative;
-    box-sizing: border-box;
-
-    &::after{
-      content: "";
-      background: getColorHex("chocolate-brown");
-      width: 100%;
-      height: rem(2);
-      position: absolute;
-      bottom: 0;
-      transform-origin: center;
-      transition: transform 0.3s ease;
-      transform: scaleX(0);
-    }
-
-    @include md{
-      font-size: rem(16);
-      font-weight: 400;
-    }
-
-    &.active{
-      color: getColorHex("green-dark");
-      pointer-events: none;
-
-      &::after{
-        transform: scaleX(1);
-      }
-    }
-
-    &:hover{
-      color: getColorHex("green-dark");
-      //border-bottom: rem(2) solid rgba(getColorHex("chocolate-brown"), 1);
-
-      &::after{
-        transform: scaleX(1);
-      }
-    }
+    justify-content: space-between;
+    flex-direction: row;
   }
 }
 
-.toggleResultsContainer{
+.filtersContainer{
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  column-gap: rem(20);
+  width: auto;
 
-  .storeResult{
-    @include body_regular;
-    font-weight: 400;
-    font-size: rem(12);
-    line-height: rem(20);
-    letter-spacing: rem(0.2);
-    color: getColorHex("grey-mid");
+  .filterButton{
+    display: flex;
+    align-items: center;
+    column-gap: rem(8);
+    flex-wrap: nowrap;
+    height: rem(40);
+    min-width: rem(145);
+    padding: rem(8) rem(12);
+    border-radius: rem(4);
+    border: rem(1) solid getColorHex("grey-light");
+    background: none;
 
-    @include md{
+    span{
+      @include body_regular;
+      font-weight: 400;
       font-size: rem(14);
       line-height: rem(22);
+      letter-spacing: rem(0.4);
+      text-transform: uppercase;
+      white-space: nowrap;
     }
   }
 }
@@ -217,6 +161,20 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
+  position: relative;
+  //row-gap: rem(32);
+
+  @include sm{
+    //row-gap: rem(60);
+  }
+}
+
+.loadMore{
+  margin: rem(32) auto 0;
+
+  @include sm{
+    margin: rem(60) auto 0;
+  }
 }
 
 .storeList{
@@ -229,7 +187,12 @@
   padding: 0;
 
   @include sm{
-    row-gap: rem(20);
+    //row-gap: rem(20);
+    padding: 0 rem(20);
+  }
+
+  @include md{
+    row-gap: rem(60);
   }
 
   .store{
@@ -254,6 +217,8 @@
       border-top-left-radius: rem(16);
       border-bottom-right-radius: rem(16);
       min-height: rem(224);
+
+      
 
       @include sm{
         -webkit-border-top-left-radius: rem(30);
@@ -354,127 +319,6 @@
   }
 }
 
-.storeMapList{
-  display: flex;
-  flex-direction: column;
-  gap: rem(20);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  @include sm{
-    gap: rem(32);
-  }
-}
-
-.storeMap{
-  display: flex;
-  flex-direction: column;
-  row-gap: rem(16);
-  transition: all 0.3s ease;
-
-  @include sm{
-    row-gap: rem(36);
-  }
-
-  &:hover{
-    padding: rem(20);
-    border: rem(1) solid getColorHex("green-dark");
-    -webkit-border-top-rght-radius: rem(16);
-    -webkit-border-bottom-left-radius: rem(16);
-    -moz-border-radius-topright: rem(16);
-    -moz-border-radius-bottomleft: rem(16);
-    border-top-right-radius: rem(16);
-    border-bottom-left-radius: rem(16);
-
-    @include sm{
-      padding: rem(32);
-      -webkit-border-top-rght-radius: rem(24);
-      -webkit-border-bottom-left-radius: rem(24);
-      -moz-border-radius-topright: rem(24);
-      -moz-border-radius-bottomleft: rem(24);
-      border-top-right-radius: rem(24);
-      border-bottom-left-radius: rem(24);
-    }
-
-    .storeMapLink{
-      display: block;
-    }
-  }
-
-  &Details{
-    display: flex;
-    flex-direction: column;
-    row-gap: rem(8);
-
-    @include sm{
-      row-gap: rem(12);
-    }
-  }
-
-  &Name{
-    @include heading_regular;
-    font-weight: 500;
-    font-size: rem(18);
-    line-height: rem(26);
-    letter-spacing: rem(0.4);
-    color: getColorHex("green-dark");
-    display: block;
-    margin: 0;
-
-    @include sm{
-      font-size: rem(26);
-      line-height: rem(36);
-      letter-spacing: rem(0.6);
-    }
-  }
-
-  &Location{
-    display: flex;
-    align-items: center;
-    gap: rem(3);
-
-    p{
-      @include body_light;
-      font-weight: 300;
-      font-size: rem(14);
-      line-height: rem(22);
-      letter-spacing: rem(0.2);
-      color: getColorHex("green-dark");
-      display: flex;
-      align-items: center;
-      gap: rem(3);
-
-      @include sm{
-        font-weight: 400;
-        font-size: rem(16);
-        line-height: rem(26);
-      }
-
-      span{
-        display: flex;
-        align-items: center;
-        gap: rem(3);
-
-        &:last-child{
-
-          &::before{
-            content: "|";
-          }
-        }
-      }
-    }
-  }
-
-  &Link{
-    display: none;
-
-    [dir="rtl"] & {
-      text-align: right;
-    }
-  }
-}
-
 .mapContainer{
   display: flex;
   width: 100%;
@@ -486,14 +330,17 @@
   -moz-border-radius-bottomright: rem(16);
   border-top-left-radius: rem(16);
   border-bottom-right-radius: rem(16);
+  height: rem(363);
 
-  @include sm{
+  @include md{
     -webkit-border-top-left-radius: rem(30);
     -webkit-border-bottom-right-radius: rem(30);
     -moz-border-radius-topleft: rem(30);
     -moz-border-radius-bottomright: rem(30);
     border-top-left-radius: rem(30);
     border-bottom-right-radius: rem(30);
+    height: rem(860);
+    margin: 0;
   }
 }
 
@@ -502,9 +349,10 @@
   width: 100%;
   max-height: rem(224);
   height: rem(500);
+  max-height: rem(363);
 
   @include md{
-    max-height: rem(363);
+    max-height: rem(860);
   }
 }
 

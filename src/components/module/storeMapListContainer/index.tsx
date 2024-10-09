@@ -1,0 +1,96 @@
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import styles from "./storeMapListContainer.module.scss";
+import { LocationIcon } from "@assets/images/svg";
+
+import { FreeMode, Scrollbar, Mousewheel } from 'swiper/modules';
+
+import "swiper/css";
+import 'swiper/css/free-mode';
+import 'swiper/css/scrollbar';
+
+const StoreMapListContainer = ({
+  storesList,
+  activeIndex,
+  handleStoreClick,
+  isMobile,
+  isAbsolutePosition
+}) => {
+  return (
+    <div className={`${[styles.storeMapListContainer]} ${isAbsolutePosition === true ? "" : styles.isRelative}`}>
+      {!isMobile ? (
+        <Swiper
+            direction={'vertical'}
+            slidesPerView={'auto'}
+            freeMode={true}
+            scrollbar={{ dragSize: 160, draggable: true }}
+            mousewheel={true}
+            modules={[FreeMode, Scrollbar, Mousewheel]}
+            className={styles.storeMapListSwiper}
+        >
+          <SwiperSlide>
+            <ul className={styles.storeMapList}>
+              {storesList.map((store, index) => (
+                <li
+                  key={store.id}
+                  className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ''}`}
+                  onClick={() => handleStoreClick(index)}
+                >
+                  <div className={styles.storeMapDetails}>
+                    <h4 className={styles.storeMapName}>{store.name}</h4>
+                    <div className={styles.storeMapLocation}>
+                      <div className={styles.locationContainer}>
+                        <LocationIcon />
+                        <p><span>{store.city}</span><span>{store.address1}</span></p>
+                      </div>
+                      <p className={styles.storeMapDistance}>{store.distance} {store.distanceUnit}</p>
+                    </div>
+                  </div>
+                  <div className={styles.storeMapLinksContainer}>
+                    <a href="" target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
+                      <span>View Details</span>
+                    </a>
+                    <a href={store.c_googleMapLocation} target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
+                      <span>Get Directions</span>
+                    </a>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </SwiperSlide>
+        </Swiper>
+      ) : (
+        <ul className={styles.storeMapList}>
+          {storesList.map((store, index) => (
+            <li
+              key={store.id}
+              className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ''}`}
+              onClick={() => handleStoreClick(index)}
+            >
+              <div className={styles.storeMapDetails}>
+                <h4 className={styles.storeMapName}>{store.name}</h4>
+                <div className={styles.storeMapLocation}>
+                  <div className={styles.locationContainer}>
+                    <LocationIcon />
+                    <p><span>{store.city}</span><span>{store.address1}</span></p>
+                  </div>
+                  <p className={styles.storeMapDistance}>{store.distance} {store.distanceUnit}</p>
+                </div>
+              </div>
+              <div className={styles.storeMapLinksContainer}>
+                <a href="" target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
+                  <span>View Details</span>
+                </a>
+                <a href={store.c_googleMapLocation} target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
+                  <span>Get Directions</span>
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default StoreMapListContainer;

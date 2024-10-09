@@ -92,7 +92,6 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
   };
 
   const hasMultipleItems = listItems.length > slidesPerView;
-
   return (
     <div className={styles.container}>
       {/* CONTAINER HEADER */}
@@ -103,6 +102,7 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
         hideUnderline={hideUnderline}
         mainTitle={mainTitle}
         richText={richText}
+
       />
       <div className={styles.containerSlider}>
         {/* SLIDER BTNS */}
