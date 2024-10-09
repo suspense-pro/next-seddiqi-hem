@@ -42,6 +42,7 @@ import ProductImageFullScreen from "./product/productImageFullScreen";
 import ProductDetailInfo from "./product/productDetailInfo";
 import Loader from "./loader";
 import BookAnAppointment from "./bookAnAppointment";
+import BrandListing from "./brandListing";
 
 
 export {
@@ -87,5 +88,6 @@ export {
   CategoryCard,
   Loader,
   BookAnAppointment,
-  MapComponent
+  MapComponent,
+  BrandListing
 };

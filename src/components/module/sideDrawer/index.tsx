@@ -11,11 +11,11 @@ interface SideDrawerProps {
   showFooter: boolean;
   showBackButton: boolean;
   onClose: () => void;
-  title?: string; 
-  position: string;
-  onSubmit: () => void;
-  onClearAll: () => void;
-  className:string;
+  className?:string;
+  title?: string;
+  position?: string;
+  onSubmit?: () => void;
+  onClearAll?: () => void;
 }
 
 const SideDrawer: React.FC<SideDrawerProps> = ({
@@ -25,36 +25,39 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   showFooter = true,
   showBackButton = false,
   title = "SORT & FILTER", // Default title
-  position,
   onSubmit,
   onClearAll,
   className,
+  position = "left",
 }) => {
   return (
-    <div className={`${isOpen ? `${styles.drawer} ${styles.open}` : styles.drawer} ${position === "right" ? styles.right : ""}`}>
+    <div className={`${styles.drawer} ${position === "right" ? styles.right : ""} ${isOpen ? styles.open : ""}`}>
       <div className={styles.header}>
-      {showBackButton? (
+        {showBackButton ? (
           <span onClick={onClose} className={styles.backButton}>
             <Typography align="left" variant="span" className={styles.backButtonText}>
-            <span className={styles.arrowLeftWrapper}><ArrowRight fill="black" className={styles.arrowLeft} /></span>
+              <span className={styles.arrowLeftWrapper}>
+                <ArrowRight fill="black" className={styles.arrowLeft} />
+              </span>
               Back
             </Typography>
           </span>
-        ) : 
-        (<Typography align="left" variant="h5" className={styles.sortFilterText}>
-         {title} 
-        </Typography>)}
+        ) : (
+          <Typography align="left" variant="h5" className={styles.sortFilterText}>
+            {title}
+          </Typography>
+        )}
         <span onClick={onClose} className={styles.closeButton}>
           <CloseIconV2 />
         </span>
       </div>
       <div className={styles.content}>{children}</div>
-      {showFooter && 
-      <div className={styles.footer}>
-        <Button title="Clear all" type="transparent" clickHandler={onClearAll} />
-        <Button title="Done" type="solid green_dark" clickHandler={onSubmit} />
-      </div>
-      }
+      {showFooter && (
+        <div className={styles.footer}>
+          <Button title="Clear all" type="transparent" clickHandler={onClearAll} />
+          <Button title="Done" type="solid green_dark" clickHandler={onSubmit} />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useContext, useEffect } from "react";
+import React, { useMemo, useState } from "react";
 import styles from "./productDetailInfo.module.scss";
 import { ArrowRight, CalendarIcon, CubeIcon, HeartIcon, PlusIcon, ShareIcon } from "@assets/images/svg";
 import { Button, SideDrawer } from "@components/module";
@@ -7,35 +7,44 @@ import CarouselBtns from "@components/module/carouselBtns";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
-import { SizeGuide, SizeSelector , StoreLocationDetails} from "@components/module";
+import { SizeGuide, SizeSelector, StoreLocationDetails } from "@components/module";
 import StoreLocator from "@components/module/storeLocator";
 import { SizeGuideProvider } from "@contexts/sizeGuideSelectorContext";
+import ProductDescriptionFlyoutCard from "../productDescriptionFlyoutCard";
+import ProductCareAndWarrantyFlyoutCard from "../productCareAndWarrantyFlyoutCard";
+import ProductShippingDetailsFlyoutCard from "../productShippingDetailsFlyoutCard";
 
 const ProductDetailInfo = ({
   product,
   content,
-  sizeGuideData
+  sizeGuideData,
+  shippingData,
+  warrantyData,
+  editorsView,
+  sizeGuideDataMenWatches,
+  sizeGuideDataWomenWatches,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
   const [storeLocatorPopup, showStoreLocatorPopup] = useState(false);
   const isMobile = !useDeviceWidth()[0];
-  const handleSizeSelectorClose = () => setSizeSelectorOpen(false);
   const [isSizeSelectorOpen, setSizeSelectorOpen] = useState(false);
+  const [isCardOpen, setCardOpen] = useState(null);
+  const productInfo = content?.page?.components[1];
+
+  if (!product) return null;
   const [isSizeGuideOpen, setSizeGuideOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
-  const [isBoutiqueLocationDetailsOpen, setBoutiqueLocationDetailsOpen] = useState(false); 
+  const [isBoutiqueLocationDetailsOpen, setBoutiqueLocationDetailsOpen] = useState(false);
 
   const handleSizeSelectorOpen = () => {
-    setSelectedProductId(product.id);
     setSizeSelectorOpen(true);
-    setSizeGuideOpen(false);
+    setCardOpen(null);
   };
 
-  const handleSizeGuideOpen = () => {
-    setSizeSelectorOpen(false);
-    setSizeGuideOpen(true);
+  const handleCardToggle = (card) => {
+    setCardOpen((prev) => (prev === card ? null : card));
   };
 
   const handleSizeGuideClose = () => {
@@ -46,27 +55,20 @@ const ProductDetailInfo = ({
 
   const handleBoutiqueLocationDetailsOpen = () => {
     setBoutiqueLocationDetailsOpen(true); // Close Boutique Location Details Popup
-
   };
 
   const handleBoutiqueLocationDetailsClose = () => {
-    setBoutiqueLocationDetailsOpen(false);  // Close Boutique Location Details Popup
+    setBoutiqueLocationDetailsOpen(false); // Close Boutique Location Details Popup
   };
 
-  if (!product) return null;
-  
   const ImageSlide = ({ item }) => {
     return (
       <div onClick={() => setShowZoom(true)} className={styles.imgContainer}>
-        <Image
-          fill
-          className={styles.image}
-          alt={item?.alt}
-          src={item?.link}
-        />
+        <Image fill className={styles.image} alt={item?.alt} src={item?.link} />
       </div>
     );
   };
+
   const VideoSlide = ({ item }) => {
     return (
       <div className={styles.imgContainer}>
@@ -89,150 +91,152 @@ const ProductDetailInfo = ({
   };
 
   const slides = product?.imageGroups[0]?.images?.map((item, index) =>
-    item?.videoLink1 ? (
-      <VideoSlide item={item} key={index} />
-    ) : (
-      <ImageSlide item={item} key={index} />
-    )
+    item?.videoLink1 ? <VideoSlide item={item} key={index} /> : <ImageSlide item={item} key={index} />
   );
-
-  
-  // Getting Variants in Size Selector Pop up
-  const sizeSelectorVariants = product.variants
-    .map(item => item.variationValues?.size)
-    .filter(size => size) // Filter out any undefined sizes
-    .sort((a, b) => parseInt(a, 10) - parseInt(b, 10)); // Sort numerically
-  
-  //Size Guide Props
-  const sizeGuideInfo = content?.page?.components[1].sizeGuide;
 
   const openStoreLocator = () => {
     showStoreLocatorPopup(true);
-  }
-
+  };
   return (
     <>
-    <div className={styles.container}>
-      {showZoom && (
-        <ProductImageFullScreen
-          listitems={product?.imageGroups[0]?.images}
-          setShowZoom={setShowZoom}
-        activeImage={activeIndex} />
-      )}
-      {isMobile && (
-        <div className={styles.backBtn}>
-          <ArrowRight /> Back
-        </div>
-      )}
-      <div className={styles.carousel}>
-        <Carousel
-          setTransition={""}
-          setSpeed={500}
-          isAnimated={"no"}
-          slides={slides}
-          setSwiper={setSwiper}
-          setActiveIndex={setActiveIndex}
-        />
-
-        {!isMobile && <div className={styles.exclusive}>Exclusive</div>}
-        <div onClick={() => setShowZoom(true)} className={styles.plus}>
-          <PlusIcon />
-        </div>
-        <div className={styles.threesixty}>
-          <CubeIcon />
-          <span className={styles.degree}>360°</span>
-        </div>
-
-        <div className={styles.carouselBtns}>
-          <CarouselBtns
+      <div className={styles.container}>
+        {showZoom && (
+          <ProductImageFullScreen
+            listitems={product?.imageGroups[0]?.images}
+            setShowZoom={setShowZoom}
+            activeImage={activeIndex}
+          />
+        )}
+        {isMobile && (
+          <div className={styles.backBtn}>
+            <ArrowRight /> Back
+          </div>
+        )}
+        <div className={styles.carousel}>
+          <Carousel
+            setTransition={""}
+            setSpeed={500}
+            isAnimated={"no"}
             slides={slides}
-            activeIndex={activeIndex}
-            swiper={swiper}
+            setSwiper={setSwiper}
+            setActiveIndex={setActiveIndex}
           />
+          {!isMobile && <div className={styles.exclusive}>Exclusive</div>}
+          <div onClick={() => setShowZoom(true)} className={styles.plus}>
+            <PlusIcon />
+          </div>
+          <div className={styles.threesixty}>
+            <CubeIcon />
+            <span className={styles.degree}>360°</span>
+          </div>
+          <div className={styles.carouselBtns}>
+            <CarouselBtns slides={slides} activeIndex={activeIndex} swiper={swiper} />
+          </div>
         </div>
-      </div>
-      <div className={styles.right}>
-        <div className={styles.productDetails}>
-          <div className={styles.productHead}>
-            <div className={styles.brand}>
-              {isMobile && <div className={styles.exclusive}>Exclusive</div>}
-              <span>{product?.brand}</span>
+        <div className={styles.right}>
+          <div className={styles.productDetails}>
+            <div className={styles.productHead}>
+              <div className={styles.brand}>
+                {isMobile && <div className={styles.exclusive}>Exclusive</div>}
+                <span>{product?.brand}</span>
+              </div>
+              <div className={styles.title}>{product?.name}</div>
+              <div className={styles.price}>
+                {product?.currency} {product?.price}
+              </div>
             </div>
-            <div className={styles.title}>{product?.name}</div>
-            <div className={styles.price}>
-              {product?.currency} {product?.price}
+            <div className={styles.size}>
+              <div className={styles.label} onClick={handleSizeSelectorOpen}>
+                Select Size
+              </div>
+              <ArrowRight />
             </div>
-          </div>
-          <div className={styles.size}>
-            <div className={styles.label} onClick={handleSizeSelectorOpen}>
-              Select Size
+            <Button
+              isLink={false}
+              link={""}
+              className={styles.boutiqueBtn}
+              title={"Find in BOUTIQUE"}
+              color="metallic"
+              type={"solid"}
+              clickHandler={openStoreLocator}
+            />
+            <div className={styles.appointment}>
+              <div className={styles.appointmentLeft}>
+                <CalendarIcon fill="#" />
+                <Button
+                  isLink={true}
+                  link={"/"}
+                  className={styles.appointmentBtn}
+                  title={"Book An Appointment"}
+                  color="green_dark"
+                  type={"Plain"}
+                />
+              </div>
+              <ShareIcon />
             </div>
-            <ArrowRight />
-          </div>
-          <Button
-            isLink={false}
-            link={""}
-            className={styles.boutiqueBtn}
-            title={"Find in BOUTIQUE"}
-            color="metallic"
-            type={"solid"}
-            clickHandler={openStoreLocator}
-          />
-          <div className={styles.appointment}>
-            <div className={styles.appointmentLeft}>
-              <CalendarIcon fill="#" />
-              <Button
-                isLink={true}
-                link={"/"}
-                className={styles.appointmentBtn}
-                title={"Book An Appointment"}
-                color="green_dark"
-                type={"Plain"}
+            <div className={styles.productText}>
+              <div className={styles.productLabel}>Product Description</div>
+              <div className={styles.productDesc}>
+                {product?.shortDescription}
+                <Button
+                  link={"/"}
+                  className={styles.readMore}
+                  title={"Read More"}
+                  color="green_dark"
+                  type={"Plain"}
+                  clickHandler={() => handleCardToggle("description")}
+                />
+              </div>
+            </div>
+            {(editorsView || product?.longDescription) && isCardOpen === "description" && (
+              <ProductDescriptionFlyoutCard
+                isDescriptionCardOpen={isCardOpen === "description"}
+                setDescriptionCardOpen={() => handleCardToggle("description")}
+                editorsView={editorsView}
+                product={product}
               />
-            </div>
-            <ShareIcon />
-          </div>
-          <div className={styles.productText}>
-            <div className={styles.productLabel}>Product Description</div>
-            <div className={styles.productDesc}>
-              {product?.shortDescription}
-              <Button
-                isLink={true}
-                link={"/"}
-                className={styles.readMore}
-                title={"Read More"}
-                color="green_dark"
-                type={"Plain"}
-              />
-            </div>
-          </div>
-          <div className={styles.bottom}>
-            <div className={styles.tab}>Editors View</div>
-            <div className={styles.vline}>&nbsp;</div>
-            <div className={styles.tab}>Warranty & Care</div>
-            <div className={styles.vline}>&nbsp;</div>
-            <div className={styles.tab}>Shipping</div>
-          </div>
-          <div className={styles.label} onClick={handleBoutiqueLocationDetailsOpen}>Boutique Location Details</div>
-            {(
-                <div className={styles.sizeSelector}>
-                  <StoreLocationDetails
-                    isOpen={isBoutiqueLocationDetailsOpen} 
-                    onClose={handleBoutiqueLocationDetailsClose}
-                    storeId={""}
-                  />           
-                </div>
             )}
-        </div>
-        <div className={styles.save}>
-          <HeartIcon fill="#" />
-        </div>
-      </div>
-      {/* Size Selector  */}
 
-        <SizeGuideProvider
-        sizeGuideData={sizeGuideData}
-        >
+            {warrantyData && isCardOpen === "careAndWarranty" && (
+              <ProductCareAndWarrantyFlyoutCard
+                isCareAndWarrantyCardOpen={isCardOpen === "careAndWarranty"}
+                setCareAndWarrantyCardOpen={() => handleCardToggle("careAndWarranty")}
+                warrantyAndCare={warrantyData}
+              />
+            )}
+            {shippingData && isCardOpen === "shipping" && (
+              <ProductShippingDetailsFlyoutCard
+                isShippingCardOpen={isCardOpen === "shipping"}
+                setShippingCardOpen={() => handleCardToggle("shipping")}
+                shippingDetails={shippingData}
+              />
+            )}
+            <div className={styles.bottom}>
+              {editorsView && (
+                <>
+                  <div onClick={() => handleCardToggle("description")} className={styles.tab}>
+                    Editors View
+                  </div>
+                  <div className={styles.vline}>&nbsp;</div>
+                </>
+              )}
+
+              <div onClick={() => handleCardToggle("careAndWarranty")} className={styles.tab}>
+                Warranty & Care
+              </div>
+              <div className={styles.vline}>&nbsp;</div>
+              <div onClick={() => handleCardToggle("shipping")} className={styles.tab}>
+                Shipping
+              </div>
+            </div>
+          </div>
+          <div className={styles.save}>
+            <HeartIcon fill="#" />
+          </div>
+        </div>
+        {/* Size Selector  */}
+
+        <SizeGuideProvider sizeGuideData={sizeGuideData}>
           <SizeSelector
             isOpen={isSizeSelectorOpen}
             onClose={handleSizeGuideClose}
@@ -241,31 +245,29 @@ const ProductDetailInfo = ({
             description={""}
           />
         </SizeGuideProvider>
-    </div>
+      </div>
 
-    <SideDrawer
-      isOpen={storeLocatorPopup}
-      onClose={() => showStoreLocatorPopup(false)}
-      showFooter={false}
-      onSubmit={null}
-      onClearAll={null}
-      showBackButton={false}
-      title="Find product in Boutique"
-      position={"right"}
-      className={""}>
-        
-        <StoreLocator 
-        productImgAlt={product?.imageGroups[0]?.images[0].alt}
-        productImgSrc={product?.imageGroups[0]?.images[0].disBaseLink} 
-        productBrand={product?.brand}
-        productName={product?.name}
-        productPrice={product?.price}
-        productCurrency={product?.currency}
+      <SideDrawer
+        isOpen={storeLocatorPopup}
+        onClose={() => showStoreLocatorPopup(false)}
+        showFooter={false}
+        onSubmit={null}
+        onClearAll={null}
+        showBackButton={false}
+        title="Find product in Boutique"
+        position={"right"}
+      >
+        <StoreLocator
+          productImgAlt={product?.imageGroups[0]?.images[0].alt}
+          productImgSrc={product?.imageGroups[0]?.images[0].disBaseLink}
+          productBrand={product?.brand}
+          productName={product?.name}
+          productPrice={product?.price}
+          productCurrency={product?.currency}
         />
-
-    </SideDrawer>
+      </SideDrawer>
     </>
-  );  
+  );
 };
 
 export default ProductDetailInfo;

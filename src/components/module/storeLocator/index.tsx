@@ -23,7 +23,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
       const existingScript = document.getElementById('google-maps');
       if (!existingScript) {
         const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBD-TGPmve8xmC6qIawp7eOXPKfs3ldS_U&libraries=places`;
         script.id = 'google-maps';
         document.body.appendChild(script);
       }
