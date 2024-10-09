@@ -27,7 +27,6 @@ import CategoryList from "./categoryList";
 import SideDrawer from "./sideDrawer";
 import SizeGuide from "./sizeGuide";
 import SizeSelector from "./sizeSelector";
-import MapComponent from "./mapComponent";
 import StoreLocationDetails from "./storeLocationDetails";
 import StoreDetails from "./storeLocationDetails/storeDetails";
 import StoreDetailsPage from "./storeLocationDetails/storeDetailsPage"
@@ -43,6 +42,7 @@ import ProductDetailInfo from "./product/productDetailInfo";
 import Loader from "./loader";
 import BookAnAppointment from "./bookAnAppointment";
 import BrandPopup from "./storeLocationDetails/brandPopUp";
+import BrandListing from "./brandListing";
 
 
 export {
@@ -88,5 +88,5 @@ export {
   CategoryCard,
   Loader,
   BookAnAppointment,
-  MapComponent
+  BrandListing
 };

@@ -23,16 +23,16 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
 
   const slides = banners
     ?.map((banner) => {
-      if (banner.media.image) {
+      if (banner?.media?.image) {
         return {
           type: "image",
           url: `https://${banner.media.image.defaultHost}/i/${banner.media.image.endpoint}/${banner.media.image.name}`,
           altText: banner.media.altText,
         };
-      } else if (banner.media.video) {
+      } else if (banner?.media?.video) {
         return {
           type: "video",
-          video: banner.media.video,
+          video: banner?.media?.video,
           autoPlay: banner.media.autoPlay,
           showPlay: banner.media.showPlay,
         };

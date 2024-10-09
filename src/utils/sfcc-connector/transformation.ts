@@ -10,15 +10,15 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
           specs: [
             {
               title: "Case",
-              description: data.c_caseMaterial
+              description: data.c_caseMaterial || "No available data"
             },
             {
               title: "Size",
-              description: data.c_size
+              description: data.c_size || "No available data"
             },
             {
               title: "Water Resistance",
-              description: data.c_waterResistance === true ? data.c_waterResistanceDepth + " " + data.c_waterResistanceDepthUnit : ""
+              description: data.c_waterResistance === true ? data.c_waterResistanceDepth || "No available data" + " " + data.c_waterResistanceDepthUnit || "No available data" : ""
             }
           ],
           productImageUrl: data.c_dialTabImage
@@ -34,7 +34,7 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
             },
             {
               title: "Power Reserve",
-              description: data.c_powerReserve
+              description: data.c_powerReserve || "No available data"
             }
           ],
           productImageUrl: data.c_movementTabImage
@@ -46,11 +46,11 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
           specs: [
             {
               title: "Dial",
-              description: data.c_dialMaterial
+              description: data.c_dialMaterial || "No available data"
             },
             {
               title: "Power Reserve",
-              description: data.c_powerReserve
+              description: data.c_powerReserve || "No available data"
             }
           ],
           productImageUrl: data.c_caseTabImage
@@ -76,7 +76,7 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
           productImageUrl: data.c_braceletTabImage
         },
       ],
-      category: data.c_categoryName,
+      category: data.c_categoryName || "No available data",
       specsData: [
         {
           mainTitle: "DETAIL SPECIFICATIONS",
@@ -88,32 +88,32 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
                 {
                   id: 1,
                   itemTitle: "Caliber",
-                  itemDescription: data.c_caliber
+                  itemDescription: data.c_caliber || "No available data"
                 },
                 {
                   id: 2,
                   itemTitle: "Movement",
-                  itemDescription: data.c_movement
+                  itemDescription: data.c_movement || "No available data"
                 },
                 {
                   id: 3,
                   itemTitle: "Power Reserve",
-                  itemDescription: data.c_powerReserve
+                  itemDescription: data.c_powerReserve || "No available data"
                 },
                 {
                   id: 4,
                   itemTitle: "Chronograph",
-                  itemDescription: data.c_chronograph
+                  itemDescription: data.c_chronograph || "No available data"
                 },
                 {
                   id: 5,
                   itemTitle: "Vibration",
-                  itemDescription: data.c_vibration
+                  itemDescription: data.c_vibration || "No available data"
                 },
                 {
                   id: 6,
                   itemTitle: "Cylinder",
-                  itemDescription: data.c_cylinder
+                  itemDescription: data.c_cylinder || "No available data"
                 }
               ]
             },
@@ -124,32 +124,32 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
                 {
                   id: 1,
                   itemTitle: "Case Material",
-                  itemDescription: data.c_caseMaterial
+                  itemDescription: data.c_caseMaterial || "No available data"
                 },
                 {
                   id: 2,
                   itemTitle: "Caseback",
-                  itemDescription: data.c_caseBack
+                  itemDescription: data.c_caseBack || "No available data"
                 },
                 {
                   id: 3,
                   itemTitle: "Water Resistance",
-                  itemDescription: data.c_waterResistance === true ? data.c_waterResistanceDepth + " " + data.c_waterResistanceDepthUnit : ""
+                  itemDescription: data.c_waterResistance === true ? data.c_waterResistanceDepth || "No available data" + " " + data.c_waterResistanceDepthUnit || "No available data" : ""
                 },
                 {
                   id: 4,
                   itemTitle: "Bezel",
-                  itemDescription: data.c_bezelType
+                  itemDescription: data.c_bezelType || "No available data"
                 },
                 {
                   id: 5,
                   itemTitle: "Crown",
-                  itemDescription: data.c_crown
+                  itemDescription: data.c_crown || "No available data"
                 },
                 {
                   id: 6,
                   itemTitle: "Crystal",
-                  itemDescription: data.c_crystal
+                  itemDescription: data.c_crystal || "No available data"
                 }
               ]
             },
@@ -160,32 +160,32 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
                 {
                   id: 1,
                   itemTitle: "Product Weight",
-                  itemDescription: data.c_productWeight
+                  itemDescription: data.c_productWeight || "No available data"
                 },
                 {
                   id: 2,
                   itemTitle: "Watch-Head Weight",
-                  itemDescription: data.c_watchHeadWeight
+                  itemDescription: data.c_watchHeadWeight || "No available data"
                 },
                 {
                   id: 3,
                   itemTitle: "Diameter",
-                  itemDescription: data.c_diameter
+                  itemDescription: data.c_diameter || "No available data"
                 },
                 {
                   id: 4,
                   itemTitle: "Thickness",
-                  itemDescription: data.c_thickness
+                  itemDescription: data.c_thickness || "No available data"
                 },
                 {
                   id: 5,
                   itemTitle: "Height",
-                  itemDescription: data.c_height
+                  itemDescription: data.c_height || "No available data"
                 },
                 {
                   id: 6,
                   itemTitle: "Lug Width",
-                  itemDescription: data.c_lugWidth
+                  itemDescription: data.c_lugWidth || "No available data"
                 }
               ]
             },
@@ -196,37 +196,37 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
                 {
                   id: 1,
                   itemTitle: "Strap Material",
-                  itemDescription: data.c_strapMaterial
+                  itemDescription: data.c_strapMaterial || "No available data"
                 },
                 {
                   id: 2,
                   itemTitle: "Strap Color",
-                  itemDescription: data.c_strapColor
+                  itemDescription: data.c_strapColor || "No available data"
                 },
                 {
                   id: 3,
                   itemTitle: "Strap Type",
-                  itemDescription: data.c_strapType
+                  itemDescription: data.c_strapType || "No available data"
                 },
                 {
                   id: 4,
                   itemTitle: "Lug",
-                  itemDescription: data.c_lug
+                  itemDescription: data.c_lug || "No available data"
                 },
                 {
                   id: 5,
                   itemTitle: "Buckle Material",
-                  itemDescription: data.c_buckleMaterial
+                  itemDescription: data.c_buckleMaterial || "No available data"
                 },
                 {
                   id: 6,
                   itemTitle: "Buckle Type",
-                  itemDescription: data.c_buckleType
+                  itemDescription: data.c_buckleType || "No available data"
                 },
                 {
                   id: 7,
                   itemTitle: "Buckle Size",
-                  itemDescription: data.c_buckleSize
+                  itemDescription: data.c_buckleSize || "No available data"
                 }
               ]
             }

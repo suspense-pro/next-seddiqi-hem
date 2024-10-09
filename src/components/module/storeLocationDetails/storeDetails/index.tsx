@@ -13,30 +13,24 @@ import { WhatsappIcon } from "@assets/images/svg";
 import { MapIcon } from "@assets/images/svg";
 import { StoreDetailsProps } from "@utils/models/storeLocatorDetails";
 import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
-import { MapComponent } from "@components/module";
+import MapView from "@components/module/mapView";
 import { ArrowRight } from "@assets/images/svg";
 import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 
 const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
   const [mapView, setMapView] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
   const [activeToggle, setActiveToggle] = useState(true);
   const [isAllBrandPopupOpen, setAllBrandPopupOpen] = useState(false);
   const storeImage = store?.c_storeImage;
-  const storeHoursString = store.storeHours;
+  const storeHoursString = store?.storeHours;
+  const [stores, setStores] = useState([]);
 
   // Split by <br /> and then by ": " to separate days from timings
   const formattedStoreHours = storeHoursString.split("<br />").map((line) => {
     const [days, timings] = line.split(": ");
     return { days: days.trim(), timings: timings.trim() };
   });
-
-  const handleDirection = () => {
-    const destination = encodeURIComponent(
-      `${store?.address1}, ${store?.city}`
-    );
-    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
-    window.open(googleMapsUrl, "_blank");
-  };
 
   const handleToggleChange = (toggle) => {
     setTimeout(() => {
@@ -79,24 +73,24 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
           </span>
         </div>
         <span className={styles.directionBtnWrapper}>
-          <Button
-            isLink={false}
-            className={styles.getDirectionBtn}
-            title={"Get directions"}
-            color="green_dark"
-            type={"Plain"}
-            clickHandler={handleDirection}
-          />
+          <a
+            href={store?.c_googleMapLocation}
+            target="_blank"
+            className={`${styles.storeMapLink} button plain green_dark`}
+          >
+            <span>Get Directions</span>
+          </a>
         </span>
       </div>
 
       <div className={styles.storeImageWrapper}>
         {!activeToggle ? (
           <div className={styles.mapContainer}>
-            <MapComponent
-              latitude={store.latitude}
-              longitude={store.longitude}
-              storeName={store.name}
+            <MapView
+              nearestStore={null}
+              stores={null}
+              activeStore={store}
+              userLocation={userLocation}
             />
           </div>
         ) : (

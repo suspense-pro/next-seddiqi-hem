@@ -13,6 +13,7 @@ export interface Store {
     c_storeImage: string;
     latitude?:number;
     longitude?:number;
+    c_googleMapLocation?:string;
   }
   
 

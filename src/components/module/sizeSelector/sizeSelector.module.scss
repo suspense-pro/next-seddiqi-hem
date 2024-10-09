@@ -65,7 +65,7 @@
 .sizeTab:hover {
   background-color:getColorHex("desert-storm");
   color: getColorHex("chocolate-brown");
-  border: 1px solid getColorHex("chocolate-brown");
+  border: rem(1) solid getColorHex("chocolate-brown");
 }
 
 .sizeInfoWrapper {
