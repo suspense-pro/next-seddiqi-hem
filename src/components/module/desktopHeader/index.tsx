@@ -34,6 +34,13 @@ export default function DesktopHeader() {
 
   const headerScrollStyles = `${styles.headerContainer} ${scrolled && styles.scrolled}`;
 
+  if(scrolled){
+    document.body.classList.add("scrolledPadding");
+  }
+  else{
+    document.body.classList.remove("scrolledPadding");
+  }
+
   return (
     <div onMouseLeave={() => updateCurrent(null)} className={styles.desktopHeader}>
       <div className={headerScrollStyles}>

@@ -23,6 +23,7 @@ export { default as PlusIcon } from "./PlusIcon";
 export { default as CalendarIcon } from "./Calendar";
 export { default as ScrollTopIcon } from "./ScrollTopIcon";
 export { default as WhatsappIcon } from "./WhatsappIcon";
+export { default as WhatsappIcon2 } from "./WhatsappIcon2";
 export { default as ShareIcon } from "./ShareIcon";
 export { default as CubeIcon } from "./CubeIcon";
 export { default as WatchIcon } from "./WatchIcon";
@@ -35,4 +36,6 @@ export { default as PhoneIcon } from "./PhoneIcon";
 export { default as TimeIcon } from "./TimeIcon";
 export { default as ServiceIcon } from "./ServiceIcon";
 export { default as BrandsIcon } from "./BrandsIcon";
+export { default as LocationIcon } from "./LocationIcon";
+export { default as CallIcon } from "./CallIcon";
 

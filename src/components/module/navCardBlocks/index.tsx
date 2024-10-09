@@ -14,7 +14,6 @@ const NavCardBlocks = () => {
   }
 
   const contentBlock = headerData?.children[current]?.content?.contentBlock;
-
   if (!contentBlock) return null;
 
   return (

@@ -68,6 +68,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/image-gallery-carousel`]: ImageGalleryCarousel,
   [`${componentUrl}/explore-brand`]: ExploreBrand,
   [`${componentUrl}/brand-category-list`]: CategoryList,
+  [`${contentUrl}/find-a-boutique-listing`]: ContentPage,
   [`${componentUrl}/brand-listing`]: BrandListing,
 };
 

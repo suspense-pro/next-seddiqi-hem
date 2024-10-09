@@ -10,11 +10,10 @@ const MegaMenu = ({ headerHeightClass }) => {
   const currentHeaderData = headerData?.children[current];
   if (
     Array.isArray(currentHeaderData?.children) &&
-    currentHeaderData?.children?.length === 0
+    !currentHeaderData?.content?.contentBlock 
   ) {
     return null;
   }
-
   return (
     <section className={`${headerHeightClass} ${styles.megaMenuContainer}`}>
       <div className={styles.columns}>
