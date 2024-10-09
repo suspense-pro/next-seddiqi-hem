@@ -9,7 +9,6 @@ import { ArrowRight, PlusIcon } from "@assets/images/svg";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 
 const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
-  console.log("galleryItems", galleryItems);
   if (!galleryItems) return null;
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);

@@ -29,10 +29,11 @@ export { default as CubeIcon } from "./CubeIcon";
 export { default as WatchIcon } from "./WatchIcon";
 export { default as ProtectionIcon } from "./ProtectionIcon";
 export { default as CareIcon } from "./CareIcon";
+export { default as MailIcon } from "./MailIcon";
+export { default as PhoneIcon } from "./PhoneIcon";
 export { default as TimeIcon } from "./TimeIcon";
 export { default as ServiceIcon } from "./ServiceIcon";
 export { default as BrandsIcon } from "./BrandsIcon";
 export { default as LocationIcon } from "./LocationIcon";
 export { default as CallIcon } from "./CallIcon";
-export { default as MailIcon } from "./MailIcon";
 

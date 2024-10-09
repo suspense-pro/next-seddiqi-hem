@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Customer, slasHelpers } from "commerce-sdk";
-import initializeShopperConfig, { basicAuthorization, clientConfig } from "@utils/sfcc-connector/config";
-
+import initializeShopperConfig, { basicAuthorization, clientConfig, getRefereshTokenResponse } from "@utils/sfcc-connector/config";
+import { getCustomer } from "@utils/sfcc-connector/dataService";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const requestMethod = req.method;
@@ -16,15 +16,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           const { username, password} = body;
           const client = new Customer.ShopperLogin(clientConfig);
 
-          const guestTokenResponse = await slasHelpers.loginRegisteredUserB2Cprivate(client, 
+          const registeredUserTokenResponse = await slasHelpers.loginRegisteredUserB2Cprivate(client, 
             { clientSecret: clientConfig.parameters.clientSecret, password: password, username: username }, {redirectURI: process.env.REDIRECT_URI}
-          )
-            .then((guestTokenResponse) => {
-              console.log("Guest Token Response: ", guestTokenResponse);
-              const access_token = guestTokenResponse.access_token;
-              return access_token;
-            })
-            .catch(error => console.log("Error fetching token for guest login: ", error));
+          );
+
+          /** Things to do after getting the token
+           * Save token, refresh_token, and customerID in a session
+           * get the customer profile object and return to front-end (done)
+           * refreshToken API implementation (done)
+           * token expiry track (handled in config.ts --> getRefereshTokenResponse)
+           */
+
+          /** Get refresh token 
+          const newToken = await getRefereshTokenResponse(registeredUserTokenResponse.refresh_token);
+          console.log("Refresh Token: " + JSON.stringify(newToken, null, 4)); */
+
+          const profile = await getCustomer(registeredUserTokenResponse.customer_id, registeredUserTokenResponse.access_token);
+          return profile;
         }
       } catch (err) {
         console.error(err);
