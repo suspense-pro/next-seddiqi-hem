@@ -1,21 +1,27 @@
 @import "../../assets/styles/main.scss";
 
-.brandListWrapper {
-    padding: 20px;
-  }
-  
-  .brandList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0; 
-  }
-  
-  .brandItem {
-    margin: 10px 0;
-  }
-  
+.title {
+  margin-block-start: rem(0);
+  margin-block-end: rem(0);
+}
 
- .title {
-    margin-block-start: rem(0);
-    margin-block-end: rem(0);
-  }
+.brandsWrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-top: rem(12);
+  margin-bottom: rem(16);
+}
+
+.brandSeparator {
+  width: rem(1);
+  height: rem(20);
+  background-color: getColorHex("green-dark");
+  margin: 0 rem(4);
+}
+
+.brandsName {
+  font-size: rem(12);
+  font-weight: 400;
+  line-height: rem(20);
+  letter-spacing: rem(0.2);
+}

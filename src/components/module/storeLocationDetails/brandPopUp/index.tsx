@@ -4,14 +4,9 @@ import Typography from "../../typography";
 import RichText from "../../richText";
 import SideDrawer from "../../sideDrawer";
 import { Button } from "@components/module";
-import { BrandPopUpProps } from "@utils/models/storeLocatorDetails"
+import { BrandPopUpProps } from "@utils/models/storeLocatorDetails";
 
-const BrandPopUp: React.FC<BrandPopUpProps> = ({
-  brands,
-  isOpen,
-  onClose,
-}) => {
-
+const BrandPopUp: React.FC<BrandPopUpProps> = ({ brands, isOpen, onClose }) => {
   return (
     <div className={styles.storeDetailsWrapper}>
       <SideDrawer
@@ -28,17 +23,17 @@ const BrandPopUp: React.FC<BrandPopUpProps> = ({
           <Typography variant="h5" className={styles.title}>
             Available Brands
           </Typography>
-          {brands.length > 0 ? (
-            <ul className={styles.brandList}>
-              {brands.map((brand, index) => (
-                <li key={index} className={styles.brandItem}>
-                  <Typography variant="p">{brand}</Typography>
-                </li>
+          <div className={styles.brandsWrapper}>
+            {brands.length > 0 &&
+              brands.map((availableBrand, index) => (
+                <React.Fragment key={index}>
+                  <p className={styles.brandsName}>{availableBrand}</p>
+                  {index < brands.length - 1 && (
+                    <div className={styles.brandSeparator} />
+                  )}
+                </React.Fragment>
               ))}
-            </ul>
-          ) : (
-            <Typography variant="p">No brands available.</Typography>
-          )}
+          </div>
         </div>
       </SideDrawer>
     </div>
