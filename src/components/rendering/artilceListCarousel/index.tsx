@@ -1,7 +1,7 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./artilceListCarousel.module.scss";
 import { Button, ContentHeader, GradientOverlay, Image, Typography, Video } from "@components/module";
-import { useDeviceWidth } from "@utils/useCustomHooks";
+import { useDeviceWidth, useWindowWidth } from "@utils/useCustomHooks";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectCoverflow } from "swiper/modules";
@@ -13,7 +13,8 @@ import RichText from "@components/module/richText";
 
 const ArticleListCarousel = ({ ...content }) => {
   const listItems = content?.listItems;
-  const isMobile = !useDeviceWidth()[0];
+  const [slidesPerView, setSlidesPerView] = useState(2.2);
+  const [isMobile, setIsMobile] = useState(false);
 
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -29,6 +30,18 @@ const ArticleListCarousel = ({ ...content }) => {
       swiperRef.current[direction === "prev" ? "slidePrev" : "slideNext"]();
     }
   }, []);
+
+  const windowWidth = useWindowWidth();
+  
+  useEffect(() => {
+    if (windowWidth < 1250) {
+      setSlidesPerView(listItems?.length === 1 ? 1 : 1.3);
+      setIsMobile(false);
+    } else {
+      setSlidesPerView(listItems?.length === 1 ? 1 : listItems?.length === 2 ? 1.3 : 2.2);
+      setIsMobile(false);
+    }
+  }, [windowWidth]);
 
   return (
     <div className={styles.container}>
@@ -61,7 +74,7 @@ const ArticleListCarousel = ({ ...content }) => {
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}
-          slidesPerView={isMobile ? 1.3 : 2.2}
+          slidesPerView={isMobile ? 1.3 : slidesPerView}
           onSlideChange={onSlideChange}
           className={styles.mySwiper}
           spaceBetween={20}

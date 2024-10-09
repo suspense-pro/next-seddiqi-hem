@@ -5,13 +5,22 @@
   flex-direction: column;
   margin-top: rem(40);
   gap: rem(44);
-  
+
   span.appointmentBtn {
     text-underline-offset: rem(10);
     text-align: left;
   }
 }
 
+.recommendText {
+  @include heading_regular;
+  color: getColorHex("green-dark");
+  font-size: rem(14);
+  font-weight: 500;
+  line-height: rem(20);
+  letter-spacing: rem(0.4);
+  text-transform: uppercase;
+}
 
 .recommendContainer {
   display: flex;
