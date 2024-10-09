@@ -239,4 +239,18 @@
       margin-top: 0;
     }
   }
+
+  transition: padding 0.3s ease;
+  padding-top: rem(120);
+
+  @include md{
+    padding-top: rem(152);
+  }
+
+  &.scrolledPadding{
+
+    @include md{
+      padding-top: rem(78);
+    }
+  }
 }
