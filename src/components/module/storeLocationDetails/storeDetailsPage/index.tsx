@@ -13,7 +13,7 @@ import { WhatsappIcon } from "@assets/images/svg";
 import { MapIcon } from "@assets/images/svg";
 import { StoreDetailsProps } from "@utils/models/storeLocatorDetails";
 import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
-import { MapComponent } from "@components/module";
+import MapView from "@components/module/mapView";
 import { ArrowRight } from "@assets/images/svg";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 
@@ -21,6 +21,8 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
   store: initialStore,
 }) => {
   const [matchedStore, setMatchedStore] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
+  const [stores, setStores] = useState([]);
   const [mapView, setMapView] = useState(false);
   const [activeToggle, setActiveToggle] = useState(true);
   const isMobile = !useDeviceWidth()[0];
@@ -44,7 +46,7 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
           fetchedStores.find((store) => store.id === storeId) || null;
 
         if (matchedStore) {
-          console.log("Matched Store:", matchedStore); // Log the matched store
+          // console.log("Matched Store:", matchedStore);
         } else {
           console.log("No matching store found.");
         }
@@ -82,14 +84,6 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
     setTimeout(() => {
       setActiveToggle(toggle);
     }, 300);
-  };
-
-  const handleDirection = () => {
-    const destination = encodeURIComponent(
-      `${matchedStore?.address1}, ${matchedStore?.city}`
-    );
-    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
-    window.open(googleMapsUrl, "_blank");
   };
 
   return (
@@ -140,14 +134,13 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
                     </span>
                   </div>
                   <span className={styles.directionBtnWrapper}>
-                    <Button
-                      isLink={false}
-                      className={styles.getDirectionBtn}
-                      title={"Get directions"}
-                      color="green_dark"
-                      type={"Plain"}
-                      clickHandler={handleDirection}
-                    />
+                    <a
+                      href={matchedStore?.c_googleMapLocation}
+                      target="_blank"
+                      className={`${styles.storeMapLink} button plain green_dark`}
+                    >
+                      <span>Get Directions</span>
+                    </a>
                   </span>
                 </div>
                 <hr className={styles.divider} />
@@ -291,12 +284,14 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
           ) : (
             <div className={styles.mapOuterContainer}>
               <div className={styles.mapContainer}>
-                <MapComponent
-                  latitude={matchedStore.latitude}
-                  longitude={matchedStore.longitude}
-                  storeName={matchedStore.name}
-                  className={styles.fullWidthMap}
-                />
+                <div className={styles.fullWidthMap}>
+                  <MapView
+                    nearestStore={null}
+                    stores={null}
+                    activeStore={matchedStore}
+                    userLocation={userLocation}
+                  />
+                </div>
                 <div className={styles.infoOverlay}>
                   <div className={styles.content}>
                     <Typography variant="h3" className={styles.title}>
@@ -317,14 +312,13 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
                       </span>
                     </div>
                     <span className={styles.directionBtnWrapper}>
-                      <Button
-                        isLink={false}
-                        className={styles.getDirectionBtn}
-                        title={"Get directions"}
-                        color="green_dark"
-                        type={"Plain"}
-                        clickHandler={handleDirection}
-                      />
+                      <a
+                        href={matchedStore?.c_googleMapLocation}
+                        target="_blank"
+                        className={`${styles.storeMapLink} button plain green_dark`}
+                      >
+                        <span>Get Directions</span>
+                      </a>
                     </span>
                   </div>
                   <hr className={styles.divider} />
