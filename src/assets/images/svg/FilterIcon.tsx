@@ -1,4 +1,4 @@
-const WishlistIcon = ({
+const FilterIcon = ({
   fill,
   className,
 }: {
@@ -19,4 +19,4 @@ const WishlistIcon = ({
   </svg>
 );
 
-export default WishlistIcon;
+export default FilterIcon;
