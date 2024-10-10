@@ -11,6 +11,7 @@ import {
   StoreLocationDetailsProps,
   Store,
 } from "@utils/models/storeLocatorDetails";
+import { useDeviceWidth } from "@utils/useCustomHooks";
 
 const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
   storeId,
@@ -19,6 +20,7 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
 }) => {
   const [storeDetails, setStoreDetails] = useState<Store[]>([]);
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
+  const isMobile = !useDeviceWidth()[0];
 
   useEffect(() => {
     const fetchStoresData = async () => {
@@ -62,6 +64,10 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
     }
   }, [storeId, storeDetails]);
 
+  if (!isMobile) {
+    return null;
+  }
+
   return (
     <div className={styles.storeDetailsWrapper}>
       <SideDrawer
@@ -72,6 +78,7 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
         onSubmit={null}
         onClearAll={null}
         position={"right"}
+        className={styles.customSideDrawerStyle}        
       >
         {selectedStore && <StoreDetails store={selectedStore} />}
       </SideDrawer>

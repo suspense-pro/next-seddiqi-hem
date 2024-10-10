@@ -151,6 +151,7 @@ const FilterBar = ({
         showFooter={true}
         showBackButton={false}
         position={""}
+        className={""}
       >
         <div className={styles.selectedOptions}>
           {Object.keys(filters).map((filterKey) =>

@@ -23,6 +23,25 @@
 
       &.isRelative{
           position: relative;
+          left: 0;
+          top: 0;
+          padding: 0;
+          width: 100%;
+          max-width: 100%;
+          background: transparent;
+
+          &.noScrollbar{
+              max-height: none;
+              min-height: auto;
+          }
+
+          .storeMapList{
+
+            .storeMap{
+                max-width: 100%;
+                width: 100%;
+            }
+          }
       }
     }
   
@@ -67,22 +86,22 @@ padding: 0;
 }
 
 .storeMap{
-display: flex;
-flex-direction: column;
-row-gap: rem(16);
-transition: all 0.3s ease;
-border-bottom: rem(1) solid getColorHex("grey-light");
-padding-bottom: rem(20);
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(16);
+    transition: all 0.3s ease;
+    border-bottom: rem(1) solid getColorHex("grey-light");
+    padding-bottom: rem(20);
 
-@include sm{
-    row-gap: rem(36);
-}
+    @include sm{
+        row-gap: rem(36);
+    }
 
-@include md{
-    padding: 0 0 rem(32) rem(28);
-    width: calc(100% - 42px);
-    box-sizing: border-box;
-}
+    @include md{
+        padding: 0 0 rem(32) rem(28);
+        width: calc(100% - 42px);
+        box-sizing: border-box;
+    }
 
 /*&:hover{
     padding: rem(20);
@@ -120,55 +139,55 @@ padding-bottom: rem(20);
     border-bottom-left-radius: rem(16);
 
     [dir="rtl"] & {
-    -webkit-border-top-left-radius: rem(16);
-    -webkit-border-top-right-radius: 0;
-    -webkit-border-bottom-right-radius: rem(16);
-    -webkit-border-bottom-left-radius: 0;
-    -moz-border-radius-topleft: rem(16);
-    -moz-border-radius-topright: 0;
-    -moz-border-radius-bottomright: rem(16);
-    -moz-border-radius-bottomleft: 0;
-    border-top-left-radius: rem(16);
-    border-top-right-radius: 0;
-    border-bottom-right-radius: rem(16);
-    border-bottom-left-radius: 0;
+        -webkit-border-top-left-radius: rem(16);
+        -webkit-border-top-right-radius: 0;
+        -webkit-border-bottom-right-radius: rem(16);
+        -webkit-border-bottom-left-radius: 0;
+        -moz-border-radius-topleft: rem(16);
+        -moz-border-radius-topright: 0;
+        -moz-border-radius-bottomright: rem(16);
+        -moz-border-radius-bottomleft: 0;
+        border-top-left-radius: rem(16);
+        border-top-right-radius: 0;
+        border-bottom-right-radius: rem(16);
+        border-bottom-left-radius: 0;
     }
 
     @include sm{
-    padding: rem(28);
-    -webkit-border-top-right-radius: rem(24);
-    -webkit-border-bottom-left-radius: rem(24);
-    -moz-border-radius-topright: rem(24);
-    -moz-border-radius-bottomleft: rem(24);
-    border-top-right-radius: rem(24);
-    border-bottom-left-radius: rem(24);
+        padding: rem(28);
+        -webkit-border-top-right-radius: rem(24);
+        -webkit-border-bottom-left-radius: rem(24);
+        -moz-border-radius-topright: rem(24);
+        -moz-border-radius-bottomleft: rem(24);
+        border-top-right-radius: rem(24);
+        border-bottom-left-radius: rem(24);
 
-    [dir="rtl"] & {
-        -webkit-border-top-left-radius: rem(24);
-        -webkit-border-top-right-radius: 0;
-        -webkit-border-bottom-right-radius: rem(24);
-        -webkit-border-bottom-left-radius: 0;
-        -moz-border-radius-topleft: rem(24);
-        -moz-border-radius-topright: 0;
-        -moz-border-radius-bottomright: rem(24);
-        -moz-border-radius-bottomleft: 0;
-        border-top-left-radius: rem(24);
-        border-top-right-radius: 0;
-        border-bottom-right-radius: rem(24);
-        border-bottom-left-radius: 0;
-    }
+        [dir="rtl"] & {
+            -webkit-border-top-left-radius: rem(24);
+            -webkit-border-top-right-radius: 0;
+            -webkit-border-bottom-right-radius: rem(24);
+            -webkit-border-bottom-left-radius: 0;
+            -moz-border-radius-topleft: rem(24);
+            -moz-border-radius-topright: 0;
+            -moz-border-radius-bottomright: rem(24);
+            -moz-border-radius-bottomleft: 0;
+            border-top-left-radius: rem(24);
+            border-top-right-radius: 0;
+            border-bottom-right-radius: rem(24);
+            border-bottom-left-radius: 0;
+        }
     }
 
     .storeMapLinksContainer{
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: rem(20);
-    row-gap: rem(10);
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: rem(20);
+        row-gap: rem(10);
     }
-
+    
     .storeMapLink{
-    display: block;
-    text-transform: none;
+        display: block;
+        text-transform: none;
     }
 }
 

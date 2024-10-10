@@ -30,6 +30,7 @@ import SizeSelector from "./sizeSelector";
 import ColorSelector from "./colorSelector";
 import StoreLocationDetails from "./storeLocationDetails";
 import StoreDetails from "./storeLocationDetails/storeDetails";
+import StoreDetailsPage from "./storeLocationDetails/storeDetailsPage"
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
@@ -41,6 +42,7 @@ import ProductImageFullScreen from "./product/productImageFullScreen";
 import ProductDetailInfo from "./product/productDetailInfo";
 import Loader from "./loader";
 import BookAnAppointment from "./bookAnAppointment";
+import BrandPopup from "./storeLocationDetails/brandPopUp";
 import BrandListing from "./brandListing";
 
 
@@ -74,6 +76,7 @@ export {
   ColorSelector,
   StoreLocationDetails,
   StoreDetails,
+  StoreDetailsPage,
   FilterBtn,
   PlpContent,
   ContentHeader,
