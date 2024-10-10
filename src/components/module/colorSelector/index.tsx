@@ -19,9 +19,10 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
         showFooter={false}
         showBackButton={false}
         position={"right"}
-        title={title || "COLOR"}
+        title={title || "Color"}
         onSubmit={null}
         onClearAll={null}
+        className={styles.customSideDrawerStyle} 
       >
         <div className={styles.contentWrapper}>
           <div className={styles.content}>
