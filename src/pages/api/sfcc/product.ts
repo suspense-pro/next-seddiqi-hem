@@ -3,6 +3,7 @@ import { Customer, slasHelpers, Product, ClientConfig, Search } from "commerce-s
 import initializeShopperConfig, { OAuthTokenFromAM, clientConfig } from "@utils/sfcc-connector/config";
 import { getProductPriceGraph } from "@utils/sfcc-connector/productUtils";
 import logger from "@utils/logger";
+import { product } from "@utils/sfcc-connector";
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -140,26 +141,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
         break;
         case "productDetail":
-            try {
+            // try {
               if (requestMethod === "GET" && action === "getProductDetails") {
                 const pid = (req.query.pid as string) ?? "";
                 console.log(pid);
-                const accessToken = await initializeShopperConfig();
-                clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
-                const shopperProductsClient = new Product.ShopperProducts(clientConfig);
+
                 
-                const options = {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                },
-                parameters: {
-                    organizationId: clientConfig.parameters.organizationId,
-                    siteId: clientConfig.parameters.siteId,
-                    id: pid,
-                    },
-                };
-                
-                const productResult = await shopperProductsClient.getProduct(options); 
+                const productResult = await product(pid); 
+
+                // console.log({productResult});
                 if (productResult) {
                     //console.log("Product: " + JSON.stringify(productResult, null, 4));
 
@@ -170,14 +160,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     return res.status(400).json({ isError: true, response: "No product found." });
                 }
               }
-            } catch (err) {
-              console.error(err);
+            // } catch (err) {
+            //   console.error(err);
       
-              return {
-                statusCode: 500,
-                body: JSON.stringify({ msg: err }),
-              };
-            }
+            //   return {
+            //     statusCode: 500,
+            //     body: JSON.stringify({ msg: err }),
+            //   };
+            // }
         break;
         case "productList":
             try {

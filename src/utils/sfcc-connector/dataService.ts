@@ -761,7 +761,7 @@ const cacheApiConfig = () => {
 
 /** This is the fetch call to the pages > api */
 const serverApiCallSfcc = async (query: string, config: any, type: string) =>
-  await (await fetch(`https://seddiqi-development.netlify.app/api/sfcc/${type}${query}`, config)).json();
+  await (await fetch(`${cacheApiConfig()}/api/sfcc/${type}${query}`, config)).json();
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
 // eslint-disable-next-line no-unused-vars
