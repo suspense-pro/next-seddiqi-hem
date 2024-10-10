@@ -96,7 +96,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-export default function ProductPage({
+export default async function ProductPage({
   content,
   product,
   sizeGuideDataWomenWatches,

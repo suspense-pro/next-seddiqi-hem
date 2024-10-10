@@ -21,7 +21,7 @@ export async function registerCustomer({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -46,7 +46,7 @@ export async function loginCustomer({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "login");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -71,7 +71,7 @@ export async function passwordlessLoginCustomer({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "login");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -96,7 +96,7 @@ export async function passwordlessAccessToken({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "login");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -127,7 +127,7 @@ export async function updateCustomer({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -158,7 +158,7 @@ export async function createCustomerAddress({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -192,7 +192,7 @@ export async function updateCustomerAddress({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -223,7 +223,7 @@ export async function getCustomerAddress({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -254,7 +254,7 @@ export async function removeCustomerAddress({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -285,7 +285,7 @@ export async function updateCustomerPassword({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -316,7 +316,7 @@ export async function deleteCustomerAccount({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -344,7 +344,7 @@ export async function getPasswordResetToken({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -379,7 +379,7 @@ export async function resetPassword ({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -404,7 +404,7 @@ export async function logoutCustomer({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "login");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -425,7 +425,7 @@ export const getCustomer = async (customerId: string, access_token: string): Pro
     };
     const queryString = new URLSearchParams(json).toString();
     const res = await serverApiCallSfcc(`?${queryString}`, config, "customer");
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -458,7 +458,7 @@ export async function getProductListing({
       return null;
     }
      
-    return await res.json();
+    return res.response;
     
   } catch (err) {
     logger.error("API threw Error", err);
@@ -484,7 +484,7 @@ export async function getCategoryFilters({
     };
     const queryString = new URLSearchParams(json).toString();
     
-    const res = (await serverApiCallSfcc(`?${queryString}`, config, "category"));
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "category");
 
     // console.log({res});
 
@@ -492,7 +492,7 @@ export async function getCategoryFilters({
       return null;
     }
      
-    return await res.json();
+    return res.response;
     
   } catch (err) {
     logger.error("API threw Error", err);
@@ -539,7 +539,7 @@ export async function setFilters({
       return null;
     }
 
-    return await res.json();
+    return res.response;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -566,10 +566,9 @@ export async function getProductDetails({
     const queryString = new URLSearchParams(json).toString();
     const res = (await serverApiCallSfcc(`?${queryString}`, config, "product"));
     // console.log("res: ", res);
-    const response = await res.json()
-    const techSpecs = transformTechSpecsDetails(response.response);
+    const techSpecs = transformTechSpecsDetails(res.response);
 
-    return {...response, techSpecs};
+    return {...res, techSpecs};
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -602,7 +601,7 @@ export async function getProducts({
       return null;
     }
      
-    return await res.json();
+    return res.response;
     
   } catch (err) {
     logger.error("API threw Error", err);
@@ -631,7 +630,7 @@ export async function getSearchResults({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = (await serverApiCallSfcc(`?${queryString}`, config, "search"));
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -656,7 +655,7 @@ export async function getSearchSuggestions({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = (await serverApiCallSfcc(`?${queryString}`, config, "search"));
-    return await res.json();
+    return res;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -686,11 +685,7 @@ export async function getStores({
       method: method,
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = await (await serverApiCallSfcc(`?${queryString}`, config, "store")).json();
-
-    console.log({res});
-    
-
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "store"));
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
@@ -715,7 +710,7 @@ export async function getCategory({
       method: method,
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = await (await serverApiCallSfcc(`?${queryString}`, config, "category")).json();
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "category"));
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
@@ -766,7 +761,7 @@ const cacheApiConfig = () => {
 
 /** This is the fetch call to the pages > api */
 const serverApiCallSfcc = async (query: string, config: any, type: string) =>
-  await fetch(`${cacheApiConfig()}/api/sfcc/${type}${query}`, config);
+  await (await fetch(`${cacheApiConfig()}/api/sfcc/${type}${query}`, config)).json();
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
 // eslint-disable-next-line no-unused-vars
