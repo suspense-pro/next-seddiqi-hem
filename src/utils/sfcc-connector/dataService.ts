@@ -754,7 +754,9 @@ const cacheApiConfig = () => {
   //     apiConfig = process.env.NEXT_PUBLIC_HOSTED_URL ?? "http://localhost:3000";
   // }
 
-  return process.env.NEXT_PUBLIC_HOSTED_URL ?? "http://localhost:3000";
+  logger.log("NEXT PUBLIC URL ===> ", process.env.NEXT_PUBLIC_HOSTED_URL)
+
+  return process.env.NEXT_PUBLIC_HOSTED_URL || "http://localhost:3000";
 };
 
 /** This is the fetch call to the pages > api */
