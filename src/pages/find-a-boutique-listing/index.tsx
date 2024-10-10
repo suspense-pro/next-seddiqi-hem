@@ -199,6 +199,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
           handleStoreClick={handleStoreClick} 
           isMobile={!isMobile} 
           isAbsolutePosition={true}
+          needScrollbar={true} //For Desktop Only
         />
       </>
     );
