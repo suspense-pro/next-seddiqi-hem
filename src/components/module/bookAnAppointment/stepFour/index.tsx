@@ -199,7 +199,7 @@ const StepFour = () => {
         )}
       </div>
 
-      {selectedDate && selectedTime && (
+      {/* {selectedDate && selectedTime && (
         <div className={styles.confirmation}>
           <p>
             Selected Date: <strong>{selectedDate?.fullDate?.toLocaleDateString()}</strong>
@@ -208,7 +208,7 @@ const StepFour = () => {
             Selected Time: <strong>{selectedTime}</strong>
           </p>
         </div>
-      )}
+      )} */}
 
       <div className={styles.preferenceContainer}>
         <div className={styles.heading}>Select your preference</div>

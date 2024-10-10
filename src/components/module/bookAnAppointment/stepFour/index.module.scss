@@ -1,7 +1,7 @@
 @import "./../../../../assets/styles/main.scss";
 
 .dateSelector {
-  max-width: 800px;
+  max-width: rem(800);
   margin: auto;
 }
 
@@ -15,18 +15,29 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: rem(60);
+  margin-top: rem(32);
+
+  @include md {
+    margin-top: rem(60);
+  }
 }
 
 .h2 {
   @include heading_regular;
   color: getColorHex("black");
   text-align: center;
-  font-size: rem(26);
+  font-size: rem(18);
   font-weight: 500;
-  line-height: rem(36);
-  letter-spacing: rem(0.6);
-  margin-bottom: rem(20);
+  line-height: rem(26);
+  letter-spacing: rem(0.4);
+  margin-bottom: rem(18);
+
+  @include md {
+    margin-bottom: rem(20);
+    line-height: rem(36);
+    letter-spacing: rem(0.6);
+    font-size: rem(26);
+  }
 }
 
 .monthNav {
@@ -34,6 +45,18 @@
   align-items: center;
   margin-bottom: rem(15);
   text-transform: uppercase;
+
+  span {
+    font-size: rem(14);
+    line-height: rem(26);
+    letter-spacing: rem(0.2);
+    text-transform: uppercase;
+
+    @include md {
+      line-height: rem(22);
+      font-size: rem(16);
+    }
+  }
 }
 
 .button {
@@ -56,8 +79,12 @@
 .dates {
   display: flex;
   justify-content: flex-start;
-  gap: rem(10);
+  gap: rem(4);
   width: max-content;
+
+  @include md {
+    gap: rem(10);
+  }
 }
 
 .dateItem,
@@ -66,13 +93,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid getColorHex("grey-light");
+  border: rem(2) solid getColorHex("grey-light");
   cursor: pointer;
   transition: 0.2s;
-  width: rem(96);
-  height: rem(104);
+  width: rem(50);
+  height: rem(64);
   padding: rem(12) rem(8);
   color: getColorHex("black");
+
+  @include md {
+    width: rem(96);
+    height: rem(104);
+  }
 
   .day {
     @include heading_regular;
@@ -86,27 +118,41 @@
   .date {
     @include heading_regular;
     text-align: center;
-    font-size: rem(26);
+    font-size: rem(18);
     font-weight: 500;
-    line-height: rem(32);
-    letter-spacing: rem(0.6);
+    line-height: rem(26);
+    letter-spacing: rem(0.4);
     text-transform: uppercase;
+
+    @include md {
+      letter-spacing: rem(0.6);
+      font-size: rem(26);
+      line-height: rem(32);
+    }
   }
 }
 .timeItem {
   @include heading_regular;
-  width: rem(96);
-  height: rem(50);
+  width: rem(50);
+  height: rem(44);
   padding: rem(12) rem(8);
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: getColorHex("black");
-  font-size: rem(20);
+  font-size: rem(14);
   font-weight: 500;
-  line-height: rem(28);
-  letter-spacing: rem(0.6);
+  line-height: rem(20);
+  letter-spacing: rem(0.4);
   text-transform: uppercase;
+
+  @include md {
+    font-size: rem(20);
+    line-height: rem(28);
+    letter-spacing: rem(0.6);
+    width: rem(96);
+    height: rem(50);
+  }
 }
 
 .dateItem:hover,
@@ -141,12 +187,16 @@
   display: flex;
   justify-content: flex-start;
   gap: rem(10);
-  width: max-content; 
+  width: max-content;
 }
 
 .preferenceContainer {
   background-color: getColorHex("white");
-  margin-top: rem(60);
+  margin-top: rem(32);
+  
+  @include md {
+    margin-top: rem(60);
+  }
 }
 
 .heading {
@@ -162,6 +212,12 @@
 .options {
   display: flex;
   gap: rem(15);
+
+  flex-direction: column;
+
+  @include md {
+    flex-direction: row;
+  }
 }
 
 .customRadio {
@@ -189,10 +245,10 @@
 
     &::after {
       content: "";
-      width: rem(6); 
+      width: rem(6);
       height: rem(6);
       border-radius: 50%;
-      background: getColorHex("midnight-brown"); 
+      background: getColorHex("midnight-brown");
       position: absolute;
       transform: scale(0);
       transition: transform 0.2s;
@@ -221,7 +277,7 @@
 }
 
 .notSelectedText {
-  color: getColorHex("grey-mid"); 
+  color: getColorHex("grey-mid");
   text-align: center;
   font-size: rem(14);
   line-height: rem(22);

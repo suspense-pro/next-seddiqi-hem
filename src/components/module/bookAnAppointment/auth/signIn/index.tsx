@@ -19,52 +19,65 @@ export default function SignIn() {
   const [otpForm, setOtpForm] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
 
-  const validateForm = (): Errors => {
-    const validationErrors: Errors = {};
-
+  const validateEmail = (value: string): string | undefined => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      validationErrors.email = "Please enter a valid email.";
+    if (!emailPattern.test(value)) {
+      return "Please enter a valid email.";
     }
-
-    if (!password) {
-      validationErrors.password = "Password is required.";
-    }
-
-    return validationErrors;
   };
 
-  const validatePhoneNumber = () => {
-    const validationErrors: Errors = {};
-
-    const phonePattern = /^[0-9]{6,15}$/;
-    if (!phonePattern.test(phone)) {
-      validationErrors.phone = "Please enter a valid phone number.";
+  const validatePassword = (value: string): string | undefined => {
+    if (!value) {
+      return "Password is required.";
     }
+  };
 
-    return validationErrors;
+  const validatePhoneNumber = (value: string): string | undefined => {
+    const phonePattern = /^[0-9]{6,15}$/;
+    if (!phonePattern.test(value)) {
+      return "Please enter a valid phone number.";
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    setErrors((prev) => ({ ...prev, email: validateEmail(value) }));
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+    setErrors((prev) => ({ ...prev, password: validatePassword(value) }));
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPhone(value);
+    setErrors((prev) => ({ ...prev, phone: validatePhoneNumber(value) }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length === 0) {
+    const validationErrors = {
+      email: validateEmail(email),
+      password: validatePassword(password),
+    };
+
+    if (!validationErrors.email && !validationErrors.password) {
       console.log("Form is valid. Logging in...");
 
-      // Prepare userData
       const userData = {
         username: email,
         password,
       };
 
       try {
-        // Call loginCustomer API
         const response = await loginCustomer({
-          userData: JSON.stringify(userData), // userData as a JSON string
+          userData: JSON.stringify(userData),
           method: "POST",
         });
 
-        // Log the response
         console.log("Login response:", response);
       } catch (error) {
         console.error("Login error:", error);
@@ -75,8 +88,11 @@ export default function SignIn() {
   };
 
   const handleSendOTP = () => {
-    const validationErrors = validatePhoneNumber();
-    if (Object.keys(validationErrors).length === 0) {
+    const validationErrors = {
+      phone: validatePhoneNumber(phone),
+    };
+
+    if (!validationErrors.phone) {
       console.log("Phone number is valid. Sending OTP...");
       setOtpForm(true);
     } else {
@@ -98,7 +114,7 @@ export default function SignIn() {
               label="Email"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
               errorMessage={errors.email}
               required={true}
             />
@@ -108,7 +124,7 @@ export default function SignIn() {
               label="Password"
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               errorMessage={errors.password}
               required={true}
             />
@@ -123,7 +139,7 @@ export default function SignIn() {
 
           <div className={styles.submitBtnContainer}>
             <Button
-              clickHandler={(e) => handleSubmit(e)}
+              clickHandler={handleSubmit}
               className={styles.submitBtn}
               title="Sign In"
               isLink={false}
@@ -152,7 +168,7 @@ export default function SignIn() {
             label="Phone"
             type="number"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={handlePhoneChange}
             errorMessage={errors.phone}
             required={true}
           />
@@ -160,7 +176,7 @@ export default function SignIn() {
 
         <div>
           <Button
-            clickHandler={() => handleSendOTP()}
+            clickHandler={handleSendOTP}
             className={styles.oneBtn}
             title="Send One Time Password"
             isLink={false}

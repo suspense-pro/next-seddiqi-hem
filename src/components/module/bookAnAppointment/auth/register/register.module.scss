@@ -12,13 +12,27 @@
 }
 .doubleForm {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: rem(40);
+  
+  @include md {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .optionSelector {
   display: flex;
   gap: rem(12);
+  flex-direction: column;
+
+  @include md {
+    flex-direction: row;
+  }
+
+
+  div:last-child {
+    width: 100%;
+  }
 }
 
 
@@ -47,11 +61,15 @@
 .passwordCriteria {
   margin-top: rem(10);
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  
+  @include md {
+    grid-template-columns: 1fr 1fr;
+  }
 
   div {
     font-size: rem(14);
-    margin: 5px 0;
+    margin: rem(5) 0;
     display: flex;
     align-items: center;
   }
