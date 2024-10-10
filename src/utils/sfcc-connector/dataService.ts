@@ -611,6 +611,34 @@ export async function getProducts({
 
 export async function getSearchResults({
   query,
+  categoryId,
+  method,
+}: {
+  query: string;
+  categoryId: string;
+  method: string;
+}) {
+  try {
+    const json = {
+      api: "search",
+      action: "getProducts",
+      search: query,
+      cgid: categoryId,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "search"));
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function getSearchSuggestions({
+  query,
   method,
 }: {
   query: string;
@@ -618,9 +646,9 @@ export async function getSearchResults({
 }) {
   try {
     const json = {
-      api: "search",
-      action: "getProducts",
-      search: query
+      api: "suggestion",
+      action: "getSuggestions",
+      search: query,
     };
     const config = {
       method: method,
