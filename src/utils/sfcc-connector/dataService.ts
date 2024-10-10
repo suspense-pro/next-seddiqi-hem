@@ -451,15 +451,14 @@ export async function getProductListing({
     const queryString = new URLSearchParams(json).toString();
     
     const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
-    const response = await res.json()
-    console.log("response: ", response);
+
     // console.log({res});
 
     if(!res) {
       return null;
     }
      
-    return response.response;
+    return await res.json();
     
   } catch (err) {
     logger.error("API threw Error", err);
@@ -485,16 +484,15 @@ export async function getCategoryFilters({
     };
     const queryString = new URLSearchParams(json).toString();
     
-    const res = await serverApiCallSfcc(`?${queryString}`, config, "category");
-    const response = await res.json()
-    console.log("response: ", response);
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "category"));
+
     // console.log({res});
 
     if(!res) {
       return null;
     }
      
-    return response.response;
+    return await res.json();
     
   } catch (err) {
     logger.error("API threw Error", err);
@@ -534,15 +532,14 @@ export async function setFilters({
     const queryString = new URLSearchParams(json).toString();
 
     const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
-    const response = await res.json()
-    console.log("response: ", response);
+
     // console.log({ res });
 
-    if (!response) {
+    if (!res) {
       return null;
     }
 
-    return response.response;
+    return await res.json();
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -568,8 +565,8 @@ export async function getProductDetails({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = (await serverApiCallSfcc(`?${queryString}`, config, "product"));
+    // console.log("res: ", res);
     const response = await res.json()
-    console.log("response: ", response);
     const techSpecs = transformTechSpecsDetails(response.response);
 
     return {...response, techSpecs};
@@ -598,15 +595,14 @@ export async function getProducts({
     const queryString = new URLSearchParams(json).toString();
     
     const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
-    const response = await res.json()
-    console.log("response: ", response);
+
     //console.log({res});
 
     if(!res) {
       return null;
     }
      
-    return response.response;
+    return await res.json();
     
   } catch (err) {
     logger.error("API threw Error", err);
@@ -691,7 +687,7 @@ export async function getStores({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = (await serverApiCallSfcc(`?${queryString}`, config, "store"));
-    return res;
+    return await res.json;
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;
@@ -715,7 +711,7 @@ export async function getCategory({
       method: method,
     };
     const queryString = new URLSearchParams(json).toString();
-    const res = (await serverApiCallSfcc(`?${queryString}`, config, "category"));
+    const res = await (await serverApiCallSfcc(`?${queryString}`, config, "category")).json();
     return res;
   } catch (err) {
     logger.error("API threw Error", err);
@@ -751,22 +747,22 @@ export async function subscribedToNewsletter({
 let apiConfig: any;
 
 const cacheApiConfig = () => {
-  // if (isServer()) {
-  //     return "";
-  // }
+  if (!isServer()) {
+      return "";
+  }
 
-  // if (!apiConfig) {
-  //     apiConfig = process.env.NEXT_PUBLIC_HOSTED_URL ?? "http://localhost:3000";
-  // }
+  if (!apiConfig) {
+      apiConfig = process.env.NEXT_PUBLIC_HOSTED_URL || "http://localhost:3000";
+  }
 
-  logger.log("NEXT PUBLIC URL ===> ", process.env.NEXT_PUBLIC_HOSTED_URL)
+  logger.log("apiConfig ===> ", apiConfig)
 
-  return process.env.NEXT_PUBLIC_HOSTED_URL || "http://localhost:3000";
+  return apiConfig;
 };
 
 /** This is the fetch call to the pages > api */
 const serverApiCallSfcc = async (query: string, config: any, type: string) =>
- await fetch(`${cacheApiConfig()}/api/sfcc/${type}${query}`, config);
+  await fetch(`${cacheApiConfig()}/api/sfcc/${type}${query}`, config);
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
 // eslint-disable-next-line no-unused-vars
