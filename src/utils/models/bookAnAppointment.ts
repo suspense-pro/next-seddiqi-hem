@@ -14,5 +14,6 @@ export interface BookAppointmentContextProps {
     setSelectedWatches: (watches: any[]) => void;
     selectedJewellery: any[];
     setSelectedJewellery: (jewellery: any[]) => void;
+    productDetails:any[];
   }
   
