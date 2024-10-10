@@ -173,7 +173,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
         <div className={styles.bookAppointment}>
           <Button
             isLink={true}
-            link={"/"}
+            link={"/book-an-appointment"}
             className={styles.appointmentBtn}
             title={"Book appointment"}
             color="green_dark"
