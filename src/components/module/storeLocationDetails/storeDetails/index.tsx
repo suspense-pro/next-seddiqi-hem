@@ -15,27 +15,35 @@ import { StoreDetailsProps } from "@utils/models/storeLocatorDetails";
 import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
 import MapView from "@components/module/mapView";
 import { ArrowRight } from "@assets/images/svg";
+import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 
 const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
   const [mapView, setMapView] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [activeToggle, setActiveToggle] = useState(true);
+  const [isAllBrandPopupOpen, setAllBrandPopupOpen] = useState(false);
   const storeImage = store?.c_storeImage;
   const storeHoursString = store?.storeHours;
   const [stores, setStores] = useState([]);
 
   // Split by <br /> and then by ": " to separate days from timings
-  const formattedStoreHours = storeHoursString
-    .split("<br />")
-    .map((line, index) => {
-      const [days, timings] = line.split(": ");
-      return { days: days.trim(), timings: timings.trim() };
-    });
+  const formattedStoreHours = storeHoursString.split("<br />").map((line) => {
+    const [days, timings] = line.split(": ");
+    return { days: days.trim(), timings: timings.trim() };
+  });
 
   const handleToggleChange = (toggle) => {
     setTimeout(() => {
       setActiveToggle(toggle);
     }, 300);
+  };
+
+  const handleViewAllBrands = () => {
+    setAllBrandPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setAllBrandPopupOpen(false);
   };
 
   return (
@@ -137,7 +145,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
                   {item.days}
                 </Typography>
                 <Typography variant="p" className={styles.storeOpenTiming}>
-                  {item.timings} {/* Display timings */}
+                  {item.timings}
                 </Typography>
               </div>
             ))}
@@ -185,16 +193,18 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             {"Brands Available"}
           </Typography>
         </span>
-        <span className={styles.viewAllBrands}>
-          <Button
-            isLink={true}
-            link={"/"}
-            className={styles.viewAllBrandsBtn}
-            title={"View all brands"}
-            color="green_dark"
-            type={"Plain"}
-          />
-        </span>
+        {store.c_availableBrands && store.c_availableBrands.length > 0 && (
+          <span className={styles.viewAllBrands}>
+            <Button
+              isLink={false}
+              className={styles.viewAllBrandsBtn}
+              title={"View all brands"}
+              color="green_dark"
+              type={"Plain"}
+              clickHandler={handleViewAllBrands}
+            />
+          </span>
+        )}
       </div>
 
       <div className={styles.brandsWrapper}>
@@ -209,7 +219,17 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             </React.Fragment>
           ))}
       </div>
+
       <hr className={styles.divider} />
+
+      {/* All Brand Pop up */}
+      {isAllBrandPopupOpen && (
+        <BrandPopup
+          brands={store.c_availableBrands}
+          onClose={handleClosePopup}
+          isOpen={isAllBrandPopupOpen}
+        />
+      )}
     </div>
   );
 };

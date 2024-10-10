@@ -16,6 +16,7 @@ import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
 import MapView from "@components/module/mapView";
 import { ArrowRight } from "@assets/images/svg";
 import { useDeviceWidth } from "@utils/useCustomHooks";
+import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 
 const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
   store: initialStore,
@@ -26,6 +27,14 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
   const [mapView, setMapView] = useState(false);
   const [activeToggle, setActiveToggle] = useState(true);
   const isMobile = !useDeviceWidth()[0];
+  const [isAllBrandPopupOpen, setAllBrandPopupOpen] = useState(false);
+
+  const handleViewAllBrands = () => {
+    setAllBrandPopupOpen(true);
+  };
+  const handleClosePopup = () => {
+    setAllBrandPopupOpen(false);
+  };
 
   useEffect(() => {
     const fetchStoresData = async () => {
@@ -244,16 +253,19 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
                       {"Brands Available"}
                     </Typography>
                   </span>
-                  <span className={styles.viewAllBrands}>
-                    <Button
-                      isLink={true}
-                      link={"/"}
-                      className={styles.viewAllBrandsBtn}
-                      title={"View all brands"}
-                      color="green_dark"
-                      type={"Plain"}
-                    />
-                  </span>
+                  {matchedStore.c_availableBrands &&
+                    matchedStore.c_availableBrands.length > 0 && (
+                      <span className={styles.viewAllBrands}>
+                        <Button
+                          isLink={false}
+                          className={styles.viewAllBrandsBtn}
+                          title={"View all brands"}
+                          color="green_dark"
+                          type={"Plain"}
+                          clickHandler={handleViewAllBrands}
+                        />
+                      </span>
+                    )}
                 </div>
 
                 <div className={styles.brandsWrapper}>
@@ -280,6 +292,13 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
                   alt={matchedStore?.name}
                 />
               </div>
+              {
+                <BrandPopup
+                  brands={matchedStore.c_availableBrands}
+                  onClose={handleClosePopup}
+                  isOpen={isAllBrandPopupOpen}
+                />
+              }
             </div>
           ) : (
             <div className={styles.mapOuterContainer}>
@@ -422,16 +441,19 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
                         {"Brands Available"}
                       </Typography>
                     </span>
-                    <span className={styles.viewAllBrands}>
-                      <Button
-                        isLink={true}
-                        link={"/"}
-                        className={styles.viewAllBrandsBtn}
-                        title={"View all brands"}
-                        color="green_dark"
-                        type={"Plain"}
-                      />
-                    </span>
+                    {matchedStore.c_availableBrands &&
+                      matchedStore.c_availableBrands.length > 0 && (
+                        <span className={styles.viewAllBrands}>
+                          <Button
+                            isLink={false}
+                            className={styles.viewAllBrandsBtn}
+                            title={"View all brands"}
+                            color="green_dark"
+                            type={"Plain"}
+                            clickHandler={handleViewAllBrands}
+                          />
+                        </span>
+                      )}
                   </div>
 
                   <div className={styles.brandsWrapper}>
@@ -452,12 +474,20 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
                       )}
                   </div>
                   <hr className={styles.divider} />
+                  {/* All Brand Pop up */}
                 </div>
               </div>
             </div>
           )}
         </div>
       </div>
+      {
+        <BrandPopup
+          brands={matchedStore.c_availableBrands}
+          onClose={handleClosePopup}
+          isOpen={isAllBrandPopupOpen}
+        />
+      }
     </div>
   );
 };
