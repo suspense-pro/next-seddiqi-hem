@@ -30,7 +30,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   //   };
   // }
 
-  const products = await getProductListing({categoryId: "mens-clothing-suits", method: "POST"});
+  const products = await getProductListing({categoryId: plpKey, method: "POST"});
+
+  console.log({products});
+  
 
   // if (!products) {
   //   return {

@@ -59,7 +59,7 @@ export default async function initializeShopperConfig() {
 
     const guestTokenResponse = await client.getAccessToken(options)
     .then((guestTokenResponse) => {
-      console.log("Guest Token Response: ", guestTokenResponse.access_token);
+      // console.log("Guest Token Response: ", guestTokenResponse.access_token);
       const access_token = guestTokenResponse.access_token;
       return access_token;
     })

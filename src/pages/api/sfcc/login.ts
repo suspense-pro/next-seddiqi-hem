@@ -68,7 +68,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
           const TokenResponse = await client.authorizePasswordlessCustomer(options)
             .then((TokenResponse) => {
-              console.log("Guest Token Response: ", TokenResponse);
+              // console.log("Guest Token Response: ", TokenResponse);
               return TokenResponse;
             })
             .catch(error => console.log("Error fetching token for guest login: ", error));
@@ -107,7 +107,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
           const TokenResponse = await client.getPasswordLessAccessToken(options)
             .then((TokenResponse) => {
-              console.log("Guest Token Response: ", TokenResponse);
+              // console.log("Guest Token Response: ", TokenResponse);
               return TokenResponse;
             })
             .catch(error => console.log("Error fetching token for guest login: ", error));
@@ -144,7 +144,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
           const TokenResponse = await client.logoutCustomer(options)
             .then((TokenResponse) => {
-              console.log("Guest Token Response: ", TokenResponse);
+              // console.log("Guest Token Response: ", TokenResponse);
               return TokenResponse;
             })
             .catch(error => console.log("Error fetching token for guest login: ", error));

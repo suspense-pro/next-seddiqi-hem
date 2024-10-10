@@ -452,7 +452,7 @@ export async function getProductListing({
     
     const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
 
-    console.log({res});
+    // console.log({res});
 
     if(!res) {
       return null;
@@ -486,7 +486,7 @@ export async function getCategoryFilters({
     
     const res = await serverApiCallSfcc(`?${queryString}`, config, "category");
 
-    console.log({res});
+    // console.log({res});
 
     if(!res) {
       return null;
@@ -533,7 +533,7 @@ export async function setFilters({
 
     const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
 
-    console.log({ res });
+    // console.log({ res });
 
     if (!res) {
       return null;

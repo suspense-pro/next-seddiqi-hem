@@ -21,7 +21,7 @@ const PlpContent = ({ productGridContent, products }) => {
   const router = useRouter();
 
   const categoryId =
-    products?.query?.TermQuery?.values?.[0] || "mens-clothing-suits";
+    products?.query?.TermQuery?.values?.[0] || "";
 
   const allHits = products?.hits || [];
 

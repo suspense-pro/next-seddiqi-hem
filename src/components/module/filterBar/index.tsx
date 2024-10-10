@@ -38,7 +38,7 @@ const FilterBar = ({
           method: "GET",
           cgid: categoryId,
         });
-        console.log("response-------", response);
+        // console.log("response-------", response);
         if (response && response.refinements) {
           setFilterOptions(response.refinements);
         }
