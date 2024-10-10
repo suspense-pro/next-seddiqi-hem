@@ -3,7 +3,6 @@ import { Customer, slasHelpers, Product, ClientConfig, Search } from "commerce-s
 import initializeShopperConfig, { OAuthTokenFromAM, clientConfig } from "@utils/sfcc-connector/config";
 import { getProductPriceGraph } from "@utils/sfcc-connector/productUtils";
 import logger from "@utils/logger";
-import { product } from "@utils/sfcc-connector";
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -145,11 +144,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               if (requestMethod === "GET" && action === "getProductDetails") {
                 const pid = (req.query.pid as string) ?? "";
                 console.log(pid);
-
+                const accessToken = await initializeShopperConfig();
+                clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
+                const shopperProductsClient = new Product.ShopperProducts(clientConfig);
                 
-                const productResult = await product(pid); 
-
-                // console.log({productResult});
+                const options = {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                },
+                parameters: {
+                    organizationId: clientConfig.parameters.organizationId,
+                    siteId: clientConfig.parameters.siteId,
+                    id: pid,
+                    },
+                };
+                
+                const productResult = await shopperProductsClient.getProduct(options); 
                 if (productResult) {
                     //console.log("Product: " + JSON.stringify(productResult, null, 4));
 
