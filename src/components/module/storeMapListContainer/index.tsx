@@ -14,11 +14,12 @@ const StoreMapListContainer = ({
   activeIndex,
   handleStoreClick,
   isMobile,
-  isAbsolutePosition
+  isAbsolutePosition,
+  needScrollbar
 }) => {
   return (
-    <div className={`${[styles.storeMapListContainer]} ${isAbsolutePosition === true ? "" : styles.isRelative}`}>
-      {!isMobile ? (
+    <div className={`${[styles.storeMapListContainer]} ${isAbsolutePosition === true ? "" : styles.isRelative} ${needScrollbar === true ? "" : styles.noScrollbar}`}>
+      {!isMobile && needScrollbar === true ? (
         <Swiper
             direction={'vertical'}
             slidesPerView={'auto'}
