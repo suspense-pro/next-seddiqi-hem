@@ -163,7 +163,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 if (productResult) {
                     //console.log("Product: " + JSON.stringify(productResult, null, 4));
 
-                    logger.info("Get getProductDetails - Response", productResult);
+                    logger.log("Get getProductDetails - Response", productResult);
                     return res.status(200).json({ isError: false, response: productResult });
                 } else {
                     console.log("No product found.");

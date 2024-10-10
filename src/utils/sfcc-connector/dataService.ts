@@ -565,7 +565,7 @@ export async function getProductDetails({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = (await serverApiCallSfcc(`?${queryString}`, config, "product"));
-    console.log("res: ", res);
+    // console.log("res: ", res);
     const techSpecs = transformTechSpecsDetails(res.response);
 
     return {...res, techSpecs};
@@ -718,15 +718,15 @@ export async function subscribedToNewsletter({
 let apiConfig: any;
 
 const cacheApiConfig = () => {
-  if (!isServer()) {
-      return "";
-  }
+  // if (isServer()) {
+  //     return "";
+  // }
 
-  if (!apiConfig) {
-      apiConfig = process.env.NEXT_PUBLIC_HOSTED_URL ?? "http://localhost:3000";
-  }
+  // if (!apiConfig) {
+  //     apiConfig = process.env.NEXT_PUBLIC_HOSTED_URL ?? "http://localhost:3000";
+  // }
 
-  return apiConfig;
+  return process.env.NEXT_PUBLIC_HOSTED_URL ?? "http://localhost:3000";
 };
 
 /** This is the fetch call to the pages > api */
