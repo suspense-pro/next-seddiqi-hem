@@ -11,6 +11,7 @@ interface SideDrawerProps {
   showFooter: boolean;
   showBackButton: boolean;
   onClose: () => void;
+  className?:string;
   title?: string;
   position?: string;
   onSubmit?: () => void;
@@ -26,6 +27,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   title = "SORT & FILTER", // Default title
   onSubmit,
   onClearAll,
+  className,
   position = "left",
 }) => {
   return (

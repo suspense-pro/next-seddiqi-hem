@@ -29,6 +29,7 @@ import SizeGuide from "./sizeGuide";
 import SizeSelector from "./sizeSelector";
 import StoreLocationDetails from "./storeLocationDetails";
 import StoreDetails from "./storeLocationDetails/storeDetails";
+import StoreDetailsPage from "./storeLocationDetails/storeDetailsPage"
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
@@ -72,6 +73,7 @@ export {
   SizeSelector,
   StoreLocationDetails,
   StoreDetails,
+  StoreDetailsPage,
   FilterBtn,
   PlpContent,
   ContentHeader,
