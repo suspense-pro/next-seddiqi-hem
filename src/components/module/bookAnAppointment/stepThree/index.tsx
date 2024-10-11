@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 import styles from "./index.module.scss";
 import { Image } from "@components/module";
-import { CloseIcon } from "@assets/images/svg";
+import { CloseIcon, MapIcon } from "@assets/images/svg";
 import ExclusiveInfoCards from "../exclusiveInfoCards";
 import { getStores } from "@utils/sfcc-connector/dataService";
 import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
 import { Button } from "@components/module";
-import { MapIcon } from "@assets/images/svg";
+import MapView from "@components/module/mapView";
 
 const StepThree = () => {
   const {
@@ -21,9 +21,9 @@ const StepThree = () => {
   const [cities, setCities] = useState([]);
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const [selectedCity, setSelectedCity] = useState("");
-
   const [selectedStoreId, setSelectedStoreId] = useState(null);
   const [isMapView, setIsMapView] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
 
   const handleSelectBoutique = () => {
     const selectedStore = stores.find((store) => store.id === selectedStoreId);
@@ -63,7 +63,7 @@ const StepThree = () => {
           setCities(uniqueCities);
         }
       } catch (error) {
-        console.error("Error fetching stores:", error);
+        console.error("error---", error);
       }
     };
 
@@ -78,76 +78,84 @@ const StepThree = () => {
     }
   }, [selectedTabIndex, cities]);
 
-  const filteredStores = selectedCity
-    ? stores.filter((store) => store.city === selectedCity)
-    : stores;
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log("Got user location:", position);
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error("geolocation error---", error);
+          setUserLocation({ lat: 25.2048, lng: 55.2708 });
+        }
+      );
+    } else {
+      console.error("geolocation is not supported by this browser---");
+      setUserLocation({ lat: 25.2048, lng: 55.2708 }); //Dubai
+    }
+  }, []);
+
+  const filteredStores = useMemo(() => {
+    return selectedCity
+      ? stores.filter((store) => store.city === selectedCity)
+      : stores;
+  }, [selectedCity, stores]);
 
   const tabs = ["All", ...cities];
 
-  const MapView = ({ stores, selectedStoreId }) => {
-    const mapRef = React.useRef(null);
-
-    useEffect(() => {
-      const loadGoogleMapsApi = () => {
-        if (window.google && window.google.maps) {
-          initializeMap();
-        } else {
-          const script = document.createElement("script");
-          script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBD-TGPmve8xmC6qIawp7eOXPKfs3ldS_U`;
-          script.async = true;
-          document.body.appendChild(script);
-          script.onload = initializeMap;
-        }
-      };
-
-      const initializeMap = () => {
-        const { google } = window;
-        if (!google) return;
-
-        const mapOptions = {
-          center: { lat: 25.2048, lng: 55.2708 },
-          zoom: 10,
-        };
-
-        const map = new google.maps.Map(mapRef.current, mapOptions);
-
-        stores.forEach((store) => {
-          if (store.latitude && store.longitude) {
-            const marker = new google.maps.Marker({
-              position: { lat: store.latitude, lng: store.longitude },
-              map: map,
-              title: store.name,
-              icon:
-                selectedStoreId === store.id
-                  ? {
-                      url: "/images/png/MapPinPoint.png",
-                      scaledSize: new google.maps.Size(44, 60),
-                      anchor: new google.maps.Point(30, 60),
-                    }
-                  : undefined,
-            });
-
-            if (selectedStoreId === store.id) {
-              map.setCenter({ lat: store.latitude, lng: store.longitude });
-              map.setZoom(12);
-            }
-
-            marker.addListener("click", () => {
-              setSelectedStoreId(store.id);
-            });
-          }
-        });
-      };
-
-      loadGoogleMapsApi();
-    }, [stores, selectedStoreId]);
-
-    return (
-      <div className={styles.mapContainer}>
-        <div ref={mapRef} className={styles.map} />
-      </div>
-    );
+  const getDistance = (lat1, lng1, lat2, lng2) => {
+    const toRadians = (degree) => (degree * Math.PI) / 180;
+    const R = 6371;
+    const dLat = toRadians(lat2 - lat1);
+    const dLng = toRadians(lng2 - lng1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRadians(lat1)) *
+        Math.cos(toRadians(lat2)) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance;
   };
+
+  const nearestStore = useMemo(() => {
+    if (!userLocation || stores.length === 0) return null;
+
+    let minDistance = Infinity;
+    let nearest = null;
+
+    stores.forEach((store) => {
+      if (store.latitude && store.longitude) {
+        const distance = getDistance(
+          userLocation.lat,
+          userLocation.lng,
+          store.latitude,
+          store.longitude
+        );
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearest = store;
+        }
+      }
+    });
+
+    return nearest;
+  }, [userLocation, stores]);
+
+  const activeStore = stores.find((store) => store.id === selectedStoreId);
+
+  // console.log(
+  //   "nearestStore", nearestStore,
+  //   "filteredStores", filteredStores,
+  //   "activeStore", activeStore,
+  //   "userLocation", userLocation
+  // );
 
   return (
     <div className={styles.container}>
@@ -212,6 +220,16 @@ const StepThree = () => {
 
         {isMapView ? (
           <div className={styles.storeListMapContainer}>
+            <div className={styles.mapContainer}>
+              {userLocation && filteredStores.length > 0 && (
+                <MapView
+                  nearestStore={nearestStore}
+                  stores={filteredStores}
+                  activeStore={activeStore || nearestStore || filteredStores[0]}
+                  userLocation={userLocation}
+                />
+              )}
+            </div>
             <div className={styles.storeList}>
               {filteredStores.map((store) => (
                 <div
@@ -238,11 +256,6 @@ const StepThree = () => {
                 </div>
               ))}
             </div>
-
-            <MapView
-              stores={filteredStores}
-              selectedStoreId={selectedStoreId}
-            />
           </div>
         ) : (
           <div className={styles.storeList}>

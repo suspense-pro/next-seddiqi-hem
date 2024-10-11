@@ -206,10 +206,27 @@
       }
 
       .mapContainer {
-        flex: 1;
+        // flex: 1;
         position: relative;
         width: 100%;
         height: rem(520);
+        order: 1;
+
+        @include md-max {
+          height: rem(224);
+        }
+        @include lg {
+          order: 2;
+        }
+
+        div {
+          border-top-left-radius: rem(18);
+          border-bottom-right-radius: rem(18);
+          @include lg {
+            border-top-left-radius: rem(24);
+            border-bottom-right-radius: rem(24);
+          }
+        }
       }
 
       .map {
@@ -226,20 +243,23 @@
       max-width: rem(1440);
       margin-top: rem(20);
 
+      order: 2;
+
       @include lg {
         margin-top: rem(32);
+        order: 1;
       }
     }
     .storeItem {
       border-bottom: rem(1) solid getColorHex("grey-light");
-      padding: rem(20);
+      padding: rem(20 0);
       display: flex;
       flex-direction: column;
       gap: rem(8);
       cursor: pointer;
 
       @include lg {
-        padding: rem(24);
+        padding: rem(24 0);
       }
 
       border-radius: 0;
@@ -249,6 +269,10 @@
       border: rem(1) solid getColorHex("green-dark");
       border-top-right-radius: rem(24);
       border-bottom-left-radius: rem(24);
+      padding: rem(20);
+      @include lg {
+        padding: rem(24);
+      }
     }
 
     .storeName {
