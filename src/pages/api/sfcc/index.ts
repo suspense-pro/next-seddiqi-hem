@@ -20,8 +20,7 @@ const cacheApiConfig = () => {
 
 
 /** This is the fetch call to the pages > api */
-const serverApiCallSfcc = async (query: string, config: any, type: string) =>
-    await (await fetch(`${cacheApiConfig()}/api/sfcc/${type}${query}`, config)).json();
+const serverApiCallSfccTest = async (query: string, config: any, type: string) => await fetch(`${cacheApiConfig()}/api/sfcc/${type}${query}`, config);
 
 
-export { serverApiCallSfcc }
+export { serverApiCallSfccTest }
