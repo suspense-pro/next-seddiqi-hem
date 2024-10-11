@@ -24,6 +24,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
             <select
               onChange={(e) => handleCountryChange?.(e.target.value)}
               value={country || "ae"}
+              disabled
             >
               {Object.entries(COUNTRY_DICT).map(([key, name]) => (
                 <option key={key} value={key}>

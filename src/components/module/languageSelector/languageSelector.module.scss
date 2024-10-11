@@ -86,4 +86,7 @@
       width: rem(160);
     }
   }
+  .countryDropdown{
+    border-bottom: rem(1) solid getColorHex("grey-brown");
+  }
 }
