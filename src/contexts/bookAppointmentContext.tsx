@@ -19,6 +19,7 @@ export const BookAppointmentProvider = ({ children }) => {
   const [selectedJewellery, setSelectedJewellery] = useState<any[]>([]);
   const [completedSteps, setCompletedSteps] = useState<boolean[]>([false, false, false, false, false]);
   const [currentStep, setCurrentStep] = useState<number | null>(null);
+  const [productDetails, setProductDetails] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedStore, setSelectedStore] = useState(null);
 
@@ -56,6 +57,7 @@ export const BookAppointmentProvider = ({ children }) => {
     const savedSelectedCard = localStorage.getItem("selectedCard");
     const savedWatches = localStorage.getItem("selectedWatches");
     const savedJewellery = localStorage.getItem("selectedJewellery");
+    const savedProductDetails = localStorage.getItem("selectedProductDetails");
 
     if (savedStep) {
       setCurrentStep(Number(savedStep));
@@ -77,6 +79,9 @@ export const BookAppointmentProvider = ({ children }) => {
 
     if (savedJewellery) {
       setSelectedJewellery(JSON.parse(savedJewellery));
+    }
+    if (savedProductDetails) {
+      setProductDetails(JSON.parse(savedProductDetails));
     }
 
     setLoading(false); 
@@ -110,6 +115,12 @@ export const BookAppointmentProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("selectedJewellery", JSON.stringify(selectedJewellery));
   }, [selectedJewellery]);
+
+  useEffect(() => {
+    if (productDetails) {
+      localStorage.setItem("selectedProductDetails", JSON.stringify(productDetails));
+    }
+  }, [productDetails]);
 
   // When selectedCard changes, mark the first step as completed
   useEffect(() => {
@@ -146,6 +157,7 @@ export const BookAppointmentProvider = ({ children }) => {
         setSelectedJewellery,
         selectedStore,  
         setSelectedStore, 
+        productDetails
       }}
     >
       {children}

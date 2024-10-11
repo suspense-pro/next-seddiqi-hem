@@ -11,6 +11,9 @@ export interface Store {
     c_services?: [];
     c_availableBrands?: [];
     c_storeImage: string;
+    latitude?:number;
+    longitude?:number;
+    c_googleMapLocation?:string;
   }
   
 
@@ -19,3 +22,10 @@ export interface StoreLocationDetailsProps {
     isOpen: boolean;
     storeId: string;
   }
+
+  
+export interface BrandPopUpProps {
+  brands: string[]; 
+  isOpen: boolean; 
+  onClose: () => void;
+}

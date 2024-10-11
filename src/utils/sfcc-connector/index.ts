@@ -36,3 +36,24 @@ export async function getProducts(searchQuery) {
   return results;
 }
 
+
+
+export async function product(pid) {
+
+  const accessToken = await initializeShopperConfig();
+  clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
+  const shopperProductsClient = new Product.ShopperProducts(clientConfig);
+  
+  const options = {
+  headers: {
+      Authorization: `Bearer ${accessToken}`
+  },
+  parameters: {
+      organizationId: clientConfig.parameters.organizationId,
+      siteId: clientConfig.parameters.siteId,
+      id: pid,
+      },
+  };
+
+  return await shopperProductsClient.getProduct(options); 
+}

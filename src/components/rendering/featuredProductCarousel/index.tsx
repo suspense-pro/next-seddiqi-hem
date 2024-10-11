@@ -48,7 +48,7 @@ const FeaturedProductCarousel = ({ mainTitle, hideUnderline, richText, listItems
     return (
       <SwiperSlide className={styles.swiperSlide} key={index} style={isMobile ? { width: "90%" } : {}}>
         <div className={styles.sliderItem}>
-          <ProductCard item={item} isCarousel={false} />
+          <ProductCard item={{...item, image: {absUrl: item?.imageGroups[1]?.images?.[0]?.link}}} isCarousel={false} />
         </div>
       </SwiperSlide>
     );

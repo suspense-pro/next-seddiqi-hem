@@ -83,7 +83,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     });      
 
                     if (filteredStores.length > 0) {
-                        console.log("Filtered Stores : " + JSON.stringify(filteredStores, null, 4));
+                        // console.log("Filtered Stores : " + JSON.stringify(filteredStores, null, 4));
                         return res.status(200).json({ isError: false, response: storeResults });
                     } else {
                         console.log("No store found.");

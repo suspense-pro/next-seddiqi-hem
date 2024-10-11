@@ -15,7 +15,7 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({
 
   const MAIN_LOGO = headerData?.content?.mainLogo?.image;
   if(!MAIN_LOGO) return null
-  console.log(headerData?.content?.logoSymbol?.image)
+  // console.log(headerData?.content?.logoSymbol?.image)
   return (
     <header className={styles.mobileHeader}>
       <div className={styles.mobileHeaderContainer}>

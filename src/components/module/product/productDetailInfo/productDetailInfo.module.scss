@@ -238,18 +238,27 @@
   gap: rem(16);
 }
 
-.size {
+.Variant {
   display: flex;
   align-items: center;
-  display: flex;
-  padding-bottom: rem(12);
-  justify-content: space-between;
-  flex: 1 0 0;
-  border-bottom: 1px solid getColorHex("grey-light-5");
-  cursor: pointer;
+}
 
-  .lable {
-    color: getColorHex("grey-mid");
+.size, .color {
+  display: flex;
+  align-items: center;            
+  justify-content: space-between; 
+  padding-bottom: rem(12);
+  cursor: pointer;
+  flex: 1;
+  border-bottom: 1px solid getColorHex("grey-light-5");
+  margin-right: rem(20);         
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .label {
+    color: getColorHex("grey");
     @include body_regular;
     font-size: rem(12);
     font-weight: 400;
@@ -370,4 +379,10 @@
     letter-spacing: rem(1);
     text-transform: capitalize;
   }
+}
+
+.errorMessage {
+  font-size: rem(12);
+  color:  getColorHex("red");
+  margin-top: rem(5);
 }

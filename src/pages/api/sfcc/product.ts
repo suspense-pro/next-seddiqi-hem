@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Customer, slasHelpers, Product, ClientConfig, Search } from "commerce-sdk";
 import initializeShopperConfig, { OAuthTokenFromAM, clientConfig } from "@utils/sfcc-connector/config";
 import { getProductPriceGraph } from "@utils/sfcc-connector/productUtils";
+import logger from "@utils/logger";
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -54,7 +55,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             const result : any = {};
             if (productResults.total > 0) {
                 // console.log("Product(s): " + JSON.stringify(productResults, null, 4));
-                result.productResults = productResults;
+                result.productResults = await productResults;
 
                 return res.status(200).json({ isError: false, response: result });
             } else {
@@ -139,7 +140,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
         break;
         case "productDetail":
-            try {
+            // try {
               if (requestMethod === "GET" && action === "getProductDetails") {
                 const pid = (req.query.pid as string) ?? "";
                 console.log(pid);
@@ -161,26 +162,28 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 const productResult = await shopperProductsClient.getProduct(options); 
                 if (productResult) {
                     //console.log("Product: " + JSON.stringify(productResult, null, 4));
+
+                    logger.log("Get getProductDetails - Response", productResult);
                     return res.status(200).json({ isError: false, response: productResult });
                 } else {
                     console.log("No product found.");
                     return res.status(400).json({ isError: true, response: "No product found." });
                 }
               }
-            } catch (err) {
-              console.error(err);
+            // } catch (err) {
+            //   console.error(err);
       
-              return {
-                statusCode: 500,
-                body: JSON.stringify({ msg: err }),
-              };
-            }
+            //   return {
+            //     statusCode: 500,
+            //     body: JSON.stringify({ msg: err }),
+            //   };
+            // }
         break;
         case "productList":
             try {
               if (requestMethod === "GET" && action === "getMultipleProducts") {
                 const productIds = (req.query.productIds as string) ?? "";
-                console.log(productIds);
+                // console.log(productIds);
                 const accessToken = await initializeShopperConfig();
                 clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
                 const shopperProductsClient = new Product.ShopperProducts(clientConfig);
