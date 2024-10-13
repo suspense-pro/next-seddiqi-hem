@@ -29,7 +29,6 @@ export { default as CubeIcon } from "./CubeIcon";
 export { default as WatchIcon } from "./WatchIcon";
 export { default as ProtectionIcon } from "./ProtectionIcon";
 export { default as CareIcon } from "./CareIcon";
-export { default as MapPinPoint } from "./MapPinPoint";
 
 export { default as MailIcon } from "./MailIcon";
 export { default as PhoneIcon } from "./PhoneIcon";

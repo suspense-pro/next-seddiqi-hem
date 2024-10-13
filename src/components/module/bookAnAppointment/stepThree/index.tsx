@@ -7,6 +7,7 @@ import { getStores } from "@utils/sfcc-connector/dataService";
 import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
 import { Button } from "@components/module";
 import MapView from "@components/module/mapView";
+import { getDistance } from "@utils/helpers/getDistance";
 
 const StepThree = () => {
   const {
@@ -35,7 +36,9 @@ const StepThree = () => {
   };
 
   const handleMapViewToggle = () => {
-    setIsMapView(!isMapView);
+    if (selectedStoreId) {
+      setIsMapView(!isMapView);
+    }
   };
 
   useEffect(() => {
@@ -78,27 +81,6 @@ const StepThree = () => {
     }
   }, [selectedTabIndex, cities]);
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          console.log("Got user location:", position);
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => {
-          console.error("geolocation error---", error);
-          setUserLocation({ lat: 25.2048, lng: 55.2708 });
-        }
-      );
-    } else {
-      console.error("geolocation is not supported by this browser---");
-      setUserLocation({ lat: 25.2048, lng: 55.2708 }); //Dubai
-    }
-  }, []);
-
   const filteredStores = useMemo(() => {
     return selectedCity
       ? stores.filter((store) => store.city === selectedCity)
@@ -106,22 +88,6 @@ const StepThree = () => {
   }, [selectedCity, stores]);
 
   const tabs = ["All", ...cities];
-
-  const getDistance = (lat1, lng1, lat2, lng2) => {
-    const toRadians = (degree) => (degree * Math.PI) / 180;
-    const R = 6371;
-    const dLat = toRadians(lat2 - lat1);
-    const dLng = toRadians(lng2 - lng1);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRadians(lat1)) *
-        Math.cos(toRadians(lat2)) *
-        Math.sin(dLng / 2) *
-        Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c;
-    return distance;
-  };
 
   const nearestStore = useMemo(() => {
     if (!userLocation || stores.length === 0) return null;
@@ -132,10 +98,8 @@ const StepThree = () => {
     stores.forEach((store) => {
       if (store.latitude && store.longitude) {
         const distance = getDistance(
-          userLocation.lat,
-          userLocation.lng,
-          store.latitude,
-          store.longitude
+          { lat: userLocation.lat, lng: userLocation.lng },
+          { lat: store.latitude, lng: store.longitude }
         );
 
         if (distance < minDistance) {
@@ -149,13 +113,6 @@ const StepThree = () => {
   }, [userLocation, stores]);
 
   const activeStore = stores.find((store) => store.id === selectedStoreId);
-
-  // console.log(
-  //   "nearestStore", nearestStore,
-  //   "filteredStores", filteredStores,
-  //   "activeStore", activeStore,
-  //   "userLocation", userLocation
-  // );
 
   return (
     <div className={styles.container}>
@@ -207,6 +164,7 @@ const StepThree = () => {
                   type="checkbox"
                   checked={isMapView}
                   onChange={handleMapViewToggle}
+                  disabled={!selectedStoreId}
                   className={styles.switchInput}
                 />
                 <span className={styles.switchSlider}></span>
@@ -221,7 +179,7 @@ const StepThree = () => {
         {isMapView ? (
           <div className={styles.storeListMapContainer}>
             <div className={styles.mapContainer}>
-              {userLocation && filteredStores.length > 0 && (
+              {selectedStoreId && (
                 <MapView
                   nearestStore={nearestStore}
                   stores={filteredStores}
@@ -285,15 +243,14 @@ const StepThree = () => {
             ))}
           </div>
         )}
-
-        <div className={styles.appointmentBtn}>
-          <Button
-            title={"Select Boutique"}
-            color="metallic"
-            type="solid"
-            clickHandler={handleSelectBoutique}
-          />
-        </div>
+      </div>
+      <div className={styles.appointmentBtn}>
+        <Button
+          title={"Select Boutique"}
+          color="metallic"
+          type="solid"
+          clickHandler={handleSelectBoutique}
+        />
       </div>
       <ExclusiveInfoCards />
     </div>
