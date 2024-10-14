@@ -67,7 +67,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     const shopperSearchClient = new Search.ShopperSearch(clientConfig);
                     const categoryResults = await shopperSearchClient.productSearch(options);
                     const result : any = {};
-                    console.log("category results: "+ categoryResults.total);
+                    // console.log("category results: "+ categoryResults.total);
 
                     if (categoryResults.total > 0) {
                         result.refinements = categoryResults.refinements;

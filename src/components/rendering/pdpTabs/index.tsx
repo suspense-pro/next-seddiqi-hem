@@ -18,7 +18,7 @@ const PdpTabs: React.FC<any> = (props) => {
   const tabsData = props?.productTechSpecs?.tabsData; //PdpTabsDummyData.tabsData;
   const [activeTab, setActiveTab] = useState<number>(1);
 
-  console.log("productTechSpecs3: ", tabsData[0]?.productImageUrl);
+  // console.log("productTechSpecs3: ", tabsData[0]?.productImageUrl);
 
   const handleTabClick = (id: number) => {
     setActiveTab(id);

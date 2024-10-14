@@ -38,7 +38,7 @@ const FilterBar = ({
           method: "GET",
           cgid: categoryId,
         });
-        console.log("response-------", response);
+        // console.log("response-------", response);
         if (response && response.refinements) {
           setFilterOptions(response.refinements);
         }
@@ -151,6 +151,7 @@ const FilterBar = ({
         showFooter={true}
         showBackButton={false}
         position={""}
+        className={""}
       >
         <div className={styles.selectedOptions}>
           {Object.keys(filters).map((filterKey) =>

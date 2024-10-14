@@ -13,32 +13,46 @@ import { WhatsappIcon } from "@assets/images/svg";
 import { MapIcon } from "@assets/images/svg";
 import { StoreDetailsProps } from "@utils/models/storeLocatorDetails";
 import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
+import MapView from "@components/module/mapView";
+import { ArrowRight } from "@assets/images/svg";
+import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 
 const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
   const [mapView, setMapView] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
   const [activeToggle, setActiveToggle] = useState(true);
+  const [isAllBrandPopupOpen, setAllBrandPopupOpen] = useState(false);
   const storeImage = store?.c_storeImage;
-  const storeHoursString = store.storeHours;
+  const storeHoursString = store?.storeHours;
+  const [stores, setStores] = useState([]);
 
   // Split by <br /> and then by ": " to separate days from timings
-  const formattedStoreHours = storeHoursString
-    .split("<br />")
-    .map((line, index) => {
-      const [days, timings] = line.split(": ");
-      return { days: days.trim(), timings: timings.trim() };
-    });
+  const formattedStoreHours = storeHoursString.split("<br />").map((line) => {
+    const [days, timings] = line.split(": ");
+    return { days: days.trim(), timings: timings.trim() };
+  });
 
+  const handleToggleChange = (toggle) => {
+    setTimeout(() => {
+      setActiveToggle(toggle);
+    }, 300);
+  };
 
-    const handleToggleChange = (toggle) => {
-      setTimeout(() => {
-        setActiveToggle(toggle)
-      }, 300);
-    };
+  const handleViewAllBrands = () => {
+    setAllBrandPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setAllBrandPopupOpen(false);
+  };
 
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.mapViewBtn}>
-        <SlidingRadioSwitch toggleLabel={"Map View"} onToggle={handleToggleChange} />
+        <SlidingRadioSwitch
+          toggleLabel={"Map View"}
+          onToggle={handleToggleChange}
+        />
       </div>
       <div className={styles.content}>
         <Typography variant="h3" className={styles.title}>
@@ -59,41 +73,36 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
           </span>
         </div>
         <span className={styles.directionBtnWrapper}>
-          <Button
-            isLink={false}
-            className={styles.getDirectionBtn}
-            title={"Get directions"}
-            color="green_dark"
-            type={"Plain"}
-            // clickHandler={handleDirection}
-          />
+          <a
+            href={store?.c_googleMapLocation}
+            target="_blank"
+            className={`${styles.storeMapLink} button plain green_dark`}
+          >
+            <span>Get Directions</span>
+          </a>
         </span>
       </div>
 
       <div className={styles.storeImageWrapper}>
         {!activeToggle ? (
           <div className={styles.mapContainer}>
-            {/* Replace with actual Map component */}
-            {/* <MapComponent store={store} /> */}
+            <MapView
+              nearestStore={null}
+              stores={null}
+              activeStore={store}
+              userLocation={userLocation}
+            />
           </div>
         ) : (
-          <div className={styles.storeImageWrapper}>
-            <img className={styles.storeImg} src={store?.c_storeImage} />
+          <div className={styles.imageContainer}>
+            <img
+              className={styles.storeImg}
+              src={storeImage}
+              alt={store?.name}
+            />
           </div>
         )}
       </div>
-
-      {/* Toogle Button for Map View */}
-      {/* <div className={styles.mapViewBtn} onClick={() => setMapView(!mapView)}>
-        <Typography variant="p" className={styles.mapViewBtnLabel}>
-          {mapView ? "IMAGE VIEW" : "MAP VIEW"}
-        </Typography>
-      </div> */}
-      {/* <div className={styles.mapViewBtn}>
-        <Typography variant="p" className={styles.mapViewBtnLabel}>
-          {"MAP VIEW"}
-        </Typography>
-      </div> */}
 
       <div className={styles.storeContactWrapper}>
         <div className={styles.leftSection}>
@@ -133,10 +142,10 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             {formattedStoreHours.map((item, index) => (
               <div className={styles.timingDetail} key={index}>
                 <Typography variant="p" className={styles.storeOpenDay}>
-                  {item.days} {/* Display days */}
+                  {item.days}
                 </Typography>
                 <Typography variant="p" className={styles.storeOpenTiming}>
-                  {item.timings} {/* Display timings */}
+                  {item.timings}
                 </Typography>
               </div>
             ))}
@@ -164,7 +173,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
         <div className={styles.bookAppointment}>
           <Button
             isLink={true}
-            link={"/"}
+            link={"/book-an-appointment"}
             className={styles.appointmentBtn}
             title={"Book appointment"}
             color="green_dark"
@@ -184,16 +193,18 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             {"Brands Available"}
           </Typography>
         </span>
-        <span className={styles.viewAllBrands}>
-          <Button
-            isLink={true}
-            link={"/"}
-            className={styles.viewAllBrandsBtn}
-            title={"View all brands"}
-            color="green_dark"
-            type={"Plain"}
-          />
-        </span>
+        {store.c_availableBrands && store.c_availableBrands.length > 0 && (
+          <span className={styles.viewAllBrands}>
+            <Button
+              isLink={false}
+              className={styles.viewAllBrandsBtn}
+              title={"View all brands"}
+              color="green_dark"
+              type={"Plain"}
+              clickHandler={handleViewAllBrands}
+            />
+          </span>
+        )}
       </div>
 
       <div className={styles.brandsWrapper}>
@@ -208,7 +219,17 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             </React.Fragment>
           ))}
       </div>
+
       <hr className={styles.divider} />
+
+      {/* All Brand Pop up */}
+      {isAllBrandPopupOpen && (
+        <BrandPopup
+          brands={store.c_availableBrands}
+          onClose={handleClosePopup}
+          isOpen={isAllBrandPopupOpen}
+        />
+      )}
     </div>
   );
 };

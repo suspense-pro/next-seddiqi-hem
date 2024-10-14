@@ -6,6 +6,7 @@ import compact from "lodash/compact";
 import ProductDetailInfo from "@components/module/product/productDetailInfo";
 import ContentBlock from "@components/module/contentBlock";
 import { PdpTabs } from "@components/rendering";
+import { isEmpty } from "@utils/helpers";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
@@ -22,6 +23,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   );
 
   const product = await getProductDetails({ productId: plpKey, method: "GET" });
+
+  if (isEmpty(product.response)) {
+    return {
+      redirect: {
+        destination: "/page-not-found",
+      },
+    };
+  }
 
   const shippingData = await fetchStandardPageData(
     {
@@ -50,23 +59,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         page: {
           key: `product/editors-view`,
         },
-      },
-    },
-    context
-  );
-  const sizeGuideDataWomenWatches = await fetchStandardPageData(
-    {
-      content: {
-        page: { key: `product-size-guide/womens-watches` },
-      },
-    },
-    context
-  );
-
-  const sizeGuideDataMenWatches = await fetchStandardPageData(
-    {
-      content: {
-        page: { key: `product-size-guide/mens-watches` },
       },
     },
     context
@@ -128,11 +120,11 @@ export default function ProductPage({
         sizeGuideDataWomenWatches={sizeGuideDataWomenWatches}
         sizeGuideData={sizeGuideData}
       />
+      <PdpTabs productTechSpecs={productTechSpecs} amplienceData={""} />
       {/* Other components like ScrollToTop and StickyWhatsapp */}
       {compact(content?.page?.components).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />
       ))}
-      <PdpTabs productTechSpecs={productTechSpecs} amplienceData={""} />
     </div>
   );
 }

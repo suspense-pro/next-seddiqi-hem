@@ -452,7 +452,7 @@ export async function getProductListing({
     
     const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
 
-    console.log({res});
+    // console.log({res});
 
     if(!res) {
       return null;
@@ -486,7 +486,7 @@ export async function getCategoryFilters({
     
     const res = await serverApiCallSfcc(`?${queryString}`, config, "category");
 
-    console.log({res});
+    // console.log({res});
 
     if(!res) {
       return null;
@@ -533,7 +533,7 @@ export async function setFilters({
 
     const res = await serverApiCallSfcc(`?${queryString}`, config, "product");
 
-    console.log({ res });
+    // console.log({ res });
 
     if (!res) {
       return null;
@@ -565,7 +565,7 @@ export async function getProductDetails({
     };
     const queryString = new URLSearchParams(json).toString();
     const res = (await serverApiCallSfcc(`?${queryString}`, config, "product"));
-    console.log("res: ", res);
+    // console.log("res: ", res);
     const techSpecs = transformTechSpecsDetails(res.response);
 
     return {...res, techSpecs};
@@ -611,6 +611,34 @@ export async function getProducts({
 
 export async function getSearchResults({
   query,
+  categoryId,
+  method,
+}: {
+  query: string;
+  categoryId: string;
+  method: string;
+}) {
+  try {
+    const json = {
+      api: "search",
+      action: "getProducts",
+      search: query,
+      cgid: categoryId,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "search"));
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function getSearchSuggestions({
+  query,
   method,
 }: {
   query: string;
@@ -618,9 +646,9 @@ export async function getSearchResults({
 }) {
   try {
     const json = {
-      api: "search",
-      action: "getProducts",
-      search: query
+      api: "suggestion",
+      action: "getSuggestions",
+      search: query,
     };
     const config = {
       method: method,
@@ -723,8 +751,10 @@ const cacheApiConfig = () => {
   }
 
   if (!apiConfig) {
-      apiConfig = process.env.NEXT_PUBLIC_HOSTED_URL ?? "http://localhost:3000";
+      apiConfig = process.env.NEXT_PUBLIC_HOSTED_URL || "http://localhost:3000";
   }
+
+  logger.log("apiConfig ===> ", apiConfig)
 
   return apiConfig;
 };
