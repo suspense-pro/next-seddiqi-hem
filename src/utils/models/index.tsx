@@ -14,5 +14,6 @@ export type { ContentHeaderProps } from "./contentHeader";
 export type { ExploreBrandProps } from "./exploreBrand";
 
 export type { CategoryListProps } from "./categoryList";
+export type { SignUpFormErrors, SignInFormErrors } from "./errors";
 
 

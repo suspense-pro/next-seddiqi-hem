@@ -36,4 +36,6 @@ export { default as ServiceIcon } from "./ServiceIcon";
 export { default as BrandsIcon } from "./BrandsIcon";
 export { default as LocationIcon } from "./LocationIcon";
 export { default as CallIcon } from "./CallIcon";
+export { default as EditIcon } from "./EditIcon";
+export { default as GreenTick } from "./GreenTick";
 

@@ -8,15 +8,11 @@ import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
 import { Button } from "@components/module";
 import MapView from "@components/module/mapView";
 import { getDistance } from "@utils/helpers/getDistance";
+import SelectedBrands from "../selectedBrands";
 
 const StepThree = () => {
-  const {
-    handleStepChange,
-    selectedCard,
-    setSelectedCard,
-    setSelectedStore,
-    updateStep,
-  } = useContext(BookAppointmentContext);
+  const { handleStepChange, selectedCard, setSelectedCard, setSelectedStore, updateStep } =
+    useContext(BookAppointmentContext);
 
   const [stores, setStores] = useState([]);
   const [cities, setCities] = useState([]);
@@ -52,17 +48,10 @@ const StepThree = () => {
         });
         console.log("Stores response:", response);
 
-        if (
-          response &&
-          !response.isError &&
-          response.response &&
-          response.response.data
-        ) {
+        if (response && !response.isError && response.response && response.response.data) {
           setStores(response.response.data);
 
-          const uniqueCities = Array.from(
-            new Set(response.response.data.map((store) => store.city))
-          );
+          const uniqueCities = Array.from(new Set(response.response.data.map((store) => store.city)));
           setCities(uniqueCities);
         }
       } catch (error) {
@@ -82,9 +71,7 @@ const StepThree = () => {
   }, [selectedTabIndex, cities]);
 
   const filteredStores = useMemo(() => {
-    return selectedCity
-      ? stores.filter((store) => store.city === selectedCity)
-      : stores;
+    return selectedCity ? stores.filter((store) => store.city === selectedCity) : stores;
   }, [selectedCity, stores]);
 
   const tabs = ["All", ...cities];
@@ -117,27 +104,28 @@ const StepThree = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <div className={styles.serviceCard}>
-          <Image
-            className={`${styles.serviceImg} ${styles.serviceImage}`}
-            image={selectedCard?.media?.image}
-            imageAltText={selectedCard?.media?.altText}
-          />
-          <div className={styles.serviceInfo}>
-            <div className={styles.serviceTitle}>{selectedCard?.title}</div>
-            <div className={styles.serviceDesc}>
-              {selectedCard?.description}
+        <div className={styles.selectedData}>
+          <div className={styles.serviceCard}>
+            <Image
+              className={`${styles.serviceImg} ${styles.serviceImage}`}
+              image={selectedCard?.media?.image}
+              imageAltText={selectedCard?.media?.altText}
+            />
+            <div className={styles.serviceInfo}>
+              <div className={styles.serviceTitle}>{selectedCard?.title}</div>
+              <div className={styles.serviceDesc}>{selectedCard?.description}</div>
+            </div>
+            <div
+              onClick={() => {
+                handleStepChange(1);
+                setSelectedCard(null);
+                updateStep(1, false);
+              }}
+            >
+              <CloseIcon className={styles.closeIcon} />
             </div>
           </div>
-          <div
-            onClick={() => {
-              handleStepChange(1);
-              setSelectedCard(null);
-              updateStep(1, false);
-            }}
-          >
-            <CloseIcon className={styles.closeIcon} />
-          </div>
+          <SelectedBrands />
         </div>
 
         <div className={styles.tabs}>
@@ -145,9 +133,7 @@ const StepThree = () => {
             {tabs.map((tabLabel, index) => (
               <button
                 key={index}
-                className={`${styles.tabButton} ${
-                  selectedTabIndex === index ? styles.activeTab : ""
-                }`}
+                className={`${styles.tabButton} ${selectedTabIndex === index ? styles.activeTab : ""}`}
                 onClick={() => setSelectedTabIndex(index)}
               >
                 {tabLabel}
@@ -171,9 +157,7 @@ const StepThree = () => {
               </div>
             </label>
           </div>
-          <div className={styles.storeCount}>
-            {filteredStores.length.toString().padStart(2, "0")} Results
-          </div>
+          <div className={styles.storeCount}>{filteredStores.length.toString().padStart(2, "0")} Results</div>
         </div>
 
         {isMapView ? (
@@ -192,9 +176,7 @@ const StepThree = () => {
               {filteredStores.map((store) => (
                 <div
                   key={store.id}
-                  className={`${styles.storeItem} ${
-                    selectedStoreId === store.id ? styles.selectedStoreItem : ""
-                  }`}
+                  className={`${styles.storeItem} ${selectedStoreId === store.id ? styles.selectedStoreItem : ""}`}
                   onClick={() => setSelectedStoreId(store.id)}
                 >
                   <div className={styles.storeName}>{store.name}</div>
@@ -220,9 +202,7 @@ const StepThree = () => {
             {filteredStores.map((store) => (
               <div
                 key={store.id}
-                className={`${styles.storeItem} ${
-                  selectedStoreId === store.id ? styles.selectedStoreItem : ""
-                }`}
+                className={`${styles.storeItem} ${selectedStoreId === store.id ? styles.selectedStoreItem : ""}`}
                 onClick={() => setSelectedStoreId(store.id)}
               >
                 <div className={styles.storeName}>{store.name}</div>
@@ -245,12 +225,7 @@ const StepThree = () => {
         )}
       </div>
       <div className={styles.appointmentBtn}>
-        <Button
-          title={"Select Boutique"}
-          color="metallic"
-          type="solid"
-          clickHandler={handleSelectBoutique}
-        />
+        <Button title={"Select Boutique"} color="metallic" type="solid" clickHandler={handleSelectBoutique} />
       </div>
       <ExclusiveInfoCards />
     </div>

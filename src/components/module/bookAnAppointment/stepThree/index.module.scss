@@ -1,5 +1,12 @@
 @import "./../../../../assets/styles/main.scss";
 
+
+.selectedData {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -196,7 +203,7 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-      max-width: rem(1440);
+      max-width: rem(800);
       margin-top: rem(32);
 
       @include lg {
@@ -240,7 +247,7 @@
       flex-direction: column;
       gap: rem(28);
       width: 100%;
-      max-width: rem(1440);
+      max-width: rem(800);
       margin-top: rem(20);
 
       order: 2;

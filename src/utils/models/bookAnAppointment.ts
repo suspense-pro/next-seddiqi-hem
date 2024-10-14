@@ -16,6 +16,10 @@ export interface BookAppointmentContextProps {
     setSelectedJewellery: (jewellery: any[]) => void;
     selectedStore: any; 
     setSelectedStore: (store: any) => void;
-    productDetails:any[];
+    productDetails?:any[];
+    selectedDate: any | null;
+    setSelectedDate: (date: any | null) => void;
+    selectedTime: string | null;
+    setSelectedTime: (time: string | null) => void;
   }
   
