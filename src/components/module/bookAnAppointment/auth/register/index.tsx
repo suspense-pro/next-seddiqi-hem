@@ -1,26 +1,20 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import styles from "./register.module.scss"; // Assuming you're importing this
+import styles from "./register.module.scss";
 import Button from "@components/module/button";
 import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
 import { GreenTick } from "@assets/images/svg";
 import InputField from "@components/module/inputField";
-
-interface FormErrors {
-  email?: string;
-  confirmEmail?: string;
-  password?: string;
-  firstName?: string;
-  lastName?: string;
-  phone?: string;
-  title?: string;
-}
-
-const passwordCriteria = {
-  length: (password: string) => password.length >= 8,
-  uppercase: (password: string) => /[A-Z]/.test(password),
-  number: (password: string) => /\d/.test(password),
-  specialChar: (password: string) => /[!@#$%^&*]/.test(password),
-};
+import {
+  passwordCriteria,
+  validateConfirmEmail,
+  validateEmail,
+  validateFirstName,
+  validateLastName,
+  validatePassword,
+  validatePhone,
+  validateTitle,
+} from "@utils/helpers/validations";
+import { SignUpFormErrors } from "@utils/models";
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -31,7 +25,7 @@ const Register: React.FC = () => {
   const [phone, setPhone] = useState<string>("");
   const [title, setTitle] = useState<string>("");
 
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [errors, setErrors] = useState<SignUpFormErrors>({});
   const [passwordValidations, setPasswordValidations] = useState({
     length: false,
     uppercase: false,
@@ -39,131 +33,64 @@ const Register: React.FC = () => {
     specialChar: false,
   });
 
-  // Handle input change and validation
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
     switch (name) {
       case "email":
         setEmail(value);
-        validateEmail(value);
+        setErrors((prev) => ({ ...prev, email: validateEmail(value) }));
         break;
       case "confirmEmail":
         setConfirmEmail(value);
-        validateConfirmEmail(email, value);
+        setErrors((prev) => ({
+          ...prev,
+          confirmEmail: validateConfirmEmail(email, value),
+        }));
         break;
       case "password":
         setPassword(value);
-        validatePassword(value);
+        setPasswordValidations({
+          length: passwordCriteria.length(value),
+          uppercase: passwordCriteria.uppercase(value),
+          number: passwordCriteria.number(value),
+          specialChar: passwordCriteria.specialChar(value),
+        });
+        setErrors((prev) => ({ ...prev, password: validatePassword(value) }));
         break;
       case "firstName":
         setFirstName(value);
-        validateFirstName(value);
+        setErrors((prev) => ({ ...prev, firstName: validateFirstName(value) }));
         break;
       case "lastName":
         setLastName(value);
-        validateLastName(value);
+        setErrors((prev) => ({ ...prev, lastName: validateLastName(value) }));
         break;
       case "phone":
         setPhone(value);
-        validatePhone(value);
+        setErrors((prev) => ({ ...prev, phone: validatePhone(value) }));
         break;
       case "title":
         setTitle(value);
-        validateTitle(value);
+        setErrors((prev) => ({ ...prev, title: validateTitle(value) }));
         break;
       default:
         break;
     }
   };
 
-  // Password Validation Feedback
-  const validatePassword = (password: string) => {
-    setPasswordValidations({
-      length: passwordCriteria.length(password),
-      uppercase: passwordCriteria.uppercase(password),
-      number: passwordCriteria.number(password),
-      specialChar: passwordCriteria.specialChar(password),
+  const validateForm = (): boolean => {
+    setErrors({
+      email: validateEmail(email),
+      confirmEmail: validateConfirmEmail(email, confirmEmail),
+      password: validatePassword(password),
+      firstName: validateFirstName(firstName),
+      lastName: validateLastName(lastName),
+      phone: validatePhone(phone),
+      title: validateTitle(title),
     });
 
-    let error = "";
-    if (!password) {
-      error = "Password is required.";
-    } else if (
-      !passwordCriteria.length(password) ||
-      !passwordCriteria.uppercase(password) ||
-      !passwordCriteria.number(password) ||
-      !passwordCriteria.specialChar(password)
-    ) {
-      error =
-        "Password must be at least 8 characters, contain one uppercase letter, one number, and one special character.";
-    }
-    setErrors((prevErrors) => ({ ...prevErrors, password: error }));
-  };
-
-  const validateEmail = (email: string) => {
-    let error = "";
-    if (!email) {
-      error = "Email is required.";
-    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-      error = "Invalid email format.";
-    }
-    setErrors((prevErrors) => ({ ...prevErrors, email: error }));
-  };
-
-  const validateConfirmEmail = (email: string, confirmEmail: string) => {
-    let error = "";
-    if (email !== confirmEmail) {
-      error = "Emails do not match.";
-    }
-    setErrors((prevErrors) => ({ ...prevErrors, confirmEmail: error }));
-  };
-
-  const validateFirstName = (firstName: string) => {
-    let error = "";
-    if (!firstName) {
-      error = "First Name is required.";
-    }
-    setErrors((prevErrors) => ({ ...prevErrors, firstName: error }));
-  };
-
-  const validateLastName = (lastName: string) => {
-    let error = "";
-    if (!lastName) {
-      error = "Last Name is required.";
-    }
-    setErrors((prevErrors) => ({ ...prevErrors, lastName: error }));
-  };
-
-  const validatePhone = (phone: string) => {
-    let error = "";
-    if (!phone) {
-      error = "Phone number is required.";
-    } else if (!/^\d{10}$/.test(phone)) {
-      error = "Phone number must be 10 digits.";
-    }
-    setErrors((prevErrors) => ({ ...prevErrors, phone: error }));
-  };
-
-  const validateTitle = (title: string) => {
-    let error = "";
-    if (!title) {
-      error = "Title is required.";
-    }
-    setErrors((prevErrors) => ({ ...prevErrors, title: error }));
-  };
-
-  const validateForm = (): boolean => {
-    validateEmail(email);
-    validateConfirmEmail(email, confirmEmail);
-    validatePassword(password);
-    validateFirstName(firstName);
-    validateLastName(lastName);
-    validatePhone(phone);
-    validateTitle(title);
-
-    const hasErrors = Object.values(errors).some((error) => error !== "");
-    return !hasErrors;
+    return !Object.values(errors).some((error) => error !== "");
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

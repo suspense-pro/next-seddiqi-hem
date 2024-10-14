@@ -1,43 +1,19 @@
 import { useState } from "react";
-import styles from "./signIn.module.scss"; // Assuming you are using a CSS module
+import styles from "./signIn.module.scss"; 
 import Button from "@components/module/button";
 import OtpComponent from "../../otp";
 import { loginCustomer } from "@utils/sfcc-connector/dataService";
 import InputField from "@components/module/inputField";
-
-interface Errors {
-  email?: string;
-  phone?: string;
-  password?: string;
-}
+import { SignInFormErrors } from "@utils/models";
+import { validateEmail, validateLoginPassword, validatePhoneNumber } from "@utils/helpers/validations";
 
 export default function SignIn() {
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
-  const [phoneCode, setPhoneCode] = useState<string>("+91"); // Default phone code
+  const [phoneCode, setPhoneCode] = useState<string>("+91");
   const [password, setPassword] = useState<string>("");
   const [otpForm, setOtpForm] = useState(false);
-  const [errors, setErrors] = useState<Errors>({});
-
-  const validateEmail = (value: string): string | undefined => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(value)) {
-      return "Please enter a valid email.";
-    }
-  };
-
-  const validatePassword = (value: string): string | undefined => {
-    if (!value) {
-      return "Password is required.";
-    }
-  };
-
-  const validatePhoneNumber = (value: string): string | undefined => {
-    const phonePattern = /^[0-9]{6,15}$/;
-    if (!phonePattern.test(value)) {
-      return "Please enter a valid phone number.";
-    }
-  };
+  const [errors, setErrors] = useState<SignInFormErrors>({});
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -48,7 +24,7 @@ export default function SignIn() {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPassword(value);
-    setErrors((prev) => ({ ...prev, password: validatePassword(value) }));
+    setErrors((prev) => ({ ...prev, password: validateLoginPassword(value) }));
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +37,7 @@ export default function SignIn() {
     e.preventDefault();
     const validationErrors = {
       email: validateEmail(email),
-      password: validatePassword(password),
+      password: validateLoginPassword(password),
     };
 
     if (!validationErrors.email && !validationErrors.password) {
