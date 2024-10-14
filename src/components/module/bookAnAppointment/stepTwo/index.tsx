@@ -8,6 +8,7 @@ import { getCategory } from "@utils/sfcc-connector/dataService";
 import WatchesContent from "../watchesContent";
 import JewelleryContent from "../jewelleryContent";
 import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
+import SelectedCard from "../selectedCard";
 
 const StepTwo = () => {
   const { selectedCard, updateStep, handleStepChange, setSelectedCard } = useContext(BookAppointmentContext);
@@ -35,7 +36,7 @@ const StepTwo = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <div className={`${styles.serviceCard}`}>
+        {/* <div className={`${styles.serviceCard}`}>
           <Image
             className={`${true && styles.serviceImg} ${styles.serviceImage}`}
             image={selectedCard?.media?.image}
@@ -54,7 +55,8 @@ const StepTwo = () => {
           >
             <CloseIcon className={styles.closeIcon} />
           </div>
-        </div>
+        </div> */}
+        <SelectedCard />
         <TabbedNavigation className={styles.tabNavigation} tabs={tabs} />
       </div>
       <ExclusiveInfoCards />

@@ -4,6 +4,7 @@ import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
 import { CloseIconV2 } from "@assets/images/svg";
 import StepOne from "./stepOne";
 import StepTwo from "./stepTwo";
+import StepFour from "./stepFour";
 
 const Step3 = () => <div>Content for Step 3</div>;
 const Step4 = () => <div>Content for Step 4</div>;
@@ -24,7 +25,7 @@ const BookAnAppointment = ({ content }) => {
       case 3:
         return <Step3 />;
       case 4:
-        return <Step4 />;
+        return <StepFour />;
       case 5:
         return <Step5 />;
       default:

@@ -18,9 +18,12 @@ export const BookAppointmentProvider = ({ children }) => {
   const [selectedWatches, setSelectedWatches] = useState<any[]>([]);
   const [selectedJewellery, setSelectedJewellery] = useState<any[]>([]);
   const [completedSteps, setCompletedSteps] = useState<boolean[]>([false, false, false, false, false]);
-  const [currentStep, setCurrentStep] = useState<number | null>(null);
-  const [productDetails, setProductDetails] = useState<any[]>([]);
+  const [currentStep, setCurrentStep] = useState<number | null>(4);
   const [loading, setLoading] = useState(true);
+
+    // Adding selectedDate and selectedTime to context
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedTime, setSelectedTime] = useState(null);
 
   // Handle Step Change
   const handleStepChange = (step: number) => {
@@ -55,7 +58,8 @@ export const BookAppointmentProvider = ({ children }) => {
     const savedSelectedCard = localStorage.getItem("selectedCard");
     const savedWatches = localStorage.getItem("selectedWatches");
     const savedJewellery = localStorage.getItem("selectedJewellery");
-    const savedProductDetails = localStorage.getItem("selectedProductDetails");
+    const savedSelectedDate = localStorage.getItem("selectedDate");
+    const savedSelectedTime = localStorage.getItem("selectedTime");
 
     if (savedStep) {
       setCurrentStep(Number(savedStep));
@@ -78,8 +82,13 @@ export const BookAppointmentProvider = ({ children }) => {
     if (savedJewellery) {
       setSelectedJewellery(JSON.parse(savedJewellery));
     }
-    if (savedProductDetails) {
-      setProductDetails(JSON.parse(savedProductDetails));
+
+    if (savedSelectedDate) {
+      setSelectedDate(new Date(JSON.parse(savedSelectedDate)));
+    }
+
+    if (savedSelectedTime) {
+      setSelectedTime(JSON.parse(savedSelectedTime));
     }
 
     setLoading(false); 
@@ -114,12 +123,6 @@ export const BookAppointmentProvider = ({ children }) => {
     localStorage.setItem("selectedJewellery", JSON.stringify(selectedJewellery));
   }, [selectedJewellery]);
 
-  useEffect(() => {
-    if (productDetails) {
-      localStorage.setItem("selectedProductDetails", JSON.stringify(productDetails));
-    }
-  }, [productDetails]);
-
   // When selectedCard changes, mark the first step as completed
   useEffect(() => {
     if (selectedCard) {
@@ -130,6 +133,19 @@ export const BookAppointmentProvider = ({ children }) => {
       });
     }
   }, [selectedCard]);
+
+    // Save selectedDate and selectedTime whenever they change
+    useEffect(() => {
+      if (selectedDate) {
+        localStorage.setItem("selectedDate", JSON.stringify(selectedDate));
+      }
+    }, [selectedDate]);
+  
+    useEffect(() => {
+      if (selectedTime) {
+        localStorage.setItem("selectedTime", JSON.stringify(selectedTime));
+      }
+    }, [selectedTime]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -153,7 +169,10 @@ export const BookAppointmentProvider = ({ children }) => {
         setSelectedWatches,
         selectedJewellery,
         setSelectedJewellery,
-        productDetails
+        selectedDate,
+        setSelectedDate,
+        selectedTime,
+        setSelectedTime,
       }}
     >
       {children}
