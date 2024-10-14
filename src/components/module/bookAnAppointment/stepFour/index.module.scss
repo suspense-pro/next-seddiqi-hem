@@ -158,7 +158,7 @@
 
 .dateItem:hover,
 .timeItem:hover {
-  border: 2px solid getColorHex("grey-light");
+  border: rem(2) solid getColorHex("grey-light");
   background-color: getColorHex("grey-tint");
   color: getColorHex("grey-brown");
 }

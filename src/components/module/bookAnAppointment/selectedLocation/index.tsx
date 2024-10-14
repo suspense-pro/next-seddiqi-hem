@@ -5,7 +5,10 @@ import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
 import Typography from "@components/module/typography";
 
 const SelectedLocation = () => {
-  const { selectedCard, updateStep, handleStepChange, setSelectedCard } = useContext(BookAppointmentContext);
+  const { selectedCard, updateStep, handleStepChange, setSelectedCard, selectedStore } =
+    useContext(BookAppointmentContext);
+
+  if (!selectedStore) return null;
 
   return (
     <div className={styles.container}>
@@ -29,7 +32,7 @@ const SelectedLocation = () => {
             <span className={styles.icon}>
               <MapIcon />
             </span>{" "}
-            Dubai | The Grand Atrium
+            {selectedStore?.city} | {selectedStore?.name}
           </p>
         </div>
       </div>

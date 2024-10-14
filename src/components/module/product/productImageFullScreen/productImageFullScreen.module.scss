@@ -121,12 +121,12 @@
   .slideItem {
     width: rem(28);
     height: rem(2);
-    background: var(--GreyShades-Light-Grey, #cccbc7);
+    background: getColorHex("grey-light-5");
     cursor: pointer;
   }
 
   .slideActive {
-    background: var(--Primary-Metallic, #a98e76);
+    background: getColorHex("metallic");
   }
 }
 

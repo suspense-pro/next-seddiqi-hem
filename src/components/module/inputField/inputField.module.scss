@@ -30,12 +30,11 @@
   }
 
   select {
-    width: rem(61);
     margin-left: rem(-3);
     // appearance: none;
     // -webkit-appearance: none;
     // -moz-appearance: none;
-
+    
     background: transparent;
     border: none;
     border-bottom: rem(1) solid getColorHex("grey-light");
@@ -45,8 +44,12 @@
     cursor: pointer;
     transition: border-color 0.3s;
     box-sizing: border-box;
-
+    
     width: 100%;
+    
+    @include md {
+      width: rem(61);
+    }
 
     &:focus {
       outline: none;

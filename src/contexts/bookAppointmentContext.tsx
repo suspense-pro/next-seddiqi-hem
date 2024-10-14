@@ -1,7 +1,6 @@
 import { BookAppointmentContextProps } from "@utils/models/bookAnAppointment";
 import React, { createContext, useState, useEffect, useContext } from "react";
 
-
 export const BookAppointmentContext = createContext<BookAppointmentContextProps | undefined>(undefined);
 
 export const useBookAppointmentContext = () => {
@@ -18,12 +17,12 @@ export const BookAppointmentProvider = ({ children }) => {
   const [selectedWatches, setSelectedWatches] = useState<any[]>([]);
   const [selectedJewellery, setSelectedJewellery] = useState<any[]>([]);
   const [completedSteps, setCompletedSteps] = useState<boolean[]>([false, false, false, false, false]);
-  const [currentStep, setCurrentStep] = useState<number | null>(4);
+  const [currentStep, setCurrentStep] = useState<number | null>(1);
   const [loading, setLoading] = useState(true);
+  const [selectedStore, setSelectedStore] = useState(null);
 
-    // Adding selectedDate and selectedTime to context
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
 
   // Handle Step Change
   const handleStepChange = (step: number) => {
@@ -91,7 +90,7 @@ export const BookAppointmentProvider = ({ children }) => {
       setSelectedTime(JSON.parse(savedSelectedTime));
     }
 
-    setLoading(false); 
+    setLoading(false);
   }, []);
 
   // Save the current step in localStorage whenever it changes
@@ -134,18 +133,18 @@ export const BookAppointmentProvider = ({ children }) => {
     }
   }, [selectedCard]);
 
-    // Save selectedDate and selectedTime whenever they change
-    useEffect(() => {
-      if (selectedDate) {
-        localStorage.setItem("selectedDate", JSON.stringify(selectedDate));
-      }
-    }, [selectedDate]);
-  
-    useEffect(() => {
-      if (selectedTime) {
-        localStorage.setItem("selectedTime", JSON.stringify(selectedTime));
-      }
-    }, [selectedTime]);
+  // Save selectedDate and selectedTime whenever they change
+  useEffect(() => {
+    if (selectedDate) {
+      localStorage.setItem("selectedDate", JSON.stringify(selectedDate));
+    }
+  }, [selectedDate]);
+
+  useEffect(() => {
+    if (selectedTime) {
+      localStorage.setItem("selectedTime", JSON.stringify(selectedTime));
+    }
+  }, [selectedTime]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -173,6 +172,9 @@ export const BookAppointmentProvider = ({ children }) => {
         setSelectedDate,
         selectedTime,
         setSelectedTime,
+        selectedStore,
+        setSelectedStore,
+        // productDetails,
       }}
     >
       {children}

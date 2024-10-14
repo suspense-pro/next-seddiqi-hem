@@ -7,7 +7,9 @@ import SelectedCard from "../selectedCard";
 import SelectedLocation from "../selectedLocation";
 import SignIn from "../auth/signIn";
 import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
+import SelectedBrands from "../selectedBrands";
 
+// TODO: Get available dates from Api 
 // Get available dates for a month
 export const getAvailableDates = (month, year) => {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -16,7 +18,7 @@ export const getAvailableDates = (month, year) => {
 
   for (let day = 1; day <= daysInMonth; day++) {
     const date = new Date(year, month, day);
-    const isAvailable = date.getDay() !== 0 && date.getDay() !== 6 && date >= today; // Check if the date is today or later
+    const isAvailable = date.getDay() !== 0 && date.getDay() !== 6 && date >= today;
 
     availableDates.push({
       day: date.toLocaleString("default", { weekday: "short" }),
@@ -38,7 +40,7 @@ export const getTimeSlotsForDate = (selectedDate) => {
 };
 
 const StepFour = () => {
-  const { selectedDate, setSelectedDate, selectedTime, setSelectedTime } = useContext(BookAppointmentContext);
+  const { selectedDate, setSelectedDate, selectedTime, setSelectedTime, selectedStore } = useContext(BookAppointmentContext);
 
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -139,6 +141,7 @@ const StepFour = () => {
     <div className={styles.dateSelector}>
       <div className={styles.selectedData}>
         <SelectedCard />
+        <SelectedBrands />
         <SelectedLocation />
       </div>
       <div className={styles.header}>
