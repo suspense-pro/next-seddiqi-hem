@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./otp.module.scss";
 import Button from "@components/module/button";
+import Typography from "@components/module/typography";
 
 const OtpComponent = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -65,7 +66,9 @@ const OtpComponent = () => {
 
   return (
     <div className={styles.otpContainer}>
-      <h2>Enter your OTP</h2>
+      <Typography align="left" variant="h2" className={styles.title}>
+        Enter your OTP
+      </Typography>
       <div>
         <p>Please enter the code we have sent to your phone</p>
         <p>+971 *********57. This is a one time verification.</p>
@@ -98,7 +101,14 @@ const OtpComponent = () => {
       </div>
 
       <div className={styles.submitBtn}>
-        <Button className={styles.signinBtn} color={"metallic"} isLink={false} clickHandler={handleSubmit} title="Sign In" type={'solid'}  />
+        <Button
+          className={styles.signinBtn}
+          color={"metallic"}
+          isLink={false}
+          clickHandler={handleSubmit}
+          title="Sign In"
+          type={"solid"}
+        />
       </div>
     </div>
   );

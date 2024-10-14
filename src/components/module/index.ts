@@ -38,6 +38,7 @@ import ProductImageFullScreen from "./product/productImageFullScreen";
 import ProductDetailInfo from "./product/productDetailInfo";
 import Loader from "./loader";
 import BookAnAppointment from "./bookAnAppointment";
+import InputField from './inputField';
 
 
 export {
@@ -79,5 +80,6 @@ export {
   CategoryList,
   CategoryCard,
   Loader,
-  BookAnAppointment
+  BookAnAppointment,
+  InputField
 };

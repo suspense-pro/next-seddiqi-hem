@@ -134,7 +134,6 @@ const StepFour = () => {
       id: 2,
       title: "Register",
       content: <Register />,
-      // content: <OtpComponent />,
     },
   ];
   return (

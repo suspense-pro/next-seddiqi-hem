@@ -51,6 +51,7 @@
     line-height: rem(26);
     letter-spacing: rem(0.2);
     text-transform: uppercase;
+    text-align: center;
 
     @include md {
       line-height: rem(22);

@@ -1,9 +1,9 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import styles from "./register.module.scss"; // Assuming you're importing this
-import InputField from "../inputField"; // Make sure this path is correct
 import Button from "@components/module/button";
 import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
 import { GreenTick } from "@assets/images/svg";
+import InputField from "@components/module/inputField";
 
 // Define types for the form errors
 interface FormErrors {

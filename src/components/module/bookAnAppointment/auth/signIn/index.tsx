@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styles from "./signIn.module.scss"; // Assuming you are using a CSS module
 import Button from "@components/module/button";
-import InputField from "../inputField";
-import OtpComponent from "../../opt";
+import OtpComponent from "../../otp";
 import { loginCustomer } from "@utils/sfcc-connector/dataService";
+import InputField from "@components/module/inputField";
 
 interface Errors {
   email?: string;

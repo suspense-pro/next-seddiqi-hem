@@ -2,6 +2,7 @@ import { CloseIcon, MapIcon } from "@assets/images/svg";
 import styles from "./selectedLocation.module.scss";
 import { useContext } from "react";
 import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
+import Typography from "@components/module/typography";
 
 const SelectedLocation = () => {
   const { selectedCard, updateStep, handleStepChange, setSelectedCard } = useContext(BookAppointmentContext);
@@ -11,7 +12,9 @@ const SelectedLocation = () => {
       <div className={styles.content}>
         <div className={styles.locationDetails}>
           <div className={styles.header}>
-            <h2>Ahmed Seddiqi</h2>
+            <Typography variant="h2" className={styles.title}>
+              Ahmed Seddiqi
+            </Typography>
             <div
               onClick={() => {
                 handleStepChange(3);
