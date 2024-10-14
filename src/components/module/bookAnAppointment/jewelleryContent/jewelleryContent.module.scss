@@ -32,11 +32,11 @@
     width: rem(20);
     height: rem(20);
     cursor: pointer;
-    border: rem(2) solid #847b72;
+    border: rem(2) solid getColorHex("grey-brown");
     display: flex;
     align-items: center;
     justify-content: center;
-    border-left: rem(1) solid #847b72;
+    border-left: rem(1) solid getColorHex("grey-brown");
   }
 
   .tick {

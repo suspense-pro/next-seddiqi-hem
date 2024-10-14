@@ -5,7 +5,6 @@ import SlidingRadioSwitch from "@components/module/slidingRadioSwitch";
 import { GreenTick } from "@assets/images/svg";
 import InputField from "@components/module/inputField";
 
-// Define types for the form errors
 interface FormErrors {
   email?: string;
   confirmEmail?: string;
