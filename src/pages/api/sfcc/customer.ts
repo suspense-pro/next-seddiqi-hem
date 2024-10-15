@@ -127,7 +127,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                         const profile = await client.getCustomer(options);
                         // console.log("Customer Info: ", profile);
-                        return profile;
+                        return res.status(200).json({ isError: false, response: profile });
                     }
                 } catch (err) {
                     console.error(err);
@@ -170,7 +170,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const profile = await client.updateCustomer(options);
                     console.log("Customer updated: ", profile);
-                    return profile;
+                    return res.status(200).json({ isError: false, response: profile });
                 }
             } catch (err) {
                 console.error(err);
@@ -218,7 +218,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const profile = await client.createCustomerAddress(options);
                     console.log("Customer Address: ", profile);
-                    return profile;
+                    return res.status(200).json({ isError: false, response: profile });
                 }
             } catch (err) {
                 console.error(err);
@@ -267,7 +267,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const profile = await client.updateCustomerAddress(options);
                     console.log("Updated Address: ", profile);
-                    return profile;
+                    return res.status(200).json({ isError: false, response: profile });
                 }
             } catch (err) {
                 console.error(err);
@@ -302,7 +302,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const response = await client.getCustomerAddress(options);
                     console.log("Address: ", response);
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -337,7 +337,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const response = await client.removeCustomerAddress(options);
                     console.log("Delete Address: ", response);
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -378,7 +378,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const response = await client.updateCustomerPassword(options);
                     console.log("Password: ", response);
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -412,7 +412,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
                     const response = await slasAdminClient.deleteShopper(options);
                     console.log("Shopper deleted successfully!");
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -450,7 +450,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
                     const response = await client.getPasswordResetToken(options);
                     console.log("Password reset token gererated" + JSON.stringify(response, null, 4));
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -490,7 +490,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
                     const response = await client.resetPassword(options);
                     console.log("Password has been reset" + JSON.stringify(response, null, 4));
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);

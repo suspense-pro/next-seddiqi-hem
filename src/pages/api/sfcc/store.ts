@@ -80,11 +80,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     // Sort by `c_priority` if it exists, defaulting to a higher value for missing priority
                     filteredStores.sort((storeA: any, storeB: any) => {
                         return (parseInt(storeA.c_priority || '999')) - (parseInt(storeB.c_priority || '999'));
-                    });      
+                    });
+                    
+                    // Extract available brands, cities, and names from the filteredStores
+                    const availableBrands = [...new Set(filteredStores.flatMap((store: any) => store.c_availableBrands || []))];
+                    const availableCities = [...new Set(filteredStores.map((store: any) => store.city))];
+                    const availableNames = [...new Set(filteredStores.map((store: any) => store.name))];
 
                     if (filteredStores.length > 0) {
                         // console.log("Filtered Stores : " + JSON.stringify(filteredStores, null, 4));
-                        return res.status(200).json({ isError: false, response: storeResults });
+                        return res.status(200).json({ 
+                            isError: false, 
+                            response: storeResults, 
+                            availableFilters: {
+                                availableBrands,
+                                availableCities,
+                                availableNames
+                            } 
+                        });
                     } else {
                         console.log("No store found.");
                         return res.status(400).json({ isError: true, response: "No store found." });
