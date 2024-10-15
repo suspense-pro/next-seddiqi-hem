@@ -1,14 +1,14 @@
 import TabbedNavigation from "@components/module/tabbedNavigation";
 import styles from "./authentication.module.scss";
-import SignIn from "./signIn";
 import Register from "./register";
+import SignIn from "./signIn";
 
 const Authentication = () => {
   let tabs = [
     {
       id: 1,
       title: "Sign In",
-      content: <SignIn />,
+      content: <SignIn direction={"column"} />,
     },
     {
       id: 2,
