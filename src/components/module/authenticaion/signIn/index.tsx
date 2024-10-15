@@ -6,6 +6,7 @@ import InputField from "@components/module/inputField";
 import { SignInFormErrors } from "@utils/models";
 import { validateEmail, validateLoginPassword, validatePhoneNumber } from "@utils/helpers/validations";
 import OtpComponent from "../otp";
+import { useRouter } from "next/router";
 
 export default function SignIn({ direction = "row" }) {
   const [email, setEmail] = useState<string>("");
@@ -15,6 +16,7 @@ export default function SignIn({ direction = "row" }) {
   const [otpForm, setOtpForm] = useState(false);
   const [errors, setErrors] = useState<SignInFormErrors>({});
 
+  const router = useRouter();
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
@@ -49,16 +51,26 @@ export default function SignIn({ direction = "row" }) {
       };
 
       try {
-        const response = await loginCustomer({
+        const data = await loginCustomer({
           userData: JSON.stringify(userData),
           method: "POST",
-        });
+        })
 
-        const profile = await getCustomer(response?.response.customer_id, response?.response.access_token);
+        console.log('RESPONSE', data)
 
-        console.log("Login response:", profile);
+        if (!data?.isError) {
+          localStorage.setItem("tokenInfo", JSON.stringify(data?.response));
+          const profile = await getCustomer(data?.response?.customer_id, data?.response?.access_token);
+          if (!profile?.isError) {
+            localStorage.setItem("userInfo", JSON.stringify(profile?.response));
+            router.push("/");
+          }
+        } else {
+          throw new Error("Login Failed Try Again")
+        }
+
       } catch (error) {
-        console.error("Login error:", error);
+        alert(error?.message)
       }
     } else {
       setErrors(validationErrors);
