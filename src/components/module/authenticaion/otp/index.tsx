@@ -5,17 +5,16 @@ import Typography from "@components/module/typography";
 
 const OtpComponent = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
-  const [timer, setTimer] = useState(30); // Countdown timer for resend button
+  const [timer, setTimer] = useState(30); 
   const inputRefs = useRef([]);
 
-  // Handle input change and update OTP state
   const handleChange = (element, index) => {
     const value = element.value;
 
     if (value.match(/^[0-9]{1}$/)) {
       // Allow only numbers
       const newOtp = [...otp];
-      newOtp[index] = value; // Update OTP value
+      newOtp[index] = value;
       setOtp(newOtp);
 
       // Auto-focus the next input field
@@ -25,18 +24,18 @@ const OtpComponent = () => {
     }
   };
 
-  // Handle backspace to move focus backward and clear input
   const handleBackspace = (e, index) => {
     const element = e.target;
 
     // If Backspace is pressed and the input is empty, move to the previous input
     if (e.key === "Backspace") {
       const newOtp = [...otp];
-      newOtp[index] = ""; // Clear the current input
+      newOtp[index] = "";
       setOtp(newOtp);
 
       if (element.value === "" && index > 0) {
-        inputRefs.current[index - 1]?.focus(); // Move focus to the previous input
+        // Move focus to the previous input
+        inputRefs.current[index - 1]?.focus(); 
       }
     }
   };
@@ -53,15 +52,15 @@ const OtpComponent = () => {
   }, [timer]);
 
   const handleResend = () => {
-    setTimer(30); // Reset the timer
-    // Logic to resend OTP
+    setTimer(30);
+    // TODO: Logic to resend OTP
     console.log("Resend OTP triggered");
   };
 
   const handleSubmit = () => {
     const otpValue = otp.join("");
     console.log("Submitted OTP:", otpValue);
-    // Handle OTP submission logic here
+    // TODO: Handle OTP submission logic here
   };
 
   return (
