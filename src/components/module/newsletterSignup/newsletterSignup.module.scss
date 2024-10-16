@@ -98,3 +98,16 @@
     font-size: rem(14);
   }
 }
+
+.statusMessage {
+  font-size: rem(12);
+  margin-top: rem(12);
+}
+
+.success {
+  color: getColorHex("success"); 
+}
+
+.error {
+  color: getColorHex("red-dark");
+}
