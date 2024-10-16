@@ -12,8 +12,12 @@
   display: flex;
   flex-direction: column;
   padding: rem(40 16 16);
-
   left: -100%; //rem(-600);
+
+  [dir="rtl"] & {
+    left: auto;
+    right: -100%;
+  }
 
   @include md {
     padding: rem(60 28 28);
@@ -23,18 +27,29 @@
   &.right {
     left: auto; 
     right: -100%; //rem(-600);
+
+    [dir="rtl"] & {
+      right: auto;
+      left: -100%;
+    }
   }
 }
 
 .open {
   left: 0;
   [dir="rtl"] & {
+    left: auto;
     right: 0;
   }
 
   &.right {
     right: 0;
     left: auto;
+
+    [dir="rtl"] & {
+      right: auto;
+      left: 0;
+    }
   }
 }
 .content {
