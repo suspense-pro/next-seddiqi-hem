@@ -66,7 +66,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 lastModifiedTimestamp: shopperResponse.lastModified,
                                 preferredLanguage: shopperResponse.preferredLocale,
                                 phoneNumber: shopperResponse.phoneMobile,
-                                emailOptIn: false,
+                                emailOptIn: marketingCommunication,
                                 smsOptIn: false,
                                 whatsappOptIn: false,
                                 isGuestCustomer: false
