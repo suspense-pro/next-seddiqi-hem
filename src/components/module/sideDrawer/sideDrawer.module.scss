@@ -7,13 +7,13 @@
   height: 100%;
   background: getColorHex("white");
   box-shadow: rem(1) 0 rem(18) rgba(0, 0, 0, 0.09);
-  transition: left 0.3s ease-in-out, right 0.3s ease-in-out;
+  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
   z-index: 10000;
   display: flex;
   flex-direction: column;
   padding: rem(40 16 16);
 
-  left: rem(-600);
+  left: -100%; //rem(-600);
 
   @include md {
     padding: rem(60 28 28);
@@ -22,7 +22,7 @@
 
   &.right {
     left: auto; 
-    right: rem(-600);
+    right: -100%; //rem(-600);
   }
 }
 
