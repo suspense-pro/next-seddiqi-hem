@@ -662,6 +662,31 @@ export async function getSearchSuggestions({
   }
 }
 
+export async function getContentSearch({
+  query,
+  method,
+}: {
+  query: string;
+  method: string;
+}) {
+  try {
+    const json = {
+      api: "content",
+      action: "contentSearch",
+      search: query,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "search"));
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 export async function getStores({
   method,
   brand,

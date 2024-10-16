@@ -29,6 +29,7 @@ async function saveGoldenIDToCustomerProfile (customer: any, goldenID: any) {
   const client = new Customer.ShopperCustomers(clientConfig);
   const profile = await client.updateCustomer(options);
   // console.log("UPDATE CUSTOMER: "+ JSON.stringify(profile, null, 4));
+  return shopperJWT;
 };
 
 export async function generateRandomString(length) {
