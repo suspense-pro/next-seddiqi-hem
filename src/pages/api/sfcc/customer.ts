@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "register":
             try {
                 if (requestMethod === "POST" && action === "registerCustomer") {
-                    const { salutation, fname, lname, phone, email, password } = body;
+                    const { salutation, fname, lname, phone, email, password, marketingCommunication, privacyPolicy } = body;
                     const configWithAuth = await initializeShopperConfig();
                     const client = new Customer.ShopperCustomers(clientConfig);
 
@@ -36,6 +36,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 firstName: fname,
                                 lastName: lname,
                                 phoneMobile: phone,
+                                "c_as&sCommunication": marketingCommunication,
+                                "c_terms&Conditions": privacyPolicy,
                             },
                         },
                     };
@@ -64,7 +66,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 lastModifiedTimestamp: shopperResponse.lastModified,
                                 preferredLanguage: shopperResponse.preferredLocale,
                                 phoneNumber: shopperResponse.phoneMobile,
-                                emailOptIn: false,
+                                emailOptIn: marketingCommunication,
                                 smsOptIn: false,
                                 whatsappOptIn: false,
                                 isGuestCustomer: false
