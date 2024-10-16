@@ -55,7 +55,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
       {showFooter && (
         <div className={styles.footer}>
           <Button title="Clear all" type="transparent" clickHandler={onClearAll} />
-          <Button title="Done" type="solid green_dark" clickHandler={onSubmit} />
+          <Button title="Done" type="solid green_dark" clickHandler={onClose} />
         </div>
       )}
     </div>

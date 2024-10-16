@@ -9,6 +9,8 @@ const UseFetchStores = async (brand, name, city) => {
       city,
     });
 
+    //console.log("DATA: ", result.response.data);
+
     return result.response.data;
   } catch (err) {
     console.error(err);

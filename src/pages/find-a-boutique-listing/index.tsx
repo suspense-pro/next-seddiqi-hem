@@ -9,7 +9,7 @@ import ContentBlock from "@components/module/contentBlock";
 import UseFetchStores from "@utils/useCustomHooks/useFetchStores";
 import MapView from "@components/module/mapView";
 import { useDeviceWidth } from "@utils/useCustomHooks";
-import { FilterIcon, LocationIcon } from "@assets/images/svg";
+import { CloseIcon, FilterIcon, LocationIcon, SearchIcon } from "@assets/images/svg";
 import StoreMapListContainer from "@components/module/storeMapListContainer";
 import LocationTabs from "@components/module/locationTabs";
 import { getDistance } from "@utils/helpers/getDistance";
@@ -18,6 +18,10 @@ import ToggleMapResults from "@components/module/toggleMapResults";
 import "swiper/css";
 import 'swiper/css/free-mode';
 import 'swiper/css/scrollbar';
+import { SideDrawer, Typography } from "@components/module";
+import { FilterAccordian, FilterAccordionItem } from "@components/module/filterAccordian";
+import CheckboxFilter from "@components/module/checkboxFilter";
+import SearchIcon2 from "@assets/images/svg/SearchIcon2";
 
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -49,11 +53,51 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [itemsToShow, setItemsToShow] = useState(8);
   const [activeTab, setActiveTab] = useState('All');
   const [cities, setCities] = useState([]);
+  const [filtersPopup, showFiltersPopup] = useState(false);
+  const [locationAddresses, setLocationAddresses] = useState([]);
+  const [locationCheckboxValues, setLocationCheckboxValues] = useState([]);
 
   const tabs = [
     { label: 'All Boutiques', value: 'All' },
     { label: 'Dubai', value: 'Dubai' },
     { label: 'Abu Dhabi', value: 'Abu Dhabi' },
+  ];
+
+  const filtersItem = [
+    { 
+      id: "1", 
+      label: 'Brands', 
+      values: [
+        {key: "cgid", label: "Rolex"}, 
+        {key: "cgid", label: "Patek Philippe"}, 
+        {key: "cgid", label: "Akrivia"},
+        {key: "cgid", label: "Audermars Piguet"}, 
+        {key: "cgid", label: "Bell & Ross"}, 
+        {key: "cgid", label: "Bovet"}, 
+        {key: "cgid", label: "Breitling"}, 
+        {key: "cgid", label: "Bvulgari"}, 
+        {key: "cgid", label: "Cabestan"}, 
+        {key: "cgid", label: "Chophard"}, 
+        {key: "cgid", label: "Rolex2"}, 
+        {key: "cgid", label: "Patek Philippe2"}
+      ] 
+    },
+    { 
+      id: "2", 
+      label: 'Locations', 
+      values: locationCheckboxValues.map(address => ({ key: address, label: address }))
+    },
+    { 
+      id: "3", 
+      label: 'Services', 
+      values: [
+        {label: "Walk-Ins"}, 
+        {label: "Appointment bookings"}, 
+        {label: "Try-On"}, 
+        {label: "Personalisation"}, 
+        {label: "Product Servicing"}
+      ] 
+    },
   ];
 
   const handleStoreClick = (index) => {
@@ -71,6 +115,17 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         // Extract unique cities
         const uniqueCities = [...new Set(result.map(store => store.city))];
         setCities(uniqueCities);
+
+        const filteredAddresses = result
+        .filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi')
+        .map(store => store.address1);
+
+        // Uncomment the first const uniqueAddresses line below for dynamic addresses and comment out the second const uniqueAddresses
+        //const uniqueAddresses = [...new Set(result.map(store => store.address1))];
+        const uniqueAddresses = [...new Set(filteredAddresses)];
+        setLocationAddresses(uniqueAddresses);
+        setLocationCheckboxValues(uniqueAddresses);
+        
       } catch (error) {
         console.error(error);
       } finally {
@@ -148,6 +203,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
             <div className={styles.storeImageContainer}>
               <img src={store.c_storeImage} alt={store.name} className={styles.storeImage} />
 
+              {/* Uncomment the commented codes below this to show the nearest store label in the image */}
               {/* {activeToggle ? (
                   <>
                     {nearestStore && nearestStore.id === store.id && (
@@ -217,6 +273,102 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
   //console.log("CONTENT: ", content);
 
+  //Open Filters Popup
+  const [filters, setFiltersState] = useState({});
+  const [searchQuery, setSearchQuery] = useState('');
+  const [popupActiveTab, setPopupActiveTab] = useState('All');
+
+  const popupTabs = [
+    { label: 'All', value: 'All' },
+    { label: 'Dubai', value: 'Dubai' },
+    { label: 'Abu Dhabi', value: 'Abu Dhabi' },
+  ];
+
+  const openFilters = () => {
+    showFiltersPopup(true);
+  };
+
+  useEffect(() => {
+    setFiltersState({});
+  }, []);
+
+  const handleOptionChange = (filterKey, option) => {
+    setFiltersState((prevFilters) => {
+        const prevSelectedOptions = prevFilters[filterKey] || [];
+        const newSelectedOptions = prevSelectedOptions.includes(option)
+            ? prevSelectedOptions.filter((selected) => selected !== option)
+            : [...prevSelectedOptions, option];
+
+        // Combine all selected options into one state
+        const combinedOptions = {
+            ...prevFilters,
+            [filterKey]: newSelectedOptions,
+        };
+
+        return combinedOptions;
+    });
+};
+
+  const handleDelete = (filterKey, option) => {
+    setFiltersState((prevFilters) => {
+      if (filterKey === "sortOption") {
+        return { ...prevFilters, sortOption: undefined };
+      }
+
+      const prevSelectedOptions = prevFilters[filterKey] || [];
+
+      if (Array.isArray(prevSelectedOptions)) {
+        const newSelectedOptions = prevSelectedOptions.filter(
+          (selected) => selected !== option
+        );
+
+        return { ...prevFilters, [filterKey]: newSelectedOptions };
+      }
+
+      return prevFilters;
+    });
+  };
+
+  const handleClearAll = () => {
+    setFiltersState({});
+  };
+  
+
+  const handlePopupTabChange = (tab) => {
+    setFadeList(true);
+
+    setTimeout(() => {
+      setPopupActiveTab(tab);
+      
+      // const filteredStores = tab === 'All' 
+      //     ? stores 
+      //     : stores.filter(store => store.city === tab);
+      const filteredStores = tab === 'All' 
+          ? stores.filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi') 
+          : stores.filter(store => store.city === tab);
+
+      const filteredAddresses = tab === 'All' 
+          ? [...new Set(filteredStores.map(store => store.address1))] 
+          : [...new Set(filteredStores.map(store => store.address1))];
+
+      setLocationCheckboxValues(filteredAddresses);
+      setFadeList(false);
+    }, 300);
+  };
+
+  const handleClearCheckboxes = (filterKey) => {
+    setFiltersState((prevFilters) => ({
+      ...prevFilters,
+      [filterKey]: [],
+    }));
+  };
+
+  const totalSelectedCount = filters 
+  ? Object.values(filters).reduce((acc: number, curr: unknown) => {
+      return acc + (Array.isArray(curr) ? curr.length : 0);
+    }, 0)
+  : 0;
+
   return (
     <>
       <div className={styles.heroBannerWrapper}>
@@ -229,16 +381,50 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         
         <div className={styles.tabsSwiperContainer}>
           <div className={styles.filtersContainer}>
-            <button className={styles.filterButton}>
+            <button 
+              className={styles.filterButton}
+              onClick={openFilters}
+            >
               <FilterIcon />
 
-              <span>Filters By (00)</span>
+              <span>
+                {`Filters By (${totalSelectedCount < 10 ? `0${totalSelectedCount}` : totalSelectedCount})`}
+              </span>
             </button>
           </div>
 
           {/* <LocationTabs activeTab={activeTab} handleTabChange={handleTabChange} tabs={[{ label: 'All Boutiques', value: 'All' }, ...cities.map(city => ({ label: city, value: city }))]}  /> */}
           <LocationTabs activeTab={activeTab} handleTabChange={handleTabChange} tabs={tabs} />
         </div>
+
+        {Object.keys(filters).some(filterKey => 
+          Array.isArray(filters[filterKey]) && filters[filterKey].length > 0) && (
+          <div className={styles.optionsContainer}>
+              <div className={styles.selectedOptions}>
+                  {Object.keys(filters).flatMap((filterKey) => 
+                      Array.isArray(filters[filterKey]) ? 
+                          filters[filterKey].map((option, index) => (
+                              <div key={index} className={styles.selectedOption}>
+                                  <Typography align="left" variant="p" className={styles.option}>
+                                      {option}
+                                  </Typography>
+                                  <div
+                                      className={styles.deleteOption}
+                                      onClick={() => handleDelete(filterKey, option)}
+                                  >
+                                      <CloseIcon />
+                                  </div>
+                              </div>
+                          )) 
+                          : []
+                  )}
+              </div>
+
+              <button className={`${styles.clearAll} button plain green_dark`} onClick={handleClearAll}>
+                  <span>Clear All</span>
+              </button>
+          </div>
+        )}
 
         <ToggleMapResults 
           onToggle={handleToggleChange} 
@@ -255,6 +441,137 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       </div>
 
       <NeedMoreHelp />
+
+      <SideDrawer
+        isOpen={filtersPopup}
+        onClose={() => showFiltersPopup(false)}
+        showFooter={true}
+        onSubmit={null}
+        onClearAll={handleClearAll}
+        showBackButton={false}
+        title="Filter"
+        position={""}
+      >
+
+        {Object.keys(filters).some(filterKey => Array.isArray(filters[filterKey]) && filters[filterKey].length > 0) && (
+          <div className={styles.selectedOptions}>
+            {Object.keys(filters).map((filterKey) =>
+              Array.isArray(filters[filterKey])
+                ? filters[filterKey].map((option, index) => (
+                    <div key={index} className={styles.selectedOption}>
+                      <Typography
+                        align="left"
+                        variant="p"
+                        className={styles.option}
+                      >
+                        {option}
+                      </Typography>
+                      <div
+                        className={styles.deleteOption}
+                        onClick={() => handleDelete(filterKey, option)}
+                      >
+                        <CloseIcon />
+                      </div>
+                    </div>
+                  ))
+                : null
+            )}
+          </div>
+        )}
+
+        <FilterAccordian>
+          {filtersItem.map((filterItem) => {
+            const selectedOptionsCount = filters[filterItem.id]?.length || 0;
+
+            return (
+              <FilterAccordionItem
+                key={filterItem.id}
+                title={filterItem.label}
+                onClear={() => handleClearCheckboxes(filterItem.id)}
+                selectedCount={selectedOptionsCount}
+              >
+                {filterItem.id === '1' && (
+                  <>
+                    <div className={styles.searchInputContainer}>
+                      <SearchIcon2 className={styles.searchIcon} />
+                      <input 
+                        type="text" 
+                        placeholder="Search for brands" 
+                        value={searchQuery} 
+                        onChange={(e) => setSearchQuery(e.target.value)} 
+                        className={styles.searchInput}
+                      />
+                    </div>
+
+                    {filterItem.values && (
+                      <>
+                        <CheckboxFilter
+                          title={filterItem.label}
+                          options={filterItem.values
+                            .map((val) => val.label)
+                            .filter((label) => label.toLowerCase().startsWith(searchQuery.toLowerCase()))} // Use startsWith here
+                          filterKey={filterItem.id}
+                          onOptionChange={handleOptionChange}
+                          selectedOptions={filters[filterItem.id] || []}
+                        />
+                        
+                        {/* Add no results found message */}
+                        {filterItem.values
+                          .map((val) => val.label)
+                          .filter((label) => label.toLowerCase().startsWith(searchQuery.toLowerCase())).length === 0 && (
+                          <div className={styles.noResults}>
+                            No brands found
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
+                {filterItem.id === '2' && ( 
+                  <>
+                    {/* <LocationTabs activeTab={popupActiveTab} handleTabChange={handlePopupTabChange} tabs={[{ label: 'All', value: 'All' }, ...cities.map(city => ({ label: city, value: city }))]}  /> */}
+                    <LocationTabs 
+                      activeTab={popupActiveTab} 
+                      handleTabChange={handlePopupTabChange} 
+                      tabs={popupTabs} 
+                    />
+
+                    <div className={`${styles.locationCheckboxContainer} ${fadeList ? styles.fadeOut : styles.fadeIn}`}>
+                      {filterItem.values && (
+                        <CheckboxFilter
+                          title={filterItem.label}
+                          options={filterItem.values
+                            .map((val) => val.label)
+                            .filter((label) => label.toLowerCase().includes(searchQuery.toLowerCase()))}
+                          filterKey={filterItem.id}
+                          onOptionChange={handleOptionChange}
+                          selectedOptions={filters[filterItem.id] || []}
+                        />
+                      )}
+                    </div>
+                  </>
+                )}
+                {filterItem.id === '3' && (
+                  <>
+                  {filterItem.values && (
+                    <CheckboxFilter
+                      title={filterItem.label}
+                      options={filterItem.values
+                        .map((val) => val.label)
+                        .filter((label) => label.toLowerCase().includes(searchQuery.toLowerCase()))}
+                      filterKey={filterItem.id}
+                      onOptionChange={handleOptionChange}
+                      selectedOptions={filters[filterItem.id] || []}
+                    />
+                  )}
+                  </>
+                )}
+              </FilterAccordionItem>
+            )
+          })}
+        </FilterAccordian>
+        
+      </SideDrawer>
     </>
   );
 };

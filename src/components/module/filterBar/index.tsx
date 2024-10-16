@@ -128,6 +128,26 @@ const FilterBar = ({
     setFiltersState({});
   };
 
+  const handleClearCheckboxes = (filterKey) => {
+    if (filterKey === "sortOption") {
+      setFiltersState((prevFilters) => ({
+        ...prevFilters,
+        sortOption: undefined, 
+      }));
+    } else {
+      setFiltersState((prevFilters) => ({
+        ...prevFilters,
+        [filterKey]: [],
+      }));
+    }
+  };
+
+  const totalSelectedCount = filters 
+  ? Object.values(filters).reduce((acc: number, curr: unknown) => {
+      return acc + (Array.isArray(curr) ? curr.length : 0);
+    }, 0)
+  : 0;
+
   return (
     <div className={styles.container}>
       <div className={styles.filterBtns}>
@@ -193,7 +213,11 @@ const FilterBar = ({
         </div>
 
         <FilterAccordian>
-          <FilterAccordionItem title="Sort">
+          <FilterAccordionItem 
+            title="Sort"
+            onClear={() => handleClearCheckboxes("sortOption")}
+            selectedCount={filters.sortOption ? 1 : 0}
+          >
             <SortFilter
               sortingOptions={sortingOptions}
               selectedSortOption={filters.sortOption}
@@ -204,6 +228,8 @@ const FilterBar = ({
             <FilterAccordionItem
               key={filterItem.attributeId}
               title={filterItem.label}
+              onClear={() => handleClearCheckboxes(filterItem.attributeId)}
+              selectedCount={filters[filterItem.attributeId]?.length || 0}
             >
               {filterItem.values && (
                 <CheckboxFilter
@@ -216,10 +242,18 @@ const FilterBar = ({
               )}
             </FilterAccordionItem>
           ))}
-          <FilterAccordionItem title="Price">
+          <FilterAccordionItem 
+            title="Price"
+            onClear={() => handleClearCheckboxes("price")}
+            selectedCount={filters.price ? 1 : 0}
+          >
             <PriceRangeFilter />
           </FilterAccordionItem>
-          <FilterAccordionItem title="Color">
+          <FilterAccordionItem 
+            title="Color"
+            onClear={() => handleClearCheckboxes("color")}
+            selectedCount={filters.color ? 1 : 0}
+          >
             <ColorFilter />
           </FilterAccordionItem>
         </FilterAccordian>
