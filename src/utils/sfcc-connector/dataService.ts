@@ -743,6 +743,152 @@ export async function subscribedToNewsletter({
   }
 }
 
+export async function createWishlist({
+  method,
+  customerId,
+  access_token
+}: {
+  method: string;
+  customerId: string; 
+  access_token: string;
+}) {
+  try {
+    const json = {
+      api: "createWishlist",
+      action: "createNewList",
+      customerId: customerId,
+      accessToken: access_token,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "wishlist");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function addProductToWishlist({
+  method,
+  customerId,
+  access_token,
+  productId
+}: {
+  method: string;
+  customerId: string; 
+  access_token: string;
+  productId: string;
+}) {
+  try {
+    const json = {
+      api: "addItemToWishlist",
+      action: "addProduct",
+      customerId: customerId,
+      accessToken: access_token,
+      productId: productId
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "wishlist");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function removeProductFromWishlist({
+  method,
+  customerId,
+  access_token,
+  productId
+}: {
+  method: string;
+  customerId: string; 
+  access_token: string;
+  productId: string;
+}) {
+  try {
+    const json = {
+      api: "removeItemFromWishlist",
+      action: "RemoveProduct",
+      customerId: customerId,
+      accessToken: access_token,
+      productId: productId,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "wishlist");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function getWishlist({
+  method,
+  customerId,
+  access_token,
+}: {
+  method: string;
+  customerId: string; 
+  access_token: string;
+}) {
+  try {
+    const json = {
+      api: "getWishlist",
+      action: "getLists",
+      customerId: customerId,
+      accessToken: access_token,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "wishlist");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
+export async function deleteWishlist({
+  method,
+  customerId,
+  access_token,
+}: {
+  method: string;
+  customerId: string; 
+  access_token: string;
+}) {
+  try {
+    const json = {
+      api: "deleteWishlist",
+      action: "deleteList",
+      customerId: customerId,
+      accessToken: access_token,
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = await serverApiCallSfcc(`?${queryString}`, config, "wishlist");
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 let apiConfig: any;
 
 const cacheApiConfig = () => {
