@@ -6,9 +6,11 @@ import { AccountIcon, CalendarIcon, SearchIcon, WishlistIcon } from "@assets/ima
 import { generateUniqueId } from "@utils/helpers/uniqueId";
 import Link from "next/link";
 import Image from "next/image";
+import PrivateLink from "../privateLink";
 
 const HeaderMainLinks = () => {
   const { updateCurrent, headerData } = useContext(HeaderContext);
+
   const headerMainLinks = headerData?.children;
   if (!headerMainLinks) return null;
 
@@ -37,9 +39,9 @@ const HeaderMainLinks = () => {
       <div className={styles.navIcons}>
         <SearchIcon fill="#" />
         <CalendarIcon fill="#" />
-        <Link href={"/auth"}>
+        <PrivateLink url="/profile">
           <AccountIcon fill="#" />
-        </Link>
+        </PrivateLink>
         <WishlistIcon fill="#" />
       </div>
     </div>

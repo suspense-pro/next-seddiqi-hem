@@ -5,9 +5,9 @@ import TabbedNavigation from "@components/module/tabbedNavigation";
 import Register from "../auth/register";
 import SelectedCard from "../selectedCard";
 import SelectedLocation from "../selectedLocation";
-import SignIn from "../auth/signIn";
 import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
 import SelectedBrands from "../selectedBrands";
+import SignIn from "@components/module/authenticaion/signIn";
 
 // TODO: Get available dates from Api 
 // Get available dates for a month
