@@ -107,13 +107,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 filterBy: [
                   {
                     path: "/_meta/schema",
-                    value: "https://schema-examples.com/blog-post-filter"
+                    value: "https://seddiqi.amplience.com/page/content-page"
                   }
-                ],
-                sortBy: {
-                  key: "default",
-                  order: "DESC"
-              },
+                ]
               };
 
               const body = JSON.stringify({
