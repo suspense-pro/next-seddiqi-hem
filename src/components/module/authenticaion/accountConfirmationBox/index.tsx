@@ -3,13 +3,7 @@ import styles from "./accountConfirmationBox.module.scss";
 import { AccountIconBig } from "@assets/images/svg";
 import Typography from "@components/module/typography";
 import Button from "@components/module/button";
-
-interface AccountConfirmationBoxProps {
-  title: string;
-  subtitle1?: string;
-  subtitle2?: string;
-  showButton?: boolean;
-}
+import { AccountConfirmationBoxProps } from "@utils/models";
 
 const AccountConfirmationBox: React.FC<AccountConfirmationBoxProps> = ({
   title,
