@@ -47,10 +47,11 @@ const CollectionsTabList = ({ ...content }) => {
 
 
 const CollectionsTabDesktop = ({ content, cta, ind }) => {
+  const listItems = content?.tabItem[ind]?.collectionItems
   return (
     <div className={styles.containerGrid}>
-      <div className={styles.containerGridItems}>
-        {content?.tabItem[ind]?.collectionItems?.map((item) => {
+      <div className={`${listItems.length <= 4 ? styles.container4Grid: styles.containerGridItems}`}>
+        {listItems?.map((item) => {
           return <CollectionsCard item={item} type={content?.type} />
         })}
       </div>

@@ -7,7 +7,7 @@ import GradientOverlay from "@components/module/gradientOverlay";
 const CollectionsCard = ({ item, type }) => {
   const isProduct = type?.toLowerCase() === "product";
   return (
-    <div className={`${isProduct && styles.productItem} ${styles.item}`}>
+    <div key={item?.title} className={`${isProduct && styles.productItem} ${styles.item}`}>
       <GradientOverlay opacity={item?.opacity?.opacity}>
         {item?.media?.image ? (
           <Image

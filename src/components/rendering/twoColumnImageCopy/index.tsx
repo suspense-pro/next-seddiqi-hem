@@ -18,9 +18,9 @@ const TwoColumnImageCopy = ({ contentLeft, contentRight, ...content }) => {
 
   const leftImage = contentLeft.image.image;
   const rightImage = contentRight.image.image;
-  const cta = contentRight.cta;
+  const cta = contentRight?.cta;
 
-  console.log("contentLeft", contentLeft)
+  // console.log("contentRight", contentRight)
 
   return (
     <div className={styles.container}>
@@ -61,11 +61,12 @@ const TwoColumnImageCopy = ({ contentLeft, contentRight, ...content }) => {
           </div>
           <Button
             isLink={true}
-            link={"/"}
+            link={cta?.url}
             className={styles.discoverBtn}
             title={cta?.label}
             color={cta?.color}
             type={cta?.type}
+            new_tab={cta?.isNewTab}
           />
         </div>
       </div>

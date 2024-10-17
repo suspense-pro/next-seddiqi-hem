@@ -20,6 +20,7 @@ const TwoColumnFullScreenImage = ({ ...content }) => {
       <div style={{ gridTemplateColumns: isSingleColumn && "1fr" }} className={styles.containerImgs}>
         <GradientOverlay opacity={content?.imageLeft?.opacity?.opacity}>
           <Image
+            height={`${isSingleColumn && styles.imgHeight} ${styles.image}`}
             className={`${isSingleColumn && styles.imgHeight} ${styles.image}`}
             image={leftImage}
             imageAltText={leftImage?.altText}
@@ -27,6 +28,7 @@ const TwoColumnFullScreenImage = ({ ...content }) => {
         </GradientOverlay>
         <GradientOverlay opacity={content?.imageRight?.opacity?.opacity}>
           <Image
+            height={`${isSingleColumn && styles.imgHeight} ${styles.image}`}
             className={`${isSingleColumn && styles.imgHeight} ${styles.image}`}
             image={rightImage}
             imageAltText={rightImage?.altText}
