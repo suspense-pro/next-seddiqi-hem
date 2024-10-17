@@ -20,6 +20,8 @@ const TwoColumnImageCopy = ({ contentLeft, contentRight, ...content }) => {
   const rightImage = contentRight.image.image;
   const cta = contentRight.cta;
 
+  console.log("contentLeft", contentLeft)
+
   return (
     <div className={styles.container}>
       <div className={styles.columnOne}>

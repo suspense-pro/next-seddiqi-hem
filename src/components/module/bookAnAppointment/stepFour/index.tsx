@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import styles from "./index.module.scss";
 import { ArrowRight } from "@assets/images/svg";
 import TabbedNavigation from "@components/module/tabbedNavigation";
-import Register from "../auth/register";
 import SelectedCard from "../selectedCard";
 import SelectedLocation from "../selectedLocation";
 import { BookAppointmentContext } from "@contexts/bookAppointmentContext";
 import SelectedBrands from "../selectedBrands";
 import SignIn from "@components/module/authenticaion/signIn";
+import Register from "@components/module/authenticaion/register";
 
 // TODO: Get available dates from Api 
 // Get available dates for a month
