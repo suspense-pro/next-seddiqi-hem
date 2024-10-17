@@ -50,7 +50,7 @@ const BrandListing = ({ ...content }) => {
     }
   };
 
-  // Mouse or touch scroll functionality
+  //  scroll functionality
   const handleMouseDown = (e) => {
     isDraggingRef.current = true;
     startXRef.current = e.pageX || e.touches[0].pageX;
@@ -61,7 +61,8 @@ const BrandListing = ({ ...content }) => {
     if (!isDraggingRef.current) return;
     e.preventDefault();
     const x = e.pageX || e.touches[0].pageX;
-    const walk = (x - startXRef.current) * 2; // The multiplier affects scroll speed
+    // The multiplier affects scroll speed
+    const walk = (x - startXRef.current) * 2;
     alphabetNavRef.current.scrollLeft = scrollLeftRef.current - walk;
   };
 
@@ -107,7 +108,9 @@ const BrandListing = ({ ...content }) => {
         {Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)).map((letter) => (
           <button
             key={letter}
-            className={`${styles.alphabetLetter} ${availableLetters.includes(letter) ? styles.enabled : styles.disabled}`}
+            className={`${styles.alphabetLetter} ${
+              availableLetters.includes(letter) ? styles.enabled : styles.disabled
+            }`}
             onClick={() => handleLetterClick(letter)}
             disabled={!availableLetters.includes(letter)}
           >
