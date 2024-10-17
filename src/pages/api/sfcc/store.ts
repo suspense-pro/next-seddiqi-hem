@@ -91,12 +91,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         // console.log("Filtered Stores : " + JSON.stringify(filteredStores, null, 4));
                         return res.status(200).json({ 
                             isError: false, 
-                            response: storeResults, 
+                            response: filteredStores, 
                             availableFilters: {
                                 availableBrands,
                                 availableCities,
                                 availableNames
-                            } 
+                            }
                         });
                     } else {
                         console.log("No store found.");
