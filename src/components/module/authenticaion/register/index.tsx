@@ -7,6 +7,7 @@ import InputField from "@components/module/inputField";
 import {
   passwordCriteria,
   validateConfirmEmail,
+  validateConfirmPassword,
   validateEmail,
   validateFirstName,
   validateLastName,
@@ -17,15 +18,18 @@ import {
 import { SignUpFormErrors } from "@utils/models";
 import { getCustomer, registerCustomer } from "@utils/sfcc-connector/dataService";
 import AccountConfirmationBox from "../accountConfirmationBox";
+import { useRouter } from "next/router";
 
 const Register = ({ gridColumn = "1fr 1fr" }) => {
   const [email, setEmail] = useState<string>("");
   const [confirmEmail, setConfirmEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
+  const [title, setTitle] = useState<string>("Mr");
+  const [phoneCode, setPhoneCode] = useState<string>("+91");
 
   const [errors, setErrors] = useState<SignUpFormErrors>({});
   const [passwordValidations, setPasswordValidations] = useState({
@@ -36,6 +40,9 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
   });
 
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(true);
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
+  const router = useRouter();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -62,6 +69,13 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
         });
         setErrors((prev) => ({ ...prev, password: validatePassword(value) }));
         break;
+      case "confirmPassword":
+        setConfirmPassword(value);
+        setErrors((prev) => ({
+          ...prev,
+          confirmPassword: validateConfirmPassword(password, value),
+        }));
+        break;
       case "firstName":
         setFirstName(value);
         setErrors((prev) => ({ ...prev, firstName: validateFirstName(value) }));
@@ -71,8 +85,10 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
         setErrors((prev) => ({ ...prev, lastName: validateLastName(value) }));
         break;
       case "phone":
-        setPhone(value);
-        setErrors((prev) => ({ ...prev, phone: validatePhone(value) }));
+        if (/^\d*$/.test(value) && value.length <= 10) {
+          setPhone(value);
+          setErrors((prev) => ({ ...prev, phone: validatePhone(value) }));
+        }
         break;
       case "title":
         setTitle(value);
@@ -86,8 +102,9 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
   const validateForm = (): boolean => {
     setErrors({
       email: validateEmail(email),
-      confirmEmail: validateConfirmEmail(email, confirmEmail),
+      // confirmEmail: validateConfirmEmail(email, confirmEmail),
       password: validatePassword(password),
+      confirmPassword: validateConfirmPassword(password, confirmPassword),
       firstName: validateFirstName(firstName),
       lastName: validateLastName(lastName),
       phone: validatePhone(phone),
@@ -107,9 +124,13 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
         password,
         fname: firstName,
         lname: lastName,
-        phone,
+        phone: `${phoneCode} ${phone}`,
         salutation: title,
+        privacyPolicy: agreedToTerms,
+        marketingCommunication: marketingOptIn,
       };
+
+      console.log("userdata", userData);
 
       try {
         const data = await registerCustomer({
@@ -119,7 +140,15 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
 
         console.log("Registration successful", data);
         if (!data?.isError) {
-          setIsRegistered(true);
+          localStorage.setItem("tokenInfo", JSON.stringify(data?.response));
+          const profile = await getCustomer(data?.response?.response?.customer_id, data?.response?.response?.access_token);
+          if (!profile?.isError) {
+            localStorage.setItem("userInfo", JSON.stringify(profile?.response));
+            setIsRegistered(true);
+            setTimeout(() => {
+              router.push("/account");
+            }, 3000); 
+          }
         } else {
           throw new Error("Registration failed. Please try again.");
         }
@@ -136,8 +165,8 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
   if (isRegistered) {
     return (
       <AccountConfirmationBox
-        title="Your account has been confirmed"
-        subtitle1="Your account has been confirmed. "
+        title="Your account has been Created"
+        subtitle1="Your account has been Created. "
         subtitle2="Please sign in to access your account!"
         showButton={true}
       />
@@ -194,7 +223,7 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
               required
             />
             {/* Confirm Email */}
-            <InputField
+            {/* <InputField
               type="email"
               name="confirmEmail"
               value={confirmEmail}
@@ -202,7 +231,7 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
               label="Repeat Email"
               errorMessage={errors.confirmEmail}
               required
-            />
+            /> */}
           </div>
 
           <div style={containerStyles} className={styles.doubleForm}>
@@ -218,7 +247,7 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
                 required
               />
               {/* Password Validation Indicators */}
-              <div className={styles.passwordCriteria}>
+              <div style={containerStyles} className={`${styles.passwordCriteria}`}>
                 {passwordValidations?.length && (
                   <div className={passwordValidations?.length ? styles.valid : styles.invalid}>
                     <GreenTick /> <span>At least 8 characters</span>
@@ -242,27 +271,56 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
               </div>
             </div>
 
-            {/* Phone Number */}
+            {/* Confirm Password */}
             <InputField
-              type="tel"
-              name="phone"
-              value={phone}
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
               onChange={handleInputChange}
-              label="Phone Number"
-              errorMessage={errors.phone}
+              label="Confirm Password"
+              errorMessage={errors.confirmPassword}
               required
             />
+
+            {/* Phone Number */}
+            <div className={styles.formGroupPhone}>
+              <InputField
+                name="phone code"
+                label=""
+                value={phoneCode}
+                onChange={(e) => setPhoneCode(e.target.value)}
+                options={["+91", "+44", "+61"]}
+                required
+              />
+              <InputField
+                type="tel"
+                name="phone"
+                value={phone}
+                onChange={handleInputChange}
+                label="Phone Number"
+                errorMessage={errors.phone}
+                required
+              />
+            </div>
           </div>
 
           <div style={containerStyles} className={styles.doubleForm}>
             <div className={`${gridColumn === "1fr" && styles.slidingSwitchReverse} ${styles.slidingSwitch}`}>
-              <SlidingRadioSwitch toggleLabel={""} onToggle={(value) => console.log(value)} />
+              <SlidingRadioSwitch
+                toggleLabel={""}
+                onToggle={(value) => setAgreedToTerms(!value)}
+                value={agreedToTerms}
+              />
               <p className={styles.switchLabel}>
                 I have read and agree to Ahmed Seddiqi’ Terms of Service and Privacy Policy*
               </p>
             </div>
             <div className={`${gridColumn === "1fr" && styles.slidingSwitchReverse} ${styles.slidingSwitch}`}>
-              <SlidingRadioSwitch toggleLabel={""} onToggle={(value) => console.log(value)} />
+              <SlidingRadioSwitch
+                toggleLabel={""}
+                onToggle={(value) => setMarketingOptIn(!value)}
+                value={marketingOptIn}
+              />
               <p className={styles.switchLabel}>
                 I would also like to receive marketing information about AS&S products or services. We may send you this
                 information using e-mail, text, telephone, post, social media or through online advertising. You can ask

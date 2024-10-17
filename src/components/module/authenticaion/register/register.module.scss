@@ -4,7 +4,6 @@
   width: 100%;
 }
 
-
 .formGroup {
   display: flex;
   flex-direction: column;
@@ -14,7 +13,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: rem(40);
-  
+
   @include md {
     grid-template-columns: 1fr 1fr;
   }
@@ -22,19 +21,17 @@
 
 .optionSelector {
   display: flex;
-  gap: rem(12);
+  gap: rem(40);
   flex-direction: column;
 
   @include md {
     flex-direction: row;
   }
 
-
   div:last-child {
     width: 100%;
   }
 }
-
 
 .slidingSwitch {
   display: flex;
@@ -52,7 +49,7 @@
   color: getColorHex("grey");
   font-size: rem(10);
   line-height: rem(14);
-  letter-spacing:rem(0.2);
+  letter-spacing: rem(0.2);
 }
 
 .submitBtnContainer {
@@ -65,11 +62,15 @@
   width: rem(264);
 }
 
+.passwordCriteriaColumn {
+  grid-template-columns: 1fr;
+}
+
 .passwordCriteria {
   margin-top: rem(10);
   display: grid;
   grid-template-columns: 1fr;
-  
+
   @include md {
     grid-template-columns: 1fr 1fr;
   }
@@ -93,5 +94,17 @@
 
   .invalid {
     color: getColorHex("dark-red");
+  }
+}
+
+
+
+.formGroupPhone {
+  display: flex;
+  gap: rem(12);
+  width: 100%;
+
+  div:last-child {
+    width: 100%;
   }
 }

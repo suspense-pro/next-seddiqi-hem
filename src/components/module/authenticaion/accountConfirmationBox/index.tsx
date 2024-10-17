@@ -29,7 +29,7 @@ const AccountConfirmationBox: React.FC<AccountConfirmationBoxProps> = ({
         {subtitle1 && <p className={styles.p}>{subtitle1}</p>}
         {subtitle2 && <p className={styles.p}>{subtitle2}</p>}
       </div>
-      {showButton && <div className={styles.btnContainer}>
+      {/* {showButton && <div className={styles.btnContainer}>
         <Button
           clickHandler={() => console.log("")}
           className={styles.signInBtn}
@@ -38,8 +38,7 @@ const AccountConfirmationBox: React.FC<AccountConfirmationBoxProps> = ({
           type="transparant"
           color="metallic"
         />
-      </div>}
-      
+      </div>} */}
     </div>
   );
 };

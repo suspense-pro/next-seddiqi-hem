@@ -2,6 +2,7 @@ export interface SignUpFormErrors {
   email?: string;
   confirmEmail?: string;
   password?: string;
+  confirmPassword?: string;
   firstName?: string;
   lastName?: string;
   phone?: string;
