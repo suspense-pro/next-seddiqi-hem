@@ -1,14 +1,14 @@
-import React, { useMemo, useState, useEffect} from "react";
-import { useRouter } from 'next/router';
+import React, { useMemo, useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import styles from "./productDetailInfo.module.scss";
 import { ArrowRight, CalendarIcon, CubeIcon, HeartIcon, PlusIcon, ShareIcon } from "@assets/images/svg";
 import { Button, SideDrawer } from "@components/module";
 import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
-import { useDeviceWidth } from "@utils/useCustomHooks";
+import { useDeviceWidth, useWindowWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
-import { SizeGuide, SizeSelector, StoreLocationDetails, ColorSelector  } from "@components/module";
+import { SizeGuide, SizeSelector, StoreLocationDetails, ColorSelector } from "@components/module";
 import StoreLocator from "@components/module/storeLocator";
 import { SizeGuideProvider } from "@contexts/sizeGuideSelectorContext";
 import ProductDescriptionFlyoutCard from "../productDescriptionFlyoutCard";
@@ -25,7 +25,7 @@ const ProductDetailInfo = ({
   sizeGuideDataMenWatches,
   sizeGuideDataWomenWatches,
 }) => {
-  const router = useRouter();  
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
   const [showZoom, setShowZoom] = useState(false);
@@ -41,6 +41,7 @@ const ProductDetailInfo = ({
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const prevScrollY = useRef(0);
 
   if (!product) return null;
 
@@ -51,12 +52,10 @@ const ProductDetailInfo = ({
 
   const handleColorSelectorOpen = () => {
     setColorSelectorOpen(true);
-
   };
 
   const handleColorSelectorClose = () => {
     setColorSelectorOpen(false);
-
   };
 
   const handleCardToggle = (card) => {
@@ -89,29 +88,27 @@ const ProductDetailInfo = ({
       localStorage.removeItem("selectedProductDetails");
     };
   }, [product]);
-    
 
   const handleBookAppointment = () => {
     if (!selectedSize || !selectedColor) {
       setErrorMessage("Please select both size and color before booking an appointment.");
       return;
     }
-    
-    setErrorMessage(""); 
+
+    setErrorMessage("");
     router.push({
       pathname: "/book-an-appointment",
     });
   };
 
   const getColorVariations = (product) => {
-    const colorAttribute = product.variationAttributes.find(attr => attr.id === "color");
+    const colorAttribute = product.variationAttributes.find((attr) => attr.id === "color");
     if (!colorAttribute) return [];
-  
-    return colorAttribute.values.map(value => value.name);
-  };
-  
-  const colorVariations = getColorVariations(product);
 
+    return colorAttribute.values.map((value) => value.name);
+  };
+
+  const colorVariations = getColorVariations(product);
 
   const ImageSlide = ({ item }) => {
     return (
@@ -142,13 +139,48 @@ const ProductDetailInfo = ({
     );
   };
 
-  const slides = product?.imageGroups[0]?.images?.map((item, index) =>
-    item?.videoLink1 ? <VideoSlide item={item} key={index} /> : <ImageSlide item={item} key={index} />
-  );
+  const slides = useMemo(() => {
+    return product?.imageGroups[0]?.images?.map((item, index) =>
+      item?.videoLink1 ? <VideoSlide item={item} key={index} /> : <ImageSlide item={item} key={index} />
+    );
+  }, [product]);
 
   const openStoreLocator = () => {
     showStoreLocatorPopup(true);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event?.target?.classList[0]?.includes("sideDrawer_content")) {
+        handleCardToggle(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isCardOpen && window?.scrollY > prevScrollY?.current) {
+        setCardOpen(null);
+      }
+      prevScrollY.current = window.scrollY;
+    };
+
+    if (isCardOpen) {
+      window.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isCardOpen]);
+
+  const windowWidth = useWindowWidth();
+
   return (
     <>
       <div className={styles.container}>
@@ -173,7 +205,7 @@ const ProductDetailInfo = ({
             setSwiper={setSwiper}
             setActiveIndex={setActiveIndex}
           />
-          {!isMobile && <div className={styles.exclusive}>Exclusive</div>}
+          {windowWidth > 991 && <div className={styles.exclusive}>Exclusive</div>}
           <div onClick={() => setShowZoom(true)} className={styles.plus}>
             <PlusIcon />
           </div>
@@ -189,7 +221,7 @@ const ProductDetailInfo = ({
           <div className={styles.productDetails}>
             <div className={styles.productHead}>
               <div className={styles.brand}>
-                {isMobile && <div className={styles.exclusive}>Exclusive</div>}
+                <div className={styles.exclusive}>Exclusive</div>
                 <span>{product?.brand}</span>
               </div>
               <div className={styles.title}>{product?.name}</div>
@@ -198,18 +230,18 @@ const ProductDetailInfo = ({
               </div>
             </div>
             <div className={styles.Variant}>
-            <div className={styles.size}>
-              <div className={styles.label} onClick={handleSizeSelectorOpen}>
-                Select Size
+              <div className={styles.size}>
+                <div className={styles.label} onClick={handleSizeSelectorOpen}>
+                  Select Size
+                </div>
+                <ArrowRight />
               </div>
-              <ArrowRight />
-            </div>
-            <div className={styles.color}>
-              <div className={styles.label} onClick={handleColorSelectorOpen}>
-                Select Color
+              <div className={styles.color}>
+                <div className={styles.label} onClick={handleColorSelectorOpen}>
+                  Select Color
+                </div>
+                <ArrowRight />
               </div>
-              <ArrowRight />
-            </div>
             </div>
             {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
             <Button
@@ -221,22 +253,23 @@ const ProductDetailInfo = ({
               type={"solid"}
               clickHandler={openStoreLocator}
             />
-            {(product.c_storeId && (product.c_storeId.trim() !== "")) && ( 
-            <div className={styles.appointment}>
-              <div className={styles.appointmentLeft}>
-                <CalendarIcon fill="#" />
-                <Button
-                  isLink={false}
-                  link={"/"}
-                  className={styles.appointmentBtn}
-                  title={"Book An Appointment"}
-                  color="green_dark"
-                  type={"Plain"}
-                  clickHandler={handleBookAppointment}
-                />
+            {product.c_storeId && product.c_storeId.trim() !== "" && (
+              <div className={styles.appointment}>
+                <div className={styles.appointmentLeft}>
+                  <CalendarIcon fill="#" />
+                  <Button
+                    isLink={false}
+                    link={"/"}
+                    className={styles.appointmentBtn}
+                    title={"Book An Appointment"}
+                    color="green_dark"
+                    type={"Plain"}
+                    clickHandler={handleBookAppointment}
+                  />
+                </div>
+                <ShareIcon />
               </div>
-              <ShareIcon />
-            </div>)}
+            )}
             <div className={styles.productText}>
               <div className={styles.productLabel}>Product Description</div>
               <div className={styles.productDesc}>
@@ -309,14 +342,16 @@ const ProductDetailInfo = ({
           />
         </SizeGuideProvider>
 
-         {/* Color Selector  */}
+        {/* Color Selector  */}
         <ColorSelector
-            isOpen={isColorSelectorOpen}
-            onClose={handleColorSelectorClose}
-            title={"COLOR"}
-            description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum, velit sit amet consequat volutpat, nisl mauris mollis elit, nec gravida erat enim at tellus."}
-            colorVariations={colorVariations} 
-          />
+          isOpen={isColorSelectorOpen}
+          onClose={handleColorSelectorClose}
+          title={"COLOR"}
+          description={
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum, velit sit amet consequat volutpat, nisl mauris mollis elit, nec gravida erat enim at tellus."
+          }
+          colorVariations={colorVariations}
+        />
       </div>
 
       <SideDrawer

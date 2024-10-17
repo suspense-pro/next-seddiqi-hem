@@ -15,29 +15,31 @@ const ProductDescriptionFlyoutCard = ({ isDescriptionCardOpen, setDescriptionCar
       title={"Product Description"}
       position="right"
     >
-      <Typography variant="p" className={styles.description}>
-        {product?.longDescription}
-      </Typography>
-      <div className={styles.bar}>&nbsp;</div>
-      {editorsView?.listItems?.map((item) => {
-        return (
-          <div className={styles.accordianContainer}>
-            <Accordion
-              showArrow={true}
-              subMenu={subMenu}
-              setSubMenu={setSubMenu}
-              item={{
-                id: 1,
-                title: `${item?.title}`,
-              }}
-              key={1}
-            >
-              <div className={styles.accordianDesc}>{item?.description}</div>
-              <div className={styles.bar}>&nbsp;</div>
-            </Accordion>
-          </div>
-        );
-      })}
+      <div onMouseDown={(e) => e.stopPropagation()}>
+        <Typography variant="p" className={styles.description}>
+          {product?.longDescription}
+        </Typography>
+        <div className={styles.bar}>&nbsp;</div>
+        {editorsView?.listItems?.map((item) => {
+          return (
+            <div className={styles.accordianContainer}>
+              <Accordion
+                showArrow={true}
+                subMenu={subMenu}
+                setSubMenu={setSubMenu}
+                item={{
+                  id: 1,
+                  title: `${item?.title}`,
+                }}
+                key={1}
+              >
+                <div className={styles.accordianDesc}>{item?.description}</div>
+                <div className={styles.bar}>&nbsp;</div>
+              </Accordion>
+            </div>
+          );
+        })}
+      </div>
     </SideDrawer>
   );
 };

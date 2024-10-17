@@ -64,7 +64,7 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
         <GradientOverlay opacity={opacity}>
           <div className={styles.sliderItem}>
             {isImage && (
-              <Image className={imageClassNames} image={item.media?.image} imageAltText={item.media?.altText} />
+              <Image height={imageClassNames} className={imageClassNames} image={item.media?.image} imageAltText={item.media?.altText} />
             )}
             {isVideo && (
               <div className={videoContainerClassNames}>
