@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useRef, useMemo, useEffect } from "react";
 import styles from "./brandListing.module.scss";
 import Button from "../button";
 import { getCategory } from "@utils/sfcc-connector/dataService";
+import Link from "next/link";
 
 const brandsData = {
   A: ["Akrivia", "Aramedes", "Artya", "Audemars Piguet", "Arnold & Son", "Angelus"],
@@ -22,45 +23,75 @@ const brandsData = {
 };
 
 const BrandListing = ({ ...content }) => {
-  if(!content) return null;
+  if (!content) return null;
+
   const [selectedLetter, setSelectedLetter] = useState("A");
   const availableLetters = useMemo(() => Object.keys(brandsData).map((letter) => letter.toUpperCase()), []);
-  const [brands, setBrands] = useState(null)
-  
+  const [brands, setBrands] = useState(null);
+
   const alphabetNavRef = useRef(null);
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
 
+  const brandListRef = useRef(null);
+
+  // Handle the letter click to scroll the brand list
   const handleLetterClick = (letter) => {
     if (availableLetters.includes(letter)) {
       setSelectedLetter(letter);
       const section = document.getElementById(`section-${letter}`);
-      section?.scrollIntoView({ behavior: "smooth" });
+      if (section && brandListRef.current) {
+        brandListRef.current.scrollTo({
+          top: section.offsetTop - brandListRef.current.offsetTop,
+          behavior: "smooth",
+        });
+      }
     }
   };
 
+  // Mouse or touch scroll functionality
   const handleMouseDown = (e) => {
     isDraggingRef.current = true;
-    startXRef.current = e.pageX - alphabetNavRef.current.offsetLeft;
+    startXRef.current = e.pageX || e.touches[0].pageX;
     scrollLeftRef.current = alphabetNavRef.current.scrollLeft;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDraggingRef.current) return;
+    e.preventDefault();
+    const x = e.pageX || e.touches[0].pageX;
+    const walk = (x - startXRef.current) * 2; // The multiplier affects scroll speed
+    alphabetNavRef.current.scrollLeft = scrollLeftRef.current - walk;
   };
 
   const handleMouseUpOrLeave = () => {
     isDraggingRef.current = false;
   };
 
-  const handleMouseMove = (e) => {
-    if (!isDraggingRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - alphabetNavRef.current.offsetLeft;
-    alphabetNavRef.current.scrollLeft = scrollLeftRef.current - (x - startXRef.current) * 2;
-  };
+  // Add touch event listeners for mobile devices
+  useEffect(() => {
+    const nav = alphabetNavRef.current;
+    if (nav) {
+      nav.addEventListener("touchstart", handleMouseDown, { passive: true });
+      nav.addEventListener("touchmove", handleMouseMove, { passive: true });
+      nav.addEventListener("touchend", handleMouseUpOrLeave);
+      return () => {
+        nav.removeEventListener("touchstart", handleMouseDown);
+        nav.removeEventListener("touchmove", handleMouseMove);
+        nav.removeEventListener("touchend", handleMouseUpOrLeave);
+      };
+    }
+  }, []);
 
   const fetchBrands = async () => {
     const brands = await getCategory({ cgid: "seddiqi-storefront-catalog", method: "GET" });
     setBrands(brands?.response?.categories);
   };
+
+  useEffect(() => {
+    fetchBrands();
+  }, []);
 
   return (
     <div className={styles.brandSectionContainer}>
@@ -76,9 +107,7 @@ const BrandListing = ({ ...content }) => {
         {Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)).map((letter) => (
           <button
             key={letter}
-            className={`${styles.alphabetLetter} ${
-              availableLetters.includes(letter) ? styles.enabled : styles.disabled
-            }`}
+            className={`${styles.alphabetLetter} ${availableLetters.includes(letter) ? styles.enabled : styles.disabled}`}
             onClick={() => handleLetterClick(letter)}
             disabled={!availableLetters.includes(letter)}
           >
@@ -88,14 +117,16 @@ const BrandListing = ({ ...content }) => {
       </div>
 
       {/* Brand List */}
-      <div className={styles.brandList}>
+      <div className={styles.brandList} ref={brandListRef}>
         {Object.keys(brandsData).map((letter) => (
           <div key={letter} id={`section-${letter}`} className={styles.brandGroup}>
             <h4>{letter}</h4>
             <div className={styles.brandColumn}>
               {brandsData[letter].map((brand, idx) => (
                 <div key={idx} className={styles.brandName}>
-                  {brand}
+                  <Link target="_blank" href={`/product/${brand}`}>
+                    {brand}
+                  </Link>
                 </div>
               ))}
             </div>
@@ -103,7 +134,13 @@ const BrandListing = ({ ...content }) => {
         ))}
       </div>
       <div className={styles.btnContainer}>
-        <Button isLink={true} link={content?.viewAllBrandsCta?.url} title={content?.viewAllBrandsCta?.label} color={content?.viewAllBrandsCta?.color} type={content?.viewAllBrandsCta?.type} />
+        <Button
+          isLink={true}
+          link={content?.viewAllBrandsCta?.url}
+          title={content?.viewAllBrandsCta?.label}
+          color={content?.viewAllBrandsCta?.color}
+          type={content?.viewAllBrandsCta?.type}
+        />
       </div>
     </div>
   );
