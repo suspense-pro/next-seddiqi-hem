@@ -84,10 +84,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 1. update the customer profile with golden ID */
                             shopperResponse = {...shopperResponse}
                             shopperResponse.currentPassword = password;
-
+                            
                             // Get the shopper token and customer ID
                             const response = await saveGoldenIDToCustomerProfile(shopperResponse, result.sfCustomerId);
-                            return res.status(200).json({ isError: false, response: response });
+                            return res.status(200).json({ isError: false, response: { response, result} });
                         } else {
                             console.log("Failed to get Golden ID.");
                             return res.status(400).json({ isError: true, response: "Failed to get Golden ID." });

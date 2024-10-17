@@ -1,7 +1,7 @@
 import TabbedNavigation from "@components/module/tabbedNavigation";
 import styles from "./authentication.module.scss";
-import Register from "./register";
 import SignIn from "./signIn";
+import Register from "./register";
 
 const Authentication = () => {
   let tabs = [
@@ -13,7 +13,7 @@ const Authentication = () => {
     {
       id: 2,
       title: "Register",
-      content: <Register />,
+      content: <Register gridColumn={"1fr"} />,
     },
   ];
 

@@ -55,9 +55,6 @@ export default function SignIn({ direction = "row" }) {
           userData: JSON.stringify(userData),
           method: "POST",
         })
-
-        console.log('RESPONSE', data)
-
         if (!data?.isError) {
           localStorage.setItem("tokenInfo", JSON.stringify(data?.response));
           const profile = await getCustomer(data?.response?.customer_id, data?.response?.access_token);

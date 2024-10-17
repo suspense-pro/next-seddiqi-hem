@@ -38,4 +38,7 @@ export { default as LocationIcon } from "./LocationIcon";
 export { default as CallIcon } from "./CallIcon";
 export { default as EditIcon } from "./EditIcon";
 export { default as GreenTick } from "./GreenTick";
+export { default as AccountIconBig } from "./AccountIconBig";
+export { default as CircleRightIcon } from "./CircleRightIcon";
+export { default as CircleWrongIcon } from "./CircleWrongIcon";
 
