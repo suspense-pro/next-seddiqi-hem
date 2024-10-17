@@ -373,7 +373,7 @@
     @include body_regular;
     width: rem(2);
     height: rem(16);
-    background-color: #cccbc7;
+    background-color: getColorHex("grey-light-5");
     font-size: rem(14);
     line-height: rem(18);
     letter-spacing: rem(1);

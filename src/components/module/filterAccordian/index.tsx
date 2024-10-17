@@ -3,16 +3,24 @@ import styles from "./filterAccordian.module.scss";
 import { ArrowDown } from "@assets/images/svg";
 import Typography from "../typography";
 
-const FilterAccordionItem = ({ title, children }) => {
+const FilterAccordionItem = ({ title, children, onClear, selectedCount }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  
   const toggleOpen = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleClear = () => {
+    if (onClear) {
+      onClear();
+    }
+  };
+
+  const formattedCount = selectedCount < 10 ? `0${selectedCount}` : selectedCount;
+
   return (
     <div className={`${styles.accordionItem} ${isOpen ? styles.open : ""}`}>
-      <div className={styles.accordionHeader} onClick={toggleOpen}>
+      <div className={styles.accordionHeader}>
         <Typography
           align="left"
           variant="p"
@@ -21,13 +29,16 @@ const FilterAccordionItem = ({ title, children }) => {
           {title}
         </Typography>
         <div className={styles.iconGroup}>
-          <Typography align="left" variant="p" className={styles.clearText}>
-            (00) Clear
-          </Typography>
+          <div className={styles.clearTextContainer} onClick={handleClear}>
+            <Typography align="left" variant="p" className={styles.clearText}>
+            ({formattedCount}) Clear
+            </Typography>
+          </div>
           <ArrowDown
             className={`${styles.arrow} ${isOpen ? styles.rotate : ""}`}
           />
         </div>
+        <span className={styles.accordionHeaderClick} onClick={toggleOpen}></span>
       </div>
       {isOpen && <div className={styles.accordionContent}>{children}</div>}
     </div>

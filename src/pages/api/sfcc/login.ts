@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Customer, slasHelpers } from "commerce-sdk";
 import initializeShopperConfig, { basicAuthorization, clientConfig, getRefereshTokenResponse } from "@utils/sfcc-connector/config";
-import { getCustomer } from "@utils/sfcc-connector/dataService";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const requestMethod = req.method;
@@ -31,16 +30,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           const newToken = await getRefereshTokenResponse(registeredUserTokenResponse.refresh_token);
           console.log("Refresh Token: " + JSON.stringify(newToken, null, 4)); */
 
-          const profile = await getCustomer(registeredUserTokenResponse.customer_id, registeredUserTokenResponse.access_token);
-          return profile;
+          return res.status(200).json({ isError: false, response: registeredUserTokenResponse });
         }
       } catch (err) {
-        console.error(err);
-
-        return {
-          statusCode: 500,
-          body: JSON.stringify({ msg: err }),
-        };
+        return res.status(400).json({ isError: true, response: err });
+ 
       }
       break;
     

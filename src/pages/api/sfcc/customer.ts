@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "register":
             try {
                 if (requestMethod === "POST" && action === "registerCustomer") {
-                    const { salutation, fname, lname, phone, email, password } = body;
+                    const { salutation, fname, lname, phone, email, password, marketingCommunication, privacyPolicy } = body;
                     const configWithAuth = await initializeShopperConfig();
                     const client = new Customer.ShopperCustomers(clientConfig);
 
@@ -36,6 +36,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 firstName: fname,
                                 lastName: lname,
                                 phoneMobile: phone,
+                                "c_as&sCommunication": marketingCommunication,
+                                "c_terms&Conditions": privacyPolicy,
                             },
                         },
                     };
@@ -64,7 +66,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 lastModifiedTimestamp: shopperResponse.lastModified,
                                 preferredLanguage: shopperResponse.preferredLocale,
                                 phoneNumber: shopperResponse.phoneMobile,
-                                emailOptIn: false,
+                                emailOptIn: marketingCommunication,
                                 smsOptIn: false,
                                 whatsappOptIn: false,
                                 isGuestCustomer: false
@@ -82,10 +84,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 1. update the customer profile with golden ID */
                             shopperResponse = {...shopperResponse}
                             shopperResponse.currentPassword = password;
-
-                            saveGoldenIDToCustomerProfile(shopperResponse, result.sfCustomerId);
-
-                            return res.status(200).json({ isError: false, response: result });
+                            
+                            // Get the shopper token and customer ID
+                            const response = await saveGoldenIDToCustomerProfile(shopperResponse, result.sfCustomerId);
+                            return res.status(200).json({ isError: false, response: { response, result} });
                         } else {
                             console.log("Failed to get Golden ID.");
                             return res.status(400).json({ isError: true, response: "Failed to get Golden ID." });
@@ -127,7 +129,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                         const profile = await client.getCustomer(options);
                         // console.log("Customer Info: ", profile);
-                        return profile;
+                        return res.status(200).json({ isError: false, response: profile });
                     }
                 } catch (err) {
                     console.error(err);
@@ -170,7 +172,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const profile = await client.updateCustomer(options);
                     console.log("Customer updated: ", profile);
-                    return profile;
+                    return res.status(200).json({ isError: false, response: profile });
                 }
             } catch (err) {
                 console.error(err);
@@ -218,7 +220,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const profile = await client.createCustomerAddress(options);
                     console.log("Customer Address: ", profile);
-                    return profile;
+                    return res.status(200).json({ isError: false, response: profile });
                 }
             } catch (err) {
                 console.error(err);
@@ -267,7 +269,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const profile = await client.updateCustomerAddress(options);
                     console.log("Updated Address: ", profile);
-                    return profile;
+                    return res.status(200).json({ isError: false, response: profile });
                 }
             } catch (err) {
                 console.error(err);
@@ -302,7 +304,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const response = await client.getCustomerAddress(options);
                     console.log("Address: ", response);
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -337,7 +339,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const response = await client.removeCustomerAddress(options);
                     console.log("Delete Address: ", response);
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -378,7 +380,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const response = await client.updateCustomerPassword(options);
                     console.log("Password: ", response);
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -412,7 +414,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
                     const response = await slasAdminClient.deleteShopper(options);
                     console.log("Shopper deleted successfully!");
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -450,7 +452,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
                     const response = await client.getPasswordResetToken(options);
                     console.log("Password reset token gererated" + JSON.stringify(response, null, 4));
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -490,7 +492,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
                     const response = await client.resetPassword(options);
                     console.log("Password has been reset" + JSON.stringify(response, null, 4));
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
