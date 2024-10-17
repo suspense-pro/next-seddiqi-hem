@@ -15,7 +15,7 @@ import { ContentHeader, GradientOverlay } from "@components/module";
 import { useWindowWidth } from "@utils/useCustomHooks";
 
 const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] }) => {
-  const [slidesPerView, setSlidesPerView] = useState(3); 
+  const [slidesPerView, setSlidesPerView] = useState(3);
   const [isMobile, setIsMobile] = useState(false);
 
   const swiperRef = useRef(null);
@@ -31,7 +31,11 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
       setSlidesPerView(2);
       setIsMobile(false);
     } else {
-      setSlidesPerView(3);
+      if (listItems?.length > 2) {
+        setSlidesPerView(3);
+      } else {
+        setSlidesPerView(2);
+      }
       setIsMobile(false);
     }
   }, [windowWidth]);
@@ -102,11 +106,10 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
         hideUnderline={hideUnderline}
         mainTitle={mainTitle}
         richText={richText}
-
       />
       <div className={styles.containerSlider}>
         {/* SLIDER BTNS */}
-        {hasMultipleItems && !isMobile &&  (
+        {hasMultipleItems && !isMobile && (
           <>
             {activeIndex > 0 && (
               <div className={styles.leftBtn} onClick={() => handleSlide("prev")}>

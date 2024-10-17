@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './slidingRadioSwitch.module.scss'; 
 
-const SlidingRadioSwitch = ({ toggleLabel, onToggle }) => {
-  const [checkedValue, setCheckedValued] = useState<Boolean>(false);
+const SlidingRadioSwitch = ({ toggleLabel, onToggle, value=false }) => {
+  const [checkedValue, setCheckedValued] = useState<boolean>(value);
 
   return (
     <div className={styles.switchContainer}>
@@ -14,6 +14,7 @@ const SlidingRadioSwitch = ({ toggleLabel, onToggle }) => {
           name="toggle"
           onChange={() => {onToggle(checkedValue); setCheckedValued(prevIndex => (prevIndex === false ? true : false))}}
           className={styles.switchInput}
+          checked={checkedValue}
         />
         <span className={`${[styles.slider]} ${[styles.round]}`}></span>
       </label>

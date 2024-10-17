@@ -31,6 +31,15 @@ export const validatePassword = (password: string): string => {
   return "";
 };
 
+export const validateConfirmPassword = (password: string, confirmPassword: string): string => {
+  if (!confirmPassword) {
+    return "Confirm password is required.";
+  } else if (password !== confirmPassword) {
+    return "Passwords do not match.";
+  }
+  return "";
+};
+
 export const validateLoginPassword = (value: string): string | undefined => {
   if (!value) {
     return "Password is required.";

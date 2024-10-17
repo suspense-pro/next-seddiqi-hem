@@ -41,6 +41,9 @@
 
   .imgHeight {
     height: rem(400);
+    @include md {
+      height: rem(720);
+    }
   }
 }
 

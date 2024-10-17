@@ -43,7 +43,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
 
                     var shopperResponse = await client.registerCustomer(options);
-                    // console.log("SFCC Customer: " + JSON.stringify(shopperResponse));
+                    console.log("SFCC Customer: " + JSON.stringify(shopperResponse));
                     
                     if (shopperResponse.customerNo) {
                         /** call to upsert API to get Golden ID */
@@ -85,9 +85,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                             shopperResponse = {...shopperResponse}
                             shopperResponse.currentPassword = password;
 
-                            saveGoldenIDToCustomerProfile(shopperResponse, result.sfCustomerId);
+                            const response = await saveGoldenIDToCustomerProfile(shopperResponse, result.sfCustomerId);
 
-                            return res.status(200).json({ isError: false, response: result });
+                            return res.status(200).json({ isError: false, response: { response, result} });
                         } else {
                             console.log("Failed to get Golden ID.");
                             return res.status(400).json({ isError: true, response: "Failed to get Golden ID." });
