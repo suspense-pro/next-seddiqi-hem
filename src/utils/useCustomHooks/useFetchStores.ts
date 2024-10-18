@@ -1,17 +1,22 @@
 import { getStores } from "@utils/sfcc-connector/dataService";
 
-const UseFetchStores = async (brand, name, city) => {
+const UseFetchStores = async (brand, name, city, service) => {
   try {
     const result = await getStores({
       method: 'GET',
       brand,
       name,
       city,
+      service
     });
 
-    //console.log("DATA: ", result.response.data);
+    console.log("DATA: ", result);
 
-    return result.response.data;
+    if (result.isError) {
+      throw new Error("Network response was not ok");
+    }
+
+    return result;
   } catch (err) {
     console.error(err);
     throw new Error('Failed to fetch stores');

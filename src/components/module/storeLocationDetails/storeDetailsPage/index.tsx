@@ -44,6 +44,8 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
           brand: "",
           city: "",
           name: "",
+          service: ""
+
         });
 
         const fetchedStores = response?.response?.data || [];
