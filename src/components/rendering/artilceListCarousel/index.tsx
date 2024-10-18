@@ -32,9 +32,11 @@ const ArticleListCarousel = ({ ...content }) => {
   }, []);
 
   const windowWidth = useWindowWidth();
-  
+
   useEffect(() => {
-    if (windowWidth < 1250) {
+    if (windowWidth > 1920 && listItems?.length >= 4) {
+      setSlidesPerView(3.2);
+    } else if (windowWidth < 1250) {
       setSlidesPerView(listItems?.length === 1 ? 1 : 1.3);
       setIsMobile(false);
     } else {
@@ -84,7 +86,7 @@ const ArticleListCarousel = ({ ...content }) => {
               <SwiperSlide className={styles.swiperSlide} key={index}>
                 <GradientOverlay opacity={item?.opacity?.opacity} className={styles.containerImg}>
                   <div className={styles.articleItem}>
-                    {item?.media?.image && <Image className={styles.image} image={item?.media?.image} />}
+                    {item?.media?.image && <Image height={styles.image} className={styles.image} image={item?.media?.image} />}
                     {item?.media?.video && (
                       <Video
                         className={styles.image}

@@ -27,52 +27,54 @@ const ProductCareAndWarrantyFlyoutCard = ({
       title={warrantyAndCare?.primaryTitle}
       position="right"
     >
-      {warrantyAndCare?.listItems?.map((item) => {
-        return (
-          <>
-            <div className={styles.accordianContainer}>
-              <Accordion
-                showArrow={true}
-                subMenu={subMenu}
-                setSubMenu={setSubMenu}
-                item={{
-                  id: 1,
-                  title: `${item?.title}`,
-                }}
-                key={1}
-              >
-                <div className={styles.accordianDesc}>{item?.description}</div>
-              </Accordion>
-            </div>
-            <div className={styles.bar}>&nbsp;</div>
-          </>
-        );
-      })}
+      <div onMouseDown={(e) => e.stopPropagation()}>
+        {warrantyAndCare?.listItems?.map((item) => {
+          return (
+            <>
+              <div className={styles.accordianContainer}>
+                <Accordion
+                  showArrow={true}
+                  subMenu={subMenu}
+                  setSubMenu={setSubMenu}
+                  item={{
+                    id: 1,
+                    title: `${item?.title}`,
+                  }}
+                  key={1}
+                >
+                  <div className={styles.accordianDesc}>{item?.description}</div>
+                </Accordion>
+              </div>
+              <div className={styles.bar}>&nbsp;</div>
+            </>
+          );
+        })}
 
-      <div className={styles.btns}>
-        {warrantyAndCare?.servicesCta && (
-          <Button
-            isLink={true}
-            link={warrantyAndCare?.servicesCta?.url}
-            className={styles.serviceBtn}
-            title={warrantyAndCare?.servicesCta?.label}
-            color={warrantyAndCare?.servicesCta?.color}
-            type={warrantyAndCare?.servicesCta?.type}
-            new_tab={warrantyAndCare?.servicesCta?.isNewTab}
-          />
-        )}
+        <div className={styles.btns}>
+          {warrantyAndCare?.servicesCta && (
+            <Button
+              isLink={true}
+              link={warrantyAndCare?.servicesCta?.url}
+              className={styles.serviceBtn}
+              title={warrantyAndCare?.servicesCta?.label}
+              color={warrantyAndCare?.servicesCta?.color}
+              type={warrantyAndCare?.servicesCta?.type}
+              new_tab={warrantyAndCare?.servicesCta?.isNewTab}
+            />
+          )}
 
-        {warrantyAndCare?.downloadCta && (
-          <Button
-            isLink={true}
-            link={warrantyAndCare?.downloadCta?.url}
-            className={styles.serviceBtn}
-            title={warrantyAndCare?.downloadCta?.label}
-            color={warrantyAndCare?.downloadCta?.color}
-            type={warrantyAndCare?.downloadCta?.type}
-            new_tab={warrantyAndCare?.downloadCta?.isNewTab}
-          />
-        )}
+          {warrantyAndCare?.downloadCta && (
+            <Button
+              isLink={true}
+              link={warrantyAndCare?.downloadCta?.url}
+              className={styles.serviceBtn}
+              title={warrantyAndCare?.downloadCta?.label}
+              color={warrantyAndCare?.downloadCta?.color}
+              type={warrantyAndCare?.downloadCta?.type}
+              new_tab={warrantyAndCare?.downloadCta?.isNewTab}
+            />
+          )}
+        </div>
       </div>
     </SideDrawer>
   );

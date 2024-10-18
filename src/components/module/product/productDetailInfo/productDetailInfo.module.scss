@@ -18,7 +18,7 @@
 
 .imgContainer {
   width: 100%;
-  height: rem(370);
+  height: rem(460);
   position: relative;
   cursor: zoom-in;
 
@@ -43,9 +43,14 @@
   position: absolute;
   z-index: 100;
   cursor: pointer;
+  font-size: rem(10);
+
+  margin-top: rem(14);
 
   svg {
     transform: rotate(180deg);
+    width: rem(6);
+    height: rem(12);
   }
 }
 
@@ -79,7 +84,7 @@
 .carousel {
   position: relative;
   width: 100%;
-  height: rem(370);
+  height: rem(460);
 
   @include lg {
     flex: 2;
@@ -123,6 +128,7 @@
     position: absolute;
     right: rem(20);
     bottom: rem(0);
+    z-index: 1;
 
     .degree {
       color: getColorHex("midnight-brown");
@@ -156,20 +162,36 @@
 
 // Right Section
 .right {
+  padding: rem(28);
+  width: 100%;
   display: flex;
-  flex: 1.2;
-  margin: rem(28);
+
+  .productDetails {
+    width: 100%;
+  }
 
   @include lg {
+    flex: 1.2;
     margin: rem(80);
+  }
+  @include breakpoint-max-width(rem(1460)) {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 .save {
-  flex: 1;
   display: flex;
   justify-content: flex-end;
   height: 100%;
+
+  position: absolute;
+  right: rem(28);
+
+  @include lg {
+    position: relative;
+    flex: 1;
+  }
 
   svg {
     margin-top: rem(6);
@@ -243,15 +265,16 @@
   align-items: center;
 }
 
-.size, .color {
+.size,
+.color {
   display: flex;
-  align-items: center;            
-  justify-content: space-between; 
+  align-items: center;
+  justify-content: space-between;
   padding-bottom: rem(12);
   cursor: pointer;
   flex: 1;
   border-bottom: 1px solid getColorHex("grey-light-5");
-  margin-right: rem(20);         
+  margin-right: rem(20);
 
   &:last-child {
     margin-right: 0;
@@ -349,9 +372,14 @@
   display: flex;
   align-items: center;
   gap: rem(16);
-  justify-content: space-between;
+
   @include lg {
     justify-content: flex-start;
+  }
+
+  @include breakpoint-max-width(rem(1460)) {
+    gap: rem(10);
+    justify-content: space-between;
   }
 
   .tab {
@@ -383,6 +411,6 @@
 
 .errorMessage {
   font-size: rem(12);
-  color:  getColorHex("red");
+  color: getColorHex("red");
   margin-top: rem(5);
 }

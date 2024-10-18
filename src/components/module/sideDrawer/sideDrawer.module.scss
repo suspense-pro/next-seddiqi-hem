@@ -49,7 +49,7 @@
     right: -100%;
   }
 
-  @include md {
+  @include lg {
     padding: rem(60 28 28);
     width: rem(600);
   }

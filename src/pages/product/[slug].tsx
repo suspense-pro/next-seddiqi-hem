@@ -7,6 +7,7 @@ import ProductDetailInfo from "@components/module/product/productDetailInfo";
 import ContentBlock from "@components/module/contentBlock";
 import { PdpTabs } from "@components/rendering";
 import { isEmpty } from "@utils/helpers";
+import { ScrollToTop, StickyWhatsapp } from "@components/module";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
@@ -122,6 +123,8 @@ export default function ProductPage({
       />
       <PdpTabs productTechSpecs={productTechSpecs} amplienceData={""} />
       {/* Other components like ScrollToTop and StickyWhatsapp */}
+      <StickyWhatsapp />
+      <ScrollToTop />
       {compact(content?.page?.components).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />
       ))}
