@@ -37,7 +37,7 @@
     z-index: -1;
     position: relative;
   
-    @include md {
+    @include xl {
       height: rem(636);
       width: 100%;
     }
