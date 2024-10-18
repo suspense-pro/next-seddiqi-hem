@@ -4,11 +4,14 @@ import Image from "@components/module/image";
 import Video from "@components/module/video";
 import GradientOverlay from "@components/module/gradientOverlay";
 
-const CollectionsCard = ({ item, type }) => {
+const CollectionsCard = ({ item, type, totalItems }) => {
   const isProduct = type?.toLowerCase() === "product";
   return (
-    <div key={item?.title} className={`${isProduct && styles.productItem} ${styles.item}`}>
-      <GradientOverlay opacity={item?.opacity?.opacity}>
+    <div
+      key={item?.title}
+      className={`${isProduct && styles.productItem} ${totalItems <= 4 && styles.collectionHeight} ${styles.item}`}
+    >
+      <GradientOverlay className={styles.gradient} opacity={item?.opacity?.opacity}>
         {item?.media?.image ? (
           <Image
             className={`${isProduct && styles.productImg} ${styles.image}`}
