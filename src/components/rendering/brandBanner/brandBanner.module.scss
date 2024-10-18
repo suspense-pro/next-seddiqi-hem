@@ -8,7 +8,6 @@
   position: relative;
   background-color: getColorHex("cream");
   flex-direction: column-reverse; 
-  margin: rem(60) 0;
 
   @include lg {
     flex-direction: row;  
