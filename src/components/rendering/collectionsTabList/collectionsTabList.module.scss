@@ -1,7 +1,8 @@
 @import "./../../../assets/styles/main.scss";
 
 .container {
-  padding: rem(60 0);
+  margin: rem(60) 0 0 0;
+
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -11,7 +12,8 @@
   }
 
   @include md {
-    padding: rem(120 0);
+    margin: rem(120) 0 0 0;
+
   }
 }
 
