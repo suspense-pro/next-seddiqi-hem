@@ -5,7 +5,7 @@ import { ArrowRight, CalendarIcon, CubeIcon, HeartIcon, PlusIcon, ShareIcon } fr
 import { Button, SideDrawer } from "@components/module";
 import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
-import { useDeviceWidth, useWindowWidth } from "@utils/useCustomHooks";
+import { useClickOutside, useCloseOnScroll, useDeviceWidth, useWindowWidth } from "@utils/useCustomHooks";
 import Image from "next/image";
 import ProductImageFullScreen from "../productImageFullScreen";
 import { SizeGuide, SizeSelector, StoreLocationDetails, ColorSelector } from "@components/module";
@@ -42,6 +42,7 @@ const ProductDetailInfo = ({
   const [selectedColor, setSelectedColor] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const prevScrollY = useRef(0);
+  const windowWidth = useWindowWidth();
 
   if (!product) return null;
 
@@ -149,37 +150,8 @@ const ProductDetailInfo = ({
     showStoreLocatorPopup(true);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event?.target?.classList[0]?.includes("sideDrawer_content")) {
-        handleCardToggle(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isCardOpen && window?.scrollY > prevScrollY?.current) {
-        setCardOpen(null);
-      }
-      prevScrollY.current = window.scrollY;
-    };
-
-    if (isCardOpen) {
-      window.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isCardOpen]);
-
-  const windowWidth = useWindowWidth();
+  useClickOutside(handleCardToggle, "sideDrawer_content");
+  useCloseOnScroll(isCardOpen, setCardOpen);
 
   return (
     <>
