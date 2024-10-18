@@ -76,7 +76,7 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
             <div className={styles.sliderItem}>
               <GradientOverlay opacity={item?.opacity?.opacity}>
                 {item?.listItems[0]?.image && (
-                  <Image className={styles.image} image={item?.listItems[0]?.image} imageAltText="image" />
+                  <Image height={styles.image} className={styles.image} image={item?.listItems[0]?.image} imageAltText="image" />
                 )}
                 {item?.listItems[0]?.video && (
                   <Video
