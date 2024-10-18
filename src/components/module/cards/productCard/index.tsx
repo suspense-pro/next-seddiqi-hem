@@ -52,7 +52,7 @@ const ProductCard = ({ item, isCarousel = true }) => {
         /> */}
         <Image
           layout="fill"
-          objectFit="cover"
+          objectFit="contain"
           alt={`Slide`}
           src={image?.absUrl}
           // src={imageGroups[1]?.images?.[0]?.link}
