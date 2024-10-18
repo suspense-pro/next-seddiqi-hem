@@ -24,8 +24,11 @@ $border-radius: rem(12 0 12 0);
 
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: center; 
   margin: $mobile-margin;
+  @include md {
+    margin: $desktop-margin;
+  }
 }
 .containerContent {
   @include flex-center;
@@ -35,7 +38,7 @@ $border-radius: rem(12 0 12 0);
   
   @include lg {
     gap: $desktop-gap;
-    margin: $desktop-margin;
+    margin: rem(0 32);
     flex-direction: row;
     width: rem(1085);
     justify-content: space-between;

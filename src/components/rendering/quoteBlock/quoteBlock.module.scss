@@ -2,19 +2,29 @@
 
 .quoteCarouselWrapper {
   width: 100%;
+  margin: rem(60) 0 0 0;
+  @include md {
+    margin: rem(120) 0 0 0;
+  }
   background-color: getColorHex("white");
 
   &.primary {
     background-color: getColorHex("white");
+    .quoteCarouselContainer {
+      padding: rem(60) rem(28);
+    }
   }
 
   &.secondary {
     background-color: getColorHex("light-cream");
+    .quoteCarouselContainer {
+      padding: rem(60) rem(28); 
+    }
   }
 }
 
 .quoteCarouselContainer {
-  padding: rem(60) rem(28);
+  padding: rem(0) rem(28);
   margin: 0 auto;
   position: relative;
   max-width: rem(1440);
