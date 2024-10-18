@@ -45,6 +45,7 @@ const StepThree = () => {
           brand: "",
           city: "",
           name: "",
+          service: ""
         });
         console.log("Stores response:", response);
 

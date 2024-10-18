@@ -7,6 +7,7 @@ import RichText from "@components/module/richText";
 const ImageComponent = ({ image, alt }) => (
   <Image
     className={styles.image}
+    height={styles.image}
     image={image}
     imageAltText={alt}
     // query={"h=700"}
@@ -68,6 +69,8 @@ const TwoColumnImageCopy = ({ contentLeft, contentRight, ...content }) => {
             type={cta?.type}
             new_tab={cta?.isNewTab}
           />
+         <span>
+         </span>
         </div>
       </div>
     </div>
