@@ -6,7 +6,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const requestMethod = req.method;
     const query = req.query.api ?? "";
     const action = req.query.action ?? "";
-    const { brand, city, name } = req.query;
+    const { brand, city, name, service } = req.query;
 
     switch (query) {
         case "search":
@@ -35,9 +35,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     const brands = Array.isArray(brand) ? brand : brand?.split(",");
                     const cities = Array.isArray(city) ? city : city?.split(",");
                     const names = Array.isArray(name) ? name : name?.split(",");
+                    const services = Array.isArray(service) ? service : service?.split(",");
 
                     // If no filters are provided, return all stores
-                    if (!brands && !cities && !names) {
+                    if (!brands && !cities && !names && !services) {
                         filteredStores = storeResults.data;
                     } else {
                         // Apply OR filtering if any filters are provided
@@ -69,6 +70,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 ),
                             ];
                         }
+
+                        if (services) {
+                            filteredStores = [
+                                ...filteredStores,
+                                ...storeResults.data.filter((store: any) =>
+                                services.some((a) => store.c_services?.toLowerCase().includes(a.toLowerCase()))
+                                ),
+                            ];
+                        }
                     
                         // Remove duplicates from filteredStores
                         filteredStores = filteredStores.filter(
@@ -86,17 +96,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     const availableBrands = [...new Set(filteredStores.flatMap((store: any) => store.c_availableBrands || []))];
                     const availableCities = [...new Set(filteredStores.map((store: any) => store.city))];
                     const availableNames = [...new Set(filteredStores.map((store: any) => store.name))];
+                    const availableServices = [...new Set(filteredStores.flatMap((store: any) => store.c_services || []))];
+                    
 
                     if (filteredStores.length > 0) {
                         // console.log("Filtered Stores : " + JSON.stringify(filteredStores, null, 4));
                         return res.status(200).json({ 
                             isError: false, 
-                            response: storeResults, 
+                            response: filteredStores, 
                             availableFilters: {
                                 availableBrands,
                                 availableCities,
-                                availableNames
-                            } 
+                                availableNames,
+                                availableServices
+                            }
                         });
                     } else {
                         console.log("No store found.");
