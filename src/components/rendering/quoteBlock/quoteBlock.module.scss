@@ -96,7 +96,7 @@
 
   &:after {
     bottom: rem(-25);
-    right: rem(15);
+    right: rem(30);
     transform: translate(100%, 50%);
     content: "”";
     @include lg {
