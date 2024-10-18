@@ -11,13 +11,13 @@
     display: flex;
     flex-direction: column;
     gap: rem(52);
-    margin: rem(32);
+    margin: rem(0 32);
 
     @include md {
       flex-direction: row;
     }
     @include lg {
-      margin: rem(60);
+      margin: rem(0 60);
     }
   }
 

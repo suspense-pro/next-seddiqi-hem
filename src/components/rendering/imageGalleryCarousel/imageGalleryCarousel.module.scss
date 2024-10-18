@@ -4,6 +4,10 @@
   position: relative;
   display: flex;
   align-items: center;
+  margin: rem(60) 0 0 0;
+  @include md {
+    margin: rem(120) 0 0 0;
+  }
 
   .leftBtn,
   .rightBtn {
