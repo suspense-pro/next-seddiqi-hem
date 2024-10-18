@@ -91,7 +91,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const result = await UseFetchStores('', '', '');
+        const result = await UseFetchStores('', '', '', '');
         setStores(result.response);
 
         // Extract unique cities

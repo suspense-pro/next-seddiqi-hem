@@ -1,12 +1,13 @@
 import { getStores } from "@utils/sfcc-connector/dataService";
 
-const UseFetchStores = async (brand, name, city) => {
+const UseFetchStores = async (brand, name, city, service) => {
   try {
     const result = await getStores({
       method: 'GET',
       brand,
       name,
       city,
+      service
     });
 
     console.log("DATA: ", result);
