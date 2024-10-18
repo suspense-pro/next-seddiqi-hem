@@ -50,7 +50,6 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
     activeBanner?.horizontalAlignment === "right"
       ? "left"
       : activeBanner?.horizontalAlignment || "center";
-
   return (
     <>
       <div className={`${styles.heroBanner} ${containerClass}`}>
@@ -107,7 +106,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
                 <div className={styles.ctaButton}>
                   <Button
                     title={activeBanner.cta[0]?.label}
-                    type={activeBanner.cta[0]?.type}
+                    type={`${activeBanner.cta[0]?.type?.toLowerCase()} ${activeBanner.cta[0]?.color?.toLowerCase()}`}
                   />
                 </div>
               )}

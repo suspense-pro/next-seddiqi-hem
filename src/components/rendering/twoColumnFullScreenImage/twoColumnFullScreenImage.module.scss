@@ -1,7 +1,6 @@
 @import "./../../../assets/styles/main.scss";
 
 .container {
-  margin: rem(60 0);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -10,10 +9,11 @@
     text-align: right;
   }
 
+  margin: rem(60) 0 0 0;
   @include md {
-    margin: rem(100 0);
-
+    margin: rem(120) 0 0 0;
   }
+
 }
 
 .containerImgs {

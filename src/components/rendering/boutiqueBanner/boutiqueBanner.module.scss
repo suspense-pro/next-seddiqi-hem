@@ -7,6 +7,10 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
+  margin: rem(60) 0 0 0;
+  @include md {
+    margin: rem(120) 0 0 0;
+  }
 
   &.primaryBackground {
     background-color: getColorHex("grey-light-6");
