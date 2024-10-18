@@ -46,6 +46,7 @@ export interface AccordionProps {
   setSubMenu?: (id: any) => void;
   subMenu?: string | number | boolean;
   showArrow?: boolean;
+  isOpen?: boolean;
 }
 
 // cards

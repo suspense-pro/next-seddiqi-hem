@@ -8,13 +8,11 @@
   margin-right: rem(0);
   gap: rem(32);
   flex-wrap: wrap;
-  
 
   @include lg {
     flex-direction: row;
     gap: rem(40);
     margin-left: rem(80);
-
   }
 
   .headerItem {
@@ -96,14 +94,14 @@
     width: rem(40);
     height: rem(40);
     border-radius: rem(12) 0 rem(12);
-    background: getColorHex("green-dark");
+    background: getColorHex("metallic");
     display: none;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     position: absolute;
     z-index: 2000;
-    
+
     @include md {
       display: flex;
     }
@@ -175,6 +173,8 @@
   line-height: rem(28);
   letter-spacing: rem(0.6);
   margin-bottom: rem(4);
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
 
   @include lg {
     margin-bottom: rem(2);
@@ -186,4 +186,15 @@
   font-size: rem(14);
   line-height: rem(22);
   letter-spacing: rem(0.4);
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+}
+
+.title,
+.desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
