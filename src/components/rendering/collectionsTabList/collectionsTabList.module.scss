@@ -1,7 +1,8 @@
 @import "./../../../assets/styles/main.scss";
 
 .container {
-  padding: rem(60 0);
+  margin: rem(60) 0 0 0;
+
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -11,7 +12,8 @@
   }
 
   @include md {
-    padding: rem(120 0);
+    margin: rem(120) 0 0 0;
+
   }
 }
 
@@ -72,20 +74,31 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(rem(360), 1fr));
     width: 100%;
-
+    
     @include md {
+      max-width: rem(1082);
+    }
+  }
+
+  .container6Grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(rem(360), 1fr));
+    width: 100%;
+
+    @include lg {
+      grid-template-columns: repeat(3, minmax(rem(260), 1fr));
       max-width: rem(1082);
     }
   }
 
   .containerGridItems {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(rem(360), 1fr));
+    grid-template-columns: repeat(1fr, minmax(rem(260), 1fr));
     width: 100%;
-
-    @include md {
+    
+    @include lg {
+      grid-template-columns: repeat(3, minmax(rem(260), 1fr));
       max-width: rem(1082);
-      // margin: 0 auto;
     }
   }
 }

@@ -9,10 +9,15 @@
   gap: rem(32);
   flex-wrap: wrap;
 
+  margin-top: rem(60);
+
+
   @include lg {
     flex-direction: row;
     gap: rem(40);
     margin-left: rem(80);
+  margin-top: rem(120);
+
   }
 
   .headerItem {
