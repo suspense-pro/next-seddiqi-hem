@@ -33,7 +33,7 @@
     @include breakpoint-max-width(rem(1400)) {
       justify-content: flex-end;
     }
-    @include breakpoint-max-width(rem(1210)) {
+    @include breakpoint-max-width(rem(1240)) {
       justify-content: center;
     }
 
@@ -94,7 +94,7 @@
   min-width: rem(180);
   // display: none;
 
-  @include breakpoint-max-width(rem(1210)) {
+  @include breakpoint-max-width(rem(1240)) {
     display: none;
   }
 
