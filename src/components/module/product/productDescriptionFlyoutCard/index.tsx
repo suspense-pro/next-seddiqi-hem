@@ -24,6 +24,7 @@ const ProductDescriptionFlyoutCard = ({ isDescriptionCardOpen, setDescriptionCar
           return (
             <div className={styles.accordianContainer}>
               <Accordion
+                isOpen={true}
                 showArrow={true}
                 subMenu={subMenu}
                 setSubMenu={setSubMenu}

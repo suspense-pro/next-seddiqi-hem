@@ -28,11 +28,12 @@ const ProductCareAndWarrantyFlyoutCard = ({
       position="right"
     >
       <div onMouseDown={(e) => e.stopPropagation()}>
-        {warrantyAndCare?.listItems?.map((item) => {
+        {warrantyAndCare?.listItems?.map((item, index) => {
           return (
             <>
               <div className={styles.accordianContainer}>
                 <Accordion
+                  isOpen={index === 0 && true}
                   showArrow={true}
                   subMenu={subMenu}
                   setSubMenu={setSubMenu}
