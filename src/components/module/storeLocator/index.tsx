@@ -37,10 +37,10 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
     const fetchStores = async () => {
       try {
         const result = await UseFetchStores(productBrand, productName, '');
-        setStores(result);
+        setStores(result.response);
 
         // Extract unique cities
-        const uniqueCities = [...new Set(result.map(store => store.city))];
+        const uniqueCities = [...new Set(result.response.map(store => store.city))];
         setCities(uniqueCities);
       } catch (error) {
         console.error(error);

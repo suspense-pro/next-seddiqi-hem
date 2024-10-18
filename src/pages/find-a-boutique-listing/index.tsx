@@ -54,8 +54,9 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [activeTab, setActiveTab] = useState('All');
   const [cities, setCities] = useState([]);
   const [filtersPopup, showFiltersPopup] = useState(false);
-  const [locationAddresses, setLocationAddresses] = useState([]);
   const [locationCheckboxValues, setLocationCheckboxValues] = useState([]);
+  const [brandCheckboxValues, setBrandCheckboxValues] = useState([]);
+  const [serviceCheckboxValues, setServiceCheckboxValues] = useState([]);
 
   const tabs = [
     { label: 'All Boutiques', value: 'All' },
@@ -67,20 +68,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     { 
       id: "1", 
       label: 'Brands', 
-      values: [
-        {key: "cgid", label: "Rolex"}, 
-        {key: "cgid", label: "Patek Philippe"}, 
-        {key: "cgid", label: "Akrivia"},
-        {key: "cgid", label: "Audermars Piguet"}, 
-        {key: "cgid", label: "Bell & Ross"}, 
-        {key: "cgid", label: "Bovet"}, 
-        {key: "cgid", label: "Breitling"}, 
-        {key: "cgid", label: "Bvulgari"}, 
-        {key: "cgid", label: "Cabestan"}, 
-        {key: "cgid", label: "Chophard"}, 
-        {key: "cgid", label: "Rolex2"}, 
-        {key: "cgid", label: "Patek Philippe2"}
-      ] 
+      values: brandCheckboxValues.map(brand => ({ key: brand, label: brand }))
     },
     { 
       id: "2", 
@@ -90,13 +78,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     { 
       id: "3", 
       label: 'Services', 
-      values: [
-        {label: "Walk-Ins"}, 
-        {label: "Appointment bookings"}, 
-        {label: "Try-On"}, 
-        {label: "Personalisation"}, 
-        {label: "Product Servicing"}
-      ] 
+      values: serviceCheckboxValues.map(service => ({ key: service, label: service }))
     },
   ];
 
@@ -110,21 +92,32 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     const fetchStores = async () => {
       try {
         const result = await UseFetchStores('', '', '');
-        setStores(result);
+        setStores(result.response);
 
         // Extract unique cities
-        const uniqueCities = [...new Set(result.map(store => store.city))];
+        const uniqueCities = [...new Set(result.response.map(store => store.city))];
         setCities(uniqueCities);
 
-        const filteredAddresses = result
+        const filteredCity = result.response.filter(store => 
+          store.city === 'Dubai' || store.city === 'Abu Dhabi'
+        );
+
+        const filteredAddresses = result.response
         .filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi')
         .map(store => store.address1);
 
         // Uncomment the first const uniqueAddresses line below for dynamic addresses and comment out the second const uniqueAddresses
         //const uniqueAddresses = [...new Set(result.map(store => store.address1))];
         const uniqueAddresses = [...new Set(filteredAddresses)];
-        setLocationAddresses(uniqueAddresses);
+        //setLocationAddresses(uniqueAddresses);
         setLocationCheckboxValues(uniqueAddresses);
+
+        //const uniqueBrands = [...new Set(result.response.flatMap(store => store.c_availableBrands))]; 
+        const uniqueBrands = [...new Set(filteredCity.flatMap(store => store.c_availableBrands))];
+        setBrandCheckboxValues(uniqueBrands);
+
+        const uniqueServices = [...new Set(filteredCity.flatMap(store => store.c_services))];
+        setServiceCheckboxValues(uniqueServices);
         
       } catch (error) {
         console.error(error);
@@ -152,6 +145,10 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       setNearestStore(nearest);
     }
   }, [stores, userLocation]);
+
+  useEffect(() => {
+    console.log("uniqueBrands2: ", brandCheckboxValues);
+  }, [brandCheckboxValues]);
 
   const calculateNearestStore = (storesList) => {
     if (!userLocation || storesList.length === 0) return null;
@@ -266,13 +263,6 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     store.city.toLowerCase() === 'dubai' || store.city.toLowerCase() === 'abu dhabi'
   );
 
-  const storeCounts = {
-    All: combinedStores.length,
-    ...Object.fromEntries(cities.map(city => [city, stores.filter(store => store.city === city).length])),
-  };
-
-  //console.log("CONTENT: ", content);
-
   //Open Filters Popup
   const [filters, setFiltersState] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
@@ -292,22 +282,108 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     setFiltersState({});
   }, []);
 
+  const calculateStoreCounts = (storesList) => {
+    const combinedStores = storesList.filter(store => 
+      store.city.toLowerCase() === 'dubai' || store.city.toLowerCase() === 'abu dhabi'
+    );
+  
+    return {
+      All: combinedStores.length,
+      ...Object.fromEntries(cities.map(city => [city, combinedStores.filter(store => store.city === city).length])),
+    };
+  };
+  
+  // Store counts state
+  const [storeCounts, setStoreCounts] = useState(calculateStoreCounts(stores));
+  
+  // Update store counts whenever filters change
+  useEffect(() => {
+    const filteredStores = getFilteredStores();
+    setStoreCounts(calculateStoreCounts(filteredStores));
+  }, [filters, activeTab, stores]);
+
+  /*const getFilteredStores = () => {
+    let filteredStores = stores;
+  
+    // Filter by city
+    if (activeTab !== 'All') {
+      filteredStores = filteredStores.filter(store => store.city === activeTab);
+    }
+  
+    // Filter by brands
+    if (filters['1'] && filters['1'].length > 0) {
+      filteredStores = filteredStores.filter(store =>
+        filters['1'].some(brand => store.c_availableBrands.includes(brand))
+      );
+    }
+  
+    // Filter by locations
+    if (filters['2'] && filters['2'].length > 0) {
+      filteredStores = filteredStores.filter(store =>
+        filters['2'].includes(store.address1)
+      );
+    }
+  
+    // Filter by services
+    if (filters['3'] && filters['3'].length > 0) {
+      filteredStores = filteredStores.filter(store =>
+        filters['3'].some(service => store.c_services.includes(service))
+      );
+    }
+  
+    return filteredStores;
+  };*/
+
+  const getFilteredStores = () => {
+    let filteredStores = stores;
+
+    if (activeTab === 'All') {
+        filteredStores = filteredStores.filter(store =>
+            store.city === 'Dubai' || store.city === 'Abu Dhabi'
+        );
+    } else {
+        filteredStores = filteredStores.filter(store => store.city === activeTab);
+    }
+
+    if (filters['1'] && filters['1'].length > 0) {
+      filteredStores = filteredStores.filter(store =>
+          filters['1'].some(brand => 
+              store.c_availableBrands?.includes(brand) // Use optional chaining
+          )
+      );
+    }
+
+    if (filters['2'] && filters['2'].length > 0) {
+        filteredStores = filteredStores.filter(store =>
+            filters['2'].includes(store.address1)
+        );
+    }
+
+    if (filters['3'] && filters['3'].length > 0) {
+        filteredStores = filteredStores.filter(store =>
+            filters['3'].some(service => store.c_services.includes(service))
+        );
+    }
+
+    return filteredStores;
+  };
+
   const handleOptionChange = (filterKey, option) => {
     setFiltersState((prevFilters) => {
         const prevSelectedOptions = prevFilters[filterKey] || [];
         const newSelectedOptions = prevSelectedOptions.includes(option)
             ? prevSelectedOptions.filter((selected) => selected !== option)
             : [...prevSelectedOptions, option];
-
+  
         // Combine all selected options into one state
         const combinedOptions = {
             ...prevFilters,
             [filterKey]: newSelectedOptions,
         };
-
+  
         return combinedOptions;
     });
-};
+  };
 
   const handleDelete = (filterKey, option) => {
     setFiltersState((prevFilters) => {
@@ -351,7 +427,10 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
           ? [...new Set(filteredStores.map(store => store.address1))] 
           : [...new Set(filteredStores.map(store => store.address1))];
 
+      const filteredBrands = [...new Set(filteredStores.flatMap(store => store.brands))];
+      
       setLocationCheckboxValues(filteredAddresses);
+      setBrandCheckboxValues(filteredBrands);
       setFadeList(false);
     }, 300);
   };
@@ -434,8 +513,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
         <div className={`${styles.storeListContainer} ${fadeList ? styles.fadeOut : styles.fadeIn}`}>
           {activeToggle ? 
-            renderStores(activeTab === 'All' ? combinedStores : stores.filter(store => store.city === activeTab)) : 
-            renderMaps(activeTab === 'All' ? combinedStores : stores.filter(store => store.city === activeTab))
+            renderStores(getFilteredStores()) : 
+            renderMaps(getFilteredStores())
           }
         </div>
       </div>
@@ -490,7 +569,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
                 onClear={() => handleClearCheckboxes(filterItem.id)}
                 selectedCount={selectedOptionsCount}
               >
-                {filterItem.id === '1' && (
+                {filterItem.label.toLowerCase() === 'brands' && (
                   <>
                     <div className={styles.searchInputContainer}>
                       <SearchIcon2 className={styles.searchIcon} />
@@ -507,9 +586,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
                       <>
                         <CheckboxFilter
                           title={filterItem.label}
-                          options={filterItem.values
-                            .map((val) => val.label)
-                            .filter((label) => label.toLowerCase().startsWith(searchQuery.toLowerCase()))} // Use startsWith here
+                          options={brandCheckboxValues
+                            .filter(label => label && label.toLowerCase().includes(searchQuery.toLowerCase()))} // Ensure label is defined
                           filterKey={filterItem.id}
                           onOptionChange={handleOptionChange}
                           selectedOptions={filters[filterItem.id] || []}
@@ -518,7 +596,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
                         {/* Add no results found message */}
                         {filterItem.values
                           .map((val) => val.label)
-                          .filter((label) => label.toLowerCase().startsWith(searchQuery.toLowerCase())).length === 0 && (
+                          .filter((label) => label && label.toLowerCase().startsWith(searchQuery.toLowerCase())).length === 0 && (
                           <div className={styles.noResults}>
                             No brands found
                           </div>
@@ -527,7 +605,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
                     )}
                   </>
                 )}
-                {filterItem.id === '2' && ( 
+                {filterItem.label.toLowerCase() === 'locations' && ( 
                   <>
                     {/* <LocationTabs activeTab={popupActiveTab} handleTabChange={handlePopupTabChange} tabs={[{ label: 'All', value: 'All' }, ...cities.map(city => ({ label: city, value: city }))]}  /> */}
                     <LocationTabs 
@@ -551,7 +629,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
                     </div>
                   </>
                 )}
-                {filterItem.id === '3' && (
+                {filterItem.label.toLowerCase() === 'services' && (
                   <>
                   {filterItem.values && (
                     <CheckboxFilter
