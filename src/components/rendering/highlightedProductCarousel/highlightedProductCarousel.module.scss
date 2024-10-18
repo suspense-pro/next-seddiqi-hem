@@ -134,6 +134,7 @@ $border-radius: rem(12 0 12 0);
   font-size: rem(16);
   line-height: rem(28);
   letter-spacing: rem(0.4);
+  color: getColorHex('black');
 
   @include md {
     font-size: rem(18)
@@ -145,6 +146,7 @@ $border-radius: rem(12 0 12 0);
   font-size: rem(12);
   line-height: rem(22);
   letter-spacing: rem(0.4);
+  color: getColorHex('grey');
 
   @include md {
     font-size: rem(14)
@@ -156,6 +158,7 @@ $border-radius: rem(12 0 12 0);
   font-size: rem(14);
   line-height: rem(20);
   letter-spacing: rem(0.4);
+  color: getColorHex('black');
 
   @include md {
     font-size: rem(16)

@@ -31,33 +31,36 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   position = "left",
 }) => {
   return (
-    <div className={`${styles.drawer} ${position === "right" ? styles.right : ""} ${isOpen ? styles.open : ""}`}>
-      <div className={styles.header}>
-        {showBackButton ? (
-          <span onClick={onClose} className={styles.backButton}>
-            <Typography align="left" variant="span" className={styles.backButtonText}>
-              <span className={styles.arrowLeftWrapper}>
-                <ArrowRight fill="black" className={styles.arrowLeft} />
-              </span>
-              Back
+    <div className={`${styles.drawerWrapper} ${isOpen ? styles.isOpen : ""}`}>
+      <div className={`${styles.underlay}`} onClick={onClose}></div>
+      <div className={`${styles.drawer} ${position === "right" ? styles.right : ""} ${isOpen ? styles.open : ""}`}>
+        <div className={styles.header}>
+          {showBackButton ? (
+            <span onClick={onClose} className={styles.backButton}>
+              <Typography align="left" variant="span" className={styles.backButtonText}>
+                <span className={styles.arrowLeftWrapper}>
+                  <ArrowRight fill="black" className={styles.arrowLeft} />
+                </span>
+                Back
+              </Typography>
+            </span>
+          ) : (
+            <Typography align="left" variant="h5" className={styles.sortFilterText}>
+              {title}
             </Typography>
+          )}
+          <span onClick={onClose} className={styles.closeButton}>
+            <CloseIconV2 />
           </span>
-        ) : (
-          <Typography align="left" variant="h5" className={styles.sortFilterText}>
-            {title}
-          </Typography>
-        )}
-        <span onClick={onClose} className={styles.closeButton}>
-          <CloseIconV2 />
-        </span>
-      </div>
-      <div className={styles.content}>{children}</div>
-      {showFooter && (
-        <div className={styles.footer}>
-          <Button title="Clear all" type="transparent" clickHandler={onClearAll} />
-          <Button title="Done" type="solid green_dark" clickHandler={onClose} />
         </div>
-      )}
+        <div className={styles.content}>{children}</div>
+        {showFooter && (
+          <div className={styles.footer}>
+            <Button title="Clear all" type="transparent" clickHandler={onClearAll} />
+            <Button title="Done" type="solid green_dark" clickHandler={onClose} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
