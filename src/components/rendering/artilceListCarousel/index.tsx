@@ -64,7 +64,7 @@ const ArticleListCarousel = ({ ...content }) => {
                 <ArrowRight fill="white" className={styles.arrowLeft} />
               </div>
             )}
-            {listItems?.length > 2 && activeIndex < listItems.length - 2 && (
+            {listItems?.length > 2 && activeIndex < listItems.length - slidesPerView && (
               <div className={styles.rightBtn} onClick={() => handleSlide("next")}>
                 <ArrowRight fill="white" className={styles.arrowRight} />
               </div>
