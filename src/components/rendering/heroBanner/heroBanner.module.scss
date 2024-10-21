@@ -17,6 +17,9 @@
     }
   }
 
+  .containerImg {
+    height: 100%;
+  }
   &.fullWidth {
     width: 100%;
   }
@@ -83,8 +86,7 @@
       transform: translateY(-50%);
       text-align: right;
       align-items: start;
-      .description{
-
+      .description {
         margin-right: rem(22);
       }
     }
@@ -102,7 +104,7 @@
       transform: translate(-50%, -50%);
       text-align: center;
       align-items: center;
-      @include lg { 
+      @include lg {
         width: 58%;
       }
     }
