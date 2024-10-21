@@ -21,6 +21,8 @@
   height: rem(460);
   position: relative;
   cursor: zoom-in;
+  width: 65%;
+  margin: 0 auto;
 
   @include lg {
     height: rem(828);
