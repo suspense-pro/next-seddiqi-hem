@@ -1,0 +1,10 @@
+@import "./../../../assets/styles/main.scss";
+
+.spacing {
+  width: 100%;
+  height: var(--spacer-mobile-height, 60px);
+
+  @include lg {
+    height: var(--spacer-desktop-height, 120px);
+  }
+}
