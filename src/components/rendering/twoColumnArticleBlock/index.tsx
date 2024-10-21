@@ -28,6 +28,7 @@ const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
             color={content?.cta?.color}
             type={content?.cta?.type}
           />
+          <span></span>
         </div>
       </div>
     );

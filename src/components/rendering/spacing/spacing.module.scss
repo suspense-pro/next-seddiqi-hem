@@ -2,9 +2,9 @@
 
 .spacing {
   width: 100%;
-  height: var(--mobile-height, 30px); 
+  height: var(--spacer-mobile-height, 60px);
 
   @include lg {
-    height: var(--desktop-height, 60px); 
+    height: var(--spacer-desktop-height, 120px);
   }
 }

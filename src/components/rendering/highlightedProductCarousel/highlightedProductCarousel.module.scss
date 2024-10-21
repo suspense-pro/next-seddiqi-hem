@@ -94,7 +94,8 @@ $border-radius: rem(12 0 12 0);
   // background-color: getColorHex("grey-light-4");
   border-radius: $border-radius;
   overflow: hidden;
-  
+
+
   @include lg {
     height: rem(474);
     margin: 0;
@@ -103,7 +104,7 @@ $border-radius: rem(12 0 12 0);
   .image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .icon {

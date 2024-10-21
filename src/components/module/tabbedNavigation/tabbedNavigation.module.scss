@@ -15,6 +15,7 @@
     justify-content: space-between;
     border-bottom: rem(1) solid getColorHex("grey-light-3");
     color: getColorHex("brown-grey");
+    width: 100%;
 
     .tab {
       @include heading_medium;

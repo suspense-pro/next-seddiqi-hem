@@ -1,19 +1,13 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import styles from "./spacing.module.scss";
-import PropTypes from "prop-types";
 
-const Spacing = ({ desktopHeight, mobileHeight }) => {
-  const spacerStyle: CSSProperties & { [key: string]: string } = {
-    "--desktop-height": `${desktopHeight}px`,
-    "--mobile-height": `${mobileHeight}px`,
+const Spacing = ({ desktopHeight = 60, mobileHeight = 30 }) => {
+  const spacerStyle = {
+    "--spacer-desktop-height": `${desktopHeight}px`,
+    "--spacer-mobile-height": `${mobileHeight}px`,
   };
 
-  return <div className={styles.spacing} style={spacerStyle}></div>;
-};
-
-Spacing.propTypes = {
-  desktopHeight: PropTypes.number.isRequired,
-  mobileHeight: PropTypes.number.isRequired,
+  return (<div className={styles.spacing} style={spacerStyle as React.CSSProperties}></div>);
 };
 
 export default Spacing;

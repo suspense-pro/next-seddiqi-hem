@@ -43,6 +43,7 @@
   padding: rem(32);
   border-radius: rem(16) 0;
   background-color: getColorHex("grey-high", 0.1);
+  flex: 1;
 
   .info {
     display: flex;
