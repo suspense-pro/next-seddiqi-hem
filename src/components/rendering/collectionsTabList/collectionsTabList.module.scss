@@ -1,7 +1,7 @@
 @import "./../../../assets/styles/main.scss";
 
 .container {
-  margin: rem(60) 0 0 0;
+  // margin: rem(60) 0 0 0;
 
   text-align: center;
   display: flex;
@@ -12,7 +12,7 @@
   }
 
   @include md {
-    margin: rem(120) 0 0 0;
+    // margin: rem(120) 0 0 0;
 
   }
 }
