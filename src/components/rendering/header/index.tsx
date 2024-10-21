@@ -16,3 +16,5 @@ export default function Header({ ...props }) {
     <header className={styles.header}>{isClient && (windowWidth > 1036 ? <DesktopHeader /> : <MobileHeader />)}</header>
   );
 }
+ 
+ 

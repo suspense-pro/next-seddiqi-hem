@@ -16,6 +16,7 @@ import HighlightedProductCarousel from "./highlightedProductCarousel";
 import FeaturedProductCarousel from "./featuredProductCarousel";
 import PdpTabs from "./pdpTabs";
 import ExploreBrand from "./exploreBrand";
+import Spacing from "./spacing";
 
 
 
@@ -38,4 +39,5 @@ export {
   FeaturedProductCarousel,
   PdpTabs,
   ExploreBrand,
+  Spacing
 };
