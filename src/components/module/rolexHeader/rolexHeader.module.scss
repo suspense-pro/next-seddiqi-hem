@@ -1,0 +1,59 @@
+@import "./../../../assets/styles/main.scss";
+
+.rolexNavbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 rem(40);
+  height: rem(90);
+  border-top: rem(1) solid rgba(70, 79, 74, 0.15);
+  background: linear-gradient(90deg, getColorHex("green-racing") 0%, getColorHex("green-spring") 100%);
+
+  .logoContainer {
+    .rolexLogo {
+    }
+  }
+
+  .navbarLinks {
+    display: flex;
+    gap: rem(36);
+    list-style: none;
+
+    li {
+      a {
+        color: getColorHex("white");
+        font-family: Helvetica;
+        font-size: rem(16);
+        line-height: rem(20);
+        letter-spacing: rem(0.4);
+        text-transform: capitalize;
+        transition: all 0.3s;
+
+        &:hover {
+          color: #55ae86;
+        }
+      }
+    }
+  }
+
+  .contactButton {
+    a {
+      padding: rem(11 26.5);
+      border-radius: rem(30);
+      border: rem(1) solid getColorHex("white");
+
+      color: getColorHex("white");
+      text-align: center;
+      font-family: Helvetica;
+      font-size: rem(14);
+
+      line-height: rem(18);
+      letter-spacing: rem(1);
+      text-transform: uppercase;
+      &:hover {
+        background-color: white;
+        color: #008c50;
+      }
+    }
+  }
+}
