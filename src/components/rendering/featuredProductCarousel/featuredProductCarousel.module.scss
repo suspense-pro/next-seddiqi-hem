@@ -1,14 +1,14 @@
 @import "./../../../assets/styles/main.scss";
 
 .container {
-  padding: rem(60 0);
+  padding: rem(0 0);
   display: flex;
   flex-direction: column;
   gap: rem(32);
   align-items: center;
 
   @include md {
-    padding: rem(120 60);
+    padding: rem(0 60);
     gap: rem(48);
   }
 
