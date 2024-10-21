@@ -7,7 +7,7 @@ const Spacing = ({ desktopHeight = 60, mobileHeight = 30 }) => {
     "--spacer-mobile-height": `${mobileHeight}px`,
   };
 
-  return <div className={styles.spacing} style={spacerStyle as React.CSSProperties}></div>;
+  return (<div className={styles.spacing} style={spacerStyle as React.CSSProperties}></div>);
 };
 
 export default Spacing;
