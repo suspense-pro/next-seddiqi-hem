@@ -6,6 +6,7 @@ import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
 import Typography from "../../module/typography";
 import RichText from "../../module/richText";
+import { GradientOverlay } from "@components/module";
 
 interface HeroBannerProps {
   banners: any[];
@@ -50,23 +51,13 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
     activeBanner?.horizontalAlignment === "right"
       ? "left"
       : activeBanner?.horizontalAlignment || "center";
+
+  // console.log("HeroBanner -> activeBanner", activeBanner);
   return (
     <>
       <div className={`${styles.heroBanner} ${containerClass}`}>
-      <div className={styles.heroBannerContainer}>
-        <Carousel
-          slides={slides}
-          setSwiper={setSwiper}
-          setActiveIndex={setActiveIndex}
-          setTransition={'fade'}
-          setSpeed={2000}
-          isAnimated={"yes"}
-        />
-      </div>
-
         {activeBanner && (
           <div className={styles.bannerItem}>
-            {activeBanner.overlay && <div className={styles.overlay} />}
             <div
               className={`${styles.textContainer} ${styles[alignmentClass]} ${
                 activeBanner.verticalAlignment === "bottom"
@@ -113,6 +104,26 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
             </div>
           </div>
         )}
+        <div className={styles.heroBannerContainer}>
+          <GradientOverlay
+            opacity={
+              !activeBanner?.opacity?.hideOverlay
+                ? activeBanner?.opacity?.opacity
+                : null
+            }
+            className={styles.containerImg}
+          >
+            <Carousel
+              slides={slides}
+              setSwiper={setSwiper}
+              setActiveIndex={setActiveIndex}
+              setTransition={"fade"}
+              setSpeed={2000}
+              isAnimated={"yes"}
+            />
+          </GradientOverlay>
+        </div>
+
         {slides && slides.length > 1 && (
           <div className={styles.carouselBtnsContainer}>
             <CarouselBtns
