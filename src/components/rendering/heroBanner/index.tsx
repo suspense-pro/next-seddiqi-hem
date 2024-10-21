@@ -52,7 +52,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
       ? "left"
       : activeBanner?.horizontalAlignment || "center";
 
-  console.log("HeroBanner -> activeBanner", activeBanner);
+  // console.log("HeroBanner -> activeBanner", activeBanner);
   return (
     <>
       <div className={`${styles.heroBanner} ${containerClass}`}>
