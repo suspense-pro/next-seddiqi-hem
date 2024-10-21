@@ -2,9 +2,10 @@
 
 .productContainer {
   // min-width: rem(348);
-  height: rem(596);
+  height: rem(594);
   background-color: getColorHex("white");
   padding: rem(16);
+  padding-top: rem(0);
   border: rem(1) solid getColorHex("grey-light-4", 0.4);
   display: flex;
   flex-direction: column;
@@ -88,7 +89,7 @@
   .imgContainer {
     position: relative;
     width: rem(275);
-    height: rem(410);
+    height: rem(464);
     margin: 0 auto;
     z-index: 10;
   }

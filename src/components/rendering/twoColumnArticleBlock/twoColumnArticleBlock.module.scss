@@ -1,10 +1,10 @@
 @import "./../../../assets/styles/main.scss";
 .container {
   display: flex;
-  margin: rem(60) 0 0 0;
-  @include md {
-    margin: rem(120) 0 0 0;
-  }
+  // margin: rem(60) 0 0 0;
+  // @include md {
+  //   margin: rem(120) 0 0 0;
+  // }
   justify-content: center;
 
   .containerColumns {
@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: column;
   gap: rem(32);
+  flex: 1;
 
   .image {
     border-radius: rem(16) 0 rem(16) 0;
@@ -37,7 +38,7 @@
     z-index: -1;
     position: relative;
   
-    @include md {
+    @include xl {
       height: rem(636);
       width: 100%;
     }
