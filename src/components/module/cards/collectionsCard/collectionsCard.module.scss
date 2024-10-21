@@ -4,8 +4,16 @@
   height: rem(336);
 
   @include md {
-    height: rem(520);
+    height: rem(480);
   }
+}
+
+.gradient {
+  height: 100%;
+}
+
+.collectionHeight {
+  height: rem(520);
 }
 
 .image,
