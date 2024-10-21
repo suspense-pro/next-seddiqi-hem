@@ -432,7 +432,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     const userId = req.query.userId as string;
                     const code_verifier = await generateRandomString(128);
                     const code_challenge = await generateCodeChallenge(code_verifier);
-                    console.log("Code Verifier: " + code_verifier);
+                    // console.log("Code Verifier: " + code_verifier);
 
                     clientConfig.headers['authorization'] = `Bearer ${access_token}`;
                     const client = new Customer.ShopperLogin(clientConfig);
@@ -442,7 +442,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                             organizationId: clientConfig.parameters.organizationId,
                         },
                         body: {
-                            callback_uri: "https://webhook.site/30a7029a-5a0a-4ef5-8cbd-02287eecbbbe", // process.env.REDIRECT_URI,
+                            callback_uri: "https://093d-2001-818-e854-f900-15b6-123e-2103-5443.ngrok-free.app/api/sfcc/callback", // "https://webhook.site/51413cd1-ff8e-43a0-95cf-e92c61870d44", // process.env.REDIRECT_URI,
                             channel_id: clientConfig.parameters.siteId,
                             client_id: clientConfig.parameters.clientId,
                             code_challenge: code_challenge,
@@ -451,8 +451,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         }
                     };
                     const response = await client.getPasswordResetToken(options);
-                    console.log("Password reset token gererated" + JSON.stringify(response, null, 4));
-                    return res.status(200).json({ isError: false, response: response });
+                    // console.log("Password reset token gererated" + JSON.stringify(response, null, 4));
+                    return res.status(200).json({ isError: false, response: response, code_verifier: code_verifier });
                 }
             } catch (err) {
                 console.error(err);
