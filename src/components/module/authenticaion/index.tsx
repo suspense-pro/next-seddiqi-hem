@@ -2,6 +2,7 @@ import TabbedNavigation from "@components/module/tabbedNavigation";
 import styles from "./authentication.module.scss";
 import SignIn from "./signIn";
 import Register from "./register";
+import ResetPassword from "./resetPassword";
 
 const Authentication = () => {
   let tabs = [
@@ -14,6 +15,11 @@ const Authentication = () => {
       id: 2,
       title: "Register",
       content: <Register gridColumn={"1fr"} />,
+    },
+    {
+      id: 3,
+      title: "resetPassword",
+      content: <ResetPassword />,
     },
   ];
 

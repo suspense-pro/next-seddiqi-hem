@@ -25,6 +25,7 @@ import {
 import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
 import BrandListing from './../../components/module/brandListing/index';
+import Spacing from "@components/rendering/spacing";
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || "platinumpanda",
@@ -70,6 +71,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/brand-category-list`]: CategoryList,
   [`${contentUrl}/find-a-boutique-listing`]: ContentPage,
   [`${componentUrl}/brand-listing`]: BrandListing,
+  [`${componentUrl}/spacing`]: Spacing,
 };
 
 const defaultConfig = {
