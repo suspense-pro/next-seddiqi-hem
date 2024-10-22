@@ -16,11 +16,11 @@ const Authentication = () => {
       title: "Register",
       content: <Register gridColumn={"1fr"} />,
     },
-    {
-      id: 3,
-      title: "resetPassword",
-      content: <ResetPassword />,
-    },
+    // {
+    //   id: 3,
+    //   title: "resetPassword",
+    //   content: <ResetPassword />,
+    // },
   ];
 
   return (
