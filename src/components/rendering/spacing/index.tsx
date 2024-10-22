@@ -7,10 +7,6 @@ const Spacing = ({ desktopHeight = 60, mobileHeight = 30, backgroundColor = "whi
     "--spacer-mobile-height": `${mobileHeight}px`,
   };
 
-  console.log("------")
-  console.log(backgroundColor)
-  console.log(content)
-
   return (
     <div className={`${styles[backgroundColor]} ${styles.spacing}`} style={spacerStyle as React.CSSProperties}></div>
   );
