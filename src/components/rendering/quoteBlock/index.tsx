@@ -17,16 +17,16 @@ const QuoteBlock = ({ quoteItem, backgroundColor }) => {
     const { logoIcon, richText, nameSource, nameDesignation } = item;
     return (
       <div key={index} className={styles.quoteBlockContainer}>
-        <div className={styles.logo}>
-          {logoIcon && logoIcon.image ? (
-            <Image
-              image={logoIcon.image.image}
-              imageAltText={logoIcon.image.altText}
-            />
-          ) : (
-            <div className={styles.logoPlaceholder}></div>
-          )}
-        </div>
+        {logoIcon && logoIcon.image && (
+          <div className={styles.logo}>
+            {logoIcon && logoIcon.image ? (
+              <Image image={logoIcon.image.image} imageAltText={logoIcon.image.altText} />
+            ) : (
+              <div className={styles.logoPlaceholder}></div>
+            )}
+          </div>
+        )}
+
         <div className={styles.richTextContainer}>
           <div className={styles.richText}>
             <RichText align="center" text={richText} />
@@ -55,17 +55,13 @@ const QuoteBlock = ({ quoteItem, backgroundColor }) => {
           slides={slides}
           setSwiper={setSwiper}
           setActiveIndex={setActiveIndex}
-          setTransition={'slide'}
+          setTransition={"slide"}
           setSpeed={500}
           isAnimated={"no"}
         />
         {quoteItem?.length > 1 && (
           <div className={styles.carouselBtnsContainer}>
-            <CarouselBtns
-              swiper={swiper}
-              activeIndex={activeIndex}
-              slides={slides}
-            />
+            <CarouselBtns swiper={swiper} activeIndex={activeIndex} slides={slides} />
           </div>
         )}
       </div>
