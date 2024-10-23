@@ -1,22 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import styles from "./rolexHeader.module.scss";
 import Link from "next/link";
 import { ArrowDown } from "@assets/images/svg";
 import { useWindowWidth } from "@utils/useCustomHooks";
 import Image from "./../image/index";
+import NavigationLink from "../navigationLink";
 
-interface RolexNavbarProps {
-  content?: any;
-}
-
-const RolexNavbar: React.FC<RolexNavbarProps> = ({ content }) => {
+const RolexNavbar = ({ content }) => {
   if (!content) return null;
-
-  const links = content?.navLinks;
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [height, setHeight] = useState<number | undefined>(0);
   const [isClient, setIsClient] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const dropdownRef = useRef<HTMLUListElement>(null);
   const windowWidth = useWindowWidth();
   const type = content?.backgroundColor;
@@ -24,14 +21,24 @@ const RolexNavbar: React.FC<RolexNavbarProps> = ({ content }) => {
 
   const isGreen = type === "green";
   const isWhite = type === "white";
+  const links = content?.navLinks;
+
+  const handleScroll = useCallback(() => {
+    setScrolled(window.scrollY > 40);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   useEffect(() => {
-    if (dropdownRef.current && isDropdownOpen) {
-      setHeight(dropdownRef.current.scrollHeight);
+    if (dropdownRef?.current && isDropdownOpen) {
+      setHeight(dropdownRef?.current?.scrollHeight);
     } else {
       setHeight(0);
     }
@@ -44,11 +51,11 @@ const RolexNavbar: React.FC<RolexNavbarProps> = ({ content }) => {
   if (!isClient) return null;
 
   return (
-    <>
+    <div className={`${styles.container} ${scrolled && styles.scrolled} `}>
       <nav
-        className={`${windowWidth < screenSize && styles.rolexMobileNavbar} ${isWhite && styles.whiteBg} ${
-          styles.rolexNavbar
-        }`}
+        className={`${windowWidth < screenSize && styles.rolexMobileNavbar} ${
+          isWhite && styles.whiteBg
+        } ${styles.rolexNavbar}`}
       >
         <Image
           className={isGreen ? styles.rolexLogo : styles.rolexLogoBlack}
@@ -62,25 +69,28 @@ const RolexNavbar: React.FC<RolexNavbarProps> = ({ content }) => {
             <ul className={styles.navbarLinks}>
               {links?.map((link) => (
                 <li key={link?.label}>
-                  <Link className={`${isWhite && styles.navBlack} ${styles.navLink}`} href={link?.url}>
-                    {link?.label}
-                  </Link>
+                  <NavigationLink
+                    className={`${isWhite && styles.navBlack} ${styles.navLink}`}
+                    title={link?.label}
+                    isNewTab={link?.isNewTab}
+                    url={link?.url}
+                  />
                 </li>
               ))}
             </ul>
             <div className={styles.contactButton}>
-              <Link className={`${isWhite && styles.btnGreen} ${styles.btnWhite}`} href={content?.cta?.url}>
-                {content?.cta?.label}
-              </Link>
+              <NavigationLink
+                className={`${isWhite && styles.btnGreen} ${styles.btnWhite}`}
+                title={content?.cta?.label}
+                isNewTab={content?.cta?.isNewTab}
+                url={content?.cta?.url}
+              />
             </div>
           </>
         ) : (
           <div className={styles.dropdownContainer} onClick={toggleDropdown}>
             <div className={`${isGreen && styles.menuWhite} ${styles.menu}`}>Menu</div>
-            <ArrowDown
-              fill={isGreen ? "white" : "black"}
-              className={isDropdownOpen ? styles.activeArrow : ""}
-            />
+            <ArrowDown fill={isGreen ? "white" : "black"} className={isDropdownOpen ? styles.activeArrow : ""} />
           </div>
         )}
       </nav>
@@ -88,7 +98,7 @@ const RolexNavbar: React.FC<RolexNavbarProps> = ({ content }) => {
       {windowWidth < screenSize && (
         <ul
           ref={dropdownRef}
-          className={isGreen ? styles.navbarMobileGreenLinks : styles.navbarMobileLinks}
+          className={`${styles.scrolled} ${isGreen ? styles.navbarMobileGreenLinks : styles.navbarMobileLinks}`}
           style={{
             height: isDropdownOpen ? height : 0,
             overflow: "hidden",
@@ -97,22 +107,25 @@ const RolexNavbar: React.FC<RolexNavbarProps> = ({ content }) => {
         >
           {links?.map((link, index) => (
             <li key={index}>
-              <Link className={`${isWhite && styles.navMobileBlack} ${styles.navMobileLink}`} href={link?.url}>
-                {link?.label}
-              </Link>
+              <NavigationLink
+                className={`${isWhite && styles.navMobileBlack} ${styles.navMobileLink}`}
+                title={link?.label}
+                isNewTab={link?.isNewTab}
+                url={link?.url}
+              />
             </li>
           ))}
           <li>
-            <Link
+            <NavigationLink
               className={`${isWhite && styles.navMobileBlack} ${styles.navMobileLink}`}
-              href={content?.cta?.url}
-            >
-              {content?.cta?.label}
-            </Link>
+              title={content?.cta?.label}
+              isNewTab={content?.cta?.isNewTab}
+              url={content?.cta?.url}
+            />
           </li>
         </ul>
       )}
-    </>
+    </div>
   );
 };
 

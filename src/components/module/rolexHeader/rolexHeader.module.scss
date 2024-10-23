@@ -10,8 +10,12 @@
   border-top: rem(1) solid getColorHex("grey-space", 0.15);
   border-bottom: rem(1) solid getColorHex("grey-space", 0.15);
   background: linear-gradient(90deg, getColorHex("green-racing") 0%, getColorHex("green-spring") 100%);
+  position: fixed;
+  transition: all 0.3s;
+  top: rem(120);
 
   @include md {
+    top: rem(152);
     padding: 0 rem(40);
   }
 
@@ -54,7 +58,7 @@
         transition: all 0.3s;
 
         &:hover {
-          color:  getColorHex("green-pine");;
+          color: getColorHex("green-pine");
         }
       }
 
@@ -86,6 +90,18 @@
       border: rem(1) solid getColorHex("green-spring");
       color: getColorHex("green-spring");
     }
+  }
+}
+
+.container {
+  position: fixed;
+  transition: all .3s;
+  width: 100%;
+}
+
+.scrolled {
+  @include md {
+    top: rem(78);
   }
 }
 
@@ -132,6 +148,11 @@
   margin: 0;
   overflow: hidden;
   transition: height 0.3s ease;
+  background-color: getColorHex("white");
+  width: 100%;
+  position: absolute;
+  top: rem(70);
+
 
   li {
     .navMobileLink,
@@ -143,7 +164,7 @@
       letter-spacing: rem(0.4);
       text-transform: capitalize;
       color: getColorHex("green-dark");
-      
+
       &.navMobileBlack {
         padding: rem(14) rem(17);
         justify-content: center;

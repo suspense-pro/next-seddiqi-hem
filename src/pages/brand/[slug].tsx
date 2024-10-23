@@ -5,7 +5,6 @@ import Layout from "@components/layout";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { useContent } from "@contexts/withVisualizationContext";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
-import fetchPageData from "@utils/cms/page/fetchPageData";
 import { isEmpty, mapToID, notNull } from "@utils/helpers";
 import { CmsContent } from "@utils/cms/utils";
 import ContentBlock from "@components/module/contentBlock";
@@ -32,14 +31,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
     context
   );
-  const rolexNavbarWhite = await fetchStandardPageData(
-    {
-      content: {
-        page: { key: `brand/rolex-navbar-white` },
-      },
-    },
-    context
-  );
 
   // if (isEmpty(data.page) || !slug) {
   //   return {
@@ -53,20 +44,19 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     props: {
       ...data,
       rolexNavbar,
-      rolexNavbarWhite,
       vse: vse || "",
+      deliveryKey
     },
   };
 }
 
 const BrandPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { vse, content, rolexNavbar, rolexNavbarWhite } = props;
+  const { vse, content, rolexNavbar, deliveryKey } = props;
   const [page] = useContent(content.page, vse as string);
-  console.log('ROLEX', rolexNavbar)
+  // console.log('ROLEX', rolexNavbar)
   return (
     <div className="blog-content">
-      <RolexNavbar content={rolexNavbar?.content?.page} />
-      <RolexNavbar content={rolexNavbarWhite?.content?.page} />
+      {deliveryKey === 'rolex' && <RolexNavbar content={rolexNavbar?.content?.page} />}
       {page?.contentComponents
         ?.filter(notNull)
         .map((cont: CmsContent, index: number) => (
