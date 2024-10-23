@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { useRouter } from 'next/router';
 import styles from "./headerMainLinks.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import NavigationLink from "../navigationLink";
-import { AccountIcon, CalendarIcon, SearchIcon, WishlistIcon } from "@assets/images/svg";
+import { AccountIcon, CalendarIcon, SearchIcon, WishlistIcon, MapIcon } from "@assets/images/svg";
 import { generateUniqueId } from "@utils/helpers/uniqueId";
 import Link from "next/link";
 import Image from "next/image";
@@ -13,6 +14,11 @@ const HeaderMainLinks = () => {
 
   const headerMainLinks = headerData?.children;
   if (!headerMainLinks) return null;
+  const router = useRouter(); 
+  //Redirect to Search Page
+  const handleSearchClick = () => {
+    router.push('/search'); // Redirect to search page
+  };
 
   return (
     <div className={styles.linksContainer}>
@@ -43,6 +49,11 @@ const HeaderMainLinks = () => {
           <AccountIcon fill="#" />
         </PrivateLink>
         <WishlistIcon fill="#" />
+        {[SearchIcon, CalendarIcon, MapIcon, WishlistIcon].map((Icon, index) => (
+          <div key={generateUniqueId()} onClick={Icon === SearchIcon ? handleSearchClick : undefined}>
+          <Icon key={generateUniqueId()} fill="#" />
+          </div>
+        ))}
       </div>
     </div>
   );

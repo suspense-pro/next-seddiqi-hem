@@ -52,7 +52,11 @@ export interface AccordionProps {
 // cards
 export interface CardInfoProps {
   item: {
-    image: {
+    media?: {
+      image?: any;
+      altText?: string;
+    };
+    image?: {
       image?: any;
       altText?: string;
     };

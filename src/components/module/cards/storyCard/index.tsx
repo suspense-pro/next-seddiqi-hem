@@ -5,8 +5,8 @@ import { CardInfoProps } from "@utils/models";
 import Typography from "@components/module/typography";
 
 const StoryCard: React.FC<CardInfoProps> = ({ item }) => {
-  const image = item?.image?.image;
-  const altText = item?.image?.altText;
+  const image = item?.media?.image || item?.image?.image;
+  const altText = item?.media?.altText || item?.image?.altText;
   const title = item?.title;
   const subtitle = item?.subTitle;
 
