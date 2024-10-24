@@ -85,7 +85,7 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
                 link={item.cta.url}
                 className={styles.discoverBtn}
                 title={item.cta.label}
-                color={"black"}
+                color={item.cta.color}
                 type={item.cta.type}
               />
             </div>
