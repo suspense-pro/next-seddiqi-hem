@@ -50,7 +50,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(200).json({ isError: false, response: productResults });
           } else {
             console.log("No matching result found");
-            return res.status(400).json({ isError: true, response: "No product found." });
+            return res.status(404).json({ isError: true, response: productResults });
           }
         }
       } catch (err) {
@@ -80,13 +80,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                 const shopperSearchClient = new Search.ShopperSearch(clientConfig);
                 const searchSuggestions = await shopperSearchClient.getSearchSuggestions(options);
+                const productSuggestions = searchSuggestions.productSuggestions.products ? searchSuggestions.productSuggestions.products.length : 0;
 
-                if (searchSuggestions) {
+                if (productSuggestions) {
                     console.log("Search Suggestion(s): " + JSON.stringify(searchSuggestions, null, 4));
                     return res.status(200).json({ isError: false, response: searchSuggestions });
                 } else {
                     console.log("No search suggestions found");
-                    return res.status(400).json({ isError: true, response: "No suggestions found." });
+                    return res.status(404).json({ isError: true, response: searchSuggestions });
                 }
             }
         } catch (err) {
