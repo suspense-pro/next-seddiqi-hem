@@ -66,7 +66,7 @@
     @include md {
       display: flex;
       flex-direction: column;
-      gap: rem(48);
+      gap: rem(40);
     }
 
     .selection {
@@ -123,7 +123,7 @@
 
     @include md {
       font-size: rem(16);
-      gap: rem(20);
+      gap: rem(28);
       margin-top: 0;
     }
   }
