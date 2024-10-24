@@ -330,6 +330,7 @@ const ProductDetailInfo = ({
         isOpen={storeLocatorPopup}
         onClose={() => showStoreLocatorPopup(false)}
         showFooter={false}
+        showHeader={true}
         onSubmit={null}
         onClearAll={null}
         showBackButton={false}

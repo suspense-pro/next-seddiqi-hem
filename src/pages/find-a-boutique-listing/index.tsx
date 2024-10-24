@@ -525,6 +525,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         isOpen={filtersPopup}
         onClose={() => showFiltersPopup(false)}
         showFooter={true}
+        showHeader={true}
         onSubmit={null}
         onClearAll={handleClearAll}
         showBackButton={false}

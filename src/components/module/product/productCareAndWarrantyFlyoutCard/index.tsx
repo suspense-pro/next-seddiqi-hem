@@ -23,6 +23,7 @@ const ProductCareAndWarrantyFlyoutCard = ({
         setCareAndWarrantyCardOpen(false);
       }}
       showFooter={false}
+      showHeader={true}
       showBackButton={false}
       title={warrantyAndCare?.primaryTitle}
       position="right"

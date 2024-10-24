@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { useRouter } from 'next/router';
 import styles from "./headerMainLinks.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import NavigationLink from "../navigationLink";
@@ -8,17 +7,24 @@ import { generateUniqueId } from "@utils/helpers/uniqueId";
 import Link from "next/link";
 import Image from "next/image";
 import PrivateLink from "../privateLink";
+import { SideDrawer } from "@components/module";
+import { Search } from "@components/module";
 
 const HeaderMainLinks = () => {
   const { updateCurrent, headerData } = useContext(HeaderContext);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const headerMainLinks = headerData?.children;
   if (!headerMainLinks) return null;
-  const router = useRouter(); 
-  //Redirect to Search Page
-  const handleSearchClick = () => {
-    router.push('/search'); // Redirect to search page
+
+  const openSearchPopup = () => {
+    setIsPopupVisible(true);
   };
+
+  const closeSearchPopup = () => {
+      setIsPopupVisible(false);
+  };
+
 
   return (
     <div className={styles.linksContainer}>
@@ -50,10 +56,26 @@ const HeaderMainLinks = () => {
         </PrivateLink>
         <WishlistIcon fill="#" />
         {[SearchIcon, CalendarIcon, MapIcon, WishlistIcon].map((Icon, index) => (
-          <div key={generateUniqueId()} onClick={Icon === SearchIcon ? handleSearchClick : undefined}>
+          <div key={generateUniqueId()} onClick={Icon === SearchIcon ? openSearchPopup : undefined}>
           <Icon key={generateUniqueId()} fill="#" />
           </div>
         ))}
+      </div>
+      <div className={styles.drawerStyle}>
+      <SideDrawer
+        isOpen={isPopupVisible}
+        onClose={closeSearchPopup}
+        showFooter={false}
+        onSubmit={null}
+        onClearAll={null}
+        showBackButton={false}
+        showHeader= {false}
+        title={""}
+        position={"right"}
+        className="customDrawerStyle"
+      >
+        <Search  closeSearch={closeSearchPopup} ></Search>
+      </SideDrawer>
       </div>
     </div>
   );

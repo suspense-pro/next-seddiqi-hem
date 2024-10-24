@@ -169,6 +169,7 @@ const FilterBar = ({
         onSubmit={handleSubmit}
         onClearAll={handleClearAll}
         showFooter={true}
+        showHeader={true}
         showBackButton={false}
         position={""}
         className={""}

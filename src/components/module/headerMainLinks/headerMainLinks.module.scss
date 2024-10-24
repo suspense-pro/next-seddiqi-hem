@@ -37,8 +37,6 @@
       justify-content: center;
     }
 
-   
-
     .headerLink {
       padding: rem(7 0);
       cursor: pointer;
@@ -110,5 +108,16 @@
   .rolexLogo {
     width: rem(100.3);
     height: rem(46);
+  }
+}
+
+.linksContainer {
+  .drawerStyle {
+    :global(.customDrawerStyle) {
+      top: rem(70);
+      @include lg {
+        width: 100%;
+      }
+    }
   }
 }

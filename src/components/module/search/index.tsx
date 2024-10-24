@@ -20,7 +20,8 @@ import {
   NoSearchResultFound,
 } from "@components/module";
 
-const Search = () => {
+const Search = ({ closeSearch }) => {
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [inputSearchTerm, setInputSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("watches");
   const [popularBrands, setPopularBrands] = useState([]);
@@ -31,6 +32,7 @@ const Search = () => {
   const [storiesResults, setStoriesResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
   const [categoriesResults, setCategories] = useState([]);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -214,7 +216,16 @@ const Search = () => {
     setInputSearchTerm("");
   };
 
+  const openSearchPopup = () => {
+    setIsPopupVisible(true);
+  };
+
+  const closeSearchPopup = () => {
+      setIsPopupVisible(false);
+  };
   return (
+    <>
+  
     <div className={styles.searchWrapper}>
       <div className={styles.searchBarWrapper}>
         <SearchIcon fill="#" className={styles.searchIcon} />
@@ -225,7 +236,10 @@ const Search = () => {
           onChange={handleSearchChange}
           className={styles.searchInput}
         />
+      
+        <div onClick= {closeSearch} className={styles.closeIcon}>
         <CloseIconV2 />
+        </div>    
       </div>
       <div className={styles.searchContentWrapper}>
         <SearchTabs activeTab={activeTab} setActiveTab={handleTabChange} />
@@ -257,6 +271,7 @@ const Search = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

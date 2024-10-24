@@ -11,6 +11,7 @@ const ProductDescriptionFlyoutCard = ({ isDescriptionCardOpen, setDescriptionCar
       isOpen={isDescriptionCardOpen}
       onClose={() => setDescriptionCardOpen(false)}
       showFooter={false}
+      showHeader={true}
       showBackButton={false}
       title={"Product Description"}
       position="right"

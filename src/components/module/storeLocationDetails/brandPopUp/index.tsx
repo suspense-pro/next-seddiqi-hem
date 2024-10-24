@@ -12,6 +12,7 @@ const BrandPopUp: React.FC<BrandPopUpProps> = ({ brands, isOpen, onClose }) => {
       <SideDrawer
         isOpen={isOpen}
         showFooter={false}
+        showHeader={true}
         showBackButton={true}
         onClose={onClose}
         onSubmit={null}

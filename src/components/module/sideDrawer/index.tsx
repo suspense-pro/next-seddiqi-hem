@@ -10,6 +10,7 @@ interface SideDrawerProps {
   isOpen: boolean;
   showFooter: boolean;
   showBackButton: boolean;
+  showHeader: boolean;
   onClose: () => void;
   className?:string;
   title?: string;
@@ -23,6 +24,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   isOpen,
   onClose,
   showFooter = true,
+  showHeader = true,
   showBackButton = false,
   title = "SORT & FILTER", // Default title
   onSubmit,
@@ -31,9 +33,10 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   position = "left",
 }) => {
   return (
-    <div className={`${styles.drawerWrapper} ${isOpen ? styles.isOpen : ""}`}>
+    <div className={`${styles.drawerWrapper} ${isOpen ? styles.isOpen : ""} ${className}`}>
       <div className={`${styles.underlay}`} onClick={onClose}></div>
-      <div className={`${styles.drawer} ${position === "right" ? styles.right : ""} ${isOpen ? styles.open : ""}`}>
+      <div className={`${styles.drawer} ${position === "right" ? styles.right : ""} ${isOpen ? styles.open : ""} ${className}`}>
+       {( showHeader &&
         <div className={styles.header}>
           {showBackButton ? (
             <span onClick={onClose} className={styles.backButton}>
@@ -53,6 +56,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
             <CloseIconV2 />
           </span>
         </div>
+        )}
         <div className={styles.content}>{children}</div>
         {showFooter && (
           <div className={styles.footer}>

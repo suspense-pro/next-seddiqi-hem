@@ -9,6 +9,7 @@ const ProductShippingDetailsFlyoutCard = ({ isShippingCardOpen, setShippingCardO
       isOpen={isShippingCardOpen}
       onClose={() => setShippingCardOpen(false)}
       showFooter={false}
+      showHeader={true}
       showBackButton={false}
       title={shippingDetails?.primaryTitle}
       position="right"

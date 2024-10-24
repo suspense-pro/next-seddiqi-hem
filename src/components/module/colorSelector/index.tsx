@@ -17,6 +17,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
         isOpen={isOpen}
         onClose={onClose}
         showFooter={false}
+        showHeader={true}
         showBackButton={false}
         position={"right"}
         title={title || "Color"}
