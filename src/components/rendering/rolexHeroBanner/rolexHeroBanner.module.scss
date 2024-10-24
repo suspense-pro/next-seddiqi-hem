@@ -1,0 +1,91 @@
+@import "./../../../assets/styles/main.scss";
+
+.heroSlider {
+  width: 100%;
+  height: 600px; // Adjust according to your design
+
+  .swiper-pagination-bullet {
+    background-color: white;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: white;
+  }
+
+  .slide {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .textOverlay {
+      position: absolute;
+      right: rem(80);
+      text-align: left;
+      width: rem(460);
+
+      .brand {
+        @include body_regular;
+        color: getColorHex("white");
+        font-size: rem(16);
+        font-weight: 700;
+        line-height: rem(26);
+        letter-spacing: rem(0.4);
+      }
+
+      h2 {
+        color: getColorHex("white");
+        font-family: Helvetica;
+        font-size: rem(40);
+        font-weight: 700;
+        line-height: rem(46);
+        letter-spacing: rem(0.4);
+        margin: rem(16) 0 rem(28) 0;
+      }
+
+      .discoverButton {
+        @include body_regular;
+        display: flex;
+        max-width: rem(200);
+        height: rem(48);
+        justify-content: center;
+        align-items: center;
+        border-radius: rem(40);
+        background: #147749;
+
+        color: getColorHex("white");
+        text-align: center;
+
+        font-size: rem(14);
+        line-height: rem(18);
+        letter-spacing: rem(1);
+        text-transform: uppercase;
+
+      }
+    }
+  }
+}
+
+
+.sliderBtn {
+    position: absolute;
+    right: rem(44);
+    display: flex;
+width: 32px;
+height: 32px;
+align-items: center;
+justify-content: center;
+gap: 10px;
+border-radius: 32px;
+background: rgba(242, 242, 242, 0.50);
+// background-color: red;
+cursor: pointer;
+}

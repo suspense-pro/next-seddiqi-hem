@@ -1,11 +1,11 @@
 import RolexNavbar from '@components/module/rolexHeader'
+import RolexHeroBanner from '@components/rendering/rolexHeroBanner'
 import React from 'react'
 
 const index = () => {
   return (
     <div>
-        <RolexNavbar type='green' />
-        <RolexNavbar type='black' />
+      <RolexHeroBanner />
     </div>
   )
 }
