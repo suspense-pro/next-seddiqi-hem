@@ -74,10 +74,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         };
 
                         const response = await fetch(customerAPI, upsertOptions);
-                        if (!response.ok) {
-                            throw new Error(`Error: ${response.status}`);
-                        }
                         const result = await response.json();
+
+                        if (!response.ok) {
+                            console.log("ERROR: Unable to get customer Golden ID.");
+                            return res.status(400).json({ isError: true, response: result });
+                        }
+                        
                         if (result.action === "insert" && result.sfCustomerId) {
                             // console.log("customer : " + JSON.stringify(result, null, 4));
                             /* save the golden ID in SFCC customer profile 
