@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { middlewareConfig } from "@utils/sfcc-connector/config";
-const newsletterAPI = middlewareConfig.parameters.api + '/newsletter';
+const contactAPI = middlewareConfig.parameters.api + '/contact';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const requestMethod = req.method;
@@ -9,10 +9,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const action = req.query.action ?? "";
 
     switch (query) {
-        case "newsletter":
+        case "contact":
             try {
-                if (requestMethod === "POST" && action === "subscription") {
-                    const { email, isSubscribed } = body;
+                if (requestMethod === "POST" && action === "contactUsSubmission") {
+                    const { email, firstName, lastName, phoneNumber, orderReferenceNumber, message, type } = body;
                     const options = {
                         method: requestMethod,
                         headers: {
@@ -24,28 +24,32 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         },
                         body: JSON.stringify({
                             email: email,
-                            isSubscribed: isSubscribed,
+                            firstName: firstName,
+                            lastName: lastName,
+                            orderReferenceNumber: orderReferenceNumber,
+                            type: type,
+                            message: message,
+                            phoneNumber: phoneNumber,
                             source: middlewareConfig.parameters.source,
                         }),
                     };
 
-                    const response = await fetch(newsletterAPI, options);
+                    const response = await fetch(contactAPI, options);
                     const result = await response.json();
-
+                    
                     if (!response.ok) {
-                        console.log("Newsletter request submission failed.");
+                        console.log("Contact us form submission failed.");
                         return res.status(400).json({ isError: true, response: result });
                     }
-                    
+
                     if (result.message === "success" && result.code === 200) {
-                        // console.log("newsletter : " + JSON.stringify(result, null, 4));
+                        // console.log("contact us : " + JSON.stringify(result, null, 4));
                         return res.status(200).json({ isError: false, response: result });
                     } else {
-                        console.log("Subscription Failed.");
-                        return res.status(400).json({ isError: true, response: "Subscription Failed." });
+                        console.log("Request submission failed.");
+                        return res.status(400).json({ isError: true, response: result });
                     }
                 }
-
             } catch(err) {
                 console.error(err);
       
