@@ -13,7 +13,11 @@
 }
 
 .collectionHeight {
-  height: rem(520);
+  height: rem(336);
+  
+  @include md {
+    height: rem(520);
+  }
 }
 
 .image,
