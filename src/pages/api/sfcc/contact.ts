@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { middlewareConfig } from "@utils/sfcc-connector/config";
+import { sendEmail } from "@utils/helpers/emailHelper";
 const contactAPI = middlewareConfig.parameters.api + '/contact';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -44,6 +45,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     if (result.message === "success" && result.code === 200) {
                         // console.log("contact us : " + JSON.stringify(result, null, 4));
+                        
+                        // send email to customer - nodemailer
+                        const subject = "Seddiqi - Support Team";
+                        const htmlContent = "Hi " + firstName + "," + "\n We have received your query and will get back to you shortly.";
+                        const emailInfo = await sendEmail(email, subject, htmlContent);
+                        if (emailInfo.success) {
+                            console.log("Email sent successfully");
+                        } else {
+                            console.log("Email failed");
+                        }
+
                         return res.status(200).json({ isError: false, response: result });
                     } else {
                         console.log("Request submission failed.");
