@@ -10,7 +10,7 @@ const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
     const opacity = content?.opacity?.opacity
     return (
       <div className={styles.column}>
-        <GradientOverlay opacity={opacity}>
+        <GradientOverlay className={styles.gradient} opacity={opacity}>
           <Image height={styles.image} className={styles.image} image={content?.image?.image} imageAltText={content?.image?.altText} />
         </GradientOverlay>
         <div className={styles.articleInfo}>
