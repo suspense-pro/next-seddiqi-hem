@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { middlewareConfig } from "@utils/sfcc-connector/config";
+import { sendEmail } from "@utils/helpers/emailHelper";
 const newsletterAPI = middlewareConfig.parameters.api + '/newsletter';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -39,7 +40,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     
                     if (result.message === "success" && result.code === 200) {
                         // console.log("newsletter : " + JSON.stringify(result, null, 4));
-                        return res.status(200).json({ isError: false, response: result });
+
+                        // send email - nodemailer
+                        const subject = "Seddiqi Newsletter Communication";
+                        const htmlContent = "You have been subscribed to our newsletter on Seddiqi.";
+                        const emailInfo = await sendEmail(email, subject, htmlContent);
+                        if (emailInfo.success) {
+                            console.log("Email sent successfully");
+                        } else {
+                            console.log("Email failed");
+                        }
+                        return res.status(200).json({ isError: false, response: result, email: emailInfo });
                     } else {
                         console.log("Subscription Failed.");
                         return res.status(400).json({ isError: true, response: "Subscription Failed." });
