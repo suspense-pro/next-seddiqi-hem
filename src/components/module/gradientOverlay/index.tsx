@@ -6,7 +6,7 @@ const GradientOverlay = ({ children, opacity = 0, className = "" }) => {
   const rgbaOpacity = opacity / 100;
 
   const backgroundStyle = {
-    backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, ${rgbaOpacity}) 100%),
+    backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, ${rgbaOpacity}) 100%),
                       linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%)`,
     zIndex: 100,
     opacity: rgbaOpacity, // Ensure this is a valid number between 0 and 1
