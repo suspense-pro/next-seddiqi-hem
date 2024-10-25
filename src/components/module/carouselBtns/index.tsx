@@ -32,9 +32,9 @@ const CarouselBtns = ({ swiper, activeIndex, slides }) => {
 
   return (
     <div className={styles.carousel}>
-      <span onClick={handlePrevClick}>
+      {/* <span onClick={handlePrevClick}>
         <ArrowRight className={styles.arrowLeft} />
-      </span>
+      </span> */}
       <div className={styles.btns}>
         {slides?.map((_, index) => (
           <div
@@ -43,14 +43,12 @@ const CarouselBtns = ({ swiper, activeIndex, slides }) => {
               index === activeIndex ? styles.activeCarouselBtn : ""
             }`}
             onClick={() => handlePaginationClick(index)}
-          >
-            &nbsp;
-          </div>
+          />
         ))}
       </div>
-      <span onClick={handleNextClick}>
+      {/* <span onClick={handleNextClick}>
         <ArrowRight className={styles.arrowRight} />
-      </span>
+      </span> */}
     </div>
   );
 };
