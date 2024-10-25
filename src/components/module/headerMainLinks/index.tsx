@@ -9,6 +9,7 @@ import Image from "next/image";
 import PrivateLink from "../privateLink";
 import { SideDrawer } from "@components/module";
 import { Search } from "@components/module";
+import { SearchProvider } from "@contexts/searchContext";
 
 const HeaderMainLinks = () => {
   const { updateCurrent, headerData } = useContext(HeaderContext);
@@ -62,6 +63,7 @@ const HeaderMainLinks = () => {
         ))}
       </div>
       <div className={styles.drawerStyle}>
+      <SearchProvider>
       <SideDrawer
         isOpen={isPopupVisible}
         onClose={closeSearchPopup}
@@ -76,6 +78,7 @@ const HeaderMainLinks = () => {
       >
         <Search  closeSearch={closeSearchPopup} ></Search>
       </SideDrawer>
+      </SearchProvider>
       </div>
     </div>
   );
