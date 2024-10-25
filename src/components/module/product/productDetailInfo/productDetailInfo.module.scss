@@ -36,18 +36,16 @@
 }
 
 .backBtn {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-left: rem(44);
+  left: rem(24);
   gap: rem(8);
   position: absolute;
   z-index: 100;
   cursor: pointer;
   font-size: rem(10);
-
-  margin-top: rem(14);
+  top: rem(14);
 
   svg {
     transform: rotate(180deg);
@@ -233,6 +231,7 @@
     line-height: rem(30);
     letter-spacing: rem(0.6);
     text-transform: uppercase;
+    color: getColorHex("brown-dark");
 
     @include lg {
       font-size: rem(32);
@@ -335,8 +334,8 @@
   gap: rem(8);
 
   .productLabel {
-    color: getColorHex("brown-dark");
     @include heading_regular;
+    color: getColorHex("brown-dark");
     font-size: rem(14);
     line-height: rem(20);
     letter-spacing: rem(0.4);
@@ -348,8 +347,8 @@
   }
 
   .productDesc {
-    color: getColorHex("grey-mid");
     @include body_regular;
+    color: getColorHex("grey");
     font-size: rem(14);
     line-height: rem(22);
     letter-spacing: rem(0.4);
@@ -369,6 +368,8 @@
     text-transform: capitalize;
   }
 }
+
+
 
 .bottom {
   display: flex;
@@ -409,6 +410,10 @@
     letter-spacing: rem(1);
     text-transform: capitalize;
   }
+}
+
+.noEditView {
+  justify-content: flex-start;
 }
 
 .errorMessage {
