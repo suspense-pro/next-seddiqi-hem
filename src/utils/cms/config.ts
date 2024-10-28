@@ -45,8 +45,6 @@ export const RolexComponentMapping: any = {
   [`${contentUrl}/container`]: Container,
   [`${contentUrl}/image`]: Image,
   [`${contentUrl}/content`]: ContentPage,
-  [`${contentUrl}/hero_banner`]: HeroBanner,
-  [`${contentUrl}/banner`]: HeroBanner,
   [`${slotsUrl}/container`]: Slot,
   [`${moduleUrl}/article-card`]: ArticleCard,
   [`${moduleUrl}/display-card`]: DisplayCard,
