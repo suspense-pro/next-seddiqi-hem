@@ -14,10 +14,11 @@
   transition: all 0.3s;
   top: rem(120);
 
-  @include md {
+  @include breakpoint-min-width(rem(1037)) {
     top: rem(152);
     padding: 0 rem(40);
   }
+
 
   .rolexLogo,
   .rolexLogoBlack {
@@ -152,6 +153,7 @@
   width: 100%;
   position: absolute;
   top: rem(70);
+  
 
 
   li {

@@ -26,6 +26,7 @@ import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
 import BrandListing from './../../components/module/brandListing/index';
 import Spacing from "@components/rendering/spacing";
+import RolexNavbar from "@components/module/rolexHeader";
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || "platinumpanda",
@@ -39,6 +40,19 @@ const pageUrl = schemaUrl + "/page";
 const moduleUrl = schemaUrl + "/module";
 const componentUrl = schemaUrl + "/component";
 const renderingUrl = schemaUrl + "/rendering";
+
+export const RolexComponentMapping: any = {
+  [`${pageUrl}/landing`]: ContentPage,
+  [`${contentUrl}/container`]: Container,
+  [`${contentUrl}/image`]: Image,
+  [`${contentUrl}/content`]: ContentPage,
+  [`${slotsUrl}/container`]: Slot,
+  [`${moduleUrl}/article-card`]: ArticleCard,
+  [`${moduleUrl}/display-card`]: DisplayCard,
+  [`${moduleUrl}/story-card`]: StoryCard,
+  [`${componentUrl}/rolex/navbar`]: RolexNavbar,
+  [`${componentUrl}/spacing`]: Spacing,
+};
 
 export const ComponentMapping: any = {
   [`${pageUrl}/landing`]: ContentPage,

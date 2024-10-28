@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Product, Search } from "commerce-sdk";
 import initializeShopperConfig, { clientConfig } from "@utils/sfcc-connector/config";
+import { getCategory } from "@utils/sfcc-connector/dataService";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const requestMethod = req.method;
@@ -27,8 +28,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         },
                     };
 
-                    const categoryResults = await shopperProductsClient.getCategory(options);    
-                    if (categoryResults.onlineSubCategoriesCount > 0) {
+                    const categoryResults = await shopperProductsClient.getCategory(options);
+                    if (categoryResults) {
                         // console.log("Categories : " + JSON.stringify(categoryResults, null, 4));
                         return res.status(200).json({ isError: false, response: categoryResults });
                     } else {
@@ -72,7 +73,38 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     if (categoryResults.total > 0) {
                         result.refinements = categoryResults.refinements;
                         result.sortingOptions = categoryResults.sortingOptions;
-                        // console.log("Filters : " + JSON.stringify(result, null, 4));
+
+                        /** Get quick filters 
+                         * compare the category quick filter label with all available filter
+                         * return the label with attribute Id 
+                        */
+                        console.log("category ID: ", categoryId);
+                        const category = await getCategory({ method: "GET", cgid: categoryId});
+                        if (!category.isError && category.response && category.response.c_categoryQuickFilters.length > 0) {
+                            console.log("c_categoryQuickFilters", category.response.c_categoryQuickFilters);
+                            const categoryQFilters = category.response.c_categoryQuickFilters;
+                            const filters = result.refinements;
+                            var quickFilters = [];
+
+                            filters.forEach(filter => {
+                                if (filter.values) {
+                                    filter.values.forEach(value => {
+                                        // If the label matches one of the filter value, searching for
+                                        if (categoryQFilters.includes(value.label)) {
+                                            quickFilters.push({
+                                                attributeId: filter.attributeId,
+                                                label: value.label
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                            // console.log("Quick Filters: ", quickFilters);
+                            if (quickFilters.length) {
+                                result.quickFilters = quickFilters;
+                            }
+                        }
+                        // console.log("Refinements : " + JSON.stringify(result, null, 4));
                         return res.status(200).json({ isError: false, response: result });
                     } else {
                         console.log("No filters found.");

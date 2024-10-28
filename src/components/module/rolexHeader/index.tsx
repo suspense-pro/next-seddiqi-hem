@@ -6,7 +6,7 @@ import { useWindowWidth } from "@utils/useCustomHooks";
 import Image from "./../image/index";
 import NavigationLink from "../navigationLink";
 
-const RolexNavbar = ({ content }) => {
+const RolexNavbar = ({ ...content }) => {
   if (!content) return null;
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -51,9 +51,9 @@ const RolexNavbar = ({ content }) => {
   if (!isClient) return null;
 
   return (
-    <div className={`${styles.container} ${scrolled && styles.scrolled} `}>
+    <div className={`${styles.container}`}>
       <nav
-        className={`${windowWidth < screenSize && styles.rolexMobileNavbar} ${
+        className={`${scrolled && styles.scrolled} ${windowWidth < screenSize && styles.rolexMobileNavbar} ${
           isWhite && styles.whiteBg
         } ${styles.rolexNavbar}`}
       >
@@ -98,7 +98,7 @@ const RolexNavbar = ({ content }) => {
       {windowWidth < screenSize && (
         <ul
           ref={dropdownRef}
-          className={`${styles.scrolled} ${isGreen ? styles.navbarMobileGreenLinks : styles.navbarMobileLinks}`}
+          className={`${isGreen ? styles.navbarMobileGreenLinks : styles.navbarMobileLinks}`}
           style={{
             height: isDropdownOpen ? height : 0,
             overflow: "hidden",
