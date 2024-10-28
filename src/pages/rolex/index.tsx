@@ -8,6 +8,7 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { isEmpty } from "@utils/helpers";
 import { getProducts } from "@utils/sfcc-connector/dataService";
+import { RolexComponentMapping } from "@utils/cms/config";
 
 // import { getCustomer } from "@utils/sfcc-connector/dataService";
 // import LoginForm from "@components/LoginForm";
@@ -15,16 +16,14 @@ import { getProducts } from "@utils/sfcc-connector/dataService";
 // import { getHierarchyChildren } from "@utils/cms/amplience";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-
   const data = await fetchStandardPageData(
     {
       content: {
-        page: { key: "homepage" },
+        page: { key: "rolex" },
       },
     },
     context
   );
-
 
   // if (isEmpty(data.page)) {
   //   return {
@@ -44,7 +43,7 @@ export default function RolexHome({ content }: InferGetServerSidePropsType<typeo
   return (
     <div className="main-content rolex">
       {compact(content?.page?.components).map((content) => (
-        <ContentBlock content={content} key={content?._meta.deliveryId} />
+        <ContentBlock components={RolexComponentMapping} content={content} key={content?._meta.deliveryId} />
       ))}
     </div>
   );
