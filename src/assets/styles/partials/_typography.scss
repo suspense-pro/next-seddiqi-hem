@@ -243,14 +243,20 @@
   transition: padding 0.3s ease;
   padding-top: rem(120);
 
-  @include md{
+  @include md {
     padding-top: rem(152);
   }
 
-  &.scrolledPadding{
-
-    @include md{
+  &.scrolledPadding {
+    @include md {
       padding-top: rem(78);
     }
+  }
+}
+
+.rolex {
+  padding-top: rem(69);
+  @include breakpoint-min-width(rem(1250)) {
+    padding-top: rem(89);
   }
 }

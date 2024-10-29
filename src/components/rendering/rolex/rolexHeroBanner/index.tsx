@@ -1,0 +1,94 @@
+import React, { useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import styles from "./rolexHeroBanner.module.scss";
+import { ArrowRightThick } from "@assets/images/svg";
+import { GradientOverlay, Image, NavigationLink, Video } from "@components/module";
+import { useWindowDimensions, useWindowWidth } from "@utils/useCustomHooks";
+
+const RolexHeroBanner = ({ ...content }) => {
+  const swiperRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  if (!content) return null;
+
+  const slides = content?.listItems;
+
+  const handleSlideChange = (swiper) => {
+    setActiveIndex(swiper.activeIndex);
+  };
+
+  console.log("content", content);
+  const screenSize = useWindowWidth();
+  return (
+    <Swiper
+      ref={swiperRef}
+      // modules={[Autoplay]}
+      spaceBetween={0}
+      slidesPerView={1}
+      // autoplay={{ delay: 3000, disableOnInteraction: false }}
+      // loop={true}
+      // speed={600}
+      onSlideChange={handleSlideChange}
+      className={styles.heroSlider}
+    >
+      {slides?.map((slide, index) => {
+        const media = screenSize < 769 ? slide?.mobileMedia?.media : slide?.media;
+        return (
+          <SwiperSlide className={styles.swiperSlide} key={index}>
+            <div className={styles.slide}>
+              {slide?.media?.image ? (
+                <GradientOverlay className={styles.gradient} opacity={slide?.opacity?.opacity}>
+                  <Image
+                    imgWidth="100%"
+                    height={styles.image}
+                    className={styles.image}
+                    image={media?.image}
+                    imageAltText={media?.altText}
+                  />
+                </GradientOverlay>
+              ) : (
+                <Video
+                  className={styles.image}
+                  video={slide?.media?.video}
+                  autoPlay={slide?.media?.autoPlay}
+                  showPlay={slide?.media?.showPlay}
+                />
+              )}
+
+              <div className={styles.textOverlay}>
+                <div className={styles.brand}>{slide?.title}</div>
+                <h2 className={styles.title}>{slide.subHeading}</h2>
+                <div className={styles.btnContainer}>
+                  <NavigationLink
+                    className={styles.discoverButton}
+                    title={slide?.cta?.label}
+                    isNewTab={slide?.cta?.isNewTab}
+                    url={slide?.cta?.url}
+                  />
+                </div>
+              </div>
+              {slides?.length > 1 && (
+                <>
+                  {
+                    <div className={styles.sliderLeftBtn} onClick={() => swiperRef.current.swiper.slidePrev()}>
+                      <ArrowRightThick />
+                    </div>
+                  }
+                  {
+                    <div className={styles.sliderRightBtn} onClick={() => swiperRef.current.swiper.slideNext()}>
+                      <ArrowRightThick />
+                    </div>
+                  }
+                </>
+              )}
+            </div>
+          </SwiperSlide>
+        );
+      })}
+    </Swiper>
+  );
+};
+
+export default RolexHeroBanner;
