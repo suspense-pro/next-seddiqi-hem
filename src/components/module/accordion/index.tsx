@@ -20,7 +20,7 @@ const Accordion: React.FC<AccordionProps> = ({
 
   useEffect(() => {
     if (contentRef.current && isCollapsed) {
-      setHeight(contentRef.current.scrollHeight);
+      setHeight(contentRef?.current?.scrollHeight);
     } else {
       setHeight(undefined);
     }
