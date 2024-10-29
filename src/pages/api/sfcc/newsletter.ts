@@ -42,9 +42,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         // console.log("newsletter : " + JSON.stringify(result, null, 4));
 
                         // send email - nodemailer
-                        const subject = "Seddiqi Newsletter Communication";
-                        const htmlContent = "You have been subscribed to our newsletter on Seddiqi.";
-                        const emailInfo = await sendEmail(email, subject, htmlContent);
+                        var emailInfo : any;
+                        if (isSubscribed) { // subscribed email
+                            const subject = "Seddiqi Newsletter Communication";
+                            const htmlContent = "You have been successfully subscribed to Seddiqi newsletter.";
+                            emailInfo = await sendEmail(email, subject, htmlContent);
+                        } else { // unsubscribed email
+                            const subject = "Seddiqi Newsletter Communication";
+                            const htmlContent = "You have been successfully unsubscribed to our newsletter on Seddiqi.";
+                            emailInfo = await sendEmail(email, subject, htmlContent);
+                        }
                         if (emailInfo.success) {
                             console.log("Email sent successfully");
                         } else {
