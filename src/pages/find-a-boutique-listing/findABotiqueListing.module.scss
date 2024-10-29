@@ -1,18 +1,26 @@
 @import "../../assets/styles/main.scss";
 
 .heroBannerWrapper{
+  
+  & > div{
+    height: rem(393);
 
-  & > div > div:first-child{
-    height: rem(420);
+    @include md{
+      height: rem(420);
+    }
   }
 
-  & > div > div:last-child > div:first-child{
+  & > div > div:first-child{
+    
+  }
+
+  /*& > div > div:last-child > div:first-child{
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5))
   }
 
   & > div > div:last-child > div > div:last-child{
     display: none;
-  }
+  }*/
 }
 
 .storeLocatorContainer{
