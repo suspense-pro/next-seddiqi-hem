@@ -65,6 +65,7 @@ export interface CardInfoProps {
     title: string;
     subTitle: string;
   };
+  className?: string;
 }
 
 // navigation links

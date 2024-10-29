@@ -53,8 +53,8 @@
 
         .imgContainer {
           position: relative;
-          width: rem(160);
-          height: rem(109);
+          width: rem(407);
+          height: rem(407);
         }
 
         .image {
@@ -107,4 +107,41 @@
       }
     }
   }
+}
+
+.storiesContainer{
+
+:global(.customStoryCardStyle) {
+  display: flex;
+  flex-direction: column; // Ensure column direction
+  width: 100%;
+  cursor: pointer;
+
+  .imgContainer {
+    width: rem(407);
+    height: rem(407); 
+    
+  }
+
+  .image {
+    border-radius: rem(16 16 0 0);
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .content {
+    margin-top: rem(10); 
+    
+    display: block; 
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.buttonContainer {
+  position: relative;
+  margin-top: rem(120);
+}
+
 }

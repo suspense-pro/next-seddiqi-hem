@@ -8,9 +8,7 @@ import { useRouter } from 'next/router';
 
 const RecommendedSearches = ({ categoryDetails, productRecommendation, searchTerm  }) => {
   const router = useRouter();
-  console.log("prodcut recommendation from coponent", productRecommendation)
   const allProductRecommendations = productRecommendation.map((product: { id: string }) => product.id);
-  console.log("allProductRecommendations", allProductRecommendations)
 
  const highlightMatch = (text, searchTerm) => {
     if (!searchTerm) return text;
@@ -29,7 +27,7 @@ const RecommendedSearches = ({ categoryDetails, productRecommendation, searchTer
   };
 
   const handleViewAllClick = () => {
-    console.log("productRecommendation from page",productRecommendation)
+    const allProductRecommendations = productRecommendation.map((product) => product.id);
     router.push({
       pathname: '/search',
       query: { recommendations: JSON.stringify(allProductRecommendations) },
@@ -60,9 +58,8 @@ const RecommendedSearches = ({ categoryDetails, productRecommendation, searchTer
               <div key={index} className={styles.productCardContainer}>
                 <Image
                   className={styles.image}
-                  image={""}
-                  // image={product?.imageGroups[0]?.images[0]?.link}
-                  // imageAltText={product?.imageGroups[0]?.images[0]?.alt}
+                  image={product?.imageGroups?.images?.link}
+                  imageAltText={product?.imageGroups?.images?.alt}
                 />
                 <div className={styles.content}>
                   <Typography

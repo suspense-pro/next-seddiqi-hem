@@ -104,5 +104,5 @@ export {
   SearchTabs,
   StoriesResults,
   NoSearchResultFound,
-  ViewAllStories
+  ViewAllStories,
 };

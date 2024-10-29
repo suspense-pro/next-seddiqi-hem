@@ -4,16 +4,16 @@ import Typography from "../../typography";
 import StoryCard from "../../cards/storyCard";
 import { Button } from "@components/module";
 import { useRouter } from "next/router";
+import { useSearchContext } from "@contexts/searchContext";
 
 const StoriesResults = ({ storiesResults }) => {
+  const { setStoriesResults } = useSearchContext();
   const router = useRouter();
 
   const handleViewAllClick = () => {
-    router.push({
-      pathname: '/search',
-      query: { stories: JSON.stringify(storiesResults) },
-    });
-  };
+   const serializedResults = JSON.stringify(storiesResults);
+  router.push(`/stories?recommendations=${encodeURIComponent(serializedResults)}`);
+};
 
   return (
     <div className={styles.storiesContainer}>

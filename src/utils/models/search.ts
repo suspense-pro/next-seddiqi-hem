@@ -18,10 +18,15 @@ export interface NoResultsProps {
     recommendationResults: any[];
     categoriesResults: string[]; 
     setCategories: (categories: string[]) => void;
-    storiesResults: any[];
     noResults: boolean;
     setNoResults: (noResults: boolean) => void;
     categorySuggestions: any[];
     setCategorySuggestions: (suggestions: any[]) => void;
     fetchCategorySuggestions: (term: string, categoryId: string) => void;
+    storiesResults: any[]; 
+    setStoriesResults: (stories: any[]) => void; 
+    storyResults: any[];
+    setStoryResults: (stories: any[]) => void;
+    productResults: any[]; 
+    setProductResults: (products: any[]) => void;
   } 

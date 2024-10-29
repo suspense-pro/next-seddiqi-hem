@@ -5,7 +5,7 @@ import { NoResultsProps } from "@utils/models/search";
 
 const NoSearchResultFound: React.FC<NoResultsProps> = ({ message }) => {
   return (
-    <div style={{ textAlign: "center", margin: "20px" }}>
+    <div>
       <Typography variant="p" className={styles.searchResultNotFoundMessage}>
         {`We couldn't find a match for"${message}". Please try another search`}
       </Typography>

@@ -13,7 +13,17 @@ const ViewAllStories = ({ storiesResults }) => {
       <div className={styles.storyCards}>
         {storiesResults.map((story, index) => (
           <div className={styles.storyCardStyles} key={index}>
-            <StoryCard item={story} />
+            <StoryCard item={story} className="customStoryCardStyle" />
+            <div className={styles.buttonContainer}>
+              <Button
+                isLink={true}
+                className={styles.storyBtn}
+                title={"Discover The Collection"}
+                link={"/"}
+                type={"Plain"}
+                color={"brown-dark"}
+              />
+            </div>
           </div>
         ))}
       </div>
