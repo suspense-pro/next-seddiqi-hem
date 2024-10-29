@@ -9,6 +9,7 @@ import fetchPageData from "@utils/cms/page/fetchPageData";
 import { isEmpty, mapToID, notNull } from "@utils/helpers";
 import { CmsContent } from "@utils/cms/utils";
 import ContentBlock from "@components/module/contentBlock";
+import { RolexComponentMapping } from "@utils/cms/config";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let { slug } = context.params || {};
@@ -18,7 +19,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
     {
       content: {
-        page: { key: `brand/${deliveryKey}` },
+        page: { key: `rolex/${deliveryKey}` },
       },
     },
     context
@@ -40,21 +41,20 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-const BrandPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const CPOPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { vse, content } = props;
   const [page] = useContent(content.page, vse as string);
-
   return (
     <div className="blog-content">
       {page?.contentComponents
         ?.filter(notNull)
         .map((cont: CmsContent, index: number) => (
-          <ContentBlock content={cont} key={index} />
+          <ContentBlock components={RolexComponentMapping} content={cont} key={index} />
         ))} 
     </div>
   );
 };
 
-export default BrandPage;
+export default CPOPage;
 
-BrandPage.Layout = Layout;
+CPOPage.Layout = Layout;
