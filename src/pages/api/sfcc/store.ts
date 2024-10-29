@@ -23,9 +23,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         parameters: {
                             organizationId: clientConfig.parameters.organizationId,
                             siteId: clientConfig.parameters.siteId,
-                            countryCode: 'US',
+                            countryCode: 'AE',
                             latitude: 38.7946,
-                            longitude: 106.5348
+                            longitude: 106.5348,
+                            limit: 100,
                         },
                     };
 
