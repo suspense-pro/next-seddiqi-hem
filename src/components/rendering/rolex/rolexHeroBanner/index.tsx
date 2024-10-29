@@ -5,7 +5,7 @@ import "swiper/css";
 import styles from "./rolexHeroBanner.module.scss";
 import { ArrowRightThick } from "@assets/images/svg";
 import { GradientOverlay, Image, NavigationLink, Video } from "@components/module";
-import { useWindowDimensions, useWindowWidth } from "@utils/useCustomHooks";
+import { useWindowWidth } from "@utils/useCustomHooks";
 
 const RolexHeroBanner = ({ ...content }) => {
   const swiperRef = useRef(null);
@@ -24,12 +24,12 @@ const RolexHeroBanner = ({ ...content }) => {
   return (
     <Swiper
       ref={swiperRef}
-      // modules={[Autoplay]}
+      modules={[Autoplay]}
       spaceBetween={0}
       slidesPerView={1}
-      // autoplay={{ delay: 3000, disableOnInteraction: false }}
-      // loop={true}
-      // speed={600}
+      autoplay={{ delay: 3000, disableOnInteraction: false }}
+      loop={true}
+      speed={600}
       onSlideChange={handleSlideChange}
       className={styles.heroSlider}
     >

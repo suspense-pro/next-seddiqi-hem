@@ -253,10 +253,3 @@
     }
   }
 }
-
-.rolex {
-  padding-top: rem(69);
-  @include breakpoint-min-width(rem(1250)) {
-    padding-top: rem(89);
-  }
-}
