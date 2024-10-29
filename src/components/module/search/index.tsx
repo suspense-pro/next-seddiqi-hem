@@ -44,7 +44,7 @@ const Search = ({ closeSearch }) => {
       // Clear suggestions if input is empty
       setCategorySuggestions([]);
     } else {
-      fetchCategorySuggestions("mens", activeTab); // Pass activeTab as categoryId
+      fetchCategorySuggestions(searchTerm, activeTab); // Pass activeTab as categoryId
     }
   };
 

@@ -36,7 +36,7 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [inputSearchTerm, setInputSearchTerm] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<string>("mens-clothing-suits");
+  const [activeTab, setActiveTab] = useState<string>("watches");
   const [popularBrands, setPopularBrands] = useState<string[]>([]);
   const [popularSearches, setPopularSearches] = useState<string[]>([]);
   const [productSuggestions, setProductSuggestions] = useState<any[]>([]);
