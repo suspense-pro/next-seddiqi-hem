@@ -1,4 +1,4 @@
-@import "./../../../assets/styles/main.scss";
+@import "./../../../../assets/styles/main.scss";
 
 .rolexNavbar {
   width: 100%;
@@ -7,8 +7,12 @@
   align-items: center;
   padding: 0 rem(17);
   height: rem(90);
-  border-top: rem(1) solid getColorHex("grey-space", 0.15);
-  border-bottom: rem(1) solid getColorHex("grey-space", 0.15);
+  
+  @include xl {
+    border-top: rem(1) solid getColorHex("grey-space", 0.15);
+    border-bottom: rem(1) solid getColorHex("grey-space", 0.15);
+  }
+
   background: linear-gradient(90deg, getColorHex("green-racing") 0%, getColorHex("green-spring") 100%);
   position: fixed;
   transition: all 0.3s;
@@ -18,7 +22,6 @@
     top: rem(152);
     padding: 0 rem(40);
   }
-
 
   .rolexLogo,
   .rolexLogoBlack {
@@ -51,8 +54,7 @@
     li {
       .navLink {
         color: getColorHex("white");
-        font-family: Helvetica;
-        font-size: rem(16);
+            font-size: rem(16);
         line-height: rem(20);
         letter-spacing: rem(0.4);
         text-transform: capitalize;
@@ -80,8 +82,7 @@
       border: rem(1) solid getColorHex("white");
       color: getColorHex("white");
       text-align: center;
-      font-family: Helvetica;
-      font-size: rem(14);
+        font-size: rem(14);
       line-height: rem(18);
       letter-spacing: rem(1);
       text-transform: uppercase;
@@ -96,8 +97,14 @@
 
 .container {
   position: fixed;
-  transition: all .3s;
+  transition: all 0.3s;
   width: 100%;
+  z-index: 1000;
+  top: rem(120);
+
+  @include breakpoint-min-width(rem(1037)) {
+    top: rem(152);
+  }
 }
 
 .scrolled {
@@ -123,7 +130,6 @@
 
   .menu {
     color: getColorHex("green-dark");
-    font-family: Helvetica;
     font-size: rem(18);
     font-weight: 400;
     line-height: rem(26);
@@ -152,17 +158,15 @@
   background-color: getColorHex("white");
   width: 100%;
   position: absolute;
-  top: rem(70);
-  
-
+  top: rem(69);
+  left: 0;
 
   li {
     .navMobileLink,
     .navMobileBlack {
       display: flex;
       align-items: flex-start;
-      font-family: Helvetica;
-      font-size: rem(12);
+        font-size: rem(12);
       letter-spacing: rem(0.4);
       text-transform: capitalize;
       color: getColorHex("green-dark");

@@ -3,8 +3,8 @@ import styles from "./rolexHeader.module.scss";
 import Link from "next/link";
 import { ArrowDown } from "@assets/images/svg";
 import { useWindowWidth } from "@utils/useCustomHooks";
-import Image from "./../image/index";
-import NavigationLink from "../navigationLink";
+import Image from "../../../module/image/index";
+import NavigationLink from "../../../module/navigationLink";
 
 const RolexNavbar = ({ ...content }) => {
   if (!content) return null;
@@ -16,42 +16,35 @@ const RolexNavbar = ({ ...content }) => {
 
   const dropdownRef = useRef<HTMLUListElement>(null);
   const windowWidth = useWindowWidth();
-  const type = content?.backgroundColor;
+  const { backgroundColor: type, navLinks: links, logo, cta } = content;
   const screenSize = type === "green" ? 1250 : 1110;
 
   const isGreen = type === "green";
   const isWhite = type === "white";
-  const links = content?.navLinks;
 
-  const handleScroll = useCallback(() => {
-    setScrolled(window.scrollY > 40);
-  }, []);
+  const handleScroll = useCallback(() => setScrolled(window.scrollY > 40), []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]);
+
+  useEffect(() => setIsClient(true), []);
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  useEffect(() => {
-    if (dropdownRef?.current && isDropdownOpen) {
-      setHeight(dropdownRef?.current?.scrollHeight);
+    if (dropdownRef.current && isDropdownOpen) {
+      setHeight(dropdownRef.current.scrollHeight);
     } else {
       setHeight(0);
     }
   }, [isDropdownOpen]);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   if (!isClient) return null;
 
   return (
-    <div className={`${styles.container}`}>
+    <div className={styles.container}>
       <nav
         className={`${scrolled && styles.scrolled} ${windowWidth < screenSize && styles.rolexMobileNavbar} ${
           isWhite && styles.whiteBg
@@ -60,8 +53,8 @@ const RolexNavbar = ({ ...content }) => {
         <Image
           className={isGreen ? styles.rolexLogo : styles.rolexLogoBlack}
           height={isGreen ? styles.rolexLogo : styles.rolexLogoBlack}
-          image={content?.logo?.image}
-          imageAltText={content?.logo?.altText}
+          image={logo?.image}
+          imageAltText={logo?.altText}
         />
 
         {windowWidth > screenSize ? (
@@ -81,9 +74,9 @@ const RolexNavbar = ({ ...content }) => {
             <div className={styles.contactButton}>
               <NavigationLink
                 className={`${isWhite && styles.btnGreen} ${styles.btnWhite}`}
-                title={content?.cta?.label}
-                isNewTab={content?.cta?.isNewTab}
-                url={content?.cta?.url}
+                title={cta?.label}
+                isNewTab={cta?.isNewTab}
+                url={cta?.url}
               />
             </div>
           </>
@@ -93,38 +86,38 @@ const RolexNavbar = ({ ...content }) => {
             <ArrowDown fill={isGreen ? "white" : "black"} className={isDropdownOpen ? styles.activeArrow : ""} />
           </div>
         )}
-      </nav>
 
-      {windowWidth < screenSize && (
-        <ul
-          ref={dropdownRef}
-          className={`${isGreen ? styles.navbarMobileGreenLinks : styles.navbarMobileLinks}`}
-          style={{
-            height: isDropdownOpen ? height : 0,
-            overflow: "hidden",
-            transition: "all 0.3s ease",
-          }}
-        >
-          {links?.map((link, index) => (
-            <li key={index}>
+        {windowWidth < screenSize && (
+          <ul
+            ref={dropdownRef}
+            className={`${isGreen ? styles.navbarMobileGreenLinks : styles.navbarMobileLinks}`}
+            style={{
+              height: isDropdownOpen ? height : 0,
+              overflow: "hidden",
+              transition: "all 0.3s ease",
+            }}
+          >
+            {links?.map((link, index) => (
+              <li key={index}>
+                <NavigationLink
+                  className={`${isWhite && styles.navMobileBlack} ${styles.navMobileLink}`}
+                  title={link?.label}
+                  isNewTab={link?.isNewTab}
+                  url={link?.url}
+                />
+              </li>
+            ))}
+            <li>
               <NavigationLink
                 className={`${isWhite && styles.navMobileBlack} ${styles.navMobileLink}`}
-                title={link?.label}
-                isNewTab={link?.isNewTab}
-                url={link?.url}
+                title={cta?.label}
+                isNewTab={cta?.isNewTab}
+                url={cta?.url}
               />
             </li>
-          ))}
-          <li>
-            <NavigationLink
-              className={`${isWhite && styles.navMobileBlack} ${styles.navMobileLink}`}
-              title={content?.cta?.label}
-              isNewTab={content?.cta?.isNewTab}
-              url={content?.cta?.url}
-            />
-          </li>
-        </ul>
-      )}
+          </ul>
+        )}
+      </nav>
     </div>
   );
 };

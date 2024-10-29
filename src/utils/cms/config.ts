@@ -26,7 +26,7 @@ import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
 import BrandListing from './../../components/module/brandListing/index';
 import Spacing from "@components/rendering/spacing";
-import RolexNavbar from "@components/module/rolexHeader";
+import { RolexNavbar } from "@components/rendering/rolex";
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || "platinumpanda",
