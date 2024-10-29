@@ -1,3 +1,4 @@
 import RolexNavbar from "./rolexHeader";
+import RolexTextBlock from './rolexTextBlock/index';
 
-export { RolexNavbar };
+export { RolexNavbar, RolexTextBlock };
