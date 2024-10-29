@@ -1,6 +1,6 @@
 const Calendar = ({ fill, className }: { fill?: string; className?: string }) => (
   <svg className={className} xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-    <g clip-path="url(#clip0_13237_1812)">
+    <g clipPath="url(#clip0_13237_1812)">
       <path d="M20.291 9.32764L1.29102 9.32764" stroke="#464F4A" />
       <path d="M5.84375 0.619141V5.36914" stroke="#464F4A" />
       <path d="M14.75 0.619141L14.75 5.36914" stroke="#464F4A" />
