@@ -103,5 +103,6 @@ export {
   PopularProducts,
   SearchTabs,
   StoriesResults,
-  NoSearchResultFound
+  NoSearchResultFound,
+  ViewAllStories
 };

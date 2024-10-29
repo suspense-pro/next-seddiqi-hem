@@ -74,7 +74,6 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
       <SideDrawer
         isOpen={isOpen}
         showFooter={false}
-        showHeader={true}
         showBackButton={true}
         onClose={onClose}
         onSubmit={null}

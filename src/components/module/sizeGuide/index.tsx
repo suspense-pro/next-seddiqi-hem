@@ -17,7 +17,6 @@ const SizeGuide: React.FC<SizeGuideProps> = ({
     <SideDrawer
       isOpen={isOpen}
       showFooter={false}
-      showHeader={true}
       onSubmit={null}
       onClearAll={null}
       showBackButton={true}

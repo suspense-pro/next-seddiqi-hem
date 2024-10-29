@@ -8,8 +8,11 @@ import { useRouter } from "next/router";
 const StoriesResults = ({ storiesResults }) => {
   const router = useRouter();
 
-  const viewAllStoriesHandler = () => {
-    router.push("/view-all-stories");
+  const handleViewAllClick = () => {
+    router.push({
+      pathname: '/search',
+      query: { stories: JSON.stringify(storiesResults) },
+    });
   };
 
   return (
@@ -28,12 +31,12 @@ const StoriesResults = ({ storiesResults }) => {
         <div className={styles.viewAllBtnContainer}>
           <Button
             isLink={false}
-            link={"/view-all-stories"}
+            link={""}
             className={styles.viewAllBtn}
             title={"View All"}
             color="green_dark"
             type={"Plain"}
-            clickHandler={viewAllStoriesHandler}
+            clickHandler={handleViewAllClick}
           />
         </div>
       )}

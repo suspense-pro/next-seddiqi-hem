@@ -139,7 +139,6 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
         onClose={onClose}
         showFooter={false}
         showBackButton={false}
-        showHeader={true}
         position={"right"}
         title={title || "Size Selector"}
         onSubmit={null}

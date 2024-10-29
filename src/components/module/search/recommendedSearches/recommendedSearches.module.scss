@@ -33,6 +33,7 @@
   margin-top: rem(20);
   margin-bottom: rem(20);
   li {
+    text-transform: capitalize;
     margin-block-end: rem(20);
     margin-block-start: rem(20);
   }
@@ -127,4 +128,8 @@
       }
     }
   }
+}
+
+.highlighted {
+  font-weight: bold;
 }

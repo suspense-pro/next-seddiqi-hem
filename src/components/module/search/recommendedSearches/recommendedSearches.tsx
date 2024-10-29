@@ -4,8 +4,38 @@ import Typography from "../../typography";
 import ProductCard from "../../cards/productCard";
 import { Button } from "@components/module";
 import Image from "@components/module/image";
+import { useRouter } from 'next/router';
 
-const RecommendedSearches = ({ categoryDetails, productRecommendation }) => {
+const RecommendedSearches = ({ categoryDetails, productRecommendation, searchTerm  }) => {
+  const router = useRouter();
+  console.log("prodcut recommendation from coponent", productRecommendation)
+  const allProductRecommendations = productRecommendation.map((product: { id: string }) => product.id);
+  console.log("allProductRecommendations", allProductRecommendations)
+
+ const highlightMatch = (text, searchTerm) => {
+    if (!searchTerm) return text;
+
+    //regex to match the whole word
+    const regex = new RegExp(`\\b(${searchTerm})\\b`, 'gi');
+    const parts = text.split(regex);
+
+    return parts.map((part, index) =>
+      part.toLowerCase() === searchTerm.toLowerCase() ? (
+        <span key={index} className={styles.highlighted}>{part}</span>
+      ) : (
+        part
+      )
+    );
+  };
+
+  const handleViewAllClick = () => {
+    console.log("productRecommendation from page",productRecommendation)
+    router.push({
+      pathname: '/search',
+      query: { recommendations: JSON.stringify(allProductRecommendations) },
+    });
+  };
+  
   return (
     <div className={styles.tabContainer}>
       <div className={styles.listsContainer}>
@@ -14,7 +44,7 @@ const RecommendedSearches = ({ categoryDetails, productRecommendation }) => {
         </Typography>
         <ul className={styles.popularSearchListStyle}>
           {categoryDetails.map((search, index) => (
-            <li key={index}>{search}</li>
+           <li key={index}>{highlightMatch(search, searchTerm)}</li> 
           ))}
         </ul>
       </div>
@@ -26,12 +56,13 @@ const RecommendedSearches = ({ categoryDetails, productRecommendation }) => {
         <div className={styles.productList}>
           {Array.isArray(productRecommendation) &&
           productRecommendation.length > 0 ? (
-            productRecommendation.map((product, index) => (
+            productRecommendation.map((product, index) => (             
               <div key={index} className={styles.productCardContainer}>
                 <Image
                   className={styles.image}
-                  image={product.image}
-                  imageAltText={product.imageAltText}
+                  image={""}
+                  // image={product?.imageGroups[0]?.images[0]?.link}
+                  // imageAltText={product?.imageGroups[0]?.images[0]?.alt}
                 />
                 <div className={styles.content}>
                   <Typography
@@ -39,7 +70,7 @@ const RecommendedSearches = ({ categoryDetails, productRecommendation }) => {
                     variant="span"
                     className={styles.title}
                   >
-                    {product.productName}
+                    {product.name}
                   </Typography>
                   <div className={styles.subtitle}>{product.price}</div>
                 </div>
@@ -54,12 +85,12 @@ const RecommendedSearches = ({ categoryDetails, productRecommendation }) => {
         <div className={styles.viewAllBtnContainer}>
           <Button
             isLink={false}
-            link={"/view-all-products"}
+            link={""}
             className={styles.viewAllBtn}
             title={"View All"}
             color="green_dark"
             type={"Plain"}
-            clickHandler={null}
+            clickHandler={handleViewAllClick}
           />
         </div>
       </div>

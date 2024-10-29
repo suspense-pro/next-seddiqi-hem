@@ -30,20 +30,31 @@ const Search = ({ closeSearch }) => {
     storiesResults,
     noResults,
     setNoResults,
+    categorySuggestions,
+    setCategorySuggestions,
+    fetchCategorySuggestions,
+
   } = useSearchContext();
 
-
   const handleSearchChange = (event) => {
-    setInputSearchTerm(event.target.value);
+    const searchTerm = event.target.value;
+    setInputSearchTerm(searchTerm);
+
+    if (searchTerm.length === 0) {
+      // Clear suggestions if input is empty
+      setCategorySuggestions([]);
+    } else {
+      fetchCategorySuggestions("mens", activeTab); // Pass activeTab as categoryId
+    }
   };
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    setInputSearchTerm("");
+    setInputSearchTerm(""); // Clear the search input when changing tabs
+    setCategorySuggestions([]); // Clear suggestions on tab change
   };
+
   return (
-    <>
-  
     <div className={styles.searchWrapper}>
       <div className={styles.searchBarWrapper}>
         <SearchIcon fill="#" className={styles.searchIcon} />
@@ -54,11 +65,21 @@ const Search = ({ closeSearch }) => {
           onChange={handleSearchChange}
           className={styles.searchInput}
         />
-      
-        <div onClick= {closeSearch} className={styles.closeIcon}>
-        <CloseIconV2 />
-        </div>    
+        <div onClick={closeSearch} className={styles.closeIcon}>
+          <CloseIconV2 />
+        </div>
       </div>
+
+      {inputSearchTerm && (
+        <div className={styles.autocompleteSuggestions}>
+          {categorySuggestions.map((suggestion, index) => (
+            <div key={index} className={styles.suggestionItem}>
+              {suggestion}
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className={styles.searchContentWrapper}>
         <SearchTabs activeTab={activeTab} setActiveTab={handleTabChange} />
         {inputSearchTerm ? (
@@ -66,16 +87,15 @@ const Search = ({ closeSearch }) => {
             <RecommendedSearches
               categoryDetails={categoriesResults}
               productRecommendation={recommendationResults}
-            ></RecommendedSearches>
+              searchTerm={inputSearchTerm}
+            />
             {noResults && <NoSearchResultFound />}
           </div>
         ) : (
           <>
             {activeTab === "stories" ? (
               <div className={styles.storiesWrapper}>
-                <StoriesResults
-                  storiesResults={storiesResults}
-                ></StoriesResults>
+                <StoriesResults storiesResults={storiesResults} />
               </div>
             ) : (
               <PopularProducts
@@ -89,7 +109,6 @@ const Search = ({ closeSearch }) => {
         )}
       </div>
     </div>
-    </>
   );
 };
 

@@ -62,22 +62,9 @@ const HeaderMainLinks = () => {
           </div>
         ))}
       </div>
-      <div className={styles.drawerStyle}>
+      <div className={`${styles.drawerStyle} ${isPopupVisible ? styles.visible : ''}`}>
       <SearchProvider>
-      <SideDrawer
-        isOpen={isPopupVisible}
-        onClose={closeSearchPopup}
-        showFooter={false}
-        onSubmit={null}
-        onClearAll={null}
-        showBackButton={false}
-        showHeader= {false}
-        title={""}
-        position={"right"}
-        className="customDrawerStyle"
-      >
         <Search  closeSearch={closeSearchPopup} ></Search>
-      </SideDrawer>
       </SearchProvider>
       </div>
     </div>
