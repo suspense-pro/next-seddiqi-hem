@@ -40,6 +40,19 @@ const moduleUrl = schemaUrl + "/module";
 const componentUrl = schemaUrl + "/component";
 const renderingUrl = schemaUrl + "/rendering";
 
+export const RolexComponentMapping: any = {
+  [`${pageUrl}/landing`]: ContentPage,
+  [`${contentUrl}/container`]: Container,
+  [`${contentUrl}/image`]: Image,
+  [`${contentUrl}/content`]: ContentPage,
+  [`${slotsUrl}/container`]: Slot,
+  [`${moduleUrl}/article-card`]: ArticleCard,
+  [`${moduleUrl}/display-card`]: DisplayCard,
+  [`${moduleUrl}/story-card`]: StoryCard,
+  // [`${componentUrl}/two-column-image-copy`]: TwoColumnImageCopy,
+  // [`${componentUrl}/spacing`]: Spacing,
+};
+
 export const ComponentMapping: any = {
   [`${pageUrl}/landing`]: ContentPage,
   [`${contentUrl}/container`]: Container,
