@@ -5,10 +5,10 @@ import Layout from "@components/layout";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { useContent } from "@contexts/withVisualizationContext";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
-import fetchPageData from "@utils/cms/page/fetchPageData";
 import { isEmpty, mapToID, notNull } from "@utils/helpers";
 import { CmsContent } from "@utils/cms/utils";
 import ContentBlock from "@components/module/contentBlock";
+import RolexNavbar from "@components/rendering/rolex/rolexHeader";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let { slug } = context.params || {};
@@ -24,6 +24,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
+
   // if (isEmpty(data.page) || !slug) {
   //   return {
   //     redirect: {
@@ -36,14 +37,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     props: {
       ...data,
       vse: vse || "",
+      deliveryKey
     },
   };
 }
 
 const BrandPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { vse, content } = props;
+  const { vse, content, } = props;
   const [page] = useContent(content.page, vse as string);
-
   return (
     <div className="blog-content">
       {page?.contentComponents

@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { Customer, slasHelpers } from "commerce-sdk";
 import initializeShopperConfig,  { clientConfig, OAuthTokenFromAM, basicAuthorization } from "@utils/sfcc-connector/config";
 import { middlewareConfig, getGuestTokenResponse, getShopperTokenResponse } from "@utils/sfcc-connector/config";
+import { sendEmail } from "@utils/helpers/emailHelper";
 import saveGoldenIDToCustomerProfile, { generateRandomString, generateCodeChallenge }from "@utils/sfcc-connector/customerUtils";
 const customerAPI = middlewareConfig.parameters.api + '/customer';
  
@@ -44,6 +45,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     var shopperResponse = await client.registerCustomer(options);
                     // console.log("SFCC Customer: " + JSON.stringify(shopperResponse));
+
+                    // send email - nodemailer
+                    const subject = "Account Registration Completed";
+                    const htmlContent = "Hey " +fname+", \n You have successfully registered on Seddiqi.com";
+                    const emailInfo = await sendEmail(email, subject, htmlContent);
+                    if (emailInfo.success) {
+                        console.log("Email sent successfully");
+                    } else {
+                        console.log("Email failed");
+                    }
                     
                     if (shopperResponse.customerNo) {
                         /** call to upsert API to get Golden ID */
