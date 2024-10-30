@@ -33,7 +33,7 @@
 .storeImg {
   border-radius: rem(16 0 16 0);
   object-fit: cover;
-  height: rem(608);
+  height: 100%;
   width: 100%;
 }
 
@@ -252,9 +252,7 @@
   margin-right: rem(100);
 }
 
-.mainWrapper {
-  margin-top: rem(200);
-}
+
 
 .backBtn {
   display: flex;
@@ -308,7 +306,7 @@
 
 .storeImageWrapper {
   position: relative;
-  height: rem(608);
+  height: 100%;
   width: 100%;
   margin-bottom: rem(28);
 }
@@ -346,7 +344,7 @@
 
 .mainWrapper {
   position: relative;
-  margin-top: rem(200);
+  margin-top: rem(20);
 }
 
 .infoColumn {
@@ -366,4 +364,9 @@
 .mapViewWrapper {
   margin-bottom: rem(16);
   margin-right: rem(100);
+}
+
+.fullWidthMap {
+  height: 100%;
+  width: 100%;
 }

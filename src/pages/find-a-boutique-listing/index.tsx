@@ -22,6 +22,7 @@ import { SideDrawer, Typography } from "@components/module";
 import { FilterAccordian, FilterAccordionItem } from "@components/module/filterAccordian";
 import CheckboxFilter from "@components/module/checkboxFilter";
 import SearchIcon2 from "@assets/images/svg/SearchIcon2";
+import { useRouter } from 'next/router';
 
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -43,6 +44,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 
 export default function FindABoutiqueListing({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const router = useRouter();
   const [stores, setStores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userLocation, setUserLocation] = useState(null);
@@ -87,6 +89,11 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   };
 
   const [isMobile] = useDeviceWidth();
+
+  const handleStoreDetails = (storeId) => {
+  router.push(`/store/${storeId}`); 
+};
+
 
   useEffect(() => {
     const fetchStores = async () => {
@@ -196,7 +203,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       <>
         <ul className={styles.storeList}>
         {displayedStores.map(store => (
-          <li className={styles.store} key={store.id}>
+          <li className={styles.store} key={store.id} onClick={() => handleStoreDetails(store.id)}>
             <div className={styles.storeImageContainer}>
               <img src={store.c_storeImage} alt={store.name} className={styles.storeImage} />
 
