@@ -12,7 +12,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "search":
             try {
                 if (requestMethod === "GET" && action === "getStores") {
-                    const accessToken = await initializeShopperConfig();
+                    const configWithAuth = await initializeShopperConfig()
+                    const accessToken = configWithAuth.access_token;
                     clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
                     const shopperStoresClient = new Seller.ShopperStores(clientConfig);
 
@@ -23,9 +24,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         parameters: {
                             organizationId: clientConfig.parameters.organizationId,
                             siteId: clientConfig.parameters.siteId,
-                            countryCode: 'US',
+                            countryCode: 'AE',
                             latitude: 38.7946,
-                            longitude: 106.5348
+                            longitude: 106.5348,
+                            limit: 100,
                         },
                     };
 

@@ -50,17 +50,10 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
 
         const fetchedStores = response?.response?.data || [];
 
-        const storeId = initialStore; // Assuming `id` is a property of the initial store
+        const storeId = initialStore.id;
 
         // Find the matched store based on the initial store ID
-        const matchedStore =
-          fetchedStores.find((store) => store.id === storeId) || null;
-
-        if (matchedStore) {
-          // console.log("Matched Store:", matchedStore);
-        } else {
-          console.log("No matching store found.");
-        }
+        const matchedStore = fetchedStores.find(store => store.id === storeId) || null;
 
         setMatchedStore(matchedStore);
       } catch (error) {
@@ -75,9 +68,9 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
   if (!matchedStore) {
     return <div>No store found.</div>;
   }
-  if (isMobile) {
-    return null;
-  }
+  // if (isMobile) {
+  //   return null;
+  // }
 
   // Store data from matchedStore
   const storeImage = matchedStore?.c_storeImage;
@@ -158,7 +151,7 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
 
                 <div className={styles.storeContactWrapper}>
                   <div className={styles.leftSection}>
-                    <WhatsappIcon className={styles.WhatsappIcon} />
+                    <WhatsappIcon className={styles.WhatsappIcon}/>
                     <span className={styles.contactLabelWrapper}>
                       <Typography variant="p" className={styles.contactLabel}>
                         {"Get in Touch"}

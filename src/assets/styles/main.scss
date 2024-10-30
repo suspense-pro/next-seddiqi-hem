@@ -118,3 +118,18 @@
     background-color: getColorHex("midnight-brown")!important
   }
 }
+
+
+
+.rolex {
+  padding-top: rem(69);
+  @include breakpoint-min-width(rem(768)) {
+    padding-top: rem(38);
+  }
+  @include breakpoint-min-width(rem(1037)) {
+    padding-top: rem(70);
+  }
+  @include breakpoint-min-width(rem(1250)) {
+    padding-top: rem(89);
+  }
+}

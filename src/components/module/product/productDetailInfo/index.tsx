@@ -165,7 +165,7 @@ const ProductDetailInfo = ({
         )}
         {isMobile && (
           <div className={styles.backBtn}>
-            <ArrowRight /> Back
+            <ArrowRight /> <span>Back</span>
           </div>
         )}
         <div className={styles.carousel}>
@@ -177,7 +177,7 @@ const ProductDetailInfo = ({
             setSwiper={setSwiper}
             setActiveIndex={setActiveIndex}
           />
-          {windowWidth > 991 && <div className={styles.exclusive}>Exclusive</div>}
+          {windowWidth > 1036 && <div className={styles.exclusive}>Exclusive</div>}
           <div onClick={() => setShowZoom(true)} className={styles.plus}>
             <PlusIcon />
           </div>
@@ -279,7 +279,7 @@ const ProductDetailInfo = ({
                 shippingDetails={shippingData}
               />
             )}
-            <div className={styles.bottom}>
+            <div className={`${!editorsView && styles.noEditView} ${styles.bottom}`}>
               {editorsView && (
                 <>
                   <div onClick={() => handleCardToggle("description")} className={styles.tab}>

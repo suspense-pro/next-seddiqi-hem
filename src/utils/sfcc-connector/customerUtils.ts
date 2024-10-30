@@ -4,9 +4,8 @@ import { createHash } from 'crypto';
 
 /** Update customer profile with golden ID **/
 async function saveGoldenIDToCustomerProfile (customer: any, goldenID: any) {
-  const guestJWT = await getGuestTokenResponse();
   const shopperJWT = await getShopperTokenResponse({
-      usid: guestJWT.usid,
+      usid: customer.usid,
       username: customer.login,
       password: customer.currentPassword,
   });

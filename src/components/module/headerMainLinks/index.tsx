@@ -1,18 +1,31 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styles from "./headerMainLinks.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import NavigationLink from "../navigationLink";
-import { AccountIcon, CalendarIcon, SearchIcon, WishlistIcon } from "@assets/images/svg";
+import { AccountIcon, CalendarIcon, SearchIcon, WishlistIcon, MapIcon } from "@assets/images/svg";
 import { generateUniqueId } from "@utils/helpers/uniqueId";
 import Link from "next/link";
 import Image from "next/image";
 import PrivateLink from "../privateLink";
+import { SideDrawer } from "@components/module";
+import { Search } from "@components/module";
+import { SearchProvider } from "@contexts/searchContext";
 
 const HeaderMainLinks = () => {
   const { updateCurrent, headerData } = useContext(HeaderContext);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const headerMainLinks = headerData?.children;
   if (!headerMainLinks) return null;
+
+  const openSearchPopup = () => {
+    setIsPopupVisible(true);
+  };
+
+  const closeSearchPopup = () => {
+      setIsPopupVisible(false);
+  };
+
 
   return (
     <div className={styles.linksContainer}>
@@ -37,12 +50,28 @@ const HeaderMainLinks = () => {
         ))}
       </div>
       <div className={styles.navIcons}>
-        <SearchIcon fill="#" />
-        <CalendarIcon fill="#" />
+        <div onClick={openSearchPopup}>
+          <SearchIcon fill="#" />
+        </div>
+        <Link target="_blank" href="/book-an-appointment">
+          <CalendarIcon fill="#" />
+        </Link>
         <PrivateLink url="/profile">
           <AccountIcon fill="#" />
         </PrivateLink>
         <WishlistIcon fill="#" />
+        {/* {[SearchIcon, CalendarIcon, AccountIcon, WishlistIcon].map((Icon, index) => (
+          Icon === AccountIcon ?     <PrivateLink url="/profile">
+          <AccountIcon fill="#" />
+        </PrivateLink>: <div key={generateUniqueId()} onClick={Icon === SearchIcon ? openSearchPopup : undefined}>
+            <Icon key={generateUniqueId()} fill="#" />
+          </div>
+        ))} */}
+      </div>
+      <div className={`${styles.drawerStyle} ${isPopupVisible ? styles.visible : ''}`}>
+      <SearchProvider>
+        <Search closeSearch={closeSearchPopup} ></Search>
+      </SearchProvider>
       </div>
     </div>
   );

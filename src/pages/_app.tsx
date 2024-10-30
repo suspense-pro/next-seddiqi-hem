@@ -16,6 +16,7 @@ import { HeaderProvider } from "@contexts/headerContext";
 import { WithAppContext } from "@contexts/appContext";
 import { WithCmsContext } from "@contexts/cmsContext";
 import { UserProvider } from "@contexts/userContext";
+import { SearchProvider } from "@contexts/searchContext";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -41,7 +42,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             <WithVisualization>
               <WithCmsContext value={(pageProps as any).context?.cmsContext}>
                 <Layout pageProps={pageProps}>
+                  <SearchProvider>    
                   <Component {...pageProps} />
+                  </SearchProvider>
                 </Layout>
               </WithCmsContext>
             </WithVisualization>

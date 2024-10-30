@@ -57,30 +57,12 @@ export default async function initializeShopperConfig() {
       },
   };
 
-    const guestTokenResponse = await client.getAccessToken(options)
-    .then((guestTokenResponse) => {
-      // console.log("Guest Token Response: ", guestTokenResponse.access_token);
-      const access_token = guestTokenResponse.access_token;
-      return access_token;
-    })
-    .catch(error => console.log("Error fetching token for guest login: ", error));
-
-
-    /*const guestTokenResponse = await slasHelpers.loginGuestUserPrivate(client, 
-      { clientSecret: clientConfig.parameters.clientSecret,
-       },
-    )
-    .then((guestTokenResponse) => {
-      console.log("Guest Token Response: ", guestTokenResponse);
-      const access_token = guestTokenResponse.access_token;
-      return access_token;
-    })
-    .catch(error => console.log("Error fetching token for guest login: ", error));*/
-
-
-  const configWithAuth = guestTokenResponse;
-
-  return configWithAuth;
+  const guestTokenResponse = await client.getAccessToken(options);
+  if (guestTokenResponse.access_token) {
+    return guestTokenResponse;
+  } else {
+    console.log("Error fetching token for guest login");
+  }
 }
 
 export async function basicAuthorization() {

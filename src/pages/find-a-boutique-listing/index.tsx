@@ -68,17 +68,17 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     { 
       id: "1", 
       label: 'Brands', 
-      values: brandCheckboxValues.map(brand => ({ key: brand, label: brand }))
+      values: brandCheckboxValues.map(brand => ({ key: brand, label: brand || 'Unknown' }))
     },
     { 
       id: "2", 
       label: 'Locations', 
-      values: locationCheckboxValues.map(address => ({ key: address, label: address }))
+      values: locationCheckboxValues.map(address => ({ key: address, label: address || 'Unknown' }))
     },
     { 
       id: "3", 
       label: 'Services', 
-      values: serviceCheckboxValues.map(service => ({ key: service, label: service }))
+      values: serviceCheckboxValues.map(service => ({ key: service, label: service || 'Unknown' }))
     },
   ];
 
@@ -348,7 +348,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     if (filters['1'] && filters['1'].length > 0) {
       filteredStores = filteredStores.filter(store =>
           filters['1'].some(brand => 
-              store.c_availableBrands?.includes(brand) // Use optional chaining
+              store.c_availableBrands?.includes(brand)
           )
       );
     }
