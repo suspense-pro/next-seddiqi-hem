@@ -2,13 +2,7 @@ import { useContext, useState } from "react";
 import styles from "./headerMainLinks.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import NavigationLink from "../navigationLink";
-import {
-  AccountIcon,
-  CalendarIcon,
-  SearchIcon,
-  WishlistIcon,
-  MapIcon,
-} from "@assets/images/svg";
+import { AccountIcon, CalendarIcon, SearchIcon, WishlistIcon, MapIcon } from "@assets/images/svg";
 import { generateUniqueId } from "@utils/helpers/uniqueId";
 import Link from "next/link";
 import Image from "next/image";
@@ -29,27 +23,18 @@ const HeaderMainLinks = () => {
   };
 
   const closeSearchPopup = () => {
-    setIsPopupVisible(false);
+      setIsPopupVisible(false);
   };
+
 
   return (
     <div className={styles.linksContainer}>
       <div className={styles.logoContainer}>
         <Link href={headerData?.content?.patekLogo}>
-          <Image
-            src={"/images/png/RolexLogo.png"}
-            width={91.57}
-            height={42}
-            alt="rolex logo"
-          />
+          <Image src={"/images/png/RolexLogo.png"} width={91.57} height={42} alt="rolex logo" />
         </Link>
         <Link href={headerData?.content?.rolexLogo}>
-          <Image
-            src={"/images/png/PatekLogo.png"}
-            width={71.81}
-            height={42}
-            alt="patek logo"
-          />
+          <Image src={"/images/png/PatekLogo.png"} width={71.81} height={42} alt="patek logo" />
         </Link>
       </div>
       <div className={styles.links}>
@@ -65,38 +50,28 @@ const HeaderMainLinks = () => {
         ))}
       </div>
       <div className={styles.navIcons}>
-        {/* <SearchIcon fill="#" />
+        <div onClick={openSearchPopup}>
+          <SearchIcon fill="#" />
+        </div>
         <Link target="_blank" href="/book-an-appointment">
           <CalendarIcon fill="#" />
         </Link>
         <PrivateLink url="/profile">
           <AccountIcon fill="#" />
         </PrivateLink>
-        <WishlistIcon fill="#" /> */}
-        {[SearchIcon, CalendarIcon, AccountIcon, WishlistIcon].map(
-          (Icon, index) =>
-            Icon === AccountIcon ? (
-              <PrivateLink url="/profile">
-                <AccountIcon fill="#" />
-              </PrivateLink>
-            ) : (
-              <div
-                key={generateUniqueId()}
-                onClick={Icon === SearchIcon ? openSearchPopup : undefined}
-              >
-                <Icon key={generateUniqueId()} fill="#" />
-              </div>
-            )
-        )}
+        <WishlistIcon fill="#" />
+        {/* {[SearchIcon, CalendarIcon, AccountIcon, WishlistIcon].map((Icon, index) => (
+          Icon === AccountIcon ?     <PrivateLink url="/profile">
+          <AccountIcon fill="#" />
+        </PrivateLink>: <div key={generateUniqueId()} onClick={Icon === SearchIcon ? openSearchPopup : undefined}>
+            <Icon key={generateUniqueId()} fill="#" />
+          </div>
+        ))} */}
       </div>
-      <div
-        className={`${styles.drawerStyle} ${
-          isPopupVisible ? styles.visible : ""
-        }`}
-      >
-        <SearchProvider>
-          <Search closeSearch={closeSearchPopup}></Search>
-        </SearchProvider>
+      <div className={`${styles.drawerStyle} ${isPopupVisible ? styles.visible : ''}`}>
+      <SearchProvider>
+        <Search closeSearch={closeSearchPopup} ></Search>
+      </SearchProvider>
       </div>
     </div>
   );
