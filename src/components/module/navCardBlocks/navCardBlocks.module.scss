@@ -36,7 +36,7 @@
 }
 
 .displayCardsTitle {
-  @include heading_regular;
+  @include heading_light;
   font-size: rem(16);
   line-height: rem(20);
   letter-spacing: rem(0.4);

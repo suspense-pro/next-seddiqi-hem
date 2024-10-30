@@ -69,7 +69,7 @@
 
     .title,
     .price {
-      @include heading_regular; 
+      @include heading_light; 
       text-transform: uppercase;
       [dir="rtl"] & { 
        text-align: right;

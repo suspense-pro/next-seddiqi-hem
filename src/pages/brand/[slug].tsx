@@ -46,7 +46,7 @@ const BrandPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>
   const { vse, content, } = props;
   const [page] = useContent(content.page, vse as string);
   return (
-    <div className="blog-content">
+    <div className="brand-content">
       {page?.contentComponents
         ?.filter(notNull)
         .map((cont: CmsContent, index: number) => (

@@ -33,7 +33,7 @@
 }
 
 .title {
-  @include heading_regular;
+  @include heading_light;
   color: getColorHex("brown-dark");
   text-align: center;
   font-size: rem(22);

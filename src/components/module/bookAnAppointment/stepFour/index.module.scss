@@ -23,7 +23,7 @@
 }
 
 .h2 {
-  @include heading_regular;
+  @include heading_light;
   color: getColorHex("black");
   text-align: center;
   font-size: rem(18);
@@ -108,7 +108,7 @@
   }
 
   .day {
-    @include heading_regular;
+    @include heading_light;
     text-align: center;
     font-size: rem(10);
     line-height: rem(14);
@@ -117,7 +117,7 @@
   }
 
   .date {
-    @include heading_regular;
+    @include heading_light;
     text-align: center;
     font-size: rem(18);
     font-weight: 500;
@@ -133,7 +133,7 @@
   }
 }
 .timeItem {
-  @include heading_regular;
+  @include heading_light;
   width: rem(50);
   height: rem(44);
   padding: rem(12) rem(8);
@@ -201,7 +201,7 @@
 }
 
 .heading {
-  @include heading_regular;
+  @include heading_light;
   font-size: rem(26);
   font-weight: 500;
   line-height: rem(36);

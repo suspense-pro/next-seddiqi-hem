@@ -22,7 +22,7 @@
   }
 
   .links {
-    @include heading_regular;
+    @include heading_light;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,7 +41,7 @@
       padding: rem(7 0);
       cursor: pointer;
       color: getColorHex("brown-dark");
-      @include heading_regular;
+      @include heading_light;
       transition: all 0.3s;
       font-size: rem(16);
       line-height: rem(20);

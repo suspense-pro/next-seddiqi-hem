@@ -37,7 +37,7 @@
   }
 
   .alphabetLetter {
-    @include heading_regular;
+    @include heading_light;
     background: none;
     border: none;
     cursor: pointer;
@@ -94,7 +94,7 @@
     margin-bottom: rem(30);
 
     h4 {
-      @include heading_regular;
+      @include heading_light;
       font-size: rem(26);
       font-weight: 500;
       line-height: rem(36);

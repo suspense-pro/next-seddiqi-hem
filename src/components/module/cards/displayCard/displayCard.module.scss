@@ -53,7 +53,7 @@
     .subTitle {
       color: getColorHex("green-dark");
       font-size: rem(16);
-      @include heading_regular;
+      @include heading_light;
       @include ellipses;
     }
   }
