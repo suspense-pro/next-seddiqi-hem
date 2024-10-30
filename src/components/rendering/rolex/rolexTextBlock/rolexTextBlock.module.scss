@@ -1,0 +1,55 @@
+@import './../../../../assets/styles/main.scss';
+
+.banner {
+  display: flex;
+  align-items: center;
+  background-color: getColorHex("grey-pampas");;
+  padding: 0 rem(28);
+  gap: rem(28);
+  align-items: flex-start;
+  flex-direction: column;
+  
+  @include lg {
+    padding: 0 rem(120);
+    flex-direction: row;
+  }
+  
+  div {
+    flex: 1;
+  }
+  
+  .leftText {
+    .title {
+      font-family: Helvetica;
+      margin: 0;
+      color: getColorHex("black");
+      font-size: rem(28);
+      line-height: rem(34); 
+      letter-spacing: rem(0.4);
+      text-transform: uppercase;
+      
+      @include lg {
+        color: getColorHex("green-dark");
+        line-height: rem(46); 
+        font-size: rem(40);
+      }
+    }
+  }
+  
+  .rightText {
+    p {
+      font-family: Helvetica;
+      color: getColorHex("black");
+      font-size: rem(14);
+      font-weight: 700;
+      line-height: rem(22);
+      letter-spacing: rem(0.4);
+
+      @include lg {
+        color: getColorHex("green-dark");
+        line-height: rem(26); 
+        font-size: rem(16);
+      }
+    }
+  }
+}
