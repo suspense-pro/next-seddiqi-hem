@@ -23,7 +23,7 @@ const PlpContent = ({ productGridContent, products }) => {
   const categoryId =
     products?.query?.TermQuery?.values?.[0] || "";
 
-  const allHits = products?.hits || [];
+    const allHits = Array.isArray(products) ? products : products?.hits || [];
 
   const [filters, setFiltersState] = useState(null);
   const [displayedProducts, setDisplayedProducts] = useState(

@@ -1,4 +1,4 @@
 import RolexNavbar from "./rolexHeader";
-import RolexTextBlock from './rolexTextBlock/index';
+import RolexHeroBanner from "./rolexHeroBanner";
 
-export { RolexNavbar, RolexTextBlock };
+export { RolexNavbar, RolexHeroBanner };

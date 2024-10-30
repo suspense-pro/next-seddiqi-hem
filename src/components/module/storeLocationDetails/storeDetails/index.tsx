@@ -106,7 +106,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
 
       <div className={styles.storeContactWrapper}>
         <div className={styles.leftSection}>
-          <WhatsappIcon className={styles.WhatsappIcon} />
+          <WhatsappIcon className={styles.WhatsappIcon} strokeColor="#464f4a"/>
           <span className={styles.contactLabelWrapper}>
             <Typography variant="p" className={styles.contactLabel}>
               {"Get in Touch"}

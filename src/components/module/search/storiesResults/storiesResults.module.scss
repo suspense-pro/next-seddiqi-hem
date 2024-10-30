@@ -1,0 +1,35 @@
+@import "../../assets/styles/main.scss";
+.storiesContainer {
+  margin: rem(20);
+}
+
+.storiesContainer h2 {
+  margin-bottom: rem(20);
+}
+
+.searchStoryTitle {
+  margin-bottom: rem(24);
+  font-size: rem(16);
+  line-height: rem(26);
+  letter-spacing: rem(0.2);
+  text-transform: uppercase;
+  color: getColorHex("grey");
+  margin-top: rem(40);
+}
+
+.viewAllBtn {
+  text-transform: capitalize;
+}
+.viewAllBtnContainer {
+  margin-top: rem(24);
+}
+.storyCards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(80);
+}
+
+.storyCard {
+  flex: 1 1 calc(50% - 40px);
+  box-sizing: border-box;
+}
