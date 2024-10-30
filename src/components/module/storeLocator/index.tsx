@@ -8,8 +8,11 @@ import StoreMapListContainer from "@components/module/storeMapListContainer";
 import LocationTabs from "@components/module/locationTabs";
 import { getDistance } from "@utils/helpers/getDistance";
 import ToggleMapResults from "@components/module/toggleMapResults";
+import { useRouter } from 'next/router';
+import { StoreLocationDetails } from "@components/module";
 
 const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName, productPrice, productCurrency }) => {
+  const router = useRouter();
   const [stores, setStores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userLocation, setUserLocation] = useState(null);
@@ -20,12 +23,24 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
   const [itemsToShow, setItemsToShow] = useState(8);
   const [activeTab, setActiveTab] = useState('All');
   const [cities, setCities] = useState([]);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [selectedStoreId, setSelectedStoreId] = useState(null);
 
   const tabs = [
     { label: 'All Boutiques', value: 'All' },
     { label: 'Dubai', value: 'Dubai' },
     { label: 'Abu Dhabi', value: 'Abu Dhabi' },
   ];
+
+  const handleStoreDtetails = (store) => {
+    setSelectedStoreId(store.id);
+    setIsDetailsOpen(true);
+  };
+
+  const handleCloseDetails = () => {
+    setIsDetailsOpen(false);
+    setSelectedStoreId(null);
+  };
 
   const handleStoreClick = (index) => {
     setActiveIndex(index); // Set the clicked store as active
@@ -111,7 +126,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
       <>
         <ul className={styles.storeList}>
         {displayedStores.map(store => (
-          <li className={styles.store} key={store.id}>
+          <li className={styles.store} key={store.id} onClick={() => handleStoreDtetails(store)}>
             <div className={styles.storeImageContainer}>
               <img src={store.c_storeImage} alt={store.name} className={styles.storeImage} />
 
@@ -207,6 +222,11 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
             renderMaps(activeTab === 'All' ? combinedStores : stores.filter(store => store.city === activeTab))
           }
       </div>
+      <StoreLocationDetails
+        storeId={selectedStoreId}
+        isOpen={isDetailsOpen}
+        onClose={handleCloseDetails}
+      />
     </div>
   );
 };
