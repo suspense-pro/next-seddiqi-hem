@@ -12,7 +12,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "search":
             try {
                 if (requestMethod === "GET" && action === "getStores") {
-                    const accessToken = await initializeShopperConfig();
+                    const configWithAuth = await initializeShopperConfig()
+                    const accessToken = configWithAuth.access_token;
                     clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
                     const shopperStoresClient = new Seller.ShopperStores(clientConfig);
 

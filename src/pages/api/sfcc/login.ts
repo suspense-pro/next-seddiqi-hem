@@ -108,11 +108,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         if (requestMethod === "POST" && action === "logoutCustomer") {
           const { refreshToken } = body;
           const configWithAuth = await initializeShopperConfig();
+          const accessToken = configWithAuth.access_token;
           const client = new Customer.ShopperLogin(clientConfig);
 
           const options = {
               headers: {
-                  Authorization: `Bearer ${configWithAuth}`,
+                  Authorization: `Bearer ${accessToken}`,
               },
               parameters: {
                   channel_id: clientConfig.parameters.siteId,

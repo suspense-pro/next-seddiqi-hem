@@ -37,12 +37,10 @@
       justify-content: center;
     }
 
-   
-
     .headerLink {
       padding: rem(7 0);
       cursor: pointer;
-      color: getColorHex("green-dark");
+      color: getColorHex("brown-dark");
       @include heading_regular;
       transition: all 0.3s;
       font-size: rem(16);
@@ -75,7 +73,7 @@
     max-width: rem(250);
     display: flex;
     align-items: center;
-    gap: rem(28.2);
+    gap: rem(24);
 
     @include breakpoint-max-width(rem(1400)) {
       display: none;
@@ -111,4 +109,20 @@
     width: rem(100.3);
     height: rem(46);
   }
+}
+
+.drawerStyle {
+  position: fixed;
+  top: rem(70);
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: getColorHex("white"); 
+  transform: translateX(100%);
+  transition: transform 0.3s ease; 
+  z-index: 1000; 
+}
+
+.drawerStyle.visible {
+  transform: translateX(0);
 }

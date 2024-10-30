@@ -8,9 +8,10 @@ type ImageProps = {
     format?: string;
     imageAltText?: string;
     di?: string;
+    imgWidth?: string;
 } & CmsContent;
 
-const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel, className, height }: ImageProps) => {
+const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel, className, height, imgWidth }: ImageProps) => {
     if (!image) {
         return null;
     }
@@ -122,7 +123,7 @@ const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel,
             </picture>
         );
 
-    return <div className={height} style={{ position: 'relative', width: 'auto' }}>{imageTag}</div>;
+    return <div className={height} style={{ position: 'relative', width: imgWidth ? imgWidth: 'auto' }}>{imageTag}</div>;
 };
 
 export default Image;
