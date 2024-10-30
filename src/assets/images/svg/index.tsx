@@ -41,4 +41,5 @@ export { default as GreenTick } from "./GreenTick";
 export { default as AccountIconBig } from "./AccountIconBig";
 export { default as CircleRightIcon } from "./CircleRightIcon";
 export { default as CircleWrongIcon } from "./CircleWrongIcon";
+export { default as ArrowRightThick } from "./ArrowRightThick";
 
