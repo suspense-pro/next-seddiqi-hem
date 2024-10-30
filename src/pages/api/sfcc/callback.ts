@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { sendEmail } from "@utils/helpers/emailHelper";
 
 export default async function handler(req : NextApiRequest, res : NextApiResponse) {
   try {
@@ -11,8 +12,16 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
       console.log("Received request:", req.body);
 
       // Process the OTP - Email or SMS
+      // send email - nodemailer
+      const subject = "Seddiqi OTP";
+      const htmlContent = "Your one time password (OTP) is: "+ token + ".";
+      const emailInfo = await sendEmail(email_id, subject, htmlContent);
+      if (emailInfo.success) {
+          console.log("Email sent successfully");
+      } else {
+          console.log("Email failed");
+      }
 
-      // Send response
       return res.status(200).json({ message: "OTP received", otp: token, customer_id, email_id });
     } else {
       // Handle unsupported methods

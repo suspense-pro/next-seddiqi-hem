@@ -771,6 +771,31 @@ export async function subscribedToNewsletter({
   }
 }
 
+export async function contactUs({
+  method,
+  userData,
+}: {
+  method: string;
+  userData: any;
+}) {
+  try {
+    const json = {
+      api: "contact",
+      action: "contactUsSubmission",
+    };
+    const config = {
+      method: method,
+      body: userData,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "contact"));
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 export async function createWishlist({
   method,
   customerId,

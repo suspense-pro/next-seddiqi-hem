@@ -40,7 +40,7 @@
 }
 
 @mixin body_thin {
-  font-family: "TheSansArabic-ExtraLight", sans-serif;
+  font-family: "TheSansArabic_ExtraLight", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
@@ -50,17 +50,17 @@
   font-variant-numeric: lining-nums proportional-nums;
 }
 @mixin body_regular {
-  font-family: "TheSansArabic-Plain", sans-serif;
+  font-family: "TheSansArabic_Light", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
 @mixin body_light {
-  font-family: "TheSansArabic-Light", sans-serif;
+  font-family: "TheSansArabic_Light", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
 @mixin body_extra_light {
-  font-family: "TheSansArabic-ExtraLight", sans-serif;
+  font-family: "TheSansArabic_ExtraLight", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
@@ -76,19 +76,19 @@
 }
 
 @mixin body_bold {
-  font-family: "TheSansArabic-Bold", sans-serif;
+  font-family: "TheSansArabic_Bold", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
 
 @mixin cta_regular {
-  font-family: "TheSansArabic-Plain", sans-serif;
+  font-family: "TheSansArabic_Light", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
 
 @mixin cta_bold {
-  font-family: "TheSansArabic-SemiBold", sans-serif;
+  font-family: "TheSansArabic_SemiBold", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
@@ -243,13 +243,12 @@
   transition: padding 0.3s ease;
   padding-top: rem(120);
 
-  @include md{
+  @include md {
     padding-top: rem(152);
   }
 
-  &.scrolledPadding{
-
-    @include md{
+  &.scrolledPadding {
+    @include md {
       padding-top: rem(78);
     }
   }
