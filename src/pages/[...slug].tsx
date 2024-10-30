@@ -30,13 +30,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  // if (isEmpty(data.page)) {
-  //   return {
-  //     redirect: {
-  //       destination: "/page-not-found",
-  //     },
-  //   };
-  // }
+  if (isEmpty(data.page)) {
+    return {
+      redirect: {
+        destination: "/page-not-found",
+      },
+    };
+  }
 
   return {
     props: {

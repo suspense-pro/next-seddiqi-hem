@@ -41,7 +41,7 @@
     }
 
     .headingPrimary {
-      @include heading_regular;
+      @include heading_light;
       margin: 0;
       text-align: left;
       text-transform: uppercase;
@@ -173,7 +173,7 @@
   }
 }
 .title {
-  @include heading_regular;
+  @include heading_light;
   font-size: rem(20);
   line-height: rem(28);
   letter-spacing: rem(0.6);

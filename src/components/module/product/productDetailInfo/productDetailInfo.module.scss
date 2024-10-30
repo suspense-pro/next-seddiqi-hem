@@ -212,7 +212,7 @@
     display: flex;
     align-items: center;
     color: getColorHex("green-dark");
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(14);
     line-height: rem(20);
     letter-spacing: rem(0.4);
@@ -224,7 +224,7 @@
   }
 
   .title {
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(22);
     font-style: normal;
     font-weight: 500;
@@ -241,7 +241,7 @@
 
   .price {
     color: getColorHex("brown-dark");
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(18);
     font-style: normal;
     font-weight: 500;
@@ -334,7 +334,7 @@
   gap: rem(8);
 
   .productLabel {
-    @include heading_regular;
+    @include heading_light;
     color: getColorHex("brown-dark");
     font-size: rem(14);
     line-height: rem(20);

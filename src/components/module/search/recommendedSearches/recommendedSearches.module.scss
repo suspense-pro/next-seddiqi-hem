@@ -86,7 +86,7 @@
     width: 100%;
 
     .title {
-      @include heading_regular;
+      @include heading_light;
       font-size: rem(14);
       line-height: rem(20);
       letter-spacing: rem(0.4);

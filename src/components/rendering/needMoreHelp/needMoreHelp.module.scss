@@ -31,7 +31,7 @@
   }
 
   h3{
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(28);
     line-height: rem(34);
     letter-spacing: rem(0.4);

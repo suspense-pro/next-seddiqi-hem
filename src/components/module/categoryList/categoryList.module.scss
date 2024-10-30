@@ -15,7 +15,7 @@
   }
 
   .title {
-    @include heading_regular;
+    @include heading_light;
     text-transform: uppercase;
     color: getColorHex("midnight-brown");
     text-align: center;

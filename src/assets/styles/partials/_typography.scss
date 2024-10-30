@@ -45,8 +45,8 @@
   font-variant-numeric: lining-nums proportional-nums;
 }
 @mixin body_thin_italic {
-  font-family: "Urbanist-ThinItalic", sans-serif;
-  font-style: normal;
+  font-family: "TheSansArabic_ExtraLight", sans-serif;
+  font-style: italic;
   font-variant-numeric: lining-nums proportional-nums;
 }
 @mixin body_regular {
@@ -65,13 +65,13 @@
   font-variant-numeric: lining-nums proportional-nums;
 }
 @mixin body_light_italic {
-  font-family: "Urbanist_LightItalic", sans-serif;
-  font-style: normal;
+  font-family: "TheSansArabic_Light", sans-serif;
+  font-style: italic;
   font-variant-numeric: lining-nums proportional-nums;
 }
 @mixin body_italic {
-  font-family: "Urbanist_Italic", sans-serif;
-  font-style: normal;
+  font-family: "TheSansArabic_Light", sans-serif;
+  font-style: italic;
   font-variant-numeric: lining-nums proportional-nums;
 }
 
@@ -108,11 +108,11 @@
   h4,
   h5,
   h6 {
-    @include heading_regular();
+    @include heading_light();
     font-weight: normal;
 
     em {
-      @include heading_regular_italic();
+      @include heading_light_italic();
     }
   }
   .h1,

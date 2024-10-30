@@ -37,7 +37,7 @@
   cursor: pointer;
   color: getColorHex("green-dark");
   border-bottom: rem(2) solid getColorHex("green-dark", 0);
-  @include heading_regular;
+  @include heading_light;
   transition: all 0.3s;
   font-size: rem(14);
   text-transform: uppercase;

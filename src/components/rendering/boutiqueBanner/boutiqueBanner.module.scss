@@ -81,7 +81,7 @@
 }
 
 .title {
-  @include heading_regular;
+  @include heading_light;
   margin-bottom: rem(12);
   color: getColorHex("black");
   width: 100%;

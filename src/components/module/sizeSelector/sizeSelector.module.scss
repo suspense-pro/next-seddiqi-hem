@@ -1,7 +1,7 @@
 @import "../../../assets/styles/main.scss";
 
 .title {
-  @include heading_regular;
+  @include heading_light;
   font-size: rem(18);
   line-height: rem(26);
   letter-spacing: rem(0.4);

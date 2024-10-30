@@ -69,7 +69,7 @@
 .headingPrimary {
   color: getColorHex("green-dark");
   margin: 0;
-  @include heading_regular;
+  @include heading_light;
 }
 
 .headingSecondary {
