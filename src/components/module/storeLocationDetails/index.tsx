@@ -11,7 +11,7 @@ import {
   StoreLocationDetailsProps,
   Store,
 } from "@utils/models/storeLocatorDetails";
-import { useDeviceWidth } from "@utils/useCustomHooks";
+//import { useDeviceWidth } from "@utils/useCustomHooks";
 
 const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
   storeId,
@@ -20,7 +20,7 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
 }) => {
   const [storeDetails, setStoreDetails] = useState<Store[]>([]);
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
-  const isMobile = !useDeviceWidth()[0];
+  //const isMobile = !useDeviceWidth()[0];
 
   useEffect(() => {
     const fetchStoresData = async () => {
@@ -32,7 +32,7 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
           name: "",
           service: ""
         });
-        const storeDetails = response?.response?.data;
+        const storeDetails = response?.response;
         if (Array.isArray(storeDetails)) {
           setStoreDetails(storeDetails);
         } else {
@@ -48,15 +48,9 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
   }, []);
 
   useEffect(() => {
-    //  Pass Stroe id coming from Parent Component
-    // if (storeId && storeDetails.length > 0) {
-
-    if (storeDetails.length > 0) {
-      const storeDetailsMatch = storeDetails.find((store) => {
-        //return store.id === storeId;
-        return store.id === "store10"; // Dummy Entry
-      });
-
+    
+    if (storeDetails.length > 0 && storeId) {
+      const storeDetailsMatch = storeDetails.find((store) => store.id === storeId);     
       if (storeDetailsMatch) {
         setSelectedStore(storeDetailsMatch);
       } else {
@@ -65,9 +59,9 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
     }
   }, [storeId, storeDetails]);
 
-  if (!isMobile) {
-    return null;
-  }
+  // if (!isMobile) {
+  //   return null;
+  // }
 
   return (
     <div className={styles.storeDetailsWrapper}>
