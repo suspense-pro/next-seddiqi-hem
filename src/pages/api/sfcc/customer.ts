@@ -18,11 +18,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 if (requestMethod === "POST" && action === "registerCustomer") {
                     const { salutation, fname, lname, phone, email, password, marketingCommunication, privacyPolicy } = body;
                     const configWithAuth = await initializeShopperConfig();
+                    const access_token = configWithAuth.access_token;
+                    const usid = configWithAuth.usid;
                     const client = new Customer.ShopperCustomers(clientConfig);
 
                     const options = {
                         headers: {
-                        Authorization: `Bearer ${configWithAuth}`,
+                        Authorization: `Bearer ${access_token}`,
                         },
                         parameters: {
                             siteId: clientConfig.parameters.siteId,
@@ -68,7 +70,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 'x-correlation-id': middlewareConfig.parameters.x_correlation_id,
                             },
                             body: JSON.stringify({
-                                customerId: shopperResponse.customerNo,
+                                customerId: shopperResponse.customerId,
                                 firstName: shopperResponse.firstName,
                                 lastName: shopperResponse.lastName,
                                 email: shopperResponse.email,
@@ -98,6 +100,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 1. update the customer profile with golden ID */
                             shopperResponse = {...shopperResponse}
                             shopperResponse.currentPassword = password;
+                            shopperResponse.usid = usid;
                             
                             // Get the shopper token and customer ID
                             const response = await saveGoldenIDToCustomerProfile(shopperResponse, result.sfCustomerId);
