@@ -34,22 +34,24 @@
 }
 
 .headingPrimary {
-  margin: 0;
   @include heading_regular;
+  margin: 0;
   text-align: center;
   text-transform: uppercase;
   font-size: rem(28);
-
+  color: getColorHex('brown-dark');
+  
   @include md {
     font-size: rem(40);
   }
-
+  
   [dir="rtl"] & {
     text-align: right;
   }
 }
 
 .headingSecondary {
+  color: getColorHex('grey');
   line-height: rem(26);
   @include body_regular;
 
