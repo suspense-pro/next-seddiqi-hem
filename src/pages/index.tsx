@@ -8,12 +8,6 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { isEmpty } from "@utils/helpers";
 import { getProducts } from "@utils/sfcc-connector/dataService";
-import FourItemSlider from "@components/rendering/fourItemSlider";
-import ThreeCompactImageText from "@components/rendering/threeCompactImageText";
-import ThreeGrid from "@components/rendering/threeGrid";
-import FooterBackToTop from "@components/module/footerBackToTop";
-import TwoColumnImageText from "@components/rendering/twoColumnImageText";
-import ThreeTallImageText from "@components/rendering/threeTallImageText";
 
 // import { getCustomer } from "@utils/sfcc-connector/dataService";
 // import LoginForm from "@components/LoginForm";
@@ -52,13 +46,6 @@ export default function Home({ content }: InferGetServerSidePropsType<typeof get
       {compact(content?.page?.components).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />
       ))}
-
-      <ThreeGrid />
-      <ThreeCompactImageText />
-      <FourItemSlider />
-      <TwoColumnImageText />
-      <ThreeTallImageText />
-      <FooterBackToTop />
     </div>
   );
 }

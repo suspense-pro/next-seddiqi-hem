@@ -1,4 +1,4 @@
-@import "./../../../assets/styles/main.scss";
+@import "./../../../../assets/styles/main.scss";
 
 .container{
   display: flex;
@@ -19,12 +19,11 @@
   }
 
   .mainTitle{
-    font-family: sans-serif;
+    @include rolex_bold;
     font-size: rem(18);
-    font-weight: 700;
     letter-spacing: rem(0.4);
     line-height: rem(26);
-    color: getColorHex("black-dark");
+    color: getColorHex("black");
     margin: 0;
 
     @include md {
@@ -78,12 +77,11 @@
   }
 
   .subtitle{
-    font-family: sans-serif;
+    @include rolex_bold;
     font-size: rem(14);
-    font-weight: 700;
     letter-spacing: rem(0.4);
     line-height: rem(22);
-    color: getColorHex("black-dark");
+    color: getColorHex("black");
     display: block;
     margin: 0;
 
@@ -99,12 +97,11 @@
   }
 
   .title{
-    font-family: sans-serif;
+    @include rolex_bold;
     font-size: rem(20);
     line-height: rem(28);
-    font-weight: 700;
     letter-spacing: rem(0.4);
-    color: getColorHex("black-dark");
+    color: getColorHex("black");
     display: block;
     margin: 0;
 
@@ -118,24 +115,15 @@
   }
 
   .link{
-    font-family: sans-serif;
-    font-size: rem(14);
-    line-height: rem(18);
-    font-weight: 700;
-    letter-spacing: rem(1);
-    color: getColorHex("rolex-green");
     display: inline-flex;
-    flex-direction: column;
     align-self: flex-start;
     margin: 0;
-    width: auto;
-    outline: none;
 
     [dir="rtl"] & {
       align-self: flex-end;
     }
 
-    &::after{
+    /*&::after{
       content: "";
       display: flex;
       width: 100%;
@@ -152,7 +140,7 @@
           transform: scaleX(1);
         }
       }
-    }
+    }*/
 
     &:empty{
       display: none;

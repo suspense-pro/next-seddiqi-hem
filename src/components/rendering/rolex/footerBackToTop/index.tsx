@@ -10,7 +10,8 @@ const FooterBackToTop = () => {
 
   return (
     <div className={styles.footerBackToTopContainer}>
-      <RolexIcon className={styles.rolexIcon} />
+      {/* <RolexIcon className={styles.rolexIcon} /> */}
+      <img src="/images/png/rolex-icon.png" className={styles.rolexIcon} />
 
       <div className={styles.backToTop}>
         <button className={styles.backToTopButton} onClick={scrollToTop}>

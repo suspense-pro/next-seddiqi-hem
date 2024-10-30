@@ -1,163 +1,39 @@
-@import "./../../../assets/styles/main.scss";
+@import "./../../../../assets/styles/rolex/rolexMain.scss";
 
-.container{
+.sliderContainer{
   display: flex;
   flex-direction: column;
-  gap: rem(60);
-  padding: rem(60) rem(28);
+  gap: rem(24);
+  padding: 0 rem(28);
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
 
   @include md {
-    padding: rem(60);
-    gap: rem(92);
+    padding: 0 rem(60);
   } 
 
   @include xl {
-    padding: rem(120);
-  }
-
-  .oneGridContainer, .twoGridsContainer{
-    display: flex;
-    flex-direction: column;
-    gap: rem(16);
-    
-    .imageTextsContainer{
-      width: 100%;
-    }
-  }
-
-  .mainTitle{
-    font-family: sans-serif;
-    font-size: rem(18);
-    font-weight: 700;
-    letter-spacing: rem(0.4);
-    line-height: rem(26);
-    color: getColorHex("black-dark");
-    margin: 0;
-
-    @include md {
-      font-size: rem(24);
-      letter-spacing: rem(0.6);
-      line-height: rem(28);
-    }
-  }
-
-  .imageTextsWrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    row-gap: rem(60);
-
-    @include md {
-      flex-direction: row;
-      column-gap: rem(36);
-    }
-  }
-
-  .imageTextsContainer{
-    display: flex;
-    flex-direction: column;
-    gap: rem(12);
-    width: 100%;
-
-    @include md {
-      width: calc(50% - 18px);
-    }
-  }
-
-  .imageContainer{
-    display: flex;
-    outline: none;
-    aspect-ratio: 1/1;
-    min-height: rem(340);
-
-    @include md {
-      aspect-ratio: auto;
-      min-height: auto;
-    }
-
-    img{
-      display: flex;
-      width: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .textsContainer{
-    display: flex;
-    flex-direction: column;
-    gap: rem(12);
-  }
-
-  .subtitle{
-    font-family: sans-serif;
-    font-size: rem(14);
-    font-weight: 700;
-    letter-spacing: rem(0.4);
-    line-height: rem(22);
-    color: getColorHex("black-dark");
-    display: block;
-    margin: 0;
-
-    @include md {
-      font-size: rem(16);
-      line-height: rem(24);
-      color: getColorHex("green-dark");
-    }
+    padding: 0 rem(120);
   }
 
   .title{
-    font-family: sans-serif;
+    @include rolex_regular;
     font-size: rem(20);
+    letter-spacing: rem(0.6);
     line-height: rem(28);
-    font-weight: 700;
-    letter-spacing: rem(0.4);
-    color: getColorHex("black-dark");
-    display: block;
+    color: getColorHex("black");
+    text-transform: uppercase;
     margin: 0;
 
     @include md {
-      letter-spacing: rem(0.6);
-    }
-  }
-
-  .link{
-    font-family: sans-serif;
-    font-size: rem(14);
-    line-height: rem(18);
-    font-weight: 700;
-    letter-spacing: rem(1);
-    color: getColorHex("rolex-green");
-    display: inline-flex;
-    flex-direction: column;
-    align-self: flex-start;
-    margin: 0;
-    width: auto;
-    outline: none;
-
-    [dir="rtl"] & {
-      align-self: flex-end;
+      @include rolex_bold;
+      font-size: rem(24);
+      text-transform: none;
     }
 
-    &::after{
-      content: "";
-      display: flex;
-      width: 100%;
-      height: rem(1);
-      background: getColorHex("rolex-green");
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-
-    @include md {
-      &:hover{
-        &::after{
-          transform: scaleX(1);
-        }
-      }
+    &:empty{
+      display: none;
     }
   }
 
@@ -190,11 +66,11 @@
 
           @include md {
             display: flex;
-            left: rem(-22);
+            left: rem(-46);
           }
           
           @include xl {
-            left: rem(-44);
+            left: rem(-76);
           }
         }
 
@@ -202,11 +78,11 @@
 
           @include md {
             display: flex;
-            right: rem(-22);
+            right: rem(-46);
           }
           
           @include xl {
-            right: rem(-44);
+            right: rem(-76);
           }
         }
 
@@ -244,15 +120,18 @@
     text-decoration: none;
     outline: none;
     width: 100%;
+
+    img{
+      width: 100%;
+    }
   }
 
   .sliderText{
-    font-family: sans-serif;
+    @include rolex_bold;
     font-size: rem(14);
-    font-weight: 700;
     letter-spacing: rem(0.4);
     line-height: rem(22);
-    color: getColorHex("black-dark");
+    color: getColorHex("black");
     display: flex;
     width: 100%;
     margin: 0;
@@ -266,6 +145,10 @@
 
     [dir="rtl"] & {
       text-align: right;
+    }
+
+    &:empty{
+      display: none;
     }
   }
 

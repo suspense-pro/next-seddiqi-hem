@@ -54,7 +54,7 @@ const ThreeGrid = () => {
             <div className={styles.textsContainer}>
               <p className={styles.subtitle}>{componentData[0].oneGrid[0].gridData[0].subtitle}</p>
               <h6 className={styles.title}>{componentData[0].oneGrid[0].gridData[0].title}</h6>
-              <a href={componentData[0].oneGrid[0].gridData[0].linkUrl} className={styles.link}>{componentData[0].oneGrid[0].gridData[0].linkText}</a>
+              <a href={componentData[0].oneGrid[0].gridData[0].linkUrl} className={`${[styles.link]} rolex-text-button`}>{componentData[0].oneGrid[0].gridData[0].linkText}</a>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@ const ThreeGrid = () => {
               <div className={styles.textsContainer}>
                 <p className={styles.subtitle}>{data.subtitle}</p>
                 <h6 className={styles.title}>{data.title}</h6>
-                <a href={data.linkUrl} className={styles.link}>{data.linkText}</a>
+                <a href={data.linkUrl} className={`${[styles.link]} rolex-text-button`}>{data.linkText}</a>
               </div>
           </div>
           ))}

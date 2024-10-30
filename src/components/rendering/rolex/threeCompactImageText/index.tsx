@@ -22,7 +22,7 @@ const ThreeCompactImageText = () => {
             <div className={styles.textsContainer}>
               <p className={styles.subtitle}>{data.subtitle}</p>
               <h6 className={styles.title}>{data.title}</h6>
-              <a href={data.linkUrl} className={styles.link}>{data.linkText}</a>
+              <a href={data.linkUrl} className={`${[styles.link]} rolex-text-button`}>{data.linkText}</a>
             </div>
         </div>
         ))}

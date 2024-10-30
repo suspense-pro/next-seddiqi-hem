@@ -1,4 +1,4 @@
-@import "./../../../assets/styles/main.scss";
+@import "./../../../../assets/styles/rolex/rolexMain.scss";
 
 .container{
   display: flex;
@@ -60,9 +60,8 @@
   }
 
   .subtitle{
-    font-family: sans-serif;
+    @include rolex_bold;
     font-size: rem(12);
-    font-weight: 700;
     letter-spacing: rem(0.4);
     line-height: rem(18);
     color: getColorHex("green-dark");
@@ -86,10 +85,9 @@
   }
 
   .title{
-    font-family: sans-serif;
+    @include rolex_regular;
     font-size: rem(18);
     line-height: rem(26);
-    font-weight: 400;
     letter-spacing: rem(0.4);
     color: getColorHex("green-dark");
     display: block;
@@ -114,10 +112,9 @@
   }
 
   .description{
-    font-family: sans-serif;
+    @include rolex_regular;
     font-size: rem(14);
     line-height: rem(22);
-    font-weight: 400;
     letter-spacing: rem(0.4);
     color: getColorHex("green-dark");
     display: block;
@@ -141,18 +138,9 @@
   }
 
   .link{
-    font-family: sans-serif;
-    font-size: rem(14);
-    line-height: rem(18);
-    font-weight: 700;
-    letter-spacing: rem(1);
-    color: getColorHex("rolex-green");
-    display: inline-flex;
-    flex-direction: column;
     align-self: flex-start;
     margin: 0;
     width: auto;
-    outline: none;
 
     [dir="rtl"] & {
       align-self: flex-end;

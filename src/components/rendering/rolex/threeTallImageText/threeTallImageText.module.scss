@@ -1,4 +1,4 @@
-@import "./../../../assets/styles/main.scss";
+@import "./../../../../assets/styles/rolex/rolexMain.scss";
 
 .sliderContainer{
   display: flex;
@@ -18,12 +18,11 @@
   }
 
   .title{
-    font-family: sans-serif;
+    @include rolex_bold;
     font-size: rem(14);
-    font-weight: 700;
     letter-spacing: rem(0.6);
     line-height: rem(20);
-    color: getColorHex("black-dark");
+    color: getColorHex("black");
     margin: 0;
 
     @include md {
@@ -77,12 +76,11 @@
   }
 
   .sliderText{
-    font-family: sans-serif;
+    @include rolex_regular;
     font-size: rem(14);
-    font-weight: 400;
     letter-spacing: rem(0.4);
     line-height: rem(20);
-    color: getColorHex("black-dark");
+    color: getColorHex("black");
     display: flex;
     width: 100%;
     margin: 0;

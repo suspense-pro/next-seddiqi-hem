@@ -9,6 +9,7 @@ import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { isEmpty } from "@utils/helpers";
 import { getProducts } from "@utils/sfcc-connector/dataService";
 import { RolexComponentMapping } from "@utils/cms/config";
+import { FooterBackToTop, FourItemSlider, ThreeCompactImageText, ThreeGrid, ThreeTallImageText, TwoColumnImageText } from "@components/rendering/rolex";
 
 // import { getCustomer } from "@utils/sfcc-connector/dataService";
 // import LoginForm from "@components/LoginForm";
@@ -46,6 +47,13 @@ export default function RolexHome({ content }: InferGetServerSidePropsType<typeo
       {compact(content?.page?.components).map((content) => (
         <ContentBlock components={RolexComponentMapping} content={content} key={content?._meta.deliveryId} />
       ))}
+
+      <ThreeGrid />
+      <ThreeCompactImageText />
+      <FourItemSlider />
+      <TwoColumnImageText />
+      <ThreeTallImageText />
+      <FooterBackToTop />
     </div>
   );
 }

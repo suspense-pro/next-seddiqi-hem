@@ -1,41 +1,153 @@
-@import "./../../../assets/styles/main.scss";
+@import "./../../../../assets/styles/rolex/rolexMain.scss";
 
-.sliderContainer{
+.container{
   display: flex;
   flex-direction: column;
-  gap: rem(24);
-  padding: 0 rem(28);
+  gap: rem(60);
+  padding: rem(60) rem(28);
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
 
   @include md {
-    padding: 0 rem(60);
+    padding: rem(60);
+    gap: rem(92);
   } 
 
   @include xl {
-    padding: 0 rem(120);
+    padding: rem(120);
   }
 
-  .title{
-    font-family: sans-serif;
-    font-size: rem(20);
-    font-weight: 400;
-    letter-spacing: rem(0.6);
-    line-height: rem(28);
-    color: getColorHex("black-dark");
-    text-transform: uppercase;
+  .oneGridContainer, .twoGridsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: rem(16);
+    
+    .imageTextsContainer{
+      width: 100%;
+    }
+  }
+
+  .mainTitle{
+    @include rolex_bold;
+    font-size: rem(18);
+    letter-spacing: rem(0.4);
+    line-height: rem(26);
+    color: getColorHex("black");
     margin: 0;
 
     @include md {
       font-size: rem(24);
-      font-weight: 700;
-      text-transform: none;
+      letter-spacing: rem(0.6);
+      line-height: rem(28);
+    }
+  }
+
+  .imageTextsWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: rem(60);
+
+    @include md {
+      flex-direction: row;
+      column-gap: rem(36);
+    }
+  }
+
+  .imageTextsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+    width: 100%;
+
+    @include md {
+      width: calc(50% - 18px);
+    }
+  }
+
+  .imageContainer{
+    display: flex;
+    outline: none;
+    aspect-ratio: 1/1;
+    min-height: rem(340);
+
+    @include md {
+      aspect-ratio: auto;
+      min-height: auto;
     }
 
-    &:empty{
-      display: none;
+    img{
+      display: flex;
+      width: 100%;
+      object-fit: cover;
     }
+  }
+
+  .textsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+  }
+
+  .subtitle{
+    @include rolex_bold;
+    font-size: rem(14);
+    letter-spacing: rem(0.4);
+    line-height: rem(22);
+    color: getColorHex("black");
+    display: block;
+    margin: 0;
+
+    @include md {
+      font-size: rem(16);
+      line-height: rem(24);
+      color: getColorHex("green-dark");
+    }
+  }
+
+  .title{
+    @include rolex_bold;
+    font-size: rem(20);
+    line-height: rem(28);
+    letter-spacing: rem(0.4);
+    color: getColorHex("black");
+    display: block;
+    margin: 0;
+
+    @include md {
+      letter-spacing: rem(0.6);
+    }
+  }
+
+  .link{
+    align-self: flex-start;
+    margin: 0;
+    width: auto;
+    outline: none;
+
+    [dir="rtl"] & {
+      align-self: flex-end;
+    }
+
+    /*&::after{
+      content: "";
+      display: flex;
+      width: 100%;
+      height: rem(1);
+      background: getColorHex("rolex-green");
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    @include md {
+      &:hover{
+        &::after{
+          transform: scaleX(1);
+        }
+      }
+    }*/
   }
 
   .sliderSwiper{
@@ -67,11 +179,11 @@
 
           @include md {
             display: flex;
-            left: rem(-46);
+            left: rem(-22);
           }
           
           @include xl {
-            left: rem(-76);
+            left: rem(-44);
           }
         }
 
@@ -79,11 +191,11 @@
 
           @include md {
             display: flex;
-            right: rem(-46);
+            right: rem(-22);
           }
           
           @include xl {
-            right: rem(-76);
+            right: rem(-44);
           }
         }
 
@@ -121,10 +233,6 @@
     text-decoration: none;
     outline: none;
     width: 100%;
-
-    img{
-      width: 100%;
-    }
   }
 
   .sliderText{
@@ -147,10 +255,6 @@
 
     [dir="rtl"] & {
       text-align: right;
-    }
-
-    &:empty{
-      display: none;
     }
   }
 
