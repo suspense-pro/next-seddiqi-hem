@@ -796,6 +796,31 @@ export async function contactUs({
   }
 }
 
+export async function getCustomPreferenceValue({
+  method,
+  preferenceId,
+}: {
+  method: string;
+  preferenceId: string;
+}) {
+  try {
+    const json = {
+      api: "getPreference",
+      action: "getCustomPreferenceValue",
+      preferenceId: preferenceId
+    };
+    const config = {
+      method: method,
+    };
+    const queryString = new URLSearchParams(json).toString();
+    const res = (await serverApiCallSfcc(`?${queryString}`, config, "preferences"));
+    return res;
+  } catch (err) {
+    logger.error("API threw Error", err);
+    throw err;
+  }
+}
+
 export async function createWishlist({
   method,
   customerId,

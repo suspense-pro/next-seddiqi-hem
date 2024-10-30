@@ -16,7 +16,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         if (requestMethod === "POST" && action === "getProducts") {
             const categoryId : string  = body;
-            const accessToken = await initializeShopperConfig();
+            const configWithAuth = await initializeShopperConfig();
+            const accessToken = configWithAuth.access_token;
             clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
             const productsClient = new Product.Products(clientConfig);
             var accountMgrAccessToken = await OAuthTokenFromAM();
@@ -85,7 +86,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 return res.status(400).json({ isError: true, response: "Category ID is required." });
               }
     
-              const accessToken = await initializeShopperConfig();
+              const configWithAuth = await initializeShopperConfig();
+              const accessToken = configWithAuth.access_token;
               clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
     
               // Build the dynamic refine parameters
@@ -96,16 +98,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               }
  
               
-             // Process other filters
+            // Process other filters
             Object.keys(filters).forEach(key => {
                 console.log(`Processing filter key: ${key}`);
                 console.log(`Filter values for ${key}:`, filters[key]);
                 if (Array.isArray(filters[key]) && filters[key].length > 0) {
-                    filters[key].forEach((value: string) => {
-                        console.log(`Adding filter ${key}=${value}`);
-                        refineParams.push(`${key}=${value}`);
-                    });
                     const combinedValues = filters[key].join('|');
+                    console.log(`Adding filter ${key}=${combinedValues}`);
                     refineParams.push(`${key}=${combinedValues}`);
                 }
             });
@@ -144,7 +143,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               if (requestMethod === "GET" && action === "getProductDetails") {
                 const pid = (req.query.pid as string) ?? "";
                 console.log(pid);
-                const accessToken = await initializeShopperConfig();
+                const configWithAuth = await initializeShopperConfig();
+                const accessToken = configWithAuth.access_token;
                 clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
                 const shopperProductsClient = new Product.ShopperProducts(clientConfig);
                 
@@ -184,7 +184,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               if (requestMethod === "GET" && action === "getMultipleProducts") {
                 const productIds = (req.query.productIds as string) ?? "";
                 // console.log(productIds);
-                const accessToken = await initializeShopperConfig();
+                const configWithAuth = await initializeShopperConfig();
+                const accessToken = configWithAuth.access_token;
                 clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
                 const shopperProductsClient = new Product.ShopperProducts(clientConfig);
                 
