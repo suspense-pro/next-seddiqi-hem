@@ -51,7 +51,9 @@ const HeaderMainLinks = () => {
       </div>
       <div className={styles.navIcons}>
         <SearchIcon fill="#" />
-        <CalendarIcon fill="#" />
+        <Link target="_blank" href="/book-an-appointment">
+          <CalendarIcon fill="#" />
+        </Link>
         <PrivateLink url="/profile">
           <AccountIcon fill="#" />
         </PrivateLink>

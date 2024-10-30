@@ -1,5 +1,5 @@
 import styles from "./productImageFullScreen.module.scss";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectCoverflow, Zoom } from "swiper/modules";
 import "swiper/css";
@@ -108,6 +108,12 @@ const ProductImageFullScreen = ({ setShowZoom, listitems, thumbnails = true, act
       swiper.zoom.out();
     }
   };
+
+  useEffect(() => {
+    if (swiper && activeIndex !== swiper?.realIndex) {
+      swiper?.slideToLoop(activeIndex);
+    }
+  }, [activeIndex, swiper]);
 
   return (
     <div className={styles.container}>
