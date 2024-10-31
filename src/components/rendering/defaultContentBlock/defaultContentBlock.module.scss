@@ -27,7 +27,7 @@
   text-transform: uppercase;
   font-size: rem(28);
 
-  @include heading_regular;
+  @include heading_light;
   @include md {
     font-size: rem(40);
   }
@@ -47,7 +47,7 @@
 }
 
 .highlightedText {
-  @include heading_regular;
+  @include heading_light;
   font-size: rem(26);
   font-weight: 500;
   line-height: rem(36);

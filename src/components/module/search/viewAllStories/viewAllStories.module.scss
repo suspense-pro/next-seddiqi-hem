@@ -78,7 +78,7 @@
           }
 
           .title {
-            @include heading_regular;
+            @include heading_light;
 
             font-size: rem(14);
             line-height: rem(20);

@@ -13,7 +13,7 @@
     }
 
     .title {
-      @include heading_regular;
+      @include heading_light;
       color: getColorHex("green-dark");
       font-size: rem(14);
       font-weight: 500;

@@ -15,7 +15,7 @@
 
   h2,
   .title {
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(24);
     font-weight: 500;
 
@@ -87,7 +87,7 @@
       text-transform: capitalize;
 
       .optTimer {
-        @include heading_regular;
+        @include heading_light;
         font-size: rem(14);
         font-weight: 500;
         line-height: rem(18);

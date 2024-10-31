@@ -73,15 +73,17 @@
   }
 }
 
-.barColor {
-  background-color: getColorHex("white");
-}
-
-.titleColor {
-  color: getColorHex("white");
-}
-.subTitleColor {
-  color: getColorHex("white");
+.container {
+  .barColor {
+    background-color: getColorHex("white");
+  }
+  
+  .titleColor {
+    color: getColorHex("white");
+  }
+  .subTitleColor {
+    color: getColorHex("white");
+  }
 }
 
 .sliderItem {
