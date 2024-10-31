@@ -70,9 +70,9 @@
 
 .title {
   p {
-    @include heading_regular_italic;
+    @include heading_light_italic;
     font-size: rem(32);
-    color: getColorHex("green-dark");
+    color: getColorHex("brown-dark");
     margin-bottom: rem(16);
     text-align: center;
 
@@ -86,7 +86,7 @@
 .richTextContainer {
   @include body_italic;
   font-size: rem(16);
-  color: getColorHex("green-dark");
+  color: getColorHex("brown-dark");
   word-break: break-all;
   text-align: center;
 

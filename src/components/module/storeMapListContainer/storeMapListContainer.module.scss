@@ -202,7 +202,7 @@ padding: 0;
 }
 
 &Name{
-    @include heading_regular;
+    @include heading_light;
     font-weight: 500;
     font-size: rem(18);
     line-height: rem(26);

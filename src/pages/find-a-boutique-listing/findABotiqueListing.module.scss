@@ -87,7 +87,7 @@
       margin: 0;
 
       @include md{
-        @include heading_regular;
+        @include heading_light;
         font-size: rem(16);
         line-height: rem(20);
         font-weight: 400;
@@ -95,7 +95,7 @@
     }
 
     p{
-      @include heading_regular;
+      @include heading_light;
       font-size: rem(16);
       line-height: rem(26);
       font-weight: 400;
@@ -278,7 +278,7 @@
     }
     
     &Name{
-      @include heading_regular;
+      @include heading_light;
       font-weight: 500;
       font-size: rem(18);
       line-height: rem(26);

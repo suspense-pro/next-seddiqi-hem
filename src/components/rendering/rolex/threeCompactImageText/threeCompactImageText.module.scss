@@ -1,0 +1,150 @@
+@import "./../../../../assets/styles/main.scss";
+
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+  padding: rem(60) rem(28);
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  background: getColorHex("beige");
+
+  @include md {
+    padding: rem(60);
+  } 
+
+  @include xl {
+    padding: rem(120);
+  }
+
+  .mainTitle{
+    @include rolex_bold;
+    font-size: rem(18);
+    letter-spacing: rem(0.4);
+    line-height: rem(26);
+    color: getColorHex("black");
+    margin: 0;
+
+    @include md {
+      font-size: rem(24);
+      letter-spacing: rem(0.6);
+      line-height: rem(28);
+    }
+
+    &:empty{
+      display: none;
+    }
+  }
+
+  .imageTextsWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: rem(40);
+
+    @include md {
+      flex-direction: row;
+      column-gap: rem(12);
+    }
+  }
+
+  .imageTextsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+    width: 100%;
+
+    @include md {
+      width: calc(33.33% - 6px);
+    }
+  }
+
+  .imageContainer{
+    display: flex;
+    outline: none;
+
+    img{
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  .textsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+  }
+
+  .subtitle{
+    @include rolex_bold;
+    font-size: rem(14);
+    letter-spacing: rem(0.4);
+    line-height: rem(22);
+    color: getColorHex("black");
+    display: block;
+    margin: 0;
+
+    @include md {
+      font-size: rem(16);
+      line-height: rem(24);
+      color: getColorHex("green-dark");
+    }
+
+    &:empty{
+      display: none;
+    }
+  }
+
+  .title{
+    @include rolex_bold;
+    font-size: rem(20);
+    line-height: rem(28);
+    letter-spacing: rem(0.4);
+    color: getColorHex("black");
+    display: block;
+    margin: 0;
+
+    @include md {
+      letter-spacing: rem(0.6);
+    }
+
+    &:empty{
+      display: none;
+    }
+  }
+
+  .link{
+    display: inline-flex;
+    align-self: flex-start;
+    margin: 0;
+
+    [dir="rtl"] & {
+      align-self: flex-end;
+    }
+
+    /*&::after{
+      content: "";
+      display: flex;
+      width: 100%;
+      height: rem(1);
+      background: getColorHex("rolex-green");
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    @include md {
+      &:hover{
+        &::after{
+          transform: scaleX(1);
+        }
+      }
+    }*/
+
+    &:empty{
+      display: none;
+    }
+  }
+}
+

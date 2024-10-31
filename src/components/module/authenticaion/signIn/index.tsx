@@ -172,7 +172,7 @@ export default function SignIn({ direction = "row" }) {
             title="Send One Time Password"
             isLink={false}
             type="transparent"
-            color="green_darK"
+            color="midnight_brown"
           />
         </div>
       </div>

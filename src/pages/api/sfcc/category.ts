@@ -13,7 +13,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "category":
             try {
                 if (requestMethod === "GET" && action === "getCategory") {
-                    const accessToken = await initializeShopperConfig();
+                    const configWithAuth = await initializeShopperConfig();
+                    const accessToken = configWithAuth.access_token;
                     clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
                     const shopperProductsClient = new Product.ShopperProducts(clientConfig);
 
@@ -50,7 +51,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "filters":
             try {
                 if (requestMethod === "GET" && action === "getFilters") {
-                    const accessToken = await initializeShopperConfig();
+                    const configWithAuth =await initializeShopperConfig();
+                    const accessToken = configWithAuth.access_token;
                     clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
                     const refineParams = [`cgid=${categoryId}`];
 

@@ -124,7 +124,7 @@
   }
 
   .title {
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(34);
     text-transform: uppercase;
     margin-bottom: rem(18);

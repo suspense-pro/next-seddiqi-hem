@@ -13,7 +13,7 @@
   }
 
   .title {
-    @include heading_regular;
+    @include heading_light;
     color: getColorHex("green-dark");
     text-align: center;
     font-size: rem(40);
@@ -54,7 +54,7 @@
   .infoTitle {
     color: getColorHex("green-dark");
 
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(26);
     font-weight: 500;
     line-height: rem(36);

@@ -34,7 +34,7 @@
 }
 
 .headingPrimary {
-  @include heading_regular;
+  @include heading_light;
   margin: 0;
   text-align: center;
   text-transform: uppercase;

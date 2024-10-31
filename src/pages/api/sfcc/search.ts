@@ -5,6 +5,7 @@ import { CmsContext } from '@contexts/cmsContext';
 import { CmsContent } from '@utils/cms/utils';
 import { stringify } from 'querystring';
 import { createAppContext } from '@contexts/appContext';
+import { getCustomPreferenceValue } from "@utils/sfcc-connector/dataService";
 
 export type CmsRequest = {
   filterBy: { path: string; value: any }[];
@@ -26,9 +27,28 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case "search":
       try {
         if (requestMethod === "GET" && action === "getProducts") {
-          const accessToken = await initializeShopperConfig();
+          const configWithAuth = await initializeShopperConfig();
+          const accessToken = configWithAuth.access_token;
           clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
           const refineParams = [`cgid=${categoryId}`];
+          var popularSearch : any = null, popularBrands : any = null;
+          
+          /** search query is empty :  selecting category tabs 
+           * get the category id i.e. Watches or Jewellery
+           * get the popular brands and recent search from the custom preferences
+          */
+
+          if (searchPhrase === '') {
+            if (categoryId.toLowerCase().indexOf('watches') !== -1) {
+              popularSearch = await getCustomPreferenceValue({ method: 'GET', preferenceId: 'watchesPopularSearch'});
+              popularBrands  = await getCustomPreferenceValue({ method: 'GET', preferenceId: 'watchesPopularBrands'});
+            } else {
+              popularSearch = await getCustomPreferenceValue({ method: 'GET', preferenceId: 'jewelleryPopularSearch'});
+              popularBrands = await getCustomPreferenceValue({ method: 'GET', preferenceId: 'jewelleryPopularBrands'});
+            }
+            popularSearch = !popularSearch.isError ? popularSearch.response : null;
+            popularBrands = !popularBrands.isError ? popularBrands.response : null;
+          }
 
           const options = {
                 headers: {
@@ -44,12 +64,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
           const shopperSearchClient = new Search.ShopperSearch(clientConfig);
           const productResults = await shopperSearchClient.productSearch(options);
+          productResults.popularSearch = popularSearch;
+          productResults.popularBrands = popularBrands;
 
           if (productResults.total > 0) {
-            console.log("Search Result(s): " + JSON.stringify(productResults, null, 4));
-            return res.status(200).json({ isError: false, response: productResults });
+            // console.log("Search Result(s): " + JSON.stringify(productResults, null, 4));
+            return res.status(200).json({ isError: false, response: productResults, });
           } else {
-            console.log("No matching result found");
+            // console.log("No matching result found");
             return res.status(404).json({ isError: true, response: productResults });
           }
         }
@@ -64,7 +86,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case "suggestion":
         try {
             if (requestMethod === "GET" && action === "getSuggestions") {
-                const accessToken = await initializeShopperConfig();
+                const configWithAuth = await initializeShopperConfig();
+                const accessToken = configWithAuth.access_token;
                 clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
 
                 const options = {

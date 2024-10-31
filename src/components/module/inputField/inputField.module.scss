@@ -62,7 +62,7 @@
   }
 
   label {
-    @include heading_regular;
+    @include heading_light;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -113,7 +113,7 @@
 }
 
 .errorMessage {
-  @include heading_regular;
+  @include heading_light;
   color: getColorHex("dark-red");
   margin-top: rem(8);
   font-size: rem(10);

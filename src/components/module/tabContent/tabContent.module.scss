@@ -70,7 +70,7 @@
 
 .displayCardsTitle {
   font-size: rem(16);
-  @include heading_regular;
+  @include heading_light;
   line-height: rem(20);
   letter-spacing: rem(0.4);
   margin-bottom: rem(-10);
