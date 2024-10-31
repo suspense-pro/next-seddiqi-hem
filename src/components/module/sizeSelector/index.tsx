@@ -14,6 +14,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
   onClose,
   isOpen,
   productId,
+  onSelectSize,
 }) => {
   const { sizeGuideData } = useSizeGuideProviderContext();
   const sizeGuidedeliveryKey = sizeGuideData?.content?.page?._meta?.deliveryKey;
@@ -131,6 +132,10 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
     }
     return null;
   };
+  const handleSizeClick = (size: string) => {
+    onSelectSize(size);
+    onClose(); 
+  };
 
   return (
     <div className={styles.sizeSelectorWrapper}>
@@ -154,7 +159,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
           <div className={styles.sizeTabWrapper}>
             {sizeSelectorVariants.length > 0 &&
               sizeSelectorVariants.map((size, index) => (
-                <span key={index} className={styles.sizeTab}>
+                <span key={index} className={styles.sizeTab} onClick={() => handleSizeClick(size)}>
                   {size}
                 </span>
               ))}
