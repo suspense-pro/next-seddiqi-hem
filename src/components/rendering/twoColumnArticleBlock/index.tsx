@@ -14,6 +14,7 @@ const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
           <Image height={styles.image} className={styles.image} image={content?.image?.image} imageAltText={content?.image?.altText} />
         </GradientOverlay>
         <div className={styles.articleInfo}>
+          <div className={styles.label}>Article</div>
           <Typography variant="h4" className={styles.headingPrimary}>
             {content?.heading}
           </Typography>

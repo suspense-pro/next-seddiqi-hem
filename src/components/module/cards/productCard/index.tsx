@@ -7,9 +7,7 @@ import CarouselBtns from "@components/module/carouselBtns";
 import Image from "next/image";
 
 // TEMP
-const TITLE = "Hublot";
 const WATCH_TYPE = "Classic Fusion";
-const PRICE = "AED 20'500";
 
 const slides = [
   "/images/png/product_watch_01.png",
@@ -25,7 +23,7 @@ const ProductCard = ({ item, isCarousel = true }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   // ITEM ATTRIBS
-  const { name, image, imageGroups, shortDescription, pricePerUnit, currency } = item;
+  const { name, image, pricePerUnit, currency } = item;
 
   return (
     <div

@@ -19,7 +19,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
     {
       content: {
-        page: { key: `rolex/${deliveryKey}` },
+        page: { key: `rolex/cpo` },
       },
     },
     context
@@ -45,8 +45,8 @@ const CPOPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) 
   const { vse, content } = props;
   const [page] = useContent(content.page, vse as string);
   return (
-    <div className="blog-content">
-      {page?.contentComponents
+    <div className="blog-content rolex">
+      {page?.components
         ?.filter(notNull)
         .map((cont: CmsContent, index: number) => (
           <ContentBlock components={RolexComponentMapping} content={cont} key={index} />

@@ -9,7 +9,7 @@
 
   @include md {
     padding: rem(0 60);
-    gap: rem(48);
+    gap: rem(38);
   }
 
   [dir="rtl"] & {
@@ -28,7 +28,6 @@
   align-items: center;
   justify-content: center;
   padding: rem(0 0 0 28);
-
   
   @include lg {
     width: rem(1044);
@@ -74,3 +73,7 @@
     right: rem(-20);
   }
 }
+
+.lastSlide {
+  border-right: rem(1) solid getColorHex("grey-light-4", 0.4);
+} 

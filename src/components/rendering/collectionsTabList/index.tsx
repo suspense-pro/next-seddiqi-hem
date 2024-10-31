@@ -46,11 +46,14 @@ const CollectionsTabList = ({ ...content }) => {
 };
 
 const CollectionsTabDesktop = ({ content, cta, ind }) => {
-  const listItems = content?.tabItem[ind]?.collectionItems
+  const listItems = content?.tabItem[ind]?.collectionItems;
+  const isProduct = content?.type?.toLowerCase() === "product";
+
   return (
-    <div className={styles.containerGrid}>
+    <div className={`${styles.containerGrid}`}>
       <div
         className={`
+          ${!isProduct && styles.containerGap} 
   ${
     listItems.length === 4
       ? styles.container4Grid
