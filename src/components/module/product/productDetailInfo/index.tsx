@@ -46,7 +46,25 @@ const ProductDetailInfo = ({
 
   if (!product) return null;
 
-  const handleSizeSelectorOpen = () => {
+  const handleSelectSize = (size) => {
+    setSelectedSize(size); 
+    setSizeSelectorOpen(false);
+    if (selectedColor) {
+      setErrorMessage(" ");
+    }
+    setSizeSelectorOpen(false);
+  };
+
+  const handleSelectColor = (color) => {
+    setSelectedColor(color); 
+    setColorSelectorOpen(false);
+    if (selectedSize) {
+      setErrorMessage(" ");
+    }
+    setColorSelectorOpen(false);
+  };
+
+  const handleSizeSelectorOpen = (size) => {
     setSizeSelectorOpen(true);
     setCardOpen(null);
   };
@@ -203,14 +221,14 @@ const ProductDetailInfo = ({
             </div>
             <div className={styles.Variant}>
               <div className={styles.size}>
-                <div className={styles.label} onClick={handleSizeSelectorOpen}>
-                  Select Size
+                <div className={styles.label} onClick={() => setSizeSelectorOpen(true)}>
+                {selectedSize ? selectedSize : "Select Size"} 
                 </div>
                 <ArrowRight />
               </div>
               <div className={styles.color}>
-                <div className={styles.label} onClick={handleColorSelectorOpen}>
-                  Select Color
+                <div className={styles.label}  onClick={() => setColorSelectorOpen(true)}>
+                {selectedColor ? selectedColor : "Select Color"} 
                 </div>
                 <ArrowRight />
               </div>
@@ -311,6 +329,7 @@ const ProductDetailInfo = ({
             productId={product.id}
             title={"SIZE"}
             description={""}
+            onSelectSize={handleSelectSize}
           />
         </SizeGuideProvider>
 
@@ -323,6 +342,7 @@ const ProductDetailInfo = ({
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum, velit sit amet consequat volutpat, nisl mauris mollis elit, nec gravida erat enim at tellus."
           }
           colorVariations={colorVariations}
+          onSelectColor={handleSelectColor}
         />
       </div>
 

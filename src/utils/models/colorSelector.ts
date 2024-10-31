@@ -4,4 +4,5 @@ export interface ColorSelectorProps {
     onClose: () => void;
     isOpen: boolean;
     colorVariations?:[] | null;
+    onSelectColor: (size: string) => void;
   }
