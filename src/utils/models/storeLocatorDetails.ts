@@ -1,5 +1,5 @@
 export interface StoreDetailsProps {
-    store: Store; 
+    store: any; 
   }
   
 export interface Store {
