@@ -30,7 +30,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store }) => {
   const router = useRouter();
 
   const handleBackButtonClick = () => {
-    router.back();
+    router.push('/find-a-boutique-listing');
   };
 
   const handleViewAllBrands = () => {
