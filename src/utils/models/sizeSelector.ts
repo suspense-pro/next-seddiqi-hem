@@ -4,4 +4,5 @@ export interface SizeSelectorProps {
     onClose: () => void;
     isOpen: boolean;
     productId?: string;
+    onSelectSize: (size: string) => void;
   }
