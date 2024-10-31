@@ -66,7 +66,6 @@ const FeaturedProductCarousel = ({ mainTitle, hideUnderline, richText, listItems
           <FeaturedPRoductCard
             isFirstItem={isFirstItem}
             item={{ ...item, image: { absUrl: item?.imageGroups[1]?.images?.[0]?.link } }}
-            isCarousel={false}
           />
         </div>
       </SwiperSlide>
