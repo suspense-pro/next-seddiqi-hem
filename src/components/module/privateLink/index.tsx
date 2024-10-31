@@ -5,7 +5,7 @@ import { UserContext } from "@contexts/userContext";
 const PrivateLink = ({ children, url }) => {
   const userContext = useContext(UserContext);
   const { tokenInfo } = userContext;
-  return <Link href={tokenInfo?.access_token ? url : "/auth"}>{children}</Link>;
+  return <Link target="_blank" href={tokenInfo?.access_token ? url : "/auth"}>{children}</Link>;
 };
 
 export default PrivateLink;

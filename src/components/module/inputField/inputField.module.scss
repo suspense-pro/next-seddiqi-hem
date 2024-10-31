@@ -104,6 +104,14 @@
   }
 }
 
+.selectGroupFull {
+  width: 100%;
+
+  select {
+    width: 100%;
+  }
+}
+
 .errorMessage {
   @include heading_light;
   color: getColorHex("dark-red");

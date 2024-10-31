@@ -9,35 +9,37 @@ import HighlightedImage from "./highlightedImage";
 import styles from "./highlightedProductCarousel.module.scss";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 
-const ProductSlide = ({ item }) => (
-  <div className={styles.product}>
-    <div className={styles.productImg}>
-      <Image
-        className={styles.image}
-        src={item?.imageGroups[1]?.images[0]?.link}
-        alt={item?.imageGroups[1]?.images[0]?.alt}
-        fill
-      />
-      <div className={styles.icon}>
-        <HeartIcon fill="#" />
+const ProductSlide = ({ item }) => {
+  return (
+    <div className={styles.product}>
+      <div className={styles.productImg}>
+        <Image
+          className={styles.image}
+          src={item?.imageGroups[1]?.images[0]?.link}
+          alt={item?.imageGroups[1]?.images[0]?.alt}
+          fill
+        />
+        <div className={styles.icon}>
+          <HeartIcon fill="#" />
+        </div>
+      </div>
+      <div className={styles.productContent}>
+        <Typography variant="p" className={styles.title}>
+          {item?.name}
+        </Typography>
+        <Typography variant="p" className={styles.type}>
+          {item?.brand}
+        </Typography>
+        <Typography variant="p" className={styles.info}>
+          {item?.shortDescription}
+        </Typography>
+        <Typography variant="p" className={styles.price}>
+          {item?.currency} {item?.price}
+        </Typography>
       </div>
     </div>
-    <div className={styles.productContent}>
-      <Typography variant="p" className={styles.title}>
-        {item?.primaryCategoryId}
-      </Typography>
-      <Typography variant="p" className={styles.type}>
-        {item?.name}
-      </Typography>
-      <Typography variant="p" className={styles.info}>
-        {item?.shortDescription}
-      </Typography>
-      <Typography variant="p" className={styles.price}>
-        {item?.currency} {item?.price}
-      </Typography>
-    </div>
-  </div>
-);
+  );
+};
 
 const HighlightedProductCarousel = ({ highlightCard, highlightProduct }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -63,7 +65,7 @@ const HighlightedProductCarousel = ({ highlightCard, highlightProduct }) => {
   if (!products) return null;
 
   const Title = (
-    <Typography variant="h2" className={styles.headingPrimary}>
+    <Typography align="center" variant="h2" className={styles.headingPrimary}>
       {highlightProduct?.mainTitle}
     </Typography>
   );

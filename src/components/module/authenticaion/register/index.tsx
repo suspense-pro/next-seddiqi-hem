@@ -80,10 +80,14 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
         setFirstName(value);
         setErrors((prev) => ({ ...prev, firstName: validateFirstName(value) }));
         break;
-      case "lastName":
-        setLastName(value);
-        setErrors((prev) => ({ ...prev, lastName: validateLastName(value) }));
-        break;
+        case "lastName":
+          if (/\d/.test(value)) {
+            setErrors((prev) => ({ ...prev, lastName: "Last Name should not contain numbers." }));
+          } else {
+            setLastName(value);
+            setErrors((prev) => ({ ...prev, lastName: validateLastName(value) }));
+          }
+          break;
       case "phone":
         if (/^\d*$/.test(value) && value.length <= 10) {
           setPhone(value);
@@ -141,13 +145,16 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
         console.log("Registration successful", data);
         if (!data?.isError) {
           localStorage.setItem("tokenInfo", JSON.stringify(data?.response));
-          const profile = await getCustomer(data?.response?.response?.customer_id, data?.response?.response?.access_token);
+          const profile = await getCustomer(
+            data?.response?.response?.customer_id,
+            data?.response?.response?.access_token
+          );
           if (!profile?.isError) {
             localStorage.setItem("userInfo", JSON.stringify(profile?.response));
             setIsRegistered(true);
             setTimeout(() => {
               router.push("/account");
-            }, 3000); 
+            }, 3000);
           }
         } else {
           throw new Error("Registration failed. Please try again.");
@@ -179,16 +186,30 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
         <div className={styles.formGroup}>
           <div style={containerStyles} className={styles.doubleForm}>
             {/* Title and First Name */}
-            <div className={styles.optionSelector}>
-              <InputField
-                name="title"
-                label="Title"
-                value={title}
-                onChange={handleInputChange}
-                options={["Mr", "Mrs", "Ms"]}
-                errorMessage={errors.title}
-                required
-              />
+            <div className={`${gridColumn === "1fr" && styles.fullWidthOption} ${styles.optionSelector}`}>
+              {gridColumn === "1fr" ? (
+                <InputField
+                  name="title"
+                  label="Title"
+                  value={title}
+                  onChange={handleInputChange}
+                  options={["Mr", "Mrs", "Ms"]}
+                  errorMessage={errors.title}
+                  required
+                  optionFull={true}
+                />
+              ) : (
+                <InputField
+                  name="title"
+                  label="Title"
+                  value={title}
+                  onChange={handleInputChange}
+                  options={["Mr", "Mrs", "Ms"]}
+                  errorMessage={errors.title}
+                  required
+                />
+              )}
+
               <InputField
                 type="text"
                 name="firstName"
@@ -289,7 +310,7 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
                 label=""
                 value={phoneCode}
                 onChange={(e) => setPhoneCode(e.target.value)}
-                options={["+91", "+44", "+61"]}
+                options={["+971", "+44", "+61"]}
                 required
               />
               <InputField

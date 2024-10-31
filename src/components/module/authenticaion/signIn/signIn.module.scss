@@ -73,7 +73,7 @@
   font-size: rem(14);
   color: getColorHex("grey-mid");
   margin-bottom: rem(-20);
-
+  
   border-radius: rem(16) 0;
   background-color: getColorHex("grey-light");
   display: flex;
@@ -86,5 +86,6 @@
 
 .oneBtn {
   width: 100%;
+  color: getColorHex("midnight_brown");
   margin-top: rem(62);
 }

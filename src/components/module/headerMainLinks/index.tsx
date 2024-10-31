@@ -23,9 +23,8 @@ const HeaderMainLinks = () => {
   };
 
   const closeSearchPopup = () => {
-      setIsPopupVisible(false);
+    setIsPopupVisible(false);
   };
-
 
   return (
     <div className={styles.linksContainer}>
@@ -45,6 +44,7 @@ const HeaderMainLinks = () => {
               className={styles.headerLink}
               title={item?.content?.commonProps?.item_title}
               url={item?.content?.commonProps?.url}
+              isNewTab={item?.content?.commonProps?.isNewTab}
             />
           </div>
         ))}
@@ -60,18 +60,16 @@ const HeaderMainLinks = () => {
           <AccountIcon fill="#" />
         </PrivateLink>
         <WishlistIcon fill="#" />
-        {/* {[SearchIcon, CalendarIcon, AccountIcon, WishlistIcon].map((Icon, index) => (
-          Icon === AccountIcon ?     <PrivateLink url="/profile">
-          <AccountIcon fill="#" />
-        </PrivateLink>: <div key={generateUniqueId()} onClick={Icon === SearchIcon ? openSearchPopup : undefined}>
-            <Icon key={generateUniqueId()} fill="#" />
+        {/* {[SearchIcon, CalendarIcon, MapIcon, WishlistIcon].map((Icon, index) => (
+          <div key={generateUniqueId()} onClick={Icon === SearchIcon ? openSearchPopup : undefined}>
+          <Icon key={generateUniqueId()} fill="#" />
           </div>
         ))} */}
       </div>
-      <div className={`${styles.drawerStyle} ${isPopupVisible ? styles.visible : ''}`}>
-      <SearchProvider>
-        <Search closeSearch={closeSearchPopup} ></Search>
-      </SearchProvider>
+      <div className={`${styles.drawerStyle} ${isPopupVisible ? styles.visible : ""}`}>
+        <SearchProvider>
+          <Search closeSearch={closeSearchPopup}></Search>
+        </SearchProvider>
       </div>
     </div>
   );

@@ -51,6 +51,7 @@ import SearchTabs from "./search/searchTabs/searchTabs";
 import StoriesResults from "./search/storiesResults/storiesResults";
 import NoSearchResultFound from "./search/noSearchResultFound/noSearchResultFound";
 import ViewAllStories from "./search/viewAllStories/viewAllStories";
+import FeaturedProductCard from "./featuredProductCard";
 
 
 export {
@@ -105,4 +106,5 @@ export {
   StoriesResults,
   NoSearchResultFound,
   ViewAllStories,
+  FeaturedProductCard
 };

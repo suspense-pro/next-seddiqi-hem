@@ -27,6 +27,7 @@
   height: rem(2);
   text-align: center;
   margin: 0 auto;
+  background-color: getColorHex("chocolate-brown");
 
   [dir="rtl"] & {
     margin: 0;

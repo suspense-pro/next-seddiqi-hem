@@ -19,7 +19,7 @@ const RolexHeroBanner = ({ ...content }) => {
     setActiveIndex(swiper.activeIndex);
   };
 
-  console.log("content", content);
+  console.log("ROLEX HERO BANNER", content);
   const screenSize = useWindowWidth();
   return (
     <Swiper
@@ -34,19 +34,28 @@ const RolexHeroBanner = ({ ...content }) => {
       className={styles.heroSlider}
     >
       {slides?.map((slide, index) => {
-        const media = screenSize < 769 ? slide?.mobileMedia?.media : slide?.media;
         return (
           <SwiperSlide className={styles.swiperSlide} key={index}>
             <div className={styles.slide}>
               {slide?.media?.image ? (
                 <GradientOverlay className={styles.gradient} opacity={slide?.opacity?.opacity}>
-                  <Image
-                    imgWidth="100%"
-                    height={styles.image}
-                    className={styles.image}
-                    image={media?.image}
-                    imageAltText={media?.altText}
-                  />
+                  {screenSize > 769 ? (
+                    <Image
+                      imgWidth="100%"
+                      height={styles.image}
+                      className={styles.image}
+                      image={slide?.media?.image}
+                      imageAltText={slide?.media?.altText}
+                    />
+                  ) : (
+                    <Image
+                      imgWidth="100%"
+                      height={styles.image}
+                      className={styles.image}
+                      image={slide?.mobileMedia?.media?.image}
+                      imageAltText={slide?.mobileMedia?.media?.altText}
+                    />
+                  )}
                 </GradientOverlay>
               ) : (
                 <Video
@@ -57,18 +66,34 @@ const RolexHeroBanner = ({ ...content }) => {
                 />
               )}
 
-              <div className={styles.textOverlay}>
-                <div className={styles.brand}>{slide?.title}</div>
-                <h2 className={styles.title}>{slide.subHeading}</h2>
-                <div className={styles.btnContainer}>
-                  <NavigationLink
-                    className={styles.discoverButton}
-                    title={slide?.cta?.label}
-                    isNewTab={slide?.cta?.isNewTab}
-                    url={slide?.cta?.url}
-                  />
+              {slide?.bannerType === "Rolex" ? (
+                <div className={styles.textOverlay}>
+                  <div className={styles.brand}>{slide?.title}</div>
+                  <h2 className={styles.title}>{slide.subHeading}</h2>
+                  <div className={styles.btnContainer}>
+                    <NavigationLink
+                      className={styles.discoverButton}
+                      title={slide?.cta?.label}
+                      isNewTab={slide?.cta?.isNewTab}
+                      url={slide?.cta?.url}
+                    />
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className={styles.textOverlayCpo}>
+                  <div className={styles.brand}>{slide?.title}</div>
+                  <h2 className={styles.title}>{slide.subHeading}</h2>
+                  <div className={styles.btnContainer}>
+                    <NavigationLink
+                      className={styles.discoverButton}
+                      title={slide?.cta?.label}
+                      isNewTab={slide?.cta?.isNewTab}
+                      url={slide?.cta?.url}
+                    />
+                  </div>
+                </div>
+              )}
+
               {slides?.length > 1 && (
                 <>
                   {

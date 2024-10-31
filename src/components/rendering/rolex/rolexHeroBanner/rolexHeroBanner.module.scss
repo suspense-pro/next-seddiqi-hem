@@ -15,69 +15,107 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+  }
+}
 
-    .textOverlay {
-      position: absolute;
-      text-align: left;
-      width: 100%;
-      bottom: rem(60);
-      left: rem(28);
-      z-index: 100;
-      @include md {
-        left: auto;
-        width: rem(460);
-        bottom: auto;
-        right: rem(80);
-      }
+.textOverlay,
+.textOverlayCpo {
+  position: absolute;
+  text-align: left;
+  width: 100%;
+  bottom: rem(60);
+  left: rem(28);
+  z-index: 100;
+  @include md {
+    left: auto;
+    width: rem(460);
+    bottom: auto;
+    right: rem(80);
+  }
 
-      .brand {
-        @include body_regular;
-        color: getColorHex("white");
-        font-size: rem(14);
-        font-weight: 700;
-        line-height: rem(22);
-        letter-spacing: rem(0.4);
+  .brand {
+    @include body_regular;
+    color: getColorHex("white");
+    font-size: rem(14);
+    font-weight: 700;
+    line-height: rem(22);
+    letter-spacing: rem(0.4);
 
-        @include md {
-          line-height: rem(26);
-          font-size: rem(16);
-        }
-      }
-
-      h2 {
-        color: getColorHex("white");
-        font-family: Helvetica;
-        font-size: rem(22);
-        font-weight: 700;
-        line-height: rem(30);
-        letter-spacing: rem(0.6);
-        margin: rem(12) 0 rem(16) 0;
-
-        @include md {
-          margin: rem(16) 0 rem(28) 0;
-          letter-spacing: rem(0.4);
-          line-height: rem(46);
-          font-size: rem(40);
-        }
-      }
-
-      .discoverButton {
-        @include body_regular;
-        display: flex;
-        max-width: rem(200);
-        height: rem(48);
-        justify-content: center;
-        align-items: center;
-        border-radius: rem(40);
-        background-color: getColorHex("green-Salem");
-        color: getColorHex("white");
-        text-align: center;
-        font-size: rem(14);
-        line-height: rem(18);
-        letter-spacing: rem(1);
-        text-transform: uppercase;
-      }
+    @include md {
+      line-height: rem(26);
+      font-size: rem(16);
     }
+  }
+
+  h2 {
+    color: getColorHex("white");
+    font-family: Helvetica;
+    font-size: rem(22);
+    font-weight: 700;
+    line-height: rem(30);
+    letter-spacing: rem(0.6);
+    margin: rem(12) 0 rem(16) 0;
+
+    @include md {
+      margin: rem(16) 0 rem(28) 0;
+      letter-spacing: rem(0.4);
+      line-height: rem(46);
+      font-size: rem(40);
+    }
+  }
+
+  .discoverButton {
+    @include body_regular;
+    display: flex;
+    max-width: rem(200);
+    height: rem(48);
+    justify-content: center;
+    align-items: center;
+    border-radius: rem(40);
+    background-color: getColorHex("green-Salem");
+    color: getColorHex("white");
+    text-align: center;
+    font-size: rem(14);
+    line-height: rem(18);
+    letter-spacing: rem(1);
+    text-transform: uppercase;
+  }
+}
+
+.textOverlayCpo {
+  left: rem(28);
+  bottom: rem(28);
+  transform: translateY(0);
+  top: auto;
+  max-width: rem(300);
+  
+  @include md {
+    max-width: rem(460);
+    top: 50%;
+    transform: translateY(-50%);
+    left: rem(80);
+    bottom: auto;
+  }
+
+  h2 {
+    font-size: rem(22);
+    line-height: rem(30);
+    margin: rem(12) 0 rem(16) 0;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: rem(0.6);
+    
+    @include md {
+      letter-spacing: rem(0.4);
+      margin: rem(16) 0 rem(28) 0;
+      letter-spacing: rem(0.4);
+      line-height: rem(54);
+      font-size: rem(48);
+    }
+  }
+
+  .discoverButton {
+    text-transform: capitalize;
   }
 }
 
