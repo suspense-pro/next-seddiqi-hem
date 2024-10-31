@@ -52,7 +52,7 @@ $border-radius: rem(12 0 12 0);
   gap: $product-gap;
   width: 100%;
   height: 100%;
-  padding: rem(0 18);
+  // padding: rem(0 18);
 
   @include lg {
     margin: 0;
@@ -82,7 +82,10 @@ $border-radius: rem(12 0 12 0);
   @include heading_light;
   margin: 0;
   text-transform: uppercase;
-  color: getColorHex("green-dark");
+  color: getColorHex("midnight-brown");
+  font-size: rem(40);
+  width: 100%;
+  text-align: center;
 }
 
 // Product image
@@ -123,6 +126,7 @@ $border-radius: rem(12 0 12 0);
 // Typography styles
 .title {
   @include heading_light;
+  color: getColorHex("black");
   text-transform: uppercase;
   line-height: rem(20);
   letter-spacing: rem(0.4);
@@ -138,7 +142,7 @@ $border-radius: rem(12 0 12 0);
   font-size: rem(16);
   line-height: rem(28);
   letter-spacing: rem(0.4);
-  color: getColorHex('black');
+  color: getColorHex('grey');
 
   @include md {
     font-size: rem(18)
@@ -150,7 +154,7 @@ $border-radius: rem(12 0 12 0);
   font-size: rem(12);
   line-height: rem(22);
   letter-spacing: rem(0.4);
-  color: getColorHex('grey');
+  color: getColorHex('grey-mid');
 
   @include md {
     font-size: rem(14)

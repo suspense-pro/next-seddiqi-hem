@@ -11,14 +11,14 @@ import { useDeviceWidth, useWindowWidth } from "@utils/useCustomHooks";
 import Button from "@components/module/button";
 import { ContentHeader } from "@components/module";
 import { getProducts } from "@utils/sfcc-connector/dataService";
-import ProductCard from "@components/module/cards/productCard";
+import FeaturedPRoductCard from "./featuredProductCard";
 
 const FeaturedProductCarousel = ({ mainTitle, hideUnderline, richText, listItems = [], cta }) => {
   if (!listItems) {
     return null;
   }
 
-  const windowWidth = useWindowWidth()
+  const windowWidth = useWindowWidth();
   const [products, setProducts] = useState(null);
   const [slidesPerView, setSlidesPerView] = useState(3);
 
@@ -33,7 +33,7 @@ const FeaturedProductCarousel = ({ mainTitle, hideUnderline, richText, listItems
   }, [listItems]);
 
   useEffect(() => {
-  if (windowWidth < 1200) {
+    if (windowWidth < 1200) {
       setSlidesPerView(2);
     } else {
       setSlidesPerView(3);
@@ -55,10 +55,19 @@ const FeaturedProductCarousel = ({ mainTitle, hideUnderline, richText, listItems
   }, []);
 
   const renderSlide = (item, index) => {
+    const isFirstItem = index === activeIndex;
     return (
-      <SwiperSlide className={styles.swiperSlide} key={index} style={isMobile ? { width: "90%" } : {}}>
+      <SwiperSlide
+        className={`${styles.swiperSlide}`}
+        key={index}
+        style={isMobile ? { width: "90%" } : {}}
+      >
         <div className={styles.sliderItem}>
-          <ProductCard item={{...item, image: {absUrl: item?.imageGroups[1]?.images?.[0]?.link}}} isCarousel={false} />
+          <FeaturedPRoductCard
+            isFirstItem={isFirstItem}
+            item={{ ...item, image: { absUrl: item?.imageGroups[1]?.images?.[0]?.link } }}
+            isCarousel={false}
+          />
         </div>
       </SwiperSlide>
     );

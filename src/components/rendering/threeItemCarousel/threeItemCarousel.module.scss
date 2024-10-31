@@ -122,6 +122,7 @@
     z-index: 1000;
 
     .categoryTitle {
+      @include heading_regular;
       font-size: rem(26);
       line-height: rem(32);
       letter-spacing: rem(0.6);
