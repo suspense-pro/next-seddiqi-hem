@@ -30,7 +30,7 @@ import SizeSelector from "./sizeSelector";
 import ColorSelector from "./colorSelector";
 import StoreLocationDetails from "./storeLocationDetails";
 import StoreDetails from "./storeLocationDetails/storeDetails";
-import StoreDetailsPage from "./storeLocationDetails/storeDetailsPage";
+import StoreDetailsPageContent from "./storeLocationDetails/storeDetailsPageContent";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
@@ -83,7 +83,7 @@ export {
   ColorSelector,
   StoreLocationDetails,
   StoreDetails,
-  StoreDetailsPage,
+  StoreDetailsPageContent,
   FilterBtn,
   PlpContent,
   ContentHeader,

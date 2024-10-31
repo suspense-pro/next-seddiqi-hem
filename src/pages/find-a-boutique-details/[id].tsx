@@ -7,7 +7,7 @@ import {
   StoreLocationDetailsProps,
   Store,
 } from "@utils/models/storeLocatorDetails";
-import { StoreDetailsPage, StoreLocationDetails } from "@components/module";
+import { StoreDetailsPageContent, StoreLocationDetails } from "@components/module";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     const { id } = context.params! ;
@@ -38,7 +38,7 @@ export default function StoreDetails(props: InferGetServerSidePropsType<typeof g
 
     return (
         <div className="main-content">
-            <StoreDetailsPage store={selectedStore} />
+            <StoreDetailsPageContent store={selectedStore} />
         </div>
     );
 }

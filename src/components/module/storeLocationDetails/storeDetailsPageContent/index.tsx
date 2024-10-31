@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./storeDetailsPage.module.scss";
+import styles from "./storeDetailsPageContent.module.scss";
 import Typography from "../../typography";
 import RichText from "../../richText";
 import SideDrawer from "../../sideDrawer";
@@ -19,7 +19,7 @@ import { useDeviceWidth } from "@utils/useCustomHooks";
 import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 import { useRouter } from "next/router";
 
-const StoreDetailsPage: React.FC<StoreDetailsProps> = ({ store }) => {
+const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store }) => {
   const [matchedStore, setMatchedStore] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [stores, setStores] = useState([]);
@@ -50,6 +50,7 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({ store }) => {
           name: "",
           service: "",
         });
+        
 
         const fetchedStores = response?.response || [];
         setStores(fetchedStores);
@@ -270,7 +271,7 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({ store }) => {
                     </Typography>
                   </span>
                   {matchedStore.c_availableBrands &&
-                    matchedStore.c_availableBrands.length > 0 && (
+                    matchedStore.c_availableBrands.length > 8 && (
                       <span className={styles.viewAllBrands}>
                         <Button
                           isLink={false}
@@ -286,7 +287,7 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({ store }) => {
 
                 <div className={styles.brandsWrapper}>
                   {matchedStore.c_availableBrands &&
-                    matchedStore.c_availableBrands.length > 0 &&
+                    matchedStore.c_availableBrands.length > 8 &&
                     matchedStore.c_availableBrands.map(
                       (availableBrand, index) => (
                         <React.Fragment key={index}>
@@ -511,4 +512,4 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({ store }) => {
   );
 };
 
-export default StoreDetailsPage;
+export default StoreDetailsPageContent;

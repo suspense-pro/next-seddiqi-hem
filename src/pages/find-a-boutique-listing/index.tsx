@@ -91,7 +91,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [isMobile] = useDeviceWidth();
 
   const handleStoreDetails = (storeId) => {
-  router.push(`/store/${storeId}`); 
+  router.push(`/find-a-boutique-details/${storeId}`); 
 };
 
 
