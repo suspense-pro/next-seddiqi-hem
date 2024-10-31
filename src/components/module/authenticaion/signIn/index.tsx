@@ -151,7 +151,7 @@ export default function SignIn({ direction = "row" }) {
             label=""
             value={phoneCode}
             onChange={(e) => setPhoneCode(e.target.value)}
-            options={["+91", "+44", "+61"]}
+            options={["+971", "+44", "+61"]}
             required
           />
           <InputField

@@ -82,6 +82,9 @@ export const validateLastName = (lastName: string): string => {
   if (!lastName) {
     return "Last Name is required.";
   }
+  if (/\d/.test(lastName)) {
+    return "Last Name should not contain numbers.";
+  }
   return "";
 };
 

@@ -33,6 +33,10 @@
   }
 }
 
+.fullWidthOption {
+  flex-direction: column;
+}
+
 .slidingSwitch {
   display: flex;
   align-items: center;
