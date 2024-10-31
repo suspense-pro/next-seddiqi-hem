@@ -63,6 +63,10 @@
 
 .productItem {
   height: rem(448);
+  border: rem(1) solid getColorHex("grey-light-4", 0.4);
+  border-left: none;
+  border-bottom: none;
+
 
   @include md {
     height: rem(562);
@@ -71,7 +75,6 @@
 
 .item {
   position: relative;
-  border: rem(1) solid getColorHex("grey-light-4", 0.4);
   z-index: 100;
 
   .itemContent,
@@ -110,6 +113,7 @@
       width: rem(36);
       background-color: getColorHex("white");
       margin: 0 auto;
+      margin-top: rem(8);
     }
   }
 

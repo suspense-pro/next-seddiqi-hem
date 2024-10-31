@@ -20,7 +20,6 @@
       margin: rem(0 60);
     }
   }
-
 }
 
 .gradient {
@@ -31,7 +30,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: rem(32);
+  gap: rem(40);
   flex: 1;
 
   .image {
@@ -41,7 +40,7 @@
     height: rem(336);
     z-index: -1;
     position: relative;
-  
+
     @include xl {
       height: rem(636);
       width: 100%;
@@ -53,23 +52,36 @@
     flex-direction: column;
     gap: rem(16);
     align-items: center;
-  
+
     [dir="rtl"] & {
       align-items: flex-start;
     }
-  
+
     span.btn {
       text-transform: capitalize;
     }
-  }  
+  }
+}
+
+.label {
+  @include body_regular;
+  border-radius: 4px 0px;
+  background: getColorHex("tint-grey");
+  padding: rem(6) rem(12);
+  color: getColorHex("brown-dark");
+  font-size: rem(10);
+  line-height: rem(14);
+  letter-spacing:rem(0.2);
+  text-transform: uppercase;
 }
 
 .headingPrimary {
-  color: getColorHex("green-dark");
-  margin: 0;
   @include heading_light;
+  color: getColorHex("brown-dark");
+  margin: 0;
   text-align: center;
   text-transform: uppercase;
+  margin-top: rem(8);
 
   [dir="rtl"] & {
     text-align: right;
@@ -81,11 +93,12 @@
 }
 
 .description {
-  color: getColorHex("green-dark");
   @include body_regular;
+  color: getColorHex("grey");
   text-align: center;
   font-size: rem(14);
   line-height: rem(22);
+  margin-bottom: rem(8);
 
   [dir="rtl"] & {
     text-align: right;
@@ -94,7 +107,5 @@
   @include md {
     font-size: rem(16);
     line-height: rem(26);
-    
   }
 }
-

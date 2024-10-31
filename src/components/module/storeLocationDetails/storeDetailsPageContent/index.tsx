@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./storeDetailsPage.module.scss";
+import styles from "./storeDetailsPageContent.module.scss";
 import Typography from "../../typography";
 import RichText from "../../richText";
 import SideDrawer from "../../sideDrawer";
@@ -17,10 +17,9 @@ import MapView from "@components/module/mapView";
 import { ArrowRight } from "@assets/images/svg";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
+import { useRouter } from "next/router";
 
-const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
-  store: initialStore,
-}) => {
+const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store }) => {
   const [matchedStore, setMatchedStore] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [stores, setStores] = useState([]);
@@ -28,6 +27,11 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
   const [activeToggle, setActiveToggle] = useState(true);
   const isMobile = !useDeviceWidth()[0];
   const [isAllBrandPopupOpen, setAllBrandPopupOpen] = useState(false);
+  const router = useRouter();
+
+  const handleBackButtonClick = () => {
+    router.push('/find-a-boutique-listing');
+  };
 
   const handleViewAllBrands = () => {
     setAllBrandPopupOpen(true);
@@ -44,17 +48,16 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
           brand: "",
           city: "",
           name: "",
-          service: ""
-
+          service: "",
         });
+        
 
-        const fetchedStores = response?.response?.data || [];
-
-        const storeId = initialStore.id;
-
-        // Find the matched store based on the initial store ID
-        const matchedStore = fetchedStores.find(store => store.id === storeId) || null;
-
+        const fetchedStores = response?.response || [];
+        setStores(fetchedStores);
+        const storeId = store;
+        const matchedStore = fetchedStores.find(
+          (store) => store.id === storeId
+        );
         setMatchedStore(matchedStore);
       } catch (error) {
         console.error("Error fetching stores:", error);
@@ -62,27 +65,26 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
     };
 
     fetchStoresData();
-  }, [initialStore]);
+  }, [store]);
 
-  // If matchedStore is not available, handle accordingly
   if (!matchedStore) {
-    return <div>No store found.</div>;
+    return null;
   }
-  // if (isMobile) {
-  //   return null;
-  // }
 
   // Store data from matchedStore
   const storeImage = matchedStore?.c_storeImage;
-  const storeHoursString = matchedStore.storeHours;
+  const storeHoursString = matchedStore.storeHours || "";
 
-  // Split by <br /> and then by ": " to separate days from timings
   const formattedStoreHours = storeHoursString
     .split("<br />")
-    .map((line, index) => {
+    .map((line) => {
       const [days, timings] = line.split(": ");
-      return { days: days.trim(), timings: timings.trim() };
-    });
+      return {
+        days: days?.trim() || "",
+        timings: timings?.trim() || "",
+      };
+    })
+    .filter((item) => item.days && item.timings);
 
   const handleToggleChange = (toggle) => {
     setTimeout(() => {
@@ -92,7 +94,7 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
 
   return (
     <div className={styles.mainWrapper}>
-      <div className={styles.backBtn}>
+      <div className={styles.backBtn} onClick={handleBackButtonClick}>
         <div className={styles.arrowLeftWrapper}>
           <ArrowRight fill="black" className={styles.arrowLeft} />
         </div>
@@ -151,7 +153,10 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
 
                 <div className={styles.storeContactWrapper}>
                   <div className={styles.leftSection}>
-                    <WhatsappIcon className={styles.WhatsappIcon}/>
+                    <WhatsappIcon
+                      className={styles.WhatsappIcon}
+                      strokeColor="#464f4a"
+                    />
                     <span className={styles.contactLabelWrapper}>
                       <Typography variant="p" className={styles.contactLabel}>
                         {"Get in Touch"}
@@ -196,7 +201,24 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
                             variant="p"
                             className={styles.storeOpenTiming}
                           >
-                            {item.timings} {/* Display timings */}
+                            {item.timings}
+                          </Typography>
+                        </div>
+                      ))}
+
+                      {formattedStoreHours.map((item, index) => (
+                        <div className={styles.timingDetail} key={index}>
+                          <Typography
+                            variant="p"
+                            className={styles.storeOpenDay}
+                          >
+                            {item.days}
+                          </Typography>
+                          <Typography
+                            variant="p"
+                            className={styles.storeOpenTiming}
+                          >
+                            {item.timings}
                           </Typography>
                         </div>
                       ))}
@@ -249,7 +271,7 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
                     </Typography>
                   </span>
                   {matchedStore.c_availableBrands &&
-                    matchedStore.c_availableBrands.length > 0 && (
+                    matchedStore.c_availableBrands.length > 8 && (
                       <span className={styles.viewAllBrands}>
                         <Button
                           isLink={false}
@@ -265,7 +287,7 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
 
                 <div className={styles.brandsWrapper}>
                   {matchedStore.c_availableBrands &&
-                    matchedStore.c_availableBrands.length > 0 &&
+                    matchedStore.c_availableBrands.length > 8 &&
                     matchedStore.c_availableBrands.map(
                       (availableBrand, index) => (
                         <React.Fragment key={index}>
@@ -300,8 +322,8 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
               <div className={styles.mapContainer}>
                 <div className={styles.fullWidthMap}>
                   <MapView
-                    nearestStore={null}
-                    stores={null}
+                    nearestStore={""}
+                    stores={stores}
                     activeStore={matchedStore}
                     userLocation={userLocation}
                   />
@@ -339,7 +361,10 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
 
                   <div className={styles.storeContactWrapper}>
                     <div className={styles.leftSection}>
-                      <WhatsappIcon className={styles.WhatsappIcon} />
+                      <WhatsappIcon
+                        className={styles.WhatsappIcon}
+                        strokeColor="#464f4a"
+                      />
                       <span className={styles.contactLabelWrapper}>
                         <Typography variant="p" className={styles.contactLabel}>
                           {"Get in Touch"}
@@ -384,7 +409,7 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
                               variant="p"
                               className={styles.storeOpenTiming}
                             >
-                              {item.timings} {/* Display timings */}
+                              {item.timings}
                             </Typography>
                           </div>
                         ))}
@@ -487,4 +512,4 @@ const StoreDetailsPage: React.FC<StoreDetailsProps> = ({
   );
 };
 
-export default StoreDetailsPage;
+export default StoreDetailsPageContent;

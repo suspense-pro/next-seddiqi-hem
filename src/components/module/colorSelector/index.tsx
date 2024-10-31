@@ -10,7 +10,13 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
   onClose,
   isOpen,
   colorVariations,
+  onSelectColor
 }) => {
+
+  const handleColorClick = (color: string) => {
+    onSelectColor(color);
+    onClose();
+  };
   return (
     <div className={styles.colorSelectorWrapper}>
       <SideDrawer
@@ -33,7 +39,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
 
           <div className={styles.colorTabWrapper}>
             {colorVariations.map((color, index) => (
-              <div key={index} className={styles.outerCircle}>
+              <div key={index} className={styles.outerCircle} onClick={() => handleColorClick(color)}>
                 <div
                   className={styles.innerCircle}
                   style={{ backgroundColor: color }}

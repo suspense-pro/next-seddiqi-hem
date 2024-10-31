@@ -30,7 +30,7 @@ import SizeSelector from "./sizeSelector";
 import ColorSelector from "./colorSelector";
 import StoreLocationDetails from "./storeLocationDetails";
 import StoreDetails from "./storeLocationDetails/storeDetails";
-import StoreDetailsPage from "./storeLocationDetails/storeDetailsPage";
+import StoreDetailsPageContent from "./storeLocationDetails/storeDetailsPageContent";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
@@ -51,6 +51,7 @@ import SearchTabs from "./search/searchTabs/searchTabs";
 import StoriesResults from "./search/storiesResults/storiesResults";
 import NoSearchResultFound from "./search/noSearchResultFound/noSearchResultFound";
 import ViewAllStories from "./search/viewAllStories/viewAllStories";
+import FeaturedProductCard from "./featuredProductCard";
 
 
 export {
@@ -83,7 +84,7 @@ export {
   ColorSelector,
   StoreLocationDetails,
   StoreDetails,
-  StoreDetailsPage,
+  StoreDetailsPageContent,
   FilterBtn,
   PlpContent,
   ContentHeader,
@@ -105,4 +106,5 @@ export {
   StoriesResults,
   NoSearchResultFound,
   ViewAllStories,
+  FeaturedProductCard
 };

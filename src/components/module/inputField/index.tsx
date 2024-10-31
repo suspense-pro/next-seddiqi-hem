@@ -9,6 +9,7 @@ interface InputFieldProps {
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   errorMessage?: string;
   required?: boolean;
+  optionFull?: boolean;
   options?: string[];
 }
 
@@ -21,7 +22,31 @@ export default function InputField({
   errorMessage,
   required = false,
   options,
+  optionFull = false,
 }: InputFieldProps) {
+  if (optionFull) {
+    return (
+      <div className={`${styles.selectGroupFull} ${styles.selectGroup}`}>
+        <select
+          value={value || options[0]}
+          name={name}
+          onChange={onChange}
+          className={errorMessage ? styles.inputError : ""}
+          required={required}
+        >
+          <option value="" disabled hidden>
+            {required ? `${label} *` : label}
+          </option>
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className={`${!options ? styles.inputGroup : styles.selectGroup}`}>
