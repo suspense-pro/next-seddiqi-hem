@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Customer, slasHelpers, Product, ClientConfig, Search } from "commerce-sdk";
 import initializeShopperConfig, { OAuthTokenFromAM, clientConfig } from "@utils/sfcc-connector/config";
-import { getProductPriceGraph } from "@utils/sfcc-connector/productUtils";
+import { transformPriceRefinement } from "@utils/sfcc-connector/productUtils";
 import logger from "@utils/logger";
 
 
@@ -54,12 +54,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             
             const productResults = await productsClient.searchProducts(options);
             const result : any = {};
-            if (productResults.total > 0) {
-                const priceGraph = getProductPriceGraph(productResults);
-                
+            if (productResults.total > 0) {                
                 result.productResults = productResults;
-                result.priceGraphData = priceGraph;
-                console.log("Product(s): " + JSON.stringify(result, null, 4));
+                // console.log("Product(s): " + JSON.stringify(result, null, 4));
 
                 return res.status(200).json({ isError: false, response: result });
             } else {
@@ -128,13 +125,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               };
 
               const shopperSearchClient = new Search.ShopperSearch(clientConfig);
-              const productResults = await shopperSearchClient.productSearch(options);         
+              var productResults = await shopperSearchClient.productSearch(options);         
               if (productResults.total > 0) {
-                const priceGraph = getProductPriceGraph(productResults);
-                productResults.priceGraphData = priceGraph;
+                
+                productResults = transformPriceRefinement(productResults);
+                // console.log("response: "+ JSON.stringify(productResults, null, 2));
                 return res.status(200).json({ isError: false, response: productResults });
               } else {
-                return res.status(400).json({ isError: true, response: "No product found." });
+                return res.status(400).json({ isError: true, response: productResults });
               }
             }
         } catch (err) {

@@ -44,3 +44,28 @@ export const getProductPriceGraph = (data: any) => {
 
   return priceRanges;
 };
+
+/** Product price refinement transform function **/
+export const transformPriceRefinement = (response : any) => {
+  const transformedResponse = JSON.parse(JSON.stringify(response));
+  
+  // get "price" refinement and transform its "values"
+  transformedResponse.refinements = transformedResponse.refinements.map((refinement) => {
+    if (refinement.attributeId === "price") {
+      const transformedValues = {};
+
+      refinement.values.forEach((priceRange) => {
+        const upperLimitMatch = priceRange.value.match(/\.\.(\d+)/);
+        if (upperLimitMatch) {
+          const upperLimit = parseInt(upperLimitMatch[1], 10);
+          transformedValues[upperLimit] = priceRange.hitCount;
+        }
+      });
+
+      refinement.values = transformedValues;
+    }
+    return refinement;
+  });
+
+  return transformedResponse;
+}
