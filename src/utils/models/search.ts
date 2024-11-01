@@ -29,4 +29,5 @@ export interface NoResultsProps {
     setStoryResults: (stories: any[]) => void;
     productResults: any[]; 
     setProductResults: (products: any[]) => void;
+    openSearch: () => void;
   } 

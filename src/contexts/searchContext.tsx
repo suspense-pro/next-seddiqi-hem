@@ -49,6 +49,7 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
   const [categorySuggestions, setCategorySuggestions] = useState<string[]>([]);
   const [storyResults, setStoryResults] = useState([]);
   const [productResults, setProductResults] = useState([]);
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
 
   const setCategories = (categories: string[]) => {
     setCategoriesResults(categories);
@@ -165,7 +166,6 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
 
         setRecommendationResults(recommendationResults);
 
-        // Handle the product details response as needed
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -182,9 +182,16 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  const openSearch = () => {
+    setIsSearchOpen(true);
+    fetchInitialData(activeTab); // Fetch initial data when the search is opened
+  };
+
   useEffect(() => {
-    fetchInitialData(activeTab);
-  }, [activeTab]);
+    if (isSearchOpen) {
+      fetchInitialData(activeTab);
+    }
+  }, [activeTab, inputSearchTerm]);
 
   const value: SearchContextType = {
     inputSearchTerm,
@@ -208,6 +215,7 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
     setStoryResults,
     productResults,
     setProductResults,
+    openSearch,
   };
 
   return (
