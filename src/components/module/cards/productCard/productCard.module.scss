@@ -6,13 +6,14 @@
   background-color: getColorHex("white");
   padding: rem(16);
   padding-top: rem(0);
-  border: rem(1) solid getColorHex("grey-light-4", 0.4);
+  // border: rem(1) solid getColorHex("grey-light-4", 0.4);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: rem(40);
   position: relative;
   transition: background-color 0.3s ease;
+
   &:hover {
     background-color: getColorHex("green-greyish");
 

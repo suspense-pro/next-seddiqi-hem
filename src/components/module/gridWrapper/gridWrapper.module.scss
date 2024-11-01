@@ -3,6 +3,9 @@
 .container {
   display: grid;
   grid-template-columns: repeat(2, minmax(rem(180), 1fr));
+  border: rem(1) solid getColorHex("grey-light-4", 0.4);
+  background-color: getColorHex("grey-light-4", 0.4);
+  grid-gap: rem(1);
 
   @include md {
     grid-template-columns: repeat(auto-fit, minmax(rem(348), 1fr));

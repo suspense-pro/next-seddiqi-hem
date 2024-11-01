@@ -30,9 +30,9 @@ const FilterBar = ({
 }) => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [filters, setFiltersState] = useState(initialFilters || {});
-  // const [filterOptions, setFilterOptions] = useState([]);
-  // const [sortingOptions, setSortingOptions] = useState([]);
-  // const [quickFilters, setQuickFilters] = useState([]);
+  // const [filterOptions, setFilterOptions] = useState(filterOptions || []);
+  // const [sortingOptions, setSortingOptions] = useState(sortingOptions || []);
+  // const [quickFilters, setQuickFilters] = useState(quickFilters || []);
 
   // useEffect(() => {
     
@@ -251,10 +251,11 @@ const FilterBar = ({
                   filterKey={filterItem.attributeId}
                   onOptionChange={handleOptionChange}
                   selectedOptions={filters[filterItem.attributeId] || []}
+                  hasSearch={filterItem.attributeId.includes('brand')}
                 />
               )}
 
-              {filterItem.attributeId.includes('price') && <PriceRangeFilter />}
+              {filterItem.attributeId.includes('price') && <PriceRangeFilter priceData={filterItem.values} />}
               {filterItem.attributeId.includes('color') &&   <ColorFilter />}
 
             </FilterAccordionItem>

@@ -56,6 +56,34 @@ const PlpContent = ({ productGridContent, products }) => {
   };
 
   useEffect(() => {
+    
+    const fetchCategoryFilters = async () => {
+      try {
+        const response = await getCategoryFilters({
+          method: "GET",
+          cgid: categoryId,
+        });
+        console.log("response-------", response);
+        if (response && response.refinements) {
+          setFilterOptions(response.refinements);
+        }
+
+        if (response && response.sortingOptions) {
+          setSortingOptions(response.sortingOptions);
+        }
+
+        if (response && response.quickFilters) {
+          setQuickFilters(response.quickFilters);
+        }
+      } catch (error) {
+        console.error("error-", error);
+      }
+    };
+
+    fetchCategoryFilters();
+  }, [categoryId]);
+
+  useEffect(() => {
     if (!router.isReady || hasInitializedFilters) return;
 
     const initializeFiltersFromUrl = () => {
@@ -167,33 +195,7 @@ const PlpContent = ({ productGridContent, products }) => {
     fetchFilteredProducts();
   }, [filters, categoryId]);
 
-  useEffect(() => {
-    
-    const fetchCategoryFilters = async () => {
-      try {
-        const response = await getCategoryFilters({
-          method: "GET",
-          cgid: categoryId,
-        });
-        console.log("response-------", response);
-        if (response && response.refinements) {
-          setFilterOptions(response.refinements);
-        }
 
-        if (response && response.sortingOptions) {
-          setSortingOptions(response.sortingOptions);
-        }
-
-        if (response && response.quickFilters) {
-          setQuickFilters(response.quickFilters);
-        }
-      } catch (error) {
-        console.error("error-", error);
-      }
-    };
-
-    fetchCategoryFilters();
-  }, [categoryId]);
 
   const totalProducts = products?.total || allHits.length;
   const PRODUCT_INFO_TEXT = `Showing ${displayedProducts.length} out of ${totalProducts} products`;

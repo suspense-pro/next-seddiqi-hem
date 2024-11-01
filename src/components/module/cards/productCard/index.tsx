@@ -23,7 +23,10 @@ const ProductCard = ({ item, isCarousel = true }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   // ITEM ATTRIBS
-  const { name, image, pricePerUnit, currency } = item;
+  const { name, image, pricePerUnit, priceCurrency, brand } = item;
+
+  // console.log({item});
+  
 
   return (
     <div
@@ -58,13 +61,13 @@ const ProductCard = ({ item, isCarousel = true }) => {
       </div>
       <div className={styles.productBottom}>
         <Typography align="center" variant="p" className={styles.title}>
-          {name?.default ? name?.default : name}
+          {brand}
         </Typography>
         <Typography align="center" variant="p" className={styles.type}>
-          {WATCH_TYPE}
+          {name?.default ? name?.default : name}
         </Typography>
         <Typography align="center" variant="p" className={styles.price}>
-          {currency} {pricePerUnit}
+          {priceCurrency} {pricePerUnit}
         </Typography>
         {isCarousel && isHovered && <CarouselBtns swiper={swiper} activeIndex={activeIndex} slides={slides} />}
       </div>
