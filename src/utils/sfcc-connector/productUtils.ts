@@ -13,42 +13,34 @@ export const transformProduct = (data: any) => {
 
 /** Product Price Graph transform function **/
 export const getProductPriceGraph = (data: any) => {
-  const response = data
+  const response = data;
   // Extract prices from the product objects
   const prices = response.hits.map(product => product.price);
 
-  // Find minimum and maximum prices
-  const minPrice = Math.min(...prices);
+  // Set minimum price to zero and calculate the maximum price
+  const minPrice = 0;
   const maxPrice = Math.max(...prices);
 
-  // Define the number of bins (ranges)
-  const numBins = 5;  // adjustable -  based on custom preference
-  const binSize = (maxPrice - minPrice) / numBins;
+  // number of bins (ranges)
+  const binWidth = 50;
+  const numBins = Math.ceil(maxPrice / binWidth);
 
-  // Initialize bins and frequency counts
-  const priceRanges = [];
-  for (let i = 0; i < numBins; i++) {
-      const lowerBound = minPrice + i * binSize;
-      const upperBound = lowerBound + binSize;
-      priceRanges.push({
-          range: `${Math.round(lowerBound)} - ${Math.round(upperBound)}`,
-          frequency: 0
-      });
+  const priceRanges = {};
+  for (let i = 1; i <= numBins; i++) {
+      const upperBound = i * binWidth;
+      priceRanges[upperBound] = 0;  // Initialize frequency to 0 for each bin
   }
 
-  // Count the frequency of products in each price range
+  // Count the frequency of products in each price bin
   prices.forEach(price => {
-      for (const priceRange of priceRanges) {
-      const [lowerBound, upperBound] = priceRange.range.split(' - ').map(Number);
-      if (lowerBound <= price && price < upperBound) {
-          priceRange.frequency++;
-          break;
-      }
+      for (const upperBound in priceRanges) {
+          if (price <= parseInt(upperBound)) {
+              priceRanges[upperBound]++;
+              break;
+          }
       }
   });
 
-  // Convert to JSON
-  const priceRangeJson = JSON.stringify(priceRanges, null, 4);
-  
-  return priceRangeJson;
+
+  return priceRanges;
 };

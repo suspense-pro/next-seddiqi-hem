@@ -24,7 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             
             const options = {
                 headers: {
-                    Authorization : `Bearer ${accountMgrAccessToken}`
+                    Authorization : `Bearer ${accountMgrAccessToken}`,
                 },
                 parameters: {
                     organizationId: clientConfig.parameters.organizationId,
@@ -55,8 +55,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             const productResults = await productsClient.searchProducts(options);
             const result : any = {};
             if (productResults.total > 0) {
-                // console.log("Product(s): " + JSON.stringify(productResults, null, 4));
-                result.productResults = await productResults;
+                const priceGraph = getProductPriceGraph(productResults);
+                
+                result.productResults = productResults;
+                result.priceGraphData = priceGraph;
+                console.log("Product(s): " + JSON.stringify(result, null, 4));
 
                 return res.status(200).json({ isError: false, response: result });
             } else {
@@ -123,11 +126,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                   sort: sortParam,
                 },
               };
-    
+
               const shopperSearchClient = new Search.ShopperSearch(clientConfig);
-              const productResults = await shopperSearchClient.productSearch(options);
-              
+              const productResults = await shopperSearchClient.productSearch(options);         
               if (productResults.total > 0) {
+                const priceGraph = getProductPriceGraph(productResults);
+                productResults.priceGraphData = priceGraph;
                 return res.status(200).json({ isError: false, response: productResults });
               } else {
                 return res.status(400).json({ isError: true, response: "No product found." });
