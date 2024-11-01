@@ -1,0 +1,38 @@
+@import "./../../../assets/styles/main.scss";
+
+.tabsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: rem(28);
+  overflow: hidden;
+  transition: all 0.5s;
+  align-items: center;
+
+
+  .tabs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: rem(1) solid getColorHex("grey-light-3");
+    color: getColorHex("brown-grey");
+    width: 100%;
+
+    .tab {
+      @include heading_medium;
+      text-transform: uppercase;
+      width: 100%;
+      text-align: center;
+      font-size: rem(14);
+      line-height: rem(20);
+      letter-spacing: rem(0.6);
+      cursor: pointer;
+      padding: rem(16);
+      border-bottom: rem(2) solid getColorHex("green-dark", 0);
+    }
+
+    .activeTab {
+      border-bottom: rem(2) solid getColorHex("green-dark");
+      color: getColorHex("green-dark");
+    }
+  }
+}

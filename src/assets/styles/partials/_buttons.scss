@@ -1,0 +1,191 @@
+@import "mixins";
+@import "typography";
+@import "variables";
+
+$sqrt3: 1.2;
+$hex-height: 3rem;
+$hex-min-width: $hex-height * $sqrt3 / 2;
+$hex-distance: ($hex-height / (2 * $sqrt3));
+$border-width: rem(1);
+
+.button {
+  @include cta_regular;
+  @include transition-3s;
+  padding: rem(12 20);
+  font-size: rem(14);
+  line-height: rem(18);
+  letter-spacing: rem(1);
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: getColorHex("midnight-brown");
+  color: getColorHex("white");
+  border: none;
+  min-width: rem(174);
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  border-radius: rem(12 0 12 0);
+
+  @include md {
+    padding: rem(12 28);
+    font-size: rem(14);
+    line-height: rem(20);
+  }
+
+  &.solid {
+    background-color: getColorHex("midnight-brown");
+    color: getColorHex("white");
+    border: rem(1) solid getColorHex("midnight-brown");
+
+    &:hover {
+      background-color: getColorHex("black");
+      color: getColorHex("white");
+    }
+
+    &.metallic {
+      background-color: getColorHex("metallic");
+      color: getColorHex("white");
+      border: rem(1) solid getColorHex("metallic");
+
+      &:hover {
+        background-color: getColorHex("midnight-brown");
+        border: rem(1) solid getColorHex("midnight-brown");
+      }
+    }
+
+    &.bronze_grey {
+      background-color: getColorHex("bronze-grey");
+      color: getColorHex("midnight-brown");
+      border: rem(1) solid getColorHex("bronze-grey");
+
+      &:hover {
+        background-color: getColorHex("midnight-brown");
+        color: getColorHex("white");
+        border: rem(1) solid getColorHex("midnight-brown");
+      }
+    }
+    &.white {
+      background-color: getColorHex("white");
+      color: getColorHex("midnight-brown");
+      border: rem(1) solid getColorHex("bronze-grey");
+
+      &:hover {
+        background-color: getColorHex("midnight-brown");
+        color: getColorHex("white");
+        border: rem(1) solid getColorHex("midnight-brown");
+      }
+    }
+    &.green_dark {
+      background-color: getColorHex("green-dark");
+      color: getColorHex("white");
+      border: rem(1) solid getColorHex("green-dark");
+
+      &:hover {
+        background-color: getColorHex("green-grey");
+        border: rem(1) solid getColorHex("green-grey");
+      }
+    }
+    &.green_grey {
+      background-color: getColorHex("green-grey");
+      color: getColorHex("white");
+      border: rem(1) solid getColorHex("green-grey");
+
+      &:hover {
+        background-color: getColorHex("green-dark");
+        border: rem(1) solid getColorHex("green-dark");
+      }
+    }
+  }
+
+  &.transparent {
+    border: rem(1) solid transparent;
+    color: getColorHex("midnight-brown");
+    border-color: getColorHex("midnight-brown");
+    background-color: transparent;
+
+    &:hover {
+      color: getColorHex("white");
+      background-color: getColorHex("black");
+    }
+
+    &.black {
+      color: getColorHex("midnight-brown");
+      border-color: getColorHex("midnight-brown");
+
+      &:hover {
+        color: getColorHex("white");
+        background-color: getColorHex("black");
+      }
+    }
+
+    &.grey {
+      color: getColorHex("bronze-grey");
+      border-color: getColorHex("bronze-grey");
+
+      &:hover {
+        color: getColorHex("midnight-brown");
+        background-color: getColorHex("bronze-grey");
+      }
+    }
+    &.green_dark {
+      color: getColorHex("green-dark");
+      border-color: getColorHex("green-dark");
+
+      &:hover {
+        color: getColorHex("white");
+        background-color: getColorHex("green-dark");
+      }
+    }
+    &.grey_light {
+      color: getColorHex("green-greyish-light");
+      border-color: getColorHex("green-greyish-light");
+
+      &:hover {
+        color: getColorHex("green-dark");
+        background-color: getColorHex("green-greyish-light");
+      }
+    }
+  }
+
+  &.plain {
+    padding: 0;
+    min-width: auto;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    span {
+      text-decoration-line: underline;
+      text-underline-offset: rem(4);
+      text-decoration: underline;
+    }
+
+    &.green_dark {
+      span {
+        color: getColorHex("green-dark");
+      }
+    }
+
+    &.white {
+      span {
+        color: getColorHex("white");
+
+        &:hover {
+          color: getColorHex("black");
+        }
+      }
+    }
+  }
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+.svg {
+  @include vertical_align_center;
+  @include pointer;
+  @include svg;
+}

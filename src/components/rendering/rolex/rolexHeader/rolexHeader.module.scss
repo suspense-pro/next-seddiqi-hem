@@ -1,0 +1,207 @@
+@import "./../../../../assets/styles/main.scss";
+
+.rolexNavbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 rem(17);
+  height: rem(90);
+  
+  @include xl {
+    border-top: rem(1) solid getColorHex("grey-space", 0.15);
+    border-bottom: rem(1) solid getColorHex("grey-space", 0.15);
+  }
+
+  background: linear-gradient(90deg, getColorHex("green-racing") 0%, getColorHex("green-spring") 100%);
+  position: fixed;
+  transition: all 0.3s;
+  top: rem(120);
+
+  @include breakpoint-min-width(rem(1037)) {
+    top: rem(152);
+    padding: 0 rem(40);
+  }
+
+  .rolexLogo,
+  .rolexLogoBlack {
+    height: rem(39);
+    width: rem(78);
+
+    @include lg {
+      height: rem(42.5);
+      width: rem(85);
+    }
+  }
+
+  .rolexLogoBlack {
+    width: rem(90.6);
+    height: rem(38);
+
+    @include lg {
+      width: rem(105);
+      height: rem(44);
+    }
+  }
+
+  .navbarLinks {
+    display: flex;
+    gap: rem(36);
+    list-style: none;
+    flex-direction: row;
+    padding: 0;
+
+    li {
+      .navLink {
+        color: getColorHex("white");
+            font-size: rem(16);
+        line-height: rem(20);
+        letter-spacing: rem(0.4);
+        text-transform: capitalize;
+        transition: all 0.3s;
+
+        &:hover {
+          color: getColorHex("green-pine");
+        }
+      }
+
+      .navBlack {
+        color: getColorHex("brown-grey");
+
+        &:hover {
+          color: getColorHex("green-dark");
+        }
+      }
+    }
+  }
+
+  .contactButton {
+    .btnWhite {
+      padding: rem(11) rem(26.5);
+      border-radius: rem(30);
+      border: rem(1) solid getColorHex("white");
+      color: getColorHex("white");
+      text-align: center;
+        font-size: rem(14);
+      line-height: rem(18);
+      letter-spacing: rem(1);
+      text-transform: uppercase;
+    }
+
+    .btnGreen {
+      border: rem(1) solid getColorHex("green-spring");
+      color: getColorHex("green-spring");
+    }
+  }
+}
+
+.container {
+  position: fixed;
+  transition: all 0.3s;
+  width: 100%;
+  z-index: 1000;
+  top: rem(120);
+
+  @include breakpoint-min-width(rem(1037)) {
+    top: rem(152);
+  }
+}
+
+.scrolled {
+  @include md {
+    top: rem(78);
+  }
+}
+
+.rolexMobileNavbar {
+  height: rem(70);
+}
+
+.whiteBg {
+  background: getColorHex("white");
+}
+
+.dropdownContainer {
+  display: flex;
+  align-items: center;
+  gap: rem(12);
+  transition: all 0.3s;
+  cursor: pointer;
+
+  .menu {
+    color: getColorHex("green-dark");
+    font-size: rem(18);
+    font-weight: 400;
+    line-height: rem(26);
+    letter-spacing: rem(0.4);
+    text-transform: uppercase;
+
+    &.menuWhite {
+      color: getColorHex("white");
+    }
+  }
+
+  .activeArrow {
+    transform: rotate(180deg);
+  }
+}
+
+.navbarMobileLinks,
+.navbarMobileGreenLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+  background-color: getColorHex("white");
+  width: 100%;
+  position: absolute;
+  top: rem(69);
+  left: 0;
+
+  li {
+    .navMobileLink,
+    .navMobileBlack {
+      display: flex;
+      align-items: flex-start;
+        font-size: rem(12);
+      letter-spacing: rem(0.4);
+      text-transform: capitalize;
+      color: getColorHex("green-dark");
+
+      &.navMobileBlack {
+        padding: rem(14) rem(17);
+        justify-content: center;
+        color: getColorHex("green-dark");
+        border-bottom: rem(1) solid getColorHex("white-flash");
+      }
+    }
+  }
+}
+
+.navbarMobileGreenLinks {
+  gap: rem(36);
+  align-items: flex-start;
+  background: linear-gradient(90deg, getColorHex("green-racing") 0%, getColorHex("green-spring") 100%);
+
+  li {
+    padding: rem(0 28);
+    width: 100%;
+
+    &:first-child {
+      padding-top: rem(40);
+    }
+
+    &:last-child {
+      padding-bottom: rem(40);
+    }
+
+    .navMobileLink {
+      font-size: rem(18);
+      line-height: rem(20);
+      color: getColorHex("white");
+    }
+  }
+}

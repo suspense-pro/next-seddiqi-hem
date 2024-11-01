@@ -1,0 +1,72 @@
+@import "./../../../assets/styles/main.scss";
+
+.containerHeader {
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  padding: rem(0 28);
+  gap: rem(20);
+  
+  @include md {
+    padding: rem(0);
+    max-width: rem(800);
+    margin: 0 auto;
+
+  }
+  max-width: rem(800);
+
+  [dir="rtl"] & {
+    margin: 0;
+    padding: rem(0);
+    align-items: flex-start;
+  }
+}
+
+.bar {
+  width: rem(70);
+  height: rem(2);
+  text-align: center;
+  margin: 0 auto;
+  background-color: getColorHex("chocolate-brown");
+
+  [dir="rtl"] & {
+    margin: 0;
+  }
+}
+
+.headingPrimary {
+  @include heading_light;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: rem(28);
+  color: getColorHex('brown-dark');
+  
+  @include md {
+    font-size: rem(40);
+  }
+  
+  [dir="rtl"] & {
+    text-align: right;
+  }
+}
+
+.headingSecondary {
+  color: getColorHex('grey');
+  line-height: rem(26);
+  @include body_regular;
+
+  font-size: rem(14);
+  line-height: rem(22);
+  letter-spacing: rem(0.4);
+  text-align: center;
+
+  @include md {
+    line-height: rem(26);
+    font-size: rem(16);
+  }
+
+  [dir="rtl"] & {
+    text-align: right;
+  }
+}
