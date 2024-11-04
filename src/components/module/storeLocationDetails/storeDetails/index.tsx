@@ -193,7 +193,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             {"Brands Available"}
           </Typography>
         </span>
-        {store.c_availableBrands && store.c_availableBrands.length > 0 && (
+        {store.c_availableBrands && store.c_availableBrands.length > 8 && (
           <span className={styles.viewAllBrands}>
             <Button
               isLink={false}
