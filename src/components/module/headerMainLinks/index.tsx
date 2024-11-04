@@ -9,17 +9,19 @@ import Image from "next/image";
 import PrivateLink from "../privateLink";
 import { SideDrawer } from "@components/module";
 import { Search } from "@components/module";
-import { SearchProvider } from "@contexts/searchContext";
+import { useSearchContext } from "@contexts/searchContext";
 
 const HeaderMainLinks = () => {
   const { updateCurrent, headerData } = useContext(HeaderContext);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const { openSearch } = useSearchContext();
 
   const headerMainLinks = headerData?.children;
   if (!headerMainLinks) return null;
 
   const openSearchPopup = () => {
     setIsPopupVisible(true);
+    openSearch();
   };
 
   const closeSearchPopup = () => {
@@ -66,10 +68,8 @@ const HeaderMainLinks = () => {
           </div>
         ))} */}
       </div>
-      <div className={`${styles.drawerStyle} ${isPopupVisible ? styles.visible : ""}`}>
-        <SearchProvider>
-          <Search closeSearch={closeSearchPopup}></Search>
-        </SearchProvider>
+      <div className={`${styles.drawerStyle} ${isPopupVisible ? styles.visible : ''}`}>
+        <Search closeSearch={closeSearchPopup} ></Search>
       </div>
     </div>
   );

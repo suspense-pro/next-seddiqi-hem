@@ -2,6 +2,7 @@ import React, { Component, PropsWithChildren, useEffect } from "react";
 import { Header, Footer } from "@components/rendering";
 import { WithNavigationContext } from "@contexts/withNavigationContext";
 import { HeaderProvider } from "@contexts/headerContext";
+import { SearchProvider } from "@contexts/searchContext";
 
 export interface LayoutProps extends PropsWithChildren {
   pageProps: any;
@@ -19,11 +20,13 @@ const Layout = ({ children, pageProps }: LayoutProps) => {
   );
 
   return (
+    <SearchProvider>
     <HeaderProvider headerData={{ ...headerData }}>
       <Header />
       <main className="mainClass">{children}</main>
       <Footer footerData={footerData} />
     </HeaderProvider>
+    </SearchProvider>
   );
 };
 

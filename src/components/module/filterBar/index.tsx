@@ -30,6 +30,7 @@ const FilterBar = ({
   const [filters, setFiltersState] = useState(initialFilters || {});
   const [filterOptions, setFilterOptions] = useState([]);
   const [sortingOptions, setSortingOptions] = useState([]);
+  const [openAccordionId, setOpenAccordionId] = useState(null); // Track the currently open accordion
 
   useEffect(() => {
     const fetchCategoryFilters = async () => {
@@ -38,7 +39,7 @@ const FilterBar = ({
           method: "GET",
           cgid: categoryId,
         });
-        // console.log("response-------", response);
+
         if (response && response.refinements) {
           setFilterOptions(response.refinements);
         }
@@ -93,16 +94,11 @@ const FilterBar = ({
       }
 
       const prevSelectedOptions = prevFilters[filterKey] || [];
+      const newSelectedOptions = prevSelectedOptions.filter(
+        (selected) => selected !== option
+      );
 
-      if (Array.isArray(prevSelectedOptions)) {
-        const newSelectedOptions = prevSelectedOptions.filter(
-          (selected) => selected !== option
-        );
-
-        return { ...prevFilters, [filterKey]: newSelectedOptions };
-      }
-
-      return prevFilters;
+      return { ...prevFilters, [filterKey]: newSelectedOptions };
     });
   };
 
@@ -132,7 +128,7 @@ const FilterBar = ({
     if (filterKey === "sortOption") {
       setFiltersState((prevFilters) => ({
         ...prevFilters,
-        sortOption: undefined, 
+        sortOption: undefined,
       }));
     } else {
       setFiltersState((prevFilters) => ({
@@ -147,6 +143,10 @@ const FilterBar = ({
       return acc + (Array.isArray(curr) ? curr.length : 0);
     }, 0)
   : 0;
+
+  const toggleAccordion = (key) => {
+    setOpenAccordionId(prev => (prev === key ? null : key));
+  };
 
   return (
     <div className={styles.container}>
@@ -215,6 +215,8 @@ const FilterBar = ({
         <FilterAccordian>
           <FilterAccordionItem 
             title="Sort"
+            isOpen={openAccordionId === "sort"}
+            onToggle={() => toggleAccordion("sort")}
             onClear={() => handleClearCheckboxes("sortOption")}
             selectedCount={filters.sortOption ? 1 : 0}
           >
@@ -228,6 +230,8 @@ const FilterBar = ({
             <FilterAccordionItem
               key={filterItem.attributeId}
               title={filterItem.label}
+              isOpen={openAccordionId === filterItem.attributeId}
+              onToggle={() => toggleAccordion(filterItem.attributeId)}
               onClear={() => handleClearCheckboxes(filterItem.attributeId)}
               selectedCount={filters[filterItem.attributeId]?.length || 0}
             >
@@ -244,6 +248,8 @@ const FilterBar = ({
           ))}
           <FilterAccordionItem 
             title="Price"
+            isOpen={openAccordionId === "price"}
+            onToggle={() => toggleAccordion("price")}
             onClear={() => handleClearCheckboxes("price")}
             selectedCount={filters.price ? 1 : 0}
           >
@@ -251,6 +257,8 @@ const FilterBar = ({
           </FilterAccordionItem>
           <FilterAccordionItem 
             title="Color"
+            isOpen={openAccordionId === "color"}
+            onToggle={() => toggleAccordion("color")}
             onClear={() => handleClearCheckboxes("color")}
             selectedCount={filters.color ? 1 : 0}
           >

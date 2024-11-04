@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import styles from "./sideDrawer.module.scss";
 import { CloseIconV2 } from "@assets/images/svg";
 import Button from "../button";
@@ -30,6 +30,18 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   className,
   position = "left",
 }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.documentElement.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.documentElement.style.overflow = 'auto';
+    };
+  }, [isOpen]);
+
   return (
     <div className={`${styles.drawerWrapper} ${isOpen ? styles.isOpen : ""} ${className}`}>
       <div className={`${styles.underlay}`} onClick={onClose}></div>
