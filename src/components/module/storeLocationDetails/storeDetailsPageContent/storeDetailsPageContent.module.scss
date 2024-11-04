@@ -139,10 +139,9 @@
 
 .WhatsappIcon {
   margin-right: rem(12);
-  color: getColorHex("brown-dark");
+  color: getColorHex("green-dark");
   height: rem(20);
   width: rem(20);
-  stroke: getColorHex("green-dark");
   [dir="rtl"] & {
     margin-left: rem(12);
   }

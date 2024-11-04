@@ -76,7 +76,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
           <a
             href={store?.c_googleMapLocation}
             target="_blank"
-            className={`${styles.storeMapLink} button plain green_dark`}
+            className={`${styles.storeMapLink} button plain brown_dark`}
           >
             <span>Get Directions</span>
           </a>
@@ -118,7 +118,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             isLink={false}
             className={styles.contactBtn}
             title={"Call"}
-            color="green_dark"
+            color="brown_dark"
             type={"Plain"}
           />
           <div className={styles.vDivider}>&nbsp;</div>
@@ -126,7 +126,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             isLink={false}
             className={styles.whatsappBtn}
             title={"WhatsApp"}
-            color="green_dark"
+            color="brown_dark"
             type={"Plain"}
           />
         </span>
@@ -176,7 +176,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             link={"/book-an-appointment"}
             className={styles.appointmentBtn}
             title={"Book appointment"}
-            color="green_dark"
+            color="brown_dark"
             type={"Plain"}
           />
         </div>
@@ -199,7 +199,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
               isLink={false}
               className={styles.viewAllBrandsBtn}
               title={"View all brands"}
-              color="green_dark"
+              color="brown_dark"
               type={"Plain"}
               clickHandler={handleViewAllBrands}
             />
