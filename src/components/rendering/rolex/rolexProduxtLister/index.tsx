@@ -17,7 +17,7 @@ const RolexProductLister = (content) => {
           spaceBetween={16}
           breakpoints={{
             768: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 16,
             },
             1024: {
@@ -42,10 +42,6 @@ const RolexProductLister = (content) => {
                       <Image
                         image={imageData}
                         imageAltText={altText}
-                        sizes={{
-                          width: 348,
-                          height: 348,
-                        }}
                         className={styles.productImage}
                       />
                     )}
