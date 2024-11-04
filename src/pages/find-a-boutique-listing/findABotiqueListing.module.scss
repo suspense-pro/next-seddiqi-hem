@@ -28,10 +28,13 @@
   display: flex;
   flex-direction: column;
   row-gap: rem(40);
-  margin-top: rem(32);
+  //margin-top: rem(32);
+  margin: rem(32) auto 0;
+  max-width: rem(1440);
 
   @include md{
-    margin-top: rem(60);
+    //margin-top: rem(60);
+    margin: rem(60) auto 0;
     padding: 0 rem(60);
     row-gap: rem(32);
   }
@@ -242,6 +245,8 @@
     &Image{
       display: flex;
       object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
 
     .nearestStore{
