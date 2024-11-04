@@ -19,6 +19,7 @@ import { SignUpFormErrors } from "@utils/models";
 import { getCustomer, registerCustomer } from "@utils/sfcc-connector/dataService";
 import AccountConfirmationBox from "../accountConfirmationBox";
 import { useRouter } from "next/router";
+import PasswordValidator from "../passwordValidator";
 
 const Register = ({ gridColumn = "1fr 1fr" }) => {
   const [email, setEmail] = useState<string>("");
@@ -267,8 +268,9 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
                 errorMessage={errors.password}
                 required
               />
+              <PasswordValidator password={password} validations={passwordValidations} />
               {/* Password Validation Indicators */}
-              <div style={containerStyles} className={`${styles.passwordCriteria}`}>
+              {/* <div style={containerStyles} className={`${styles.passwordCriteria}`}>
                 {passwordValidations?.length && (
                   <div className={passwordValidations?.length ? styles.valid : styles.invalid}>
                     <GreenTick /> <span>At least 8 characters</span>
@@ -289,7 +291,7 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
                     <GreenTick /> At least 1 special character (!@#$%^&*)
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
 
             {/* Confirm Password */}
