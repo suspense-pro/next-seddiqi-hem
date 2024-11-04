@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import styles from "./productDetailInfo.module.scss";
 import { ArrowRight, CalendarIcon, CubeIcon, HeartIcon, PlusIcon, ShareIcon } from "@assets/images/svg";
-import { Button, SideDrawer } from "@components/module";
+import { Button, ScrollToTop, SideDrawer } from "@components/module";
 import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
 import { useClickOutside, useCloseOnScroll, useDeviceWidth, useWindowWidth } from "@utils/useCustomHooks";
@@ -365,6 +365,8 @@ const ProductDetailInfo = ({
           productCurrency={product?.currency}
         />
       </SideDrawer>
+
+      <ScrollToTop />
     </>
   );
 };

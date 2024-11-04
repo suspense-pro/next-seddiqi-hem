@@ -59,6 +59,11 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [locationCheckboxValues, setLocationCheckboxValues] = useState([]);
   const [brandCheckboxValues, setBrandCheckboxValues] = useState([]);
   const [serviceCheckboxValues, setServiceCheckboxValues] = useState([]);
+  const [openAccordion, setOpenAccordion] = useState("brands"); // Default open accordion
+
+  const handleToggleAccordion = (accordion) => {
+    setOpenAccordion(openAccordion === accordion ? null : accordion);
+  };
 
   const tabs = [
     { label: 'All Boutiques', value: 'All' },
@@ -276,7 +281,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [popupActiveTab, setPopupActiveTab] = useState('All');
 
   const popupTabs = [
-    { label: 'All', value: 'All' },
+    { label: 'All Boutiques', value: 'All' },
     { label: 'Dubai', value: 'Dubai' },
     { label: 'Abu Dhabi', value: 'Abu Dhabi' },
   ];
@@ -416,31 +421,30 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     setFiltersState({});
   };
   
-
   const handlePopupTabChange = (tab) => {
     setFadeList(true);
 
     setTimeout(() => {
-      setPopupActiveTab(tab);
-      
-      // const filteredStores = tab === 'All' 
-      //     ? stores 
-      //     : stores.filter(store => store.city === tab);
-      const filteredStores = tab === 'All' 
-          ? stores.filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi') 
-          : stores.filter(store => store.city === tab);
+        setPopupActiveTab(tab);
+        
+        // const filteredStores = tab === 'All' 
+        //     ? stores 
+        //     : stores.filter(store => store.city === tab);
+        const filteredStores = tab === 'All' 
+            ? stores.filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi') 
+            : stores.filter(store => store.city === tab);
+        
+        const filteredAddresses = [...new Set(filteredStores.map(store => store.address1))];
+        const filteredBrands = [...new Set(filteredStores.flatMap(store => store.c_availableBrands))];
+        const filteredServices = [...new Set(filteredStores.flatMap(store => store.c_services))];
 
-      const filteredAddresses = tab === 'All' 
-          ? [...new Set(filteredStores.map(store => store.address1))] 
-          : [...new Set(filteredStores.map(store => store.address1))];
-
-      const filteredBrands = [...new Set(filteredStores.flatMap(store => store.brands))];
-      
-      setLocationCheckboxValues(filteredAddresses);
-      setBrandCheckboxValues(filteredBrands);
-      setFadeList(false);
+        setLocationCheckboxValues(filteredAddresses);
+        setBrandCheckboxValues(filteredBrands);
+        setServiceCheckboxValues(filteredServices);
+        
+        setFadeList(false);
     }, 300);
-  };
+};
 
   const handleClearCheckboxes = (filterKey) => {
     setFiltersState((prevFilters) => ({
@@ -575,6 +579,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
                 title={filterItem.label}
                 onClear={() => handleClearCheckboxes(filterItem.id)}
                 selectedCount={selectedOptionsCount}
+                isOpen={openAccordion === filterItem.label.toLowerCase()}
+                onToggle={() => handleToggleAccordion(filterItem.label.toLowerCase())}
               >
                 {filterItem.label.toLowerCase() === 'brands' && (
                   <>
