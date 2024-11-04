@@ -31,8 +31,10 @@ export default function SignIn({ direction = "row" }) {
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setPhone(value);
-    setErrors((prev) => ({ ...prev, phone: validatePhoneNumber(value) }));
+    if (/^\d*$/.test(value) && value.length <= 10) {
+      setPhone(value);
+      setErrors((prev) => ({ ...prev, phone: validatePhoneNumber(value) }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -54,7 +56,7 @@ export default function SignIn({ direction = "row" }) {
         const data = await loginCustomer({
           userData: JSON.stringify(userData),
           method: "POST",
-        })
+        });
         if (!data?.isError) {
           localStorage.setItem("tokenInfo", JSON.stringify(data?.response));
           const profile = await getCustomer(data?.response?.customer_id, data?.response?.access_token);
@@ -63,11 +65,10 @@ export default function SignIn({ direction = "row" }) {
             router.push("/");
           }
         } else {
-          throw new Error("Login Failed Try Again")
+          throw new Error("Login Failed Try Again");
         }
-
       } catch (error) {
-        alert(error?.message)
+        alert(error?.message);
       }
     } else {
       setErrors(validationErrors);
