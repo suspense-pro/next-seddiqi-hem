@@ -2,18 +2,23 @@ import { useState, ChangeEvent } from "react";
 import styles from "./resetPassword.module.scss"; // Using CSS Modules for local styling
 import InputField from "@components/module/inputField";
 import Button from "@components/module/button";
+import ArrowRight from "@assets/images/svg/ArrowDown";
+import { ArrowUp } from "@assets/images/svg";
+import { useRouter } from "next/router";
 
 interface ResetPasswordProps {
-  title?: string; // Optional prop
-  subTitle?: string; // Optional prop
-  step?: number; // Optional prop
+  title?: string;
+  subTitle?: string;
+  step?: number;
+  backUrl?: string;
 }
 
-export default function ResetPassword({ title = "", subTitle = "", step = 1 }: ResetPasswordProps) {
+export default function ResetPassword({ title = "", subTitle = "", step = 1, backUrl = "auth" }: ResetPasswordProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [emailSent, setEmailSent] = useState(false);
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -38,6 +43,7 @@ export default function ResetPassword({ title = "", subTitle = "", step = 1 }: R
       } else {
         // Handle submit logic for email, e.g., API call
         console.log("Submitting email:", email);
+        setEmailSent(true);
       }
     } else if (step === 3) {
       if (!password || !confirmPassword) {
@@ -56,59 +62,76 @@ export default function ResetPassword({ title = "", subTitle = "", step = 1 }: R
     return emailPattern.test(email);
   };
 
-  return (
-    <div className={styles.resetPasswordContainer}>
-      <h2 className={styles.heading}>{title}</h2>
-      {subTitle && <p className={styles.description}>{subTitle}</p>}
+  const router = useRouter();
 
-      {step !== 2 && (
-        <form className={styles.formContainer} onSubmit={handleSubmit}>
-          {step === 1 && (
-            <InputField
-              name="email"
-              label="Email"
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              errorMessage={error}
-              required={true}
-            />
-          )}
-          
-          {step === 3 && (
-            <>
+  if (emailSent) {
+    return (
+      <ResetPassword
+        title={"Check your email"}
+        subTitle={"We have sent an email to aashamsi@gmail.com. Please follow the steps to recover your password."}
+        step={2}
+      />
+    );
+  }
+
+  return (
+    <div className={styles.container}>
+      <div onClick={() => router.push(backUrl)} className={styles.backBtn}>
+        <ArrowRight className={styles.arrow} /> <div>Back</div>
+      </div>
+      <div className={styles.resetPasswordContainer}>
+        <h2 className={styles.heading}>{title}</h2>
+        {subTitle && <p className={styles.description}>{subTitle}</p>}
+
+        {step !== 2 && (
+          <form className={styles.formContainer} onSubmit={handleSubmit}>
+            {step === 1 && (
               <InputField
-                name="password"
-                label="Password"
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
+                name="email"
+                label="Email"
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                errorMessage={error}
                 required={true}
               />
-              <InputField
-                name="confirmPassword"
-                label="Confirm Password"
-                type="password"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-                errorMessage={password !== confirmPassword ? "Passwords do not match" : ""}
-                required={true}
+            )}
+
+            {step === 3 && (
+              <>
+                <InputField
+                  name="password"
+                  label="Password"
+                  type="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  required={true}
+                />
+                <InputField
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                  errorMessage={password !== confirmPassword ? "Passwords do not match" : ""}
+                  required={true}
+                />
+              </>
+            )}
+
+            <div className={styles.submitButton}>
+              <Button
+                clickHandler={() => console.log("")}
+                className={styles.signInBtn}
+                title="Send"
+                isLink={false}
+                type="solid"
+                color="metallic"
               />
-            </>
-          )}
-          
-          <div className={styles.submitButton}>
-            <Button
-              clickHandler={() => console.log("")}
-              className={styles.signInBtn}
-              title="Send"
-              isLink={false}
-              type="solid"
-              color="metallic"
-            />
-          </div>
-        </form>
-      )}
+            </div>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
