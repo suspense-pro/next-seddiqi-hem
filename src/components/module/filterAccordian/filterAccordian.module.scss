@@ -49,15 +49,15 @@
   }
 
   .clearText {
-    margin-right: rem(16);
+    //margin-right: rem(16);
     font-size: rem(14);
     cursor: pointer;
     color: getColorHex("grey");
     text-transform: uppercase;
     
-    [dir="rtl"] & {
+    /*[dir="rtl"] & {
       margin-left: rem(16);
-    }
+    }*/
   }
 
   .accordionContent {
@@ -75,6 +75,11 @@
 
 .arrow {
   transition: transform 0.3s ease;
+  margin-left: rem(28);
+
+  [dir="rtl"] & {
+    margin-right: rem(28);
+  }
 }
 
 .rotate {

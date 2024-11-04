@@ -49,14 +49,14 @@
 }
 
 .tabButton {
-  @include heading_light;
+  @include heading_regular;
   font-weight: 500;
   font-size: rem(14);
   line-height: rem(20);
   letter-spacing: rem(0.4);
-  color: getColorHex("green-dark");
+  color: getColorHex("grey-brown");
   flex: 1;
-  padding: rem(12);
+  padding: rem(16) rem(12);
   background: transparent;
   cursor: pointer;
   transition: all 0.5s;
@@ -69,10 +69,11 @@
     font-size: rem(20);
     line-height: rem(28);
     letter-spacing: rem(0.6);
-    padding: rem(12);
+    padding: rem(20);
   }
 
   &:hover, &.active{
+    color: getColorHex("brown-dark");
     background: getColorHex("desert-storm");
     border-bottom: rem(2) solid getColorHex("midnight-brown");
   }
