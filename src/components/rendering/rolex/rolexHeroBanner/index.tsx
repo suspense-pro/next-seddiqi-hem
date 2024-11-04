@@ -21,13 +21,14 @@ const RolexHeroBanner = ({ ...content }) => {
 
   console.log("ROLEX HERO BANNER", content);
   const screenSize = useWindowWidth();
+  console.log("ROLEX HERO BANNER", screenSize > 769);
   return (
     <Swiper
       ref={swiperRef}
       modules={[Autoplay]}
       spaceBetween={0}
       slidesPerView={1}
-      autoplay={{ delay: 3000, disableOnInteraction: false }}
+      // autoplay={{ delay: 3000, disableOnInteraction: false }}
       loop={true}
       speed={600}
       onSlideChange={handleSlideChange}
@@ -37,35 +38,31 @@ const RolexHeroBanner = ({ ...content }) => {
         return (
           <SwiperSlide className={styles.swiperSlide} key={index}>
             <div className={styles.slide}>
-              {slide?.media?.image ? (
+              {slide?.media?.image || slide?.mobileMedia?.media?.image ? (
                 <GradientOverlay className={styles.gradient} opacity={slide?.opacity?.opacity}>
-                  {screenSize > 769 ? (
-                    <Image
-                      imgWidth="100%"
-                      height={styles.image}
-                      className={styles.image}
-                      image={slide?.media?.image}
-                      imageAltText={slide?.media?.altText}
-                    />
-                  ) : (
-                    <Image
-                      imgWidth="100%"
-                      height={styles.image}
-                      className={styles.image}
-                      image={slide?.mobileMedia?.media?.image}
-                      imageAltText={slide?.mobileMedia?.media?.altText}
-                    />
-                  )}
+                  <Image
+                    imgWidth="100%"
+                    height={styles.image}
+                    className={styles.image}
+                    image={slide?.media?.image}
+                    imageAltText={slide?.media?.altText}
+                  />
+                  <Image
+                    imgWidth="100%"
+                    height={styles.mobileImage}
+                    className={styles.mobileImage}
+                    image={slide?.mobileMedia?.media?.image}
+                    imageAltText={slide?.mobileMedia?.media?.altText}
+                  />
                 </GradientOverlay>
               ) : (
                 <Video
-                  className={styles.image}
+                  className={styles.video}
                   video={slide?.media?.video}
                   autoPlay={slide?.media?.autoPlay}
                   showPlay={slide?.media?.showPlay}
                 />
               )}
-
               {slide?.bannerType === "Rolex" ? (
                 <div className={styles.textOverlay}>
                   <div className={styles.brand}>{slide?.title}</div>

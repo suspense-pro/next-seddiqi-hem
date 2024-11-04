@@ -28,7 +28,6 @@ const StepOne = ({ content }) => {
           </div>
         ))}
       </div>
-      <ExclusiveInfoCards />
     </div>
   );
 };

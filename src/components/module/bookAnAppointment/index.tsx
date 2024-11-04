@@ -6,12 +6,13 @@ import StepOne from "./stepOne";
 import StepTwo from "./stepTwo";
 import StepFour from "./stepFour";
 import StepThree from "./stepThree";
+import ExclusiveInfoCards from "./exclusiveInfoCards";
 
 const Step3 = () => <div>Ahmed Seddiqi</div>;
 const Step4 = () => <div>Content for Step 4</div>;
 const Step5 = () => <div>Content for Step 5</div>;
 
-const BookAnAppointment = ({ content }) => {
+const BookAnAppointment = ({ content, exclusiveInfoCards = null }) => {
   const { completedSteps, currentStep, handleStepChange, setSelectedCard } = useContext(BookAppointmentContext);
 
   const steps = [1, 2, 3, 4, 5];
@@ -65,6 +66,7 @@ const BookAnAppointment = ({ content }) => {
         ))}
       </div>
       <div className={styles.stepContent}>{renderStepContent()}</div>
+      {exclusiveInfoCards && <ExclusiveInfoCards exclusiveInfoCards={exclusiveInfoCards?.content?.page} />}
     </div>
   );
 };
