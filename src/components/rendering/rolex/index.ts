@@ -6,6 +6,7 @@ import ThreeTallImageText from "./threeTallImageText";
 import TwoColumnImageText from "./twoColumnImageText";
 import FooterBackToTop from "./footerBackToTop";
 import FourItemSlider from "./fourItemSlider";
+import RolexProductLister from "./rolexProduxtLister";
 
 export { 
     RolexNavbar, 
@@ -15,5 +16,6 @@ export {
     ThreeCompactImageText,
     ThreeTallImageText,
     FourItemSlider,
-    FooterBackToTop
+    FooterBackToTop,
+    RolexProductLister
  };
