@@ -49,10 +49,10 @@ export default function RolexHome({ content }: InferGetServerSidePropsType<typeo
         <ContentBlock components={RolexComponentMapping} content={content} key={content?._meta.deliveryId} />
       ))}
 
-      <FourItemSlider />
+      {/* <FourItemSlider />
       <TwoColumnImageText />
       <ThreeTallImageText />
-      <FooterBackToTop />
+      <FooterBackToTop /> */}
     </div>
   );
 }
