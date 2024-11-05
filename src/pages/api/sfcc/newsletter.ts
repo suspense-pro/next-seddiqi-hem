@@ -14,6 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             try {
                 if (requestMethod === "POST" && action === "subscription") {
                     const { email, isSubscribed } = body;
+                    /* TODO: The below code is for mulesoft API integration - upsert API
                     const options = {
                         method: requestMethod,
                         headers: {
@@ -61,7 +62,25 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     } else {
                         console.log("Subscription Failed.");
                         return res.status(400).json({ isError: true, response: "Subscription Failed." });
+                    }*/
+
+                    // send email - nodemailer
+                    var emailInfo : any;
+                    if (isSubscribed) { // subscribed email
+                        const subject = "Seddiqi Newsletter Communication";
+                        const htmlContent = "You have been successfully subscribed to Seddiqi newsletter.";
+                        emailInfo = await sendEmail(email, subject, htmlContent);
+                    } else { // unsubscribed email
+                        const subject = "Seddiqi Newsletter Communication";
+                        const htmlContent = "You have been successfully unsubscribed to our newsletter on Seddiqi.";
+                        emailInfo = await sendEmail(email, subject, htmlContent);
                     }
+                    if (emailInfo.success) {
+                        console.log("Email sent successfully");
+                    } else {
+                        console.log("Email failed");
+                    }
+                    return res.status(200).json({ isError: false, response: emailInfo  });
                 }
 
             } catch(err) {
