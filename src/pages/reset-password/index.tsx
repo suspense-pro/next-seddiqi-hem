@@ -24,7 +24,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function ResetPasswordPage() {
   return (
     <div>
-      <ResetPassword title={"Reset your password"} subTitle={"In order to reset your password, please provide us with your email. We will send you an email momentarily. Contact Customer Service for further assistance."} step={1} />
+      <ResetPassword
+        title={"Reset your password"}
+        subTitle={"Please write a new password, the password must contain:"}
+        step={3}
+      />
     </div>
   );
 }
