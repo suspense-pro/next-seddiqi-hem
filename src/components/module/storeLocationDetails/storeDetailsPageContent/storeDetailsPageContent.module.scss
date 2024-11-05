@@ -15,6 +15,20 @@
   letter-spacing: rem(0.2);
 }
 
+.contactLabel,
+.storeOpenDay,
+.storeServiceInfo,
+.brandsName {
+  color: getColorHex("grey");
+}
+.availableBrandsTitle {
+  color: getColorHex("grey-mid");
+}
+.storeOpenTiming {
+  color: getColorHex("green-dark");
+}
+
+
 .mapViewBtnLabel,
 .availableBrandsTitle {
   text-transform: uppercase;
@@ -128,7 +142,6 @@
   color: getColorHex("green-dark");
   height: rem(20);
   width: rem(20);
-  stroke: getColorHex("green-dark");
   [dir="rtl"] & {
     margin-left: rem(12);
   }
@@ -138,7 +151,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  color: getColorHex("green-dark");
+  color: getColorHex("grey");
   margin-bottom: rem(12);
   margin-top: rem(12);
 }
@@ -334,7 +347,7 @@
 }
 
 .title {
-  color: getColorHex("green-dark");
+  color: getColorHex("brown-dark");
   letter-spacing: rem(0.6);
   margin-block-end: rem(42);
   margin-block-start: rem(60);

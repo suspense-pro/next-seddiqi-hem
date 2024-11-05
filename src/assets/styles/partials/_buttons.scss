@@ -164,6 +164,11 @@ $border-width: rem(1);
         color: getColorHex("green-dark");
       }
     }
+    &.brown_dark {
+      span {
+        color: getColorHex("brown-dark");
+      }
+    }
 
     &.white {
       span {
