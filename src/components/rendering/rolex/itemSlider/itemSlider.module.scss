@@ -39,6 +39,11 @@
 
   .sliderSwiper{
     overflow: visible;
+    opacity: 0;
+
+    &:global(.swiper-initialized){
+      opacity: 1;
+    }
 
     & > div{
 
