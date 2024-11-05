@@ -6,15 +6,7 @@ const ThreeCompactImageText = ({ ...content }) => {
 
   if (!content) return null;
 
-  console.log("Contentsss: ", content);
-
   const components = content?.components;
-
-  const componentData = [
-    {imageUrl: "/images/png/discover-rolex1.png", subtitle: "A commitment to excellence", title: "World of Rolex", linkText: "Learn More", linkUrl: "/"},
-    {imageUrl: "/images/png/discover-rolex2.png", subtitle: "Excellence in the making", title: "Watchmaking", linkText: "Learn More", linkUrl: "/"},
-    {imageUrl: "/images/png/discover-rolex3.png", subtitle: "our servicing philosophy", title: "Servicing", linkText: "Learn More", linkUrl: "/"},
-  ];
 
   return (
     <div className={styles.container}>
