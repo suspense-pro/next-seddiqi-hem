@@ -7,11 +7,12 @@ import { SignInFormErrors } from "@utils/models";
 import { validateEmail, validateLoginPassword, validatePhoneNumber } from "@utils/helpers/validations";
 import OtpComponent from "../otp";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function SignIn({ direction = "row" }) {
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
-  const [phoneCode, setPhoneCode] = useState<string>("+91");
+  const [phoneCode, setPhoneCode] = useState<string>("+971");
   const [password, setPassword] = useState<string>("");
   const [otpForm, setOtpForm] = useState(false);
   const [errors, setErrors] = useState<SignInFormErrors>({});
@@ -110,7 +111,6 @@ export default function SignIn({ direction = "row" }) {
               errorMessage={errors.email}
               required={true}
             />
-
             <InputField
               name="password"
               label="Password"
@@ -125,6 +125,7 @@ export default function SignIn({ direction = "row" }) {
             className={styles.forgotBtn}
             title="Forgot your password?"
             isLink={true}
+            link="/forgot-password"
             type="Plain"
             color="green_darK"
           />
