@@ -445,13 +445,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "resetPassword":
             try {
                 if (requestMethod === "POST" && action === "resetToken") {
-                    const access_token = req.query.accessToken as string;
                     const userId = req.query.userId as string;
                     const code_verifier = await generateRandomString(128);
                     const code_challenge = await generateCodeChallenge(code_verifier);
                     // console.log("Code Verifier: " + code_verifier);
 
-                    clientConfig.headers['authorization'] = `Bearer ${access_token}`;
                     const client = new Customer.ShopperLogin(clientConfig);
 
                     const options = {
@@ -483,17 +481,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "setPassword":
             try {
                 if (requestMethod === "POST" && action === "resetPassword") {
-                    const access_token = req.query.accessToken as string;
                     const userId = req.query.userId as string;
                     const codeVerifier = req.query.codeVerifier as string;
                     const { newPassword, token } = body;
 
-                    clientConfig.headers['authorization'] = `Bearer ${access_token}`;
                     const client = new Customer.ShopperLogin(clientConfig);
 
                     const options = {
                         headers: {
-                            Authorization: `Bearer ${await basicAuthorization()}`,
+                            Authorization: `Basic ${await basicAuthorization()}`,
                         },
                         parameters: {
                             organizationId: clientConfig.parameters.organizationId,
