@@ -28,6 +28,7 @@ export default function ResetPasswordPage() {
         title={"Reset your password"}
         subTitle={"Please write a new password, the password must contain:"}
         step={3}
+        btnTitle="Reset Password"
       />
     </div>
   );

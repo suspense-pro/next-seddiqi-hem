@@ -19,9 +19,7 @@ const RolexHeroBanner = ({ ...content }) => {
     setActiveIndex(swiper.activeIndex);
   };
 
-  console.log("ROLEX HERO BANNER", content);
   const screenSize = useWindowWidth();
-  console.log("ROLEX HERO BANNER", screenSize > 769);
   return (
     <Swiper
       ref={swiperRef}
