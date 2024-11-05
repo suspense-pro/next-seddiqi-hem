@@ -1,7 +1,7 @@
 @import "../../../../assets/styles/main.scss";
 
 .title {
-  color: getColorHex("green-dark");
+  color: getColorHex("brown-dark");
   letter-spacing: rem(0.6);
   margin-block-end: rem(12);
   margin-block-start: rem(20);
@@ -140,11 +140,24 @@
   width: rem(20);
 }
 
+.contactLabel,
+.storeOpenDay,
+.storeServiceInfo,
+.brandsName {
+  color: getColorHex("grey");
+}
+.availableBrandsTitle {
+  color: getColorHex("grey-mid");
+}
+.storeOpenTiming {
+  color: getColorHex("green-dark");
+}
+
 .locationInfo {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  color: getColorHex("green-dark");
+  color: getColorHex("grey");
   margin-bottom: rem(12);
   margin-top: rem(12);
 }

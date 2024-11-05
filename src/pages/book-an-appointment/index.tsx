@@ -16,17 +16,32 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
+  const exclusiveInfoCards = await fetchStandardPageData(
+    {
+      content: {
+        page: {
+          key: `book-an-appointment/exclusive-info-cards`,
+        },
+      },
+    },
+    context
+  );
+
   return {
     props: {
       ...data,
+      exclusiveInfoCards,
     },
   };
 }
 
-export default function BookAnAppointmentPage({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function BookAnAppointmentPage({
+  content,
+  exclusiveInfoCards,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <BookAppointmentProvider>
-      <BookAnAppointment content={content} />
+      <BookAnAppointment content={content} exclusiveInfoCards={exclusiveInfoCards} />
     </BookAppointmentProvider>
   );
 }

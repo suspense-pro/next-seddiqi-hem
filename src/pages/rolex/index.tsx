@@ -41,7 +41,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function RolexHome({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log("content", content)
   return (
     <div className="main-content rolex">
       {compact(content?.page?.components).map((content) => (

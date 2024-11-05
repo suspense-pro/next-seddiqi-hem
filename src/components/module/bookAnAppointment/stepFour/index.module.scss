@@ -178,7 +178,7 @@
 .timeContainer {
   overflow-x: auto;
   white-space: nowrap;
-  margin-top: 20px;
+  margin-top: rem(20);
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;

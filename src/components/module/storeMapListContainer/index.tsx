@@ -31,6 +31,7 @@ const StoreMapListContainer = ({
     setSelectedStoreId(null);
   };
   return (
+    <>
     <div className={`${[styles.storeMapListContainer]} ${isAbsolutePosition === true ? "" : styles.isRelative} ${needScrollbar === true ? "" : styles.noScrollbar}`}>
       {!isMobile && needScrollbar === true ? (
         <Swiper
@@ -48,7 +49,6 @@ const StoreMapListContainer = ({
                 <li
                   key={store.id}
                   className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ''}`}
-                  onClick={() => handleStoreDtetails(store)}
                 >
                   <div className={styles.storeMapDetails}>
                     <h4 className={styles.storeMapName}>{store.name}</h4>
@@ -79,9 +79,8 @@ const StoreMapListContainer = ({
             <li
               key={store.id}
               className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ''}`}
-              onClick={() => handleStoreDtetails(store)}
             >
-              <div className={styles.storeMapDetails}>
+              <div className={styles.storeMapDetails}  onClick={() => handleStoreDtetails(store)}>
                 <h4 className={styles.storeMapName}>{store.name}</h4>
                 <div className={styles.storeMapLocation}>
                   <div className={styles.locationContainer}>
@@ -103,12 +102,18 @@ const StoreMapListContainer = ({
           ))}
         </ul>
       )}
-       <StoreLocationDetails
-        storeId={selectedStoreId}
-        isOpen={isDetailsOpen}
-        onClose={handleCloseDetails}
-      />
     </div>
+    {isDetailsOpen && (
+    <>
+    <div className={styles.storeDetailsBackdrop} onClick={handleCloseDetails} />
+      <StoreLocationDetails
+          storeId={selectedStoreId}
+          isOpen={isDetailsOpen}
+          onClose={handleCloseDetails}
+        />
+    </>
+    )}
+    </>
   );
 };
 

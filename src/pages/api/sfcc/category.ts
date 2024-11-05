@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Product, Search } from "commerce-sdk";
 import initializeShopperConfig, { clientConfig } from "@utils/sfcc-connector/config";
 import { getCategory } from "@utils/sfcc-connector/dataService";
+import { transformPriceRefinement } from "@utils/sfcc-connector/productUtils";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const requestMethod = req.method;
@@ -68,11 +69,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
 
                     const shopperSearchClient = new Search.ShopperSearch(clientConfig);
-                    const categoryResults = await shopperSearchClient.productSearch(options);
+                    var categoryResults = await shopperSearchClient.productSearch(options);
                     const result : any = {};
                     // console.log("category results: "+ categoryResults.total);
 
                     if (categoryResults.total > 0) {
+                        categoryResults = transformPriceRefinement(categoryResults);
                         result.refinements = categoryResults.refinements;
                         result.sortingOptions = categoryResults.sortingOptions;
 

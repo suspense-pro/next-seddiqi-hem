@@ -26,7 +26,7 @@ import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
 import BrandListing from './../../components/module/brandListing/index';
 import Spacing from "@components/rendering/spacing";
-import { RolexHeroBanner, RolexNavbar } from "@components/rendering/rolex";
+import { RolexHeroBanner, RolexNavbar , RolexImageBanner} from "@components/rendering/rolex";
 import RolexTextBlock from "@components/rendering/rolex/rolexTextBlock";
 import {RolexProductLister} from "@components/rendering/rolex";
 
@@ -55,6 +55,7 @@ export const RolexComponentMapping: any = {
   [`${componentUrl}/rolex/navbar`]: RolexNavbar,
   [`${componentUrl}/rolex/text-block`]: RolexTextBlock,
   [`${componentUrl}/rolex/hero-banner`]: RolexHeroBanner,
+  [`${componentUrl}/rolex/image-banner`]: RolexImageBanner,
   [`${componentUrl}/spacing`]: Spacing,
   [`${componentUrl}/rolex/product-lister`]: RolexProductLister,
 
