@@ -42,7 +42,7 @@ const Button: React.FC<ButtonProps> = ({
   } else {
     return (
       <button
-        className={classNames(`button`, type?.toLowerCase(), color?.toLowerCase())}
+        className={classNames(className, `button`, type?.toLowerCase(), color?.toLowerCase())}
         disabled={disabled}
         onClick={clickHandler ? clickHandler : () => router.push(link || "/")}
       >

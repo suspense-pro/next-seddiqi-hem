@@ -11,9 +11,16 @@ interface ResetPasswordProps {
   subTitle?: string;
   step?: number;
   backUrl?: string;
+  btnTitle?: string;
 }
 
-export default function ResetPassword({ title = "", subTitle = "", step = 1, backUrl = "auth" }: ResetPasswordProps) {
+export default function ResetPassword({
+  title = "",
+  subTitle = "",
+  step = 1,
+  backUrl = "auth",
+  btnTitle,
+}: ResetPasswordProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -122,8 +129,8 @@ export default function ResetPassword({ title = "", subTitle = "", step = 1, bac
             <div className={styles.submitButton}>
               <Button
                 clickHandler={() => console.log("")}
-                className={styles.signInBtn}
-                title="Send"
+                className={styles.resetBtn}
+                title={`${btnTitle ? btnTitle : "Send"}`}
                 isLink={false}
                 type="solid"
                 color="metallic"
