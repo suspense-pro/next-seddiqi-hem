@@ -59,7 +59,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     }
                     
                     if (shopperResponse.customerNo) {
-                        /** call to upsert API to get Golden ID */
+                        /** TODO: call to upsert API to get Golden ID 
                         const upsertOptions = {
                             method: requestMethod,
                             headers: {
@@ -97,7 +97,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         if (result.action === "insert" && result.sfCustomerId) {
                             // console.log("customer : " + JSON.stringify(result, null, 4));
                             /* save the golden ID in SFCC customer profile 
-                                1. update the customer profile with golden ID */
+                                1. update the customer profile with golden ID
                             shopperResponse = {...shopperResponse}
                             shopperResponse.currentPassword = password;
                             shopperResponse.usid = usid;
@@ -108,10 +108,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         } else {
                             console.log("Failed to get Golden ID.");
                             return res.status(400).json({ isError: true, response: "Failed to get Golden ID." });
+                        } */
+
+                        // Get the shopper token and customer ID
+                        const response = await saveGoldenIDToCustomerProfile(shopperResponse, null);
+                        if (response.access_token) {
+                            return res.status(200).json({ isError: false, response: { response } });
+                        } else {
+                            return res.status(400).json({ isError: true, response: { response } });
                         }
                     } else {
                         console.log("Registration Failed.");
-                        return res.status(400).json({ isError: true, response: "Error registering shopper" });
+                        return res.status(400).json({ isError: true, response: shopperResponse });
                     }
                 }
             } catch (err) {

@@ -9,6 +9,7 @@ async function saveGoldenIDToCustomerProfile (customer: any, goldenID: any) {
       username: customer.login,
       password: customer.currentPassword,
   });
+  /* TODO: Once the API is finalied for golden ID, use the below code for setting up the golden ID in customer profile
   clientConfig.headers['authorization'] = `Bearer ${shopperJWT.access_token}`;
   const options = {
     headers: {
@@ -27,7 +28,7 @@ async function saveGoldenIDToCustomerProfile (customer: any, goldenID: any) {
   // UPDATE: customer golden ID into SFCC customer profile
   const client = new Customer.ShopperCustomers(clientConfig);
   const profile = await client.updateCustomer(options);
-  // console.log("UPDATE CUSTOMER: "+ JSON.stringify(profile, null, 4));
+  // console.log("UPDATE CUSTOMER: "+ JSON.stringify(profile, null, 4));*/
   return shopperJWT;
 };
 
