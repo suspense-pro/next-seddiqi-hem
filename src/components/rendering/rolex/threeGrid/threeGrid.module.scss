@@ -4,18 +4,18 @@
   display: flex;
   flex-direction: column;
   gap: rem(60);
-  padding: rem(60) rem(28);
+  padding: 0 rem(28);
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
 
   @include md {
-    padding: rem(60);
+    padding: 0 rem(60);
     gap: rem(92);
   } 
 
   @include xl {
-    padding: rem(120);
+    padding: 0 rem(120);
   }
 
   .oneGridContainer, .twoGridsContainer{
