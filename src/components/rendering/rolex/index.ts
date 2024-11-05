@@ -5,7 +5,7 @@ import ThreeGrid from "./threeGrid";
 import ThreeTallImageText from "./threeTallImageText";
 import TwoColumnImageText from "./twoColumnImageText";
 import FooterBackToTop from "./footerBackToTop";
-import FourItemSlider from "./fourItemSlider";
+import ItemSlider from "./itemSlider";
 import RolexProductLister from "./rolexProduxtLister";
 import RolexImageBanner from "./rolexImageBanner";
 
@@ -16,7 +16,7 @@ export {
     ThreeGrid,
     ThreeCompactImageText,
     ThreeTallImageText,
-    FourItemSlider,
+    ItemSlider,
     FooterBackToTop,
     RolexProductLister,
     RolexImageBanner
