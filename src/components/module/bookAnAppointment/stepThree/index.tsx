@@ -228,7 +228,6 @@ const StepThree = () => {
       <div className={styles.appointmentBtn}>
         <Button title={"Select Boutique"} color="metallic" type="solid" clickHandler={handleSelectBoutique} />
       </div>
-      <ExclusiveInfoCards />
     </div>
   );
 };
