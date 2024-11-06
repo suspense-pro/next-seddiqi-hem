@@ -3,6 +3,7 @@ import styles from "./brandListing.module.scss";
 import Button from "../button";
 import { getCategory } from "@utils/sfcc-connector/dataService";
 import Link from "next/link";
+import TabbedNavigation from "../tabbedNavigation";
 
 const brandsData = {
   A: ["Akrivia", "Aramedes", "Artya", "Audemars Piguet", "Arnold & Son", "Angelus"],
@@ -22,7 +23,7 @@ const brandsData = {
   Z: ["Zenith", "Zodiac"],
 };
 
-const BrandListing = ({ ...content }) => {
+const BrandListing = ({ height = true, ...content }) => {
   if (!content) return null;
 
   const [selectedLetter, setSelectedLetter] = useState("A");
@@ -96,6 +97,16 @@ const BrandListing = ({ ...content }) => {
 
   return (
     <div className={styles.brandSectionContainer}>
+      <TabbedNavigation
+        tabs={[
+          { id: 1, title: "All brands" },
+          { id: 2, title: "watches" },
+          { id: 3, title: "Jewellery" },
+          { id: 4, title: "accessories" },
+        ]}
+        className={styles.tabContainer}
+      />
+
       {/* Alphabet Navigation */}
       <div
         ref={alphabetNavRef}
@@ -120,7 +131,7 @@ const BrandListing = ({ ...content }) => {
       </div>
 
       {/* Brand List */}
-      <div className={styles.brandList} ref={brandListRef}>
+      <div className={`${height && styles.brandListHeight} ${styles.brandList}`} ref={brandListRef}>
         {Object.keys(brandsData).map((letter) => (
           <div key={letter} id={`section-${letter}`} className={styles.brandGroup}>
             <h4>{letter}</h4>
@@ -136,15 +147,18 @@ const BrandListing = ({ ...content }) => {
           </div>
         ))}
       </div>
-      <div className={styles.btnContainer}>
-        <Button
-          isLink={true}
-          link={content?.viewAllBrandsCta?.url}
-          title={content?.viewAllBrandsCta?.label}
-          color={content?.viewAllBrandsCta?.color}
-          type={content?.viewAllBrandsCta?.type}
-        />
-      </div>
+
+      {content?.viewAllBrandsCta && (
+        <div className={styles.btnContainer}>
+          <Button
+            isLink={true}
+            link={content?.viewAllBrandsCta?.url}
+            title={content?.viewAllBrandsCta?.label}
+            color={content?.viewAllBrandsCta?.color}
+            type={content?.viewAllBrandsCta?.type}
+          />
+        </div>
+      )}
     </div>
   );
 };
