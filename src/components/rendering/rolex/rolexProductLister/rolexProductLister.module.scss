@@ -1,0 +1,124 @@
+@import "./../../../../assets/styles/main.scss";
+
+.productListerContainer {
+  padding: rem(0 28);
+  margin: 0 auto;
+  max-width: rem(1150);
+
+  .swiperWrapper {
+    max-width: rem(1150);
+    margin: 0 auto;
+  }
+
+  .productLister {
+    margin-bottom: rem(40);
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+    }
+
+    .productItem {
+      text-align: center;
+
+      .imageContainer {
+        position: relative;
+        width: rem(348);
+        height: rem(348);
+        margin: 0 auto;
+        overflow: hidden;
+        .productImage {
+          object-fit: contain;
+        }
+
+        @include lg {
+          width: rem(336);
+          height: rem(336);
+        }
+      }
+
+      .productInfo {
+        margin-top: rem(28);
+
+        @include lg {
+          margin-top: rem(40);
+        }
+
+        .productTitle {
+          font-family: Helvetica;
+          color: getColorHex("black");
+          font-size: rem(12);
+          font-weight: 400;
+          line-height: rem(18);
+          letter-spacing: rem(0.4);
+          margin-bottom: rem(8);
+
+          @include lg {
+            font-size: rem(16);
+            line-height: rem(20);
+            margin-bottom: rem(12);
+          }
+        }
+
+        .productName {
+          font-family: Helvetica;
+          color: getColorHex("black");
+          font-size: rem(14);
+          font-weight: 700;
+          line-height: rem(22);
+          letter-spacing: rem(0.4);
+          margin-bottom: rem(8);
+
+          @include lg {
+            font-size: rem(16);
+            line-height: rem(26);
+            margin-bottom: rem(12);
+          }
+        }
+
+        .productPrice {
+          font-family: Helvetica;
+          color: getColorHex("black");
+          font-size: rem(12);
+          font-weight: 400;
+          line-height: rem(18);
+          letter-spacing: rem(0.4);
+          margin-bottom: rem(8);
+
+          @include lg {
+            font-size: rem(16);
+            line-height: rem(20);
+            margin-bottom: rem(12);
+          }
+        }
+      }
+    }
+  }
+
+  .btnContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: rem(52);
+
+    @include lg {
+      margin-top: rem(40);
+    }
+  }
+
+  .discoverButton {
+    @include body_regular;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(200);
+    height: rem(48);
+    border-radius: rem(40);
+    background-color: getColorHex("green-Salem");
+    color: getColorHex("white");
+    text-align: center;
+    font-size: rem(14);
+    line-height: rem(18);
+    letter-spacing: rem(1);
+    text-transform: uppercase;
+  }
+}

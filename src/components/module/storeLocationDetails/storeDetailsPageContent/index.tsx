@@ -50,8 +50,6 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store }) => {
           name: "",
           service: "",
         });
-        
-
         const fetchedStores = response?.response || [];
         setStores(fetchedStores);
         const storeId = store;
@@ -75,22 +73,20 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store }) => {
   const storeImage = matchedStore?.c_storeImage;
   const storeHoursString = matchedStore.storeHours || "";
 
-  const formattedStoreHours = storeHoursString
-    .split("<br />")
-    .map((line) => {
-      const [days, timings] = line.split(": ");
-      return {
-        days: days?.trim() || "",
-        timings: timings?.trim() || "",
-      };
-    })
-    .filter((item) => item.days && item.timings);
+  const storeHoursArray = JSON.parse(storeHoursString);
+
+  const formattedStoreHours = storeHoursArray.map((line) => {
+    const [days, timings] = line.split(": ");
+    return { days: days.trim(), timings: timings.trim() };
+  });
 
   const handleToggleChange = (toggle) => {
     setTimeout(() => {
       setActiveToggle(toggle);
     }, 300);
   };
+
+  const brandsToDisplay = matchedStore.c_availableBrands.slice(0, 8);
 
   return (
     <div className={styles.mainWrapper}>
@@ -205,23 +201,6 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store }) => {
                           </Typography>
                         </div>
                       ))}
-
-                      {formattedStoreHours.map((item, index) => (
-                        <div className={styles.timingDetail} key={index}>
-                          <Typography
-                            variant="p"
-                            className={styles.storeOpenDay}
-                          >
-                            {item.days}
-                          </Typography>
-                          <Typography
-                            variant="p"
-                            className={styles.storeOpenTiming}
-                          >
-                            {item.timings}
-                          </Typography>
-                        </div>
-                      ))}
                     </div>
                   </div>
                 </div>
@@ -270,35 +249,30 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store }) => {
                       {"Brands Available"}
                     </Typography>
                   </span>
-                  {matchedStore.c_availableBrands &&
-                    matchedStore.c_availableBrands.length > 8 && (
-                      <span className={styles.viewAllBrands}>
-                        <Button
-                          isLink={false}
-                          className={styles.viewAllBrandsBtn}
-                          title={"View all brands"}
-                          color="brown_dark"
-                          type={"Plain"}
-                          clickHandler={handleViewAllBrands}
-                        />
-                      </span>
-                    )}
+                  {matchedStore.c_availableBrands.length > 8 && (
+                    <span className={styles.viewAllBrands}>
+                      <Button
+                        isLink={false}
+                        className={styles.viewAllBrandsBtn}
+                        title={"View all brands"}
+                        color="brown_dark"
+                        type={"Plain"}
+                        clickHandler={handleViewAllBrands}
+                      />
+                    </span>
+                  )}
                 </div>
 
                 <div className={styles.brandsWrapper}>
-                  {matchedStore.c_availableBrands &&
-                    matchedStore.c_availableBrands.length > 0 &&
-                    matchedStore.c_availableBrands.map(
-                      (availableBrand, index) => (
-                        <React.Fragment key={index}>
-                          <p className={styles.brandsName}>{availableBrand}</p>
-                          {index <
-                            matchedStore.c_availableBrands.length - 1 && (
-                            <div className={styles.brandSeparator} />
-                          )}
-                        </React.Fragment>
-                      )
-                    )}
+                  {brandsToDisplay &&
+                    brandsToDisplay.map((availableBrand, index) => (
+                      <React.Fragment key={index}>
+                        <p className={styles.brandsName}>{availableBrand}</p>
+                        {index < brandsToDisplay.length - 1 && (
+                          <div className={styles.brandSeparator} />
+                        )}
+                      </React.Fragment>
+                    ))}
                 </div>
                 <hr className={styles.divider} />
               </div>
@@ -461,37 +435,30 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store }) => {
                         {"Brands Available"}
                       </Typography>
                     </span>
-                    {matchedStore.c_availableBrands &&
-                      matchedStore.c_availableBrands.length > 8 && (
-                        <span className={styles.viewAllBrands}>
-                          <Button
-                            isLink={false}
-                            className={styles.viewAllBrandsBtn}
-                            title={"View all brands"}
-                            color="brown_dark"
-                            type={"Plain"}
-                            clickHandler={handleViewAllBrands}
-                          />
-                        </span>
-                      )}
+                    {matchedStore.c_availableBrands.length > 8 && (
+                      <span className={styles.viewAllBrands}>
+                        <Button
+                          isLink={false}
+                          className={styles.viewAllBrandsBtn}
+                          title={"View all brands"}
+                          color="brown_dark"
+                          type={"Plain"}
+                          clickHandler={handleViewAllBrands}
+                        />
+                      </span>
+                    )}
                   </div>
 
                   <div className={styles.brandsWrapper}>
-                    {matchedStore.c_availableBrands &&
-                      matchedStore.c_availableBrands.length > 0 &&
-                      matchedStore.c_availableBrands.map(
-                        (availableBrand, index) => (
-                          <React.Fragment key={index}>
-                            <p className={styles.brandsName}>
-                              {availableBrand}
-                            </p>
-                            {index <
-                              matchedStore.c_availableBrands.length - 1 && (
-                              <div className={styles.brandSeparator} />
-                            )}
-                          </React.Fragment>
-                        )
-                      )}
+                    {brandsToDisplay &&
+                      brandsToDisplay.map((availableBrand, index) => (
+                        <React.Fragment key={index}>
+                          <p className={styles.brandsName}>{availableBrand}</p>
+                          {index < brandsToDisplay.length - 1 && (
+                            <div className={styles.brandSeparator} />
+                          )}
+                        </React.Fragment>
+                      ))}
                   </div>
                   <hr className={styles.divider} />
                   {/* All Brand Pop up */}
