@@ -18,6 +18,22 @@
     padding: 0 rem(120);
   }
 
+  &.white{
+    background: getColorHex("white");
+  }
+
+  &.beige{
+    background: getColorHex("beige");
+  }
+
+  &.grey_pampas{
+    background: getColorHex("grey-pampas");
+  }
+
+  &.grey_light{
+    background: getColorHex("grey-light");
+  }
+
   .oneGridContainer, .twoGridsContainer{
     display: flex;
     flex-direction: column;

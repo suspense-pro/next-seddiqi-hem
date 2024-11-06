@@ -9,9 +9,10 @@ const ThreeGrid = ({ ...content }) => {
   const oneGrid = content?.oneGrid[0];
   const twoGrids = content?.twoGrids[0];
 
+  const backgroundClass = content?.backgroundColor.toLowerCase();
 
   return (
-    <div className={styles.container}>
+    <div className={`${[styles.container]} ${styles[backgroundClass]}`}>
       <div className={styles.oneGridContainer}>
         <h3 className={styles.mainTitle}>{oneGrid.mainTitle}</h3>
 
