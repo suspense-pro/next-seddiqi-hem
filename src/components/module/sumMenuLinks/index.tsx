@@ -23,6 +23,7 @@ const SubMenuLinks = () => {
           title={item_title}
           arrow={isVisible}
           url={content?.commonProps?.url ? content?.commonProps?.url : "/"}
+          isNewTab={content?.commonProps?.isNewTab}
         />
       );
     });
