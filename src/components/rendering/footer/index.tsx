@@ -53,8 +53,8 @@ export default function Footer({ footerData }: FooterPropType) {
           <Image
             src={logoUrl}
             alt={logoAltText}
-            width={300}
-            height={30}
+            width={209}
+            height={44}
             className={styles.logo}
           />
 
