@@ -1,22 +1,18 @@
+import { Image } from "@components/module";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import styles from "./fourItemSlider.module.scss";
+import styles from "./itemSlider.module.scss";
 
 import { Navigation } from "swiper/modules";
 
-const FourItemSlider = () => {
+const ItemSlider = ({ ...content }) => {
 
-  const sliderData = [
-    {imageUrl: "/images/png/keep-exploring1.png", linkText: "Discover Rolex", linkUrl: "/"},
-    {imageUrl: "/images/png/keep-exploring2.png", linkText: "Rolex watches", linkUrl: "/"},
-    {imageUrl: "/images/png/keep-exploring3.png", linkText: "New watches 2024", linkUrl: "/"},
-    {imageUrl: "/images/png/keep-exploring4.png", linkText: "Watchmaking", linkUrl: "/"},
-    {imageUrl: "/images/png/keep-exploring1.png", linkText: "Discover Rolex", linkUrl: "/"}
-  ];
+  if (!content) return null;
 
+  const sliderItem = content?.sliderItem;
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleSlideChange = (swiper) => {
@@ -25,7 +21,7 @@ const FourItemSlider = () => {
   
   return (
     <div className={styles.sliderContainer}>
-      <h3 className={styles.title}>Keep Exploring</h3>
+      <h3 className={styles.title}>{content.mainTitle}</h3>
 
       <Swiper
         slidesPerView={'auto'}
@@ -40,10 +36,15 @@ const FourItemSlider = () => {
         className={styles.sliderSwiper}
         onSlideChange={handleSlideChange}
       >
-        {sliderData.map((data, index) => (
+        {sliderItem.map((data, index) => (
         <SwiperSlide  key={index} className={`${[styles.sliderSlide]} ${index < activeIndex || index > activeIndex + 3 ? styles.hiddenSlide : ''}`}>
           <a href={data.linkUrl} className={styles.sliderLink}>
-            <img src={data.imageUrl} className={styles.sliderImage} />
+            <Image
+              imgWidth="100%"
+              height={"auto"}
+              image={data.media?.image}
+              imageAltText={data.media?.altText}
+            />
             <span className={styles.sliderText}>{data.linkText}</span>
           </a>
         </SwiperSlide>
@@ -54,4 +55,4 @@ const FourItemSlider = () => {
   )
 };
 
-export default FourItemSlider;
+export default ItemSlider;

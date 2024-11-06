@@ -29,6 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     });
                     form.parse(req, async (err, fields, files) => {
                         
+                        /* TODO: The below code is for Mulesoft API integration
                         if (err) {
                             console.error("Error parsing form:", err);
                             return res.status(500).json({ isError: true, message: "Form parsing error" });
@@ -92,6 +93,27 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         } else {
                             console.log("Request submission failed.");
                             return res.status(400).json({ isError: true, response: result });
+                        }*/
+
+                        // send email to customer - nodemailer
+                        const subject = "Seddiqi - Support Team";
+                        const htmlContent = "Hi " + getFieldValue(fields.firstName)+ "," + "\n We have received your query and will get back to you shortly.";
+                        const emailInfo = await sendEmail(getFieldValue(fields.email), subject, htmlContent);
+                        if (emailInfo.success) {
+                            console.log("Email sent successfully");
+                        } else {
+                            console.log("Email failed");
+                        }
+
+                        // send email to support (with attachment if any) - nodemailer
+                        const file = files.attachment ? files.attachment[0] : null;
+                        const emailAttachment = await sendEmailWithAttachment(fields, file);
+                        if (emailAttachment.success) {
+                            console.log("Attachment sent successfully");
+                            return res.status(200).json({ isError: false, emailAttachment });
+                        } else {
+                            console.log("Attachment Email failed");
+                            return res.status(400).json({ isError: false, emailAttachment });
                         }
                     });
                 }
