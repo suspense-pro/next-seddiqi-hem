@@ -12,7 +12,7 @@ import { Search } from "@components/module";
 import { useSearchContext } from "@contexts/searchContext";
 
 const HeaderMainLinks = () => {
-  const { updateCurrent, headerData } = useContext(HeaderContext);
+  const { updateCurrent, current, headerData } = useContext(HeaderContext);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const { openSearch } = useSearchContext();
 
