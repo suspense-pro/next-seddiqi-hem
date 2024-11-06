@@ -16,6 +16,10 @@
 .rolex {
   @include rolex_regular;
 
+  div{
+    @include rolex_regular();
+  }
+
   .h1,
   .h2,
   .h3,

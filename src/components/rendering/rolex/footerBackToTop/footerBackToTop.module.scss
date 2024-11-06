@@ -7,6 +7,10 @@
     padding: rem(32) rem(40);
     background: rgb(25,111,72);
     background: linear-gradient(270deg, rgba(25,111,72,1) 0%, rgba(13,72,45,1) 100%);
+
+    & > div{
+        margin: 0 auto;
+    }
 }
 
 .rolexIcon{

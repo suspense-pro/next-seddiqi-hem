@@ -44,6 +44,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 const CPOPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { vse, content } = props;
   const [page] = useContent(content.page, vse as string);
+
+  console.log("CPO Content: ", content);
   return (
     <div className="blog-content rolex">
       {page?.components

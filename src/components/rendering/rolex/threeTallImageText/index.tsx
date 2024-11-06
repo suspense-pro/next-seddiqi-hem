@@ -1,20 +1,19 @@
+import { Image } from "@components/module";
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 
 import styles from "./threeTallImageText.module.scss";
 
-const ThreeTallImageText = () => {
+const ThreeTallImageText = ({ ...content }) => {
 
-  const sliderData = [
-    {imageUrl: "/images/png/keep-exploring1.png", linkText: "ROLEX CERTIFIED PRE-OWNED AT Ahmed seddiqi", linkUrl: "/"},
-    {imageUrl: "/images/png/keep-exploring2.png", linkText: "our selection", linkUrl: "/"},
-    {imageUrl: "/images/png/keep-exploring3.png", linkText: "The rolex certification", linkUrl: "/"},
-  ];
+  if (!content) return null;
+
+  const components = content?.components;
   
   return (
     <div className={styles.sliderContainer}>
-      <h3 className={styles.title}>Keep Exploring</h3>
+      <h3 className={styles.title}>{content.mainTitle}</h3>
 
       <Swiper
         slidesPerView={'auto'}
@@ -27,10 +26,17 @@ const ThreeTallImageText = () => {
         }}
         className={styles.sliderSwiper}
       >
-        {sliderData.map((data, index) => (
+        {components.map((data, index) => (
         <SwiperSlide  key={index} className={`${[styles.sliderSlide]}`}>
           <a href={data.linkUrl} className={styles.sliderLink}>
-            <img src={data.imageUrl} className={styles.sliderImage} />
+          <Image
+            imgWidth="100%"
+            height={styles.image}
+            className={styles.image}
+            image={data?.media?.image}
+            imageAltText={data?.media?.altText}
+          />
+            
             <span className={styles.sliderText}>{data.linkText}</span>
           </a>
         </SwiperSlide>
