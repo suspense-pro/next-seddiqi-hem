@@ -48,7 +48,7 @@ const RolexProductLister = (content) => {
                   </div>
                   <div className={styles.productInfo}>
                     <Typography variant="p" className={styles.productTitle}>
-                      {title}
+                      {title}--000
                     </Typography>
                     <Typography variant="p" className={styles.productName}>
                       {name}
