@@ -6,7 +6,7 @@ import ThreeTallImageText from "./threeTallImageText";
 import TwoColumnImageText from "./twoColumnImageText";
 import FooterBackToTop from "./footerBackToTop";
 import ItemSlider from "./itemSlider";
-import RolexProductLister from "./rolexProduxtLister";
+import RolexProductLister from "./rolexProductLister";
 import RolexImageBanner from "./rolexImageBanner";
 
 export { 
@@ -19,5 +19,5 @@ export {
     ItemSlider,
     FooterBackToTop,
     RolexProductLister,
-    RolexImageBanner
+    RolexImageBanner,
  };
