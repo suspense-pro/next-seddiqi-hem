@@ -4,7 +4,6 @@ import RichText from "@components/module/richText";
 import { Typography } from "@components/module";
 
 const RolexTextBlock = ({ ...content }) => {
-  console.log("TEXT BLOCK", content);
   if (!content) return null;
 
   if (content?.type?.toLowerCase() === "rolex") {

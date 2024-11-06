@@ -8,8 +8,10 @@ const ThreeCompactImageText = ({ ...content }) => {
 
   const components = content?.components;
 
+  const backgroundClass = content?.backgroundColor.toLowerCase();
+
   return (
-    <div className={styles.container}>
+    <div className={`${[styles.container]} ${styles[backgroundClass]}`}>
       <h3 className={styles.mainTitle}>{content.mainTitle}</h3>
 
       <div className={styles.imageTextsWrapper}>

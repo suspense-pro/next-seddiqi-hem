@@ -51,12 +51,7 @@
     flex-direction: column;
 
     .logo {
-      width: rem(230);
-      height: rem(25);
-      @include md {
-        width: rem(300);
-        height: rem(30);
-      }
+      height: rem(44);
     }
 
     span {

@@ -1,12 +1,17 @@
 @import "./../../../assets/styles/main.scss";
 
+
+
+.tabContainer {
+  width: rem(600);
+}
 .brandSectionContainer {
   display: flex;
   flex-direction: column;
-  margin: rem(120 0);
+  margin: rem(0 0);
 
   @include lg {
-    margin: rem(120);
+    margin: rem(0 120);
   }
 }
 
@@ -59,19 +64,21 @@
   }
 }
 
-.brandList {
+.brandListHeight {
   max-height: rem(400);
+}
+
+.brandList {
   overflow-y: auto;
   margin: 0 rem(28);
   display: grid;
   gap: rem(20);
   grid-template-columns: repeat(auto-fit, minmax(rem(150), 1fr));
-  
+
   @include md {
     grid-template-columns: repeat(2, minmax(rem(250), 1fr));
   }
 
-  
   @include lg {
     margin: 0;
     grid-template-columns: repeat(4, 1fr);

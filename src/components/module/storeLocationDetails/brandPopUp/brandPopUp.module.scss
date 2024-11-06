@@ -7,6 +7,8 @@
 
 .brandsWrapper {
   display: flex;
+  flex-wrap: wrap; 
+  align-items: center; 
   align-items: flex-start;
   margin-top: rem(12);
   margin-bottom: rem(16);
@@ -16,7 +18,8 @@
   width: rem(1);
   height: rem(20);
   background-color: getColorHex("green-dark");
-  margin: 0 rem(4);
+  margin-left: rem(5);
+  margin-right: rem(5);
 }
 
 .brandsName {
@@ -24,4 +27,5 @@
   font-weight: 400;
   line-height: rem(20);
   letter-spacing: rem(0.2);
+  white-space: nowrap;
 }

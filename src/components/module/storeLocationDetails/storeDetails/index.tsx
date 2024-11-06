@@ -26,8 +26,8 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
   const storeHoursString = store?.storeHours;
   const [stores, setStores] = useState([]);
 
-  // Split by <br /> and then by ": " to separate days from timings
-  const formattedStoreHours = storeHoursString.split("<br />").map((line) => {
+  const storeHoursArray = JSON.parse(storeHoursString);
+  const formattedStoreHours = storeHoursArray.map((line) => {
     const [days, timings] = line.split(": ");
     return { days: days.trim(), timings: timings.trim() };
   });
@@ -45,6 +45,9 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
   const handleClosePopup = () => {
     setAllBrandPopupOpen(false);
   };
+  
+  const brandsToDisplay = store.c_availableBrands.slice(0, 8);
+
 
   return (
     <div className={styles.contentWrapper}>
@@ -193,7 +196,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             {"Brands Available"}
           </Typography>
         </span>
-        {store.c_availableBrands && store.c_availableBrands.length > 8 && (
+        {store?.c_availableBrands.length > 8 && (
           <span className={styles.viewAllBrands}>
             <Button
               isLink={false}
@@ -208,12 +211,11 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
       </div>
 
       <div className={styles.brandsWrapper}>
-        {store.c_availableBrands &&
-          store.c_availableBrands.length > 0 &&
-          store.c_availableBrands.map((availableBrand, index) => (
+        {brandsToDisplay &&
+          brandsToDisplay.map((availableBrand, index) => (
             <React.Fragment key={index}>
               <p className={styles.brandsName}>{availableBrand}</p>
-              {index < store.c_availableBrands.length - 1 && (
+              {index < brandsToDisplay.length - 1 && (
                 <div className={styles.brandSeparator} />
               )}
             </React.Fragment>
