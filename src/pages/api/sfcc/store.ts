@@ -32,8 +32,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
 
                     const storeResults = await shopperStoresClient.searchStores(options);
-                    let filteredStores = [];
 
+                    /** transform store hours into array */
+                    storeResults.data.forEach(store => {
+                        if (store.storeHours) {
+                            const storeHoursArray = store.storeHours
+                                .split(",")
+                                .filter(item => item.trim() !== "")
+                                .map(item => {
+                                    const [day, hours] = item.split(": ").map(part => part.trim());
+                                    // Return an object with day as key and hours as value
+                                    return `${day}: ${hours}`;
+                                });
+                            store.storeHours = JSON.stringify(storeHoursArray);
+                        }                        
+                    });
+    
+                    let filteredStores = [];
                     const brands = Array.isArray(brand) ? brand : brand?.split(",");
                     const cities = Array.isArray(city) ? city : city?.split(",");
                     const names = Array.isArray(name) ? name : name?.split(",");
