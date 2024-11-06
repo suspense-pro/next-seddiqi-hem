@@ -28,13 +28,25 @@ const HeaderMainLinks = () => {
     setIsPopupVisible(false);
   };
 
+  const RolexScript = 
+    ` <div id="rolex-retailer-clock">
+        <div class="LinkEnabler">
+        <!-- Container div for scaling -->
+        <div class="clockContainer">
+        <iframe id="rolex_retailer" title="Rolex Official Retailer" src="
+        https://static.rolex.com/retailers/clock/?colour=gold&amp;apiKey=fd5d8663fc8674a9ffab32649c3e39bf&amp;lang=en" scrolling="no" frameborder="no"></iframe>
+        </div>
+      </div>`
+  
+
   return (
     <div className={styles.linksContainer}>
       <div className={styles.logoContainer}>
-        <Link href={headerData?.content?.patekLogo}>
-          <Image src={"/images/png/RolexLogo.png"} width={91.57} height={42} alt="rolex logo" />
+        <Link href={headerData?.content?.rolexLogo} dangerouslySetInnerHTML={{__html: RolexScript}}>
+          {/* <Image src={"/images/png/RolexLogo.png"} width={91.57} height={42} alt="rolex logo" /> */}
+          {/* <div></div> */}
         </Link>
-        <Link href={headerData?.content?.rolexLogo}>
+        <Link href={headerData?.content?.patekLogo}>
           <Image src={"/images/png/PatekLogo.png"} width={71.81} height={42} alt="patek logo" />
         </Link>
       </div>

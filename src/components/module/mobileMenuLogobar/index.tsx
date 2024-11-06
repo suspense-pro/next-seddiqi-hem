@@ -14,6 +14,16 @@ const MobileMenuLogobar = () => {
     
   if(!PATEK_LOGO || !ROLEX_LOGO) return null
 
+  const RolexScript = 
+  ` <div id="rolex-retailer-clock">
+      <div class="LinkEnabler">
+      <!-- Container div for scaling -->
+      <div class="clockContainer">
+      <iframe id="rolex_retailer" title="Rolex Official Retailer" src="
+      https://static.rolex.com/retailers/clock/?colour=gold&amp;apiKey=fd5d8663fc8674a9ffab32649c3e39bf&amp;lang=en" scrolling="no" frameborder="no"></iframe>
+      </div>
+    </div>`
+    
   return (
     <div className={styles.bottom}>
       {/* <Button
@@ -36,7 +46,9 @@ const MobileMenuLogobar = () => {
               className={styles.image}
             />
           </Link>
-          <Link href={"/"}>
+          <Link href={headerData?.content?.rolexLogo} dangerouslySetInnerHTML={{__html: RolexScript}}>
+          </Link>
+          {/* <Link href={"/"}>
             <Image
               src={ROLEX_LOGO}
               width={104}
@@ -44,7 +56,7 @@ const MobileMenuLogobar = () => {
               alt={rightLogo?.image?.altText}
               className={styles.image}
             />
-          </Link>
+          </Link> */}
         </div>
       </div>
       <HeaderFooter className={styles.headerFooter} />
