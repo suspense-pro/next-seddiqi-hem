@@ -26,7 +26,7 @@ import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
 import BrandListing from './../../components/module/brandListing/index';
 import Spacing from "@components/rendering/spacing";
-import { RolexHeroBanner, RolexNavbar , RolexImageBanner, ThreeGrid, ThreeCompactImageText, ItemSlider} from "@components/rendering/rolex";
+import { RolexHeroBanner, RolexNavbar , RolexImageBanner, ThreeGrid, ThreeCompactImageText, ItemSlider, TwoColumnImageText, ThreeTallImageText} from "@components/rendering/rolex";
 import RolexTextBlock from "@components/rendering/rolex/rolexTextBlock";
 import {RolexProductLister} from "@components/rendering/rolex";
 
@@ -60,6 +60,8 @@ export const RolexComponentMapping: any = {
   [`${componentUrl}/rolex/three-grid`]: ThreeGrid,
   [`${componentUrl}/rolex/three-compact-image-text`]: ThreeCompactImageText,
   [`${componentUrl}/rolex/item-slider`]: ItemSlider,
+  [`${componentUrl}/rolex/two-column-image-text-v2`]: TwoColumnImageText,
+  [`${componentUrl}/rolex/three-tall-image-text`]: ThreeTallImageText,
   [`${componentUrl}/rolex/product-lister`]: RolexProductLister
 };
 

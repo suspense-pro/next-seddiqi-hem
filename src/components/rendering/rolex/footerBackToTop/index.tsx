@@ -1,17 +1,26 @@
 import { ArrowUp } from "@assets/images/svg";
 import RolexIcon from "@assets/images/svg/RolexIcon";
+import { Image } from "@components/module";
 import React from "react";
 import styles from "./footerBackToTop.module.scss";
 
-const FooterBackToTop = () => {
+const FooterBackToTop = ({ contentImage, contentAlt }) => {
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <div className={styles.footerBackToTopContainer}>
-      {/* <RolexIcon className={styles.rolexIcon} /> */}
-      <img src="/images/png/rolex-icon.png" className={styles.rolexIcon} />
+      {contentImage && 
+        <Image
+          className={styles.rolexIcon}
+          imgWidth="auto"
+          height={"auto"}
+          image={contentImage}
+          imageAltText={contentAlt}
+        />
+      }
 
       <div className={styles.backToTop}>
         <button className={styles.backToTopButton} onClick={scrollToTop}>

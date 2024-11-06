@@ -8,7 +8,7 @@
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
-  background: getColorHex("beige");
+  background: getColorHex("grey-light");
 
   @include md {
     padding: 0 rem(60);
@@ -34,6 +34,15 @@
         flex-direction: row-reverse;
       }
     }
+
+    & > div{
+      width: 100%;
+  
+      @include md {
+        width: calc(50% - 22px);
+        min-width: calc(50% - 22px);
+      }
+    }
   }
 
   .image{
@@ -42,11 +51,7 @@
     aspect-ratio: 1/1;
     object-fit: cover;
     width: 100%;
-
-    @include md {
-      width: 50%;
-      min-width: 50%;
-    }
+    height: 100%;
   }
 
   .textsContainer{
@@ -81,6 +86,14 @@
 
     &:empty{
       display: none;
+    }
+  }
+
+  a{
+    margin: 0 auto;
+
+    @include md {
+      margin: 0;
     }
   }
 

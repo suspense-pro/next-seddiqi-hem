@@ -42,18 +42,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function RolexHome({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log("Contents: ", content);
+  //console.log("Contents: ", content);
 
   return (
     <div className="main-content rolex">
       {compact(content?.page?.components).map((content) => (
         <ContentBlock components={RolexComponentMapping} content={content} key={content?._meta.deliveryId} />
       ))}
-
-      {/*<ItemSlider />
-      <TwoColumnImageText />
-      <ThreeTallImageText />
-      <FooterBackToTop /> */}
+      
+      <FooterBackToTop contentImage={content?.page?.footerBlock?.footer?.media?.image} contentAlt={content?.page?.footerBlock?.footer?.media?.altText} />
     </div>
   );
 }

@@ -34,10 +34,10 @@
   }
 
   .brand {
-    @include body_regular;
+    @include rolex_regular;
     color: getColorHex("white");
     font-size: rem(14);
-    font-weight: 700;
+    //font-weight: 700;
     line-height: rem(22);
     letter-spacing: rem(0.4);
 
@@ -65,7 +65,7 @@
   }
 
   .discoverButton {
-    @include body_regular;
+    @include rolex_regular;
     display: flex;
     max-width: rem(200);
     height: rem(48);
