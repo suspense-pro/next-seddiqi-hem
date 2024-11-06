@@ -22,26 +22,18 @@
       text-align: center;
 
       .imageContainer {
+        position: relative;
         width: rem(348);
         height: rem(348);
         margin: 0 auto;
         overflow: hidden;
-
         .productImage {
-          width: rem(348);
-          height: rem(348);
-          object-fit: cover;
-          display: block;
+          object-fit: contain;
         }
 
         @include lg {
           width: rem(336);
           height: rem(336);
-
-          .productImage {
-            width: rem(336);
-            height: rem(336);
-          }
         }
       }
 
@@ -109,7 +101,7 @@
     margin-top: rem(52);
 
     @include lg {
-      margin-top: rem(88);
+      margin-top: rem(40);
     }
   }
 

@@ -1,28 +1,13 @@
-import React, { useEffect, useState } from "react";
-import styles from "./rolexProductListerV2.module.scss";
-import { Typography, NavigationLink } from "@components/module";
+import React from "react";
+import styles from "./rolexProductLister.module.scss";
+import { Typography, NavigationLink, Image } from "@components/module";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { getProducts } from "@utils/sfcc-connector/dataService";
-import Image from "next/image";
 
-const RolexProductListerV2 = ({ listItems = [], cta }) => {
-  const [products, setProducts] = useState(null);
+const RolexProductListerV2 = (content) => {
+  if (!content) return null;
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      if (listItems.length > 0) {
-        const data = await getProducts({
-          pids: listItems.join(","),
-          method: "GET",
-        });
-        setProducts(data?.data);
-      }
-    };
-    fetchProducts();
-  }, [listItems]);
-
-  if (!products) return null;
+  const products = content?.productImages;
 
   return (
     <div className={styles.productListerContainer}>
@@ -43,11 +28,11 @@ const RolexProductListerV2 = ({ listItems = [], cta }) => {
           className={styles.productLister}
         >
           {products.map((product, index) => {
-            const imageData = product?.imageGroups?.[1]?.images?.[0]?.link;
-            const altText = product?.imageGroups?.[1]?.images?.[0]?.alt || "";
-            const title = product?.brand;
-            const subtitle = product?.name;
-            const price = product?.price;
+            const imageData = product.image.image;
+            const altText = product.image.altText || "";
+            const title = product.productTitle;
+            const name = product.productName;
+            const price = product.price;
 
             return (
               <SwiperSlide key={index}>
@@ -55,23 +40,21 @@ const RolexProductListerV2 = ({ listItems = [], cta }) => {
                   <div className={styles.imageContainer}>
                     {imageData && (
                       <Image
-                        layout="fill"
-                        objectFit="contain"
-                        alt={altText}
-                        src={imageData}
-                        className={styles.productImage} 
+                        image={imageData}
+                        imageAltText={altText}
+                        className={styles.productImage}
                       />
                     )}
                   </div>
                   <div className={styles.productInfo}>
-                  <Typography variant="p" className={styles.productTitle}>
+                    <Typography variant="p" className={styles.productTitle}>
                       {title}
                     </Typography>
                     <Typography variant="p" className={styles.productName}>
-                      {subtitle?.toUpperCase()}
+                      {name}
                     </Typography>
                     <Typography variant="p" className={styles.productPrice}>
-                      AED {price}
+                      {price}
                     </Typography>
                   </div>
                 </div>
@@ -81,10 +64,7 @@ const RolexProductListerV2 = ({ listItems = [], cta }) => {
         </Swiper>
       </div>
       <div className={styles.btnContainer}>
-        <NavigationLink
-          className={styles.discoverButton}
-          title={cta?.label || "Shop"}
-        />
+        <NavigationLink className={styles.discoverButton} title={"Shop"} />
       </div>
     </div>
   );
