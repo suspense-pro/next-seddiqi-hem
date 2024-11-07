@@ -34,7 +34,7 @@
   }
 
   .brand {
-    @include rolex_regular;
+    // @include rolex_regular;
     color: getColorHex("white");
     font-size: rem(14);
     //font-weight: 700;
@@ -54,7 +54,7 @@
     font-weight: 700;
     line-height: rem(30);
     letter-spacing: rem(0.6);
-    margin: rem(12) 0 rem(16) 0;
+    margin: rem(8) 0 rem(16) 0;
 
     @include md {
       margin: rem(16) 0 rem(28) 0;
@@ -78,7 +78,13 @@
     font-size: rem(14);
     line-height: rem(18);
     letter-spacing: rem(1);
-    text-transform: uppercase;
+    text-transform: capitalize;
+  }
+}
+
+.textOverlay {
+  h2 {
+    margin-top: rem(8);
   }
 }
 
@@ -180,4 +186,17 @@
 }
 .sliderRightBtn {
   right: rem(44);
+}
+
+.carouselBtns {
+  width: 100%;
+  position: absolute;
+  bottom: rem(36);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiperSlide {
+  position: relative;
 }
