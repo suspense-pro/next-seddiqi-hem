@@ -1,0 +1,83 @@
+@import "./../../../assets/styles/main.scss";
+
+.contactForm {
+  max-width: rem(800);
+  margin: rem(120) auto;
+  display: flex;
+  flex-direction: column;
+  gap: rem(44);
+}
+
+.heading {
+  @include heading_regular;
+  color: getColorHex("green-dark");
+  text-align: center;
+
+  font-size: rem(32);
+  font-weight: 500;
+  line-height: rem(44);
+  letter-spacing: rem(0.6);
+}
+
+.doubleForm {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: rem(40);
+
+  @include md {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.optionSelector {
+  display: flex;
+  gap: rem(40);
+  flex-direction: column;
+
+  @include md {
+    flex-direction: row;
+  }
+
+  div:last-child {
+    width: 100%;
+  }
+}
+
+.attachmentField {
+  display: flex;
+  flex-direction: column;
+  gap: rem(12);
+}
+
+.attachment {
+  height: rem(80);
+  border: none;
+  outline: none;
+  border: 1px solid var(--Secondary-Brown-Grey, #847b72);
+  width: 100%;
+  position: relative;
+
+  .fileInfo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+
+  input {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+}
+
+.btnContainer {
+  width: 100%;
+  text-align: center;
+
+  .submitBtn {
+    width: rem(252);
+  }
+}
