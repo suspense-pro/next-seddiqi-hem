@@ -29,13 +29,14 @@
     justify-content: center;
     flex: 1;
     width: 100%;
-    gap: rem(36);
+    gap: rem(26);
 
     // @include breakpoint-max-width(rem(1400)) {
     //   justify-content: flex-end;
     // }
-    @include breakpoint-max-width(rem(1400)) {
+    @include breakpoint-min-width(rem(1448)) {
       justify-content: center;
+      gap: rem(36);
     }
 
     .headerLink {
@@ -101,6 +102,12 @@
   // @include xl {
   //   display: flex;
   // }
+
+  &.scrolled {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
 
   .rolexLogo {
     width: rem(78.65);

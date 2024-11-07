@@ -10,8 +10,9 @@ import PrivateLink from "../privateLink";
 import { SideDrawer } from "@components/module";
 import { Search } from "@components/module";
 import { useSearchContext } from "@contexts/searchContext";
+import classNames from "classnames";
 
-const HeaderMainLinks = () => {
+const HeaderMainLinks = ({isScrolled = false}: {isScrolled?: boolean}) => {
   const { updateCurrent, current, headerData } = useContext(HeaderContext);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const { openSearch } = useSearchContext();
@@ -34,13 +35,13 @@ const HeaderMainLinks = () => {
 
   return (
     <div className={styles.linksContainer}>
-      <div className={styles.logoContainer}>
+      <div className={classNames(styles.logoContainer, {[styles.scrolled]: isScrolled})}>
         <Link href={headerData?.content?.rolexLogo} dangerouslySetInnerHTML={{__html: RolexScript}}>
           {/* <Image src={"/images/png/RolexLogo.png"} width={91.57} height={42} alt="rolex logo" /> */}
           {/* <div></div> */}
         </Link>
         <Link href={headerData?.content?.patekLogo}>
-          <Image src={"/images/png/PatekLogo.png"} width={150} height={70} alt="patek logo" />
+          <Image src={"/images/png/PatekLogo.png"} width={118} height={68} alt="patek logo" />
         </Link>
       </div>
       <div className={styles.links}>

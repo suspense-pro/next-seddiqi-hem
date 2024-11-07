@@ -35,8 +35,8 @@ const MobileMenuLogobar = () => {
           <Link href={"/"}>
             <Image
               src={PATEK_LOGO}
-              width={150}
-              height={70}
+              width={118}
+              height={68}
               alt={leftLogo?.image?.altText}
               className={styles.image}
             />
