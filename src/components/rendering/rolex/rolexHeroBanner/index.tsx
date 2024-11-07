@@ -114,16 +114,18 @@ const RolexHeroBanner = ({ ...content }) => {
           </SwiperSlide>
         );
       })}
-      <div className={styles.carouselBtns}>
-        <CarouselBtns
-          btnWidth={40}
-          activeIndex={activeIndex}
-          slides={slides}
-          swiper={swiper}
-          btnColor="white"
-          activeBtn={false}
-        />
-      </div>
+      {slides?.length > 1 && (
+        <div className={styles.carouselBtns}>
+          <CarouselBtns
+            btnWidth={40}
+            activeIndex={activeIndex}
+            slides={slides}
+            swiper={swiper}
+            btnColor="white"
+            activeBtn={false}
+          />
+        </div>
+      )}
     </Swiper>
   );
 };
