@@ -44,6 +44,16 @@
     }
   }
 
+  .twoGridsContainer{
+    
+    .mainTitle{
+
+      @include md {
+        margin-bottom: rem(4);
+      }
+    }
+  }
+
   .mainTitle{
     @include rolex_bold;
     font-size: rem(18);
@@ -104,7 +114,11 @@
   .textsContainer{
     display: flex;
     flex-direction: column;
-    gap: rem(12);
+    gap: rem(8);
+
+    @include md {
+      gap: rem(16);
+    }
   }
 
   .subtitle{
@@ -119,7 +133,11 @@
     @include md {
       font-size: rem(16);
       line-height: rem(24);
-      color: getColorHex("green-dark");
+      //color: getColorHex("green-dark");
+    }
+
+    &:empty{
+      display: none;
     }
   }
 
@@ -134,6 +152,10 @@
 
     @include md {
       letter-spacing: rem(0.6);
+    }
+
+    &:empty{
+      display: none;
     }
   }
 
@@ -165,6 +187,10 @@
         }
       }
     }*/
+
+    &:empty{
+      display: none;
+    }
   }
 
   .sliderSwiper{
