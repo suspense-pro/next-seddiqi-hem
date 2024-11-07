@@ -11,8 +11,6 @@
   }
 
   .productLister {
-    margin-bottom: rem(40);
-
     .swiper-slide {
       display: flex;
       justify-content: center;
@@ -82,13 +80,11 @@
           font-size: rem(12);
           font-weight: 400;
           line-height: rem(18);
-          letter-spacing: rem(0.4);
-          margin-bottom: rem(8);
+          letter-spacing: rem(0.4); 
 
           @include lg {
             font-size: rem(16);
-            line-height: rem(20);
-            margin-bottom: rem(12);
+            line-height: rem(20); 
           }
         }
       }
@@ -98,10 +94,10 @@
   .btnContainer {
     display: flex;
     justify-content: center;
-    margin-top: rem(52);
+    margin-top: rem(24);
 
     @include lg {
-      margin-top: rem(40);
+      margin-top: rem(48);
     }
   }
 
