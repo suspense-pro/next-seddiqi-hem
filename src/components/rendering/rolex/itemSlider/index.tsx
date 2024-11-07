@@ -1,11 +1,9 @@
 import { Image } from "@components/module";
 import React, { useState } from "react";
+import styles from "./itemSlider.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import 'swiper/css/navigation';
-
-import styles from "./itemSlider.module.scss";
-
 import { Navigation } from "swiper/modules";
 
 const ItemSlider = ({ ...content }) => {
