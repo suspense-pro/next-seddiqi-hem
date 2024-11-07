@@ -1,15 +1,24 @@
 import { Image } from "@components/module";
 import React, { useRef, useState, useCallback, useEffect } from "react";
+import styles from "./threeTallImageText.module.scss";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-import styles from "./threeTallImageText.module.scss";
+import { Navigation, Pagination } from "swiper/modules";
 
 const ThreeTallImageText = ({ ...content }) => {
 
   if (!content) return null;
 
   const components = content?.components;
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleSlideChange = (swiper) => {
+    setActiveIndex(swiper.activeIndex);
+  };
   
   return (
     <div className={styles.sliderContainer}>
@@ -18,13 +27,17 @@ const ThreeTallImageText = ({ ...content }) => {
       <Swiper
         slidesPerView={'auto'}
         spaceBetween={40}
+        navigation={true}
+        pagination={{ clickable: true }}
         breakpoints={{
           768: {
             spaceBetween: 32,
             slidesPerView: 3,
           }
         }}
+        modules={[Navigation, Pagination]}
         className={styles.sliderSwiper}
+        onSlideChange={handleSlideChange}
       >
         {components.map((data, index) => (
         <SwiperSlide  key={index} className={`${[styles.sliderSlide]}`}>
