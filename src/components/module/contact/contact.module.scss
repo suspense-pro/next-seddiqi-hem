@@ -2,17 +2,21 @@
 
 .contactForm {
   max-width: rem(800);
-  margin: rem(120) auto;
   display: flex;
   flex-direction: column;
   gap: rem(44);
+  margin: rem(60 28);
+  
+  @include md {
+    margin: rem(80) auto;
+  }
 }
 
 .heading {
   @include heading_regular;
   color: getColorHex("green-dark");
   text-align: center;
-
+  margin: 0;
   font-size: rem(32);
   font-weight: 500;
   line-height: rem(44);
@@ -31,16 +35,17 @@
 
 .optionSelector {
   display: flex;
-  gap: rem(40);
-  flex-direction: column;
-
+  gap: rem(12);
+  flex-direction: row;
+  
   @include md {
-    flex-direction: row;
+    gap: rem(24);
   }
 
   div:last-child {
     width: 100%;
   }
+
 }
 
 .attachmentField {
