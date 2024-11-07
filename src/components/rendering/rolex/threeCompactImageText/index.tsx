@@ -1,22 +1,29 @@
+import { Image } from "@components/module";
+
 import styles from "./threeCompactImageText.module.scss";
 
-const ThreeCompactImageText = () => {
+const ThreeCompactImageText = ({ ...content }) => {
 
-  const componentData = [
-    {imageUrl: "/images/png/discover-rolex1.png", subtitle: "A commitment to excellence", title: "World of Rolex", linkText: "Learn More", linkUrl: "/"},
-    {imageUrl: "/images/png/discover-rolex2.png", subtitle: "Excellence in the making", title: "Watchmaking", linkText: "Learn More", linkUrl: "/"},
-    {imageUrl: "/images/png/discover-rolex3.png", subtitle: "our servicing philosophy", title: "Servicing", linkText: "Learn More", linkUrl: "/"},
-  ];
+  if (!content) return null;
+
+  const components = content?.components;
+
+  const backgroundClass = content?.backgroundColor.toLowerCase();
 
   return (
-    <div className={styles.container}>
-      <h3 className={styles.mainTitle}>Discover Rolex</h3>
+    <div className={`${[styles.container]} ${styles[backgroundClass]}`}>
+      <h3 className={styles.mainTitle}>{content.mainTitle}</h3>
 
       <div className={styles.imageTextsWrapper}>
-        {componentData.map((data, index) => (
+        {components.map((data, index) => (
         <div key={index} className={`${[styles.imageTextsContainer]}`}>
             <a href={data.linkUrl} className={styles.imageContainer}>
-              <img src={data.imageUrl} />
+              <Image
+                imgWidth="100%"
+                height={"auto"}
+                image={data.media?.image}
+                imageAltText={data.media?.altText}
+              />
             </a>
 
             <div className={styles.textsContainer}>

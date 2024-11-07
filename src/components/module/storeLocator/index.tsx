@@ -196,6 +196,8 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
   };
 
   return (
+    <>
+    {!isDetailsOpen &&(
     <div className={styles.storeLocatorContainer}>
       <div className={styles.productInfoContainer}>
         <div className={styles.productInfoContainerImage}>
@@ -207,9 +209,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
           <span>{productCurrency} {productPrice}</span>
         </div>
       </div>
-
       <LocationTabs activeTab={activeTab} handleTabChange={handleTabChange} tabs={tabs} />
-
       <ToggleMapResults 
         onToggle={handleToggleChange} 
         activeTab={activeTab} 
@@ -222,12 +222,15 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
             renderMaps(activeTab === 'All' ? combinedStores : stores.filter(store => store.city === activeTab))
           }
       </div>
-      <StoreLocationDetails
-        storeId={selectedStoreId}
-        isOpen={isDetailsOpen}
-        onClose={handleCloseDetails}
-      />
-    </div>
+    </div>)}
+    {isDetailsOpen &&
+    (<StoreLocationDetails
+    storeId={selectedStoreId}
+    isOpen={isDetailsOpen}
+    onClose={handleCloseDetails}
+  />)
+    }
+  </>
   );
 };
 

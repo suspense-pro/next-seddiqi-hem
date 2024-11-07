@@ -37,6 +37,11 @@
 
   .sliderSwiper{
     overflow: hidden;
+    opacity: 0;
+
+    &:global(.swiper-initialized){
+      opacity: 1;
+    }
   }
 
   .sliderSlide{
@@ -70,6 +75,9 @@
 
       @include md {
         aspect-ratio: 3/4;
+      }
+
+      @include xl {
         min-height: rem(505);
       }
     }

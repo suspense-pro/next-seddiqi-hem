@@ -326,18 +326,15 @@ export async function deleteCustomerAccount({
 export async function getPasswordResetToken({
   method,
   userId,
-  access_token
 }: {
   method: string;
   userId: string; 
-  access_token: string;
 }) {
   try {
     const json = {
       api: "resetPassword",
       action: "resetToken",
       userId: userId,
-      accessToken: access_token,
     };
     const config = {
       method: method,
@@ -355,14 +352,12 @@ export async function resetPassword ({
   method,
   userId,
   codeVerifier,
-  access_token,
   userData,
 
 }: {
   method: string;
   userId: string;
   codeVerifier: string; 
-  access_token: string;
   userData: any
 }) {
   try {
@@ -370,7 +365,6 @@ export async function resetPassword ({
       api: "setPassword",
       action: "resetPassword",
       userId: userId,
-      accessToken: access_token,
       codeVerifier: codeVerifier,
     };
     const config = {

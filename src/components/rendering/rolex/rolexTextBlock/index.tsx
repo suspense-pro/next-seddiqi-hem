@@ -4,20 +4,36 @@ import RichText from "@components/module/richText";
 import { Typography } from "@components/module";
 
 const RolexTextBlock = ({ ...content }) => {
-  console.log("content", content);
-  if(!content) return null;
-  return (
-    <div className={styles.banner}>
-      <div className={styles.leftText}>
-        <Typography variant="h1" className={styles.title}>
-          {content?.title}
-        </Typography>
+  if (!content) return null;
+
+  if (content?.type?.toLowerCase() === "rolex") {
+    return (
+      <div className={styles.banner}>
+        <div className={styles.leftText}>
+          <Typography variant="h1" className={styles.title}>
+            {content?.title}
+          </Typography>
+        </div>
+        <div className={styles.rightText}>
+          <RichText align="" className={`${styles.headingSecondary}`} text={content?.description} />
+        </div>
       </div>
-      <div className={styles.rightText}>
-        <RichText align="" className={`${styles.headingSecondary}`} text={content?.description} />
+    );
+  } else {
+    return (
+      <div className={styles.bannerCpo}>
+        <div className={styles.label}>{content?.label}</div>
+        <div className={styles.leftText}>
+          <Typography variant="h1" className={styles.title}>
+            {content?.title}
+          </Typography>
+        </div>
+        <div className={styles.rightText}>
+          <RichText align="" className={`${styles.headingSecondary}`} text={content?.description} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default RolexTextBlock;
