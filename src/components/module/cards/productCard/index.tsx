@@ -16,16 +16,21 @@ const slides = [
   "/images/png/product_watch_04.png",
 ];
 
-const ProductCard = ({ item, isCarousel = true }) => {
+interface Props {
+  item: any;
+  hasCarousel?: boolean
+}
+
+const ProductCard = ({ item, hasCarousel = false }: Props) => {
   if (!item) return null;
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
   // ITEM ATTRIBS
-  const { name, image, pricePerUnit, priceCurrency, brand } = item;
+  const { name, image, pricePerUnit, priceCurrency, brand, imageGroups } = item;
 
-  // console.log({item});
+  console.log({item});
   
 
   return (
@@ -46,18 +51,21 @@ const ProductCard = ({ item, isCarousel = true }) => {
         <HeartIcon fill="#" />
       </div>
       <div className={styles.imgContainer}>
-        {/* <Carousel
+        {hasCarousel && isHovered ? <Carousel
           slides={slides}
           setSwiper={setSwiper}
           setActiveIndex={setActiveIndex}
-        /> */}
+          setTransition={"slide"}
+          setSpeed={500}
+          isAnimated={"no"}
+        /> : 
         <Image
           layout="fill"
           objectFit="contain"
           alt={`Slide`}
           src={image?.absUrl}
           // src={imageGroups[1]?.images?.[0]?.link}
-        />
+        />}
       </div>
       <div className={styles.productBottom}>
         <Typography align="center" variant="p" className={styles.title}>
@@ -69,7 +77,7 @@ const ProductCard = ({ item, isCarousel = true }) => {
         <Typography align="center" variant="p" className={styles.price}>
           {priceCurrency} {pricePerUnit}
         </Typography>
-        {isCarousel && isHovered && <CarouselBtns swiper={swiper} activeIndex={activeIndex} slides={slides} />}
+        {/* {hasCarousel && isHovered && <CarouselBtns swiper={swiper} activeIndex={activeIndex} slides={slides} />} */}
       </div>
     </div>
   );

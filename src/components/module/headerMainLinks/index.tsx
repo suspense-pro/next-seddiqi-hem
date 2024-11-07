@@ -29,14 +29,7 @@ const HeaderMainLinks = () => {
   };
 
   const RolexScript = 
-    ` <div id="rolex-retailer-clock">
-        <div class="LinkEnabler">
-        <!-- Container div for scaling -->
-        <div class="clockContainer">
-        <iframe id="rolex_retailer" title="Rolex Official Retailer" src="
-        https://static.rolex.com/retailers/clock/?colour=gold&amp;apiKey=fd5d8663fc8674a9ffab32649c3e39bf&amp;lang=en" scrolling="no" frameborder="no"></iframe>
-        </div>
-      </div>`
+    `<div id="rolex-retailer-clock"><div class="LinkEnabler" style="position:absolute; height:70px; width:150px; z-index:1;"></div><iframe id="rolex_retailer" title="Rolex Official Retailer" src="https://static.rolex.com/retailers/clock/?colour=gold&amp;apiKey=fd5d8663fc8674a9ffab32649c3e39bf&amp;lang=en" style="width:150px;height:70px;border:0;margin:0;padding:0;overflow:hidden;z-index:0;position:relative;scroll:none" scrolling="NO" frameborder="NO"></iframe></div>`
   
 
   return (
@@ -47,7 +40,7 @@ const HeaderMainLinks = () => {
           {/* <div></div> */}
         </Link>
         <Link href={headerData?.content?.patekLogo}>
-          <Image src={"/images/png/PatekLogo.png"} width={71.81} height={42} alt="patek logo" />
+          <Image src={"/images/png/PatekLogo.png"} width={150} height={70} alt="patek logo" />
         </Link>
       </div>
       <div className={styles.links}>

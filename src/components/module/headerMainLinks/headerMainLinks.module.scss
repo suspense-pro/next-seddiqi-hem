@@ -7,6 +7,7 @@
   align-content: center;
   padding: 0;
   margin: 0;
+  gap: rem(24);
 
   @include breakpoint-max-width(rem(1400)) {
     // flex-direction: column;
@@ -30,10 +31,10 @@
     width: 100%;
     gap: rem(36);
 
+    // @include breakpoint-max-width(rem(1400)) {
+    //   justify-content: flex-end;
+    // }
     @include breakpoint-max-width(rem(1400)) {
-      justify-content: flex-end;
-    }
-    @include breakpoint-max-width(rem(1240)) {
       justify-content: center;
     }
 
@@ -93,13 +94,13 @@
   min-width: rem(180);
   // display: none;
 
-  @include breakpoint-max-width(rem(1240)) {
+  @include breakpoint-max-width(rem(1400)) {
     display: none;
   }
 
-  @include xl {
-    display: flex;
-  }
+  // @include xl {
+  //   display: flex;
+  // }
 
   .rolexLogo {
     width: rem(78.65);

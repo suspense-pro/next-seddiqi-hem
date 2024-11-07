@@ -9,7 +9,7 @@ import styles from "./carousel.module.scss";
 import Video from "../video";
 
 const Carousel = ({ slides, setSwiper, setActiveIndex, setTransition, setSpeed, isAnimated }) => {
-  // console.log("slides------", slides)
+  console.log("slides------", slides)
   const onSlideChange = (swiperInstance) => {
     setActiveIndex(swiperInstance.realIndex);
   };

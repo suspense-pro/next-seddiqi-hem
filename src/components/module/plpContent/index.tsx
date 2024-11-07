@@ -219,6 +219,7 @@ const PlpContent = ({ productGridContent, products }) => {
                 <ProductCard
                   key={generateUniqueId()}
                   item={{ ...item, tempId: ind + 1 }}
+                  hasCarousel
                 />
               ))}
               {productGridContent?.length > 0 &&
