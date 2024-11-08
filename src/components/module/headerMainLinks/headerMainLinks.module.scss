@@ -7,6 +7,7 @@
   align-content: center;
   padding: 0;
   margin: 0;
+  gap: rem(24);
 
   @include breakpoint-max-width(rem(1400)) {
     // flex-direction: column;
@@ -28,13 +29,14 @@
     justify-content: center;
     flex: 1;
     width: 100%;
-    gap: rem(36);
+    gap: rem(26);
 
-    @include breakpoint-max-width(rem(1400)) {
-      justify-content: flex-end;
-    }
-    @include breakpoint-max-width(rem(1240)) {
+    // @include breakpoint-max-width(rem(1400)) {
+    //   justify-content: flex-end;
+    // }
+    @include breakpoint-min-width(rem(1448)) {
       justify-content: center;
+      gap: rem(36);
     }
 
     .headerLink {
@@ -93,20 +95,26 @@
   min-width: rem(180);
   // display: none;
 
-  @include breakpoint-max-width(rem(1240)) {
+  @include breakpoint-max-width(rem(1400)) {
     display: none;
   }
 
-  @include xl {
-    display: flex;
+  // @include xl {
+  //   display: flex;
+  // }
+
+  &.scrolled {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
   }
 
-  .patakLogo {
+  .rolexLogo {
     width: rem(78.65);
     height: rem(46);
   }
 
-  .rolexLogo {
+  .patekLogo {
     width: rem(100.3);
     height: rem(46);
   }

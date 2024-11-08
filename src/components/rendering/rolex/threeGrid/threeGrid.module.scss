@@ -4,18 +4,34 @@
   display: flex;
   flex-direction: column;
   gap: rem(60);
-  padding: rem(60) rem(28);
+  padding: 0 rem(28);
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
 
   @include md {
-    padding: rem(60);
+    padding: 0 rem(60);
     gap: rem(92);
   } 
 
   @include xl {
-    padding: rem(120);
+    padding: 0 rem(120);
+  }
+
+  &.white{
+    background: getColorHex("white");
+  }
+
+  &.beige{
+    background: getColorHex("beige");
+  }
+
+  &.grey_pampas{
+    background: getColorHex("grey-pampas");
+  }
+
+  &.grey_light{
+    background: getColorHex("grey-light");
   }
 
   .oneGridContainer, .twoGridsContainer{
@@ -25,6 +41,16 @@
     
     .imageTextsContainer{
       width: 100%;
+    }
+  }
+
+  .twoGridsContainer{
+    
+    .mainTitle{
+
+      @include md {
+        margin-bottom: rem(4);
+      }
     }
   }
 
@@ -80,6 +106,7 @@
     img{
       display: flex;
       width: 100%;
+      height: 100%;
       object-fit: cover;
     }
   }
@@ -87,7 +114,11 @@
   .textsContainer{
     display: flex;
     flex-direction: column;
-    gap: rem(12);
+    gap: rem(8);
+
+    @include md {
+      gap: rem(16);
+    }
   }
 
   .subtitle{
@@ -102,7 +133,11 @@
     @include md {
       font-size: rem(16);
       line-height: rem(24);
-      color: getColorHex("green-dark");
+      //color: getColorHex("green-dark");
+    }
+
+    &:empty{
+      display: none;
     }
   }
 
@@ -117,6 +152,10 @@
 
     @include md {
       letter-spacing: rem(0.6);
+    }
+
+    &:empty{
+      display: none;
     }
   }
 
@@ -148,6 +187,10 @@
         }
       }
     }*/
+
+    &:empty{
+      display: none;
+    }
   }
 
   .sliderSwiper{

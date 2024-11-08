@@ -1,5 +1,6 @@
 // emailHelper.ts
 import nodemailer from 'nodemailer';
+const getFieldValue = (field) => Array.isArray(field) ? field[0] : field;
 
 export const sendEmail = async (to: string, subject: string, htmlContent: string) => {
   // Configure the transporter
@@ -32,7 +33,7 @@ export const sendEmail = async (to: string, subject: string, htmlContent: string
   }
 };
 
-export const sendEmailWithAttachment = async (file) => {
+export const sendEmailWithAttachment = async (fields: any, file: any) => {
     // Configure the transporter
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -43,20 +44,56 @@ export const sendEmailWithAttachment = async (file) => {
         pass: process.env.SMTP_PASSWORD,
       },
     });
-  
+    
+    const emailBody = `
+    <p>Please find the details provided by the customer below:</p>
+    <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+      <tr>
+        <th>Email</th>
+        <td>${getFieldValue(fields.email)}</td>
+      </tr>
+      <tr>
+        <th>First Name</th>
+        <td>${getFieldValue(fields.firstName)}</td>
+      </tr>
+      <tr>
+        <th>Last Name</th>
+        <td>${getFieldValue(fields.lastName)}</td>
+      </tr>
+      <tr>
+        <th>Order Reference Number</th>
+        <td>${getFieldValue(fields.orderReferenceNumber)}</td>
+      </tr>
+      <tr>
+        <th>Type</th>
+        <td>${getFieldValue(fields.type)}</td>
+      </tr>
+      <tr>
+        <th>Message</th>
+        <td>${getFieldValue(fields.message)}</td>
+      </tr>
+      <tr>
+        <th>Phone Number</th>
+        <td>${getFieldValue(fields.phoneNumber)}</td>
+      </tr>
+    </table>
+  `;
+
     // Email options
     const mailOptions = {
       from: process.env.SMTP_USER, // Sender address
       to: process.env.SEDDIQI_SUPPORT_EMAIL,
-      subject: 'File Upload from Customer',
-      text: 'Please find the attached file from the customer.',
-      attachments: [
-        {
+      subject: 'Ahmed Seddiqi & Sons - Contact Us Query',
+      html: emailBody,
+      ...(file && file.originalFilename && {
+        attachments: [
+          {
             filename: file.originalFilename,
             path: file.filepath,
-        },
-      ]
-    };
+          },
+        ],
+      }),
+    }
   
     // Send email
     try {

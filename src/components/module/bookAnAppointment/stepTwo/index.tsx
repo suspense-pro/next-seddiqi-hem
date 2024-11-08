@@ -59,7 +59,6 @@ const StepTwo = () => {
         <SelectedCard />
         <TabbedNavigation className={styles.tabNavigation} tabs={tabs} />
       </div>
-      <ExclusiveInfoCards />
     </div>
   );
 };

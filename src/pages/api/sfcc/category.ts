@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Product, Search } from "commerce-sdk";
 import initializeShopperConfig, { clientConfig } from "@utils/sfcc-connector/config";
 import { getCategory } from "@utils/sfcc-connector/dataService";
+import { transformPriceRefinement } from "@utils/sfcc-connector/productUtils";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const requestMethod = req.method;
@@ -68,11 +69,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
 
                     const shopperSearchClient = new Search.ShopperSearch(clientConfig);
-                    const categoryResults = await shopperSearchClient.productSearch(options);
+                    var categoryResults = await shopperSearchClient.productSearch(options);
                     const result : any = {};
                     // console.log("category results: "+ categoryResults.total);
 
                     if (categoryResults.total > 0) {
+                        categoryResults = transformPriceRefinement(categoryResults);
                         result.refinements = categoryResults.refinements;
                         result.sortingOptions = categoryResults.sortingOptions;
 
@@ -89,7 +91,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                             var quickFilters = [];
 
                             filters.forEach(filter => {
-                                if (filter.values) {
+                                if (filter.attributeId !== 'price' && filter.values) {
                                     filter.values.forEach(value => {
                                         // If the label matches one of the filter value, searching for
                                         if (categoryQFilters.includes(value.label)) {
@@ -110,7 +112,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         return res.status(200).json({ isError: false, response: result });
                     } else {
                         console.log("No filters found.");
-                        return res.status(400).json({ isError: true, response: "No filters found." });
+                        return res.status(400).json({ isError: true, response: categoryResults });
                     }
                 }
 

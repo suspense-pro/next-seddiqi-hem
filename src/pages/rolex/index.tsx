@@ -9,7 +9,8 @@ import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { isEmpty } from "@utils/helpers";
 import { getProducts } from "@utils/sfcc-connector/dataService";
 import { RolexComponentMapping } from "@utils/cms/config";
-import { FooterBackToTop, FourItemSlider, ThreeCompactImageText, ThreeGrid, ThreeTallImageText, TwoColumnImageText } from "@components/rendering/rolex";
+import { FooterBackToTop, ThreeCompactImageText, ThreeGrid, ThreeTallImageText, TwoColumnImageText } from "@components/rendering/rolex";
+import ItemSlider from "@components/rendering/rolex/itemSlider";
 
 // import { getCustomer } from "@utils/sfcc-connector/dataService";
 // import LoginForm from "@components/LoginForm";
@@ -41,19 +42,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function RolexHome({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log("content", content)
+  //console.log("Contents: ", content);
+
   return (
     <div className="main-content rolex">
       {compact(content?.page?.components).map((content) => (
         <ContentBlock components={RolexComponentMapping} content={content} key={content?._meta.deliveryId} />
       ))}
-
-      <ThreeGrid />
-      <ThreeCompactImageText />
-      <FourItemSlider />
-      <TwoColumnImageText />
-      <ThreeTallImageText />
-      <FooterBackToTop />
+      
+      <FooterBackToTop contentImage={content?.page?.footerBlock?.footer?.media?.image} contentAlt={content?.page?.footerBlock?.footer?.media?.altText} />
     </div>
   );
 }

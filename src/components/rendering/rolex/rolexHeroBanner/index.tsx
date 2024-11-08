@@ -6,20 +6,25 @@ import styles from "./rolexHeroBanner.module.scss";
 import { ArrowRightThick } from "@assets/images/svg";
 import { GradientOverlay, Image, NavigationLink, Video } from "@components/module";
 import { useWindowWidth } from "@utils/useCustomHooks";
+import CarouselBtns from "@components/module/carouselBtns";
 
 const RolexHeroBanner = ({ ...content }) => {
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [swiper, setSwiper] = useState(null);
 
   if (!content) return null;
 
   const slides = content?.listItems;
 
   const handleSlideChange = (swiper) => {
-    setActiveIndex(swiper.activeIndex);
+    setActiveIndex(swiper?.activeIndex);
   };
 
-  console.log("ROLEX HERO BANNER", content);
+  const handleReachEnd = () => {
+    setActiveIndex(0);
+  };
+
   const screenSize = useWindowWidth();
   return (
     <Swiper
@@ -32,40 +37,37 @@ const RolexHeroBanner = ({ ...content }) => {
       speed={600}
       onSlideChange={handleSlideChange}
       className={styles.heroSlider}
+      onReachEnd={handleReachEnd}
     >
       {slides?.map((slide, index) => {
         return (
           <SwiperSlide className={styles.swiperSlide} key={index}>
             <div className={styles.slide}>
-              {slide?.media?.image ? (
+              {slide?.media?.image || slide?.mobileMedia?.media?.image ? (
                 <GradientOverlay className={styles.gradient} opacity={slide?.opacity?.opacity}>
-                  {screenSize > 769 ? (
-                    <Image
-                      imgWidth="100%"
-                      height={styles.image}
-                      className={styles.image}
-                      image={slide?.media?.image}
-                      imageAltText={slide?.media?.altText}
-                    />
-                  ) : (
-                    <Image
-                      imgWidth="100%"
-                      height={styles.image}
-                      className={styles.image}
-                      image={slide?.mobileMedia?.media?.image}
-                      imageAltText={slide?.mobileMedia?.media?.altText}
-                    />
-                  )}
+                  <Image
+                    imgWidth="100%"
+                    height={styles.image}
+                    className={styles.image}
+                    image={slide?.media?.image}
+                    imageAltText={slide?.media?.altText}
+                  />
+                  <Image
+                    imgWidth="100%"
+                    height={styles.mobileImage}
+                    className={styles.mobileImage}
+                    image={slide?.mobileMedia?.media?.image}
+                    imageAltText={slide?.mobileMedia?.media?.altText}
+                  />
                 </GradientOverlay>
               ) : (
                 <Video
-                  className={styles.image}
+                  className={styles.video}
                   video={slide?.media?.video}
                   autoPlay={slide?.media?.autoPlay}
                   showPlay={slide?.media?.showPlay}
                 />
               )}
-
               {slide?.bannerType === "Rolex" ? (
                 <div className={styles.textOverlay}>
                   <div className={styles.brand}>{slide?.title}</div>
@@ -112,6 +114,18 @@ const RolexHeroBanner = ({ ...content }) => {
           </SwiperSlide>
         );
       })}
+      {slides?.length > 1 && (
+        <div className={styles.carouselBtns}>
+          <CarouselBtns
+            btnWidth={40}
+            activeIndex={activeIndex}
+            slides={slides}
+            swiper={swiper}
+            btnColor="white"
+            activeBtn={false}
+          />
+        </div>
+      )}
     </Swiper>
   );
 };

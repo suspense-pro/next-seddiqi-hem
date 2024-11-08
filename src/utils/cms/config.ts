@@ -21,12 +21,13 @@ import {
   HighlightedProductCarousel,
   FeaturedProductCarousel,
   ExploreBrand,
+  ContentAndImageTwoColumn
 } from "@components/rendering";
 import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
 import BrandListing from './../../components/module/brandListing/index';
 import Spacing from "@components/rendering/spacing";
-import { RolexHeroBanner, RolexNavbar } from "@components/rendering/rolex";
+import { RolexHeroBanner, RolexNavbar , RolexImageBanner, ThreeGrid, ThreeCompactImageText, ItemSlider, TwoColumnImageText, ThreeTallImageText, RolexProductLister} from "@components/rendering/rolex";
 import RolexTextBlock from "@components/rendering/rolex/rolexTextBlock";
 
 export const defaultClientConfig: ContentClientConfigV2 = {
@@ -54,7 +55,14 @@ export const RolexComponentMapping: any = {
   [`${componentUrl}/rolex/navbar`]: RolexNavbar,
   [`${componentUrl}/rolex/text-block`]: RolexTextBlock,
   [`${componentUrl}/rolex/hero-banner`]: RolexHeroBanner,
+  [`${componentUrl}/rolex/image-banner`]: RolexImageBanner,
   [`${componentUrl}/spacing`]: Spacing,
+  [`${componentUrl}/rolex/three-grid`]: ThreeGrid,
+  [`${componentUrl}/rolex/three-compact-image-text`]: ThreeCompactImageText,
+  [`${componentUrl}/rolex/item-slider`]: ItemSlider,
+  [`${componentUrl}/rolex/two-column-image-text-v2`]: TwoColumnImageText,
+  [`${componentUrl}/rolex/three-tall-image-text`]: ThreeTallImageText,
+  [`${componentUrl}/rolex/product-lister-v2`]: RolexProductLister
 };
 
 export const ComponentMapping: any = {
@@ -88,6 +96,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/brand-category-list`]: CategoryList,
   [`${contentUrl}/find-a-boutique-listing`]: ContentPage,
   [`${componentUrl}/brand-listing`]: BrandListing,
+  [`${componentUrl}/content-and-image-two-column`]: ContentAndImageTwoColumn,
   [`${componentUrl}/spacing`]: Spacing,
 };
 
