@@ -781,6 +781,8 @@ export async function contactUs({
       method: method,
       body: userData,
     };
+
+    console.log("USERDATA", userData)
     const queryString = new URLSearchParams(json).toString();
     const res = (await serverApiCallSfcc(`?${queryString}`, config, "contact"));
     return res;

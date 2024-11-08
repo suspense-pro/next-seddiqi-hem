@@ -18,6 +18,8 @@ const ContactForm = () => {
     description: "",
   });
 
+  const [attachment, setAttachment] = useState<File | null>(null);
+
   type FormErrors = {
     topic: string;
     orderNumber?: string;
@@ -43,22 +45,32 @@ const ContactForm = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // Check for form errors before submission
     if (validateForm()) {
-      console.log("Form submitted:", formData);
+      const userData = {
+        type: formData.topic,
+        orderReferenceNumber: formData.orderNumber,
+        message: formData.description,
+        phoneNumber: `${formData.phoneCode} ${formData.phoneNumber}`,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+      };
+      const data = new FormData();
+      Object.keys(userData).forEach((key) => {
+        data.append(key, userData[key as keyof typeof userData] as string);
+      });
+
+      if (attachment) {
+        data.append("attachment", attachment);
+      }
+
       const response = await contactUs({
         method: "POST",
-        userData: {
-          type: formData.topic,
-          orderReferenceNumber: formData.orderNumber,
-          message: formData.description,
-          phoneNumber: `${formData.phoneCode} ${formData.phoneNumber}`,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-        },
+        userData: data,
       });
+
       console.log(response);
+      console.log("Form submitted:", formData);
     }
   };
 
@@ -84,6 +96,18 @@ const ContactForm = () => {
 
     setFormData(updatedFormData);
     validateField(name, value);
+  };
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    if (file) {
+      if (file.size <= 10 * 1024 * 1024) {
+        // 10 MB limit
+        setAttachment(file);
+      } else {
+        alert("Please select a file smaller than 10 MB.");
+      }
+    }
   };
 
   const validateField = (name: string, value: string) => {
@@ -133,7 +157,7 @@ const ContactForm = () => {
     <form className={styles.contactForm} onSubmit={handleSubmit}>
       <h2 className={styles.heading}>Contact Us</h2>
 
-      <div className={styles.doubleForm}>
+      <div className={`${styles.singleForm} ${styles.doubleForm}`}>
         <InputField
           name="topic"
           showLabel={true}
@@ -145,14 +169,14 @@ const ContactForm = () => {
           optionFull
         />
 
-        <InputField
+        {/* <InputField
           name="orderNumber"
           label="Order Number"
           type="text"
           value={formData.orderNumber}
           onChange={handleChange}
           required
-        />
+        /> */}
       </div>
 
       <div className={styles.doubleForm}>
@@ -184,7 +208,6 @@ const ContactForm = () => {
             value={formData.phoneCode}
             onChange={handleChange}
             options={Object.keys(countryCodes)}
-            // required
           />
 
           <InputField
@@ -193,7 +216,6 @@ const ContactForm = () => {
             value={formData.phoneNumber}
             onChange={handleChange}
             errorMessage={errors.phoneNumber}
-            // required
           />
         </div>
         <InputField
@@ -216,12 +238,15 @@ const ContactForm = () => {
         required
       />
 
-      {/* Attachment Input (placeholder) */}
+      {/* Attachment Input */}
       <div className={styles.attachmentField}>
         <label>Attachments</label>
         <div className={styles.attachment}>
-          <input type="file" accept="image/*,application/pdf" />
-          <div className={styles.fileInfo}>Upload (Max 10 MB)</div>
+          <input type="file" accept="image/*,application/pdf" onChange={handleFileChange} />
+          <div className={styles.fileInfo}>
+            Selected File: {attachment.name ? attachment.name : "Upload (Max 10 MB)"}{" "}
+          </div>
+          {/* {attachment && <div className={styles.fileName}>Selected File: {attachment.name}</div>} */}
         </div>
       </div>
 

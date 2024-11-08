@@ -33,6 +33,12 @@
   }
 }
 
+
+.singleForm {
+  grid-template-columns: 1fr;
+}
+
+
 .optionSelector {
   display: flex;
   gap: rem(12);

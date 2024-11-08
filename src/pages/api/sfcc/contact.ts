@@ -28,6 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         keepExtensions: true,
                     });
                     form.parse(req, async (err, fields, files) => {
+                        console.log("FILEDS", fields)
                         
                         /* TODO: The below code is for Mulesoft API integration
                         if (err) {
