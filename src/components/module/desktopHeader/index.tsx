@@ -51,7 +51,7 @@ export default function DesktopHeader() {
               <LogoLink logo={mainLogo?.image} className={styles.mainLogo} />
             </div>
           )}
-          <HeaderMainLinks />
+          <HeaderMainLinks isScrolled={scrolled} />
         </div>
       </div>
     </div>

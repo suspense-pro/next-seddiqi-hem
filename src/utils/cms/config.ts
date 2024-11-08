@@ -21,6 +21,7 @@ import {
   HighlightedProductCarousel,
   FeaturedProductCarousel,
   ExploreBrand,
+  ContentAndImageTwoColumn
 } from "@components/rendering";
 import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
@@ -95,6 +96,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/brand-category-list`]: CategoryList,
   [`${contentUrl}/find-a-boutique-listing`]: ContentPage,
   [`${componentUrl}/brand-listing`]: BrandListing,
+  [`${componentUrl}/content-and-image-two-column`]: ContentAndImageTwoColumn,
   [`${componentUrl}/spacing`]: Spacing,
 };
 
