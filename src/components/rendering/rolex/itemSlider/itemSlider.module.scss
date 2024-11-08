@@ -95,6 +95,41 @@
           display: none;
         }
       }
+
+      &:global(.swiper-pagination){
+        display: flex;
+        gap: rem(6);
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        height: auto;
+        background: none;
+        position: relative;
+        border: 0;
+        top: auto;
+        bottom: auto;
+        transform: translate(0, 0);
+        margin: rem(26) 0 0;
+
+        @include md{
+          margin: rem(38) 0 0;
+        }
+
+        & > span{
+          margin: 0;
+          background: getColorHex("rolex-grey");
+          opacity: 1;
+          border-radius: 0;
+          width: rem(16);
+          height: rem(2);
+          transition: width 0.3s ease;
+
+          &:global(.swiper-pagination-bullet-active){
+            background-color: getColorHex("rolex-green");
+            width: rem(40);
+          }
+        }
+      }
     }
   }
 
