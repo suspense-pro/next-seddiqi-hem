@@ -27,7 +27,7 @@ const ContentAndImageTwoColumn: React.FC<ContentAndImageTwoColumnProps> = (
             {title}
           </Typography>
           <div className={styles.description}>
-            <RichText text={description} />
+            <RichText text={description}  className={styles.richTextStyle}/>
           </div>
           {cta && (
             <div className={styles.ctaContainer}>
