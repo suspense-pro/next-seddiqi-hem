@@ -6,17 +6,23 @@ import styles from "./rolexHeroBanner.module.scss";
 import { ArrowRightThick } from "@assets/images/svg";
 import { GradientOverlay, Image, NavigationLink, Video } from "@components/module";
 import { useWindowWidth } from "@utils/useCustomHooks";
+import CarouselBtns from "@components/module/carouselBtns";
 
 const RolexHeroBanner = ({ ...content }) => {
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [swiper, setSwiper] = useState(null);
 
   if (!content) return null;
 
   const slides = content?.listItems;
 
   const handleSlideChange = (swiper) => {
-    setActiveIndex(swiper.activeIndex);
+    setActiveIndex(swiper?.activeIndex);
+  };
+
+  const handleReachEnd = () => {
+    setActiveIndex(0);
   };
 
   const screenSize = useWindowWidth();
@@ -31,6 +37,7 @@ const RolexHeroBanner = ({ ...content }) => {
       speed={600}
       onSlideChange={handleSlideChange}
       className={styles.heroSlider}
+      onReachEnd={handleReachEnd}
     >
       {slides?.map((slide, index) => {
         return (
@@ -107,6 +114,18 @@ const RolexHeroBanner = ({ ...content }) => {
           </SwiperSlide>
         );
       })}
+      {slides?.length > 1 && (
+        <div className={styles.carouselBtns}>
+          <CarouselBtns
+            btnWidth={40}
+            activeIndex={activeIndex}
+            slides={slides}
+            swiper={swiper}
+            btnColor="white"
+            activeBtn={false}
+          />
+        </div>
+      )}
     </Swiper>
   );
 };
