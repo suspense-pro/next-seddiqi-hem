@@ -62,8 +62,7 @@ export const RolexComponentMapping: any = {
   [`${componentUrl}/rolex/item-slider`]: ItemSlider,
   [`${componentUrl}/rolex/two-column-image-text-v2`]: TwoColumnImageText,
   [`${componentUrl}/rolex/three-tall-image-text`]: ThreeTallImageText,
-  [`${componentUrl}/rolex/product-lister-v2`]: RolexProductLister,
-  [`${componentUrl}/need-help`]: NeedMoreHelp
+  [`${componentUrl}/rolex/product-lister-v2`]: RolexProductLister
 };
 
 export const ComponentMapping: any = {
