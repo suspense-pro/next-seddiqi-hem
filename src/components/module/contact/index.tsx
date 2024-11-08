@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import styles from "./contact.module.scss";
 import InputField from "../inputField";
 import Button from "../button";
+import { countryCodes } from "./countryCodes";
+import { validateEmail, validateFirstName, validateLastName, validatePhone } from "@utils/helpers/validations";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -15,28 +17,102 @@ const ContactForm = () => {
     description: "",
   });
 
-  const [errors, setErrors] = useState({
-    email: "",
-  });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-
-    // Simple email registration error check
-    if (name === "email") {
-      if (value === "aareza@gmail.com") {
-        setErrors((prev) => ({ ...prev, email: "This account is already registered, please sign in" }));
-      } else {
-        setErrors((prev) => ({ ...prev, email: "" }));
-      }
-    }
+  type FormErrors = {
+    topic: string;
+    orderNumber?: string;
+    firstName: string;
+    lastName: string;
+    phoneCode?: string;
+    phoneNumber?: string;
+    email: string;
+    description: string;
   };
+
+  const [errors, setErrors] = useState<FormErrors>({
+    topic: "",
+    orderNumber: "",
+    firstName: "",
+    lastName: "",
+    phoneCode: "",
+    phoneNumber: "",
+    email: "",
+    description: "",
+  });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // Form submission logic here
-    console.log("Form submitted:", formData);
+
+    // Check for form errors before submission
+    if (validateForm()) {
+      console.log("Form submitted:", formData);
+    }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    let updatedFormData = { ...formData, [name]: value };
+    if (name === "phoneNumber") {
+      if (/^\d*$/.test(value) && value.length <= 10) {
+        updatedFormData = { ...formData, [name]: value };
+      }
+    }
+
+    // Auto-populate phoneCode based on phoneNumber prefix
+    if (name === "phoneNumber") {
+      const prefix = value.slice(0, 3);
+      for (const [code, prefixes] of Object.entries(countryCodes)) {
+        if (prefixes.some((p) => value.startsWith(p))) {
+          updatedFormData.phoneCode = code;
+          break;
+        }
+      }
+    }
+
+    setFormData(updatedFormData);
+    validateField(name, value);
+  };
+
+  const validateField = (name: string, value: string) => {
+    let errorMessage = "";
+
+    switch (name) {
+      case "firstName":
+        errorMessage = validateFirstName(value);
+        break;
+      case "lastName":
+        if (/\d/.test(value)) {
+          errorMessage = "Last Name should not contain numbers.";
+        } else {
+          errorMessage = validateLastName(value);
+        }
+        break;
+      case "phoneNumber":
+        errorMessage = validatePhone(value);
+        break;
+      case "email":
+        errorMessage = validateEmail(value);
+        break;
+      default:
+        break;
+    }
+
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
+  };
+
+  const validateForm = (): boolean => {
+    const updatedErrors: FormErrors = {
+      topic: "",
+      orderNumber: "",
+      firstName: validateFirstName(formData.firstName),
+      lastName: validateLastName(formData.lastName),
+      phoneCode: "",
+      phoneNumber: validatePhone(formData.phoneNumber),
+      email: validateEmail(formData.email),
+      description: "",
+    };
+
+    setErrors(updatedErrors);
+    return !Object.values(updatedErrors).some((error) => error !== "");
   };
 
   return (
@@ -72,6 +148,7 @@ const ContactForm = () => {
           type="text"
           value={formData.firstName}
           onChange={handleChange}
+          errorMessage={errors.firstName}
           required
         />
 
@@ -81,6 +158,7 @@ const ContactForm = () => {
           type="text"
           value={formData.lastName}
           onChange={handleChange}
+          errorMessage={errors.lastName}
           required
         />
       </div>
@@ -91,16 +169,17 @@ const ContactForm = () => {
             label=""
             value={formData.phoneCode}
             onChange={handleChange}
-            options={["+971", "+44", "+61"]}
-            required
+            options={Object.keys(countryCodes)}
+            // required
           />
 
           <InputField
             name="phoneNumber"
-            // label="Phone Number"
             type="tel"
             value={formData.phoneNumber}
             onChange={handleChange}
+            errorMessage={errors.phoneNumber}
+            // required
           />
         </div>
         <InputField
@@ -117,7 +196,7 @@ const ContactForm = () => {
       <InputField
         name="description"
         label="Description"
-        type="text"
+        type="textarea"
         value={formData.description}
         onChange={handleChange}
         required
