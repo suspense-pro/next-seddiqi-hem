@@ -41,8 +41,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   };
 }
-
-
 export default function FindABoutiqueListing({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
   const [stores, setStores] = useState([]);
@@ -50,7 +48,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [userLocation, setUserLocation] = useState(null);
   const [nearestStore, setNearestStore] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeToggle, setActiveToggle] = useState(true);
+  const [activeToggle, setActiveToggle] = useState(false); //Set to true to show the location lister
   const [fadeList, setFadeList] = useState(false);
   const [itemsToShow, setItemsToShow] = useState(8);
   const [activeTab, setActiveTab] = useState('All');
@@ -261,7 +259,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         <StoreMapListContainer 
           storesList={storesList} 
           activeIndex={activeIndex} 
-          handleStoreClick={handleStoreClick} 
+          handleStoreClick={handleStoreClick}
           isMobile={!isMobile} 
           isAbsolutePosition={true}
           needScrollbar={true} //For Desktop Only
