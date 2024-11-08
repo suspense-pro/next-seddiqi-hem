@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 
 const api_key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY;
 
 const MapView = ({ nearestStore, stores, activeStore, userLocation }) => {
   const mapRef = useRef();
-  const mapLoaded = useRef(false);
-  const mapInstance = useRef(null);
+  const markersRef = useRef([]);
+  const [activeMarker, setActiveMarker] = useState(null);
 
   useEffect(() => {
 
@@ -169,8 +169,6 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation }) => {
           styles: styles
         });
 
-        mapInstance.current = map;
-
         const getIconSize = () => {
           const width = window.innerWidth;
           return new google.maps.Size(width < 600 ? 36 : 50, width < 600 ? 49 : 68);
@@ -200,7 +198,6 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation }) => {
           });
         }
 
-        // Marker for the user location
         if (userLocation) {
           new google.maps.Marker({
             position: userLocation,
@@ -211,15 +208,42 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation }) => {
         }
 
         if (activeStore) {
-          map.setCenter({ lat: activeStore.latitude, lng: activeStore.longitude });
+          const currentCenter = map.getCenter();
+          map.panTo({
+            lat: currentCenter.lat(), 
+            lng: currentCenter.lng() + -0.03 
+          });
+          map.setZoom(14);
         }
 
         stores.forEach((store) => {
-          new google.maps.Marker({
+          const marker = new google.maps.Marker({
             position: { lat: store.latitude, lng: store.longitude },
             map: map,
             title: store.name,
             icon: storeIcon,
+          });
+
+          markersRef.current.push(marker);
+
+          if (activeStore && store.id !== activeStore.id) {
+            marker.setVisible(false); 
+          }
+
+          marker.addListener("click", () => {
+            setActiveMarker(store.id); 
+            
+            const currentCenter = map.getCenter();
+            map.panTo({
+              lat: currentCenter.lat(),  
+              lng: currentCenter.lng() + -0.03 
+            });
+            map.setZoom(14); 
+            markersRef.current.forEach((m) => {
+              if (m !== marker) {
+                m.setVisible(false); 
+              }
+            });
           });
         });
       }
