@@ -4,10 +4,11 @@ import InputField from "../inputField";
 import Button from "../button";
 import { countryCodes } from "./countryCodes";
 import { validateEmail, validateFirstName, validateLastName, validatePhone } from "@utils/helpers/validations";
+import { contactUs } from "@utils/sfcc-connector/dataService";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    topic: "Returns & Refunds",
+    topic: "Compliant",
     orderNumber: "",
     firstName: "",
     lastName: "",
@@ -39,12 +40,25 @@ const ContactForm = () => {
     description: "",
   });
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     // Check for form errors before submission
     if (validateForm()) {
       console.log("Form submitted:", formData);
+      const response = await contactUs({
+        method: "POST",
+        userData: {
+          type: formData.topic,
+          orderReferenceNumber: formData.orderNumber,
+          message: formData.description,
+          phoneNumber: `${formData.phoneCode} ${formData.phoneNumber}`,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+        },
+      });
+      console.log(response);
     }
   };
 
@@ -126,7 +140,7 @@ const ContactForm = () => {
           label="Select a topic"
           value={formData.topic}
           onChange={handleChange}
-          options={["Returns & Refunds", "Order Issue", "General Inquiry"]}
+          options={["Compliant", "Suggestion", "Question", "Warranty"]}
           required
           optionFull
         />
