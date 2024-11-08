@@ -1,14 +1,159 @@
 import React, { useEffect, useRef } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 
-const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+const api_key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY;
 
 const MapView = ({ nearestStore, stores, activeStore, userLocation }) => {
   const mapRef = useRef();
+  const mapLoaded = useRef(false);
+  const mapInstance = useRef(null);
 
   useEffect(() => {
+
+
+    const styles = [
+      {
+          "featureType": "all",
+          "elementType": "all",
+          "stylers": [
+              {
+                  "hue": "#ffaa00"
+              },
+              {
+                  "saturation": "-33"
+              },
+              {
+                  "lightness": "10"
+              }
+          ]
+      },
+      {
+          "featureType": "administrative.locality",
+          "elementType": "labels.text.fill",
+          "stylers": [
+              {
+                  "color": "#9c5e18"
+              }
+          ]
+      },
+      {
+          "featureType": "landscape.natural.terrain",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "visibility": "simplified"
+              }
+          ]
+      },
+      {
+          "featureType": "poi",
+          "elementType": "all",
+          "stylers": [
+              {
+                  "visibility": "off"
+              }
+          ]
+      },
+      {
+          "featureType": "poi.attraction",
+          "elementType": "all",
+          "stylers": [
+              {
+                  "visibility": "off"
+              }
+          ]
+      },
+      {
+          "featureType": "poi.business",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "visibility": "off"
+              }
+          ]
+      },
+      {
+          "featureType": "poi.government",
+          "elementType": "all",
+          "stylers": [
+              {
+                  "visibility": "off"
+              }
+          ]
+      },
+      {
+          "featureType": "poi.place_of_worship",
+          "elementType": "all",
+          "stylers": [
+              {
+                  "visibility": "off"
+              }
+          ]
+      },
+      {
+          "featureType": "road.highway",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "visibility": "simplified"
+              }
+          ]
+      },
+      {
+          "featureType": "road.highway",
+          "elementType": "labels.text",
+          "stylers": [
+              {
+                  "visibility": "on"
+              }
+          ]
+      },
+      {
+          "featureType": "road.arterial",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "visibility": "simplified"
+              }
+          ]
+      },
+      {
+          "featureType": "transit.line",
+          "elementType": "all",
+          "stylers": [
+              {
+                  "visibility": "off"
+              }
+          ]
+      },
+      {
+          "featureType": "water",
+          "elementType": "geometry.fill",
+          "stylers": [
+              {
+                  "saturation": "-23"
+              },
+              {
+                  "gamma": "2.01"
+              },
+              {
+                  "color": "#f2f6f6"
+              }
+          ]
+      },
+      {
+          "featureType": "water",
+          "elementType": "geometry.stroke",
+          "stylers": [
+              {
+                  "saturation": "-14"
+              }
+          ]
+      }
+  ];
+    
     const loader = new Loader({
-      apiKey: API_KEY,
+      apiKey: api_key,
       version: "weekly",
       libraries: ["places"],
     });
@@ -21,7 +166,10 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation }) => {
             lng: activeStore ? activeStore.longitude : nearestStore.longitude,
           },
           zoom: 12,
+          styles: styles
         });
+
+        mapInstance.current = map;
 
         const getIconSize = () => {
           const width = window.innerWidth;
@@ -78,6 +226,7 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation }) => {
     }).catch(err => {
       console.error("Error loading Google Maps: ", err);
     });
+    
   }, [nearestStore, stores, activeStore]);
 
   return <div ref={mapRef} style={{ height: '100%', width: '100%' }}></div>;

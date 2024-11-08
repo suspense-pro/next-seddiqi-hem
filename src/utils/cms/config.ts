@@ -28,6 +28,7 @@ import BrandListing from './../../components/module/brandListing/index';
 import Spacing from "@components/rendering/spacing";
 import { RolexHeroBanner, RolexNavbar , RolexImageBanner, ThreeGrid, ThreeCompactImageText, ItemSlider, TwoColumnImageText, ThreeTallImageText, RolexProductLister} from "@components/rendering/rolex";
 import RolexTextBlock from "@components/rendering/rolex/rolexTextBlock";
+import NeedMoreHelp from "@components/rendering/needMoreHelp";
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || "platinumpanda",
@@ -61,7 +62,8 @@ export const RolexComponentMapping: any = {
   [`${componentUrl}/rolex/item-slider`]: ItemSlider,
   [`${componentUrl}/rolex/two-column-image-text-v2`]: TwoColumnImageText,
   [`${componentUrl}/rolex/three-tall-image-text`]: ThreeTallImageText,
-  [`${componentUrl}/rolex/product-lister-v2`]: RolexProductLister
+  [`${componentUrl}/rolex/product-lister-v2`]: RolexProductLister,
+  [`${componentUrl}/need-help`]: NeedMoreHelp
 };
 
 export const ComponentMapping: any = {
@@ -96,6 +98,7 @@ export const ComponentMapping: any = {
   [`${contentUrl}/find-a-boutique-listing`]: ContentPage,
   [`${componentUrl}/brand-listing`]: BrandListing,
   [`${componentUrl}/spacing`]: Spacing,
+  [`${componentUrl}/need-help`]: NeedMoreHelp
 };
 
 const defaultConfig = {
