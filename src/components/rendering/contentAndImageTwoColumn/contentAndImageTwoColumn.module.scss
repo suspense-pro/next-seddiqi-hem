@@ -103,3 +103,11 @@
     justify-content: flex-end;
   }
 }
+
+.richTextStyle {
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+  }
+}
