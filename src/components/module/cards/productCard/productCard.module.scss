@@ -93,5 +93,26 @@
     height: rem(464);
     margin: 0 auto;
     z-index: 10;
+
+    & > :hover {
+      cursor: grab;
+    }
+  }
+
+
+  .carouselBtnsContainer {
+
+    * {
+      color: getColorHex("grey-light-5");
+      fill: getColorHex("grey-light-5");
+    }
+
+    .carouselBtns_carouselBtn {
+      background-color: getColorHex("grey-light-5");
+    }
+    .carouselBtns_activeCarouselBtn {
+      border: 0.0625rem solid getColorHex("metallic");
+    }
+
   }
 }

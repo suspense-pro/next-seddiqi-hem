@@ -52,6 +52,8 @@ import StoriesResults from "./search/storiesResults/storiesResults";
 import NoSearchResultFound from "./search/noSearchResultFound/noSearchResultFound";
 import ViewAllStories from "./search/viewAllStories/viewAllStories";
 import FeaturedProductCard from "./featuredProductCard";
+import HoverProductSlider from "./hoverProductSlider";
+import CarouselBtns from "./carouselBtns"
 
 
 export {
@@ -106,5 +108,7 @@ export {
   StoriesResults,
   NoSearchResultFound,
   ViewAllStories,
-  FeaturedProductCard
+  FeaturedProductCard,
+  HoverProductSlider,
+  CarouselBtns
 };

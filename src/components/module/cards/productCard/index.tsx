@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import Typography from "@components/module/typography";
 import HeartIcon from "@assets/images/svg/HeartIcon";
 import styles from "./productCard.module.scss";
-import Carousel from "@components/module/carousel";
-import CarouselBtns from "@components/module/carouselBtns";
 import Image from "next/image";
+import { HoverProductSlider, CarouselBtns } from "@components/module";
 
 // TEMP
 const WATCH_TYPE = "Classic Fusion";
@@ -18,8 +17,9 @@ const slides = [
 
 interface Props {
   item: any;
-  hasCarousel?: boolean
+  hasCarousel?: boolean;
 }
+
 
 const ProductCard = ({ item, hasCarousel = false }: Props) => {
   if (!item) return null;
@@ -30,8 +30,6 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
   // ITEM ATTRIBS
   const { name, image, pricePerUnit, priceCurrency, brand, imageGroups } = item;
 
-  console.log({item});
-  
 
   return (
     <div
@@ -51,21 +49,23 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
         <HeartIcon fill="#" />
       </div>
       <div className={styles.imgContainer}>
-        {hasCarousel && isHovered ? <Carousel
-          slides={slides}
-          setSwiper={setSwiper}
-          setActiveIndex={setActiveIndex}
-          setTransition={"slide"}
-          setSpeed={500}
-          isAnimated={"no"}
-        /> : 
-        <Image
-          layout="fill"
-          objectFit="contain"
-          alt={`Slide`}
-          src={image?.absUrl}
-          // src={imageGroups[1]?.images?.[0]?.link}
-        />}
+        {hasCarousel && isHovered ? (
+          <HoverProductSlider
+            slides={imageGroups[0].images}
+            setSwiper={setSwiper}
+            setActiveIndex={setActiveIndex}
+            setTransition={"slide"}
+            setSpeed={500}
+          />
+        ) : (
+          <Image
+            layout="fill"
+            objectFit="contain"
+            alt={`Slide`}
+            src={image?.absUrl}
+            // src={imageGroups[1]?.images?.[0]?.link}
+          />
+        )}
       </div>
       <div className={styles.productBottom}>
         <Typography align="center" variant="p" className={styles.title}>
@@ -77,7 +77,17 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
         <Typography align="center" variant="p" className={styles.price}>
           {priceCurrency} {pricePerUnit}
         </Typography>
-        {/* {hasCarousel && isHovered && <CarouselBtns swiper={swiper} activeIndex={activeIndex} slides={slides} />} */}
+        {hasCarousel && isHovered && (
+  
+          <CarouselBtns
+            swiper={swiper}
+            activeIndex={activeIndex}
+            slides={imageGroups[0].images}
+            btnWidth={16}
+            btnColor={"grey-light-5"}
+          />
+        
+        )}
       </div>
     </div>
   );

@@ -63,7 +63,9 @@ const PlpContent = ({ productGridContent, products }) => {
           method: "GET",
           cgid: categoryId,
         });
+
         console.log("response-------", response);
+
         if (response && response.refinements) {
           setFilterOptions(response.refinements);
         }
@@ -160,6 +162,9 @@ const PlpContent = ({ productGridContent, products }) => {
 
     const fetchFilteredProducts = async () => {
       setIsLoading(true);
+
+      console.log("Object.keys(filters): ", Object.keys(filters));
+      
       try {
         if (Object.keys(filters).length === 0) {
           setDisplayedProducts(allHits.slice(0, 24));
@@ -173,6 +178,8 @@ const PlpContent = ({ productGridContent, products }) => {
             filters: otherFilters,
             sortOption: sortOption,
           });
+
+          console.log("res: ", res);
 
           if (res && res.hits) {
             setDisplayedProducts(res.hits.slice(0, 24));
@@ -203,14 +210,14 @@ const PlpContent = ({ productGridContent, products }) => {
   return (
     <div ref={productsRef}>
       <div className={styles.container}>
-        <FilterBar
+        {/* <FilterBar
           filters={filters || {}}
           onFilterChange={setFiltersState}
           totalProducts={totalProducts}
           filterOptions={filterOptions}
           sortingOptions={sortingOptions}
           quickFilters={quickFilters}
-        />
+        /> */}
 
         {displayedProducts.length > 0 ? (
           <>

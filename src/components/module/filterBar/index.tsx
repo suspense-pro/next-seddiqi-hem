@@ -28,6 +28,9 @@ const FilterBar = ({
   sortingOptions,
   quickFilters
 }) => {
+
+  console.log({initialFilters});
+  
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [filters, setFiltersState] = useState(initialFilters || {});
   const [openAccordionId, setOpenAccordionId] = useState(null); // Track the currently open accordion
