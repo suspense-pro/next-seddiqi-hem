@@ -475,7 +475,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
               <FilterIcon />
 
               <span>
-                {`Filters By (${totalSelectedCount < 10 ? `0${totalSelectedCount}` : totalSelectedCount})`}
+                {`Filters By (${Number(totalSelectedCount) < 10 ? `0${totalSelectedCount}` : totalSelectedCount})`}
               </span>
             </button>
           </div>
