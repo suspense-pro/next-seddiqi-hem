@@ -7,8 +7,6 @@ import { Image } from "@components/module";
 const NeedMoreHelp = ({ ...content }) => {
   const contents = content.content;
 
-  console.log("Need Content: ",contents);
-
   return (
     <div className={`${[styles.needMoreHelpContainer]}`}>
       <h3>{contents.mainTitle}</h3>
