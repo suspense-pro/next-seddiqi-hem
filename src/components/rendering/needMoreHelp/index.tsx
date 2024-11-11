@@ -1,38 +1,43 @@
 import { CallIcon, MailIcon, WhatsappIcon2 } from "@assets/images/svg";
 import React from "react";
 import styles from "./needMoreHelp.module.scss";
+import { Image } from "@components/module";
 
 
-const NeedMoreHelp = () => {
+const NeedMoreHelp = ({ ...content }) => {
+  const contents = content.content;
+
   return (
     <div className={`${[styles.needMoreHelpContainer]}`}>
-      <h3>Need more help?</h3>
+      <h3>{contents.mainTitle}</h3>
 
       <ul className={styles.paragraphsContainer}>
-        <li>
-          <p>Find the answer to your questions on our</p>
-          <p><a href="">FAQs section.</a></p>
-        </li>
-
-        <li>
-          <p>Contact our Customer Service support centre from</p>
-          <p>Monday to Saturday 9:00 am - 6:00 pm</p>
-        </li>
+        {contents.shortDescription.map((desc, index) => (
+          <li key={index}>
+            {desc.shortDescriptionText.map((text, textIndex) => (
+              <p key={textIndex}>{text}</p>
+            ))}
+            {desc.linkText && (
+              <p><a href={desc.linkUrl}>{desc.linkText}</a></p>
+            )}
+          </li>
+        ))}
       </ul>
 
-      <div className={styles.contactIcons}>
-        <a href="">
-          <MailIcon />
-        </a>
-
-        <a href="">
-          <CallIcon />
-        </a>
-
-        <a href="">
-          <WhatsappIcon2 />
-        </a>
-      </div>
+      {contents.icons.length > 0 ? 
+        <div className={styles.contactIcons}>
+          {contents.icons.map((icon, index) => (
+          <a href={icon.linkUrl}>
+            <Image
+              imgWidth="100%"
+              height={"100%"}
+              image={icon.media?.image}
+              imageAltText={icon.media?.altText}
+            />
+          </a>
+          ))}
+        </div>
+      : ""}
     </div>
   );
 };
