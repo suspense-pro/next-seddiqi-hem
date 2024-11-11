@@ -4,7 +4,7 @@ import ContentBlock from "@components/module/contentBlock";
 import { useContent } from "@contexts/withVisualizationContext";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { CmsContent } from "@utils/cms/utils";
-import { notNull } from "@utils/helpers";
+import { isEmpty, notNull } from "@utils/helpers";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import React from "react";
 
@@ -20,13 +20,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const { vse } = context.query || {};
 
-  // if (isEmpty(data.page)) {
-  //   return {
-  //     redirect: {
-  //       destination: "/page-not-found",
-  //     },
-  //   };
-  // }
+  if (isEmpty(data.page)) {
+    return {
+      redirect: {
+        destination: "/page-not-found",
+      },
+    };
+  }
   return {
     props: {
       ...data,
