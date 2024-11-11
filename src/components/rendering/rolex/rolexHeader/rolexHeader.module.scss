@@ -25,12 +25,14 @@
 
   .rolexLogo,
   .rolexLogoBlack {
-    height: rem(39);
-    width: rem(78);
+    //height: rem(39);
+    //width: rem(78);
+    height: rem(60);
+    width: rem(120);
 
     @include lg {
-      height: rem(42.5);
-      width: rem(85);
+      height: rem(60);
+      width: rem(120);
     }
   }
 

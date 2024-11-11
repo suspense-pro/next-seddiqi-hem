@@ -21,6 +21,7 @@ import {
   HighlightedProductCarousel,
   FeaturedProductCarousel,
   ExploreBrand,
+  ContentAndImageTwoColumn
 } from "@components/rendering";
 import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
@@ -28,6 +29,7 @@ import BrandListing from './../../components/module/brandListing/index';
 import Spacing from "@components/rendering/spacing";
 import { RolexHeroBanner, RolexNavbar , RolexImageBanner, ThreeGrid, ThreeCompactImageText, ItemSlider, TwoColumnImageText, ThreeTallImageText, RolexProductLister} from "@components/rendering/rolex";
 import RolexTextBlock from "@components/rendering/rolex/rolexTextBlock";
+import NeedMoreHelp from "@components/rendering/needMoreHelp";
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || "platinumpanda",
@@ -95,7 +97,9 @@ export const ComponentMapping: any = {
   [`${componentUrl}/brand-category-list`]: CategoryList,
   [`${contentUrl}/find-a-boutique-listing`]: ContentPage,
   [`${componentUrl}/brand-listing`]: BrandListing,
+  [`${componentUrl}/content-and-image-two-column`]: ContentAndImageTwoColumn,
   [`${componentUrl}/spacing`]: Spacing,
+  [`${componentUrl}/need-help`]: NeedMoreHelp
 };
 
 const defaultConfig = {
