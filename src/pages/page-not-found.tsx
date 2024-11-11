@@ -24,8 +24,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function PageNotFound({ ...content }) {
-  console.log("PAGESSSS: ", content.content.page.needMoreHelp);
-
   const contents = content.content.page.needMoreHelp;
 
   return (
