@@ -114,7 +114,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                             return res.status(200).json({ isError: false, emailAttachment });
                         } else {
                             console.log("Attachment Email failed");
-                            return res.status(400).json({ isError: false, emailAttachment });
+                            return res.status(400).json({ isError: true, emailAttachment });
                         }
                     });
                 }
