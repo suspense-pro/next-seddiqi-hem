@@ -1,6 +1,5 @@
 import Layout from "@components/layout";
-import ResetPassword from "@components/module/authenticaion/resetPassword";
-import ContactForm from "@components/module/contact";
+import ContactForm from "@components/module/contactForm";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import React from "react";
@@ -23,9 +22,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function ContactUs() {
-  return <div>
-    <ContactForm />
-  </div>;
+  return (
+    <div>
+      <ContactForm />
+    </div>
+  );
 }
 
 ContactUs.Layout = Layout;

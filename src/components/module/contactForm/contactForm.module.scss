@@ -64,7 +64,7 @@
   height: rem(80);
   border: none;
   outline: none;
-  border: 1px solid var(--Secondary-Brown-Grey, #847b72);
+  border: rem(1) solid getColorHex("grey-brown");
   width: 100%;
   position: relative;
 

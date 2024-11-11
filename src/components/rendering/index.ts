@@ -17,6 +17,7 @@ import FeaturedProductCarousel from "./featuredProductCarousel";
 import PdpTabs from "./pdpTabs";
 import ExploreBrand from "./exploreBrand";
 import Spacing from "./spacing";
+import ContentAndImageTwoColumn from "./contentAndImageTwoColumn";
 
 
 
@@ -39,5 +40,7 @@ export {
   FeaturedProductCarousel,
   PdpTabs,
   ExploreBrand,
-  Spacing
+  ContentAndImageTwoColumn,
+  Spacing,
+
 };

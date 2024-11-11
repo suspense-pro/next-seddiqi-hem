@@ -23,6 +23,7 @@ import { FilterAccordian, FilterAccordionItem } from "@components/module/filterA
 import CheckboxFilter from "@components/module/checkboxFilter";
 import SearchIcon2 from "@assets/images/svg/SearchIcon2";
 import { useRouter } from 'next/router';
+import { HeroBanner } from "@components/rendering";
 
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -41,8 +42,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   };
 }
-
-
 export default function FindABoutiqueListing({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
   const [stores, setStores] = useState([]);
@@ -50,7 +49,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [userLocation, setUserLocation] = useState(null);
   const [nearestStore, setNearestStore] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeToggle, setActiveToggle] = useState(true);
+  const [activeToggle, setActiveToggle] = useState(false); //Set to true to show the location lister
   const [fadeList, setFadeList] = useState(false);
   const [itemsToShow, setItemsToShow] = useState(8);
   const [activeTab, setActiveTab] = useState('All');
@@ -261,7 +260,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         <StoreMapListContainer 
           storesList={storesList} 
           activeIndex={activeIndex} 
-          handleStoreClick={handleStoreClick} 
+          handleStoreClick={handleStoreClick}
           isMobile={!isMobile} 
           isAbsolutePosition={true}
           needScrollbar={true} //For Desktop Only
@@ -462,9 +461,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   return (
     <>
       <div className={styles.heroBannerWrapper}>
-      {compact(content?.page?.components).map((content) => (
-        <ContentBlock content={content} key={content?._meta.deliveryId} />
-      ))}
+        <HeroBanner banners={content.page.heroBanner.banners} bannerType={content.page.heroBanner.bannerType} />
       </div>
 
       <div className={styles.storeLocatorContainer}>
@@ -478,7 +475,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
               <FilterIcon />
 
               <span>
-                {`Filters By (${totalSelectedCount < 10 ? `0${totalSelectedCount}` : totalSelectedCount})`}
+                {`Filters By (${Number(totalSelectedCount) < 10 ? `0${totalSelectedCount}` : totalSelectedCount})`}
               </span>
             </button>
           </div>
@@ -530,7 +527,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         </div>
       </div>
 
-      <NeedMoreHelp />
+      <NeedMoreHelp content={content.page.needMoreHelp} />
 
       <SideDrawer
         isOpen={filtersPopup}

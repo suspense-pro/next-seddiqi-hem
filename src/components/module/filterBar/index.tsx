@@ -11,53 +11,64 @@ import Typography from "../typography";
 import { CloseIcon } from "@assets/images/svg";
 import { getCategoryFilters } from "@utils/sfcc-connector/dataService";
 
-const FILTERS = [
-  { icon: true, text: "All Filter & Sort by" },
-  { icon: false, text: "New" },
-  { icon: false, text: "Exclusive" },
-  { icon: false, text: "Gifts" },
-  { icon: false, text: "Messika" },
-  { icon: false, text: "Bvlgari" },
-];
+// const FILTERS = [
+//   { icon: true, text: "All Filter & Sort by" },
+//   { icon: false, text: "New" },
+//   { icon: false, text: "Exclusive" },
+//   { icon: false, text: "Gifts" },
+//   { icon: false, text: "Messika" },
+//   { icon: false, text: "Bvlgari" },
+// ];
 
 const FilterBar = ({
   filters: initialFilters,
   onFilterChange,
   totalProducts,
-  categoryId,
+  filterOptions,
+  sortingOptions,
+  quickFilters
 }) => {
+
+  console.log({initialFilters});
+  
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [filters, setFiltersState] = useState(initialFilters || {});
-  const [filterOptions, setFilterOptions] = useState([]);
-  const [sortingOptions, setSortingOptions] = useState([]);
   const [openAccordionId, setOpenAccordionId] = useState(null); // Track the currently open accordion
+  // const [filterOptions, setFilterOptions] = useState(filterOptions || []);
+  // const [sortingOptions, setSortingOptions] = useState(sortingOptions || []);
+  // const [quickFilters, setQuickFilters] = useState(quickFilters || []);
 
-  useEffect(() => {
-    const fetchCategoryFilters = async () => {
-      try {
-        const response = await getCategoryFilters({
-          method: "GET",
-          cgid: categoryId,
-        });
+  // useEffect(() => {
+    
+  //   const fetchCategoryFilters = async () => {
+  //     try {
+  //       const response = await getCategoryFilters({
+  //         method: "GET",
+  //         cgid: categoryId,
+  //       });
+  //       console.log("response-------", response);
+  //       if (response && response.refinements) {
+  //         setFilterOptions(response.refinements);
+  //       }
 
-        if (response && response.refinements) {
-          setFilterOptions(response.refinements);
-        }
+  //       if (response && response.sortingOptions) {
+  //         setSortingOptions(response.sortingOptions);
+  //       }
 
-        if (response && response.sortingOptions) {
-          setSortingOptions(response.sortingOptions);
-        }
-      } catch (error) {
-        console.error("error-", error);
-      }
-    };
+  //       if (response && response.quickFilters) {
+  //         setQuickFilters(response.quickFilters);
+  //       }
+  //     } catch (error) {
+  //       console.error("error-", error);
+  //     }
+  //   };
 
-    fetchCategoryFilters();
-  }, [categoryId]);
+  //   fetchCategoryFilters();
+  // }, [categoryId]);
 
-  useEffect(() => {
-    setFiltersState(initialFilters || {});
-  }, [initialFilters]);
+  // useEffect(() => {
+  //   setFiltersState(initialFilters || {});
+  // }, [initialFilters]);
 
   useEffect(() => {
     if (!isDrawerOpen) {
@@ -78,6 +89,8 @@ const FilterBar = ({
 
       return { ...prevFilters, [filterKey]: newSelectedOptions };
     });
+
+    onFilterChange(filters);
   };
 
   const handleSortChange = (selectedSortOption) => {
@@ -117,7 +130,7 @@ const FilterBar = ({
     if (onFilterChange) {
       onFilterChange(filteredFilters);
     }
-    setDrawerOpen(false);
+
   };
 
   const handleClearAll = () => {
@@ -151,22 +164,25 @@ const FilterBar = ({
   return (
     <div className={styles.container}>
       <div className={styles.filterBtns}>
-        {FILTERS.map((item, index) => (
           <FilterBtn
-            key={index}
-            label={item.text}
-            icon={item.icon}
-            onClick={
-              item.text === "All Filter & Sort by" ? toggleDrawer : undefined
-            }
+            label={"All Filter"}
+            icon={true}
+            onClick={toggleDrawer}
           />
-        ))}
+          {quickFilters.map((item, index) => (
+            <FilterBtn
+              key={index}
+              label={item.label}
+              icon={false}
+              onClick={undefined}
+            />
+          ))}
       </div>
       <div className={styles.productsLength}>{totalProducts} Products</div>
       <SideDrawer
         isOpen={isDrawerOpen}
         onClose={() => setDrawerOpen(false)}
-        onSubmit={handleSubmit}
+        onSubmit={null}
         onClearAll={handleClearAll}
         showFooter={true}
         showBackButton={false}
@@ -213,7 +229,7 @@ const FilterBar = ({
         </div>
 
         <FilterAccordian>
-          <FilterAccordionItem 
+          {/* <FilterAccordionItem 
             title="Sort"
             isOpen={openAccordionId === "sort"}
             onToggle={() => toggleAccordion("sort")}
@@ -225,7 +241,7 @@ const FilterBar = ({
               selectedSortOption={filters.sortOption}
               onSortChange={handleSortChange}
             />
-          </FilterAccordionItem>
+          </FilterAccordionItem> */}
           {filterOptions.map((filterItem) => (
             <FilterAccordionItem
               key={filterItem.attributeId}
@@ -235,18 +251,23 @@ const FilterBar = ({
               onClear={() => handleClearCheckboxes(filterItem.attributeId)}
               selectedCount={filters[filterItem.attributeId]?.length || 0}
             >
-              {filterItem.values && (
+              {filterItem.values &&  (!filterItem.attributeId.includes('color') && !filterItem.attributeId.includes('price')) && (
                 <CheckboxFilter
                   title={filterItem.label}
                   options={filterItem.values.map((val) => val.label)}
                   filterKey={filterItem.attributeId}
                   onOptionChange={handleOptionChange}
                   selectedOptions={filters[filterItem.attributeId] || []}
+                  hasSearch={filterItem.attributeId.includes('brand')}
                 />
               )}
+
+              {filterItem.attributeId.includes('price') && <PriceRangeFilter priceData={filterItem.values} />}
+              {filterItem.attributeId.includes('color') &&   <ColorFilter />}
+
             </FilterAccordionItem>
           ))}
-          <FilterAccordionItem 
+          {/* <FilterAccordionItem 
             title="Price"
             isOpen={openAccordionId === "price"}
             onToggle={() => toggleAccordion("price")}
@@ -263,7 +284,7 @@ const FilterBar = ({
             selectedCount={filters.color ? 1 : 0}
           >
             <ColorFilter />
-          </FilterAccordionItem>
+          </FilterAccordionItem> */}
         </FilterAccordian>
       </SideDrawer>
     </div>

@@ -1,12 +1,15 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import styles from "./contact.module.scss";
+import styles from "./contactForm.module.scss";
 import InputField from "../inputField";
 import Button from "../button";
-import { countryCodes } from "./countryCodes";
 import { validateEmail, validateFirstName, validateLastName, validatePhone } from "@utils/helpers/validations";
 import { contactUs } from "@utils/sfcc-connector/dataService";
+import { useRouter } from "next/router";
+import { ContactUsFormErrors } from "@utils/models/errors";
 
 const ContactForm = () => {
+  const router = useRouter();
+  const [attachment, setAttachment] = useState<File | null>(null);
   const [formData, setFormData] = useState({
     topic: "Compliant",
     orderNumber: "",
@@ -17,21 +20,7 @@ const ContactForm = () => {
     email: "",
     description: "",
   });
-
-  const [attachment, setAttachment] = useState<File | null>(null);
-
-  type FormErrors = {
-    topic: string;
-    orderNumber?: string;
-    firstName: string;
-    lastName: string;
-    phoneCode?: string;
-    phoneNumber?: string;
-    email: string;
-    description: string;
-  };
-
-  const [errors, setErrors] = useState<FormErrors>({
+  const [errors, setErrors] = useState<ContactUsFormErrors>({
     topic: "",
     orderNumber: "",
     firstName: "",
@@ -69,11 +58,11 @@ const ContactForm = () => {
         userData: data,
       });
 
-      console.log(response);
-      if(response?.isError) {
-        alert("Form submitted")
+      // console.log(response);
+      if (!response?.isError) {
+        router.push("/contact-us/confirmation");
       } else {
-        alert("Failed to send email")
+        alert("Failed to send email");
       }
     }
   };
@@ -88,17 +77,6 @@ const ContactForm = () => {
     }
     if (name === "lastName" && /\d/.test(value)) {
       return;
-    }
-
-    // Auto-populate phoneCode based on phoneNumber prefix
-    if (name === "phoneNumber") {
-      const prefix = value.slice(0, 3);
-      for (const [code, prefixes] of Object.entries(countryCodes)) {
-        if (prefixes.some((p) => value.startsWith(p))) {
-          updatedFormData.phoneCode = code;
-          break;
-        }
-      }
     }
 
     setFormData(updatedFormData);
@@ -146,7 +124,7 @@ const ContactForm = () => {
   };
 
   const validateForm = (): boolean => {
-    const updatedErrors: FormErrors = {
+    const updatedErrors: ContactUsFormErrors = {
       topic: "",
       orderNumber: "",
       firstName: validateFirstName(formData.firstName),
@@ -215,7 +193,7 @@ const ContactForm = () => {
             label=""
             value={formData.phoneCode}
             onChange={handleChange}
-            options={Object.keys(countryCodes)}
+            options={["+917", "+49", "+81"]}
           />
 
           <InputField
@@ -250,15 +228,10 @@ const ContactForm = () => {
       <div className={styles.attachmentField}>
         <label>Attachments</label>
         <div className={styles.attachment}>
-          <input
-            type="file"
-            accept="image/*,application/pdf"
-            onChange={handleFileChange}
-          />
+          <input type="file" accept="image/*,application/pdf" onChange={handleFileChange} />
           <div onChange={handleFileChange} className={styles.fileInfo}>
-            Selected File: {attachment?.name ? attachment?.name : "Upload (Max 10 MB)"}{" "}
+            {attachment?.name ? `Selected File: ${attachment?.name}` : "Upload (Max 10 MB)"}
           </div>
-          {/* {attachment && <div className={styles.fileName}>Selected File: {attachment.name}</div>} */}
         </div>
       </div>
 

@@ -1,4 +1,5 @@
 import Layout from "@components/layout";
+import { HeroBanner } from "@components/rendering";
 import NeedMoreHelp from "@components/rendering/needMoreHelp";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
@@ -23,7 +24,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 export default function ContactUsConfirmationPage({ ...content }) {
   console.log("CONTACT US DATA", content);
+  const heroBanner = content?.content?.page?.heroBanner
   return <div>
+    <HeroBanner banners={heroBanner?.banners} bannerType={heroBanner?.bannerType}  />
+    <NeedMoreHelp content={content?.content?.page.needMoreHelp} />
   </div>;
 }
 
