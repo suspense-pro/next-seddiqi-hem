@@ -8,7 +8,6 @@ import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { isEmpty, mapToID, notNull } from "@utils/helpers";
 import { CmsContent } from "@utils/cms/utils";
 import ContentBlock from "@components/module/contentBlock";
-import RolexNavbar from "@components/rendering/rolex/rolexHeader";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let { slug } = context.params || {};
@@ -45,6 +44,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 const BrandPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { vse, content, } = props;
   const [page] = useContent(content.page, vse as string);
+  console.log("CONTENT BRAND", content)
   return (
     <div className="brand-content">
       {page?.contentComponents

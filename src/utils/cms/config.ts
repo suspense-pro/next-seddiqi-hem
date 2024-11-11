@@ -28,6 +28,7 @@ import BrandListing from './../../components/module/brandListing/index';
 import Spacing from "@components/rendering/spacing";
 import { RolexHeroBanner, RolexNavbar , RolexImageBanner, ThreeGrid, ThreeCompactImageText, ItemSlider, TwoColumnImageText, ThreeTallImageText, RolexProductLister} from "@components/rendering/rolex";
 import RolexTextBlock from "@components/rendering/rolex/rolexTextBlock";
+import ViewAllBrandsCategory from "@components/module/brands/viewAllBrandsCategory";
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || "platinumpanda",
@@ -95,6 +96,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/brand-category-list`]: CategoryList,
   [`${contentUrl}/find-a-boutique-listing`]: ContentPage,
   [`${componentUrl}/brand-listing`]: BrandListing,
+  [`${componentUrl}/view-all-brands`]: ViewAllBrandsCategory,
   [`${componentUrl}/spacing`]: Spacing,
 };
 

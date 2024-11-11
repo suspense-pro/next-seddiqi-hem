@@ -61,7 +61,7 @@ const ContactForm = () => {
       });
 
       if (attachment) {
-        data.append("attachment", attachment);
+        data?.append("attachment", attachment);
       }
 
       const response = await contactUs({
@@ -70,7 +70,11 @@ const ContactForm = () => {
       });
 
       console.log(response);
-      console.log("Form submitted:", formData);
+      if(response?.isError) {
+        alert("Form submitted")
+      } else {
+        alert("Failed to send email")
+      }
     }
   };
 
@@ -81,6 +85,9 @@ const ContactForm = () => {
       if (/^\d*$/.test(value) && value.length <= 10) {
         updatedFormData = { ...formData, [name]: value };
       }
+    }
+    if (name === "lastName" && /\d/.test(value)) {
+      return;
     }
 
     // Auto-populate phoneCode based on phoneNumber prefix
@@ -119,6 +126,7 @@ const ContactForm = () => {
         break;
       case "lastName":
         if (/\d/.test(value)) {
+          // Check if there are numbers
           errorMessage = "Last Name should not contain numbers.";
         } else {
           errorMessage = validateLastName(value);
@@ -242,9 +250,13 @@ const ContactForm = () => {
       <div className={styles.attachmentField}>
         <label>Attachments</label>
         <div className={styles.attachment}>
-          <input type="file" accept="image/*,application/pdf" onChange={handleFileChange} />
-          <div className={styles.fileInfo}>
-            Selected File: {attachment.name ? attachment.name : "Upload (Max 10 MB)"}{" "}
+          <input
+            type="file"
+            accept="image/*,application/pdf"
+            onChange={handleFileChange}
+          />
+          <div onChange={handleFileChange} className={styles.fileInfo}>
+            Selected File: {attachment?.name ? attachment?.name : "Upload (Max 10 MB)"}{" "}
           </div>
           {/* {attachment && <div className={styles.fileName}>Selected File: {attachment.name}</div>} */}
         </div>
