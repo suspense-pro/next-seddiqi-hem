@@ -23,6 +23,7 @@ import { FilterAccordian, FilterAccordionItem } from "@components/module/filterA
 import CheckboxFilter from "@components/module/checkboxFilter";
 import SearchIcon2 from "@assets/images/svg/SearchIcon2";
 import { useRouter } from 'next/router';
+import { HeroBanner } from "@components/rendering";
 
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -460,9 +461,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   return (
     <>
       <div className={styles.heroBannerWrapper}>
-      {compact(content?.page?.components).map((content) => (
-        <ContentBlock content={content} key={content?._meta.deliveryId} />
-      ))}
+        <HeroBanner banners={content.page.heroBanner.banners} bannerType={content.page.heroBanner.bannerType} />
       </div>
 
       <div className={styles.storeLocatorContainer}>
@@ -528,7 +527,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         </div>
       </div>
 
-      <NeedMoreHelp />
+      <NeedMoreHelp content={content.page.needMoreHelp} />
 
       <SideDrawer
         isOpen={filtersPopup}
