@@ -1,6 +1,7 @@
 @import "../../assets/styles/main.scss";
 
 .heroBannerWrapper{
+  overflow: hidden;
   
   & > div{
     height: rem(393);
