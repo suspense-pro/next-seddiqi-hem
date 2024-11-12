@@ -37,8 +37,10 @@ const StoreMapListContainer = ({
   };
 
   const handleStoreDetailsPage = (storeId, showMapView = false) => {
-    router.push(`/find-a-boutique-details/${storeId}`); 
-    query: { mapView: showMapView ? 'true' : 'false' }
+    router.push({
+      pathname: `/find-a-boutique-details/${storeId}`,
+      query: { mapView: showMapView ? 'true' : 'false' }
+    });
   };
 
   return (
