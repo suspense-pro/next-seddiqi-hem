@@ -111,11 +111,11 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
         </div>
       </div>
       <div className={styles.mapViewWrapper}>
-        <SlidingRadioSwitch
+        {/* <SlidingRadioSwitch
           toggleLabel={"Map View"}
           onToggle={handleToggleChange}
           value ={activeToggle}
-        />
+        /> */}
       </div>
 
       <div className={styles.contentWrapper}>
