@@ -25,6 +25,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
   const [cities, setCities] = useState([]);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedStoreId, setSelectedStoreId] = useState(null);
+  const [mapViewOn, setMapViewOn] = useState(false);
 
   const tabs = [
     { label: 'All Boutiques', value: 'All' },
@@ -113,6 +114,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
 
   const handleToggleChange = (toggle) => {
     setFadeList(true);
+    setMapViewOn(toggle); 
     setTimeout(() => {
       setActiveToggle(toggle);
       setFadeList(false);
@@ -228,6 +230,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
     storeId={selectedStoreId}
     isOpen={isDetailsOpen}
     onClose={handleCloseDetails}
+    mapViewOn={mapViewOn}
   />)
     }
   </>
