@@ -169,6 +169,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
               stores={stores} 
               activeStore={stores[activeIndex]} 
               userLocation={userLocation}
+              useOnPopup={true}
             />
           )}
         </div>

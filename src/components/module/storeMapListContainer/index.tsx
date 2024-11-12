@@ -100,13 +100,17 @@ const StoreMapListContainer = ({
             <li
               key={store.id}
               className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ''}`}
+              onClick={() => handleStoreClick(index)}
             >
               <div className={styles.storeMapDetails}>
                 <h4 className={styles.storeMapName}>{store.name}</h4>
                 <div className={styles.storeMapLocation}>
                   <div className={styles.locationContainer}>
-                    <LocationIcon />
-                    <p><span>{store.city}</span><span>{store.address1}</span></p>
+                    {/* <LocationIcon /> */}
+                    <p>
+                      <span><LocationIcon /> {store.city}</span>
+                      <span>{store.address1}</span>
+                    </p>
                   </div>
                   <p className={styles.storeMapDistance}>{store.distance} {store.distanceUnit}</p>
                 </div>

@@ -90,6 +90,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
   const handleStoreClick = (index) => {
     setActiveIndex(index); // Set the clicked store as active
+
+    console.log("asdasdas");
   };
 
   const [isMobile] = useDeviceWidth();
@@ -254,6 +256,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
               stores={stores} 
               activeStore={stores[activeIndex]} 
               userLocation={userLocation}
+              useOnPopup={false}
             />
           )}
         </div>
