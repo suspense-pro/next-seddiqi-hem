@@ -7,10 +7,11 @@
   flex-direction: column-reverse;
   height: rem(46);
   width: 100%;
-  
+
   input,
   select {
-    @include heading_light;
+    @include body_regular;
+
     border: none;
     border-bottom: rem(1) solid getColorHex("grey-light");
     font-size: rem(14);
@@ -18,10 +19,9 @@
     transition: border-color 0.3s;
     background-color: transparent;
     height: 100%;
-    
+
     @include md {
       font-size: rem(16);
-
     }
 
     &:focus {
@@ -37,7 +37,6 @@
     // -moz-appearance: none;
     @include body_regular;
 
-    
     background: transparent;
     border: none;
     border-bottom: rem(1) solid getColorHex("grey-light");
@@ -47,9 +46,9 @@
     cursor: pointer;
     transition: border-color 0.3s;
     box-sizing: border-box;
-    
+
     width: 100%;
-    
+
     @include md {
       width: rem(61);
     }
@@ -65,7 +64,8 @@
   }
 
   label {
-    @include heading_light;
+    @include body_regular;
+
     position: absolute;
     left: 0;
     bottom: 0;
@@ -79,7 +79,7 @@
     color: getColorHex("grey");
     line-height: rem(26);
     letter-spacing: rem(0.2);
-    
+
     @include md {
       font-size: rem(16);
     }
@@ -116,7 +116,8 @@
 }
 
 .errorMessage {
-  @include heading_light;
+  @include body_regular;
+
   color: getColorHex("dark-red");
   margin-top: rem(8);
   font-size: rem(10);

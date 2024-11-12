@@ -2,7 +2,13 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import styles from "./contactForm.module.scss";
 import InputField from "../inputField";
 import Button from "../button";
-import { validateEmail, validateFirstName, validateLastName, validatePhone } from "@utils/helpers/validations";
+import {
+  validateDescription,
+  validateEmail,
+  validateFirstName,
+  validateLastName,
+  validatePhone,
+} from "@utils/helpers/validations";
 import { contactUs } from "@utils/sfcc-connector/dataService";
 import { useRouter } from "next/router";
 import { ContactUsFormErrors } from "@utils/models/errors";
@@ -112,6 +118,9 @@ const ContactForm = () => {
       case "email":
         errorMessage = validateEmail(value);
         break;
+      case "description":
+        errorMessage = validateDescription(value);
+        break;
       default:
         break;
     }
@@ -128,13 +137,12 @@ const ContactForm = () => {
       phoneCode: "",
       phoneNumber: validatePhone(formData.phoneNumber),
       email: validateEmail(formData.email),
-      description: "",
+      description: validateDescription(formData.description),
     };
 
     setErrors(updatedErrors);
     return !Object.values(updatedErrors).some((error) => error !== "");
   };
-
 
   return (
     <form className={styles.contactForm} onSubmit={handleSubmit}>
@@ -218,6 +226,7 @@ const ContactForm = () => {
         type="textarea"
         value={formData.description}
         onChange={handleChange}
+        errorMessage={errors.description}
         required
       />
 
@@ -225,7 +234,7 @@ const ContactForm = () => {
       <div className={styles.attachmentField}>
         <label>Attachments</label>
         <div className={styles.attachment}>
-          <input type="file" accept="image/*,application/pdf" onChange={handleFileChange} />
+          <input type="file" accept="image/*" onChange={handleFileChange} />
           <div onChange={handleFileChange} className={styles.fileInfo}>
             {attachment?.name ? `Selected File: ${attachment?.name}` : "Upload (Max 10 MB)"}
           </div>
