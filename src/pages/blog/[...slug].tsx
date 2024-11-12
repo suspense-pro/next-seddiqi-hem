@@ -41,7 +41,7 @@ export default function BlogDetail({
   vse,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [page] = useContent(content.page, vse as string);
-
+  
   return (
     <div className="blog-main-content">
       {page?.contentComponents

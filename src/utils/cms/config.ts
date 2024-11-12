@@ -89,7 +89,6 @@ export const ComponentMapping: any = {
   [`${componentUrl}/collections-tab-list`]: CollectionsTabList,
   [`${componentUrl}/article-list-carousel`]: ArticleListCarousel,
   [`${componentUrl}/brand-banner`]: BrandBanner,
-
   [`${componentUrl}/highlighted-product-carousel`]: HighlightedProductCarousel,
   [`${componentUrl}/botique-banner`]: BoutiqueBanner,
   [`${componentUrl}/product-carousel`]: FeaturedProductCarousel,
