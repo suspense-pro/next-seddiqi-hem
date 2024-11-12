@@ -31,11 +31,12 @@
   }
 
   h3{
-    @include heading_light;
+    @include heading_regular;
     font-size: rem(28);
+    font-weight: 500;
     line-height: rem(34);
     letter-spacing: rem(0.4);
-    color: getColorHex("green-dark");
+    color: getColorHex("brown-dark");
     margin: 0;
     text-transform: uppercase;
     text-align: left;
