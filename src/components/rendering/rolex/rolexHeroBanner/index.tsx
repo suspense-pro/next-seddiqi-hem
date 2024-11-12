@@ -4,7 +4,12 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import styles from "./rolexHeroBanner.module.scss";
 import { ArrowRightThick } from "@assets/images/svg";
-import { GradientOverlay, Image, NavigationLink, Video } from "@components/module";
+import {
+  GradientOverlay,
+  Image,
+  NavigationLink,
+  Video,
+} from "@components/module";
 import { useWindowWidth } from "@utils/useCustomHooks";
 import CarouselBtns from "@components/module/carouselBtns";
 
@@ -44,7 +49,10 @@ const RolexHeroBanner = ({ ...content }) => {
           <SwiperSlide className={styles.swiperSlide} key={index}>
             <div className={styles.slide}>
               {slide?.media?.image || slide?.mobileMedia?.media?.image ? (
-                <GradientOverlay className={styles.gradient} opacity={slide?.opacity?.opacity}>
+                <GradientOverlay
+                  className={styles.gradient}
+                  opacity={slide?.opacity?.opacity}
+                >
                   <Image
                     imgWidth="100%"
                     height={styles.image}
@@ -72,14 +80,16 @@ const RolexHeroBanner = ({ ...content }) => {
                 <div className={styles.textOverlay}>
                   <div className={styles.brand}>{slide?.title}</div>
                   <h2 className={styles.title}>{slide.subHeading}</h2>
-                  <div className={styles.btnContainer}>
-                    <NavigationLink
-                      className={styles.discoverButton}
-                      title={slide?.cta?.label}
-                      isNewTab={slide?.cta?.isNewTab}
-                      url={slide?.cta?.url}
-                    />
-                  </div>
+                  {slide?.cta?.label && (
+                    <div className={styles.btnContainer}>
+                      <NavigationLink
+                        className={styles.discoverButton}
+                        title={slide?.cta?.label}
+                        isNewTab={slide?.cta?.isNewTab}
+                        url={slide?.cta?.url}
+                      />
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className={styles.textOverlayCpo}>
@@ -99,12 +109,18 @@ const RolexHeroBanner = ({ ...content }) => {
               {slides?.length > 1 && (
                 <>
                   {
-                    <div className={styles.sliderLeftBtn} onClick={() => swiperRef.current.swiper.slidePrev()}>
+                    <div
+                      className={styles.sliderLeftBtn}
+                      onClick={() => swiperRef.current.swiper.slidePrev()}
+                    >
                       <ArrowRightThick />
                     </div>
                   }
                   {
-                    <div className={styles.sliderRightBtn} onClick={() => swiperRef.current.swiper.slideNext()}>
+                    <div
+                      className={styles.sliderRightBtn}
+                      onClick={() => swiperRef.current.swiper.slideNext()}
+                    >
                       <ArrowRightThick />
                     </div>
                   }

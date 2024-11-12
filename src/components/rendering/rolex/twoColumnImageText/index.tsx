@@ -10,7 +10,7 @@ const TwoColumnImageText = ({ ...content }) => {
   return (
     <div className={styles.container}>
       {contentRow.map((data, index) => (
-      <div key={index} className={`${[styles.imageTextsWrapper]}`}>
+        <div key={index} className={`${[styles.imageTextsWrapper]}`}>
           <Image
             className={styles.image}
             imgWidth="100%"
@@ -23,12 +23,16 @@ const TwoColumnImageText = ({ ...content }) => {
             <h6 className={styles.subtitle}>{data.subtitle}</h6>
             <h3 className={styles.title}>{data.title}</h3>
             <p className={styles.description}>{data.description}</p>
-            <a href={data.linkUrl} className={`rolex-button solid`}>{data.linkText}</a>
+            {data?.linkText && (
+              <a href={data?.linkUrl} className={`rolex-button solid`}>
+                {data?.linkText}
+              </a>
+            )}
           </div>
-      </div>
+        </div>
       ))}
     </div>
-  )
+  );
 };
 
 export default TwoColumnImageText;
