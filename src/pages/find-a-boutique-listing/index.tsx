@@ -90,8 +90,6 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
   const handleStoreClick = (index) => {
     setActiveIndex(index); // Set the clicked store as active
-
-    console.log("asdasdas");
   };
 
   const [isMobile] = useDeviceWidth();
