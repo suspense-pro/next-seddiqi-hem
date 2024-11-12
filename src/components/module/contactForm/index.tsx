@@ -104,12 +104,7 @@ const ContactForm = () => {
         errorMessage = validateFirstName(value);
         break;
       case "lastName":
-        if (/\d/.test(value)) {
-          // Check if there are numbers
-          errorMessage = "Last Name should not contain numbers.";
-        } else {
-          errorMessage = validateLastName(value);
-        }
+        errorMessage = validateLastName(value);
         break;
       case "phoneNumber":
         errorMessage = validatePhone(value);
@@ -139,6 +134,7 @@ const ContactForm = () => {
     setErrors(updatedErrors);
     return !Object.values(updatedErrors).some((error) => error !== "");
   };
+
 
   return (
     <form className={styles.contactForm} onSubmit={handleSubmit}>

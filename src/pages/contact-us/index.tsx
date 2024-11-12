@@ -1,5 +1,6 @@
 import Layout from "@components/layout";
 import ContactForm from "@components/module/contactForm";
+import NeedMoreHelp from "@components/rendering/needMoreHelp";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import React from "react";
@@ -8,7 +9,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
     {
       content: {
-        page: { key: "" },
+        page: { key: "/contact-us" },
       },
     },
     context
@@ -21,10 +22,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-export default function ContactUs() {
+export default function ContactUs({ ...content }) {
+  console.log("DATA", content);
   return (
     <div>
       <ContactForm />
+      <NeedMoreHelp content={content?.content?.page.needMoreHelp} />
     </div>
   );
 }
