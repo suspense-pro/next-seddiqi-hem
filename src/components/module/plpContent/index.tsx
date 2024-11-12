@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import FilterBar from "../filterBar";
-import styles from "./productsContnet.module.scss";
+import styles from "./productsContent.module.scss";
 import GridWrapper from "../gridWrapper";
 import ProductCard from "../cards/productCard";
 import { ComponentMapping } from "@utils/cms/config";
 import { generateUniqueId } from "@utils/helpers/uniqueId";
 import Button from "../button";
-import { setFilters } from "@utils/sfcc-connector/dataService";
+import { getCategoryFilters, setFilters } from "@utils/sfcc-connector/dataService";
 import Typography from "../typography";
 import Loader from "../loader";
+import ScrollToTop from "../scrollToTop";
 
 const LOAD_MORE_TEXT = "Load More";
 
@@ -19,23 +20,21 @@ const PlpContent = ({ productGridContent, products }) => {
   if (!products) return null;
 
   const router = useRouter();
-
-  const categoryId =
-    products?.query?.TermQuery?.values?.[0] || "";
-
-    const allHits = Array.isArray(products) ? products : products?.hits || [];
+  const categoryId = products?.query?.TermQuery?.values?.[0] || "";
+  const allHits = Array.isArray(products) ? products : products?.hits || [];
 
   const [filters, setFiltersState] = useState(null);
-  const [displayedProducts, setDisplayedProducts] = useState(
-    allHits.slice(0, 24)
-  );
+  const [displayedProducts, setDisplayedProducts] = useState(allHits.slice(0, 24));
   const [currentIndex, setCurrentIndex] = useState(24);
   const [isAllLoaded, setIsAllLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const productsRef = useRef(null);
-  const isButtonDisabled = displayedProducts.length <= 24 || isAllLoaded;
-
   const [hasInitializedFilters, setHasInitializedFilters] = useState(false);
+  const [filterOptions, setFilterOptions] = useState([]);
+  const [sortingOptions, setSortingOptions] = useState([]);
+  const [quickFilters, setQuickFilters] = useState([]);
+
+  const productsRef = useRef(null);
+  const isButtonDisabled = products?.total <= 24 || isAllLoaded;
 
   const loadMoreProducts = () => {
     const currentScrollPos = window.scrollY;
@@ -55,6 +54,36 @@ const PlpContent = ({ productGridContent, products }) => {
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+    
+    const fetchCategoryFilters = async () => {
+      try {
+        const response = await getCategoryFilters({
+          method: "GET",
+          cgid: categoryId,
+        });
+
+        console.log("response-------", response);
+
+        if (response && response.refinements) {
+          setFilterOptions(response.refinements);
+        }
+
+        if (response && response.sortingOptions) {
+          setSortingOptions(response.sortingOptions);
+        }
+
+        if (response && response.quickFilters) {
+          setQuickFilters(response.quickFilters);
+        }
+      } catch (error) {
+        console.error("error-", error);
+      }
+    };
+
+    fetchCategoryFilters();
+  }, [categoryId]);
 
   useEffect(() => {
     if (!router.isReady || hasInitializedFilters) return;
@@ -133,6 +162,9 @@ const PlpContent = ({ productGridContent, products }) => {
 
     const fetchFilteredProducts = async () => {
       setIsLoading(true);
+
+      console.log("Object.keys(filters): ", Object.keys(filters));
+      
       try {
         if (Object.keys(filters).length === 0) {
           setDisplayedProducts(allHits.slice(0, 24));
@@ -146,6 +178,8 @@ const PlpContent = ({ productGridContent, products }) => {
             filters: otherFilters,
             sortOption: sortOption,
           });
+
+          console.log("res: ", res);
 
           if (res && res.hits) {
             setDisplayedProducts(res.hits.slice(0, 24));
@@ -168,18 +202,22 @@ const PlpContent = ({ productGridContent, products }) => {
     fetchFilteredProducts();
   }, [filters, categoryId]);
 
+
+
   const totalProducts = products?.total || allHits.length;
   const PRODUCT_INFO_TEXT = `Showing ${displayedProducts.length} out of ${totalProducts} products`;
 
   return (
     <div ref={productsRef}>
       <div className={styles.container}>
-        <FilterBar
+        {/* <FilterBar
           filters={filters || {}}
           onFilterChange={setFiltersState}
           totalProducts={totalProducts}
-          categoryId={categoryId}
-        />
+          filterOptions={filterOptions}
+          sortingOptions={sortingOptions}
+          quickFilters={quickFilters}
+        /> */}
 
         {displayedProducts.length > 0 ? (
           <>
@@ -188,6 +226,7 @@ const PlpContent = ({ productGridContent, products }) => {
                 <ProductCard
                   key={generateUniqueId()}
                   item={{ ...item, tempId: ind + 1 }}
+                  hasCarousel
                 />
               ))}
               {productGridContent?.length > 0 &&
@@ -208,14 +247,14 @@ const PlpContent = ({ productGridContent, products }) => {
             <div className={styles.bottom}>
               <div className={styles.productInfo}>{PRODUCT_INFO_TEXT}</div>
               {!isAllLoaded && (
-                <div>
+                // <div>
                   <Button
                     title={LOAD_MORE_TEXT}
-                    type="solid green_dark"
+                    type="solid metallic"
                     disabled={isButtonDisabled}
                     clickHandler={loadMoreProducts}
                   />
-                </div>
+                // </div>
               )}
             </div>
           </>
@@ -227,6 +266,7 @@ const PlpContent = ({ productGridContent, products }) => {
 
         {isLoading && <Loader />}
       </div>
+      <ScrollToTop />
     </div>
   );
 };

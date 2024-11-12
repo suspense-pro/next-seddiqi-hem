@@ -39,7 +39,7 @@
   letter-spacing: rem(0.2);
   color: getColorHex("grey");
   margin-top: rem(12);
-  margin-bottom: rem(32);
+  margin-bottom: rem(20);
 
   @include md {
     margin-top: rem(20);
@@ -101,5 +101,20 @@
     padding-right: rem(0);
 
     justify-content: flex-end;
+  }
+}
+
+.richTextStyle {
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+  }
+}
+
+.ctaContainer {
+  margin-bottom: rem(32);
+  @include md {
+    margin-top: rem(28);
   }
 }

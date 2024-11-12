@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import Typography from "@components/module/typography";
 import HeartIcon from "@assets/images/svg/HeartIcon";
 import styles from "./productCard.module.scss";
-import Carousel from "@components/module/carousel";
-import CarouselBtns from "@components/module/carouselBtns";
 import Image from "next/image";
+import { HoverProductSlider, CarouselBtns } from "@components/module";
 
 // TEMP
 const WATCH_TYPE = "Classic Fusion";
@@ -16,14 +15,21 @@ const slides = [
   "/images/png/product_watch_04.png",
 ];
 
-const ProductCard = ({ item, isCarousel = true }) => {
+interface Props {
+  item: any;
+  hasCarousel?: boolean;
+}
+
+
+const ProductCard = ({ item, hasCarousel = false }: Props) => {
   if (!item) return null;
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
   // ITEM ATTRIBS
-  const { name, image, pricePerUnit, currency } = item;
+  const { name, image, pricePerUnit, priceCurrency, brand, imageGroups } = item;
+
 
   return (
     <div
@@ -43,30 +49,45 @@ const ProductCard = ({ item, isCarousel = true }) => {
         <HeartIcon fill="#" />
       </div>
       <div className={styles.imgContainer}>
-        {/* <Carousel
-          slides={slides}
-          setSwiper={setSwiper}
-          setActiveIndex={setActiveIndex}
-        /> */}
-        <Image
-          layout="fill"
-          objectFit="contain"
-          alt={`Slide`}
-          src={image?.absUrl}
-          // src={imageGroups[1]?.images?.[0]?.link}
-        />
+        {hasCarousel && isHovered ? (
+          <HoverProductSlider
+            slides={imageGroups[0].images}
+            setSwiper={setSwiper}
+            setActiveIndex={setActiveIndex}
+            setTransition={"slide"}
+            setSpeed={500}
+          />
+        ) : (
+          <Image
+            layout="fill"
+            objectFit="contain"
+            alt={`Slide`}
+            src={image?.absUrl}
+            // src={imageGroups[1]?.images?.[0]?.link}
+          />
+        )}
       </div>
       <div className={styles.productBottom}>
         <Typography align="center" variant="p" className={styles.title}>
-          {name?.default ? name?.default : name}
+          {brand}
         </Typography>
         <Typography align="center" variant="p" className={styles.type}>
-          {WATCH_TYPE}
+          {name?.default ? name?.default : name}
         </Typography>
         <Typography align="center" variant="p" className={styles.price}>
-          {currency} {pricePerUnit}
+          {priceCurrency} {pricePerUnit}
         </Typography>
-        {isCarousel && isHovered && <CarouselBtns swiper={swiper} activeIndex={activeIndex} slides={slides} />}
+        {hasCarousel && isHovered && (
+  
+          <CarouselBtns
+            swiper={swiper}
+            activeIndex={activeIndex}
+            slides={imageGroups[0].images}
+            btnWidth={16}
+            btnColor={"grey-light-5"}
+          />
+        
+        )}
       </div>
     </div>
   );

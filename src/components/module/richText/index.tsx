@@ -53,7 +53,7 @@ const RichText = ({ text = [], align = "left", className }: TextProps) => {
             return (
               <div
                 key={index}
-                className="amp-dc-text"
+                className={`${className} amp-dc-text`}
                 style={{ textAlign: align }}
               >
                 {data && (
