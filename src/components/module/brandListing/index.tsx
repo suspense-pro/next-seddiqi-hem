@@ -97,16 +97,6 @@ const BrandListing = ({ height = true, ...content }) => {
 
   return (
     <div className={styles.brandSectionContainer}>
-      <TabbedNavigation
-        tabs={[
-          { id: 1, title: "All brands" },
-          { id: 2, title: "watches" },
-          { id: 3, title: "Jewellery" },
-          { id: 4, title: "accessories" },
-        ]}
-        className={styles.tabContainer}
-      />
-
       {/* Alphabet Navigation */}
       <div
         ref={alphabetNavRef}

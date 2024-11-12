@@ -9,7 +9,7 @@
   .leftText {
     .title {
       margin: 0;
-      color: getColorHex("black");
+      color: getColorHex("black-dark");
       font-weight: 400;
     }
   }
@@ -36,7 +36,7 @@
       line-height: rem(34);
       letter-spacing: rem(0.4);
       text-transform: uppercase;
-      color: getColorHex("black");
+      color: getColorHex("black-dark");
 
       @include lg {
         line-height: rem(46);
@@ -46,7 +46,7 @@
   }
 
   .rightText {
-    color: getColorHex("black");
+    color: getColorHex("black-dark");
     font-size: rem(14);
     font-weight: 700;
     line-height: rem(22);
@@ -99,7 +99,7 @@
 
   .rightText {
     width: 100%;
-    color: getColorHex("black");
+    color: getColorHex("black-dark");
     font-size: rem(14);
     font-weight: 700;
     line-height: rem(22);
@@ -108,7 +108,7 @@
     font-weight: 400;
 
     @include lg {
-      color: getColorHex("black");
+      color: getColorHex("black-dark");
       line-height: rem(26);
       font-size: rem(16);
     }

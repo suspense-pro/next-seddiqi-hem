@@ -10,7 +10,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
     {
       content: {
-        page: { key: "homepage" },
+        page: { key: "page-not-found" },
       },
     },
     context
@@ -23,7 +23,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-export default function PageNotFound() {
+export default function PageNotFound({ ...content }) {
+  const contents = content.content.page.needMoreHelp;
+
   return (
     <>
     <div className="error-page">
@@ -40,7 +42,7 @@ export default function PageNotFound() {
       <Button title="Go to homepage" type="solid" color="metallic" />
     </div>
 
-    <NeedMoreHelp />
+    <NeedMoreHelp content={contents} />
     </>
   );
 }

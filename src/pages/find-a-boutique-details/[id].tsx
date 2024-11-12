@@ -11,6 +11,7 @@ import { StoreDetailsPageContent, StoreLocationDetails } from "@components/modul
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     const { id } = context.params! ;
+    const { mapView } = context.query;
 
     console.log('Store ID from context params:', id);
 
@@ -28,17 +29,18 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         props: {
             ...data,
             selectedStore: id, 
+            mapView: mapView === 'true',
         },
     };
 }
 
 
 export default function StoreDetails(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const { selectedStore } = props; 
+    const { selectedStore, mapView } = props;
 
     return (
         <div className="main-content">
-            <StoreDetailsPageContent store={selectedStore} />
+            <StoreDetailsPageContent store={selectedStore} mapViewOn={mapView} />
         </div>
     );
 }

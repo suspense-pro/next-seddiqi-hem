@@ -58,7 +58,7 @@ const dataFromServer = {
   },
 };
 
-const PriceRangeFilter = () => {
+const PriceRangeFilter = (priceData: any) => {
   const prices = Object.keys(dataFromServer.values)
     .map((key) => parseInt(key))
     .sort((a, b) => a - b);

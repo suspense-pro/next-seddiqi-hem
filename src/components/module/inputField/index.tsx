@@ -10,6 +10,7 @@ interface InputFieldProps {
   errorMessage?: string;
   required?: boolean;
   optionFull?: boolean;
+  showLabel?: boolean;
   options?: string[];
 }
 
@@ -23,10 +24,17 @@ export default function InputField({
   required = false,
   options,
   optionFull = false,
+  showLabel = false,
 }: InputFieldProps) {
   if (optionFull) {
     return (
       <div className={`${styles.selectGroupFull} ${styles.selectGroup}`}>
+        {showLabel && (
+          <label>
+            {label}
+          </label>
+        )}
+
         <select
           value={value || options[0]}
           name={name}

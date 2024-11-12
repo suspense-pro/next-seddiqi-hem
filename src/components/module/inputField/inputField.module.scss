@@ -7,9 +7,10 @@
   flex-direction: column-reverse;
   height: rem(46);
   width: 100%;
-
+  
   input,
   select {
+    @include heading_light;
     border: none;
     border-bottom: rem(1) solid getColorHex("grey-light");
     font-size: rem(14);
@@ -34,6 +35,8 @@
     // appearance: none;
     // -webkit-appearance: none;
     // -moz-appearance: none;
+    @include body_regular;
+
     
     background: transparent;
     border: none;

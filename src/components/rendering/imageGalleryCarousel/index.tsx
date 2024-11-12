@@ -33,20 +33,27 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
     ? activeIndex < galleryItems.length - slidesPerView
     : activeIndex < galleryItems.length - 3;
 
-  const currentImg = currentImage?.listItems[0]?.image;
-  let productItem;
-  if (currentImg) {
-    productItem = {
-      link: `https://${currentImg?.defaultHost}/i/${currentImg?.endpoint}/${encodeURIComponent(
-        currentImg?.name
-      )}`,
+  // const currentImg = currentImage?.listItems[0]?.image;
+  // let productItem;
+  // if (currentImg) {
+  //   productItem = {
+  //     link: `https://${currentImg?.defaultHost}/i/${currentImg?.endpoint}/${encodeURIComponent(currentImg?.name)}`,
+  //     alt: "product",
+  //   };
+  // }
+
+  let displayImages = currentImage?.listItems?.map((currentImg) => {
+    return {
+      link: `https://${currentImg?.image?.defaultHost}/i/${currentImg?.image?.endpoint}/${encodeURIComponent(currentImg?.image?.name)}`,
       alt: "product",
     };
-  }
+  });
 
   return (
     <div className={styles.container}>
-      {showZoom && <ProductImageFullScreen setShowZoom={setShowZoom} listitems={[productItem]} thumbnails={false} />}
+      {showZoom && (
+        <ProductImageFullScreen setShowZoom={setShowZoom} listitems={displayImages} thumbnails={true} />
+      )}
       {(showLeftArrow || showRightArrow) && (
         <>
           {showLeftArrow && (
@@ -76,7 +83,12 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
             <div className={styles.sliderItem}>
               <GradientOverlay opacity={item?.opacity?.opacity}>
                 {item?.listItems[0]?.image && (
-                  <Image height={styles.image} className={styles.image} image={item?.listItems[0]?.image} imageAltText="image" />
+                  <Image
+                    height={styles.image}
+                    className={styles.image}
+                    image={item?.listItems[0]?.image}
+                    imageAltText="image"
+                  />
                 )}
                 {item?.listItems[0]?.video && (
                   <Video

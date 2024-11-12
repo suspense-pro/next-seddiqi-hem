@@ -3,42 +3,52 @@ import Layout from "@components/layout";
 import ContentBlock from "@components/module/contentBlock";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { CmsContent } from "@utils/cms/utils";
+import { useContent } from "@contexts/withVisualizationContext";
+import { isEmpty, notNull } from "@utils/helpers";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug = [] } = context.params || {};
   const blogKey = Array.isArray(slug) ? slug.join("/") : slug;
+  const { vse } = context.query || {};
+
   const data = await fetchStandardPageData(
     {
       content: {
-        slots: [{ key: blogKey }],
+        page: { key: `blog/${blogKey}` },
       },
     },
     context
   );
 
+  if (isEmpty(data.page) || !slug) {
+    return {
+      redirect: {
+        destination: "/page-not-found",
+      },
+    };
+  }
+
   return {
     props: {
       ...data,
+      vse: vse || "",
     },
   };
 }
 
 export default function BlogDetail({
   content,
+  vse,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const [page] = useContent(content.page, vse as string);
+
   return (
-    <div className="af-main-content">
-      {content.slots
-        .filter((slot) => slot != null)
-        .map((slot, index: number) => {
-          return (
-            <ContentBlock
-              key={index}
-              content={slot as CmsContent}
-              type="SLOT"
-            />
-          );
-        })}
+    <div className="blog-main-content">
+      {page?.components
+        ?.filter(notNull)
+        .map((content: CmsContent, index: number) => (
+          <ContentBlock content={content} key={index} />
+        ))}
     </div>
   );
 }
