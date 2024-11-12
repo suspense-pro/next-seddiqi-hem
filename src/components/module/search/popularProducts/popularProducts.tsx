@@ -40,7 +40,6 @@ const PopularProducts = ({
                 ...product,
                 image: { absUrl: product.image?.link },
               }}
-              isCarousel={false}
             />
           ))}
         </div>

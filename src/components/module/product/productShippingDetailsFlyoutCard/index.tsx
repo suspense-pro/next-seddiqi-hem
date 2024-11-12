@@ -28,11 +28,11 @@ const ProductShippingDetailsFlyoutCard = ({ isShippingCardOpen, setShippingCardO
         <div className={styles.title}>{shippingDetails?.secondaryTitle}</div>
         <div className={styles.desc}>{shippingDetails?.secondaryDescription}</div>
         <div className={styles.icons}>
-          <a href="mailto:someone@example.com" style={{ textDecoration: "none" }}>
+          <a href="mailto:info@seddiqi.com" style={{ textDecoration: "none" }}>
             <MailIcon />
           </a>
 
-          <a href="tel:+1234567890" style={{ textDecoration: "none" }}>
+          <a href="tel:+97145119999" style={{ textDecoration: "none" }}>
             <PhoneIcon />
           </a>
           {/* <a href="tel:+1234567890" style={{ textDecoration: "none" }}>
