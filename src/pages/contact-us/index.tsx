@@ -27,7 +27,7 @@ export default function ContactUs({ ...content }) {
   return (
     <div>
       <ContactForm />
-      <NeedMoreHelp content={content?.content?.page.needMoreHelp} />
+      <NeedMoreHelp {...content?.content?.page.needMoreHelp} />
     </div>
   );
 }

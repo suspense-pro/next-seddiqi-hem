@@ -26,7 +26,7 @@ export default function ContactUsConfirmationPage({ ...content }) {
   const heroBanner = content?.content?.page?.heroBanner
   return <div>
     <HeroBanner banners={heroBanner?.banners} bannerType={heroBanner?.bannerType}  />
-    <NeedMoreHelp content={content?.content?.page.needMoreHelp} />
+    <NeedMoreHelp {...content?.content?.page.needMoreHelp} />
   </div>;
 }
 
