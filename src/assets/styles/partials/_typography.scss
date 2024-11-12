@@ -10,8 +10,14 @@
   font-variant-numeric: lining-nums proportional-nums;
 }
 
+// @mixin heading_regular {
+//   font-family: "Haboro_Contrast_Regular", sans-serif;
+//   font-style: normal;
+//   font-variant-numeric: lining-nums proportional-nums;
+// }
+
 @mixin heading_regular {
-  font-family: "Haboro_Contrast_Regular", sans-serif;
+  font-family: "haboro-contrast-normal", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
@@ -27,8 +33,14 @@
   font-variant-numeric: lining-nums proportional-nums;
 }
 
+// @mixin heading_light {
+//   font-family: "Haboro_Contrast_Light", sans-serif;
+//   font-style: normal;
+//   font-variant-numeric: lining-nums proportional-nums;
+// }
+
 @mixin heading_light {
-  font-family: "Haboro_Contrast_Light", sans-serif;
+  font-family: "haboro-contrast-normal", sans-serif;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
 }
