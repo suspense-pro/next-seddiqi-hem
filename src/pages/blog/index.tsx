@@ -19,7 +19,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         context
       );
     
-      if (isEmpty(data.page)) {
+      if (isEmpty(data.content.page)) {
         return {
           redirect: {
             destination: "/page-not-found",
@@ -37,7 +37,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function Blog({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
       <div className="blog-main-content">
-        {compact(content?.page?.components).map((content) => (
+        {compact(content?.page?.contentComponents).map((content) => (
           <ContentBlock content={content} key={content?._meta.deliveryId} />
         ))}
       </div>
