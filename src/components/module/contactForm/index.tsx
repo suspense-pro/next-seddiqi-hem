@@ -6,6 +6,7 @@ import { validateEmail, validateFirstName, validateLastName, validatePhone } fro
 import { contactUs } from "@utils/sfcc-connector/dataService";
 import { useRouter } from "next/router";
 import { ContactUsFormErrors } from "@utils/models/errors";
+import { countryCodes } from "@utils/data/countryCodes";
 
 const ContactForm = () => {
   const router = useRouter();
@@ -193,7 +194,7 @@ const ContactForm = () => {
             label=""
             value={formData.phoneCode}
             onChange={handleChange}
-            options={["+917", "+49", "+81"]}
+            options={countryCodes}
           />
 
           <InputField
