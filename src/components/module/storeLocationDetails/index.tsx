@@ -16,6 +16,7 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
   storeId,
   isOpen,
   onClose,
+  mapViewOn,
 }) => {
   const [storeDetails, setStoreDetails] = useState<Store[]>([]);
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
@@ -70,7 +71,7 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
         position={"right"}
         className={styles.customSideDrawerStyle}
       >
-        {selectedStore && <StoreDetails store={selectedStore} />}
+        {selectedStore && <StoreDetails store={selectedStore} mapViewOn={mapViewOn}/>}
       </SideDrawer>
     </div>
   );

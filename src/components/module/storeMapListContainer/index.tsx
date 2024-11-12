@@ -5,6 +5,7 @@ import { LocationIcon } from "@assets/images/svg";
 import { StoreLocationDetails } from "@components/module";
 
 import { FreeMode, Scrollbar, Mousewheel } from 'swiper/modules';
+import { useRouter } from 'next/router';
 
 import "swiper/css";
 import 'swiper/css/free-mode';
@@ -20,15 +21,24 @@ const StoreMapListContainer = ({
 }) => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedStoreId, setSelectedStoreId] = useState(null);
+  const [mapViewOn, setMapViewOn] = useState(false);
+  const router = useRouter();
 
   const handleStoreDtetails = (store) => {
     setSelectedStoreId(store.id);
+    setMapViewOn(true);
     setIsDetailsOpen(true);
   };
 
   const handleCloseDetails = () => {
     setIsDetailsOpen(false);
     setSelectedStoreId(null);
+    setMapViewOn(false);
+  };
+
+  const handleStoreDetailsPage = (storeId, showMapView = false) => {
+    router.push(`/find-a-boutique-details/${storeId}`); 
+    query: { mapView: showMapView ? 'true' : 'false' }
   };
 
   return (
@@ -66,7 +76,11 @@ const StoreMapListContainer = ({
                     </div>
                   </div>
                   <div className={styles.storeMapLinksContainer}>
-                    <a href="" target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
+                    <a href="/" target="_blank" className={`${styles.storeMapLink} button plain green_dark`} 
+                      onClick={(e) => { 
+                        e.preventDefault(); 
+                        handleStoreDetailsPage(store.id,true);
+                      }}>
                       <span>View Details</span>
                     </a>
                     <a href={store.c_googleMapLocation} target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
@@ -85,7 +99,7 @@ const StoreMapListContainer = ({
               key={store.id}
               className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ''}`}
             >
-              <div className={styles.storeMapDetails}  onClick={() => handleStoreDtetails(store)}>
+              <div className={styles.storeMapDetails}>
                 <h4 className={styles.storeMapName}>{store.name}</h4>
                 <div className={styles.storeMapLocation}>
                   <div className={styles.locationContainer}>
@@ -96,7 +110,11 @@ const StoreMapListContainer = ({
                 </div>
               </div>
               <div className={styles.storeMapLinksContainer}>
-                <a href="" target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
+                <a href="/" target="" className={`${styles.storeMapLink} button plain green_dark`}
+                 onClick={(e) => {
+                  e.preventDefault();
+                  handleStoreDtetails(store);
+                }}>
                   <span>View Details</span>
                 </a>
                 <a href={store.c_googleMapLocation} target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
@@ -115,6 +133,7 @@ const StoreMapListContainer = ({
           storeId={selectedStoreId}
           isOpen={isDetailsOpen}
           onClose={handleCloseDetails}
+          mapViewOn={mapViewOn}
         />
     </>
     )}

@@ -20,14 +20,14 @@ import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 import { useRouter } from "next/router";
 
 const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store }) => {
+  const router = useRouter();
+  const { mapView } = router.query; 
   const [matchedStore, setMatchedStore] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [stores, setStores] = useState([]);
-  const [mapView, setMapView] = useState(false);
-  const [activeToggle, setActiveToggle] = useState(true);
+  const [activeToggle, setActiveToggle] = useState(mapView === 'true');
   const isMobile = !useDeviceWidth()[0];
   const [isAllBrandPopupOpen, setAllBrandPopupOpen] = useState(false);
-  const router = useRouter();
 
   const handleBackButtonClick = () => {
     router.push('/find-a-boutique-listing');
