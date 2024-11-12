@@ -9,11 +9,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const cmsContext = await createCmsContext(context.req);
     const [content] = await fetchContent([{ id: contentId as string }], cmsContext);
     const { res } = context;
+    const delKey = (content as any)?._meta?.deliveryKey === "rolex" ? "/rolex" : `/${(content as any)?._meta?.deliveryKey}`;
 
-    if (res && (content as any)?._meta?.deliveryKey) {
+    if (res && delKey) {
         res.setHeader('Cache-Control', 'no-cache ');
         res.writeHead(301, {
-            Location: `/rolex/${(content as any)._meta?.deliveryKey}?vse=${cmsContext.stagingApi}`,
+            Location: `${delKey}?vse=${cmsContext.stagingApi}`,
         });
         res.end();
     }
