@@ -8,7 +8,7 @@ const ThreeCompactImageText = ({ ...content }) => {
 
   const components = content?.components;
 
-  const backgroundClass = content?.backgroundColor.toLowerCase();
+  const backgroundClass = content?.backgroundColor?.toLowerCase();
 
   return (
     <div className={`${[styles.container]} ${styles[backgroundClass]}`}>
