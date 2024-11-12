@@ -10,10 +10,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const [content] = await fetchContent([{ id: contentId as string }], cmsContext);
     const { res } = context;
 
-    if (res && (content as any)?._meta?.deliveryKey) {
+    const delKey = (content as any)?._meta?.deliveryKey === "blog" ? "/blog" : `/${(content as any)?._meta?.deliveryKey}`;
+
+    if (res && delKey) {
         res.setHeader('Cache-Control', 'no-cache ');
         res.writeHead(301, {
-            Location: `/blog/${(content as any)._meta?.deliveryKey}?vse=${cmsContext.stagingApi}`,
+            Location: `${delKey}?vse=${cmsContext.stagingApi}`,
         });
         res.end();
     }

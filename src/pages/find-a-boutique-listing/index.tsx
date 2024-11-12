@@ -528,7 +528,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         </div>
       </div>
 
-      <NeedMoreHelp {...content.page.needMoreHelp} />
+     {content?.page.needMoreHelp && <NeedMoreHelp {...content.page.needMoreHelp} />}
 
       <SideDrawer
         isOpen={filtersPopup}
