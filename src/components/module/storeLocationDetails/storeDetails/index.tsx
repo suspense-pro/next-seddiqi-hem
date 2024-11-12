@@ -48,17 +48,17 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
     setAllBrandPopupOpen(false);
   };
   
-  const brandsToDisplay = store.c_availableBrands.slice(0, 8);
+  const brandsToDisplay = store?.c_availableBrands?.slice(0, 8);
 
 
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.mapViewBtn}>
-        <SlidingRadioSwitch
+        {/* <SlidingRadioSwitch
           toggleLabel={"Map View"}
           onToggle={handleToggleChange}
           value ={activeToggle}
-        />
+        /> */}
       </div>
       <div className={styles.content}>
         <Typography variant="h3" className={styles.title}>
@@ -93,11 +93,11 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
         {activeToggle ? (
           <div className={styles.mapContainer}>
             <MapView
-              nearestStore={null}
+              nearestStore={store}
               stores={null}
               activeStore={store}
               userLocation={userLocation}
-              useOnPopup={false}
+              useOnPopup={true}
             />
           </div>
         ) : (
@@ -200,7 +200,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
             {"Brands Available"}
           </Typography>
         </span>
-        {store?.c_availableBrands.length > 8 && (
+        {store?.c_availableBrands?.length > 8 && (
           <span className={styles.viewAllBrands}>
             <Button
               isLink={false}
