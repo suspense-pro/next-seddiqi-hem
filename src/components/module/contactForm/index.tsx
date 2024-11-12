@@ -58,12 +58,11 @@ const ContactForm = () => {
         userData: data,
       });
 
-      console.log(response);
-      // if (!response?.isError) {
-      //   router.push("/contact-us/confirmation");
-      // } else {
-      //   alert("Failed to send email");
-      // }
+      if (!response?.isError) {
+        router.push("/contact-us/confirmation");
+      } else {
+        alert("Failed to send email");
+      }
     }
   };
 
@@ -71,12 +70,10 @@ const ContactForm = () => {
     const { name, value } = e.target;
     let updatedFormData = { ...formData, [name]: value };
     if (name === "phoneNumber") {
-      // Allow only numeric values and limit to 10 characters
       if (/^\d*$/.test(value) && value.length <= 10) {
-        // Update the form data with the valid phone number value
         setFormData((prevData) => ({ ...prevData, [name]: value }));
       }
-      return; // Stop further processing for phone number field
+      return;
     }
     if (name === "lastName" && /\d/.test(value)) {
       return;
