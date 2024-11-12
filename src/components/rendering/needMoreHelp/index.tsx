@@ -26,7 +26,7 @@ const NeedMoreHelp = ({ ...content }) => {
 
       {contents.icons.length > 0 ? 
         <div className={styles.contactIcons}>
-          {contents.icons.map((icon, index) => (
+          {contents?.icons?.map((icon, index) => (
           <a href={icon.linkUrl}>
             <Image
               imgWidth="100%"

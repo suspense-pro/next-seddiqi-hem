@@ -46,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
 
                     var shopperResponse = await client.registerCustomer(options);
-                    // console.log("SFCC Customer: " + JSON.stringify(shopperResponse));
+                    console.log("SFCC Customer: " + JSON.stringify(shopperResponse));
 
                     // send email - nodemailer
                     const subject = "Account Registration Completed";
