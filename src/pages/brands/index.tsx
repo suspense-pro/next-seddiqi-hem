@@ -4,7 +4,7 @@ import ContentBlock from "@components/module/contentBlock";
 import { useContent } from "@contexts/withVisualizationContext";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { CmsContent } from "@utils/cms/utils";
-import { notNull } from "@utils/helpers";
+import { isEmpty, notNull } from "@utils/helpers";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import React from "react";
 
@@ -20,13 +20,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const { vse } = context.query || {};
 
-  // if (isEmpty(data.content.page)) {
-  //   return {
-  //     redirect: {
-  //       destination: "/page-not-found",
-  //     },
-  //   };
-  // }
+  if (isEmpty(data.content.page)) {
+    return {
+      redirect: {
+        destination: "/page-not-found",
+      },
+    };
+  }
   return {
     props: {
       ...data,
@@ -41,10 +41,9 @@ export default function ViewAllBrandsPage(props: InferGetServerSidePropsType<typ
   console.log("VIEW ALL BRANDS", content)
   return (
     <div className="main-content">
-      {page?.components?.filter(notNull).map((cont: CmsContent, index: number) => (
+      {page?.contentComponents?.filter(notNull).map((cont: CmsContent, index: number) => (
         <ContentBlock content={cont} key={index} />
       ))}
-      <BrandListing height={false} />
     </div>
   );
 }

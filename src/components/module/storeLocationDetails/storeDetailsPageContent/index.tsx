@@ -19,15 +19,20 @@ import { useDeviceWidth } from "@utils/useCustomHooks";
 import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 import { useRouter } from "next/router";
 
-const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store }) => {
+const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
+  const router = useRouter();
+  const { mapView } = router.query; 
   const [matchedStore, setMatchedStore] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [stores, setStores] = useState([]);
-  const [mapView, setMapView] = useState(false);
-  const [activeToggle, setActiveToggle] = useState(true);
+  const [activeToggle, setActiveToggle] = useState(mapViewOn);
   const isMobile = !useDeviceWidth()[0];
   const [isAllBrandPopupOpen, setAllBrandPopupOpen] = useState(false);
-  const router = useRouter();
+
+  useEffect(() => {
+    setActiveToggle(mapViewOn);
+  }, [mapViewOn]);
+  
 
   const handleBackButtonClick = () => {
     router.push('/find-a-boutique-listing');
@@ -109,12 +114,13 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store }) => {
         <SlidingRadioSwitch
           toggleLabel={"Map View"}
           onToggle={handleToggleChange}
+          value ={activeToggle}
         />
       </div>
 
       <div className={styles.contentWrapper}>
         <div className={styles.storeImageWrapper}>
-          {activeToggle ? (
+          {!activeToggle ? (
             <div className={styles.twoColumnLayout}>
               <div className={styles.infoTwoColumn}>
                 <div className={styles.content}>

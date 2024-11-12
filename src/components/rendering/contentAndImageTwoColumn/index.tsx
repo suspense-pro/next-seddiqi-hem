@@ -18,10 +18,14 @@ const ContentAndImageTwoColumn: React.FC<ContentAndImageTwoColumnProps> = ({
 
   const { backgroundStyle } = BackgroundStyle({ backgroundColor }) || {};
 
-  const hasCta = cta && cta.label && cta.type;
+  const hasCta = !!(leftColumn?.cta?.label && leftColumn?.cta?.type);
 
   return (
-    <div className={`${styles.contentAndImageContainer} ${reverse ? styles.reversed : ""} ${backgroundStyle || ""}`}>
+    <div
+      className={`${styles.contentAndImageContainer} ${
+        reverse ? styles.reversed : ""
+      } ${backgroundStyle || ""}`}
+    >
       <div className={styles.contentWrapper}>
         <div className={styles.leftContent}>
           {title && (
@@ -36,7 +40,14 @@ const ContentAndImageTwoColumn: React.FC<ContentAndImageTwoColumnProps> = ({
           )}
           {hasCta && (
             <div className={styles.ctaContainer}>
-              <Button title={cta.label} type={cta.type} className={styles.ctaButton} />
+              <Button
+                isLink={true}
+                className={styles.btnStyle}
+                title={leftColumn?.cta?.label}
+                color={leftColumn?.cta?.color}
+                type={leftColumn?.cta?.type}
+                new_tab={leftColumn?.cta?.isNewTab}
+              />
             </div>
           )}
         </div>

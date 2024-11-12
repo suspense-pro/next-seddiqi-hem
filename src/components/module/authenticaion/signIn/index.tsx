@@ -8,6 +8,7 @@ import { validateEmail, validateLoginPassword, validatePhoneNumber } from "@util
 import OtpComponent from "../otp";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { countryCodes } from "@utils/data/countryCodes";
 
 export default function SignIn({ direction = "row" }) {
   const [email, setEmail] = useState<string>("");
@@ -153,7 +154,7 @@ export default function SignIn({ direction = "row" }) {
             label=""
             value={phoneCode}
             onChange={(e) => setPhoneCode(e.target.value)}
-            options={["+971", "+44", "+61"]}
+            options={countryCodes}
             required
           />
           <InputField

@@ -20,6 +20,7 @@ import { getCustomer, registerCustomer } from "@utils/sfcc-connector/dataService
 import AccountConfirmationBox from "../accountConfirmationBox";
 import { useRouter } from "next/router";
 import PasswordValidator from "../passwordValidator";
+import { countryCodes } from "@utils/data/countryCodes";
 
 const Register = ({ gridColumn = "1fr 1fr" }) => {
   const [email, setEmail] = useState<string>("");
@@ -312,7 +313,7 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
                 label=""
                 value={phoneCode}
                 onChange={(e) => setPhoneCode(e.target.value)}
-                options={["+971", "+44", "+61"]}
+                options={countryCodes}
                 required
               />
               <InputField

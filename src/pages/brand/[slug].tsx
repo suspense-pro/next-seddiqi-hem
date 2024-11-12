@@ -8,7 +8,6 @@ import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { isEmpty, mapToID, notNull } from "@utils/helpers";
 import { CmsContent } from "@utils/cms/utils";
 import ContentBlock from "@components/module/contentBlock";
-import RolexNavbar from "@components/rendering/rolex/rolexHeader";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let { slug } = context.params || {};
