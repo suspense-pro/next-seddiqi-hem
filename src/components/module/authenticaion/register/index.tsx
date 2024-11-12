@@ -159,7 +159,8 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
             }, 3000);
           }
         } else {
-          throw new Error("Registration failed. Please try again.");
+            // validateEmail("")
+          // throw new Error("Registration failed. Please try again.");
         }
       } catch (error) {
         alert(error?.message || "An error occurred during registration.");
