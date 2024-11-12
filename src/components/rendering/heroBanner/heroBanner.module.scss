@@ -119,9 +119,13 @@
   }
 
   .logoIcon {
-    width: rem(100);
+    max-width: rem(280);
+    min-height: rem(40);
     margin-bottom: rem(20);
+    width: 100%;
+    height: auto;
   }
+  
 
   .title {
     @include heading_light;

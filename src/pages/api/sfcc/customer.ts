@@ -126,13 +126,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         return res.status(400).json({ isError: true, response: shopperResponse });
                     }
                 }
-            } catch (err) {
-                console.error(err);
-      
-                return {
-                    statusCode: 500,
-                    body: JSON.stringify({ msg: err }),
-                };
+            } catch (error) {
+                // read the response body for more details
+                const errorData = await error.response?.text(); 
+                console.error("Error response body:", JSON.parse(errorData));
+                return res.status(500).json({ isError: true, response: JSON.parse(errorData) });
             }
             break;
 

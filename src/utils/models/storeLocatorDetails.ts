@@ -1,5 +1,6 @@
 export interface StoreDetailsProps {
     store: any; 
+    mapViewOn:boolean;
   }
   
 export interface Store {
@@ -21,6 +22,7 @@ export interface StoreLocationDetailsProps {
     onClose: () => void;
     isOpen: boolean;
     storeId: string;
+    mapViewOn:boolean;
   }
 
   

@@ -17,10 +17,10 @@ import MapView from "@components/module/mapView";
 import { ArrowRight } from "@assets/images/svg";
 import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 
-const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
+const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
   const [mapView, setMapView] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
-  const [activeToggle, setActiveToggle] = useState(true);
+  const [activeToggle, setActiveToggle] = useState(mapViewOn);
   const [isAllBrandPopupOpen, setAllBrandPopupOpen] = useState(false);
   const storeImage = store?.c_storeImage;
   const storeHoursString = store?.storeHours;
@@ -32,10 +32,12 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
     return { days: days.trim(), timings: timings.trim() };
   });
 
-  const handleToggleChange = (toggle) => {
-    setTimeout(() => {
-      setActiveToggle(toggle);
-    }, 300);
+  useEffect(() => {
+    setActiveToggle(mapViewOn);
+  }, [mapViewOn]);
+
+  const handleToggleChange = (toggle:boolean) => {
+    setActiveToggle(toggle);
   };
 
   const handleViewAllBrands = () => {
@@ -55,6 +57,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
         <SlidingRadioSwitch
           toggleLabel={"Map View"}
           onToggle={handleToggleChange}
+          value ={activeToggle}
         />
       </div>
       <div className={styles.content}>
@@ -87,7 +90,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
       </div>
 
       <div className={styles.storeImageWrapper}>
-        {!activeToggle ? (
+        {activeToggle ? (
           <div className={styles.mapContainer}>
             <MapView
               nearestStore={null}

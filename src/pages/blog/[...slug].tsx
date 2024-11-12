@@ -19,8 +19,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
     context
   );
-
-  if (isEmpty(data.page) || !slug) {
+  
+  if (isEmpty(data.content.page)) {
     return {
       redirect: {
         destination: "/page-not-found",
@@ -41,10 +41,10 @@ export default function BlogDetail({
   vse,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [page] = useContent(content.page, vse as string);
-
+  
   return (
     <div className="blog-main-content">
-      {page?.components
+      {page?.contentComponents
         ?.filter(notNull)
         .map((content: CmsContent, index: number) => (
           <ContentBlock content={content} key={index} />
