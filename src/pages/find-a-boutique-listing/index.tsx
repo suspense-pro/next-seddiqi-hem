@@ -254,6 +254,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
               stores={stores} 
               activeStore={stores[activeIndex]} 
               userLocation={userLocation}
+              useOnPopup={false}
             />
           )}
         </div>
