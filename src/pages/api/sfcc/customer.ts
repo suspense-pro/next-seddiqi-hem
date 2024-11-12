@@ -110,6 +110,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                             return res.status(400).json({ isError: true, response: "Failed to get Golden ID." });
                         } */
 
+                        shopperResponse = {...shopperResponse}
+                        shopperResponse.currentPassword = password;
+                        shopperResponse.usid = usid;
+
                         // Get the shopper token and customer ID
                         const response = await saveGoldenIDToCustomerProfile(shopperResponse, null);
                         if (response.access_token) {
