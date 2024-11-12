@@ -170,6 +170,7 @@ const StepThree = () => {
                   stores={filteredStores}
                   activeStore={activeStore || nearestStore || filteredStores[0]}
                   userLocation={userLocation}
+                  useOnPopup={false}
                 />
               )}
             </div>

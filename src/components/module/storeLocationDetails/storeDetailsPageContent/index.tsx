@@ -306,6 +306,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     stores={stores}
                     activeStore={matchedStore}
                     userLocation={userLocation}
+                    useOnPopup={false}
                   />
                 </div>
                 <div className={styles.infoOverlay}>
