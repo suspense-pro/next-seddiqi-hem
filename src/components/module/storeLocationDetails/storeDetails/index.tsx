@@ -97,6 +97,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
               stores={null}
               activeStore={store}
               userLocation={userLocation}
+              useOnPopup={false}
             />
           </div>
         ) : (

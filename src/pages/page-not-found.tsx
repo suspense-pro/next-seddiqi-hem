@@ -42,7 +42,7 @@ export default function PageNotFound({ ...content }) {
       <Button title="Go to homepage" type="solid" color="metallic" />
     </div>
 
-    <NeedMoreHelp content={contents} />
+    <NeedMoreHelp {...contents} />
     </>
   );
 }

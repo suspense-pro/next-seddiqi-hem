@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./storeMapListContainer.module.scss";
 import { LocationIcon } from "@assets/images/svg";
@@ -22,6 +22,7 @@ const StoreMapListContainer = ({
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedStoreId, setSelectedStoreId] = useState(null);
   const [mapViewOn, setMapViewOn] = useState(false);
+  const swiperRef = useRef(null);
   const router = useRouter();
 
   const handleStoreDtetails = (store) => {
@@ -37,9 +38,17 @@ const StoreMapListContainer = ({
   };
 
   const handleStoreDetailsPage = (storeId, showMapView = false) => {
-    router.push(`/find-a-boutique-details/${storeId}`); 
-    query: { mapView: showMapView ? 'true' : 'false' }
+    router.push({
+      pathname: `/find-a-boutique-details/${storeId}`,
+      query: { mapView: showMapView ? 'true' : 'false' }
+    });
   };
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.update(); // Trigger Swiper update on data change
+    }
+  }, [storesList]);
 
   return (
     <>
@@ -53,6 +62,7 @@ const StoreMapListContainer = ({
             mousewheel={true}
             modules={[FreeMode, Scrollbar, Mousewheel]}
             className={styles.storeMapListSwiper}
+            ref={swiperRef}
         >
           <SwiperSlide>
             <ul className={styles.storeMapList}>
@@ -98,13 +108,17 @@ const StoreMapListContainer = ({
             <li
               key={store.id}
               className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ''}`}
+              onClick={() => handleStoreClick(index)}
             >
               <div className={styles.storeMapDetails}>
                 <h4 className={styles.storeMapName}>{store.name}</h4>
                 <div className={styles.storeMapLocation}>
                   <div className={styles.locationContainer}>
-                    <LocationIcon />
-                    <p><span>{store.city}</span><span>{store.address1}</span></p>
+                    {/* <LocationIcon /> */}
+                    <p>
+                      <span><LocationIcon /> {store.city}</span>
+                      <span>{store.address1}</span>
+                    </p>
                   </div>
                   <p className={styles.storeMapDistance}>{store.distance} {store.distanceUnit}</p>
                 </div>

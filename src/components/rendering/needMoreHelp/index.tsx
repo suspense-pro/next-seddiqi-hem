@@ -5,7 +5,9 @@ import { Image } from "@components/module";
 
 
 const NeedMoreHelp = ({ ...content }) => {
-  const contents = content.content;
+  // console.log("NEED MORE HELP: ", content);
+  
+  const contents = content;
 
   return (
     <div className={`${[styles.needMoreHelpContainer]}`}>
@@ -26,7 +28,7 @@ const NeedMoreHelp = ({ ...content }) => {
 
       {contents.icons.length > 0 ? 
         <div className={styles.contactIcons}>
-          {contents.icons.map((icon, index) => (
+          {contents?.icons?.map((icon, index) => (
           <a href={icon.linkUrl}>
             <Image
               imgWidth="100%"
