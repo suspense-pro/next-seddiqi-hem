@@ -45,6 +45,11 @@ export const validateLoginPassword = (value: string): string | undefined => {
     return "Password is required.";
   }
 };
+export const validateDescription = (value: string): string | undefined => {
+  if (!value) {
+    return "Description is required.";
+  }
+};
 
 export const validatePhoneNumber = (value: string): string | undefined => {
   const phonePattern = /^[0-9]{6,15}$/;
@@ -53,11 +58,13 @@ export const validatePhoneNumber = (value: string): string | undefined => {
   }
 };
 
-export const validateEmail = (email: string): string => {
+export const validateEmail = (email: string, message?: string, isRegistered?: boolean): string => {
   if (!email) {
-    return "Email is required.";
+    return message ? message : "Email is required.";
   } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-    return "Invalid email format.";
+    return message ? message : "Invalid email format.";
+  } else if (isRegistered) {
+    return message;
   }
   return "";
 };

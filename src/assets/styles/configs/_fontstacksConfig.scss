@@ -1,7 +1,6 @@
 /* <link rel="stylesheet" href="
 https://use.typekit.net/rkl4lug.css"> */
 
- 
 
 @font-face {
   font-family: "Haboro_Contrast_Light";
@@ -14,6 +13,20 @@ https://use.typekit.net/rkl4lug.css"> */
   font-display: auto;
   font-style: normal;
   font-weight: 200;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "haboro-contrast-normal";
+  src: url("https://use.typekit.net/af/460e46/00000000000000007735bdd9/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/460e46/00000000000000007735bdd9/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/460e46/00000000000000007735bdd9/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 400;
   font-stretch: normal;
 }
 
@@ -115,8 +128,6 @@ https://use.typekit.net/rkl4lug.css"> */
   font-stretch: normal;
 }
 
- 
-
 @font-face {
   font-family: "Urbanist_Regular";
   src: url("../../fonts/Urbanist-Regular.ttf") format("truetype");
@@ -172,8 +183,6 @@ https://use.typekit.net/rkl4lug.css"> */
   font-weight: normal;
   font-style: normal;
 }
-
-
 
 @font-face {
   font-family: "TheSansArabic_Plain";
