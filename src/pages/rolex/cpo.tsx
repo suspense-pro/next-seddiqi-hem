@@ -25,7 +25,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  // if (isEmpty(data.page) || !slug) {
+  // if (isEmpty(data.content.pagee)) {
   //   return {
   //     redirect: {
   //       destination: "/page-not-found",

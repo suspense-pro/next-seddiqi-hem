@@ -20,7 +20,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const { vse } = context.query || {};
 
-  // if (isEmpty(data.page)) {
+  // if (isEmpty(data.content.page)) {
   //   return {
   //     redirect: {
   //       destination: "/page-not-found",
