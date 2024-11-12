@@ -29,6 +29,8 @@
 .addressWrapper {
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: rem(8);
 }
 
 .vline {
@@ -78,6 +80,7 @@
 .storeTimingWrapper {
   display: flex;
   flex-direction: column;
+  margin-top: rem(8);
 }
 
 .timingRow {
@@ -157,15 +160,17 @@
 .locationInfo {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-end;
   color: getColorHex("grey");
   margin-bottom: rem(12);
   margin-top: rem(12);
+  gap: rem(15);
 }
 
 .leftSection {
   display: flex;
   align-items: flex-start;
+  flex: 1 1 60%;
 }
 
 .iconWrapper {
