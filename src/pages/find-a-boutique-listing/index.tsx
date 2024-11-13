@@ -48,6 +48,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [loading, setLoading] = useState(true);
   const [userLocation, setUserLocation] = useState(null);
   const [nearestStore, setNearestStore] = useState(null);
+  const [locationStores, setLocationStores] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeToggle, setActiveToggle] = useState(false); //Set to true to show the location lister
   const [fadeList, setFadeList] = useState(false);
@@ -104,7 +105,21 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     const fetchStores = async () => {
       try {
         const result = await UseFetchStores('', '', '', '');
+        /*let result;
+
+        if (userLocation) {
+          result = await UseFetchStores("", "", '', '', userLocation.lat, userLocation.lng);  // Pass lat and lng to fetch stores
+        } else {
+          result = await UseFetchStores('', '', '', '', null, null); // Default fetch if no location is available
+        }*/
+
         setStores(result.response);
+
+        const filteredStores = result.response.filter(store =>
+          store.city === 'Dubai' || store.city === 'Abu Dhabi'
+        );
+
+        setLocationStores(filteredStores);
 
         // Extract unique cities
         const uniqueCities = [...new Set(result.response.map(store => store.city))];
@@ -159,7 +174,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   }, [stores, userLocation]);
 
   useEffect(() => {
-    console.log("uniqueBrands2: ", brandCheckboxValues);
+    //console.log("uniqueBrands2: ", brandCheckboxValues);
   }, [brandCheckboxValues]);
 
   const calculateNearestStore = (storesList) => {
@@ -186,8 +201,13 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       setActiveTab(tab);
       setItemsToShow(8);
       setFadeList(false);
+      setActiveIndex(0); //Set the active index to the first one on the list
 
       const storesToCalculate = tab === 'All' ? stores : stores.filter(store => store.city === tab);
+
+      //Used to pass the current tab stores to the map
+      setLocationStores(storesToCalculate);
+
       const nearest = calculateNearestStore(storesToCalculate);
       setNearestStore(nearest);
     }, 300);
@@ -252,7 +272,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
             <MapView 
               nearestStore={nearestStore} 
               stores={stores} 
-              activeStore={stores[activeIndex]} 
+              activeStore={locationStores[activeIndex]} 
               userLocation={userLocation}
               useOnPopup={false}
             />

@@ -17,6 +17,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
   const [loading, setLoading] = useState(true);
   const [userLocation, setUserLocation] = useState(null);
   const [nearestStore, setNearestStore] = useState(null);
+  const [locationStores, setLocationStores] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeToggle, setActiveToggle] = useState(false);
   const [fadeList, setFadeList] = useState(false);
@@ -52,8 +53,22 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const result = await UseFetchStores(productBrand, productName, '', '');
+        const result = await UseFetchStores(productBrand, productName, '', '',);
+        /*let result;
+
+        if (userLocation) {
+          result = await UseFetchStores("", "", '', '', userLocation.lat, userLocation.lng); 
+        } else {
+          result = await UseFetchStores('', '', '', '', null, null);
+        }*/
+
         setStores(result.response);
+
+        const filteredStores = result.response.filter(store =>
+          store.city === 'Dubai' || store.city === 'Abu Dhabi'
+        );
+
+        setLocationStores(filteredStores);
 
         // Extract unique cities
         const uniqueCities = [...new Set(result.response.map(store => store.city))];
@@ -107,6 +122,10 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
       setFadeList(false);
 
       const storesToCalculate = tab === 'All' ? stores : stores.filter(store => store.city === tab);
+
+      //Used to pass the current tab stores to the map
+      setLocationStores(storesToCalculate);
+
       const nearest = calculateNearestStore(storesToCalculate);
       setNearestStore(nearest);
     }, 300);
@@ -167,7 +186,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
             <MapView 
               nearestStore={nearestStore} 
               stores={stores} 
-              activeStore={stores[activeIndex]} 
+              activeStore={locationStores[activeIndex]} 
               userLocation={userLocation}
               useOnPopup={true}
             />
