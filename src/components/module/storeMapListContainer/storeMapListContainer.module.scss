@@ -225,11 +225,15 @@
 
 &Location{
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-wrap: nowrap;
+    align-items: flex-start;
     column-gap: rem(12);
     row-gap: rem(12);
     justify-content: space-between;
+
+    @include md{
+        column-gap: rem(40);
+    }
 
     .locationContainer{
         display: flex;
@@ -280,6 +284,7 @@
 
 &Distance{
     display: block;
+    white-space: nowrap;
 
     /*@include md{
     display: none !important;
