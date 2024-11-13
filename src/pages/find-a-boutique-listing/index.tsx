@@ -104,14 +104,14 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const result = await UseFetchStores('', '', '', '');
-        /*let result;
+        //const result = await UseFetchStores('', '', '', '');
+        let result;
 
         if (userLocation) {
-          result = await UseFetchStores("", "", '', '', userLocation.lat, userLocation.lng);  // Pass lat and lng to fetch stores
+          result = await UseFetchStores('', '', '', '', userLocation.lat.toString(), userLocation.lng.toString());  // Pass lat and lng to fetch stores
         } else {
           result = await UseFetchStores('', '', '', '', null, null); // Default fetch if no location is available
-        }*/
+        }
 
         setStores(result.response);
 

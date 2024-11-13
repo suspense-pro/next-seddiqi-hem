@@ -50,6 +50,8 @@ const StoreMapListContainer = ({
     }
   }, [storesList]);
 
+  console.log("STORE: ", storesList);
+
   return (
     <>
     <div className={`${[styles.storeMapListContainer]} ${isAbsolutePosition === true ? "" : styles.isRelative} ${needScrollbar === true ? "" : styles.noScrollbar}`}>
@@ -83,11 +85,11 @@ const StoreMapListContainer = ({
                         </p>
                       </div>
 
-                      {/* {store.distance !== null || store.distance !== "" || store.distance !== undefined ?
+                      {store.distance !== null ?
                       <p className={styles.storeMapDistance}>{store.distance} {store.distanceUnit}</p>
                       : 
                       ""
-                      } */}
+                      }
                     </div>
                   </div>
                   <div className={styles.storeMapLinksContainer}>
