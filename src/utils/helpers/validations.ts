@@ -44,11 +44,13 @@ export const validateLoginPassword = (value: string): string | undefined => {
   if (!value) {
     return "Password is required.";
   }
+  return ""
 };
 export const validateDescription = (value: string): string | undefined => {
   if (!value) {
     return "Description is required.";
   }
+  return ""
 };
 
 export const validatePhoneNumber = (value: string): string | undefined => {
