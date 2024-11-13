@@ -6,7 +6,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const requestMethod = req.method;
     const query = req.query.api ?? "";
     const action = req.query.action ?? "";
-    const { brand, city, name, service } = req.query;
+    var { brand, city, name, service, lat, lng } = req.query;
+    var coordinates = true;
 
     switch (query) {
         case "search":
@@ -17,6 +18,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
                     const shopperStoresClient = new Seller.ShopperStores(clientConfig);
 
+                    // get the customer location (default case)
+                    if (lat === 'null' && lng === 'null') {
+                        coordinates = false;
+                        lat = '38.7946';
+                        lng = '106.5348'; 
+                    }
+
                     const options = {
                         headers: {
                             Authorization: `Bearer ${accessToken}`
@@ -25,11 +33,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                             organizationId: clientConfig.parameters.organizationId,
                             siteId: clientConfig.parameters.siteId,
                             countryCode: 'AE',
-                            latitude: 38.7946,
-                            longitude: 106.5348,
+                            latitude: Number(lat),
+                            longitude: Number(lng),
                             limit: 100,
                         },
                     };
+                    console.log(JSON.stringify(options, null, 2));
 
                     const storeResults = await shopperStoresClient.searchStores(options);
 
@@ -45,6 +54,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                     return `${day}: ${hours}`;
                                 });
                             store.storeHours = JSON.stringify(storeHoursArray);
+                            if (!coordinates) {
+                                store.distance = null;
+                            }
                         }                        
                     });
     
