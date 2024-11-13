@@ -106,14 +106,14 @@ const FeaturedProductCarousel = ({ mainTitle, hideUnderline, richText, listItems
           {products?.map((item, index) => renderSlide(item, index))}
         </Swiper>
       </div>
-      <Button
+      {cta && cta?.label &&<Button
         isLink={true}
         link={cta.url}
         className={styles.discoverBtn}
         title={cta.label}
         color={cta.color}
         type={cta.type}
-      />
+      />}
     </div>
   );
 };
