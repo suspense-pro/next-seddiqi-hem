@@ -82,7 +82,12 @@ const StoreMapListContainer = ({
                           <span>{store.address1}</span>
                         </p>
                       </div>
+
+                      {/* {store.distance !== null || store.distance !== "" || store.distance !== undefined ?
                       <p className={styles.storeMapDistance}>{store.distance} {store.distanceUnit}</p>
+                      : 
+                      ""
+                      } */}
                     </div>
                   </div>
                   <div className={styles.storeMapLinksContainer}>
