@@ -9,11 +9,17 @@
   .heroBannerContainer {
     position: relative;
     width: 100%;
-    height: rem(880);
+    height: rem(742);
     margin: 0 auto;
     z-index: 1;
-    video {
+    @include md{
       height: rem(880);
+    }
+    video {
+      height: rem(742);
+      @include md{
+        height: rem(880);
+      }
     }
   }
 
