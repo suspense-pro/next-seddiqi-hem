@@ -9,6 +9,8 @@
   margin: 0 auto;
   overflow: hidden;
   background: getColorHex("beige");
+  align-items: center;
+
 
   @include md {
     padding: 0 rem(60);
@@ -41,6 +43,7 @@
     line-height: rem(26);
     color: getColorHex("rolex-brown");
     margin: 0;
+    width: 100%;
 
     @include md {
       font-size: rem(24);
@@ -164,3 +167,11 @@
   }
 }
 
+
+.containerCover {
+  align-items: center;
+  flex-direction: column;
+  max-width: rem(1220);
+  display: flex;
+  gap: rem(24);
+}

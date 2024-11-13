@@ -8,12 +8,15 @@
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
-
+  max-width: rem(1220);
+  
   @include md {
+    max-width: rem(1320);
     padding: 0 rem(60);
   } 
-
+  
   @include xl {
+    max-width: rem(1460);
     padding: 0 rem(120);
   }
 
@@ -241,3 +244,6 @@
   }
 }
 
+.container {
+  width: 100%;
+}
