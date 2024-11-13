@@ -687,12 +687,16 @@ export async function getStores({
   city,
   name,
   service,
+  lat,
+  lng,
 }: {
   method: string;
   brand: string;
   city: string;
   name: string;
   service: string;
+  lat: string,
+  lng: string,
 }) {
   try {
     const json = {
@@ -702,6 +706,8 @@ export async function getStores({
       ...(city && { city }),        // Include city filter if provided
       ...(name && { name }), // Include location filter if provided
       ...(service && { service }), // Include available service filter if provided
+      lat: lat,
+      lng: lng,
     };
     const config = {
       method: method,
