@@ -125,7 +125,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
               setActiveIndex={setActiveIndex}
               setTransition={"fade"}
               setSpeed={2000}
-              isAnimated={"yes"}
+              isAnimated={"no"}
             />
           </GradientOverlay>
         </div>
