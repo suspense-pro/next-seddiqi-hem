@@ -53,14 +53,14 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        //const result = await UseFetchStores(productBrand, productName, '', '',);
-        let result;
+        const result = await UseFetchStores(productBrand, productName, '', '',);
+        /*let result;
 
         if (userLocation) {
           result = await UseFetchStores("", "", '', '', userLocation.lat, userLocation.lng); 
         } else {
           result = await UseFetchStores('', '', '', '', null, null);
-        }
+        }*/
 
         setStores(result.response);
 
