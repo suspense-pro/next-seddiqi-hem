@@ -24,6 +24,7 @@
   @include lg {
     padding: 0 rem(120);
     flex-direction: row;
+    gap: rem(80);
   }
 
   div {
@@ -38,7 +39,6 @@
       // text-transform: uppercase;
       color: getColorHex("rolex-brown");
       font-weight: 700;
-
 
       @include lg {
         line-height: rem(46);
@@ -68,6 +68,7 @@
   flex-direction: column;
   text-align: center;
   gap: rem(20);
+  width: 100%;
 
   @include lg {
     padding: 0 rem(120);
@@ -75,44 +76,43 @@
 
   .label {
     width: 100%;
-    color: getColorHex("green-metallic");
+    color: getColorHex("dark-black");
     text-align: center;
     font-size: rem(16);
-    line-height: rem(26);
-    letter-spacing: rem(0.4);
+    line-height: rem(20);
+    // letter-spacing: rem(0.4);
+    font-weight: 700;
     text-transform: uppercase;
+    max-width: rem(440);
+    margin: 0 auto;
   }
   .leftText {
     width: 100%;
     margin-bottom: rem(8);
     .title {
+      margin: 0 auto;
       font-size: rem(28);
       line-height: rem(34);
       letter-spacing: rem(0.4);
       text-transform: uppercase;
+      color: getColorHex("black-dark");
+      max-width: rem(440);
 
       @include lg {
-        color: getColorHex("green-dark");
-        line-height: rem(46);
-        font-size: rem(40);
+        line-height: rem(36);
+        font-size: rem(32);
+        letter-spacing: rem(1);
       }
     }
   }
 
   .rightText {
-    width: 100%;
-    color: getColorHex("black-dark");
+    max-width: rem(480);
+    margin: 0 auto;
     font-size: rem(14);
-    font-weight: 700;
-    line-height: rem(22);
-    letter-spacing: rem(0.4);
-    text-align: center;
     font-weight: 400;
-
-    @include lg {
-      color: getColorHex("black-dark");
-      line-height: rem(26);
-      font-size: rem(16);
-    }
+    line-height: rem(22);
+    text-align: center;
+    color: getColorHex("black-dark");
   }
 }

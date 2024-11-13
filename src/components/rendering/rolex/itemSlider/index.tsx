@@ -25,7 +25,7 @@ const ItemSlider = ({ ...content }) => {
 
       <Swiper
         slidesPerView={'auto'}
-        spaceBetween={12}
+        spaceBetween={8}
         navigation={true}
         pagination={{ clickable: true }}
         breakpoints={{
@@ -42,7 +42,8 @@ const ItemSlider = ({ ...content }) => {
           <a href={data.linkUrl} className={styles.sliderLink}>
             <Image
               imgWidth="100%"
-              height={"auto"}
+              height={styles.imgHeight}
+              className={styles.imgHeight}
               image={data.media?.image}
               imageAltText={data.media?.altText}
             />

@@ -1,9 +1,9 @@
 @import "./../../../../assets/styles/rolex/rolexMain.scss";
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
-  gap: rem(60);
+  gap: rem(90);
   padding: 0 rem(28);
   width: 100%;
   margin: 0 auto;
@@ -11,65 +11,99 @@
 
   @include md {
     padding: 0 rem(60);
-    gap: rem(92);
-  } 
+    gap: rem(90);
+  }
 
   @include xl {
     padding: 0 rem(120);
   }
 
-  &.white{
+  &.white {
     background: getColorHex("white");
   }
 
-  &.beige{
+  &.beige {
     background: getColorHex("beige");
   }
 
-  &.grey_pampas{
+  &.grey_pampas {
     background: getColorHex("grey-pampas");
   }
 
-  &.grey_light{
+  &.grey_light {
     background: getColorHex("grey-light");
   }
 
-  .oneGridContainer, .twoGridsContainer{
+  .oneGridContainer,
+  .twoGridsContainer {
     display: flex;
     flex-direction: column;
     gap: rem(16);
-    
-    .imageTextsContainer{
+
+    .imageTextsContainer {
       width: 100%;
     }
   }
 
-  .twoGridsContainer{
-    
-    .mainTitle{
-
+  .oneGridContainer {
+    .mainTitle {
+      @include rolex_bold;
+      font-size: rem(18);
+      letter-spacing: rem(0.4);
+      line-height: rem(26);
+      color: #462C1F;
+      margin: 0;
+      
       @include md {
-        margin-bottom: rem(4);
+        color: #462C1F;
+        font-size: rem(28);
+        line-height: rem(32);
       }
     }
   }
 
-  .mainTitle{
+  .twoGridsContainer {
+    gap: rem(20);
+
+    .mainTitle {
+      @include md {
+        margin-bottom: rem(4);
+      }
+    }
+
+    .mainTitle {
+      @include rolex_bold;
+      font-size: rem(18);
+      // letter-spacing: rem(0.4);
+      line-height: rem(26);
+      color: getColorHex("rolex-brown");
+      margin: 0;
+      font-weight: 700;
+
+      @include md {
+        font-size: rem(28);
+        // letter-spacing: rem(0.6);
+        line-height: rem(32);
+      }
+    }
+  }
+
+  .mainTitle {
     @include rolex_bold;
     font-size: rem(18);
     letter-spacing: rem(0.4);
     line-height: rem(26);
-    color: getColorHex("black");
+    color: #462C1F;
     margin: 0;
 
     @include md {
-      font-size: rem(24);
-      letter-spacing: rem(0.6);
-      line-height: rem(28);
+      font-size: rem(28);
+      // letter-spacing: rem(0.6);
+      line-height: rem(32);
     }
   }
 
-  .imageTextsWrapper{
+  .imageTextsWrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -77,14 +111,14 @@
 
     @include md {
       flex-direction: row;
-      column-gap: rem(36);
+      column-gap: rem(12);
     }
   }
 
-  .imageTextsContainer{
+  .imageTextsContainer {
     display: flex;
     flex-direction: column;
-    gap: rem(12);
+    gap: rem(16);
     width: 100%;
 
     @include md {
@@ -92,7 +126,7 @@
     }
   }
 
-  .imageContainer{
+  .imageContainer {
     display: flex;
     outline: none;
     aspect-ratio: 1/1;
@@ -103,7 +137,7 @@
       min-height: auto;
     }
 
-    img{
+    img {
       display: flex;
       width: 100%;
       height: 100%;
@@ -111,42 +145,42 @@
     }
   }
 
-  .textsContainer{
+  .textsContainer {
     display: flex;
     flex-direction: column;
-    gap: rem(8);
+    // gap: rem(8);
 
-    @include md {
-      gap: rem(16);
-    }
+    // @include md {
+    //   gap: rem(16);
+    // }
   }
 
-  .subtitle{
+  .subtitle {
     @include rolex_bold;
-    font-size: rem(14);
-    letter-spacing: rem(0.4);
-    line-height: rem(22);
-    color: getColorHex("black");
+    // letter-spacing: rem(0.4);
+    color: #462C1F;
     display: block;
+    font-size: rem(12);
     margin: 0;
-
+    font-weight: 700;
+    line-height: rem(16);
+    
     @include md {
-      font-size: rem(16);
-      line-height: rem(24);
       //color: getColorHex("green-dark");
     }
-
-    &:empty{
+    
+    &:empty {
       display: none;
     }
   }
-
-  .title{
+  
+  .title {
     @include rolex_bold;
-    font-size: rem(20);
-    line-height: rem(28);
-    letter-spacing: rem(0.4);
-    color: getColorHex("black");
+    font-size: rem(28);
+    font-weight: 700;
+    line-height: rem(32);
+    // letter-spacing: rem(0.4);
+    color: #462C1F;
     display: block;
     margin: 0;
 
@@ -154,16 +188,20 @@
       letter-spacing: rem(0.6);
     }
 
-    &:empty{
+    &:empty {
       display: none;
     }
   }
 
-  .link{
+  .link {
     align-self: flex-start;
     margin: 0;
     width: auto;
     outline: none;
+    margin-top: rem(8);
+    font-size: rem(12);
+    font-weight: 700;
+
 
     [dir="rtl"] & {
       align-self: flex-end;
@@ -188,17 +226,16 @@
       }
     }*/
 
-    &:empty{
+    &:empty {
       display: none;
     }
   }
 
-  .sliderSwiper{
+  .sliderSwiper {
     overflow: visible;
 
-    & > div{
-
-      & + div{
+    & > div {
+      & + div {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -213,43 +250,42 @@
           display: block;
         }
 
-        &:after{
+        &:after {
           content: none;
         }
 
-        &:global(.swiper-button-prev){
+        &:global(.swiper-button-prev) {
           transform: translateY(-50%) rotate(-180deg);
 
           @include md {
             display: flex;
             left: rem(-22);
           }
-          
+
           @include xl {
             left: rem(-44);
           }
         }
 
-        &:global(.swiper-button-next){
-
+        &:global(.swiper-button-next) {
           @include md {
             display: flex;
             right: rem(-22);
           }
-          
+
           @include xl {
             right: rem(-44);
           }
         }
 
-        &:global(.swiper-button-disabled){
+        &:global(.swiper-button-disabled) {
           display: none;
         }
       }
     }
   }
 
-  .sliderSlide{
+  .sliderSlide {
     display: flex;
     flex-direction: column;
     max-width: rem(159);
@@ -260,13 +296,13 @@
       max-width: none;
     }
 
-    &.hiddenSlide{
+    &.hiddenSlide {
       opacity: 0;
       pointer-events: none;
     }
   }
 
-  .sliderLink{
+  .sliderLink {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -278,7 +314,7 @@
     width: 100%;
   }
 
-  .sliderText{
+  .sliderText {
     font-family: sans-serif;
     font-size: rem(14);
     font-weight: 700;
@@ -290,7 +326,7 @@
     margin: 0;
     text-align: left;
 
-    @include md{
+    @include md {
       font-size: rem(20);
       line-height: rem(28);
       letter-spacing: rem(0.6);
@@ -301,7 +337,7 @@
     }
   }
 
-  .sliderButton{
+  .sliderButton {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -317,28 +353,25 @@
     }
   }
 
-  .sliderButtonPrev{
+  .sliderButtonPrev {
     transform: translateY(-50%) rotate(-180deg);
 
     @include md {
       left: rem(-22);
     }
-    
+
     @include xl {
       left: rem(-44);
     }
   }
 
-  .sliderButtonNext{
-    
-
+  .sliderButtonNext {
     @include md {
       right: rem(-22);
     }
-    
+
     @include xl {
       right: rem(-44);
     }
   }
 }
-

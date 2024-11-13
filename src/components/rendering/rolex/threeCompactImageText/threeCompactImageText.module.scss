@@ -37,15 +37,15 @@
   .mainTitle{
     @include rolex_bold;
     font-size: rem(18);
-    letter-spacing: rem(0.4);
+    // letter-spacing: rem(0.4);
     line-height: rem(26);
-    color: getColorHex("black");
+    color: getColorHex("rolex-brown");
     margin: 0;
 
     @include md {
       font-size: rem(24);
       letter-spacing: rem(0.6);
-      line-height: rem(28);
+      line-height: rem(32);
     }
 
     &:empty{
@@ -61,7 +61,7 @@
 
     @include md {
       flex-direction: row;
-      column-gap: rem(12);
+      column-gap: rem(8);
     }
   }
 
@@ -89,27 +89,21 @@
   .textsContainer{
     display: flex;
     flex-direction: column;
-    gap: rem(8);
+    // gap: rem(8);
 
     @include md {
-      gap: rem(12);
+      // gap: rem(12);
     }
   }
 
   .subtitle{
     @include rolex_bold;
-    font-size: rem(14);
-    letter-spacing: rem(0.4);
-    line-height: rem(22);
-    color: getColorHex("black");
+    font-size: rem(12);
+    // letter-spacing: rem(0.4);
+    line-height: rem(16);
+    color: getColorHex("rolex-brown");
     display: block;
     margin: 0;
-
-    @include md {
-      font-size: rem(16);
-      line-height: rem(24);
-      color: getColorHex("green-dark");
-    }
 
     &:empty{
       display: none;
@@ -121,12 +115,12 @@
     font-size: rem(20);
     line-height: rem(28);
     letter-spacing: rem(0.4);
-    color: getColorHex("black");
+    color: getColorHex("rolex-brown");
     display: block;
     margin: 0;
 
     @include md {
-      letter-spacing: rem(0.6);
+      // letter-spacing: rem(0.6);
     }
 
     &:empty{
@@ -138,6 +132,8 @@
     display: inline-flex;
     align-self: flex-start;
     margin: 0;
+    margin-top: rem(8);
+    font-size: rem(12);
 
     [dir="rtl"] & {
       align-self: flex-end;
