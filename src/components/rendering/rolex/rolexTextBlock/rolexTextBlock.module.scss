@@ -34,9 +34,11 @@
     .title {
       font-size: rem(28);
       line-height: rem(34);
-      letter-spacing: rem(0.4);
-      text-transform: uppercase;
-      color: getColorHex("black-dark");
+      // letter-spacing: rem(0.4);
+      // text-transform: uppercase;
+      color: getColorHex("rolex-brown");
+      font-weight: 700;
+
 
       @include lg {
         line-height: rem(46);

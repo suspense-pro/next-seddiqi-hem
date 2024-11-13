@@ -145,7 +145,7 @@ const ContactForm = () => {
   };
 
   return (
-    <form className={styles.contactForm} onSubmit={handleSubmit}>
+    <form className={styles.contactForm}>
       <h2 className={styles.heading}>Contact Us</h2>
 
       <div className={`${styles.singleForm} ${styles.doubleForm}`}>
@@ -243,7 +243,7 @@ const ContactForm = () => {
 
       <div className={styles.btnContainer}>
         <Button
-          clickHandler={handleSubmit}
+          clickHandler={(e) => handleSubmit(e)}
           className={styles.submitBtn}
           title="Submit"
           isLink={false}
