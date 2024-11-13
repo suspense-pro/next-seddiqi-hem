@@ -41,7 +41,6 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // console.log("HELLO")
 
     if (validateForm()) {
       setIsLoading(true);
@@ -68,7 +67,6 @@ const ContactForm = () => {
           method: "POST",
           userData: data,
         });
-        console.log("HELLO");
 
         if (!response?.isError) {
           router.push("/contact-us/confirmation");
@@ -155,7 +153,7 @@ const ContactForm = () => {
   };
 
   return (
-    <form className={styles.contactForm} onSubmit={handleSubmit}>
+    <form className={styles.contactForm}>
       <h2 className={styles.heading}>Contact Us</h2>
 
       <div className={`${styles.singleForm} ${styles.doubleForm}`}>
@@ -250,7 +248,6 @@ const ContactForm = () => {
           </div>
         </div>
       </div>
-
       <div className={styles.btnContainer}>
         <Button
           clickHandler={handleSubmit}
