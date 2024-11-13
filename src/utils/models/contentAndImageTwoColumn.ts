@@ -17,4 +17,5 @@ export interface ContentAndImageTwoColumnProps {
     type: string;
     color: string;
   };
+  isSquareImage?: boolean;
 }
