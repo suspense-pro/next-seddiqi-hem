@@ -105,6 +105,14 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     const fetchStores = async () => {
       try {
         const result = await UseFetchStores('', '', '', '');
+        /*let result;
+
+        if (userLocation) {
+          result = await UseFetchStores("", "", '', '', userLocation.lat, userLocation.lng);  // Pass lat and lng to fetch stores
+        } else {
+          result = await UseFetchStores('', '', '', '', null, null); // Default fetch if no location is available
+        }*/
+
         setStores(result.response);
 
         const filteredStores = result.response.filter(store =>
@@ -166,7 +174,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   }, [stores, userLocation]);
 
   useEffect(() => {
-    console.log("uniqueBrands2: ", brandCheckboxValues);
+    //console.log("uniqueBrands2: ", brandCheckboxValues);
   }, [brandCheckboxValues]);
 
   const calculateNearestStore = (storesList) => {
