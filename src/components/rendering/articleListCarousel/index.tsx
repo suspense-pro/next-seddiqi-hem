@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import styles from "./artilceListCarousel.module.scss";
+import styles from "./articleListCarousel.module.scss";
 import { Button, ContentHeader, GradientOverlay, Image, Typography, Video } from "@components/module";
 import { useDeviceWidth, useWindowWidth } from "@utils/useCustomHooks";
 

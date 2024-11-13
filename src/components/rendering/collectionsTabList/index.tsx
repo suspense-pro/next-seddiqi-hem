@@ -66,7 +66,7 @@ const CollectionsTabDesktop = ({ content, cta, ind }) => {
           return <CollectionsCard totalItems={listItems?.length} item={item} type={content?.type} />;
         })}
       </div>
-      <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />
+      {cta && cta.label && <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />}
     </div>
   );
 };
