@@ -54,6 +54,8 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
           city: "",
           name: "",
           service: "",
+          lat: "",
+          lng: "",
         });
         const fetchedStores = response?.response || [];
         setStores(fetchedStores);

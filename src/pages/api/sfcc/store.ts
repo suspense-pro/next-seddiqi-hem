@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     const shopperStoresClient = new Seller.ShopperStores(clientConfig);
 
                     // get the customer location (default case)
-                    if (lat === 'null' && lng === 'null') {
+                    if (lat === 'null' && lng === 'null' || lat === '' && lng === '') {
                         coordinates = false;
                         lat = '38.7946';
                         lng = '106.5348'; 
