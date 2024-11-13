@@ -38,7 +38,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                             limit: 100,
                         },
                     };
-                    console.log(JSON.stringify(options, null, 2));
 
                     const storeResults = await shopperStoresClient.searchStores(options);
 
