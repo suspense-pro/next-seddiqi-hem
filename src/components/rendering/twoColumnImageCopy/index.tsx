@@ -15,10 +15,11 @@ const ImageComponent = ({ image, alt }) => (
 );
 
 const TwoColumnImageCopy = ({ contentLeft, contentRight, ...content }) => {
-  if (!contentLeft?.image?.image || !contentRight?.image?.image) return null;
+  
+  if (!contentLeft?.media?.image || !contentRight?.media?.image) return null;
 
-  const leftImage = contentLeft.image.image;
-  const rightImage = contentRight.image.image;
+  // const leftImage = contentLeft.image.image;
+  // const rightImage = contentRight.image.image;
   const cta = contentRight?.cta;
 
   // console.log("contentRight", contentRight)
