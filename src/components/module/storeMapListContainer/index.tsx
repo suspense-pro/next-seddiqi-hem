@@ -17,7 +17,8 @@ const StoreMapListContainer = ({
   handleStoreClick,
   isMobile,
   isAbsolutePosition,
-  needScrollbar
+  needScrollbar,
+  useOnPopup,
 }) => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedStoreId, setSelectedStoreId] = useState(null);
@@ -28,7 +29,15 @@ const StoreMapListContainer = ({
   const handleStoreDtetails = (store) => {
     setSelectedStoreId(store.id);
     setMapViewOn(true);
-    setIsDetailsOpen(true);
+    //setIsDetailsOpen(true);
+    setMapViewOn(true);
+    if (useOnPopup) {
+      // Show StoreLocationDetails as a popup
+      setIsDetailsOpen(true);
+    } else {
+      // Redirect to details page
+      handleStoreDetailsPage(store.id, true);
+    }
   };
 
   const handleCloseDetails = () => {
@@ -105,11 +114,11 @@ const StoreMapListContainer = ({
                     </div>
                   </div>
                   <div className={styles.storeMapLinksContainer}>
-                    <a href="/" target="_blank" className={`${styles.storeMapLink} button plain green_dark`} 
-                      onClick={(e) => { 
-                        e.preventDefault(); 
-                        handleStoreDetailsPage(store.id,true);
-                      }}>
+                  <a href="/" target="_blank" className={`${styles.storeMapLink} button plain green_dark`} 
+                        onClick={(e) => { 
+                          e.preventDefault(); 
+                          handleStoreDtetails(store);
+                        }}>
                       <span>View Details</span>
                     </a>
                     <a href={store.c_googleMapLocation} target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
@@ -147,11 +156,11 @@ const StoreMapListContainer = ({
                 </div>
               </div>
               <div className={styles.storeMapLinksContainer}>
-                <a href="/" target="" className={`${styles.storeMapLink} button plain green_dark`}
-                 onClick={(e) => {
-                  e.preventDefault();
-                  handleStoreDtetails(store);
-                }}>
+              <a href="/" target="_blank" className={`${styles.storeMapLink} button plain green_dark`} 
+                        onClick={(e) => { 
+                          e.preventDefault(); 
+                          handleStoreDtetails(store);
+                        }}>
                   <span>View Details</span>
                 </a>
                 <a href={store.c_googleMapLocation} target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
@@ -171,6 +180,8 @@ const StoreMapListContainer = ({
           isOpen={isDetailsOpen}
           onClose={handleCloseDetails}
           mapViewOn={mapViewOn}
+          useOnPopup={true}
+          stores={storesList}
         />
     </>
     )}
