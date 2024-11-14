@@ -75,11 +75,7 @@ const NewsletterSignup: React.FC = () => {
             placeholder="Email"
             className={`${styles.newsletterInput} ${styles.languageDropdown}`}
           />
-          <button
-            className={styles.newsletterButton}
-            onClick={handleSubscribe}
-            disabled={isLoading}
-          >
+          <button className={styles.newsletterButton} onClick={handleSubscribe} disabled={isLoading}>
             {"Subscribe"}
           </button>
         </div>
@@ -90,20 +86,17 @@ const NewsletterSignup: React.FC = () => {
             checked={isChecked}
             onChange={(e) => setIsChecked(e.target.checked)}
           />
+          {/* <label htmlFor="privacyPolicy">
+            I have read and understood <a href="/privacy-policy">Privacy Policy</a> and I agree to receive the
+            newsletter.
+          </label> */}
           <label htmlFor="privacyPolicy">
-            I have read and understood{" "}
-            <a href="/privacy-policy">Privacy Policy</a> and I agree to receive
-            the newsletter.
+            I consent to receive occasional marketing communications and event invitation from Ahmed Seddiqi & Sons, its
+            affiliates, and group companies via phone, email, SMS, or WhatsApp channels.
           </label>
         </div>
         {statusMessage && (
-          <p
-            className={`${styles.statusMessage} ${
-              isError ? styles.error : styles.success
-            }`}
-          >
-            {statusMessage}
-          </p>
+          <p className={`${styles.statusMessage} ${isError ? styles.error : styles.success}`}>{statusMessage}</p>
         )}
       </div>
     </div>
