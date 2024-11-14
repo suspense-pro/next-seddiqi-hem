@@ -18,7 +18,7 @@ const HeaderLogoBar = ({ headerLogoContainer }) => {
   const { mainLogo } = headerData?.content;
 
   return (
-    <div onMouseEnter={() => updateCurrent(null)} className={headerLogoContainer && headerLogoContainer}>
+    <div className={headerLogoContainer && headerLogoContainer}>
       {/* {leftLogo && <LogoLink logo={leftLogo?.image} className={styles.patakLogo} />} */}
       {mainLogo && <LogoLink logo={mainLogo?.image} className={styles.mainLogo} />}
       {/* {rightLogo && <LogoLink logo={rightLogo?.image} className={styles.rolexLogo} />} */}

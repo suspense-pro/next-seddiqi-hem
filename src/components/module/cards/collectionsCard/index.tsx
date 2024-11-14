@@ -26,8 +26,8 @@ const CollectionsCard = ({ item, type, totalItems }) => {
         ) : null}
       </GradientOverlay>
       <div className={`${isProduct && styles.productContent} ${styles.itemContent}`}>
-        <div className={styles.category}>{item?.title}</div>
-        <div className={styles.title}>{item?.cta?.label}</div>
+        {item?.title && <div className={styles.category}>{item?.title}</div> }
+        {item?.cta?.label && <div className={styles.title}>{item?.cta?.label}</div> }
         {!item?.hideUnderline && <div className={styles.itemBar}>&nbsp;</div>}
       </div>
     </div>
