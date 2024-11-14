@@ -2,7 +2,7 @@
 
 .productContainer {
   // min-width: rem(348);
-  height: rem(594);
+  height: rem(368);
   background-color: getColorHex("white");
   padding: rem(16);
   padding-top: rem(0);
@@ -13,6 +13,10 @@
   padding-bottom: rem(40);
   position: relative;
   transition: background-color 0.3s ease;
+  
+  @include md{
+    height: rem(594);
+  }
 
   &:hover {
     background-color: getColorHex("green-greyish");
@@ -63,9 +67,15 @@
     flex-direction: column;
     gap: rem(12);
     align-items: center;
+    flex: auto;
 
     [dir="rtl"] & { 
       align-items: flex-start;
+    }
+
+    
+    @include sm-max{
+      margin-top: rem(36);
     }
 
     .title,
@@ -78,21 +88,29 @@
     }
 
     .type {
-      font-size: rem(18);
+      font-size: rem(14);
       line-height: rem(28);
       letter-spacing: rem(0.4);
       text-align: center;
       color: getColorHex("green-metallic");
       @include body_regular; 
+      @include md{
+        font-size: rem(16);
+      }
     }
   }
 
   .imgContainer {
     position: relative;
-    width: rem(275);
-    height: rem(464);
+    max-width: rem(275);
+    width: 100%;
+    height: rem(216);
     margin: 0 auto;
     z-index: 10;
+    @include md{
+      height: rem(464);
+
+    }
 
     & > :hover {
       cursor: grab;
