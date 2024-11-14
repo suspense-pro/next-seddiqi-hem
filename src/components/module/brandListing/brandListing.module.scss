@@ -60,12 +60,12 @@
   }
 }
 
-.brandListHeight {
-  max-height: rem(400);
-}
+// .brandListHeight {
+//   max-height: rem(400);
+// }
 
 .brandList {
-  overflow-y: auto;
+  // overflow-y: auto;
   margin: 0 rem(28);
   display: grid;
   gap: rem(20);
@@ -104,6 +104,7 @@
       letter-spacing: rem(0.6);
       color: getColorHex("metallic");
       margin-bottom: rem(20);
+      text-transform: uppercase;
     }
 
     .brandColumn {
@@ -116,6 +117,11 @@
         font-size: rem(16);
         line-height: rem(26);
         margin-bottom: rem(10);
+
+        .disabled {
+          color: getColorHex("grey-light-5");
+          pointer-events: none;
+        }
       }
     }
   }
