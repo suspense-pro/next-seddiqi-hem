@@ -13,9 +13,13 @@ const SubMenuLinks = () => {
     return null;
   }
 
+  
   const renderLinks = (links) => {
     return links?.map(({ content }) => {
       const { item_title, isVisible } = content?.commonProps || {};
+      if(!item_title) {
+        return null
+      }
       return (
         <div onClick={() => updateCurrent(null)}>
           <NavigationLink
