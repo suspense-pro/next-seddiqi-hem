@@ -28,7 +28,7 @@ const CollectionsCard = ({ item, type, totalItems }) => {
       <div className={`${isProduct && styles.productContent} ${styles.itemContent}`}>
         <div className={styles.category}>{item?.title}</div>
         <div className={styles.title}>{item?.cta?.label}</div>
-        {!item?.hideUnderline && <div className={styles.itemBar}>&nbsp;</div>}
+        {!item?.hideUnderline && !isProduct && <div className={styles.itemBar}>&nbsp;</div>}
       </div>
     </div>
   );
