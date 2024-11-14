@@ -2,24 +2,22 @@ import { ReactNode, createContext, useState } from "react";
 
 interface HeaderContextProps {
   current: number;
+  menuOpen: boolean;
   updateCurrent: (data: number) => void;
+  setMenuOpen: (data: boolean) => void;
   headerData?: any;
 }
 
-export const HeaderContext = createContext<HeaderContextProps | undefined>(
-  undefined
-);
+export const HeaderContext = createContext<HeaderContextProps | undefined>(undefined);
 
 interface HeaderProviderProps {
   children: ReactNode;
   headerData?: any;
 }
 
-export const HeaderProvider: React.FC<HeaderProviderProps> = ({
-  children,
-  headerData,
-}) => {
+export const HeaderProvider: React.FC<HeaderProviderProps> = ({ children, headerData }) => {
   const [current, setCurrent] = useState<number | null>(null);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const updateCurrent = (data: number | null) => {
     setCurrent(data);
@@ -31,6 +29,8 @@ export const HeaderProvider: React.FC<HeaderProviderProps> = ({
         current,
         updateCurrent,
         headerData,
+        menuOpen,
+        setMenuOpen,
       }}
     >
       {children}
