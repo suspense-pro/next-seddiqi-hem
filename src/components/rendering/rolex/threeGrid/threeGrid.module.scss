@@ -135,6 +135,8 @@
     aspect-ratio: 1/1;
     min-height: rem(340);
 
+    
+
     @include md {
       aspect-ratio: auto;
       min-height: auto;

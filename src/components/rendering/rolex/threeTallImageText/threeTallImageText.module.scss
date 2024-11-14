@@ -176,7 +176,11 @@
     outline: none;
     width: 100%;
     // height: rem(284);
-    width: rem(284);
+    width: 100%;
+
+    @include md {
+      width: rem(284);
+    }
 
     picture {
       display: flex;
@@ -186,8 +190,11 @@
       width: 100%;
       object-fit: cover;
       // aspect-ratio: 4/3;
-      height: rem(284);
-      width: rem(284);
+      height: rem(272);
+
+      @include md {
+        width: rem(284);
+      }
 
       // @include md {
       //   aspect-ratio: 3/4;
