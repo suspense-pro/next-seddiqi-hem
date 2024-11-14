@@ -3,11 +3,12 @@
 .brandSectionContainer {
   display: flex;
   flex-direction: column;
-  margin: rem(0 0);
+  margin: 0 auto;
+  max-width: rem(1020);
 
-  @include lg {
-    margin: rem(0 120);
-  }
+  // @include lg {
+  //   margin: rem(0 120);
+  // }
 }
 
 .alphabetNav {
