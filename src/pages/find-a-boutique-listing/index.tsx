@@ -120,7 +120,6 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
       setLocationStores(filteredStores);
 
-      // Extract unique cities
       const uniqueCities = [...new Set(result.response.map(store => store.city))];
       setCities(uniqueCities);
 
@@ -130,15 +129,11 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
       const filteredAddresses = result.response
       .filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi')
-      .map(store => store.address1);
+      .map(store => store.name);
 
-      // Uncomment the first const uniqueAddresses line below for dynamic addresses and comment out the second const uniqueAddresses
-      //const uniqueAddresses = [...new Set(result.map(store => store.address1))];
       const uniqueAddresses = [...new Set(filteredAddresses)];
-      //setLocationAddresses(uniqueAddresses);
       setLocationCheckboxValues(uniqueAddresses);
 
-      //const uniqueBrands = [...new Set(result.response.flatMap(store => store.c_availableBrands))]; 
       const uniqueBrands = [...new Set(filteredCity.flatMap(store => store.c_availableBrands))];
       setBrandCheckboxValues(uniqueBrands);
 
@@ -249,15 +244,6 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
           <li className={styles.store} key={store.id} onClick={() => handleStoreDetails(store.id)}>
             <div className={styles.storeImageContainer}>
               <img src={store.c_storeImage} alt={store.name} className={styles.storeImage} />
-
-              {/* Uncomment the commented codes below this to show the nearest store label in the image */}
-              {/* {activeToggle ? (
-                  <>
-                    {nearestStore && nearestStore.id === store.id && (
-                      <h3 className={styles.nearestStore}>Nearest Store</h3>
-                    )}
-                  </>
-                ) : null} */}
             </div>
 
             <div className={styles.storeDetails}>
@@ -362,38 +348,6 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     setStoreCounts(calculateStoreCounts(filteredStores));
   }, [filters, activeTab, stores]);
 
-  /*const getFilteredStores = () => {
-    let filteredStores = stores;
-  
-    // Filter by city
-    if (activeTab !== 'All') {
-      filteredStores = filteredStores.filter(store => store.city === activeTab);
-    }
-  
-    // Filter by brands
-    if (filters['1'] && filters['1'].length > 0) {
-      filteredStores = filteredStores.filter(store =>
-        filters['1'].some(brand => store.c_availableBrands.includes(brand))
-      );
-    }
-  
-    // Filter by locations
-    if (filters['2'] && filters['2'].length > 0) {
-      filteredStores = filteredStores.filter(store =>
-        filters['2'].includes(store.address1)
-      );
-    }
-  
-    // Filter by services
-    if (filters['3'] && filters['3'].length > 0) {
-      filteredStores = filteredStores.filter(store =>
-        filters['3'].some(service => store.c_services.includes(service))
-      );
-    }
-  
-    return filteredStores;
-  };*/
-
   const getFilteredStores = () => {
     let filteredStores = stores;
 
@@ -415,14 +369,16 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
     if (filters['2'] && filters['2'].length > 0) {
         filteredStores = filteredStores.filter(store =>
-            filters['2'].includes(store.address1)
+            filters['2'].includes(store.name)
         );
     }
 
     if (filters['3'] && filters['3'].length > 0) {
-        filteredStores = filteredStores.filter(store =>
-            filters['3'].some(service => store.c_services.includes(service))
-        );
+      filteredStores = filteredStores.filter(store =>
+        filters['3'].some(service => 
+          store.c_services && Array.isArray(store.c_services) && store.c_services.includes(service)
+        )
+      );
     }
 
     return filteredStores;
@@ -482,7 +438,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
             ? stores.filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi') 
             : stores.filter(store => store.city === tab);
         
-        const filteredAddresses = [...new Set(filteredStores.map(store => store.address1))];
+        const filteredAddresses = [...new Set(filteredStores.map(store => store.name))];
         const filteredBrands = [...new Set(filteredStores.flatMap(store => store.c_availableBrands))];
         const filteredServices = [...new Set(filteredStores.flatMap(store => store.c_services))];
 
