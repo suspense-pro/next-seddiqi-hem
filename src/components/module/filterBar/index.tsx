@@ -164,7 +164,7 @@ const FilterBar = ({
   return (
     <div className={styles.container}>
       <div className={styles.filterBtns}>
-          <FilterBtn
+          {/* <FilterBtn
             label={"All Filter"}
             icon={true}
             onClick={toggleDrawer}
@@ -176,7 +176,7 @@ const FilterBar = ({
               icon={false}
               onClick={undefined}
             />
-          ))}
+          ))} */}
       </div>
       <div className={styles.productsLength}>{totalProducts} Products</div>
       <SideDrawer
