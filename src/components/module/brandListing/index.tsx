@@ -4,11 +4,35 @@ import Button from "../button";
 import { getCategory } from "@utils/sfcc-connector/dataService";
 import Link from "next/link";
 import TabbedNavigation from "../tabbedNavigation";
+import classNames from "classnames";
 
 const brandsData = {
-  A: ["Akrivia", "Aramedes", "Artya", "Audemars Piguet", "Arnold & Son", "Angelus"],
-  B: ["Bell & Ross", "Bernard Favre", "Bovet", "Breitling", "Bvlgari", "Blancpain", "Baume & Mercier"],
-  C: ["Cabestan", "Chopard", "Christian Van der Klaauw", "Christophe Claret", "Claude Meylan", "Cartier", "Corum"],
+  A: [
+    "Akrivia",
+    "Aramedes",
+    "Artya",
+    "Audemars Piguet",
+    "Arnold & Son",
+    "Angelus",
+  ],
+  B: [
+    "Bell & Ross",
+    "Bernard Favre",
+    "Bovet",
+    "Breitling",
+    "Bvlgari",
+    "Blancpain",
+    "Baume & Mercier",
+  ],
+  C: [
+    "Cabestan",
+    "Chopard",
+    "Christian Van der Klaauw",
+    "Christophe Claret",
+    "Claude Meylan",
+    "Cartier",
+    "Corum",
+  ],
   D: ["Debethune", "Dior", "De Grisogono", "Daniel Wellington", "DeWitt"],
   F: ["Franck Muller", "Ferdinand Berthoud", "Frederique Constant"],
   G: ["Girard-Perregaux", "Glashütte Original", "Greubel Forsey"],
@@ -23,12 +47,27 @@ const brandsData = {
   Z: ["Zenith", "Zodiac"],
 };
 
-const BrandListing = ({ height = true, ...content }) => {
-  if (!content) return null;
+const BrandListing = ({
+  height = true,
+  categories,
+  brandPages = [],
+  ...content
+}) => {
+  // if (!content) return null;
+
+  // console.log(categories[0].parentCategoryTree);
+  // console.log({ brandPages });
+
+  const alphabet = [...Array(26).keys()].map((i) =>
+    String.fromCharCode(i + 97)
+  );
 
   const [selectedLetter, setSelectedLetter] = useState("A");
-  const availableLetters = useMemo(() => Object.keys(brandsData).map((letter) => letter.toUpperCase()), []);
-  const [brands, setBrands] = useState(null);
+  const availableLetters = useMemo(
+    () => Object.keys(brandsData).map((letter) => letter.toUpperCase()),
+    []
+  );
+  const [brands, setBrands] = useState(categories);
 
   const alphabetNavRef = useRef(null);
   const isDraggingRef = useRef(false);
@@ -39,16 +78,18 @@ const BrandListing = ({ height = true, ...content }) => {
 
   // Handle the letter click to scroll the brand list
   const handleLetterClick = (letter) => {
-    if (availableLetters.includes(letter)) {
+ 
       setSelectedLetter(letter);
       const section = document.getElementById(`section-${letter}`);
+
       if (section && brandListRef.current) {
-        brandListRef.current.scrollTo({
-          top: section.offsetTop - brandListRef.current.offsetTop,
+        window.scrollTo({
+          top: (section.offsetTop - brandListRef.current.offsetTop) - window.screenY,
           behavior: "smooth",
+          left: 0
         });
       }
-    }
+  
   };
 
   //  scroll functionality
@@ -86,14 +127,14 @@ const BrandListing = ({ height = true, ...content }) => {
     }
   }, []);
 
-  const fetchBrands = async () => {
-    const brands = await getCategory({ cgid: "seddiqi-storefront-catalog", method: "GET" });
-    setBrands(brands?.response?.categories);
-  };
+  // const fetchBrands = async () => {
+  //   const brands = await getCategory({ cgid: "seddiqi-storefront-catalog", method: "GET" });
+  //   setBrands(brands?.response?.categories);
+  // };
 
   useEffect(() => {
-    fetchBrands();
-  }, []);
+    setBrands(categories);
+  }, [brands]);
 
   return (
     <div className={styles.brandSectionContainer}>
@@ -106,33 +147,51 @@ const BrandListing = ({ height = true, ...content }) => {
         onMouseMove={handleMouseMove}
         className={styles.alphabetNav}
       >
-        {Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)).map((letter) => (
-          <button
-            key={letter}
-            className={`${styles.alphabetLetter} ${
-              availableLetters.includes(letter) ? styles.enabled : styles.disabled
-            }`}
-            onClick={() => handleLetterClick(letter)}
-            disabled={!availableLetters.includes(letter)}
-          >
-            {letter}
-          </button>
-        ))}
+        {Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)).map(
+          (letter) => (
+            <button
+              key={letter}
+              className={`${styles.alphabetLetter} ${brands.filter((x) => x.id.toLowerCase().startsWith(letter.toLowerCase())).length > 0 ? styles.enabled : styles.disabled }`}
+              onClick={() => handleLetterClick(letter.toLowerCase())}
+              disabled={brands.filter((x) => x.id.toLowerCase().startsWith(letter.toLowerCase())).length < 1}
+            >
+              {letter}
+            </button>
+          )
+        )}
       </div>
 
       {/* Brand List */}
-      <div className={`${height && styles.brandListHeight} ${styles.brandList}`} ref={brandListRef}>
-        {Object.keys(brandsData).map((letter) => (
-          <div key={letter} id={`section-${letter}`} className={styles.brandGroup}>
+      <div
+        className={`${height && styles.brandListHeight} ${styles.brandList}`}
+        ref={brandListRef}
+      >
+        {alphabet.map((letter) => (
+          <div
+            key={letter}
+            id={`section-${letter}`}
+            className={styles.brandGroup}
+          >
             <h4>{letter}</h4>
             <div className={styles.brandColumn}>
-              {brandsData[letter].map((brand, idx) => (
-                <div key={idx} className={styles.brandName}>
-                  <Link target="_blank" href={`/brand/${brand}`}>
-                    {brand}
-                  </Link>
-                </div>
-              ))}
+              {brands &&
+                brands.filter((x) => x.id.toLowerCase().startsWith(letter)).map(({ id, name }, ind) => (
+                    <div key={ind} className={styles.brandName}>
+                      <Link
+                        className={
+                          !brandPages.find((x) => x.url.toLowerCase().includes(id.toLowerCase())) &&
+                          styles.disabled
+                        }
+                        target="_self"
+                        href={`${
+                          brandPages.find((x) => x.url.toLowerCase().includes(id.toLowerCase()))?.url ?? "/"
+                        }`}
+                      >
+                        {name}
+                      </Link>
+                    </div>
+                  )
+                )}
             </div>
           </div>
         ))}
