@@ -37,7 +37,7 @@ const RolexProductLister = ({ listItems = [], cta }) => {
             },
             1024: {
               slidesPerView: 3,
-              spaceBetween: 40,
+              spaceBetween: 20,
             },
           }}
           className={styles.productLister}
@@ -50,7 +50,7 @@ const RolexProductLister = ({ listItems = [], cta }) => {
             const price = product?.price;
 
             return (
-              <SwiperSlide key={index}>
+              <SwiperSlide className={styles.swiperSlide} key={index}>
                 <div className={styles.productItem}>
                   <div className={styles.imageContainer}>
                     {imageData && (
@@ -59,12 +59,12 @@ const RolexProductLister = ({ listItems = [], cta }) => {
                         objectFit="contain"
                         alt={altText}
                         src={imageData}
-                        className={styles.productImage} 
+                        className={styles.productImage}
                       />
                     )}
                   </div>
                   <div className={styles.productInfo}>
-                  <Typography variant="p" className={styles.productTitle}>
+                    <Typography variant="p" className={styles.productTitle}>
                       {title}
                     </Typography>
                     <Typography variant="p" className={styles.productName}>
@@ -81,10 +81,7 @@ const RolexProductLister = ({ listItems = [], cta }) => {
         </Swiper>
       </div>
       <div className={styles.btnContainer}>
-        <NavigationLink
-          className={styles.discoverButton}
-          title={cta?.label || "Shop"}
-        />
+        <NavigationLink className={styles.discoverButton} title={cta?.label || "Shop"} />
       </div>
     </div>
   );
