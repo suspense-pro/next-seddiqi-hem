@@ -17,6 +17,7 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
   isOpen,
   onClose,
   mapViewOn,
+  useOnPopup
 }) => {
   const [storeDetails, setStoreDetails] = useState<Store[]>([]);
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
@@ -63,6 +64,7 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
 
   return (
     <div className={styles.storeDetailsWrapper}>
+      {useOnPopup && (
       <SideDrawer
         isOpen={isOpen}
         showFooter={false}
@@ -75,6 +77,7 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
       >
         {selectedStore && <StoreDetails store={selectedStore} mapViewOn={mapViewOn}/>}
       </SideDrawer>
+      )}
     </div>
   );
 };

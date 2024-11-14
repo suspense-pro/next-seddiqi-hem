@@ -23,6 +23,7 @@ export interface StoreLocationDetailsProps {
     isOpen: boolean;
     storeId: string;
     mapViewOn:boolean;
+    useOnPopup:boolean;
   }
 
   

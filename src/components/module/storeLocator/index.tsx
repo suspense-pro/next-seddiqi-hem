@@ -229,6 +229,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
             isMobile={isMobile} 
             isAbsolutePosition={false}
             needScrollbar={false} //For Desktop Only
+            useOnPopup={true}
           />
         </div>
       </>
@@ -275,11 +276,12 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
     </div>)}
     {isDetailsOpen &&
     (<StoreLocationDetails
-    storeId={selectedStoreId}
-    isOpen={isDetailsOpen}
-    onClose={handleCloseDetails}
-    mapViewOn={mapViewOn}
-  />)
+        storeId={selectedStoreId}
+        isOpen={isDetailsOpen}
+        onClose={handleCloseDetails}
+        mapViewOn={mapViewOn}
+        useOnPopup={true}
+    />)
     }
   </>
   );
