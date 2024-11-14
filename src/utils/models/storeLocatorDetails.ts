@@ -1,7 +1,7 @@
 export interface StoreDetailsProps {
     store: any; 
     mapViewOn:boolean;
-    stores:[];
+    stores?:[];
   }
   
 export interface Store {

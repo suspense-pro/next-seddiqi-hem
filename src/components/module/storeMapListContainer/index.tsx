@@ -4,14 +4,24 @@ import styles from "./storeMapListContainer.module.scss";
 import { LocationIcon } from "@assets/images/svg";
 import { StoreLocationDetails } from "@components/module";
 
-import { FreeMode, Scrollbar, Mousewheel } from 'swiper/modules';
-import { useRouter } from 'next/router';
+import { FreeMode, Scrollbar, Mousewheel } from "swiper/modules";
+import { useRouter } from "next/router";
 
 import "swiper/css";
-import 'swiper/css/free-mode';
-import 'swiper/css/scrollbar';
+import "swiper/css/free-mode";
+import "swiper/css/scrollbar";
 
-const StoreMapListContainer = ({
+interface StoreMapListContainerProps {
+  storesList: Array<any>;
+  activeIndex: number;
+  handleStoreClick: (index: number) => void;
+  isMobile: boolean;
+  isAbsolutePosition: boolean;
+  needScrollbar: boolean;
+  useOnPopup?: boolean;
+}
+
+const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
   storesList,
   activeIndex,
   handleStoreClick,
@@ -49,7 +59,7 @@ const StoreMapListContainer = ({
   const handleStoreDetailsPage = (storeId, showMapView = false) => {
     router.push({
       pathname: `/find-a-boutique-details/${storeId}`,
-      query: { mapView: showMapView ? 'true' : 'false' }
+      query: { mapView: showMapView ? "true" : "false" },
     });
   };
 
@@ -66,125 +76,149 @@ const StoreMapListContainer = ({
       updateSwiper();
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, [storesList]);
 
   return (
     <>
-    <div className={`${[styles.storeMapListContainer]} ${isAbsolutePosition === true ? "" : styles.isRelative} ${needScrollbar === true ? "" : styles.noScrollbar}`}>
-      {!isMobile && needScrollbar === true ? (
-        <Swiper
-            direction={'vertical'}
-            slidesPerView={'auto'}
+      <div
+        className={`${[styles.storeMapListContainer]} ${isAbsolutePosition === true ? "" : styles.isRelative} ${
+          needScrollbar === true ? "" : styles.noScrollbar
+        }`}
+      >
+        {!isMobile && needScrollbar === true ? (
+          <Swiper
+            direction={"vertical"}
+            slidesPerView={"auto"}
             freeMode={true}
             scrollbar={{ dragSize: 160, draggable: true }}
             mousewheel={true}
             modules={[FreeMode, Scrollbar, Mousewheel]}
             className={styles.storeMapListSwiper}
             ref={swiperRef}
-        >
-          <SwiperSlide>
-            <ul className={styles.storeMapList}>
-              {storesList.map((store, index) => (
-                <li
-                  key={store.id}
-                  className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ''}`}
-                  onClick={() => handleStoreClick(index)}
-                >
-                  <div className={styles.storeMapDetails}>
-                    <h4 className={styles.storeMapName}>{store.name}</h4>
-                    <div className={styles.storeMapLocation}>
-                      <div className={styles.locationContainer}>
-                        {/* <LocationIcon /> */}
-                        <p>
-                          <span><LocationIcon /> {store.city}</span>
-                          <span>{store.address1}</span>
-                        </p>
-                      </div>
+          >
+            <SwiperSlide>
+              <ul className={styles.storeMapList}>
+                {storesList.map((store, index) => (
+                  <li
+                    key={store.id}
+                    className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ""}`}
+                    onClick={() => handleStoreClick(index)}
+                  >
+                    <div className={styles.storeMapDetails}>
+                      <h4 className={styles.storeMapName}>{store.name}</h4>
+                      <div className={styles.storeMapLocation}>
+                        <div className={styles.locationContainer}>
+                          {/* <LocationIcon /> */}
+                          <p>
+                            <span>
+                              <LocationIcon /> {store.city}
+                            </span>
+                            <span>{store.address1}</span>
+                          </p>
+                        </div>
 
-                      {store.distance !== null ? (
-                        <p className={styles.storeMapDistance}>
-                          {store.distance} {store.distanceUnit}
-                        </p>
-                      ) : null}
+                        {store.distance !== null ? (
+                          <p className={styles.storeMapDistance}>
+                            {store.distance} {store.distanceUnit}
+                          </p>
+                        ) : null}
+                      </div>
                     </div>
-                  </div>
-                  <div className={styles.storeMapLinksContainer}>
-                  <a href="/" target="_blank" className={`${styles.storeMapLink} button plain green_dark`} 
-                        onClick={(e) => { 
-                          e.preventDefault(); 
+                    <div className={styles.storeMapLinksContainer}>
+                      <a
+                        href="/"
+                        target="_blank"
+                        className={`${styles.storeMapLink} button plain green_dark`}
+                        onClick={(e) => {
+                          e.preventDefault();
                           handleStoreDtetails(store);
-                        }}>
-                      <span>View Details</span>
-                    </a>
-                    <a href={store.c_googleMapLocation} target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
-                      <span>Get Directions</span>
-                    </a>
+                        }}
+                      >
+                        <span>View Details</span>
+                      </a>
+                      <a
+                        href={store.c_googleMapLocation}
+                        target="_blank"
+                        className={`${styles.storeMapLink} button plain green_dark`}
+                      >
+                        <span>Get Directions</span>
+                      </a>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </SwiperSlide>
+          </Swiper>
+        ) : (
+          <ul className={styles.storeMapList}>
+            {storesList.map((store, index) => (
+              <li
+                key={store.id}
+                className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ""}`}
+                onClick={() => handleStoreClick(index)}
+              >
+                <div className={styles.storeMapDetails}>
+                  <h4 className={styles.storeMapName}>{store.name}</h4>
+                  <div className={styles.storeMapLocation}>
+                    <div className={styles.locationContainer}>
+                      {/* <LocationIcon /> */}
+                      <p>
+                        <span>
+                          <LocationIcon /> {store.city}
+                        </span>
+                        <span>{store.address1}</span>
+                      </p>
+                    </div>
+                    {store.distance !== null ? (
+                      <p className={styles.storeMapDistance}>
+                        {store.distance} {store.distanceUnit}
+                      </p>
+                    ) : null}
                   </div>
-                </li>
-              ))}
-            </ul>
-          </SwiperSlide>
-        </Swiper>
-      ) : (
-        <ul className={styles.storeMapList}>
-          {storesList.map((store, index) => (
-            <li
-              key={store.id}
-              className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ''}`}
-              onClick={() => handleStoreClick(index)}
-            >
-              <div className={styles.storeMapDetails}>
-                <h4 className={styles.storeMapName}>{store.name}</h4>
-                <div className={styles.storeMapLocation}>
-                  <div className={styles.locationContainer}>
-                    {/* <LocationIcon /> */}
-                    <p>
-                      <span><LocationIcon /> {store.city}</span>
-                      <span>{store.address1}</span>
-                    </p>
-                  </div>
-                  {store.distance !== null ? (
-                    <p className={styles.storeMapDistance}>
-                      {store.distance} {store.distanceUnit}
-                    </p>
-                  ) : null}
                 </div>
-              </div>
-              <div className={styles.storeMapLinksContainer}>
-              <a href="/" target="_blank" className={`${styles.storeMapLink} button plain green_dark`} 
-                        onClick={(e) => { 
-                          e.preventDefault(); 
-                          handleStoreDtetails(store);
-                        }}>
-                  <span>View Details</span>
-                </a>
-                <a href={store.c_googleMapLocation} target="_blank" className={`${styles.storeMapLink} button plain green_dark`}>
-                  <span>Get Directions</span>
-                </a>
-              </div>
-            </li>
-          ))}
-        </ul>
+                <div className={styles.storeMapLinksContainer}>
+                  <a
+                    href="/"
+                    target="_blank"
+                    className={`${styles.storeMapLink} button plain green_dark`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleStoreDtetails(store);
+                    }}
+                  >
+                    <span>View Details</span>
+                  </a>
+                  <a
+                    href={store.c_googleMapLocation}
+                    target="_blank"
+                    className={`${styles.storeMapLink} button plain green_dark`}
+                  >
+                    <span>Get Directions</span>
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      {isDetailsOpen && (
+        <>
+          <div className={styles.storeDetailsBackdrop} onClick={handleCloseDetails} />
+          <StoreLocationDetails
+            storeId={selectedStoreId}
+            isOpen={isDetailsOpen}
+            onClose={handleCloseDetails}
+            mapViewOn={mapViewOn}
+            useOnPopup={true}
+            stores={storesList}
+          />
+        </>
       )}
-    </div>
-    {isDetailsOpen && (
-    <>
-    <div className={styles.storeDetailsBackdrop} onClick={handleCloseDetails} />
-      <StoreLocationDetails
-          storeId={selectedStoreId}
-          isOpen={isDetailsOpen}
-          onClose={handleCloseDetails}
-          mapViewOn={mapViewOn}
-          useOnPopup={true}
-          stores={storesList}
-        />
-    </>
-    )}
     </>
   );
 };
