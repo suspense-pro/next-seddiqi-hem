@@ -48,6 +48,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [loading, setLoading] = useState(true);
   const [userLocation, setUserLocation] = useState(null);
   const [nearestStore, setNearestStore] = useState(null);
+  const [locationStores, setLocationStores] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeToggle, setActiveToggle] = useState(false); //Set to true to show the location lister
   const [fadeList, setFadeList] = useState(false);
@@ -100,54 +101,86 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 };
 
 
-  useEffect(() => {
-    const fetchStores = async () => {
-      try {
-        const result = await UseFetchStores('', '', '', '');
-        setStores(result.response);
+  const fetchStores = async (location) => {
+    try {
+      //const result = await UseFetchStores('', '', '', '');
+      let result;
 
-        // Extract unique cities
-        const uniqueCities = [...new Set(result.response.map(store => store.city))];
-        setCities(uniqueCities);
-
-        const filteredCity = result.response.filter(store => 
-          store.city === 'Dubai' || store.city === 'Abu Dhabi'
-        );
-
-        const filteredAddresses = result.response
-        .filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi')
-        .map(store => store.address1);
-
-        // Uncomment the first const uniqueAddresses line below for dynamic addresses and comment out the second const uniqueAddresses
-        //const uniqueAddresses = [...new Set(result.map(store => store.address1))];
-        const uniqueAddresses = [...new Set(filteredAddresses)];
-        //setLocationAddresses(uniqueAddresses);
-        setLocationCheckboxValues(uniqueAddresses);
-
-        //const uniqueBrands = [...new Set(result.response.flatMap(store => store.c_availableBrands))]; 
-        const uniqueBrands = [...new Set(filteredCity.flatMap(store => store.c_availableBrands))];
-        setBrandCheckboxValues(uniqueBrands);
-
-        const uniqueServices = [...new Set(filteredCity.flatMap(store => store.c_services))];
-        setServiceCheckboxValues(uniqueServices);
-        
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
+      if (location) {
+        result = await UseFetchStores('', '', '', '', location.lat.toString(), location.lng.toString());  // Pass lat and lng to fetch stores
+      } else {
+        result = await UseFetchStores('', '', '', '', null, null); // Default fetch if no location is available
       }
-    };
 
-    fetchStores();
+      setStores(result.response);
 
+      const filteredStores = result.response.filter(store =>
+        store.city === 'Dubai' || store.city === 'Abu Dhabi'
+      );
+
+      setLocationStores(filteredStores);
+
+      // Extract unique cities
+      const uniqueCities = [...new Set(result.response.map(store => store.city))];
+      setCities(uniqueCities);
+
+      const filteredCity = result.response.filter(store => 
+        store.city === 'Dubai' || store.city === 'Abu Dhabi'
+      );
+
+      const filteredAddresses = result.response
+      .filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi')
+      .map(store => store.address1);
+
+      // Uncomment the first const uniqueAddresses line below for dynamic addresses and comment out the second const uniqueAddresses
+      //const uniqueAddresses = [...new Set(result.map(store => store.address1))];
+      const uniqueAddresses = [...new Set(filteredAddresses)];
+      //setLocationAddresses(uniqueAddresses);
+      setLocationCheckboxValues(uniqueAddresses);
+
+      //const uniqueBrands = [...new Set(result.response.flatMap(store => store.c_availableBrands))]; 
+      const uniqueBrands = [...new Set(filteredCity.flatMap(store => store.c_availableBrands))];
+      setBrandCheckboxValues(uniqueBrands);
+
+      const uniqueServices = [...new Set(filteredCity.flatMap(store => store.c_services))];
+      setServiceCheckboxValues(uniqueServices);
+      
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const location = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        setUserLocation(location);
-      });
+      const watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          const location = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          setUserLocation(location); 
+          fetchStores(location);
+        },
+        (error) => {
+          console.error("Error watching location:", error);
+          setUserLocation(null); 
+          fetchStores(null);
+        },
+        {
+          enableHighAccuracy: true, 
+          maximumAge: 0, 
+          timeout: 5000,
+        }
+      );
+  
+      return () => {
+        navigator.geolocation.clearWatch(watchId);
+      };
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+      fetchStores(null);
     }
   }, []);
 
@@ -159,7 +192,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   }, [stores, userLocation]);
 
   useEffect(() => {
-    console.log("uniqueBrands2: ", brandCheckboxValues);
+    //console.log("uniqueBrands2: ", brandCheckboxValues);
   }, [brandCheckboxValues]);
 
   const calculateNearestStore = (storesList) => {
@@ -186,8 +219,13 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       setActiveTab(tab);
       setItemsToShow(8);
       setFadeList(false);
+      setActiveIndex(0); //Set the active index to the first one on the list
 
       const storesToCalculate = tab === 'All' ? stores : stores.filter(store => store.city === tab);
+
+      //Used to pass the current tab stores to the map
+      setLocationStores(storesToCalculate);
+
       const nearest = calculateNearestStore(storesToCalculate);
       setNearestStore(nearest);
     }, 300);
@@ -248,15 +286,24 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     return (
       <>
         <div className={styles.mapContainer}>
-          {nearestStore && (
-            <MapView 
-              nearestStore={nearestStore} 
-              stores={stores} 
-              activeStore={stores[activeIndex]} 
-              userLocation={userLocation}
-              useOnPopup={false}
-            />
-          )}
+        {nearestStore && userLocation && (
+          <MapView 
+            nearestStore={nearestStore} 
+            stores={stores} 
+            activeStore={locationStores[activeIndex]} 
+            userLocation={userLocation} 
+            useOnPopup={false}
+          />
+        )}
+        {!userLocation && (
+          <MapView 
+            nearestStore={null} 
+            stores={stores} 
+            activeStore={locationStores[activeIndex]} 
+            userLocation={null} 
+            useOnPopup={false}
+          />
+        )}
         </div>
 
         <StoreMapListContainer 

@@ -33,7 +33,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           return res.status(200).json({ isError: false, response: registeredUserTokenResponse });
         }
       } catch (err) {
-        return res.status(400).json({ isError: true, response: err });
+        // return res.status(400).json({ isError: true, response: err });
+        const errorData = await err.response?.text(); 
+        console.error("Error response body:", JSON.parse(errorData));
+        return res.status(500).json({ isError: true, response: JSON.parse(errorData) });
  
       }
       break;

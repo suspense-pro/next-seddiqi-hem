@@ -8,6 +8,7 @@ import FooterBackToTop from "./footerBackToTop";
 import ItemSlider from "./itemSlider";
 import RolexProductLister from "./rolexProductLister";
 import RolexImageBanner from "./rolexImageBanner";
+import RolexSmallLink from "./rolexSmallLink";
 
 export { 
     RolexNavbar, 
@@ -20,4 +21,5 @@ export {
     FooterBackToTop,
     RolexProductLister,
     RolexImageBanner,
+    RolexSmallLink
  };
