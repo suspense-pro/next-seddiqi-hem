@@ -61,13 +61,17 @@ const HeaderMainLinks = ({isScrolled = false}: {isScrolled?: boolean}) => {
         <div onClick={openSearchPopup}>
           <SearchIcon fill="#" />
         </div>
-        <Link target="_blank" href="/book-an-appointment">
+        {/* <Link target="_blank" href="/book-an-appointment">
           <CalendarIcon fill="#" />
+        </Link> */}
+        <Link target="_blank" href="/find-a-boutique-listing">
+          {/* <CalendarIcon fill="#" /> */}
+          <MapIcon fill="#" />
         </Link>
-        <PrivateLink url="/profile">
+        {/* <PrivateLink url="/profile">
           <AccountIcon fill="#" />
-        </PrivateLink>
-        <WishlistIcon fill="#" />
+        </PrivateLink> */}
+        {/* <WishlistIcon fill="#" /> */}
         {/* {[SearchIcon, CalendarIcon, MapIcon, WishlistIcon].map((Icon, index) => (
           <div key={generateUniqueId()} onClick={Icon === SearchIcon ? openSearchPopup : undefined}>
           <Icon key={generateUniqueId()} fill="#" />

@@ -29,18 +29,18 @@
   }
 
   @include md {
-    height: rem(420);
+    height: rem(450);
 
     img {
       width: 100%;
-      height: rem(420);
+      height: rem(450);
 
       object-fit: cover;
     }
 
     .desktopImage {
       display: block;
-      height: rem(420);
+      height: rem(450);
     }
 
     .mobileImage {

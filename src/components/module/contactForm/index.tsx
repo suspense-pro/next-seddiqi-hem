@@ -250,7 +250,7 @@ const ContactForm = () => {
       </div>
       <div className={styles.btnContainer}>
         <Button
-          clickHandler={handleSubmit}
+          clickHandler={(e) => handleSubmit(e)}
           className={styles.submitBtn}
           title={isLoading ? "Submitting" : "Submit"}
           isLink={false}

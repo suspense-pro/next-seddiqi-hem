@@ -35,6 +35,10 @@
     background-color: getColorHex("metallic");
     transition: width 0.3s ease, background-color 0.3s ease;
   }
+
+  .activeCarouselBtnGreen {
+    background-color: getColorHex("green-Salem");
+  }
 }
 
 .arrowLeft,
