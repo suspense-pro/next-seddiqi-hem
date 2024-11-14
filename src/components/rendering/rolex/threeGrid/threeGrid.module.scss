@@ -204,6 +204,9 @@
     margin-top: rem(8);
     font-size: rem(12);
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: rem(8);
 
 
     [dir="rtl"] & {

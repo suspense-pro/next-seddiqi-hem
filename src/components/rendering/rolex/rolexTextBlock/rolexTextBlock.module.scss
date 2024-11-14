@@ -21,8 +21,10 @@
   max-width: rem(1220);
   display: flex;
   gap: rem(28);
-
+  flex-direction: column;
+  
   @include lg {
+    flex-direction: row;
     gap: rem(80);
   }
 }
@@ -33,7 +35,8 @@
   align-items: flex-start;
   flex-direction: column;
   text-align: center;
-  gap: rem(20);
+  gap: rem(12);
+  display: flex;
   width: 100%;
 
   @include lg {
@@ -115,7 +118,7 @@
   }
   .leftText {
     width: 100%;
-    margin-bottom: rem(8);
+    margin-bottom: rem(4);
     .title {
       margin: 0 auto;
       font-size: rem(28);

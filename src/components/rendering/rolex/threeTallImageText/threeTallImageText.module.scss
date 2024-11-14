@@ -1,6 +1,6 @@
 @import "./../../../../assets/styles/rolex/rolexMain.scss";
 
-.sliderContainer{
+.sliderContainer {
   display: flex;
   flex-direction: column;
   gap: rem(24);
@@ -8,16 +8,15 @@
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
+  max-width: rem(1116);
 
   @include md {
-    padding: 0 rem(60);
-  } 
-
-  @include xl {
     padding: 0 rem(120);
   }
 
-  .title{
+  // padding: 0 rem(60);
+
+  .title {
     @include rolex_bold;
     font-size: rem(14);
     letter-spacing: rem(0.6);
@@ -30,22 +29,21 @@
       line-height: rem(28);
     }
 
-    &:empty{
+    &:empty {
       display: none;
     }
   }
 
-  .sliderSwiper{
+  .sliderSwiper {
     overflow: visible;
     opacity: 0;
 
-    &:global(.swiper-initialized){
+    &:global(.swiper-initialized) {
       opacity: 1;
     }
 
-    & > div{
-
-      & + div{
+    & > div {
+      & + div {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -61,41 +59,40 @@
           display: block;
         }
 
-        &:after{
+        &:after {
           content: none;
         }
 
-        &:global(.swiper-button-prev){
+        &:global(.swiper-button-prev) {
           transform: translateY(-50%) rotate(-180deg);
 
           @include md {
             display: flex;
             left: rem(-46);
           }
-          
+
           @include xl {
             left: rem(-76);
           }
         }
 
-        &:global(.swiper-button-next){
-
+        &:global(.swiper-button-next) {
           @include md {
             display: flex;
             right: rem(-46);
           }
-          
+
           @include xl {
             right: rem(-76);
           }
         }
 
-        &:global(.swiper-button-disabled){
+        &:global(.swiper-button-disabled) {
           display: none;
         }
       }
 
-      &:global(.swiper-pagination){
+      &:global(.swiper-pagination) {
         display: flex;
         gap: rem(6);
         align-items: center;
@@ -110,11 +107,11 @@
         transform: translate(0, 0);
         margin: rem(28) 0 0;
 
-        @include md{
+        @include md {
           margin: rem(36) 0 0;
         }
 
-        & > span{
+        & > span {
           margin: 0;
           background: getColorHex("rolex-grey");
           opacity: 1;
@@ -123,18 +120,16 @@
           height: rem(2);
           transition: width 0.3s ease;
 
-          &:global(.swiper-pagination-bullet-active){
+          &:global(.swiper-pagination-bullet-active) {
             background-color: getColorHex("rolex-green");
             width: rem(40);
           }
         }
       }
-      
     }
 
-    
-
-    &::before, &::after{
+    &::before,
+    &::after {
       content: "";
       position: absolute;
       top: 0;
@@ -145,19 +140,19 @@
       z-index: 10;
     }
 
-    &::before{
+    &::before {
       transform: translateX(-100%);
     }
 
-    &::after{
+    &::after {
       transform: translateX(100%);
     }
   }
 
-  .sliderSlide{
+  .sliderSlide {
     display: flex;
     flex-direction: column;
-    max-width: rem(225);
+    // max-width: rem(225);
     width: 100%;
     transition: opacity 0.3s ease;
 
@@ -165,13 +160,13 @@
       max-width: none;
     }
 
-    &.hiddenSlide{
+    &.hiddenSlide {
       opacity: 0;
       pointer-events: none;
     }
   }
 
-  .sliderLink{
+  .sliderLink {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -181,29 +176,32 @@
     text-decoration: none;
     outline: none;
     width: 100%;
+    // height: rem(284);
+    width: rem(284);
 
-    picture{
+    picture {
       display: flex;
     }
 
-    img{
+    img {
       width: 100%;
       object-fit: cover;
-      aspect-ratio: 4/3;
-      min-height: rem(300);
+      // aspect-ratio: 4/3;
+      height: rem(284);
+      width: rem(284);
 
-      @include md {
-        aspect-ratio: 3/4;
-      }
+      // @include md {
+      //   aspect-ratio: 3/4;
+      // }
 
-      @include xl {
-        min-height: rem(505);
-      }
+      // @include xl {
+      //   min-height: rem(505);
+      // }
     }
   }
 
-  .sliderText{
-    @include rolex_regular;
+  .sliderText {
+    @include rolex_bold;
     font-size: rem(14);
     letter-spacing: rem(0.4);
     line-height: rem(20);
@@ -214,22 +212,21 @@
     text-align: left;
     text-transform: uppercase;
 
-    @include md{
-      font-size: rem(20);
-      line-height: rem(28);
-      letter-spacing: rem(0.6);
+    @include md {
+      line-height: rem(18);
+      letter-spacing: rem(1);
     }
 
     [dir="rtl"] & {
       text-align: right;
     }
 
-    &:empty{
+    &:empty {
       display: none;
     }
   }
 
-  .sliderButton{
+  .sliderButton {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -245,28 +242,25 @@
     }
   }
 
-  .sliderButtonPrev{
+  .sliderButtonPrev {
     transform: translateY(-50%) rotate(-180deg);
 
     @include md {
       left: rem(-22);
     }
-    
+
     @include xl {
       left: rem(-44);
     }
   }
 
-  .sliderButtonNext{
-    
-
+  .sliderButtonNext {
     @include md {
       right: rem(-22);
     }
-    
+
     @include xl {
       right: rem(-44);
     }
   }
 }
-

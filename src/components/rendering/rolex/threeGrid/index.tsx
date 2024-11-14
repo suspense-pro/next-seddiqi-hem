@@ -1,6 +1,8 @@
 import { Image } from "@components/module";
 
 import styles from "./threeGrid.module.scss";
+import GreenArrowSmall from "@assets/images/svg/GreenArrowSmall";
+import RolexSmallLink from "../rolexSmallLink";
 
 const ThreeGrid = ({ ...content }) => {
   if (!content) return null;
@@ -29,9 +31,11 @@ const ThreeGrid = ({ ...content }) => {
             <div className={styles.textsContainer}>
               <p className={styles.subtitle}>{oneGrid.contents[0].subtitle}</p>
               <h6 className={styles.title}>{oneGrid.contents[0].title}</h6>
-              <a href={oneGrid.contents[0].linkUrl} className={`${[styles.link]} rolex-text-button`}>
-                {oneGrid.contents[0].linkText}
-              </a>
+              <RolexSmallLink
+                href={oneGrid.contents[0].linkUrl}
+                className={`${[styles.link]} rolex-text-button`}
+                linkText={oneGrid.contents[0].linkText}
+              />
             </div>
           </div>
         </div>
@@ -50,9 +54,11 @@ const ThreeGrid = ({ ...content }) => {
               <div className={styles.textsContainer}>
                 <p className={styles.subtitle}>{data.subtitle}</p>
                 <h6 className={styles.title}>{data.title}</h6>
-                <a href={data.linkUrl} className={`${[styles.link]} rolex-text-button`}>
-                  {data.linkText}
-                </a>
+                <RolexSmallLink
+                  href={data.linkUrl}
+                  className={`${[styles.link]} rolex-text-button`}
+                  linkText={data.linkText}
+                />
               </div>
             </div>
           ))}

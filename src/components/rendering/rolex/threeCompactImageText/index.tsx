@@ -1,6 +1,7 @@
 import { Image } from "@components/module";
 
 import styles from "./threeCompactImageText.module.scss";
+import RolexSmallLink from "../rolexSmallLink";
 
 const ThreeCompactImageText = ({ ...content }) => {
   if (!content) return null;
@@ -23,9 +24,11 @@ const ThreeCompactImageText = ({ ...content }) => {
               <div className={styles.textsContainer}>
                 <p className={styles.subtitle}>{data.subtitle}</p>
                 <h6 className={styles.title}>{data.title}</h6>
-                <a href={data.linkUrl} className={`${[styles.link]} rolex-text-button`}>
-                  {data.linkText}
-                </a>
+                <RolexSmallLink
+                  href={data.linkUrl}
+                  className={`${[styles.link]} rolex-text-button`}
+                  linkText={data.linkText}
+                />
               </div>
             </div>
           ))}

@@ -24,7 +24,7 @@ const ItemSlider = ({ ...content }) => {
         <h3 className={styles.title}>{content.mainTitle}</h3>
 
         <Swiper
-          slidesPerView={"auto"}
+          slidesPerView={2}
           spaceBetween={8}
           navigation={true}
           pagination={{ clickable: true }}

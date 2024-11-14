@@ -1,6 +1,6 @@
 @import "./../../../../assets/styles/rolex/rolexMain.scss";
-
-.container{
+ 
+.container {
   display: flex;
   flex-direction: column;
   gap: rem(48);
@@ -9,43 +9,43 @@
   margin: 0 auto;
   overflow: hidden;
   background: getColorHex("white");
-
+ 
   @include md {
     padding: 0 rem(60);
-  } 
-
-  .imageTextsWrapper{
+  }
+ 
+  .imageTextsWrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     row-gap: rem(32);
-
-    @include md {
+ 
+    @include xl {
       align-items: center;
       flex-direction: row;
       flex-wrap: nowrap;
       column-gap: rem(44);
     }
-
-    &:nth-child(even){
+ 
+    &:nth-child(even) {
       flex-direction: column;
-      
-      @include md {
+ 
+      @include xl {
         flex-direction: row-reverse;
       }
     }
-
-    & > div{
+ 
+    & > div {
       width: 100%;
-  
-      @include md {
+ 
+      @include xl {
         width: calc(50% - 22px);
         min-width: calc(50% - 22px);
       }
     }
   }
-
-  .image{
+ 
+  .image {
     display: flex;
     outline: none;
     aspect-ratio: 1/1;
@@ -53,18 +53,42 @@
     width: 100%;
     height: 100%;
   }
-
-  .textsContainer{
+ 
+  .textsContainer {
     display: flex;
     flex-direction: column;
-    row-gap: rem(12);
-
+    align-items: flex-start;
+    align-items: center;
+ 
+    .textsContainerInner{
+      // display: block;
+      
+      @include xl {
+        margin-left: rem(96);
+        margin-right: rem(140);
+        width: rem(410);
+        flex-direction: column;
+      }
+    }
+ 
     @include md {
-      row-gap: rem(16);
     }
   }
-
-  .subtitle{
+ 
+  .logoContainer {
+    max-width: 120px;
+    min-height: 60px;
+    display: flex;
+    margin-bottom: rem(8);
+  }
+ 
+  .logo {
+    width: 120px;
+    height: 60px;
+    object-fit: contain;
+  }
+ 
+  .subtitle {
     @include rolex_bold;
     font-size: rem(12);
     letter-spacing: rem(0.4);
@@ -72,94 +96,98 @@
     color: getColorHex("green-dark");
     display: block;
     margin: 0;
-    text-align: center;
-
+    text-align: left;
+    margin-bottom: rem(16);
+ 
     @include md {
       font-size: rem(16);
       line-height: rem(20);
+      margin-bottom: rem(24);
       text-align: left;
-
+ 
       [dir="rtl"] & {
         text-align: right;
       }
     }
-
-    &:empty{
+ 
+    &:empty {
       display: none;
     }
   }
-
-  a{
-    margin: 0 auto;
-
+ 
+  a {
     @include md {
       margin: 0;
     }
   }
-
-  .title{
+ 
+  .title {
     @include rolex_regular;
     font-size: rem(18);
     line-height: rem(26);
     letter-spacing: rem(0.4);
     color: getColorHex("green-dark");
     display: block;
-    margin: 0;
-    text-align: center;
+    text-align: left;
     text-transform: uppercase;
-
+    margin-bottom: rem(12);
+    margin-top: 0;
+ 
     @include md {
       font-size: rem(26);
       line-height: rem(32);
       letter-spacing: rem(0.6);
       text-align: left;
-
+      margin-bottom: rem(8);
+ 
       [dir="rtl"] & {
         text-align: right;
       }
     }
-
-    &:empty{
+ 
+    &:empty {
       display: none;
     }
   }
-
-  .description{
+ 
+  .description {
     @include rolex_regular;
     font-size: rem(14);
     line-height: rem(22);
     letter-spacing: rem(0.4);
     color: getColorHex("green-dark");
     display: block;
-    margin: 0;
-    text-align: center;
-
+    margin-bottom: rem(20);
+    
+    text-align: left;
+    
     @include md {
       font-size: rem(16);
       line-height: rem(26);
       letter-spacing: rem(0.6);
       text-align: left;
-
+      margin-bottom: rem(24);
+      
       [dir="rtl"] & {
         text-align: right;
       }
     }
-
-    &:empty{
+ 
+    &:empty {
       display: none;
     }
   }
-
-  .link{
+ 
+  .link {
     align-self: flex-start;
     margin: 0;
     width: auto;
-
+ 
     [dir="rtl"] & {
       align-self: flex-end;
     }
-
-    &::after{
+ 
+    &::after {
       content: "";
       display: flex;
       width: 100%;
@@ -169,18 +197,17 @@
       transform-origin: left;
       transition: transform 0.3s ease;
     }
-
+ 
     @include md {
-      &:hover{
-        &::after{
+      &:hover {
+        &::after {
           transform: scaleX(1);
         }
       }
     }
-
-    &:empty{
+ 
+    &:empty {
       display: none;
     }
   }
 }
-

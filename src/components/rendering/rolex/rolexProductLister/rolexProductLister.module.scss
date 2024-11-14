@@ -122,14 +122,14 @@
     align-items: center;
     // width: rem(119);
     padding: rem(0 28);
-    height: rem(48);
+    height: rem(36);
     border-radius: rem(40);
     background-color: getColorHex("green-Salem");
     color: getColorHex("white");
     text-align: center;
-    font-size: rem(14);
+    font-size: rem(12);
     line-height: rem(18);
     letter-spacing: rem(1);
-    text-transform: uppercase;
+    text-transform: capitalize;
   }
 }
