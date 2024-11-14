@@ -46,8 +46,8 @@
   }
 
   .column {
-    display: grid;
-    gap: rem(20);
+    display: flex;
+    gap: rem(32);
     flex-direction: column;
 
     .logo {
@@ -114,7 +114,7 @@
     @include body_light;
     color: getColorHex("green-metallic");
     font-size: rem(14);
-    margin-top: rem(48);
+    margin-top: rem(32);
 
     @include md {
       font-size: rem(16);
@@ -187,5 +187,35 @@
     @include md {
       margin-top: rem(40);
     }
+  }
+}
+
+.mainLink {
+  @include heading_regular;
+  color: getColorHex("brown-dark");
+  font-size: rem(12);
+  font-weight: 500;
+  line-height: rem(18);
+  letter-spacing: rem(0.4);
+  text-transform: uppercase;
+  
+  @include md {
+    line-height: rem(20);
+    font-size: rem(16);
+
+  }
+}
+
+.secondMainLink {
+  @include body_regular;
+  color: getColorHex("grey-mid");
+  font-size: rem(14);
+  line-height: rem(22);
+  letter-spacing: rem(0.2);
+
+  @include md {
+    line-height: rem(26);
+    font-size: rem(16);
+
   }
 }

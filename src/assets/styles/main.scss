@@ -12,11 +12,11 @@
   background-color: getColorHex("grey-tint");
   color: getColorHex("midnight-brown");
 
-  @include md{
+  @include md {
     padding: 0 rem(80) rem(60);
   }
 
-  .error-image{
+  .error-image {
     display: flex;
     object-fit: cover;
     aspect-ratio: 4/3;
@@ -33,7 +33,7 @@
     text-transform: uppercase;
     font-weight: 500;
 
-    @include md{
+    @include md {
       font-size: rem(32);
       line-height: rem(36);
       letter-spacing: rem(0.6);
@@ -49,7 +49,7 @@
     text-align: center;
     margin-bottom: rem(24);
 
-    @include md{
+    @include md {
       font-size: rem(16);
       line-height: rem(26);
       margin-bottom: rem(28);
@@ -92,13 +92,13 @@
 
 /*Customized Background -Text Color Combinations */
 .bgWhiteTextDarkGreen {
-  background-color:  getColorHex("white");
-  color:  getColorHex("green-dark"); /* Dark-Green text */  
+  background-color: getColorHex("white");
+  color: getColorHex("green-dark"); /* Dark-Green text */
 }
 
 .bgCreamTextMidnightBrown {
-  background-color:  getColorHex("cream");
-  color:  getColorHex("midnight-brown"); /* Midnight-brown text */
+  background-color: getColorHex("cream");
+  color: getColorHex("midnight-brown"); /* Midnight-brown text */
 }
 
 .bgDefaultTextGreen {
@@ -106,30 +106,39 @@
   color: getColorHex("green-dark"); /* dark-green text */
 }
 
-
 //Customized Hideunderline Color based on Textcolor
 .customBarColor {
-
   &.greenDark {
-    background-color: getColorHex("green-dark")!important
+    background-color: getColorHex("green-dark") !important;
   }
 
   &.midnightBrown {
-    background-color: getColorHex("midnight-brown")!important
+    background-color: getColorHex("midnight-brown") !important;
   }
 }
-
-
 
 .rolex {
   padding-top: rem(69);
   @include breakpoint-min-width(rem(768)) {
-    padding-top: rem(38);
+    padding-top: rem(37);
   }
   @include breakpoint-min-width(rem(1037)) {
-    padding-top: rem(70);
+    padding-top: rem(69);
   }
   @include breakpoint-min-width(rem(1250)) {
-    padding-top: rem(89);
+    padding-top: rem(81);
+  }
+}
+
+.rolexCpo {
+  padding-top: rem(69);
+  @include breakpoint-min-width(rem(768)) {
+    padding-top: rem(37);
+  }
+  @include breakpoint-min-width(rem(1037)) {
+    padding-top: rem(69);
+  }
+  @include breakpoint-min-width(rem(1250)) {
+    padding-top: rem(79);
   }
 }

@@ -5,6 +5,7 @@ import { ArrowDown } from "@assets/images/svg";
 import { useWindowWidth } from "@utils/useCustomHooks";
 import Image from "../../../module/image/index";
 import NavigationLink from "../../../module/navigationLink";
+import { useRouter } from "next/router";
 
 const RolexNavbar = ({ ...content }) => {
   if (!content) return null;
@@ -42,7 +43,8 @@ const RolexNavbar = ({ ...content }) => {
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   if (!isClient) return null;
-
+  const router = useRouter();
+  
   return (
     <div className={styles.container}>
       <nav
@@ -59,11 +61,13 @@ const RolexNavbar = ({ ...content }) => {
 
         {windowWidth > screenSize ? (
           <>
-            <ul className={styles.navbarLinks}>
+            <ul className={`${styles.navbarGreenLinks} ${styles.navbarLinks}`}>
               {links?.map((link) => (
                 <li key={link?.label}>
                   <NavigationLink
-                    className={`${isWhite && styles.navBlack} ${styles.navLink}`}
+                    className={`${link?.url === router?.asPath && styles.activeLink} ${isWhite && styles.navBlack} ${
+                      styles.navLink
+                    }`}
                     title={link?.label}
                     isNewTab={link?.isNewTab}
                     url={link?.url}
@@ -71,14 +75,14 @@ const RolexNavbar = ({ ...content }) => {
                 </li>
               ))}
             </ul>
-            <div className={styles.contactButton}>
+            {/* <div className={styles.contactButton}>
               <NavigationLink
                 className={`${isWhite && styles.btnGreen} ${styles.btnWhite}`}
                 title={cta?.label}
                 isNewTab={cta?.isNewTab}
                 url={cta?.url}
               />
-            </div>
+            </div> */}
           </>
         ) : (
           <div className={styles.dropdownContainer} onClick={toggleDropdown}>

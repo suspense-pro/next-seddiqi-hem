@@ -6,8 +6,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 rem(17);
-  height: rem(90);
-  
+  height: rem(82);
+
   @include xl {
     border-top: rem(1) solid getColorHex("grey-space", 0.15);
     border-bottom: rem(1) solid getColorHex("grey-space", 0.15);
@@ -20,19 +20,19 @@
 
   @include breakpoint-min-width(rem(1037)) {
     top: rem(152);
-    padding: 0 rem(40);
+    padding: 0 rem(110);
   }
 
   .rolexLogo,
   .rolexLogoBlack {
-    //height: rem(39);
-    //width: rem(78);
-    height: rem(60);
-    width: rem(120);
+    height: rem(42.5);
+    width: rem(85);
+    // height: rem(60);
+    // width: rem(120);
 
     @include lg {
-      height: rem(60);
-      width: rem(120);
+      height: rem(42.5);
+      width: rem(85);
     }
   }
 
@@ -41,8 +41,8 @@
     height: rem(38);
 
     @include lg {
-      width: rem(105);
-      height: rem(44);
+      width: rem(109.47);
+      height: rem(48);
     }
   }
 
@@ -56,11 +56,12 @@
     li {
       .navLink {
         color: getColorHex("white");
-            font-size: rem(16);
-        line-height: rem(20);
-        letter-spacing: rem(0.4);
+        font-size: rem(12);
+        line-height: rem(16);
+        // letter-spacing: rem(0.4);
         text-transform: capitalize;
         transition: all 0.3s;
+        font-weight: 700;
 
         &:hover {
           color: getColorHex("green-pine");
@@ -69,12 +70,17 @@
 
       .navBlack {
         color: getColorHex("brown-grey");
+        font-weight: 400;
 
         &:hover {
           color: getColorHex("green-dark");
         }
       }
     }
+  }
+
+  .navbarGreenLinks {
+    gap: rem(40);
   }
 
   .contactButton {
@@ -84,7 +90,7 @@
       border: rem(1) solid getColorHex("white");
       color: getColorHex("white");
       text-align: center;
-        font-size: rem(14);
+      font-size: rem(14);
       line-height: rem(18);
       letter-spacing: rem(1);
       text-transform: uppercase;
@@ -117,10 +123,6 @@
 
 .rolexMobileNavbar {
   height: rem(70);
-}
-
-.whiteBg {
-  background: getColorHex("white");
 }
 
 .dropdownContainer {
@@ -168,7 +170,7 @@
     .navMobileBlack {
       display: flex;
       align-items: flex-start;
-        font-size: rem(12);
+      font-size: rem(12);
       letter-spacing: rem(0.4);
       text-transform: capitalize;
       color: getColorHex("green-dark");
@@ -206,4 +208,10 @@
       color: getColorHex("white");
     }
   }
+}
+
+// CPO
+.whiteBg {
+  background: getColorHex("white");
+  height: rem(76);
 }
