@@ -6,7 +6,8 @@ import logger from "@utils/logger";
 
 export async function getProducts(searchQuery) {
 
-  const configWithAuth : any = await initializeShopperConfig();
+  var configWithAuth : any = await initializeShopperConfig();
+  configWithAuth = configWithAuth.access_token;
 
   const searchClient = new Search.ShopperSearch(configWithAuth);
   const searchResults = await searchClient.productSearch({
@@ -36,3 +37,25 @@ export async function getProducts(searchQuery) {
   return results;
 }
 
+
+
+export async function product(pid) {
+
+  const configWithAuth : any = await initializeShopperConfig();
+  const accessToken = configWithAuth.access_token;
+  clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
+  const shopperProductsClient = new Product.ShopperProducts(clientConfig);
+  
+  const options = {
+  headers: {
+      Authorization: `Bearer ${accessToken}`
+  },
+  parameters: {
+      organizationId: clientConfig.parameters.organizationId,
+      siteId: clientConfig.parameters.siteId,
+      id: pid,
+      },
+  };
+
+  return await shopperProductsClient.getProduct(options); 
+}

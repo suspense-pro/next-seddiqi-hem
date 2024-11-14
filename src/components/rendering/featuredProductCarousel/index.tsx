@@ -6,19 +6,20 @@ import styles from "./featuredProductCarousel.module.scss";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import { useDeviceWidth } from "@utils/useCustomHooks";
+import { useDeviceWidth, useWindowWidth } from "@utils/useCustomHooks";
 
 import Button from "@components/module/button";
-import { ContentHeader } from "@components/module";
+import { ContentHeader, FeaturedProductCard } from "@components/module";
 import { getProducts } from "@utils/sfcc-connector/dataService";
-import ProductCard from "@components/module/cards/productCard";
 
 const FeaturedProductCarousel = ({ mainTitle, hideUnderline, richText, listItems = [], cta }) => {
   if (!listItems) {
     return null;
   }
 
+  const windowWidth = useWindowWidth();
   const [products, setProducts] = useState(null);
+  const [slidesPerView, setSlidesPerView] = useState(3);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -29,6 +30,14 @@ const FeaturedProductCarousel = ({ mainTitle, hideUnderline, richText, listItems
     };
     fetchProducts();
   }, [listItems]);
+
+  useEffect(() => {
+    if (windowWidth < 1200) {
+      setSlidesPerView(2);
+    } else {
+      setSlidesPerView(3);
+    }
+  }, [windowWidth]);
 
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -45,10 +54,18 @@ const FeaturedProductCarousel = ({ mainTitle, hideUnderline, richText, listItems
   }, []);
 
   const renderSlide = (item, index) => {
+    const isFirstItem = index === activeIndex;
     return (
-      <SwiperSlide className={styles.swiperSlide} key={index} style={isMobile ? { width: "90%" } : {}}>
+      <SwiperSlide
+        className={`${styles.swiperSlide}`}
+        key={index}
+        style={isMobile ? { width: "90%" } : {}}
+      >
         <div className={styles.sliderItem}>
-          <ProductCard item={{...item, image: {absUrl: item?.imageGroups[1]?.images?.[0]?.link}}} isCarousel={false} />
+          <FeaturedProductCard
+            isFirstItem={isFirstItem}
+            item={{ ...item, image: { absUrl: item?.imageGroups[1]?.images?.[0]?.link } }}
+          />
         </div>
       </SwiperSlide>
     );
@@ -69,7 +86,7 @@ const FeaturedProductCarousel = ({ mainTitle, hideUnderline, richText, listItems
                 <ArrowRight fill="white" className={styles.arrowLeft} />
               </div>
             )}
-            {activeIndex < listItems.length - 3 && (
+            {activeIndex < listItems.length - slidesPerView && (
               <div className={styles.rightBtn} onClick={() => handleSlide("next")}>
                 <ArrowRight fill="white" className={styles.arrowRight} />
               </div>
@@ -82,21 +99,21 @@ const FeaturedProductCarousel = ({ mainTitle, hideUnderline, richText, listItems
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}
-          slidesPerView={isMobile ? "auto" : products?.length < 3 ? products?.length : 3}
+          slidesPerView={isMobile ? "auto" : products?.length < 3 ? products?.length : slidesPerView}
           onSlideChange={onSlideChange}
           className={styles.mySwiper}
         >
           {products?.map((item, index) => renderSlide(item, index))}
         </Swiper>
       </div>
-      <Button
+      {cta && cta?.label &&<Button
         isLink={true}
         link={cta.url}
         className={styles.discoverBtn}
         title={cta.label}
         color={cta.color}
         type={cta.type}
-      />
+      />}
     </div>
   );
 };

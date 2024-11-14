@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Customer, slasHelpers } from "commerce-sdk";
 import initializeShopperConfig, { basicAuthorization, clientConfig, getRefereshTokenResponse } from "@utils/sfcc-connector/config";
-import { getCustomer } from "@utils/sfcc-connector/dataService";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const requestMethod = req.method;
@@ -31,16 +30,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           const newToken = await getRefereshTokenResponse(registeredUserTokenResponse.refresh_token);
           console.log("Refresh Token: " + JSON.stringify(newToken, null, 4)); */
 
-          const profile = await getCustomer(registeredUserTokenResponse.customer_id, registeredUserTokenResponse.access_token);
-          return profile;
+          return res.status(200).json({ isError: false, response: registeredUserTokenResponse });
         }
       } catch (err) {
-        console.error(err);
-
-        return {
-          statusCode: 500,
-          body: JSON.stringify({ msg: err }),
-        };
+        // return res.status(400).json({ isError: true, response: err });
+        const errorData = await err.response?.text(); 
+        console.error("Error response body:", JSON.parse(errorData));
+        return res.status(500).json({ isError: true, response: JSON.parse(errorData) });
+ 
       }
       break;
     
@@ -59,27 +56,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                   organizationId: clientConfig.parameters.organizationId
               },
               body: {
-                  callback_uri: process.env.REDIRECT_URI,
+                  callback_uri: 'https://093d-2001-818-e854-f900-15b6-123e-2103-5443.ngrok-free.app/api/sfcc/callback', // process.env.REDIRECT_URI, // 'https://webhook.site/51413cd1-ff8e-43a0-95cf-e92c61870d44',
                   channel_id: clientConfig.parameters.siteId,
                   mode: "callback",
                   user_id: username,
               },
           };
 
-          const TokenResponse = await client.authorizePasswordlessCustomer(options)
-            .then((TokenResponse) => {
-              // console.log("Guest Token Response: ", TokenResponse);
-              return TokenResponse;
-            })
-            .catch(error => console.log("Error fetching token for guest login: ", error));
+          const TokenResponse = await client.authorizePasswordlessCustomer(options);
+          // console.log("PasswordLess Login Response: ", TokenResponse);
+          
+          return res.status(200).json({ isError: false, response: TokenResponse });
         }
       } catch (err) {
         console.error(err);
-
-        return {
-          statusCode: 500,
-          body: JSON.stringify({ msg: err }),
-        };
+        return res.status(400).json({ isError: true, response: err });
       }
       break;
 
@@ -105,20 +96,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               },
           };
 
-          const TokenResponse = await client.getPasswordLessAccessToken(options)
-            .then((TokenResponse) => {
-              // console.log("Guest Token Response: ", TokenResponse);
-              return TokenResponse;
-            })
-            .catch(error => console.log("Error fetching token for guest login: ", error));
+          const TokenResponse = await client.getPasswordLessAccessToken(options);
+          // console.log("Login Token Response: ", TokenResponse);
+          return res.status(200).json({ isError: false, response: TokenResponse });
         }
       } catch (err) {
         console.error(err);
-
-        return {
-          statusCode: 500,
-          body: JSON.stringify({ msg: err }),
-        };
+        return res.status(400).json({ isError: true, response: err });
       }
       break;
     
@@ -126,13 +110,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         if (requestMethod === "POST" && action === "logoutCustomer") {
           const { refreshToken } = body;
-          const base64data = await basicAuthorization();
           const configWithAuth = await initializeShopperConfig();
+          const accessToken = configWithAuth.access_token;
           const client = new Customer.ShopperLogin(clientConfig);
 
           const options = {
               headers: {
-                  Authorization: `Bearer ${configWithAuth}`,
+                  Authorization: `Bearer ${accessToken}`,
               },
               parameters: {
                   channel_id: clientConfig.parameters.siteId,
@@ -142,20 +126,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               },
           };
 
-          const TokenResponse = await client.logoutCustomer(options)
-            .then((TokenResponse) => {
-              // console.log("Guest Token Response: ", TokenResponse);
-              return TokenResponse;
-            })
-            .catch(error => console.log("Error fetching token for guest login: ", error));
+          const TokenResponse = await client.logoutCustomer(options);
+          console.log("Logout Token Response: ", TokenResponse);
+          return res.status(200).json({ isError: false, response: TokenResponse });          
         }
       } catch (err) {
         console.error(err);
-
-        return {
-          statusCode: 500,
-          body: JSON.stringify({ msg: err }),
-        };
+        return res.status(400).json({ isError: true, response: err });
       }
       break;
     default:

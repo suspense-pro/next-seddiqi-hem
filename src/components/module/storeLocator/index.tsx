@@ -8,18 +8,25 @@ import StoreMapListContainer from "@components/module/storeMapListContainer";
 import LocationTabs from "@components/module/locationTabs";
 import { getDistance } from "@utils/helpers/getDistance";
 import ToggleMapResults from "@components/module/toggleMapResults";
+import { useRouter } from 'next/router';
+import { StoreLocationDetails } from "@components/module";
 
 const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName, productPrice, productCurrency }) => {
+  const router = useRouter();
   const [stores, setStores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userLocation, setUserLocation] = useState(null);
   const [nearestStore, setNearestStore] = useState(null);
+  const [locationStores, setLocationStores] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeToggle, setActiveToggle] = useState(true);
+  const [activeToggle, setActiveToggle] = useState(false);
   const [fadeList, setFadeList] = useState(false);
   const [itemsToShow, setItemsToShow] = useState(8);
   const [activeTab, setActiveTab] = useState('All');
   const [cities, setCities] = useState([]);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [selectedStoreId, setSelectedStoreId] = useState(null);
+  const [mapViewOn, setMapViewOn] = useState(false);
 
   const tabs = [
     { label: 'All Boutiques', value: 'All' },
@@ -27,38 +34,81 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
     { label: 'Abu Dhabi', value: 'Abu Dhabi' },
   ];
 
+  const handleStoreDtetails = (store) => {
+    setSelectedStoreId(store.id);
+    setIsDetailsOpen(true);
+  };
+
+  const handleCloseDetails = () => {
+    setIsDetailsOpen(false);
+    setSelectedStoreId(null);
+  };
+
   const handleStoreClick = (index) => {
     setActiveIndex(index); // Set the clicked store as active
   };
 
   const [isMobile] = useDeviceWidth();
 
-  useEffect(() => {
-    const fetchStores = async () => {
-      try {
-        const result = await UseFetchStores(productBrand, productName, '');
-        setStores(result);
+  const fetchStores = async (location) => {
+    try {
+      //const result = await UseFetchStores(productBrand, productName, '', '',);
+      let result;
 
-        // Extract unique cities
-        const uniqueCities = [...new Set(result.map(store => store.city))];
-        setCities(uniqueCities);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
+      if (location) {
+        result = await UseFetchStores("", "", '', '', location.lat, location.lng); 
+      } else {
+        result = await UseFetchStores('', '', '', '', null, null);
       }
-    };
 
-    fetchStores();
+      setStores(result.response);
 
+      const filteredStores = result.response.filter(store =>
+        store.city === 'Dubai' || store.city === 'Abu Dhabi'
+      );
+
+      setLocationStores(filteredStores);
+
+      // Extract unique cities
+      const uniqueCities = [...new Set(result.response.map(store => store.city))];
+      setCities(uniqueCities);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const location = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        setUserLocation(location);
-      });
+      const watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          const location = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          setUserLocation(location); 
+          fetchStores(location);
+        },
+        (error) => {
+          console.error("Error watching location:", error);
+          setUserLocation(null);
+  
+          fetchStores(null);
+        },
+        {
+          enableHighAccuracy: true, 
+          maximumAge: 0, 
+          timeout: 5000, 
+        }
+      );
+
+      return () => {
+        navigator.geolocation.clearWatch(watchId);
+      };
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+      fetchStores(null);
     }
   }, []);
 
@@ -91,6 +141,10 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
       setFadeList(false);
 
       const storesToCalculate = tab === 'All' ? stores : stores.filter(store => store.city === tab);
+
+      //Used to pass the current tab stores to the map
+      setLocationStores(storesToCalculate);
+
       const nearest = calculateNearestStore(storesToCalculate);
       setNearestStore(nearest);
     }, 300);
@@ -98,6 +152,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
 
   const handleToggleChange = (toggle) => {
     setFadeList(true);
+    setMapViewOn(toggle); 
     setTimeout(() => {
       setActiveToggle(toggle);
       setFadeList(false);
@@ -111,7 +166,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
       <>
         <ul className={styles.storeList}>
         {displayedStores.map(store => (
-          <li className={styles.store} key={store.id}>
+          <li className={styles.store} key={store.id} onClick={() => handleStoreDtetails(store)}>
             <div className={styles.storeImageContainer}>
               <img src={store.c_storeImage} alt={store.name} className={styles.storeImage} />
 
@@ -146,14 +201,24 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
     return (
       <>
         <div className={styles.mapContainer}>
-          {nearestStore && (
-            <MapView 
-              nearestStore={nearestStore} 
-              stores={stores} 
-              activeStore={stores[activeIndex]} 
-              userLocation={userLocation}
-            />
-          )}
+        {nearestStore && userLocation && (
+          <MapView 
+            nearestStore={nearestStore} 
+            stores={stores} 
+            activeStore={locationStores[activeIndex]} 
+            userLocation={userLocation} 
+            useOnPopup={true}
+          />
+        )}
+        {!userLocation && (
+          <MapView 
+            nearestStore={null} 
+            stores={stores} 
+            activeStore={locationStores[activeIndex]} 
+            userLocation={null} 
+            useOnPopup={true}
+          />
+        )}
         </div>
         
         <div className={styles.storeMapListWrapper}>
@@ -164,6 +229,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
             isMobile={isMobile} 
             isAbsolutePosition={false}
             needScrollbar={false} //For Desktop Only
+            useOnPopup={true}
           />
         </div>
       </>
@@ -181,6 +247,8 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
   };
 
   return (
+    <>
+    {!isDetailsOpen &&(
     <div className={styles.storeLocatorContainer}>
       <div className={styles.productInfoContainer}>
         <div className={styles.productInfoContainerImage}>
@@ -192,9 +260,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
           <span>{productCurrency} {productPrice}</span>
         </div>
       </div>
-
       <LocationTabs activeTab={activeTab} handleTabChange={handleTabChange} tabs={tabs} />
-
       <ToggleMapResults 
         onToggle={handleToggleChange} 
         activeTab={activeTab} 
@@ -207,7 +273,18 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
             renderMaps(activeTab === 'All' ? combinedStores : stores.filter(store => store.city === activeTab))
           }
       </div>
-    </div>
+    </div>)}
+    {isDetailsOpen &&
+    (<StoreLocationDetails
+        storeId={selectedStoreId}
+        isOpen={isDetailsOpen}
+        onClose={handleCloseDetails}
+        mapViewOn={mapViewOn}
+        useOnPopup={true}
+        stores={stores}
+    />)
+    }
+  </>
   );
 };
 

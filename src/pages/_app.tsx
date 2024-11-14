@@ -15,6 +15,7 @@ import WithVisualization from "@contexts/withVisualizationContext";
 import { HeaderProvider } from "@contexts/headerContext";
 import { WithAppContext } from "@contexts/appContext";
 import { WithCmsContext } from "@contexts/cmsContext";
+import { UserProvider } from "@contexts/userContext";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -33,18 +34,20 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <LanguageProvider>
-        <Head />
-        <WithAppContext value={(pageProps as any).context?.appContext}>
-          <WithVisualization>
-            <WithCmsContext value={(pageProps as any).context?.cmsContext}>
-              <Layout pageProps={pageProps}>
-                <Component {...pageProps} />
-              </Layout>
-            </WithCmsContext>
-          </WithVisualization>
-        </WithAppContext>
-      </LanguageProvider>
+      <UserProvider>
+        <LanguageProvider>
+          <Head />
+          <WithAppContext value={(pageProps as any).context?.appContext}>
+            <WithVisualization>
+              <WithCmsContext value={(pageProps as any).context?.cmsContext}>
+                <Layout pageProps={pageProps}>
+                  <Component {...pageProps} />
+                </Layout>
+              </WithCmsContext>
+            </WithVisualization>
+          </WithAppContext>
+        </LanguageProvider>
+      </UserProvider>
     </>
   );
 }

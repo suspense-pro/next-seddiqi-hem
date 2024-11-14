@@ -1,7 +1,7 @@
 @import "../../../../assets/styles/main.scss";
 
 .title {
-  color: getColorHex("green-dark");
+  color: getColorHex("brown-dark");
   letter-spacing: rem(0.6);
   margin-block-end: rem(12);
   margin-block-start: rem(20);
@@ -29,6 +29,8 @@
 .addressWrapper {
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: rem(8);
 }
 
 .vline {
@@ -78,6 +80,7 @@
 .storeTimingWrapper {
   display: flex;
   flex-direction: column;
+  margin-top: rem(8);
 }
 
 .timingRow {
@@ -104,6 +107,7 @@
   margin-left: rem(32);
   margin-top: rem(12);
   margin-bottom: rem(16);
+  flex-wrap: wrap; 
 }
 
 .brandSeparator {
@@ -140,18 +144,33 @@
   width: rem(20);
 }
 
+.contactLabel,
+.storeOpenDay,
+.storeServiceInfo,
+.brandsName {
+  color: getColorHex("grey");
+}
+.availableBrandsTitle {
+  color: getColorHex("grey-mid");
+}
+.storeOpenTiming {
+  color: getColorHex("green-dark");
+}
+
 .locationInfo {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  color: getColorHex("green-dark");
+  align-items: flex-end;
+  color: getColorHex("grey");
   margin-bottom: rem(12);
   margin-top: rem(12);
+  gap: rem(15);
 }
 
 .leftSection {
   display: flex;
   align-items: flex-start;
+  flex: 1 1 60%;
 }
 
 .iconWrapper {
@@ -238,11 +257,15 @@
   height: rem(224);
   width: 100%;
   margin-bottom: rem(28);
+  div {
+    border-radius: rem(16) rem(0);
+  }
 }
 
 .imageContainer,
 .mapContainer {
   margin-bottom: rem(28);
+  border-radius: rem(16) rem(0);
 }
 
 .contentWrapper {

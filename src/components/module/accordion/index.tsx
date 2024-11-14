@@ -10,6 +10,7 @@ const Accordion: React.FC<AccordionProps> = ({
   setSubMenu,
   subMenu,
   showArrow = false,
+  isOpen = false,
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [height, setHeight] = useState<number | undefined>(undefined);
@@ -19,11 +20,17 @@ const Accordion: React.FC<AccordionProps> = ({
 
   useEffect(() => {
     if (contentRef.current && isCollapsed) {
-      setHeight(contentRef.current.scrollHeight);
+      setHeight(contentRef?.current?.scrollHeight);
     } else {
       setHeight(undefined);
     }
   }, [isCollapsed]);
+  
+  useEffect(() => {
+    if (isOpen) {
+      handleClick();
+    }
+  }, [isOpen]);
 
   const handleClick = () => {
     if (showArrow && setSubMenu) {
@@ -35,22 +42,10 @@ const Accordion: React.FC<AccordionProps> = ({
   return (
     <div className={styles.accordion}>
       <div className={styles.accordionLink} onClick={handleClick}>
-        <NavigationLink
-          hover={false}
-          className={styles.headerLink}
-          title={item?.title}
-        />
-        {showArrow && (
-          <ArrowDown
-            className={activeSubMenu ? styles.activeArrow : undefined}
-          />
-        )}
+        <NavigationLink hover={false} className={styles.headerLink} title={item?.title} />
+        {showArrow && <ArrowDown className={activeSubMenu ? styles.activeArrow : undefined} />}
       </div>
-      <div
-        ref={contentRef}
-        style={{ height: activeSubMenu ? height : 0 }}
-        className={styles.accordionContainer}
-      >
+      <div ref={contentRef} style={{ height: activeSubMenu ? height : 0 }} className={styles.accordionContainer}>
         {children}
       </div>
     </div>

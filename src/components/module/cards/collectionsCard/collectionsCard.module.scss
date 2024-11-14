@@ -4,6 +4,18 @@
   height: rem(336);
 
   @include md {
+    height: rem(480);
+  }
+}
+
+.gradient {
+  height: 100%;
+}
+
+.collectionHeight {
+  height: rem(336);
+  
+  @include md {
     height: rem(520);
   }
 }
@@ -51,6 +63,10 @@
 
 .productItem {
   height: rem(448);
+  border: rem(1) solid getColorHex("grey-light-4", 0.4);
+  border-left: none;
+  border-bottom: none;
+
 
   @include md {
     height: rem(562);
@@ -59,22 +75,24 @@
 
 .item {
   position: relative;
-  border: rem(1) solid getColorHex("grey-light-4", 0.4);
   z-index: 100;
 
   .itemContent,
   .productContent {
     z-index: 100;
     position: absolute;
-    bottom: rem(32);
+    bottom: rem(0);
     color: getColorHex("white");
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: rem(8);
+    @include md {
+      bottom: rem(32);
+    }
 
     .category {
-      @include heading_regular;
+      @include heading_light;
       font-size: rem(16);
       font-weight: 400;
       line-height: rem(20);
@@ -90,7 +108,7 @@
       letter-spacing: rem(0.4);
       text-align: center;
       text-transform: uppercase;
-      margin-top: rem(8);
+      margin-top: rem(0);
     }
 
     .itemBar {
@@ -98,6 +116,7 @@
       width: rem(36);
       background-color: getColorHex("white");
       margin: 0 auto;
+      margin-top: rem(8);
     }
   }
 

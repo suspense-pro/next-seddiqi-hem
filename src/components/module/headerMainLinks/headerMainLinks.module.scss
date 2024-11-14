@@ -7,9 +7,10 @@
   align-content: center;
   padding: 0;
   margin: 0;
+  gap: rem(24);
 
   @include breakpoint-max-width(rem(1400)) {
-    flex-direction: column;
+    // flex-direction: column;
     // justify-content: flex-end;
   }
 
@@ -22,25 +23,34 @@
   }
 
   .links {
-    @include heading_regular;
+    @include heading_light;
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 1;
     width: 100%;
-    gap: rem(36);
+    gap: rem(26);
+
+    // @include breakpoint-max-width(rem(1400)) {
+    //   justify-content: flex-end;
+    // }
+    @include breakpoint-min-width(rem(1448)) {
+      justify-content: center;
+      gap: rem(36);
+    }
 
     .headerLink {
       padding: rem(7 0);
       cursor: pointer;
-      color: getColorHex("green-dark");
-      @include heading_regular;
+      color: getColorHex("brown-dark");
+      @include heading_light;
       transition: all 0.3s;
       font-size: rem(16);
       line-height: rem(20);
       letter-spacing: rem(0.4);
       text-transform: uppercase;
       margin-top: rem(9);
+      display: inline-block;
 
       &::after {
         margin-top: rem(7);
@@ -66,7 +76,7 @@
     max-width: rem(250);
     display: flex;
     align-items: center;
-    gap: rem(28.2);
+    gap: rem(24);
 
     @include breakpoint-max-width(rem(1400)) {
       display: none;
@@ -83,19 +93,45 @@
   align-items: center;
   gap: rem(12);
   min-width: rem(180);
-  display: none;
+  // display: none;
 
-  @include xl {
-    display: flex;
+  @include breakpoint-max-width(rem(1400)) {
+    display: none;
   }
 
-  .patakLogo {
+  // @include xl {
+  //   display: flex;
+  // }
+
+  &.scrolled {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .rolexLogo {
     width: rem(78.65);
     height: rem(46);
   }
 
-  .rolexLogo {
+  .patekLogo {
     width: rem(100.3);
     height: rem(46);
   }
+}
+
+.drawerStyle {
+  position: fixed;
+  top: rem(70);
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: getColorHex("white"); 
+  transform: translateX(100%);
+  transition: transform 0.3s ease; 
+  z-index: 1000; 
+}
+
+.drawerStyle.visible {
+  transform: translateX(0);
 }

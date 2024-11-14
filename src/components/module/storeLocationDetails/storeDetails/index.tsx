@@ -17,25 +17,27 @@ import MapView from "@components/module/mapView";
 import { ArrowRight } from "@assets/images/svg";
 import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 
-const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
+const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) => {
   const [mapView, setMapView] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
-  const [activeToggle, setActiveToggle] = useState(true);
+  const [activeToggle, setActiveToggle] = useState(mapViewOn);
   const [isAllBrandPopupOpen, setAllBrandPopupOpen] = useState(false);
   const storeImage = store?.c_storeImage;
   const storeHoursString = store?.storeHours;
-  const [stores, setStores] = useState([]);
+  const [matchedStore, setMatchedStore] = useState(null);
 
-  // Split by <br /> and then by ": " to separate days from timings
-  const formattedStoreHours = storeHoursString.split("<br />").map((line) => {
+  const storeHoursArray = JSON.parse(storeHoursString);
+  const formattedStoreHours = storeHoursArray.map((line) => {
     const [days, timings] = line.split(": ");
     return { days: days.trim(), timings: timings.trim() };
   });
 
-  const handleToggleChange = (toggle) => {
-    setTimeout(() => {
-      setActiveToggle(toggle);
-    }, 300);
+  useEffect(() => {
+    setActiveToggle(mapViewOn);
+  }, [mapViewOn]);
+
+  const handleToggleChange = (toggle:boolean) => {
+    setActiveToggle(toggle);
   };
 
   const handleViewAllBrands = () => {
@@ -45,14 +47,17 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
   const handleClosePopup = () => {
     setAllBrandPopupOpen(false);
   };
+  const brandsToDisplay = store?.c_availableBrands?.slice(0, 8);
+
 
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.mapViewBtn}>
-        <SlidingRadioSwitch
+        {/* <SlidingRadioSwitch
           toggleLabel={"Map View"}
           onToggle={handleToggleChange}
-        />
+          value ={activeToggle}
+        /> */}
       </div>
       <div className={styles.content}>
         <Typography variant="h3" className={styles.title}>
@@ -76,7 +81,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
           <a
             href={store?.c_googleMapLocation}
             target="_blank"
-            className={`${styles.storeMapLink} button plain green_dark`}
+            className={`${styles.storeMapLink} button plain brown_dark`}
           >
             <span>Get Directions</span>
           </a>
@@ -84,14 +89,15 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
       </div>
 
       <div className={styles.storeImageWrapper}>
-        {!activeToggle ? (
+        {activeToggle ? (
           <div className={styles.mapContainer}>
             <MapView
-              nearestStore={null}
-              stores={null}
-              activeStore={store}
-              userLocation={userLocation}
-            />
+                    nearestStore={""}
+                    stores={stores}
+                    activeStore={store}
+                    userLocation={userLocation}
+                    useOnPopup={true}
+                />
           </div>
         ) : (
           <div className={styles.imageContainer}>
@@ -106,7 +112,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
 
       <div className={styles.storeContactWrapper}>
         <div className={styles.leftSection}>
-          <WhatsappIcon className={styles.WhatsappIcon} />
+          <WhatsappIcon className={styles.WhatsappIcon} strokeColor="#464f4a" />
           <span className={styles.contactLabelWrapper}>
             <Typography variant="p" className={styles.contactLabel}>
               {"Get in Touch"}
@@ -118,7 +124,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             isLink={false}
             className={styles.contactBtn}
             title={"Call"}
-            color="green_dark"
+            color="brown_dark"
             type={"Plain"}
           />
           <div className={styles.vDivider}>&nbsp;</div>
@@ -126,7 +132,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             isLink={false}
             className={styles.whatsappBtn}
             title={"WhatsApp"}
-            color="green_dark"
+            color="brown_dark"
             type={"Plain"}
           />
         </span>
@@ -176,7 +182,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             link={"/book-an-appointment"}
             className={styles.appointmentBtn}
             title={"Book appointment"}
-            color="green_dark"
+            color="brown_dark"
             type={"Plain"}
           />
         </div>
@@ -193,13 +199,13 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
             {"Brands Available"}
           </Typography>
         </span>
-        {store.c_availableBrands && store.c_availableBrands.length > 0 && (
+        {store?.c_availableBrands?.length > 8 && (
           <span className={styles.viewAllBrands}>
             <Button
               isLink={false}
               className={styles.viewAllBrandsBtn}
               title={"View all brands"}
-              color="green_dark"
+              color="brown_dark"
               type={"Plain"}
               clickHandler={handleViewAllBrands}
             />
@@ -208,12 +214,11 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
       </div>
 
       <div className={styles.brandsWrapper}>
-        {store.c_availableBrands &&
-          store.c_availableBrands.length > 0 &&
-          store.c_availableBrands.map((availableBrand, index) => (
+        {brandsToDisplay &&
+          brandsToDisplay.map((availableBrand, index) => (
             <React.Fragment key={index}>
               <p className={styles.brandsName}>{availableBrand}</p>
-              {index < store.c_availableBrands.length - 1 && (
+              {index < brandsToDisplay.length - 1 && (
                 <div className={styles.brandSeparator} />
               )}
             </React.Fragment>
@@ -225,7 +230,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store }) => {
       {/* All Brand Pop up */}
       {isAllBrandPopupOpen && (
         <BrandPopup
-          brands={store.c_availableBrands}
+          brands={store?.c_availableBrands}
           onClose={handleClosePopup}
           isOpen={isAllBrandPopupOpen}
         />

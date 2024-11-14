@@ -18,7 +18,7 @@ const BrandBanner: React.FC<BrandBannerProps> = ({
       </div>
       <div className={styles.textContainer}>
         <div className={styles.innerContent}>
-          <Typography variant="p" className={styles.title}>
+          <Typography variant="h2" className={styles.title}>
             {mainTitle?.toUpperCase()}
           </Typography>
           <div className={styles.richTextContainer}>

@@ -2,11 +2,10 @@
 
 .container {
   text-align: center;
-  margin: rem(60 0);
-
-  @include md {
-    margin:  rem(120 0);
-  }
+  // margin: rem(60) 0 0 0;
+  // @include md {
+  //   margin: rem(120) 0 0 0;
+  // }
 }
 .containerHeader {
   margin: 0 rem(28);
@@ -28,7 +27,7 @@
   text-transform: uppercase;
   font-size: rem(28);
 
-  @include heading_regular;
+  @include heading_light;
   @include md {
     font-size: rem(40);
   }
@@ -48,7 +47,7 @@
 }
 
 .highlightedText {
-  @include heading_regular;
+  @include heading_light;
   font-size: rem(26);
   font-weight: 500;
   line-height: rem(36);
@@ -70,3 +69,8 @@
 // .aboutBtn {
 //   background: getColorHex("green-dark");
 // }
+
+
+.cta {
+  min-width: rem(200);
+}

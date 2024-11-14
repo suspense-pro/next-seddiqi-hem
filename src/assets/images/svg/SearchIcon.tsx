@@ -1,24 +1,17 @@
-const SearchIcon = ({
-  fill,
-  className,
-}: {
-  fill?: string;
-  className?: string;
-}) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-  >
-    <path
-      fill={fill ?? "#032715"}
-      d="M21 22.7375L15.5298 15.41C18.9931 12.8094 19.6984 7.88451 17.1054 4.41089C14.5125 0.937277 9.60221 0.229878 6.13888 2.83133C2.67554 5.43199 1.97024 10.3561 4.56399 13.8297C6.31816 16.1792 9.13148 17.2629 11.8405 16.9135"
-      stroke="#464F4A"
-      strokeMiterlimit="10"
-    />
+const SearchIcon = ({ fill, className }: { fill?: string; className?: string }) => (
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+    <g clip-path="url(#clip0_18810_12193)">
+      <path
+        d="M17.5 19.0671L12.9415 12.9608C15.8276 10.7936 16.4153 6.68957 14.2545 3.79489C12.0937 0.900204 8.00184 0.310705 5.11573 2.47858C2.22962 4.6458 1.64187 8.74918 3.80332 11.6439C5.26514 13.6018 7.60956 14.5049 9.86711 14.2138"
+        stroke="#2B2219"
+        stroke-miterlimit="10"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_18810_12193">
+        <rect width="20" height="20" fill="white" transform="translate(0 0.119141)" />
+      </clipPath>
+    </defs>
   </svg>
 );
 

@@ -1,12 +1,19 @@
 import React from "react";
 import Image from "@components/module/image";
-import { Button, NavigationLink, ContentHeader, Typography, Video } from "@components/module";
+import {
+  Button,
+  NavigationLink,
+  ContentHeader,
+  Typography,
+  Video,
+} from "@components/module";
 import styles from "./twoColumnImageCopy.module.scss";
 import RichText from "@components/module/richText";
 
 const ImageComponent = ({ image, alt }) => (
   <Image
     className={styles.image}
+    height={styles.image}
     image={image}
     imageAltText={alt}
     // query={"h=700"}
@@ -14,11 +21,13 @@ const ImageComponent = ({ image, alt }) => (
 );
 
 const TwoColumnImageCopy = ({ contentLeft, contentRight, ...content }) => {
-  if (!contentLeft?.image?.image || !contentRight?.image?.image) return null;
+  if (!contentLeft?.media?.image || !contentRight?.media?.image) return null;
 
-  const leftImage = contentLeft.image.image;
-  const rightImage = contentRight.image.image;
-  const cta = contentRight.cta;
+  // const leftImage = contentLeft.image.image;
+  // const rightImage = contentRight.image.image;
+  const cta = contentRight?.cta;
+
+  // console.log("contentRight", contentRight)
 
   return (
     <div className={styles.container}>
@@ -43,7 +52,7 @@ const TwoColumnImageCopy = ({ contentLeft, contentRight, ...content }) => {
         )}
       </div>
       <div className={styles.columnTwo}>
-      {contentRight?.media?.image ? (
+        {contentRight?.media?.image ? (
           <ImageComponent image={contentRight?.media?.image} alt="watch" />
         ) : (
           <Video
@@ -55,16 +64,23 @@ const TwoColumnImageCopy = ({ contentLeft, contentRight, ...content }) => {
         )}
         <div className={styles.columnContent}>
           <div className={styles.headingSecondary}>
-            <RichText align="" className={styles.desc} text={contentRight?.description} />
+            <RichText
+              align=""
+              className={styles.desc}
+              text={contentRight?.description}
+            />
           </div>
-          <Button
-            isLink={true}
-            link={"/"}
-            className={styles.discoverBtn}
-            title={cta?.label}
-            color={cta?.color}
-            type={cta?.type}
-          />
+          {cta && cta?.label && cta?.label?.length > 0 && (
+            <Button
+              isLink={true}
+              link={cta?.url}
+              className={styles.discoverBtn}
+              title={cta?.label}
+              color={cta?.color}
+              type={cta?.type}
+              new_tab={cta?.isNewTab}
+            />
+          )}
         </div>
       </div>
     </div>

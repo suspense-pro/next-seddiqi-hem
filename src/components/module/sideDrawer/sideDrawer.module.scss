@@ -1,5 +1,35 @@
 @import "../../../assets/styles/main.scss";
 
+.drawerWrapper{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+
+  &.isOpen{
+    pointer-events: all;
+
+    .underlay{
+      opacity: 0.3;
+    }
+  }
+}
+
+.underlay{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: getColorHex("black");
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
 .drawer {
   position: fixed;
   top: 0;
@@ -7,34 +37,49 @@
   height: 100%;
   background: getColorHex("white");
   box-shadow: rem(1) 0 rem(18) rgba(0, 0, 0, 0.09);
-  transition: left 0.3s ease-in-out, right 0.3s ease-in-out;
+  transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
   z-index: 10000;
   display: flex;
   flex-direction: column;
   padding: rem(40 16 16);
+  left: -100%; //rem(-600);
 
-  left: rem(-600);
+  [dir="rtl"] & {
+    left: auto;
+    right: -100%;
+  }
 
-  @include md {
+  @include lg {
     padding: rem(60 28 28);
     width: rem(600);
   }
 
   &.right {
     left: auto; 
-    right: rem(-600);
+    right: -100%; //rem(-600);
+
+    [dir="rtl"] & {
+      right: auto;
+      left: -100%;
+    }
   }
 }
 
 .open {
   left: 0;
   [dir="rtl"] & {
+    left: auto;
     right: 0;
   }
 
   &.right {
     right: 0;
     left: auto;
+
+    [dir="rtl"] & {
+      right: auto;
+      left: 0;
+    }
   }
 }
 .content {

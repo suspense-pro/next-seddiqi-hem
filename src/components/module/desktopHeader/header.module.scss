@@ -19,6 +19,7 @@
     .headerHeight {
       transition: all 0.3s;
       top: rem(78);
+      height: calc(100vh - 78px);
     }
 
     .headerMargin {
@@ -56,6 +57,7 @@
   margin-top: rem(20);
 
   .mainLogo {
-    height: rem(22);
+    height: rem(44);
+    width: rem(209);
   }
 }

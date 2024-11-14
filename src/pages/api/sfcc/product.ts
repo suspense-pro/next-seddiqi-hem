@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Customer, slasHelpers, Product, ClientConfig, Search } from "commerce-sdk";
 import initializeShopperConfig, { OAuthTokenFromAM, clientConfig } from "@utils/sfcc-connector/config";
-import { getProductPriceGraph } from "@utils/sfcc-connector/productUtils";
+import { transformPriceRefinement } from "@utils/sfcc-connector/productUtils";
 import logger from "@utils/logger";
 
 
@@ -16,14 +16,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         if (requestMethod === "POST" && action === "getProducts") {
             const categoryId : string  = body;
-            const accessToken = await initializeShopperConfig();
+            const configWithAuth = await initializeShopperConfig();
+            const accessToken = configWithAuth.access_token;
             clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
             const productsClient = new Product.Products(clientConfig);
             var accountMgrAccessToken = await OAuthTokenFromAM();
             
             const options = {
                 headers: {
-                    Authorization : `Bearer ${accountMgrAccessToken}`
+                    Authorization : `Bearer ${accountMgrAccessToken}`,
                 },
                 parameters: {
                     organizationId: clientConfig.parameters.organizationId,
@@ -53,9 +54,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             
             const productResults = await productsClient.searchProducts(options);
             const result : any = {};
-            if (productResults.total > 0) {
-                // console.log("Product(s): " + JSON.stringify(productResults, null, 4));
-                result.productResults = await productResults;
+            if (productResults.total > 0) {                
+                result.productResults = productResults;
+                // console.log("Product(s): " + JSON.stringify(result, null, 4));
 
                 return res.status(200).json({ isError: false, response: result });
             } else {
@@ -85,7 +86,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 return res.status(400).json({ isError: true, response: "Category ID is required." });
               }
     
-              const accessToken = await initializeShopperConfig();
+              const configWithAuth = await initializeShopperConfig();
+              const accessToken = configWithAuth.access_token;
               clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
     
               // Build the dynamic refine parameters
@@ -96,16 +98,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               }
  
               
-             // Process other filters
+            // Process other filters
             Object.keys(filters).forEach(key => {
                 console.log(`Processing filter key: ${key}`);
                 console.log(`Filter values for ${key}:`, filters[key]);
                 if (Array.isArray(filters[key]) && filters[key].length > 0) {
-                    filters[key].forEach((value: string) => {
-                        console.log(`Adding filter ${key}=${value}`);
-                        refineParams.push(`${key}=${value}`);
-                    });
                     const combinedValues = filters[key].join('|');
+                    console.log(`Adding filter ${key}=${combinedValues}`);
                     refineParams.push(`${key}=${combinedValues}`);
                 }
             });
@@ -124,14 +123,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                   sort: sortParam,
                 },
               };
-    
+
               const shopperSearchClient = new Search.ShopperSearch(clientConfig);
-              const productResults = await shopperSearchClient.productSearch(options);
-              
+              var productResults = await shopperSearchClient.productSearch(options);         
               if (productResults.total > 0) {
+                
+                productResults = transformPriceRefinement(productResults);
+                // console.log("response: "+ JSON.stringify(productResults, null, 2));
                 return res.status(200).json({ isError: false, response: productResults });
               } else {
-                return res.status(400).json({ isError: true, response: "No product found." });
+                return res.status(400).json({ isError: true, response: productResults });
               }
             }
         } catch (err) {
@@ -144,7 +145,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               if (requestMethod === "GET" && action === "getProductDetails") {
                 const pid = (req.query.pid as string) ?? "";
                 console.log(pid);
-                const accessToken = await initializeShopperConfig();
+                const configWithAuth = await initializeShopperConfig();
+                const accessToken = configWithAuth.access_token;
                 clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
                 const shopperProductsClient = new Product.ShopperProducts(clientConfig);
                 
@@ -163,7 +165,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 if (productResult) {
                     //console.log("Product: " + JSON.stringify(productResult, null, 4));
 
-                    logger.info("Get getProductDetails - Response", productResult);
+                    logger.log("Get getProductDetails - Response", productResult);
                     return res.status(200).json({ isError: false, response: productResult });
                 } else {
                     console.log("No product found.");
@@ -184,7 +186,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               if (requestMethod === "GET" && action === "getMultipleProducts") {
                 const productIds = (req.query.productIds as string) ?? "";
                 // console.log(productIds);
-                const accessToken = await initializeShopperConfig();
+                const configWithAuth = await initializeShopperConfig();
+                const accessToken = configWithAuth.access_token;
                 clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
                 const shopperProductsClient = new Product.ShopperProducts(clientConfig);
                 

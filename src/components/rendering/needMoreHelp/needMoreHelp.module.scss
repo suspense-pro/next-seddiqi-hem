@@ -33,9 +33,10 @@
   h3{
     @include heading_regular;
     font-size: rem(28);
+    font-weight: 500;
     line-height: rem(34);
     letter-spacing: rem(0.4);
-    color: getColorHex("green-dark");
+    color: getColorHex("brown-dark");
     margin: 0;
     text-transform: uppercase;
     text-align: left;
@@ -114,6 +115,20 @@
 
       @include md {
         width: rem(40);
+      }
+    }
+
+    a{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: rem(40);
+      height: rem(40);
+
+      picture{
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }

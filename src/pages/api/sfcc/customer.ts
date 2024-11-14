@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { Customer, slasHelpers } from "commerce-sdk";
 import initializeShopperConfig,  { clientConfig, OAuthTokenFromAM, basicAuthorization } from "@utils/sfcc-connector/config";
 import { middlewareConfig, getGuestTokenResponse, getShopperTokenResponse } from "@utils/sfcc-connector/config";
+import { sendEmail } from "@utils/helpers/emailHelper";
 import saveGoldenIDToCustomerProfile, { generateRandomString, generateCodeChallenge }from "@utils/sfcc-connector/customerUtils";
 const customerAPI = middlewareConfig.parameters.api + '/customer';
  
@@ -15,13 +16,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "register":
             try {
                 if (requestMethod === "POST" && action === "registerCustomer") {
-                    const { salutation, fname, lname, phone, email, password } = body;
+                    const { salutation, fname, lname, phone, email, password, marketingCommunication, privacyPolicy } = body;
                     const configWithAuth = await initializeShopperConfig();
+                    const access_token = configWithAuth.access_token;
+                    const usid = configWithAuth.usid;
                     const client = new Customer.ShopperCustomers(clientConfig);
 
                     const options = {
                         headers: {
-                        Authorization: `Bearer ${configWithAuth}`,
+                        Authorization: `Bearer ${access_token}`,
                         },
                         parameters: {
                             siteId: clientConfig.parameters.siteId,
@@ -36,15 +39,27 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 firstName: fname,
                                 lastName: lname,
                                 phoneMobile: phone,
+                                "c_as&sCommunication": marketingCommunication,
+                                "c_terms&Conditions": privacyPolicy,
                             },
                         },
                     };
 
                     var shopperResponse = await client.registerCustomer(options);
-                    // console.log("SFCC Customer: " + JSON.stringify(shopperResponse));
+                    console.log("SFCC Customer: " + JSON.stringify(shopperResponse));
+
+                    // send email - nodemailer
+                    const subject = "Account Registration Completed";
+                    const htmlContent = "Hey " +fname+", \n You have successfully registered on Seddiqi.com";
+                    const emailInfo = await sendEmail(email, subject, htmlContent);
+                    if (emailInfo.success) {
+                        console.log("Email sent successfully");
+                    } else {
+                        console.log("Email failed");
+                    }
                     
                     if (shopperResponse.customerNo) {
-                        /** call to upsert API to get Golden ID */
+                        /** TODO: call to upsert API to get Golden ID 
                         const upsertOptions = {
                             method: requestMethod,
                             headers: {
@@ -55,7 +70,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 'x-correlation-id': middlewareConfig.parameters.x_correlation_id,
                             },
                             body: JSON.stringify({
-                                customerId: shopperResponse.customerNo,
+                                customerId: shopperResponse.customerId,
                                 firstName: shopperResponse.firstName,
                                 lastName: shopperResponse.lastName,
                                 email: shopperResponse.email,
@@ -64,7 +79,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                                 lastModifiedTimestamp: shopperResponse.lastModified,
                                 preferredLanguage: shopperResponse.preferredLocale,
                                 phoneNumber: shopperResponse.phoneMobile,
-                                emailOptIn: false,
+                                emailOptIn: marketingCommunication,
                                 smsOptIn: false,
                                 whatsappOptIn: false,
                                 isGuestCustomer: false
@@ -72,36 +87,50 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         };
 
                         const response = await fetch(customerAPI, upsertOptions);
-                        if (!response.ok) {
-                            throw new Error(`Error: ${response.status}`);
-                        }
                         const result = await response.json();
+
+                        if (!response.ok) {
+                            console.log("ERROR: Unable to get customer Golden ID.");
+                            return res.status(400).json({ isError: true, response: result });
+                        }
+                        
                         if (result.action === "insert" && result.sfCustomerId) {
                             // console.log("customer : " + JSON.stringify(result, null, 4));
                             /* save the golden ID in SFCC customer profile 
-                                1. update the customer profile with golden ID */
+                                1. update the customer profile with golden ID
                             shopperResponse = {...shopperResponse}
                             shopperResponse.currentPassword = password;
-
-                            saveGoldenIDToCustomerProfile(shopperResponse, result.sfCustomerId);
-
-                            return res.status(200).json({ isError: false, response: result });
+                            shopperResponse.usid = usid;
+                            
+                            // Get the shopper token and customer ID
+                            const response = await saveGoldenIDToCustomerProfile(shopperResponse, result.sfCustomerId);
+                            return res.status(200).json({ isError: false, response: { response, result} });
                         } else {
                             console.log("Failed to get Golden ID.");
                             return res.status(400).json({ isError: true, response: "Failed to get Golden ID." });
+                        } */
+
+                        shopperResponse = {...shopperResponse}
+                        shopperResponse.currentPassword = password;
+                        shopperResponse.usid = usid;
+
+                        // Get the shopper token and customer ID
+                        const response = await saveGoldenIDToCustomerProfile(shopperResponse, null);
+                        if (response.access_token) {
+                            return res.status(200).json({ isError: false, response: { response } });
+                        } else {
+                            return res.status(400).json({ isError: true, response: { response } });
                         }
                     } else {
                         console.log("Registration Failed.");
-                        return res.status(400).json({ isError: true, response: "Error registering shopper" });
+                        return res.status(400).json({ isError: true, response: shopperResponse });
                     }
                 }
-            } catch (err) {
-                console.error(err);
-      
-                return {
-                    statusCode: 500,
-                    body: JSON.stringify({ msg: err }),
-                };
+            } catch (error) {
+                // read the response body for more details
+                const errorData = await error.response?.text(); 
+                console.error("Error response body:", JSON.parse(errorData));
+                return res.status(500).json({ isError: true, response: JSON.parse(errorData) });
             }
             break;
 
@@ -127,7 +156,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                         const profile = await client.getCustomer(options);
                         // console.log("Customer Info: ", profile);
-                        return profile;
+                        return res.status(200).json({ isError: false, response: profile });
                     }
                 } catch (err) {
                     console.error(err);
@@ -170,7 +199,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const profile = await client.updateCustomer(options);
                     console.log("Customer updated: ", profile);
-                    return profile;
+                    return res.status(200).json({ isError: false, response: profile });
                 }
             } catch (err) {
                 console.error(err);
@@ -218,7 +247,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const profile = await client.createCustomerAddress(options);
                     console.log("Customer Address: ", profile);
-                    return profile;
+                    return res.status(200).json({ isError: false, response: profile });
                 }
             } catch (err) {
                 console.error(err);
@@ -267,7 +296,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const profile = await client.updateCustomerAddress(options);
                     console.log("Updated Address: ", profile);
-                    return profile;
+                    return res.status(200).json({ isError: false, response: profile });
                 }
             } catch (err) {
                 console.error(err);
@@ -302,7 +331,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const response = await client.getCustomerAddress(options);
                     console.log("Address: ", response);
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -337,7 +366,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const response = await client.removeCustomerAddress(options);
                     console.log("Delete Address: ", response);
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -378,7 +407,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
                     const response = await client.updateCustomerPassword(options);
                     console.log("Password: ", response);
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -412,7 +441,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
                     const response = await slasAdminClient.deleteShopper(options);
                     console.log("Shopper deleted successfully!");
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);
@@ -426,13 +455,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "resetPassword":
             try {
                 if (requestMethod === "POST" && action === "resetToken") {
-                    const access_token = req.query.accessToken as string;
                     const userId = req.query.userId as string;
                     const code_verifier = await generateRandomString(128);
                     const code_challenge = await generateCodeChallenge(code_verifier);
-                    console.log("Code Verifier: " + code_verifier);
+                    // console.log("Code Verifier: " + code_verifier);
 
-                    clientConfig.headers['authorization'] = `Bearer ${access_token}`;
                     const client = new Customer.ShopperLogin(clientConfig);
 
                     const options = {
@@ -440,7 +467,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                             organizationId: clientConfig.parameters.organizationId,
                         },
                         body: {
-                            callback_uri: "https://webhook.site/30a7029a-5a0a-4ef5-8cbd-02287eecbbbe", // process.env.REDIRECT_URI,
+                            callback_uri: "https://093d-2001-818-e854-f900-15b6-123e-2103-5443.ngrok-free.app/api/sfcc/callback", // "https://webhook.site/51413cd1-ff8e-43a0-95cf-e92c61870d44", // process.env.REDIRECT_URI,
                             channel_id: clientConfig.parameters.siteId,
                             client_id: clientConfig.parameters.clientId,
                             code_challenge: code_challenge,
@@ -449,8 +476,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         }
                     };
                     const response = await client.getPasswordResetToken(options);
-                    console.log("Password reset token gererated" + JSON.stringify(response, null, 4));
-                    return response;
+                    // console.log("Password reset token gererated" + JSON.stringify(response, null, 4));
+                    return res.status(200).json({ isError: false, response: response, code_verifier: code_verifier });
                 }
             } catch (err) {
                 console.error(err);
@@ -464,17 +491,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "setPassword":
             try {
                 if (requestMethod === "POST" && action === "resetPassword") {
-                    const access_token = req.query.accessToken as string;
                     const userId = req.query.userId as string;
                     const codeVerifier = req.query.codeVerifier as string;
                     const { newPassword, token } = body;
 
-                    clientConfig.headers['authorization'] = `Bearer ${access_token}`;
                     const client = new Customer.ShopperLogin(clientConfig);
 
                     const options = {
                         headers: {
-                            Authorization: `Bearer ${await basicAuthorization()}`,
+                            Authorization: `Basic ${await basicAuthorization()}`,
                         },
                         parameters: {
                             organizationId: clientConfig.parameters.organizationId,
@@ -490,7 +515,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     };
                     const response = await client.resetPassword(options);
                     console.log("Password has been reset" + JSON.stringify(response, null, 4));
-                    return response;
+                    return res.status(200).json({ isError: false, response: response });
                 }
             } catch (err) {
                 console.error(err);

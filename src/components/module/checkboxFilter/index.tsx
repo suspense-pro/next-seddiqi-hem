@@ -85,7 +85,7 @@ const CheckboxFilter: React.FC<CheckboxFilterProps> = ({
               </Typography>
             </label>
           ))}
-        {filteredOptions.length > 8 && (
+        {filteredOptions.length > 10 && (
           <div className={styles.viewMoreButton}>
             <button onClick={handleViewMore}>
               {showAll ? "View Less" : "View More"}

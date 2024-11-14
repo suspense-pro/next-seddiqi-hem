@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./filterAccordian.module.scss";
 import { ArrowDown } from "@assets/images/svg";
 import Typography from "../typography";
 
-const FilterAccordionItem = ({ title, children }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const FilterAccordionItem = ({ title, children, onClear, selectedCount, isOpen, onToggle }) => {
+  const handleClear = (event) => {
+    event.stopPropagation();
 
-  const toggleOpen = () => {
-    setIsOpen(!isOpen);
+    if (onClear) {
+      onClear();
+    }
   };
+
+  const formattedCount = selectedCount < 10 ? `0${selectedCount}` : selectedCount;
 
   return (
     <div className={`${styles.accordionItem} ${isOpen ? styles.open : ""}`}>
-      <div className={styles.accordionHeader} onClick={toggleOpen}>
+      <div className={styles.accordionHeader} onClick={onToggle}>
         <Typography
           align="left"
           variant="p"
@@ -21,9 +25,11 @@ const FilterAccordionItem = ({ title, children }) => {
           {title}
         </Typography>
         <div className={styles.iconGroup}>
-          <Typography align="left" variant="p" className={styles.clearText}>
-            (00) Clear
-          </Typography>
+          <div className={styles.clearTextContainer} onClick={handleClear}>
+            <Typography align="left" variant="p" className={styles.clearText}>
+              ({formattedCount}) Clear
+            </Typography>
+          </div>
           <ArrowDown
             className={`${styles.arrow} ${isOpen ? styles.rotate : ""}`}
           />

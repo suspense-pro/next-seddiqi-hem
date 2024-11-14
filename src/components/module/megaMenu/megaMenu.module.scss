@@ -10,6 +10,14 @@
   width: 100%;
   background-color: getColorHex("white");
   transition: all 0.3s;
+  height: calc(100vh - 152px);
+  overflow-y: scroll;
+  justify-content: space-between;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
 
   @include breakpoint-max-width(rem(1150)) {
     padding: rem(30 60);

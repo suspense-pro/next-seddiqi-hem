@@ -1,7 +1,6 @@
 @import "./../../../assets/styles/main.scss";
 
 .container {
-  margin: rem(60 0);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -10,10 +9,11 @@
     text-align: right;
   }
 
-  @include md {
-    margin: rem(100 0);
+  // margin: rem(60) 0 0 0;
+  // @include md {
+  //   margin: rem(120) 0 0 0;
+  // }
 
-  }
 }
 
 .containerImgs {
@@ -41,15 +41,18 @@
 
   .imgHeight {
     height: rem(400);
+    @include md {
+      height: rem(720);
+    }
   }
 }
 
 .titleColor {
-  color: getColorHex("green-dark");
+  color: getColorHex("brown-dark");
 }
 
 .subTitleColor {
-  color: getColorHex("green-dark");
+  color: getColorHex("grey");
 }
 .barColor {
   background: getColorHex("metallic");

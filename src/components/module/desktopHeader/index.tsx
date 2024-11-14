@@ -1,7 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { HeaderContext } from "@contexts/headerContext";
 import MegaMenu from "../megaMenu";
-import HeaderLogoBar from "../headerLogoBar";
 import HeaderMainLinks from "../headerMainLinks";
 import styles from "./header.module.scss";
 import Image from "../image";
@@ -47,11 +46,11 @@ export default function DesktopHeader() {
         <MegaMenu headerHeightClass={styles.headerHeight} />
         <div className={`${scrolled && styles.headerScrolled} ${styles.headerMargin}`}>
           {mainLogo && (
-            <div className={styles.headerLogoContainer}>
+            <div onMouseEnter={() => updateCurrent(null)} className={styles.headerLogoContainer}>
               <LogoLink logo={mainLogo?.image} className={styles.mainLogo} />
             </div>
           )}
-          <HeaderMainLinks />
+          <HeaderMainLinks isScrolled={scrolled} />
         </div>
       </div>
     </div>

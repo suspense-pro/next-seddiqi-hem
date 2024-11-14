@@ -1,7 +1,7 @@
 @import "./../../../../assets/styles/main.scss";
 
 .container {
-  display: none;
+  // display: none;
   flex-direction: column;
   gap: rem(48);
   justify-content: center;
@@ -9,11 +9,11 @@
   margin: rem(20 0);
 
   @include lg {
-    display: flex
+    display: flex;
   }
 
   .title {
-    @include heading_regular;
+    @include heading_light;
     color: getColorHex("green-dark");
     text-align: center;
     font-size: rem(40);
@@ -31,9 +31,20 @@
   gap: rem(24);
   margin: 0 rem(80);
   flex-wrap: wrap;
+  flex-direction: column;
   @include lg {
+    flex-direction: row;
     flex-wrap: nowrap;
   }
+}
+
+.image {
+  width: rem(48);
+  height: rem(48);
+}
+
+.height {
+  height: rem(48);
 }
 
 .infoListCard {
@@ -42,7 +53,7 @@
   gap: rem(24);
   padding: rem(32);
   border-radius: rem(16) 0;
-  background-color: getColorHex("grey-high", 0.1);
+  flex: 1;
 
   .info {
     display: flex;
@@ -53,7 +64,7 @@
   .infoTitle {
     color: getColorHex("green-dark");
 
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(26);
     font-weight: 500;
     line-height: rem(36);
@@ -66,4 +77,8 @@
     line-height: rem(26);
     letter-spacing: rem(0.2);
   }
+}
+
+.grey-high {
+  background-color: getColorHex("grey-high", 0.1);
 }

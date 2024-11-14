@@ -23,7 +23,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function Home({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    return <ContentBlock content={content.content} />;
+
+    const contentData = content.content._meta.schema.includes("/rendering/banner") ? {_meta: content.content._meta, banners: [content.content]} : content.content;
+    
+    return <ContentBlock content={contentData} />;
 }
 
 Home.Layout = StandaloneLayout;

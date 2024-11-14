@@ -27,6 +27,7 @@
   height: rem(2);
   text-align: center;
   margin: 0 auto;
+  background-color: getColorHex("chocolate-brown");
 
   [dir="rtl"] & {
     margin: 0;
@@ -34,22 +35,24 @@
 }
 
 .headingPrimary {
+  @include heading_light;
   margin: 0;
-  @include heading_regular;
   text-align: center;
   text-transform: uppercase;
   font-size: rem(28);
-
+  color: getColorHex('brown-dark');
+  
   @include md {
     font-size: rem(40);
   }
-
+  
   [dir="rtl"] & {
     text-align: right;
   }
 }
 
 .headingSecondary {
+  color: getColorHex('grey');
   line-height: rem(26);
   @include body_regular;
 

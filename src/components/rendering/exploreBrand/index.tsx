@@ -61,7 +61,7 @@ const ExploreBrand: React.FC<ExploreBrandProps> = ({
   return (
     <div className={styles.exploreBrandContainer}>
       <Typography variant="h2" className={styles.title}>
-        {primaryTitle}
+        {primaryTitle?.toUpperCase()}
       </Typography>
       <div className={styles.description}>
         <Typography variant="p">{secondaryDescription}</Typography>
@@ -87,13 +87,15 @@ const ExploreBrand: React.FC<ExploreBrandProps> = ({
           ))}
         </div>
       </div>
-      <div className={styles.viewAllButton}>
-        <Button
-          title={cta.label || "View all Brands"}
-          type={cta.type || "solid"}
-          color={cta.color || "green_dark"}
-        />
-      </div>
+      {cta && cta.label && (
+        <div className={styles.viewAllButton}>
+          <Button
+            title={cta.label || "View all Brands"}
+            type={cta.type || "solid"}
+            color={cta.color || "green_dark"}
+          />
+        </div>
+      )}
     </div>
   );
 };

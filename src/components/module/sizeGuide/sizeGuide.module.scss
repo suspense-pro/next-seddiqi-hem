@@ -1,7 +1,7 @@
 @import "../../../assets/styles/main.scss";
 
 .title {
-  @include heading_regular;
+  @include heading_light;
   text-transform: uppercase;
   margin-bottom: rem(24);
   color:  getColorHex("green-dark");
@@ -12,7 +12,7 @@
 }
 
 .sizeGuidetableTitle {
-  @include heading_regular;
+  @include heading_light;
   color:  getColorHex("green-dark");
   text-transform: uppercase;
   margin-bottom: rem(12);
@@ -53,7 +53,7 @@
   }
 
   th {
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(12);
     line-height: rem(18);
     letter-spacing: rem(0.8);

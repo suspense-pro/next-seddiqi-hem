@@ -1,29 +1,37 @@
 @import "./../../../assets/styles/main.scss";
 .container {
   display: flex;
-  margin: rem(60) 0;
+  // margin: rem(60) 0 0 0;
+  // @include md {
+  //   margin: rem(120) 0 0 0;
+  // }
+  justify-content: center;
 
   .containerColumns {
     display: flex;
     flex-direction: column;
     gap: rem(52);
-    margin: rem(32);
+    margin: rem(0 32);
 
     @include md {
       flex-direction: row;
     }
     @include lg {
-      margin: rem(60);
+      margin: rem(0 60);
     }
   }
+}
 
+.gradient {
+  border-radius: rem(16) 0 rem(16) 0;
 }
 
 .column {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: rem(32);
+  gap: rem(40);
+  flex: 1;
 
   .image {
     border-radius: rem(16) 0 rem(16) 0;
@@ -32,8 +40,8 @@
     height: rem(336);
     z-index: -1;
     position: relative;
-  
-    @include md {
+
+    @include xl {
       height: rem(636);
       width: 100%;
     }
@@ -44,23 +52,36 @@
     flex-direction: column;
     gap: rem(16);
     align-items: center;
-  
+
     [dir="rtl"] & {
       align-items: flex-start;
     }
-  
+
     span.btn {
       text-transform: capitalize;
     }
-  }  
+  }
+}
+
+.label {
+  @include body_regular;
+  border-radius: 4px 0px;
+  background: getColorHex("tint-grey");
+  padding: rem(6) rem(12);
+  color: getColorHex("brown-dark");
+  font-size: rem(10);
+  line-height: rem(14);
+  letter-spacing:rem(0.2);
+  text-transform: uppercase;
 }
 
 .headingPrimary {
-  color: getColorHex("green-dark");
+  @include heading_light;
+  color: getColorHex("brown-dark");
   margin: 0;
-  @include heading_regular;
   text-align: center;
   text-transform: uppercase;
+  margin-top: rem(8);
 
   [dir="rtl"] & {
     text-align: right;
@@ -72,11 +93,12 @@
 }
 
 .description {
-  color: getColorHex("green-dark");
   @include body_regular;
+  color: getColorHex("grey");
   text-align: center;
   font-size: rem(14);
   line-height: rem(22);
+  margin-bottom: rem(8);
 
   [dir="rtl"] & {
     text-align: right;
@@ -85,7 +107,5 @@
   @include md {
     font-size: rem(16);
     line-height: rem(26);
-    
   }
 }
-

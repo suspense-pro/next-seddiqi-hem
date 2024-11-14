@@ -10,12 +10,14 @@ import CollectionsTabList from "./collectionsTabList";
 import QuoteBlock from "./quoteBlock";
 import ImageQuoteBlock from "./imageQuoteBlock";
 import BoutiqueBanner from "./boutiqueBanner";
-import ArticleListCarousel from "./artilceListCarousel";
+import ArticleListCarousel from "./articleListCarousel";
 import BrandBanner from "./brandBanner";
 import HighlightedProductCarousel from "./highlightedProductCarousel";
 import FeaturedProductCarousel from "./featuredProductCarousel";
 import PdpTabs from "./pdpTabs";
 import ExploreBrand from "./exploreBrand";
+import Spacing from "./spacing";
+import ContentAndImageTwoColumn from "./contentAndImageTwoColumn";
 
 
 
@@ -38,4 +40,7 @@ export {
   FeaturedProductCarousel,
   PdpTabs,
   ExploreBrand,
+  ContentAndImageTwoColumn,
+  Spacing,
+
 };

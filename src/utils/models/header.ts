@@ -46,12 +46,17 @@ export interface AccordionProps {
   setSubMenu?: (id: any) => void;
   subMenu?: string | number | boolean;
   showArrow?: boolean;
+  isOpen?: boolean;
 }
 
 // cards
 export interface CardInfoProps {
   item: {
-    image: {
+    media?: {
+      image?: any;
+      altText?: string;
+    };
+    image?: {
       image?: any;
       altText?: string;
     };
@@ -60,6 +65,7 @@ export interface CardInfoProps {
     title: string;
     subTitle: string;
   };
+  className?: string;
 }
 
 // navigation links

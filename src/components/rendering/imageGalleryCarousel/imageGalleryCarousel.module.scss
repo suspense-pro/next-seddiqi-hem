@@ -11,12 +11,16 @@
     height: rem(40);
     border-radius: rem(12) 0 rem(12);
     background: getColorHex("white");
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     position: absolute;
     z-index: 2000;
+    
+    @include md {
+      display: flex;
+    }
 
     .arrowLeft {
       transform: rotate(180deg);
@@ -63,7 +67,7 @@
 
     .label {
       color: getColorHex("white");
-      @include heading_regular;
+      @include heading_light;
       font-size: rem(16);
       line-height: rem(20);
       letter-spacing: rem(0.4);

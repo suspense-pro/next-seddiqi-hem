@@ -54,9 +54,9 @@
   font-size: rem(14);
   line-height: rem(20);
   letter-spacing: rem(0.4);
-  color: getColorHex("green-dark");
+  color: getColorHex("grey-brown");
   flex: 1;
-  padding: rem(12);
+  padding: rem(16) rem(12);
   background: transparent;
   cursor: pointer;
   transition: all 0.5s;
@@ -69,10 +69,11 @@
     font-size: rem(20);
     line-height: rem(28);
     letter-spacing: rem(0.6);
-    padding: rem(12);
+    padding: rem(20);
   }
 
   &:hover, &.active{
+    color: getColorHex("brown-dark");
     background: getColorHex("desert-storm");
     border-bottom: rem(2) solid getColorHex("midnight-brown");
   }
@@ -176,7 +177,7 @@
     gap: rem(8);
 
     h5{
-      @include heading_regular;
+      @include heading_light;
       font-weight: 500;
       font-size: rem(14);
       line-height: rem(20);
@@ -202,7 +203,7 @@
       margin: 0;
 
       @include md {
-        @include heading_regular;
+        @include heading_light;
         font-weight: 400;
         font-size: rem(16);
         line-height: rem(26);
@@ -261,7 +262,7 @@
   }
 
   .techSpecsMainTitle{
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(22);
     font-weight: 500;
     line-height: rem(30);
@@ -321,7 +322,7 @@
       }
 
       &Title{
-        @include heading_regular;
+        @include heading_light;
         font-size: rem(18);
         font-weight: 500;
         line-height: rem(26);
@@ -375,17 +376,17 @@
       overflow: hidden;
       transition: height 0.3s ease;
       height: 0;
-      margin: 0 0 0 0;
+      margin: 0;
 
       @include md {
-        margin: rem(25) 0 0 0;
+        //margin: rem(25) 0 0 0;
         row-gap: rem(50);
         height: auto !important;
         overflow: visible;
       }
 
       @include lg {
-        margin: rem(30) 0 0 0;
+        //margin: rem(30) 0 0 0;
         row-gap: rem(60);
       }
 
@@ -411,18 +412,19 @@
       row-gap: rem(8);
       margin: 0;
       transition: margin 0.3s ease;
-      margin-top: rem(20);
-
-      @include md {
-        margin-top: rem(25);
+      
+      &:first-child{
+        margin: rem(20) 0 0;
       }
 
-      @include lg {
-        margin-top: rem(30);
+      @include md {
+        &:first-child{
+          margin: rem(40) 0 0;
+        }
       }
 
       &Title, &Description{
-        @include heading_regular;
+        @include heading_light;
         font-size: rem(14);
         font-weight: 500;
         line-height: rem(20);
@@ -489,7 +491,7 @@
   //padding-top: rem(150); //To be removed later
 
   .nonTabTitle{
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(22);
     font-weight: 500;
     line-height: rem(30);
@@ -584,7 +586,7 @@
         }
 
         h5{
-          @include heading_regular;
+          @include heading_light;
           font-weight: 500;
           font-size: rem(14);
           line-height: rem(20);
@@ -613,7 +615,7 @@
           text-align: center;
     
           @include md {
-            @include heading_regular;
+            @include heading_light;
             font-weight: 400;
             font-size: rem(16);
             line-height: rem(26);

@@ -31,7 +31,7 @@ $screen-lg-min: 992px;
 $screen-xl-max: 1279px;
 $screen-xl-min: 1280px;
 $screen-xxl-max: 1590px;
-$screen-xxl-min: 1600px;
+$screen-xxl-min: 1440px;
 
 // HD Desktop Breakpoint (Kerzner spec)
 $screen-hd-desktop-min: 1024px;
@@ -99,6 +99,14 @@ $screen-hd-desktop-max: 1023px;
 }
 @mixin xl-max {
   @media (max-width: #{$screen-xl-max}) {
+    @content;
+  }
+}
+
+// Extra Extra large devices
+@mixin xxl {
+  // min-width: 1280px
+  @media (min-width: #{$screen-xxl-min}) {
     @content;
   }
 }

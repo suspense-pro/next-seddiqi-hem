@@ -6,6 +6,7 @@ import Carousel from "@components/module/carousel";
 import CarouselBtns from "@components/module/carouselBtns";
 import Typography from "../../module/typography";
 import RichText from "../../module/richText";
+import { GradientOverlay } from "@components/module";
 
 interface HeroBannerProps {
   banners: any[];
@@ -51,23 +52,12 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
       ? "left"
       : activeBanner?.horizontalAlignment || "center";
 
+  // console.log("HeroBanner -> activeBanner", activeBanner);
   return (
     <>
       <div className={`${styles.heroBanner} ${containerClass}`}>
-      <div className={styles.heroBannerContainer}>
-        <Carousel
-          slides={slides}
-          setSwiper={setSwiper}
-          setActiveIndex={setActiveIndex}
-          setTransition={'fade'}
-          setSpeed={2000}
-          isAnimated={"yes"}
-        />
-      </div>
-
         {activeBanner && (
           <div className={styles.bannerItem}>
-            {activeBanner.overlay && <div className={styles.overlay} />}
             <div
               className={`${styles.textContainer} ${styles[alignmentClass]} ${
                 activeBanner.verticalAlignment === "bottom"
@@ -93,7 +83,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
                   {activeBanner.mainTitle}
                 </Typography>
               )}
-              {activeBanner.hideUnderline && (
+              {!activeBanner.hideUnderline && (
                 <div className={styles.underline}></div>
               )}
               {activeBanner.richText && (
@@ -103,17 +93,43 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
                   text={activeBanner.richText}
                 />
               )}
-              {activeBanner.cta && activeBanner.cta.length > 0 && (
-                <div className={styles.ctaButton}>
-                  <Button
-                    title={activeBanner.cta[0]?.label}
-                    type={activeBanner.cta[0]?.type}
-                  />
-                </div>
-              )}
+
+              {activeBanner.cta &&
+                activeBanner.cta?.length > 0 &&
+                activeBanner.cta.map((_cta: any) => (
+                  _cta.label && _cta.label.length > 0 && 
+                    <div className={styles.ctaButton}>
+                    <Button
+                      title={_cta?.label}
+                      type={`${_cta?.type?.toLowerCase()} ${_cta.color?.toLowerCase()}`}
+                    />
+                  </div>
+                  
+              
+                ))}
             </div>
           </div>
         )}
+        <div className={styles.heroBannerContainer}>
+          <GradientOverlay
+            opacity={
+              !activeBanner?.opacity?.hideOverlay
+                ? activeBanner?.opacity?.opacity
+                : null
+            }
+            className={styles.containerImg}
+          >
+            <Carousel
+              slides={slides}
+              setSwiper={setSwiper}
+              setActiveIndex={setActiveIndex}
+              setTransition={"fade"}
+              setSpeed={2000}
+              isAnimated={"no"}
+            />
+          </GradientOverlay>
+        </div>
+
         {slides && slides.length > 1 && (
           <div className={styles.carouselBtnsContainer}>
             <CarouselBtns

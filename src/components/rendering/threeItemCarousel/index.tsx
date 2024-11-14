@@ -14,8 +14,13 @@ import Video from "@components/module/video";
 import { ContentHeader, GradientOverlay } from "@components/module";
 import { useWindowWidth } from "@utils/useCustomHooks";
 
-const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] }) => {
-  const [slidesPerView, setSlidesPerView] = useState(3); 
+const ThreeItemCarousel = ({
+  mainTitle,
+  hideUnderline,
+  richText,
+  listItems = [],
+}) => {
+  const [slidesPerView, setSlidesPerView] = useState(3);
   const [isMobile, setIsMobile] = useState(false);
 
   const swiperRef = useRef(null);
@@ -31,7 +36,11 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
       setSlidesPerView(2);
       setIsMobile(false);
     } else {
-      setSlidesPerView(3);
+      if (listItems?.length > 2) {
+        setSlidesPerView(3);
+      } else {
+        setSlidesPerView(2);
+      }
       setIsMobile(false);
     }
   }, [windowWidth]);
@@ -46,8 +55,12 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
     setActiveIndex(swiper.realIndex);
   }, []);
 
-  const imageClassNames = listItems.length < 3 ? `${styles.twoColumnImg} ${styles.image}` : styles.image;
-  const videoContainerClassNames = listItems.length < 3 ? `${styles.twoColumnVid}` : styles.videoContainer;
+  const imageClassNames =
+    listItems.length < 3
+      ? `${styles.twoColumnImg} ${styles.image}`
+      : styles.image;
+  const videoContainerClassNames =
+    listItems.length < 3 ? `${styles.twoColumnVid}` : styles.videoContainer;
   const videoClassNames = isMobile ? styles.mobileVid : styles.video;
 
   const renderSlide = (item, index) => {
@@ -60,7 +73,12 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
         <GradientOverlay opacity={opacity}>
           <div className={styles.sliderItem}>
             {isImage && (
-              <Image className={imageClassNames} image={item.media?.image} imageAltText={item.media?.altText} />
+              <Image
+                height={imageClassNames}
+                className={imageClassNames}
+                image={item.media?.image}
+                imageAltText={item.media?.altText}
+              />
             )}
             {isVideo && (
               <div className={videoContainerClassNames}>
@@ -76,14 +94,16 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
               <Typography className={styles.categoryTitle} variant="h4">
                 {item.title}
               </Typography>
-              <Button
-                isLink={true}
-                link={item.cta.url}
-                className={styles.discoverBtn}
-                title={item.cta.label}
-                color={item.cta.color}
-                type={item.cta.type}
-              />
+              {item?.cta && item?.cta?.label && (
+                <Button
+                  isLink={true}
+                  link={item.cta.url}
+                  className={styles.discoverBtn}
+                  title={item.cta.label}
+                  color={item.cta.color}
+                  type={item.cta.type}
+                />
+              )}
             </div>
           </div>
         </GradientOverlay>
@@ -102,19 +122,24 @@ const ThreeItemCarousel = ({ mainTitle, hideUnderline, richText, listItems = [] 
         hideUnderline={hideUnderline}
         mainTitle={mainTitle}
         richText={richText}
-
       />
       <div className={styles.containerSlider}>
         {/* SLIDER BTNS */}
-        {hasMultipleItems && !isMobile &&  (
+        {hasMultipleItems && !isMobile && (
           <>
             {activeIndex > 0 && (
-              <div className={styles.leftBtn} onClick={() => handleSlide("prev")}>
+              <div
+                className={styles.leftBtn}
+                onClick={() => handleSlide("prev")}
+              >
                 <ArrowRight fill="white" className={styles.arrowLeft} />
               </div>
             )}
             {activeIndex < listItems.length - slidesPerView && (
-              <div className={styles.rightBtn} onClick={() => handleSlide("next")}>
+              <div
+                className={styles.rightBtn}
+                onClick={() => handleSlide("next")}
+              >
                 <ArrowRight fill="white" className={styles.arrowRight} />
               </div>
             )}

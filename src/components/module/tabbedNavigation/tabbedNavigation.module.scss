@@ -7,6 +7,7 @@
   overflow: hidden;
   transition: all 0.5s;
   align-items: center;
+  margin-top: rem(16);
 
 
   .tabs {
@@ -15,6 +16,7 @@
     justify-content: space-between;
     border-bottom: rem(1) solid getColorHex("grey-light-3");
     color: getColorHex("brown-grey");
+    width: 100%;
 
     .tab {
       @include heading_medium;

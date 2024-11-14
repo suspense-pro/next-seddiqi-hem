@@ -24,15 +24,17 @@ const BrandPopUp: React.FC<BrandPopUpProps> = ({ brands, isOpen, onClose }) => {
             Available Brands
           </Typography>
           <div className={styles.brandsWrapper}>
-            {brands.length > 0 &&
-              brands.map((availableBrand, index) => (
-                <React.Fragment key={index}>
-                  <p className={styles.brandsName}>{availableBrand}</p>
-                  {index < brands.length - 1 && (
-                    <div className={styles.brandSeparator} />
-                  )}
-                </React.Fragment>
-              ))}
+            {brands?.length > 0 &&
+              brands.map((availableBrand, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <p className={styles.brandsName}>{availableBrand}</p>
+                    {index < brands.length - 1 && (
+                      <div className={styles.brandSeparator} />
+                    )}
+                  </React.Fragment>
+                );
+              })}
           </div>
         </div>
       </SideDrawer>

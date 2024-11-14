@@ -31,7 +31,7 @@
   }
 
   .slideTitle {
-    @include heading_regular;
+    @include heading_light;
     line-height: rem(20);
     text-transform: uppercase;
     font-size: rem(14);

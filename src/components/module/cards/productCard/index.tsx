@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import Typography from "@components/module/typography";
 import HeartIcon from "@assets/images/svg/HeartIcon";
 import styles from "./productCard.module.scss";
-import Carousel from "@components/module/carousel";
-import CarouselBtns from "@components/module/carouselBtns";
 import Image from "next/image";
+import { HoverProductSlider, CarouselBtns } from "@components/module";
+import Link from "next/link";
 
 // TEMP
-const TITLE = "Hublot";
 const WATCH_TYPE = "Classic Fusion";
-const PRICE = "AED 20'500";
 
 const slides = [
   "/images/png/product_watch_01.png",
@@ -18,59 +16,94 @@ const slides = [
   "/images/png/product_watch_04.png",
 ];
 
-const ProductCard = ({ item, isCarousel = true }) => {
+interface Props {
+  item: any;
+  hasCarousel?: boolean;
+}
+
+const ProductCard = ({ item, hasCarousel = false }: Props) => {
   if (!item) return null;
+
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-
-  // ITEM ATTRIBS
-  const { name, image, imageGroups, shortDescription, pricePerUnit, currency } = item;
+ 
+  const {
+    id,
+    name,
+    image,
+    pricePerUnit,
+    priceCurrency,
+    c_brandName,
+    c_model,
+    imageGroups,
+  } = item;
+ 
+  const cleanedId = id.replace(/\//g, "%2F");
 
   return (
-    <div
-      style={{
-        order: item?.tempId,
-        gridRowEnd: `span 1`,
-        gridColumnEnd: `span 1`,
-      }}
-      className={styles.productContainer}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <Link
+      href={`/product/${cleanedId}`}
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      <div className={styles.productTop}>
-        <div className={styles.newContainer}>
-          <div className={styles.new}>New In</div>
+      <div
+        style={{
+          order: item?.tempId,
+          gridRowEnd: `span 1`,
+          gridColumnEnd: `span 1`,
+        }}
+        className={styles.productContainer}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div className={styles.productTop}>
+          <div className={styles.newContainer}>
+            <div className={styles.new}>New In</div>
+          </div>
+          {/* <HeartIcon fill="#" /> */}
         </div>
-        <HeartIcon fill="#" />
+        <div className={styles.imgContainer}>
+          {hasCarousel && isHovered ? (
+            <HoverProductSlider
+              slides={imageGroups[0].images}
+              setSwiper={setSwiper}
+              setActiveIndex={setActiveIndex}
+              setTransition={"slide"}
+              setSpeed={500}
+            />
+          ) : (
+            <Image
+              layout="fill"
+              objectFit="contain"
+              alt={`Slide`}
+              src={image?.absUrl}
+              // src={imageGroups[1]?.images?.[0]?.link}
+            />
+          )}
+        </div>
+        <div className={styles.productBottom}>
+          <Typography align="center" variant="p" className={styles.title}>
+            {c_brandName}
+          </Typography>
+          <Typography align="center" variant="p" className={styles.type}>
+            {c_model}
+          </Typography>
+          {/* <Typography align="center" variant="p" className={styles.price}>
+            {priceCurrency} {pricePerUnit}
+          </Typography> */}
+          {hasCarousel && isHovered && (
+            <CarouselBtns
+              swiper={swiper}
+              activeIndex={activeIndex}
+              slides={imageGroups[0].images}
+              btnWidth={16}
+              btnColor={"grey-light-5"}
+            />
+          )}
+        </div>
       </div>
-      <div className={styles.imgContainer}>
-        {/* <Carousel
-          slides={slides}
-          setSwiper={setSwiper}
-          setActiveIndex={setActiveIndex}
-        /> */}
-        <Image
-          layout="fill"
-          objectFit="cover"
-          alt={`Slide`}
-          src={image?.absUrl}
-          // src={imageGroups[1]?.images?.[0]?.link}
-        />
-      </div>
-      <div className={styles.productBottom}>
-        <Typography align="center" variant="p" className={styles.title}>
-          {name?.default ? name?.default : name}
-        </Typography>
-        <Typography align="center" variant="p" className={styles.type}>
-          {WATCH_TYPE}
-        </Typography>
-        <Typography align="center" variant="p" className={styles.price}>
-          {currency} {pricePerUnit}
-        </Typography>
-        {isCarousel && isHovered && <CarouselBtns swiper={swiper} activeIndex={activeIndex} slides={slides} />}
-      </div>
-    </div>
+    </Link>
   );
 };
 

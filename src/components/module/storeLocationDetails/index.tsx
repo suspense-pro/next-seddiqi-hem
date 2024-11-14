@@ -11,16 +11,17 @@ import {
   StoreLocationDetailsProps,
   Store,
 } from "@utils/models/storeLocatorDetails";
-import { useDeviceWidth } from "@utils/useCustomHooks";
 
 const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
   storeId,
   isOpen,
   onClose,
+  mapViewOn,
+  useOnPopup,
+  stores
 }) => {
   const [storeDetails, setStoreDetails] = useState<Store[]>([]);
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
-  const isMobile = !useDeviceWidth()[0];
 
   useEffect(() => {
     const fetchStoresData = async () => {
@@ -30,8 +31,11 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
           brand: "",
           city: "",
           name: "",
+          service: "",
+          lat: "",
+          lng: "",
         });
-        const storeDetails = response?.response?.data;
+        const storeDetails = response?.response;
         if (Array.isArray(storeDetails)) {
           setStoreDetails(storeDetails);
         } else {
@@ -44,18 +48,13 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
     };
 
     fetchStoresData();
-  }, []);
+  }, [storeId]);
 
   useEffect(() => {
-    //  Pass Stroe id coming from Parent Component
-    // if (storeId && storeDetails.length > 0) {
-
-    if (storeDetails.length > 0) {
-      const storeDetailsMatch = storeDetails.find((store) => {
-        //return store.id === storeId;
-        return store.id === "store10"; // Dummy Entry
-      });
-
+    if (storeDetails.length > 0 && storeId) {
+      const storeDetailsMatch = storeDetails.find(
+        (store) => store.id === storeId
+      );
       if (storeDetailsMatch) {
         setSelectedStore(storeDetailsMatch);
       } else {
@@ -64,12 +63,9 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
     }
   }, [storeId, storeDetails]);
 
-  if (!isMobile) {
-    return null;
-  }
-
   return (
     <div className={styles.storeDetailsWrapper}>
+      {useOnPopup && (
       <SideDrawer
         isOpen={isOpen}
         showFooter={false}
@@ -78,10 +74,11 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
         onSubmit={null}
         onClearAll={null}
         position={"right"}
-        className={styles.customSideDrawerStyle}        
+        className={styles.customSideDrawerStyle}
       >
-        {selectedStore && <StoreDetails store={selectedStore} />}
+        {selectedStore && <StoreDetails store={selectedStore} mapViewOn={mapViewOn} stores={stores}/>}
       </SideDrawer>
+      )}
     </div>
   );
 };

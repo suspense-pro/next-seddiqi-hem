@@ -1,8 +1,8 @@
 @import "./../../../assets/styles/main.scss";
 
 // Variables
-$mobile-margin: rem(60 32);
-$desktop-margin: rem(120 32);
+$mobile-margin: rem(0 32);
+$desktop-margin: rem(0 32);
 $mobile-gap: rem(40);
 $desktop-gap: rem(10);
 $product-gap: rem(28);
@@ -24,8 +24,11 @@ $border-radius: rem(12 0 12 0);
 
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: center; 
   margin: $mobile-margin;
+  @include md {
+    margin: $desktop-margin;
+  }
 }
 .containerContent {
   @include flex-center;
@@ -35,7 +38,7 @@ $border-radius: rem(12 0 12 0);
   
   @include lg {
     gap: $desktop-gap;
-    margin: $desktop-margin;
+    margin: rem(0 32);
     flex-direction: row;
     width: rem(1085);
     justify-content: space-between;
@@ -49,7 +52,7 @@ $border-radius: rem(12 0 12 0);
   gap: $product-gap;
   width: 100%;
   height: 100%;
-  padding: rem(0 18);
+  // padding: rem(0 18);
 
   @include lg {
     margin: 0;
@@ -76,10 +79,13 @@ $border-radius: rem(12 0 12 0);
 
 // Heading
 .headingPrimary {
-  @include heading_regular;
+  @include heading_light;
   margin: 0;
   text-transform: uppercase;
-  color: getColorHex("green-dark");
+  color: getColorHex("midnight-brown");
+  font-size: rem(40);
+  width: 100%;
+  text-align: center;
 }
 
 // Product image
@@ -91,7 +97,8 @@ $border-radius: rem(12 0 12 0);
   // background-color: getColorHex("grey-light-4");
   border-radius: $border-radius;
   overflow: hidden;
-  
+
+
   @include lg {
     height: rem(474);
     margin: 0;
@@ -100,7 +107,7 @@ $border-radius: rem(12 0 12 0);
   .image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .icon {
@@ -118,7 +125,8 @@ $border-radius: rem(12 0 12 0);
 
 // Typography styles
 .title {
-  @include heading_regular;
+  @include heading_light;
+  color: getColorHex("black");
   text-transform: uppercase;
   line-height: rem(20);
   letter-spacing: rem(0.4);
@@ -134,6 +142,7 @@ $border-radius: rem(12 0 12 0);
   font-size: rem(16);
   line-height: rem(28);
   letter-spacing: rem(0.4);
+  color: getColorHex('grey');
 
   @include md {
     font-size: rem(18)
@@ -145,6 +154,7 @@ $border-radius: rem(12 0 12 0);
   font-size: rem(12);
   line-height: rem(22);
   letter-spacing: rem(0.4);
+  color: getColorHex('grey-mid');
 
   @include md {
     font-size: rem(14)
@@ -152,10 +162,11 @@ $border-radius: rem(12 0 12 0);
 }
 
 .price {
-  @include heading_regular;
+  @include heading_light;
   font-size: rem(14);
   line-height: rem(20);
   letter-spacing: rem(0.4);
+  color: getColorHex('black');
 
   @include md {
     font-size: rem(16)

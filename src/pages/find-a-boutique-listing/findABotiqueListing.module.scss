@@ -1,18 +1,27 @@
 @import "../../assets/styles/main.scss";
 
 .heroBannerWrapper{
+  overflow: hidden;
+  
+  & > div{
+    height: rem(393);
 
-  & > div > div:first-child{
-    height: rem(420);
+    @include md{
+      height: rem(420);
+    }
   }
 
-  & > div > div:last-child > div:first-child{
+  & > div > div:first-child{
+    
+  }
+
+  /*& > div > div:last-child > div:first-child{
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5))
   }
 
   & > div > div:last-child > div > div:last-child{
     display: none;
-  }
+  }*/
 }
 
 .storeLocatorContainer{
@@ -20,10 +29,13 @@
   display: flex;
   flex-direction: column;
   row-gap: rem(40);
-  margin-top: rem(32);
+  //margin-top: rem(32);
+  margin: rem(32) auto 0;
+  max-width: rem(1440);
 
   @include md{
-    margin-top: rem(60);
+    //margin-top: rem(60);
+    margin: rem(60) auto 0;
     padding: 0 rem(60);
     row-gap: rem(32);
   }
@@ -79,7 +91,7 @@
       margin: 0;
 
       @include md{
-        @include heading_regular;
+        @include heading_light;
         font-size: rem(16);
         line-height: rem(20);
         font-weight: 400;
@@ -87,7 +99,7 @@
     }
 
     p{
-      @include heading_regular;
+      @include heading_light;
       font-size: rem(16);
       line-height: rem(26);
       font-weight: 400;
@@ -234,6 +246,8 @@
     &Image{
       display: flex;
       object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
 
     .nearestStore{
@@ -270,7 +284,7 @@
     }
     
     &Name{
-      @include heading_regular;
+      @include heading_light;
       font-weight: 500;
       font-size: rem(18);
       line-height: rem(26);
@@ -364,4 +378,113 @@
 .fadeOut {
   opacity: 0;
   transition: opacity 0.3s ease-out;
+}
+
+.searchInputContainer{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  border: none;
+  border-bottom: rem(1) solid getColorHex("grey-light");
+  margin-bottom: rem(28);
+  height: rem(48);
+  gap: rem(12);
+
+  @include md{
+    margin-bottom: rem(29);
+    gap: rem(20);
+  }
+}
+
+.searchIcon{
+  width: rem(20);
+  height: rem(20);
+
+  @include md{
+    width: rem(24) !important;
+    height: rem(24);
+  }
+}
+
+.searchInput{
+  @include body_regular;
+  font-weight: 400;
+  font-size: rem(12);
+  line-height: rem(20);
+  letter-spacing: rem(0.2);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  border: none;
+  height: rem(48);
+  padding: 0;
+
+  @include md{
+    font-size: rem(14);
+    line-height: rem(22);
+  }
+}
+
+.locationCheckboxContainer{
+  margin-top: rem(28);
+
+  @include md{
+    margin-top: rem(29);
+  }
+}
+
+.selectedOptions {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: rem(32);
+  gap: rem(16);
+  
+  @include md {
+    gap: rem(20); 
+  }
+
+  .selectedOption {
+    background-color: getColorHex("green-greyish");
+    padding: rem(6 12);
+    border-radius: rem(4);
+    display: flex;
+    align-items: center;
+    gap: rem(10);
+    .option {
+      @include body_light;
+      font-size: rem(10);
+      @include md {
+        font-size: rem(14);
+      }
+    }
+  }
+
+  .deleteOption {
+    cursor: pointer;
+    svg {
+      width: rem(10);
+      height: rem(10);
+      color: getHexColor("green-dark");
+    }
+  }
+
+  &:empty{
+    display: none;
+  }
+}
+
+.optionsContainer{
+  display: none;
+  width: 100%;
+  gap: rem(16);
+
+  @include md{
+    display: flex;
+  }
+
+  .selectedOptions{
+    margin: 0;
+  }
 }

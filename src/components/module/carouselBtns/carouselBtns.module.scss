@@ -1,5 +1,11 @@
 @import './../../../assets/styles/main.scss';
 
+
+.image {
+  object-fit: cover;
+}
+
+
 .carousel {
   display: flex;
   align-items: center;
@@ -12,34 +18,45 @@
 
 .btns {
   display: flex;
-  align-items: flex-end;
-  gap: rem(8);
-  height: rem(16);
+  align-items: center;
+  gap: rem(6); 
+  height: rem(8);
 
   .carouselBtn {
-    width: rem(1); 
-    height: rem(8); 
-    border: rem(1) solid getColorHex("green-grey"); 
+    width: rem(16);
+    height: rem(2);
     cursor: pointer;
-    transition: height 0.3s ease;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    z-index: 100;
   }
 
   .activeCarouselBtn {
-    height: rem(16);
-    border: rem(1) solid getColorHex("green-dark"); 
-    transition: height 0.3s ease;
+    width: rem(24);
+    background-color: getColorHex("metallic");
+    transition: width 0.3s ease, background-color 0.3s ease;
   }
+
+  .activeCarouselBtnGreen {
+    background-color: getColorHex("green-Salem");
+  }
+}
+
+.arrowLeft,
+.arrowRight {
+  cursor: pointer;
+  width: rem(16);
+  height: rem(16);
 }
 
 .arrowLeft {
   transform: rotate(180deg);
-  cursor: pointer;
 }
 
-.arrowRight {
-  cursor: pointer;
+
+.white {
+  background-color: getColorHex("white");
 }
 
-.image {
-  object-fit: cover;
+.grey-light-5 {
+  background-color: getColorHex("grey-light-5");
 }

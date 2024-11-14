@@ -1,0 +1,199 @@
+@import "./../../../assets/styles/main.scss";
+.contentAndImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: rem(20) rem(20);
+
+  @include md {
+    margin-left: rem(120);
+    margin-right: rem(120);
+  }
+}
+
+.contentWrapper {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: rem(1200);
+  gap: rem(0);
+
+  @include md-max {
+    flex-direction: column;
+    gap: rem(28);
+  }
+
+  @include lg {
+    flex-direction: row;
+    gap: rem(120);
+  }
+}
+.squareImageLayout {
+  .contentWrapper {
+    @include md {
+      flex-direction: row;
+      gap: rem(80);
+    }
+  }
+}
+
+h2.title {
+  color: getColorHex("brown-dark");
+  text-align: left;
+  text-transform: uppercase;
+  margin-block-end: rem(0);
+  margin-block-start: rem(0);
+  font-weight: 500;
+  @include md {
+    letter-spacing: rem(0.4);
+  }
+}
+
+.description {
+  letter-spacing: rem(0.2);
+  color: getColorHex("grey");
+  margin-top: rem(12);
+  margin-bottom: rem(20);
+  font-weight: rem(400);
+  font-size: rem(16);
+  line-height: rem(26);
+
+  @include md {
+    margin-top: rem(12);
+    margin-bottom: rem(0);
+  }
+}
+
+.leftContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @include md {
+    width: 100%;
+    height: rem(690);
+  }
+
+  &.square {
+    width: 100%;
+    height: auto;
+
+    @include md {
+      width: rem(520);
+      height: auto;
+    }
+
+    .description {
+      margin-bottom: rem(0);
+      @include md {
+        margin-bottom: rem(20);
+      }
+    }
+  }
+}
+
+.rightContent {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+  height: rem(448);
+
+  @include md {
+    flex-direction: row;
+    flex: 0 0 rem(520);
+    width: rem(520);
+    height: rem(693);
+  }
+
+  &.square {
+    aspect-ratio: 1;
+    width: 100%;
+    height: 100%;
+    @include md {
+      flex-direction: row;
+      flex: 0 0 rem(520);
+      width: rem(520);
+      height: rem(520);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: rem(16) rem(0);
+
+      @include md {
+        width: rem(520);
+        height: rem(520);
+      }
+    }
+  }
+}
+
+.rightContent img {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: rem(448);
+  object-fit: cover;
+  border-radius: rem(16) rem(0);
+
+  @include md {
+    width: rem(520);
+    height: rem(690);
+  }
+}
+
+.squareImage {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: rem(16);
+}
+
+.reversed.contentAndImageTwoColumn {
+  @include md {
+    margin: 0 auto;
+    width: 100%;
+  }
+  .contentWrapper {
+    flex-direction: row-reverse;
+  }
+}
+
+.reversed .leftContent {
+  order: 2;
+  @include md {
+    justify-content: flex-start;
+    padding-left: rem(0);
+  }
+}
+
+.reversed .rightContent {
+  order: 1;
+  padding-bottom: rem(32);
+  @include md {
+    padding-right: rem(0);
+    justify-content: flex-end;
+  }
+}
+
+.richTextStyle {
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+  }
+}
+
+.ctaContainer {
+  @include md {
+    margin-top: rem(28);
+  }
+}

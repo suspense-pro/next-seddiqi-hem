@@ -18,9 +18,11 @@
 
 .imgContainer {
   width: 100%;
-  height: rem(370);
+  height: rem(460);
   position: relative;
   cursor: zoom-in;
+  width: 65%;
+  margin: 0 auto;
 
   @include lg {
     height: rem(828);
@@ -34,18 +36,21 @@
 }
 
 .backBtn {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-left: rem(44);
+  left: rem(24);
   gap: rem(8);
   position: absolute;
   z-index: 100;
   cursor: pointer;
+  font-size: rem(10);
+  top: rem(14);
 
   svg {
     transform: rotate(180deg);
+    width: rem(6);
+    height: rem(12);
   }
 }
 
@@ -79,7 +84,7 @@
 .carousel {
   position: relative;
   width: 100%;
-  height: rem(370);
+  height: rem(460);
 
   @include lg {
     flex: 2;
@@ -123,6 +128,7 @@
     position: absolute;
     right: rem(20);
     bottom: rem(0);
+    z-index: 1;
 
     .degree {
       color: getColorHex("midnight-brown");
@@ -156,20 +162,36 @@
 
 // Right Section
 .right {
+  padding: rem(28);
+  width: 100%;
   display: flex;
-  flex: 1.2;
-  margin: rem(28);
+
+  .productDetails {
+    width: 100%;
+  }
 
   @include lg {
+    flex: 1.2;
     margin: rem(80);
+  }
+  @include breakpoint-max-width(rem(1460)) {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 .save {
-  flex: 1;
   display: flex;
   justify-content: flex-end;
   height: 100%;
+
+  position: absolute;
+  right: rem(28);
+
+  @include lg {
+    position: relative;
+    flex: 1;
+  }
 
   svg {
     margin-top: rem(6);
@@ -190,7 +212,7 @@
     display: flex;
     align-items: center;
     color: getColorHex("green-dark");
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(14);
     line-height: rem(20);
     letter-spacing: rem(0.4);
@@ -202,13 +224,14 @@
   }
 
   .title {
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(22);
     font-style: normal;
     font-weight: 500;
     line-height: rem(30);
     letter-spacing: rem(0.6);
     text-transform: uppercase;
+    color: getColorHex("brown-dark");
 
     @include lg {
       font-size: rem(32);
@@ -218,7 +241,7 @@
 
   .price {
     color: getColorHex("brown-dark");
-    @include heading_regular;
+    @include heading_light;
     font-size: rem(18);
     font-style: normal;
     font-weight: 500;
@@ -243,15 +266,16 @@
   align-items: center;
 }
 
-.size, .color {
+.size,
+.color {
   display: flex;
-  align-items: center;            
-  justify-content: space-between; 
+  align-items: center;
+  justify-content: space-between;
   padding-bottom: rem(12);
   cursor: pointer;
   flex: 1;
   border-bottom: 1px solid getColorHex("grey-light-5");
-  margin-right: rem(20);         
+  margin-right: rem(20);
 
   &:last-child {
     margin-right: 0;
@@ -310,8 +334,8 @@
   gap: rem(8);
 
   .productLabel {
+    @include heading_light;
     color: getColorHex("brown-dark");
-    @include heading_regular;
     font-size: rem(14);
     line-height: rem(20);
     letter-spacing: rem(0.4);
@@ -323,8 +347,8 @@
   }
 
   .productDesc {
-    color: getColorHex("grey-mid");
     @include body_regular;
+    color: getColorHex("grey");
     font-size: rem(14);
     line-height: rem(22);
     letter-spacing: rem(0.4);
@@ -345,13 +369,20 @@
   }
 }
 
+
+
 .bottom {
   display: flex;
   align-items: center;
   gap: rem(16);
-  justify-content: space-between;
+
   @include lg {
     justify-content: flex-start;
+  }
+
+  @include breakpoint-max-width(rem(1460)) {
+    gap: rem(10);
+    justify-content: space-between;
   }
 
   .tab {
@@ -373,7 +404,7 @@
     @include body_regular;
     width: rem(2);
     height: rem(16);
-    background-color: #cccbc7;
+    background-color: getColorHex("grey-light-5");
     font-size: rem(14);
     line-height: rem(18);
     letter-spacing: rem(1);
@@ -381,8 +412,12 @@
   }
 }
 
+.noEditView {
+  justify-content: flex-start;
+}
+
 .errorMessage {
   font-size: rem(12);
-  color:  getColorHex("red");
+  color: getColorHex("red");
   margin-top: rem(5);
 }

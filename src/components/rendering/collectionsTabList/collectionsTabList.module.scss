@@ -1,7 +1,8 @@
 @import "./../../../assets/styles/main.scss";
 
 .container {
-  padding: rem(60 0);
+  // margin: rem(60) 0 0 0;
+
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -11,16 +12,16 @@
   }
 
   @include md {
-    padding: rem(120 0);
+    // margin: rem(120) 0 0 0;
   }
 }
 
 .titleColor {
-  color: getColorHex("green-dark");
+  color: getColorHex("brown-dark");
 }
 
 .subTitleColor {
-  color: getColorHex("green-dark");
+  color: getColorHex("grey");
 }
 
 .barColor {
@@ -34,7 +35,7 @@
   padding: 0 rem(28);
   justify-content: center;
 
-  @include md {
+  @include lg {
     width: rem(800);
     margin: 0;
     padding: 0;
@@ -44,7 +45,6 @@
     margin-bottom: rem(20);
   }
 }
-
 
 .containerSlider {
   padding: rem(0 0 0 28);
@@ -68,15 +68,48 @@
   flex-direction: column;
   align-items: center;
   gap: rem(40);
-
-  .containerGridItems {
+ 
+  .container4Grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(rem(360), 1fr));
+    grid-template-columns: repeat(2, minmax(rem(360), 1fr));
+    border-left: rem(1) solid getColorHex("grey-light-4", 0.4);
+    border-bottom: rem(1) solid getColorHex("grey-light-4", 0.4);
     width: 100%;
 
     @include md {
       max-width: rem(1082);
-      // margin: 0 auto;
+    }
+  }
+
+  .container6Grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(rem(360), 1fr));
+    width: 100%;
+    border-left: rem(1) solid getColorHex("grey-light-4", 0.4);
+    border-bottom: rem(1) solid getColorHex("grey-light-4", 0.4);
+
+
+    @include lg {
+      grid-template-columns: repeat(3, minmax(rem(260), 1fr));
+      max-width: rem(1082);
+    }
+  }
+
+  .containerGap {
+    gap: rem(1);
+  }
+
+  .containerGridItems {
+    display: grid;
+    grid-template-columns: repeat(1fr, minmax(rem(260), 1fr));
+    width: 100%;
+    border-left: rem(1) solid getColorHex("grey-light-4", 0.4);
+    border-bottom: rem(1) solid getColorHex("grey-light-4", 0.4);
+
+
+    @include lg {
+      grid-template-columns: repeat(3, minmax(rem(260), 1fr));
+      max-width: rem(1082);
     }
   }
 }

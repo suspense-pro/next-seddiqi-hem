@@ -30,7 +30,7 @@ import SizeSelector from "./sizeSelector";
 import ColorSelector from "./colorSelector";
 import StoreLocationDetails from "./storeLocationDetails";
 import StoreDetails from "./storeLocationDetails/storeDetails";
-import StoreDetailsPage from "./storeLocationDetails/storeDetailsPage"
+import StoreDetailsPageContent from "./storeLocationDetails/storeDetailsPageContent";
 import FilterBtn from "./filterBtn";
 import ProductCard from "./cards/productCard";
 import PlpContent from "./plpContent";
@@ -44,6 +44,16 @@ import Loader from "./loader";
 import BookAnAppointment from "./bookAnAppointment";
 import BrandPopup from "./storeLocationDetails/brandPopUp";
 import BrandListing from "./brandListing";
+import Search from "./search";
+import RecommendedSearches from "./search/recommendedSearches/recommendedSearches";
+import PopularProducts from "./search/popularProducts/popularProducts";
+import SearchTabs from "./search/searchTabs/searchTabs";
+import StoriesResults from "./search/storiesResults/storiesResults";
+import NoSearchResultFound from "./search/noSearchResultFound/noSearchResultFound";
+import ViewAllStories from "./search/viewAllStories/viewAllStories";
+import FeaturedProductCard from "./featuredProductCard";
+import HoverProductSlider from "./hoverProductSlider";
+import CarouselBtns from "./carouselBtns"
 
 
 export {
@@ -76,7 +86,7 @@ export {
   ColorSelector,
   StoreLocationDetails,
   StoreDetails,
-  StoreDetailsPage,
+  StoreDetailsPageContent,
   FilterBtn,
   PlpContent,
   ContentHeader,
@@ -90,5 +100,15 @@ export {
   CategoryCard,
   Loader,
   BookAnAppointment,
-  BrandListing
+  BrandListing,
+  Search,
+  RecommendedSearches,
+  PopularProducts,
+  SearchTabs,
+  StoriesResults,
+  NoSearchResultFound,
+  ViewAllStories,
+  FeaturedProductCard,
+  HoverProductSlider,
+  CarouselBtns
 };

@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { ArrowRight } from "@assets/images/svg";
 import styles from "./carouselBtns.module.scss";
 
-const CarouselBtns = ({ swiper, activeIndex, slides }) => {
+const CarouselBtns = ({ swiper, activeIndex, slides, btnColor = "metallic", btnWidth = 0, activeBtn = true }) => {
   const handlePaginationClick = useCallback(
     (index) => {
       if (swiper) swiper.slideToLoop(index);
@@ -32,25 +32,24 @@ const CarouselBtns = ({ swiper, activeIndex, slides }) => {
 
   return (
     <div className={styles.carousel}>
-      <span onClick={handlePrevClick}>
+      {/* <span onClick={handlePrevClick}>
         <ArrowRight className={styles.arrowLeft} />
-      </span>
+      </span> */}
       <div className={styles.btns}>
         {slides?.map((_, index) => (
           <div
+            style={{ width: index === activeIndex && btnWidth && btnWidth }}
             key={index}
-            className={`${styles.carouselBtn} ${
-              index === activeIndex ? styles.activeCarouselBtn : ""
+            className={`${styles[btnColor]} ${styles.carouselBtn} ${
+              index === activeIndex ? `${activeBtn ? styles.activeCarouselBtn : ""}` : ""
             }`}
             onClick={() => handlePaginationClick(index)}
-          >
-            &nbsp;
-          </div>
+          />
         ))}
       </div>
-      <span onClick={handleNextClick}>
+      {/* <span onClick={handleNextClick}>
         <ArrowRight className={styles.arrowRight} />
-      </span>
+      </span> */}
     </div>
   );
 };

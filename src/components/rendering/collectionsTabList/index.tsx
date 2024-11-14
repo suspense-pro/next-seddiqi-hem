@@ -10,7 +10,7 @@ import { useDeviceWidth } from "@utils/useCustomHooks";
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation } from "swiper/modules";
-import { BackgroundStyle }  from '@utils/helpers/backgroundStyle';
+import { BackgroundStyle } from "@utils/helpers/backgroundStyle";
 
 const CollectionsTabList = ({ ...content }) => {
   const isMobile = !useDeviceWidth()[0];
@@ -45,16 +45,28 @@ const CollectionsTabList = ({ ...content }) => {
   );
 };
 
-
 const CollectionsTabDesktop = ({ content, cta, ind }) => {
+  const listItems = content?.tabItem[ind]?.collectionItems;
+  const isProduct = content?.type?.toLowerCase() === "product";
+
   return (
-    <div className={styles.containerGrid}>
-      <div className={styles.containerGridItems}>
-        {content?.tabItem[ind]?.collectionItems?.map((item) => {
-          return <CollectionsCard item={item} type={content?.type} />
+    <div className={`${styles.containerGrid}`}>
+      <div
+        className={`
+          ${!isProduct && styles.containerGap} 
+  ${
+    listItems.length === 4
+      ? styles.container4Grid
+      : listItems.length >= 6
+      ? styles.container6Grid
+      : styles.containerGridItems
+  }`}
+      >
+        {listItems?.map((item) => {
+          return <CollectionsCard totalItems={listItems?.length} item={item} type={content?.type} />;
         })}
       </div>
-      <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />
+      {cta && cta.label && <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />}
     </div>
   );
 };
@@ -72,7 +84,7 @@ const CollectionsTabMobile = ({ content, cta, ind }) => {
 
   const renderSlide = (item, index) => (
     <SwiperSlide className={styles.swiperSlide} key={index} style={isMobile ? { width: "90%" } : {}}>
-      <CollectionsCard item={item} type={content?.type} />
+      <CollectionsCard totalItems={listItems?.length} item={item} type={content?.type} />
     </SwiperSlide>
   );
 
