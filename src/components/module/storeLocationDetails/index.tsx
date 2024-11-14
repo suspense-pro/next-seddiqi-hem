@@ -29,7 +29,9 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
           brand: "",
           city: "",
           name: "",
-          service: ""
+          service: "",
+          lat: "",
+          lng: "",
         });
         const storeDetails = response?.response;
         if (Array.isArray(storeDetails)) {
