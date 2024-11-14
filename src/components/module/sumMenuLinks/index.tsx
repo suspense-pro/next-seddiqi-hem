@@ -6,7 +6,7 @@ import { generateUniqueId } from "@utils/helpers/uniqueId";
 
 const SubMenuLinks = () => {
   const headerContext = useContext(HeaderContext);
-  const { current, headerData } = headerContext;
+  const { current, headerData, updateCurrent } = headerContext;
   const currentHeaderData = headerData?.children[current]?.children;
 
   if (current === null || !currentHeaderData) {
@@ -17,14 +17,16 @@ const SubMenuLinks = () => {
     return links?.map(({ content }) => {
       const { item_title, isVisible } = content?.commonProps || {};
       return (
-        <NavigationLink
-          className={styles.menuLink}
-          key={generateUniqueId()}
-          title={item_title}
-          arrow={isVisible}
-          url={content?.commonProps?.url ? content?.commonProps?.url : "/"}
-          isNewTab={content?.commonProps?.isNewTab}
-        />
+        <div onClick={() => updateCurrent(null)}>
+          <NavigationLink
+            className={styles.menuLink}
+            key={generateUniqueId()}
+            title={`${item_title}`}
+            arrow={isVisible}
+            url={content?.commonProps?.url ? content?.commonProps?.url : "/"}
+            isNewTab={content?.commonProps?.isNewTab}
+          />
+        </div>
       );
     });
   };
