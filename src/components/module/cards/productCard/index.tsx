@@ -23,12 +23,13 @@ interface Props {
 
 const ProductCard = ({ item, hasCarousel = false }: Props) => {
   if (!item) return null;
+  
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
   // ITEM ATTRIBS
-  const { name, image, pricePerUnit, priceCurrency, brand, imageGroups } = item;
+  const { name, image, pricePerUnit, priceCurrency, c_brandName, c_model, imageGroups } = item;
 
 
   return (
@@ -69,14 +70,14 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
       </div>
       <div className={styles.productBottom}>
         <Typography align="center" variant="p" className={styles.title}>
-          {brand}
+          {c_brandName}
         </Typography>
         <Typography align="center" variant="p" className={styles.type}>
-          {name?.default ? name?.default : name}
+           {c_model}
         </Typography>
-        <Typography align="center" variant="p" className={styles.price}>
+        {/* <Typography align="center" variant="p" className={styles.price}>
           {priceCurrency} {pricePerUnit}
-        </Typography>
+        </Typography> */}
         {hasCarousel && isHovered && (
   
           <CarouselBtns
