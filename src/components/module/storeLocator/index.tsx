@@ -207,7 +207,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
             stores={stores} 
             activeStore={locationStores[activeIndex]} 
             userLocation={userLocation} 
-            useOnPopup={false}
+            useOnPopup={true}
           />
         )}
         {!userLocation && (
@@ -216,7 +216,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
             stores={stores} 
             activeStore={locationStores[activeIndex]} 
             userLocation={null} 
-            useOnPopup={false}
+            useOnPopup={true}
           />
         )}
         </div>
