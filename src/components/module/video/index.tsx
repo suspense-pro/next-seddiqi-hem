@@ -21,7 +21,7 @@ const Video = ({ video, className = "", autoPlay = true, showPlay = true }) => {
           }
         });
       },
-      { threshold: 0.7 }
+      { threshold: 0.5 }
     );
     if (videoRef.current) {
       videoRef.current.addEventListener("ended", function () {
@@ -82,6 +82,7 @@ const Video = ({ video, className = "", autoPlay = true, showPlay = true }) => {
           loop={true}
           muted={isMuted}
           autoPlay={autoPlay}
+          playsInline
           className={styles.videoPlayer}
           onLoadedData={handleVideoLoad}
           style={{
