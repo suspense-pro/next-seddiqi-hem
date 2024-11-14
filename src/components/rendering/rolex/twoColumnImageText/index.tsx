@@ -37,7 +37,7 @@ const TwoColumnImageText = ({ ...content }) => {
             <h3 className={styles.title}>{data.title}</h3>
             <p className={styles.description}>{data.description}</p>
             {data?.linkText && (
-              <a href={data?.linkUrl} className={`rolex-button solid`}>
+              <a href={data?.linkUrl} className={`${styles.linkText} rolex-button solid`}>
                 {data?.linkText}
               </a>
             )}
