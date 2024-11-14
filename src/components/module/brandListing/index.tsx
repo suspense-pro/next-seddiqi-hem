@@ -128,7 +128,7 @@ const BrandListing = ({ height = true, ...content }) => {
             <div className={styles.brandColumn}>
               {brandsData[letter].map((brand, idx) => (
                 <div key={idx} className={styles.brandName}>
-                  <Link target="_blank" href={`/product/${brand}`}>
+                  <Link target="_blank" href={`/brand/${brand}`}>
                     {brand}
                   </Link>
                 </div>
