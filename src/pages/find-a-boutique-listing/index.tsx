@@ -420,9 +420,11 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     }
 
     if (filters['3'] && filters['3'].length > 0) {
-        filteredStores = filteredStores.filter(store =>
-            filters['3'].some(service => store.c_services.includes(service))
-        );
+      filteredStores = filteredStores.filter(store =>
+        filters['3'].some(service => 
+          store.c_services && Array.isArray(store.c_services) && store.c_services.includes(service)
+        )
+      );
     }
 
     return filteredStores;
