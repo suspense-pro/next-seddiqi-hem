@@ -281,6 +281,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
         onClose={handleCloseDetails}
         mapViewOn={mapViewOn}
         useOnPopup={true}
+        stores={stores}
     />)
     }
   </>

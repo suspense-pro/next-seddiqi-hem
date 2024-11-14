@@ -17,14 +17,13 @@ import MapView from "@components/module/mapView";
 import { ArrowRight } from "@assets/images/svg";
 import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 
-const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
+const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) => {
   const [mapView, setMapView] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [activeToggle, setActiveToggle] = useState(mapViewOn);
   const [isAllBrandPopupOpen, setAllBrandPopupOpen] = useState(false);
   const storeImage = store?.c_storeImage;
   const storeHoursString = store?.storeHours;
-  const [stores, setStores] = useState([]);
   const [matchedStore, setMatchedStore] = useState(null);
 
   const storeHoursArray = JSON.parse(storeHoursString);
@@ -94,7 +93,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
           <div className={styles.mapContainer}>
             <MapView
                     nearestStore={""}
-                    stores={""}
+                    stores={stores}
                     activeStore={store}
                     userLocation={userLocation}
                     useOnPopup={true}

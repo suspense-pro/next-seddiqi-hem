@@ -1,6 +1,7 @@
 export interface StoreDetailsProps {
     store: any; 
     mapViewOn:boolean;
+    stores:[];
   }
   
 export interface Store {
@@ -24,6 +25,7 @@ export interface StoreLocationDetailsProps {
     storeId: string;
     mapViewOn:boolean;
     useOnPopup:boolean;
+    stores:any;
   }
 
   

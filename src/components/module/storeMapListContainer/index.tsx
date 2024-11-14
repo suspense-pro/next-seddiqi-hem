@@ -181,6 +181,7 @@ const StoreMapListContainer = ({
           onClose={handleCloseDetails}
           mapViewOn={mapViewOn}
           useOnPopup={true}
+          stores={storesList}
         />
     </>
     )}
