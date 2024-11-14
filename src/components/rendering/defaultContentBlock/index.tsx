@@ -3,9 +3,8 @@ import styles from "./defaultContentBlock.module.scss";
 import { Button, Typography } from "@components/module";
 import RichText from "@components/module/richText";
 
-
 const DefaultContentBlock = ({ ...content }) => {
-  if(!content) return null
+  if (!content) return null;
   const { cta } = content;
   return (
     <div className={styles.container}>
@@ -22,13 +21,17 @@ const DefaultContentBlock = ({ ...content }) => {
           <RichText align="" className={styles.desc} text={content?.richText} />
         </div>
       </div>
-      <Button
-        isLink={true}
-        link={cta?.url}
-        title={cta?.label}
-        color={cta?.color}
-        type={cta?.type}
-      />
+      {cta && cta?.label && (
+        <Button
+          className={styles.cta}
+          isLink={true}
+          link={cta?.url}
+          title={cta?.label}
+          color={cta?.color}
+          type={cta?.type}
+          new_tab={cta?.isNewTab}
+        />
+      )}
     </div>
   );
 };

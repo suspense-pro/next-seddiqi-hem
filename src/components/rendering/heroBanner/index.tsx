@@ -93,14 +93,20 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
                   text={activeBanner.richText}
                 />
               )}
-              {activeBanner.cta && activeBanner.cta.length > 0 && (
-                <div className={styles.ctaButton}>
-                  <Button
-                    title={activeBanner.cta[0]?.label}
-                    type={`${activeBanner.cta[0]?.type?.toLowerCase()} ${activeBanner.cta[0]?.color?.toLowerCase()}`}
-                  />
-                </div>
-              )}
+
+              {activeBanner.cta &&
+                activeBanner.cta?.length > 0 &&
+                activeBanner.cta.map((_cta: any) => (
+                  _cta.label && _cta.label.length > 0 && 
+                    <div className={styles.ctaButton}>
+                    <Button
+                      title={_cta?.label}
+                      type={`${_cta?.type?.toLowerCase()} ${_cta.color?.toLowerCase()}`}
+                    />
+                  </div>
+                  
+              
+                ))}
             </div>
           </div>
         )}
@@ -119,7 +125,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
               setActiveIndex={setActiveIndex}
               setTransition={"fade"}
               setSpeed={2000}
-              isAnimated={"yes"}
+              isAnimated={"no"}
             />
           </GradientOverlay>
         </div>

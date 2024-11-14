@@ -52,7 +52,7 @@ const ProductCareAndWarrantyFlyoutCard = ({
         })}
 
         <div className={styles.btns}>
-          {warrantyAndCare?.servicesCta && (
+          {warrantyAndCare?.servicesCta && warrantyAndCare?.servicesCta?.label && (
             <Button
               isLink={true}
               link={warrantyAndCare?.servicesCta?.url}

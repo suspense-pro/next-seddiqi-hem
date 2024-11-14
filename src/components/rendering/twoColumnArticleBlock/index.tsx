@@ -7,11 +7,16 @@ import RichText from "@components/module/richText";
 const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
   if (!contentLeft || !contentRight) return null;
   const renderColumn = (content) => {
-    const opacity = content?.opacity?.opacity
+    const opacity = content?.opacity?.opacity;
     return (
       <div className={styles.column}>
         <GradientOverlay className={styles.gradient} opacity={opacity}>
-          <Image height={styles.image} className={styles.image} image={content?.image?.image} imageAltText={content?.image?.altText} />
+          <Image
+            height={styles.image}
+            className={styles.image}
+            image={content?.image?.image}
+            imageAltText={content?.image?.altText}
+          />
         </GradientOverlay>
         <div className={styles.articleInfo}>
           <div className={styles.label}>Article</div>
@@ -21,14 +26,16 @@ const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
           <div className={styles.description}>
             <RichText align="" text={content?.description} />
           </div>
-          <Button
-            isLink={content?.cta?.isNewTab}
-            link={content?.cta?.url}
-            className={styles.btn}
-            title={content?.cta?.label}
-            color={content?.cta?.color}
-            type={content?.cta?.type}
-          />
+          {content?.cta && content?.cta?.label && (
+            <Button
+              isLink={content?.cta?.isNewTab}
+              link={content?.cta?.url}
+              className={styles.btn}
+              title={content?.cta?.label}
+              color={content?.cta?.color}
+              type={content?.cta?.type}
+            />
+          )}
           <span></span>
         </div>
       </div>

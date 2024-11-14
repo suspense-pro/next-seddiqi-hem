@@ -17,6 +17,7 @@ import { countryCodes } from "@utils/data/countryCodes";
 const ContactForm = () => {
   const router = useRouter();
   const [attachment, setAttachment] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     topic: "Compliant",
     orderNumber: "",
@@ -42,6 +43,7 @@ const ContactForm = () => {
     e.preventDefault();
 
     if (validateForm()) {
+      setIsLoading(true);
       const userData = {
         type: formData.topic,
         orderReferenceNumber: formData.orderNumber,
@@ -60,15 +62,21 @@ const ContactForm = () => {
         data?.append("attachment", attachment);
       }
 
-      const response = await contactUs({
-        method: "POST",
-        userData: data,
-      });
+      try {
+        const response = await contactUs({
+          method: "POST",
+          userData: data,
+        });
 
-      if (!response?.isError) {
-        router.push("/contact-us/confirmation");
-      } else {
-        alert("Failed to send email");
+        if (!response?.isError) {
+          router.push("/contact-us/confirmation");
+        } else {
+          alert("Failed to send email");
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -240,15 +248,15 @@ const ContactForm = () => {
           </div>
         </div>
       </div>
-
       <div className={styles.btnContainer}>
         <Button
           clickHandler={(e) => handleSubmit(e)}
           className={styles.submitBtn}
-          title="Submit"
+          title={isLoading ? "Submitting" : "Submit"}
           isLink={false}
           type="solid"
           color="metallic"
+          disabled={isLoading}
         />
       </div>
     </form>

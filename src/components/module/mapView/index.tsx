@@ -188,21 +188,21 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }
         scaledSize: getIconSize(),
       };
 
-      if (nearestStore) {
+      /*if (nearestStore) {
         new google.maps.Marker({
           position: { lat: nearestStore.latitude, lng: nearestStore.longitude },
           map: map,
           title: nearestStore.name,
           icon: nearestStoreIcon,
         });
-      }
-
-      if (userLocation) {
+      }*/
+      
+      if (userLocation && (nearestStore.latitude !== userLocation.lat || nearestStore.longitude !== userLocation.lng)) {
         new google.maps.Marker({
           position: userLocation,
           map: map,
           title: "Your Location",
-          icon: userLocationIcon
+          icon: userLocationIcon,
         });
       }
 
@@ -232,7 +232,7 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }
           marker.setVisible(false); 
         }
 
-        marker.addListener("click", () => {
+        /*marker.addListener("click", () => {
           setActiveMarker(store.id); 
 
           const currentCenter = map.getCenter();
@@ -246,7 +246,7 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }
               m.setVisible(false); 
             }
           });
-        });
+        });*/
       });
     }
   }).catch(err => {
