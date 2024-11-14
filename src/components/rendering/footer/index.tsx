@@ -61,24 +61,26 @@ export default function Footer({ footerData }: FooterPropType) {
             </>
           )}
         </div>
-        <div className={styles.linkContainer}>
-          <div className={styles.mainLinks}>
-            {mainLinks.length > 0 && (
-              <>
-                {[0, 4].map((offset) => (
-                  <div key={offset} className={styles.column} style={{ gridArea: `links${offset / 4 + 1}` }}>
-                    {renderLinks(mainLinks, offset, styles.mainLink)}
-                  </div>
-                ))}
-              </>
-            )}
-          </div>
-          <div className={styles.secondaryLinks}>
-            {secondaryLinks.length > 0 && (
-              <div className={styles.column} style={{ gridArea: "links3" }}>
-                {renderLinks(secondaryLinks, 0, styles.secondMainLink)}
-              </div>
-            )}
+        <div className={styles.rightLinks}>
+          <div className={styles.linkContainer}>
+            <div className={styles.mainLinks}>
+              {mainLinks.length > 0 && (
+                <>
+                  {[0, 4].map((offset) => (
+                    <div key={offset} className={styles.column} style={{ gridArea: `links${offset / 4 + 1}` }}>
+                      {renderLinks(mainLinks, offset, styles.mainLink)}
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+            <div className={styles.secondaryLinks}>
+              {secondaryLinks.length > 0 && (
+                <div className={`${styles.secondarySmallLinks} ${styles.column}`} style={{ gridArea: "links3" }}>
+                  {renderLinks(secondaryLinks, 0, styles.secondMainLink)}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

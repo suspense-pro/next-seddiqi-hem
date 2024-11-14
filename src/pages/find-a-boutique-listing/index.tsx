@@ -130,7 +130,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
       const filteredAddresses = result.response
       .filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi')
-      .map(store => store.address1);
+      .map(store => store.name);
 
       // Uncomment the first const uniqueAddresses line below for dynamic addresses and comment out the second const uniqueAddresses
       //const uniqueAddresses = [...new Set(result.map(store => store.address1))];
@@ -415,14 +415,16 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
     if (filters['2'] && filters['2'].length > 0) {
         filteredStores = filteredStores.filter(store =>
-            filters['2'].includes(store.address1)
+            filters['2'].includes(store.name)
         );
     }
 
     if (filters['3'] && filters['3'].length > 0) {
-        filteredStores = filteredStores.filter(store =>
-            filters['3'].some(service => store.c_services.includes(service))
-        );
+      filteredStores = filteredStores.filter(store =>
+        filters['3'].some(service => 
+          store.c_services && Array.isArray(store.c_services) && store.c_services.includes(service)
+        )
+      );
     }
 
     return filteredStores;
@@ -482,7 +484,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
             ? stores.filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi') 
             : stores.filter(store => store.city === tab);
         
-        const filteredAddresses = [...new Set(filteredStores.map(store => store.address1))];
+        const filteredAddresses = [...new Set(filteredStores.map(store => store.name))];
         const filteredBrands = [...new Set(filteredStores.flatMap(store => store.c_availableBrands))];
         const filteredServices = [...new Set(filteredStores.flatMap(store => store.c_services))];
 
