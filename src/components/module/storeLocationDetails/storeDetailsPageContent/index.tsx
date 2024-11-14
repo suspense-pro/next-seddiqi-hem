@@ -93,7 +93,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
     }, 300);
   };
 
-  const brandsToDisplay = matchedStore.c_availableBrands.slice(0, 8);
+  const brandsToDisplay = matchedStore?.c_availableBrands?.slice(0, 8);
 
   return (
     <div className={styles.mainWrapper}>
@@ -113,11 +113,11 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
         </div>
       </div>
       <div className={styles.mapViewWrapper}>
-        <SlidingRadioSwitch
+        {/* <SlidingRadioSwitch
           toggleLabel={"Map View"}
           onToggle={handleToggleChange}
           value ={activeToggle}
-        />
+        /> */}
       </div>
 
       <div className={styles.contentWrapper}>
@@ -221,8 +221,8 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                   </div>
                   <div className={styles.storeServiceInfo}>
                     <ul className={styles.serviceList}>
-                      {matchedStore.c_services &&
-                      matchedStore.c_services.length > 0 ? (
+                      {matchedStore?.c_services &&
+                      matchedStore.c_services?.length > 0 ? (
                         matchedStore.c_services.map((service, index) => (
                           <li key={index}>{service}</li>
                         ))
@@ -257,7 +257,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                       {"Brands Available"}
                     </Typography>
                   </span>
-                  {matchedStore.c_availableBrands.length > 8 && (
+                  {matchedStore?.c_availableBrands?.length > 8 && (
                     <span className={styles.viewAllBrands}>
                       <Button
                         isLink={false}
@@ -276,7 +276,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     brandsToDisplay.map((availableBrand, index) => (
                       <React.Fragment key={index}>
                         <p className={styles.brandsName}>{availableBrand}</p>
-                        {index < brandsToDisplay.length - 1 && (
+                        {index < brandsToDisplay?.length - 1 && (
                           <div className={styles.brandSeparator} />
                         )}
                       </React.Fragment>
@@ -408,8 +408,8 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     </div>
                     <div className={styles.storeServiceInfo}>
                       <ul className={styles.serviceList}>
-                        {matchedStore.c_services &&
-                        matchedStore.c_services.length > 0 ? (
+                        {matchedStore?.c_services &&
+                        matchedStore.c_services?.length > 0 ? (
                           matchedStore.c_services.map((service, index) => (
                             <li key={index}>{service}</li>
                           ))
@@ -444,7 +444,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                         {"Brands Available"}
                       </Typography>
                     </span>
-                    {matchedStore.c_availableBrands.length > 8 && (
+                    {matchedStore?.c_availableBrands?.length > 8 && (
                       <span className={styles.viewAllBrands}>
                         <Button
                           isLink={false}
@@ -463,7 +463,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                       brandsToDisplay.map((availableBrand, index) => (
                         <React.Fragment key={index}>
                           <p className={styles.brandsName}>{availableBrand}</p>
-                          {index < brandsToDisplay.length - 1 && (
+                          {index < brandsToDisplay?.length - 1 && (
                             <div className={styles.brandSeparator} />
                           )}
                         </React.Fragment>

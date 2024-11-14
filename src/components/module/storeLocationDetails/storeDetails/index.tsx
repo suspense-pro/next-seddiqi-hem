@@ -17,14 +17,14 @@ import MapView from "@components/module/mapView";
 import { ArrowRight } from "@assets/images/svg";
 import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 
-const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
+const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) => {
   const [mapView, setMapView] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [activeToggle, setActiveToggle] = useState(mapViewOn);
   const [isAllBrandPopupOpen, setAllBrandPopupOpen] = useState(false);
   const storeImage = store?.c_storeImage;
   const storeHoursString = store?.storeHours;
-  const [stores, setStores] = useState([]);
+  const [matchedStore, setMatchedStore] = useState(null);
 
   const storeHoursArray = JSON.parse(storeHoursString);
   const formattedStoreHours = storeHoursArray.map((line) => {
@@ -47,7 +47,6 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
   const handleClosePopup = () => {
     setAllBrandPopupOpen(false);
   };
-  
   const brandsToDisplay = store?.c_availableBrands?.slice(0, 8);
 
 
@@ -93,12 +92,12 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
         {activeToggle ? (
           <div className={styles.mapContainer}>
             <MapView
-              nearestStore={store}
-              stores={null}
-              activeStore={store}
-              userLocation={userLocation}
-              useOnPopup={true}
-            />
+                    nearestStore={""}
+                    stores={stores}
+                    activeStore={store}
+                    userLocation={userLocation}
+                    useOnPopup={true}
+                />
           </div>
         ) : (
           <div className={styles.imageContainer}>
