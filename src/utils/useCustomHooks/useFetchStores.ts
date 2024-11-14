@@ -9,10 +9,10 @@ const UseFetchStores = async (brand, name, city, service, lat, lng) => {
       city,
       service,
       lat,
-      lng,
+      lng
     });
 
-    //console.log("DATA: ", result);
+    console.log("DATA: ", result);
 
     if (result.isError) {
       throw new Error("Network response was not ok");

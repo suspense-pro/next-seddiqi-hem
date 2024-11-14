@@ -45,9 +45,23 @@ const StoreMapListContainer = ({
   };
 
   useEffect(() => {
-    if (swiperRef.current) {
-      swiperRef.current.swiper.update(); // Trigger Swiper update on data change
-    }
+    const updateSwiper = () => {
+      if (swiperRef.current && swiperRef.current.swiper) {
+        swiperRef.current.swiper.update();
+      }
+    };
+
+    updateSwiper();
+
+    const handleResize = () => {
+      updateSwiper();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [storesList]);
 
   return (
@@ -83,11 +97,11 @@ const StoreMapListContainer = ({
                         </p>
                       </div>
 
-                      {/* {store.distance !== null || store.distance !== "" || store.distance !== undefined ?
-                      <p className={styles.storeMapDistance}>{store.distance} {store.distanceUnit}</p>
-                      : 
-                      ""
-                      } */}
+                      {store.distance !== null ? (
+                        <p className={styles.storeMapDistance}>
+                          {store.distance} {store.distanceUnit}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
                   <div className={styles.storeMapLinksContainer}>
@@ -125,7 +139,11 @@ const StoreMapListContainer = ({
                       <span>{store.address1}</span>
                     </p>
                   </div>
-                  <p className={styles.storeMapDistance}>{store.distance} {store.distanceUnit}</p>
+                  {store.distance !== null ? (
+                    <p className={styles.storeMapDistance}>
+                      {store.distance} {store.distanceUnit}
+                    </p>
+                  ) : null}
                 </div>
               </div>
               <div className={styles.storeMapLinksContainer}>

@@ -46,8 +46,8 @@ const StepThree = () => {
           city: "",
           name: "",
           service: "",
-          lat: "",
-          lng: "",
+          lat: null,
+          lng: null
         });
         console.log("Stores response:", response);
 

@@ -50,46 +50,65 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
 
   const [isMobile] = useDeviceWidth();
 
-  useEffect(() => {
-    const fetchStores = async () => {
-      try {
-        const result = await UseFetchStores(productBrand, productName, '', '',);
-        /*let result;
+  const fetchStores = async (location) => {
+    try {
+      //const result = await UseFetchStores(productBrand, productName, '', '',);
+      let result;
 
-        if (userLocation) {
-          result = await UseFetchStores("", "", '', '', userLocation.lat, userLocation.lng); 
-        } else {
-          result = await UseFetchStores('', '', '', '', null, null);
-        }*/
-
-        setStores(result.response);
-
-        const filteredStores = result.response.filter(store =>
-          store.city === 'Dubai' || store.city === 'Abu Dhabi'
-        );
-
-        setLocationStores(filteredStores);
-
-        // Extract unique cities
-        const uniqueCities = [...new Set(result.response.map(store => store.city))];
-        setCities(uniqueCities);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
+      if (location) {
+        result = await UseFetchStores("", "", '', '', location.lat, location.lng); 
+      } else {
+        result = await UseFetchStores('', '', '', '', null, null);
       }
-    };
 
-    fetchStores();
+      setStores(result.response);
 
+      const filteredStores = result.response.filter(store =>
+        store.city === 'Dubai' || store.city === 'Abu Dhabi'
+      );
+
+      setLocationStores(filteredStores);
+
+      // Extract unique cities
+      const uniqueCities = [...new Set(result.response.map(store => store.city))];
+      setCities(uniqueCities);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const location = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        setUserLocation(location);
-      });
+      const watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          const location = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          setUserLocation(location); 
+          fetchStores(location);
+        },
+        (error) => {
+          console.error("Error watching location:", error);
+          setUserLocation(null);
+  
+          fetchStores(null);
+        },
+        {
+          enableHighAccuracy: true, 
+          maximumAge: 0, 
+          timeout: 5000, 
+        }
+      );
+
+      return () => {
+        navigator.geolocation.clearWatch(watchId);
+      };
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+      fetchStores(null);
     }
   }, []);
 
@@ -182,15 +201,24 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
     return (
       <>
         <div className={styles.mapContainer}>
-          {nearestStore && (
-            <MapView 
-              nearestStore={nearestStore} 
-              stores={stores} 
-              activeStore={locationStores[activeIndex]} 
-              userLocation={userLocation}
-              useOnPopup={true}
-            />
-          )}
+        {nearestStore && userLocation && (
+          <MapView 
+            nearestStore={nearestStore} 
+            stores={stores} 
+            activeStore={locationStores[activeIndex]} 
+            userLocation={userLocation} 
+            useOnPopup={false}
+          />
+        )}
+        {!userLocation && (
+          <MapView 
+            nearestStore={null} 
+            stores={stores} 
+            activeStore={locationStores[activeIndex]} 
+            userLocation={null} 
+            useOnPopup={false}
+          />
+        )}
         </div>
         
         <div className={styles.storeMapListWrapper}>
