@@ -47,8 +47,6 @@ export default function Footer({ footerData }: FooterPropType) {
       <div className={styles.container}>
         <div className={styles.column} style={{ gridArea: "logo" }}>
           <Image src={logoUrl} alt={logoAltText} width={209} height={44} className={styles.logo} />
-
-         
         </div>
         <div className={styles.rightLinks}>
           <div className={styles.linkContainer}>
