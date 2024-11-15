@@ -59,7 +59,7 @@
   .imageTextsWrapper{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    // justify-content: space-between;
     row-gap: rem(40);
 
     @include md {
