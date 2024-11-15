@@ -20,15 +20,11 @@
     @include rolex_bold;
     font-size: rem(14);
     letter-spacing: rem(0.6);
-    line-height: rem(20);
-    color: getColorHex("black");
+    line-height: rem(18);
+    color: getColorHex("black-dark");
     margin: 0;
 
-    @include md {
-      font-size: rem(20);
-      line-height: rem(28);
-    }
-
+  
     &:empty {
       display: none;
     }
