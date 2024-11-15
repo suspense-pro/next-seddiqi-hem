@@ -63,6 +63,11 @@
         transition: all 0.3s;
         font-weight: 700;
 
+        @include md {
+          font-size: rem(14);
+          line-height: rem(18);
+        }
+
         &:hover {
           color: getColorHex("green-pine");
         }
@@ -203,7 +208,7 @@
     }
 
     .navMobileLink {
-      font-size: rem(18);
+      font-size: rem(14);
       line-height: rem(20);
       color: getColorHex("white");
     }
