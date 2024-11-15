@@ -92,7 +92,7 @@ const RolexHeroBanner = ({ ...content }) => {
 
                   {slide?.subHeading && <h2 className={styles.title}>{slide?.subHeading}</h2>}
 
-                  {slide?.cta && (
+                  {slide?.cta && slide?.cta?.label &&  (
                     <div className={styles.btnContainer}>
                       <NavigationLink
                         className={styles.discoverButton}
