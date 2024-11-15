@@ -121,7 +121,7 @@ const ProductDetailInfo = ({
   };
 
   const getColorVariations = (product) => {
-    const colorAttribute = product.variationAttributes.find((attr) => attr.id === "color");
+    const colorAttribute = product.variationAttributes?.find((attr) => attr.id === "color");
     if (!colorAttribute) return [];
 
     return colorAttribute.values.map((value) => value.name);
@@ -199,10 +199,12 @@ const ProductDetailInfo = ({
           <div onClick={() => setShowZoom(true)} className={styles.plus}>
             <PlusIcon />
           </div>
+          {/*}
           <div className={styles.threesixty}>
             <CubeIcon />
             <span className={styles.degree}>360°</span>
           </div>
+          */}
           <div className={styles.carouselBtns}>
             <CarouselBtns slides={slides} activeIndex={activeIndex} swiper={swiper} />
           </div>
@@ -214,11 +216,14 @@ const ProductDetailInfo = ({
                 <div className={styles.exclusive}>Exclusive</div>
                 <span>{product?.brand}</span>
               </div>
-              <div className={styles.title}>{product?.name}</div>
+              <div className={styles.title}>{product?.c_model}</div>
+              {/*
               <div className={styles.price}>
                 {product?.currency} {product?.price}
               </div>
+              */}
             </div>
+            {/*
             <div className={styles.Variant}>
               <div className={styles.size}>
                 <div className={styles.label} onClick={() => setSizeSelectorOpen(true)}>
@@ -233,6 +238,7 @@ const ProductDetailInfo = ({
                 <ArrowRight />
               </div>
             </div>
+            */}
             {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
             <Button
               isLink={false}
@@ -264,6 +270,8 @@ const ProductDetailInfo = ({
               <div className={styles.productLabel}>Product Description</div>
               <div className={styles.productDesc}>
                 {product?.shortDescription}
+
+                {/*
                 <Button
                   link={"/"}
                   className={styles.readMore}
@@ -271,7 +279,7 @@ const ProductDetailInfo = ({
                   color="green_dark"
                   type={"Plain"}
                   clickHandler={() => handleCardToggle("description")}
-                />
+                />*/}
               </div>
             </div>
             {(editorsView || product?.longDescription) && isCardOpen === "description" && (
@@ -316,9 +324,11 @@ const ProductDetailInfo = ({
               </div>
             </div>
           </div>
+          {/*}
           <div className={styles.save}>
             <HeartIcon fill="#" />
           </div>
+          */}
         </div>
         {/* Size Selector  */}
 

@@ -5,6 +5,7 @@ import { getCategory } from "@utils/sfcc-connector/dataService";
 import Link from "next/link";
 import TabbedNavigation from "../tabbedNavigation";
 import classNames from "classnames";
+import { useDeviceWidth } from "@utils/useCustomHooks";
 
 const brandsData = {
   A: [
@@ -53,11 +54,6 @@ const BrandListing = ({
   brandPages = [],
   ...content
 }) => {
-  // if (!content) return null;
-
-  // console.log(categories[0].parentCategoryTree);
-  // console.log({ brandPages });
-
   const alphabet = [...Array(26).keys()].map((i) =>
     String.fromCharCode(i + 97)
   );
@@ -73,8 +69,8 @@ const BrandListing = ({
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
-
   const brandListRef = useRef(null);
+  const isDesktop = useDeviceWidth();
 
   // Handle the letter click to scroll the brand list
   const handleLetterClick = (letter) => {
@@ -82,12 +78,25 @@ const BrandListing = ({
       setSelectedLetter(letter);
       const section = document.getElementById(`section-${letter}`);
 
+  
+      
+
       if (section && brandListRef.current) {
-        window.scrollTo({
-          top: (section.offsetTop - brandListRef.current.offsetTop) - window.screenY,
-          behavior: "smooth",
-          left: 0
-        });
+        
+        if(isDesktop[0]) {
+          window.scrollTo({
+            top: (section.offsetTop - brandListRef.current.offsetTop) - window.screenY,
+            behavior: "smooth",
+            left: 0
+          });
+        } else {
+          section.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "start"
+          });
+        }
+
       }
   
   };

@@ -4,12 +4,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import styles from "./rolexHeroBanner.module.scss";
 import { ArrowRightThick } from "@assets/images/svg";
-import {
-  GradientOverlay,
-  Image,
-  NavigationLink,
-  Video,
-} from "@components/module";
+import { GradientOverlay, Image, NavigationLink, Video } from "@components/module";
 import { useWindowWidth } from "@utils/useCustomHooks";
 import CarouselBtns from "@components/module/carouselBtns";
 
@@ -19,6 +14,8 @@ const RolexHeroBanner = ({ ...content }) => {
   const [swiper, setSwiper] = useState(null);
 
   if (!content) return null;
+
+  console.log("content", content);
 
   const slides = content?.listItems;
 
@@ -30,7 +27,8 @@ const RolexHeroBanner = ({ ...content }) => {
     setActiveIndex(0);
   };
 
-  const screenSize = useWindowWidth();
+  const bannerType = content?.listItems[0]?.bannerType;
+
   return (
     <Swiper
       ref={swiperRef}
@@ -41,7 +39,7 @@ const RolexHeroBanner = ({ ...content }) => {
       loop={true}
       speed={600}
       onSlideChange={handleSlideChange}
-      className={styles.heroSlider}
+      className={`${bannerType === "CPO" && styles.cpoHeroSlider} ${styles.heroSlider}`}
       onReachEnd={handleReachEnd}
     >
       {slides?.map((slide, index) => {
@@ -49,10 +47,7 @@ const RolexHeroBanner = ({ ...content }) => {
           <SwiperSlide className={styles.swiperSlide} key={index}>
             <div className={styles.slide}>
               {slide?.media?.image || slide?.mobileMedia?.media?.image ? (
-                <GradientOverlay
-                  className={styles.gradient}
-                  opacity={slide?.opacity?.opacity}
-                >
+                <GradientOverlay className={styles.gradient} opacity={slide?.opacity?.opacity}>
                   <Image
                     imgWidth="100%"
                     height={styles.image}
@@ -78,8 +73,8 @@ const RolexHeroBanner = ({ ...content }) => {
               )}
               {slide?.bannerType === "Rolex" ? (
                 <div className={styles.textOverlay}>
-                  <div className={styles.brand}>{slide?.title}</div>
-                  <h2 className={styles.title}>{slide.subHeading}</h2>
+                  {slide?.title && <div className={styles.brand}>{slide?.title}</div>}
+                  {slide.subHeading && <h2 className={styles.title}>{slide.subHeading}</h2>}
                   {slide?.cta?.label && (
                     <div className={styles.btnContainer}>
                       <NavigationLink
@@ -92,35 +87,33 @@ const RolexHeroBanner = ({ ...content }) => {
                   )}
                 </div>
               ) : (
-                <div className={styles.textOverlayCpo}>
-                  <div className={styles.brand}>{slide?.title}</div>
-                  <h2 className={styles.title}>{slide.subHeading}</h2>
-                  <div className={styles.btnContainer}>
-                    <NavigationLink
-                      className={styles.discoverButton}
-                      title={slide?.cta?.label}
-                      isNewTab={slide?.cta?.isNewTab}
-                      url={slide?.cta?.url}
-                    />
-                  </div>
+                <div className={`${slide?.textPosition === "Center" && styles.centerCpo} ${styles.textOverlayCpo}`}>
+                  {slide?.title && <div className={styles.brand}>{slide?.title}</div>}
+
+                  {slide?.subHeading && <h2 className={styles.title}>{slide?.subHeading}</h2>}
+
+                  {slide?.cta && slide?.cta?.label &&  (
+                    <div className={styles.btnContainer}>
+                      <NavigationLink
+                        className={styles.discoverButton}
+                        title={slide?.cta?.label}
+                        isNewTab={slide?.cta?.isNewTab}
+                        url={slide?.cta?.url}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
 
               {slides?.length > 1 && (
                 <>
                   {
-                    <div
-                      className={styles.sliderLeftBtn}
-                      onClick={() => swiperRef.current.swiper.slidePrev()}
-                    >
+                    <div className={styles.sliderLeftBtn} onClick={() => swiperRef.current.swiper.slidePrev()}>
                       <ArrowRightThick />
                     </div>
                   }
                   {
-                    <div
-                      className={styles.sliderRightBtn}
-                      onClick={() => swiperRef.current.swiper.slideNext()}
-                    >
+                    <div className={styles.sliderRightBtn} onClick={() => swiperRef.current.swiper.slideNext()}>
                       <ArrowRightThick />
                     </div>
                   }

@@ -8,7 +8,6 @@ import Image from "next/image";
 
 const RolexProductLister = ({ listItems = [], cta }) => {
   const [products, setProducts] = useState(null);
-
   useEffect(() => {
     const fetchProducts = async () => {
       if (listItems.length > 0) {
@@ -45,9 +44,10 @@ const RolexProductLister = ({ listItems = [], cta }) => {
           {products.map((product, index) => {
             const imageData = product?.imageGroups?.[1]?.images?.[0]?.link;
             const altText = product?.imageGroups?.[1]?.images?.[0]?.alt || "";
-            const title = product?.brand;
-            const subtitle = product?.name;
+            // const brand = product?.c_brandName;
+            const productName = product?.c_model;
             const price = product?.price;
+            const model = product?.c_brandName;
 
             return (
               <SwiperSlide className={styles.swiperSlide} key={index}>
@@ -64,15 +64,24 @@ const RolexProductLister = ({ listItems = [], cta }) => {
                     )}
                   </div>
                   <div className={styles.productInfo}>
-                    <Typography variant="p" className={styles.productTitle}>
-                      {title}
+                    <Typography variant="p" className={styles.productBrand}>
+                      Rolex certified Pre-owned
                     </Typography>
-                    <Typography variant="p" className={styles.productName}>
-                      {subtitle?.toUpperCase()}
-                    </Typography>
-                    <Typography variant="p" className={styles.productPrice}>
+                    {productName && (
+                      <Typography variant="p" className={styles.productName}>
+                        {productName}
+                      </Typography>
+                    )}
+
+                    {model && (
+                      <Typography variant="p" className={styles.productDesc}>
+                        {model}
+                      </Typography>
+                    )}
+
+                    {/* <Typography variant="p" className={styles.productPrice}>
                       AED {price}
-                    </Typography>
+                    </Typography> */}
                   </div>
                 </div>
               </SwiperSlide>
@@ -81,7 +90,7 @@ const RolexProductLister = ({ listItems = [], cta }) => {
         </Swiper>
       </div>
       <div className={styles.btnContainer}>
-        <NavigationLink className={styles.discoverButton} title={cta?.label || "Shop"} />
+        <NavigationLink className={styles.discoverButton} title={cta?.label || "Shop More"} />
       </div>
     </div>
   );
