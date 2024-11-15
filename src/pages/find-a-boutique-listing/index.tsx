@@ -134,16 +134,21 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
       // Uncomment the first const uniqueAddresses line below for dynamic addresses and comment out the second const uniqueAddresses
       //const uniqueAddresses = [...new Set(result.map(store => store.address1))];
-      const uniqueAddresses = [...new Set(filteredAddresses)];
+      const uniqueAddresses = [...new Set(filteredAddresses)].sort();
       //setLocationAddresses(uniqueAddresses);
       setLocationCheckboxValues(uniqueAddresses);
 
       //const uniqueBrands = [...new Set(result.response.flatMap(store => store.c_availableBrands))]; 
-      const uniqueBrands = [...new Set(filteredCity.flatMap(store => store.c_availableBrands))];
+      const uniqueBrands = [...new Set(filteredCity.flatMap(store => store.c_availableBrands))].sort();
       setBrandCheckboxValues(uniqueBrands);
 
-      const uniqueServices = [...new Set(filteredCity.flatMap(store => store.c_services))];
-      setServiceCheckboxValues(uniqueServices);
+      const uniqueServices = [
+        ...new Set(
+          filteredCity.flatMap(store => store.c_services || []),
+        ),
+      ].sort();
+  
+      setServiceCheckboxValues(uniqueServices.filter(service => service));
       
     } catch (error) {
       console.error(error);
@@ -427,6 +432,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       );
     }
 
+    console.log('Filtered Stores:', filteredStores);
+
     return filteredStores;
   };
 
@@ -491,9 +498,25 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         setLocationCheckboxValues(filteredAddresses);
         setBrandCheckboxValues(filteredBrands);
         setServiceCheckboxValues(filteredServices);
+
+        updateFilters(filteredStores);
         
         setFadeList(false);
     }, 300);
+};
+
+const updateFilters = (filteredStores) => {
+  const filteredAddresses = filteredStores.map(store => store.name);
+  const uniqueAddresses = [...new Set(filteredAddresses)].sort();  // Ensure unique values and sort alphabetically
+  setLocationCheckboxValues(uniqueAddresses);
+
+  // Filter and sort Brands
+  const uniqueBrands = [...new Set(filteredStores.flatMap(store => store.c_availableBrands))].sort();
+  setBrandCheckboxValues(uniqueBrands);
+
+  // Filter and sort Services
+  const uniqueServices = [...new Set(filteredStores.flatMap(store => store.c_services))].sort();
+  setServiceCheckboxValues(uniqueServices);
 };
 
   const handleClearCheckboxes = (filterKey) => {
