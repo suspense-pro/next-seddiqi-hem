@@ -26,6 +26,7 @@ import { useRouter } from 'next/router';
 import { HeroBanner } from "@components/rendering";
 
 
+
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
     {
@@ -399,6 +400,40 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     return filteredStores;
   };*/
 
+  useEffect(() => {
+    const { brand } = router.query;
+  
+    if (brand && brandCheckboxValues.length > 0) {
+      // Ensure brand is a string (or pick the first element if it's an array)
+      const brandString = Array.isArray(brand) ? brand[0] : brand;
+  
+      // Safely check if brandString is a valid string before calling toLowerCase()
+      if (typeof brandString === 'string' && brandString.trim()) {
+        // Check if the brand matches any available brand
+        const brandFilter = brandCheckboxValues.find(b => typeof b === 'string' && b.toLowerCase() === brandString.toLowerCase());
+  
+        if (brandFilter) {
+          setFiltersState(prevFilters => ({
+            ...prevFilters,
+            "1": [brandFilter], // Apply the brand filter
+          }));
+        } else {
+          setFiltersState(prevFilters => ({
+            ...prevFilters,
+            "1": [], // Reset filter for "1" to an empty array, meaning no filter applied
+          }));
+        }
+      } else {
+        // If brandString is invalid, reset filter to no filter applied
+        setFiltersState(prevFilters => ({
+          ...prevFilters,
+          "1": [],
+        }));
+      }
+    }
+  }, [router.query, brandCheckboxValues]);
+  
+
   const getFilteredStores = () => {
     let filteredStores = stores;
 
@@ -432,25 +467,22 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       );
     }
 
-    console.log('Filtered Stores:', filteredStores);
+    //console.log('Filtered Stores:', filteredStores);
 
     return filteredStores;
   };
 
   const handleOptionChange = (filterKey, option) => {
-    setFiltersState((prevFilters) => {
-        const prevSelectedOptions = prevFilters[filterKey] || [];
-        const newSelectedOptions = prevSelectedOptions.includes(option)
-            ? prevSelectedOptions.filter((selected) => selected !== option)
-            : [...prevSelectedOptions, option];
-  
-        // Combine all selected options into one state
-        const combinedOptions = {
-            ...prevFilters,
-            [filterKey]: newSelectedOptions,
-        };
-  
-        return combinedOptions;
+    setFiltersState(prevFilters => {
+      const prevSelectedOptions = prevFilters[filterKey] || [];
+      const newSelectedOptions = prevSelectedOptions.includes(option)
+        ? prevSelectedOptions.filter((selected) => selected !== option)
+        : [...prevSelectedOptions, option];
+
+      return {
+        ...prevFilters,
+        [filterKey]: newSelectedOptions,
+      };
     });
   };
 
@@ -531,6 +563,10 @@ const updateFilters = (filteredStores) => {
       return acc + (Array.isArray(curr) ? curr.length : 0);
     }, 0)
   : 0;
+
+  const [brandsSearchQuery, setBrandsSearchQuery] = useState('');
+  const [locationsSearchQuery, setLocationsSearchQuery] = useState('');
+  const [servicesSearchQuery, setServicesSearchQuery] = useState('');
 
   return (
     <>
@@ -660,8 +696,8 @@ const updateFilters = (filteredStores) => {
                       <input 
                         type="text" 
                         placeholder="Search for brands" 
-                        value={searchQuery} 
-                        onChange={(e) => setSearchQuery(e.target.value)} 
+                        value={brandsSearchQuery} 
+                        onChange={(e) => setBrandsSearchQuery(e.target.value)} 
                         className={styles.searchInput}
                       />
                     </div>
@@ -671,24 +707,21 @@ const updateFilters = (filteredStores) => {
                         <CheckboxFilter
                           title={filterItem.label}
                           options={brandCheckboxValues
-                            .filter(label => label && label.toLowerCase().includes(searchQuery.toLowerCase()))} // Ensure label is defined
+                            .filter(label => label && label.toLowerCase().includes(brandsSearchQuery.toLowerCase()))}
                           filterKey={filterItem.id}
                           onOptionChange={handleOptionChange}
                           selectedOptions={filters[filterItem.id] || []}
                         />
-                        
-                        {/* Add no results found message */}
                         {filterItem.values
                           .map((val) => val.label)
-                          .filter((label) => label && label.toLowerCase().startsWith(searchQuery.toLowerCase())).length === 0 && (
-                          <div className={styles.noResults}>
-                            No brands found
-                          </div>
+                          .filter((label) => label && label.toLowerCase().startsWith(brandsSearchQuery.toLowerCase())).length === 0 && (
+                          <div className={styles.noResults}>No brands found</div>
                         )}
                       </>
                     )}
                   </>
                 )}
+
                 {filterItem.label.toLowerCase() === 'locations' && ( 
                   <>
                     {/* <LocationTabs activeTab={popupActiveTab} handleTabChange={handlePopupTabChange} tabs={[{ label: 'All', value: 'All' }, ...cities.map(city => ({ label: city, value: city }))]}  /> */}
