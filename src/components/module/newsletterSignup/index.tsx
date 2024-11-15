@@ -42,18 +42,23 @@ const NewsletterSignup: React.FC = () => {
         userData: formData,
         method: "POST",
       });
-      // console.log("response------", response);
+      //console.log("response------", response);
 
-      if (!response?.isError && response?.response?.code === 200) {
-        setStatusMessage("You have successfully subscribed to the Newsletter!");
+      if (!response?.isError && response?.status === 200) {
+        setStatusMessage("You have successfully subscribed to our newsletter");
         setIsError(false);
+      
+      } else if (!response?.isError && response?.status === 400){
+        setStatusMessage("You are already subscribed to our newsletter");
+        setIsError(true);
+
       } else {
-        setStatusMessage("Failed to subscribe. Please try again.");
+        setStatusMessage("Subscription failed, please try again");
         setIsError(true);
       }
     } catch (error) {
       console.error("error----", error);
-      setStatusMessage("An error occurred. Please try again.");
+      setStatusMessage("An error occurred, please try again");
       setIsError(true);
     } finally {
       setIsLoading(false);
