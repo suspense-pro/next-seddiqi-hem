@@ -8,7 +8,7 @@ class MyDocument extends Document {
         <Head>
           <meta
             name="description"
-            content="The premiere coffee delivery service."
+            content="TIMELESS LEGACY: WHAT STARTED AS ONE MAN'S PASSION OVER 60 YEARS AGO IS TODAY A FAMILY-BUSINESS THAT BRINGS LUXURY AND HONESTY TO THE HEARTS OF WATCH COLLECTORS ALL OVER THE WORLD."
           />
         </Head>
         <body className="seddiqi-theme">

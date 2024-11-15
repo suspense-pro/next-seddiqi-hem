@@ -8,8 +8,8 @@ import TabContentProducts from "../tabContent/tabContentProducts";
 import TabContentExplore from "../tabContent/tabContentExplore";
 
 const MobileHeader = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const { headerData } = useContext(HeaderContext);
+  // const [menuOpen, setMenuOpen] = useState(false);
+  const { headerData, menuOpen, setMenuOpen } = useContext(HeaderContext);
 
   if (!headerData) return null;
 
@@ -31,12 +31,7 @@ const MobileHeader = () => {
       tab,
     };
 
-    if (
-      !tabs.some(
-        (existingTab) =>
-          existingTab.id === obj.id || existingTab.title === obj.title
-      )
-    ) {
+    if (!tabs.some((existingTab) => existingTab.id === obj.id || existingTab.title === obj.title)) {
       tabs.push(obj);
     }
   });
