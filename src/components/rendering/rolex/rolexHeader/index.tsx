@@ -111,14 +111,14 @@ const RolexNavbar = ({ ...content }) => {
                 />
               </li>
             ))}
-            <li>
+            {/* <li>
               <NavigationLink
                 className={`${isWhite && styles.navMobileBlack} ${styles.navMobileLink}`}
                 title={cta?.label}
                 isNewTab={cta?.isNewTab}
                 url={cta?.url}
               />
-            </li>
+            </li> */}
           </ul>
         )}
       </nav>

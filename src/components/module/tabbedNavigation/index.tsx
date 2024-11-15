@@ -6,18 +6,23 @@ const TabbedNavigation: React.FC<{ tabs: any; className?: any; gap?: any }> = ({
   const [activeTab, setActiveTab] = useState(1);
   return (
     <div className={styles.tabsContainer}>
-      {tabs?.length > 0 && (
+      {tabs?.length > 0 && !(tabs.length === 1 && !tabs[0]?.title) && (
         <div className={`${className}`}>
           <div style={{ gap }} className={`${styles.tabs}`}>
-            {tabs?.map((tab) => (
-              <div
-                key={generateUniqueId()}
-                className={`${styles.tab} ${tab?.id === activeTab && styles.activeTab}`}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab?.title}
-              </div>
-            ))}
+            {tabs?.map((tab) => {
+              if (!tab?.title) {
+                return null;
+              }
+              return (
+                <div
+                  key={generateUniqueId()}
+                  className={`${styles.tab} ${tab?.id === activeTab && styles.activeTab}`}
+                  onClick={() => setActiveTab(tab.id)}
+                >
+                  {tab?.title}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

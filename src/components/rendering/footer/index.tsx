@@ -8,6 +8,7 @@ import LanguageSelector from "@components/module/languageSelector";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import { Typography } from "@components/module";
 import NewsletterSignup from "@components/module/newsletterSignup";
+import Link from "next/link";
 
 const getLogoUrl = (logoData) => {
   if (logoData?.image) {
@@ -46,7 +47,20 @@ export default function Footer({ footerData }: FooterPropType) {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.column} style={{ gridArea: "logo" }}>
-          <Image src={logoUrl} alt={logoAltText} width={209} height={44} className={styles.logo} />
+          <Image src={logoUrl} alt={logoAltText} width={195} height={36} className={styles.logo} />
+
+          {isDesktop && (
+            <>
+              <NewsletterSignup />
+              {/* <LanguageSelector /> */}
+            </>
+          )}
+          {!isDesktop && (
+            <>
+              <NewsletterSignup />
+              {/* <LanguageSelector /> */}
+            </>
+          )}
         </div>
         <div className={styles.rightLinks}>
           <div className={styles.linkContainer}>
@@ -76,9 +90,16 @@ export default function Footer({ footerData }: FooterPropType) {
       <div className={styles.footer_bottom}>
         <div className={styles.copy_right}>{footerData?.content?.copyright}</div>
         <div className={styles.social_icons}>
-          <TwitterIcon />
-          <InstaIcon />
-          <FBIcon />
+          <Link target="_blank" href={"https://x.com/seddiqi_uae/"}>
+            <TwitterIcon />
+          </Link>
+
+          <Link target="_blank" href={"https://www.facebook.com/ahmedseddiqiandsons"}>
+            <InstaIcon />
+          </Link>
+          <Link target="_blank" href={"https://www.instagram.com/seddiqi_uae/"}>
+            <FBIcon />
+          </Link>
         </div>
       </div>
     </footer>
