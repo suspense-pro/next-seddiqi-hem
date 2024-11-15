@@ -109,6 +109,8 @@ export default function ProductPage({
 }) {
   const productTechSpecs = product?.techSpecs;
 
+  console.log(shippingData?.content?.page);
+
   return (
     <div className="main-content">
       <ProductDetailInfo
@@ -121,7 +123,7 @@ export default function ProductPage({
         sizeGuideDataWomenWatches={sizeGuideDataWomenWatches}
         sizeGuideData={sizeGuideData}
       />
-      <PdpTabs productTechSpecs={productTechSpecs} amplienceData={""} />
+      <PdpTabs tabImage={product?.response.imageGroups[0]?.images[1]?.link} productTechSpecs={productTechSpecs} amplienceData={""} />
       {/* Other components like ScrollToTop and StickyWhatsapp */}
       <StickyWhatsapp />
       <ScrollToTop />

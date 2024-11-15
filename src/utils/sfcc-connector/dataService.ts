@@ -563,6 +563,7 @@ export async function getProductDetails({
     const techSpecs = transformTechSpecsDetails(res.response);
 
     return {...res, techSpecs};
+    //return {...res};
   } catch (err) {
     logger.error("API threw Error", err);
     throw err;

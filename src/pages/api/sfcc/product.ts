@@ -143,8 +143,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "productDetail":
             try {
               if (requestMethod === "GET" && action === "getProductDetails") {
-                const pid = (req.query.pid as string) ?? "";
-                console.log(pid);
+                var pid = (req.query.pid as string) ?? "";
+                pid = pid.replace(/\//g, '%2F');
                 const configWithAuth = await initializeShopperConfig();
                 const accessToken = configWithAuth.access_token;
                 clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
