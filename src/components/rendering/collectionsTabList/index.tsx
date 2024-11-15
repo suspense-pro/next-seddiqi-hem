@@ -151,7 +151,6 @@ const CollectionsTabMobile = ({ content, cta, ind }) => {
             color={cta?.color}
             type={cta?.type}
           />
-          ====
         </div>
       )}
     </div>
