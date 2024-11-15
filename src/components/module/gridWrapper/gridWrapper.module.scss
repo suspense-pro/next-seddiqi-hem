@@ -8,11 +8,11 @@
   grid-gap: rem(1);
 
   @include md {
-    grid-template-columns: repeat(auto-fit, minmax(rem(348), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(rem(346.75), 1fr));
   }
   
   @include xxl {
-    grid-template-columns: repeat(4, minmax(rem(348), 1fr));
+    grid-template-columns: repeat(4, minmax(rem(346.75), 1fr));
   }
  
 }

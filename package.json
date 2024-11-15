@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.8",
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@next/bundle-analyzer": "^14.2.4",
     "axios": "^1.6.7",
     "chart.js": "^4.4.3",

@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { middlewareConfig } from "@utils/sfcc-connector/config";
 import { sendEmail } from "@utils/helpers/emailHelper";
 const newsletterAPI = middlewareConfig.parameters.api + '/newsletter';
+const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const requestMethod = req.method;
@@ -14,6 +15,68 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             try {
                 if (requestMethod === "POST" && action === "subscription") {
                     const { email, isSubscribed } = body;
+
+                    console.log("response------", process.env.MC_API_KEY.toString());
+
+                    const apiKey = process.env.MC_API_KEY.toString(); //"723f293a694f78bfc4b735c84ac2d351-us20"; 
+                    const server = process.env.MC_SERVER_PREFIX.toString(); //"us20"; 
+
+
+                    mailchimp.setConfig({
+                        apiKey:  apiKey,
+                        server:  server
+                    });
+
+                    const listId = process.env.MC_LIST_ID.toString(); //"df28b3974d";
+                    const subscribingUser = {
+                        firstName: "",
+                        lastName: "",
+                        email: email
+                    };
+
+                    var emailInfo : any;
+
+                    async function run() {
+                        try {
+                            const response = await mailchimp.lists.addListMember(listId, {
+                                email_address: subscribingUser.email,
+                                status: "subscribed",
+                                merge_fields: {
+                                FNAME: subscribingUser.firstName,
+                                LNAME: subscribingUser.lastName
+                                }
+                            });
+                            console.log(response);
+
+                            var emailInfo : any;
+                            
+                            const subject = "Seddiqi Newsletter Communication";
+                            const htmlContent = "You have been successfully subscribed to Seddiqi newsletter.";
+                            emailInfo = await sendEmail(email, subject, htmlContent);
+
+                            return res.status(200).json({ isError: false, status:200, response: emailInfo  });
+
+                        } catch (e) {
+
+                            if (e.status === 400) {
+                                console.error(e);
+                                return res.status(200).json({ isError: false, status:400, response: emailInfo  });
+                               
+                            }
+
+                            if (e.status === 404) {
+                                console.error(e);
+                                return {
+                                    statusCode: 500,
+                                    body: JSON.stringify({ msg: e.body }),
+                                };
+                            }
+                           
+                        }
+                    }
+
+                    run();
+
                     /* TODO: The below code is for mulesoft API integration - upsert API
                     const options = {
                         method: requestMethod,
@@ -65,6 +128,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     }*/
 
                     // send email - nodemailer
+                    /*
                     var emailInfo : any;
                     if (isSubscribed) { // subscribed email
                         const subject = "Seddiqi Newsletter Communication";
@@ -80,7 +144,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     } else {
                         console.log("Email failed");
                     }
-                    return res.status(200).json({ isError: false, response: emailInfo  });
+
+                    return res.status(200).json({ isError: false, status:200, response: emailInfo  });
+                    */
+                    
                 }
 
             } catch(err) {
