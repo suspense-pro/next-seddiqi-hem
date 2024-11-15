@@ -14,7 +14,6 @@ const BoutiqueBanner: React.FC<BoutiqueBannerProps> = ({
   media,
   richText,
 }) => {
-  console.log("cta--", cta);
   const bgClass =
     backgroundColor === "primary"
       ? styles.primaryBackground
