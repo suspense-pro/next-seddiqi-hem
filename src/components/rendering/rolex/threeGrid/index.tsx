@@ -7,63 +7,71 @@ import RolexSmallLink from "../rolexSmallLink";
 const ThreeGrid = ({ ...content }) => {
   if (!content) return null;
 
-  const oneGrid = content?.oneGrid[0];
-  const twoGrids = content?.twoGrids[0];
+  console.log("content", content)
+
+  const oneGrid = content?.oneGrid && content?.oneGrid[0];
+  const twoGrids = content?.twoGrids && content?.twoGrids[0];
 
   const backgroundClass = content?.backgroundColor?.toLowerCase();
 
   return (
     <div className={`${[styles.container]} ${styles[backgroundClass]}`}>
-      <div className={styles.oneGridContainer}>
-        <h3 className={styles.mainTitle}>{oneGrid.mainTitle}</h3>
+      {oneGrid && (
+        <div className={styles.oneGridContainer}>
+          {oneGrid?.mainTitle && <h3 className={styles.mainTitle}>{oneGrid?.mainTitle}</h3>}
 
-        <div className={styles.imageTextsWrapper}>
-          <div className={`${[styles.imageTextsContainer]}`}>
-            <a href={oneGrid.contents[0].linkUrl} className={styles.imageContainer}>
-              <Image
-                imgWidth="100%"
-                height={"auto"}
-                image={oneGrid.contents[0].media?.image}
-                imageAltText={oneGrid.contents[0].media?.altText}
-              />
-            </a>
-
-            <div className={styles.textsContainer}>
-              <p className={styles.subtitle}>{oneGrid.contents[0].subtitle}</p>
-              <h6 className={styles.title}>{oneGrid.contents[0].title}</h6>
-              <RolexSmallLink
-                href={oneGrid.contents[0].linkUrl}
-                className={`${[styles.link]} rolex-text-button`}
-                linkText={oneGrid.contents[0].linkText}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.twoGridsContainer}>
-        <h3 className={styles.mainTitle}>{twoGrids.mainTitle}</h3>
-
-        <div className={styles.imageTextsWrapper}>
-          {twoGrids.contents.map((data, index) => (
-            <div key={index} className={`${[styles.imageTextsContainer]}`}>
-              <a href={data.linkUrl} className={styles.imageContainer}>
-                <Image imgWidth="100%" height={"auto"} image={data.media?.image} imageAltText={data.media?.altText} />
-              </a>
+          <div className={styles.imageTextsWrapper}>
+            <div className={`${[styles.imageTextsContainer]}`}>
+              {oneGrid?.contents[0]?.media?.image && (
+                <a href={oneGrid?.contents[0]?.linkUrl} className={styles.imageContainer}>
+                  <Image
+                    imgWidth="100%"
+                    height={"auto"}
+                    image={oneGrid?.contents[0]?.media?.image}
+                    imageAltText={oneGrid?.contents[0]?.media?.altText}
+                  />
+                </a>
+              )}
 
               <div className={styles.textsContainer}>
-                <p className={styles.subtitle}>{data.subtitle}</p>
-                <h6 className={styles.title}>{data.title}</h6>
+                {oneGrid?.contents[0]?.subtitle && <p className={styles.subtitle}>{oneGrid?.contents[0]?.subtitle}</p>}
+                {oneGrid?.contents[0]?.title && <h6 className={styles.title}>{oneGrid?.contents[0]?.title}</h6>}
                 <RolexSmallLink
-                  href={data.linkUrl}
+                  href={oneGrid?.contents[0]?.linkUrl}
                   className={`${[styles.link]} rolex-text-button`}
-                  linkText={data.linkText}
+                  linkText={oneGrid?.contents[0]?.linkText}
                 />
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+      )}
+
+      {twoGrids && (
+        <div className={styles.twoGridsContainer}>
+          <h3 className={styles.mainTitle}>{twoGrids.mainTitle}</h3>
+
+          <div className={styles.imageTextsWrapper}>
+            {twoGrids?.contents.map((data, index) => (
+              <div key={index} className={`${[styles.imageTextsContainer]}`}>
+                <a href={data.linkUrl} className={styles.imageContainer}>
+                  <Image imgWidth="100%" height={"auto"} image={data.media?.image} imageAltText={data.media?.altText} />
+                </a>
+
+                <div className={styles.textsContainer}>
+                  <p className={styles.subtitle}>{data.subtitle}</p>
+                  <h6 className={styles.title}>{data.title}</h6>
+                  <RolexSmallLink
+                    href={data.linkUrl}
+                    className={`${[styles.link]} rolex-text-button`}
+                    linkText={data.linkText}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
