@@ -144,11 +144,10 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
       const uniqueServices = [
         ...new Set(
-          filteredCity.flatMap(store => store.c_services || []), // If c_services is undefined, use an empty array
+          filteredCity.flatMap(store => store.c_services || []),
         ),
       ].sort();
   
-      // Filter out any empty or undefined values that may have appeared
       setServiceCheckboxValues(uniqueServices.filter(service => service));
       
     } catch (error) {
@@ -507,7 +506,6 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 };
 
 const updateFilters = (filteredStores) => {
-  // Filter and sort Locations
   const filteredAddresses = filteredStores.map(store => store.name);
   const uniqueAddresses = [...new Set(filteredAddresses)].sort();  // Ensure unique values and sort alphabetically
   setLocationCheckboxValues(uniqueAddresses);
