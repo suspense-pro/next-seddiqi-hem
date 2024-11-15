@@ -4,12 +4,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import styles from "./rolexHeroBanner.module.scss";
 import { ArrowRightThick } from "@assets/images/svg";
-import {
-  GradientOverlay,
-  Image,
-  NavigationLink,
-  Video,
-} from "@components/module";
+import { GradientOverlay, Image, NavigationLink, Video } from "@components/module";
 import { useWindowWidth } from "@utils/useCustomHooks";
 import CarouselBtns from "@components/module/carouselBtns";
 
@@ -30,6 +25,9 @@ const RolexHeroBanner = ({ ...content }) => {
     setActiveIndex(0);
   };
 
+  console.log("content?.listItems", content?.listItems);
+  const bannerType = content?.listItems[0]?.bannerType;
+
   const screenSize = useWindowWidth();
   return (
     <Swiper
@@ -41,7 +39,7 @@ const RolexHeroBanner = ({ ...content }) => {
       loop={true}
       speed={600}
       onSlideChange={handleSlideChange}
-      className={styles.heroSlider}
+      className={`${bannerType === "CPO" && styles.cpoHeroSlider} ${styles.heroSlider}`}
       onReachEnd={handleReachEnd}
     >
       {slides?.map((slide, index) => {
@@ -49,10 +47,7 @@ const RolexHeroBanner = ({ ...content }) => {
           <SwiperSlide className={styles.swiperSlide} key={index}>
             <div className={styles.slide}>
               {slide?.media?.image || slide?.mobileMedia?.media?.image ? (
-                <GradientOverlay
-                  className={styles.gradient}
-                  opacity={slide?.opacity?.opacity}
-                >
+                <GradientOverlay className={styles.gradient} opacity={slide?.opacity?.opacity}>
                   <Image
                     imgWidth="100%"
                     height={styles.image}
@@ -109,18 +104,12 @@ const RolexHeroBanner = ({ ...content }) => {
               {slides?.length > 1 && (
                 <>
                   {
-                    <div
-                      className={styles.sliderLeftBtn}
-                      onClick={() => swiperRef.current.swiper.slidePrev()}
-                    >
+                    <div className={styles.sliderLeftBtn} onClick={() => swiperRef.current.swiper.slidePrev()}>
                       <ArrowRightThick />
                     </div>
                   }
                   {
-                    <div
-                      className={styles.sliderRightBtn}
-                      onClick={() => swiperRef.current.swiper.slideNext()}
-                    >
+                    <div className={styles.sliderRightBtn} onClick={() => swiperRef.current.swiper.slideNext()}>
                       <ArrowRightThick />
                     </div>
                   }

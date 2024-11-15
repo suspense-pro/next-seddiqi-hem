@@ -8,7 +8,7 @@ import Image from "next/image";
 
 const RolexProductLister = ({ listItems = [], cta }) => {
   const [products, setProducts] = useState(null);
-
+  console.log("listItems", listItems)
   useEffect(() => {
     const fetchProducts = async () => {
       if (listItems.length > 0) {
@@ -16,6 +16,8 @@ const RolexProductLister = ({ listItems = [], cta }) => {
           pids: listItems.join(","),
           method: "GET",
         });
+
+        console.log("data", data)
         setProducts(data?.data);
       }
     };
@@ -23,6 +25,8 @@ const RolexProductLister = ({ listItems = [], cta }) => {
   }, [listItems]);
 
   if (!products) return null;
+
+  console.log("products", products);
 
   return (
     <div className={styles.productListerContainer}>
@@ -45,8 +49,8 @@ const RolexProductLister = ({ listItems = [], cta }) => {
           {products.map((product, index) => {
             const imageData = product?.imageGroups?.[1]?.images?.[0]?.link;
             const altText = product?.imageGroups?.[1]?.images?.[0]?.alt || "";
-            const title = product?.brand;
-            const subtitle = product?.name;
+            const brand = product?.brand;
+            const productName = product?.name;
             const price = product?.price;
 
             return (
@@ -64,11 +68,14 @@ const RolexProductLister = ({ listItems = [], cta }) => {
                     )}
                   </div>
                   <div className={styles.productInfo}>
-                    <Typography variant="p" className={styles.productTitle}>
-                      {title}
+                    <Typography variant="p" className={styles.productBrand}>
+                      {brand}
                     </Typography>
                     <Typography variant="p" className={styles.productName}>
-                      {subtitle?.toUpperCase()}
+                      {productName}
+                    </Typography>
+                    <Typography variant="p" className={styles.productDesc}>
+                      2016 oyster, 40mm, Oystersteel and platinum
                     </Typography>
                     <Typography variant="p" className={styles.productPrice}>
                       AED {price}
@@ -81,7 +88,7 @@ const RolexProductLister = ({ listItems = [], cta }) => {
         </Swiper>
       </div>
       <div className={styles.btnContainer}>
-        <NavigationLink className={styles.discoverButton} title={cta?.label || "Shop"} />
+        <NavigationLink className={styles.discoverButton} title={cta?.label || "Shop More"} />
       </div>
     </div>
   );

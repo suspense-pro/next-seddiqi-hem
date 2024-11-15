@@ -52,7 +52,7 @@ const ThreeGrid = ({ ...content }) => {
           <h3 className={styles.mainTitle}>{twoGrids.mainTitle}</h3>
 
           <div className={styles.imageTextsWrapper}>
-            {twoGrids?.contents.map((data, index) => (
+            {twoGrids?.contents?.map((data, index) => (
               <div key={index} className={`${[styles.imageTextsContainer]}`}>
                 <a href={data.linkUrl} className={styles.imageContainer}>
                   <Image imgWidth="100%" height={"auto"} image={data.media?.image} imageAltText={data.media?.altText} />
