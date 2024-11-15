@@ -25,7 +25,6 @@ const RolexHeroBanner = ({ ...content }) => {
     setActiveIndex(0);
   };
 
-  console.log("content?.listItems", content?.listItems);
   const bannerType = content?.listItems[0]?.bannerType;
 
   const screenSize = useWindowWidth();
@@ -88,16 +87,20 @@ const RolexHeroBanner = ({ ...content }) => {
                 </div>
               ) : (
                 <div className={styles.textOverlayCpo}>
-                  <div className={styles.brand}>{slide?.title}</div>
-                  <h2 className={styles.title}>{slide.subHeading}</h2>
-                  <div className={styles.btnContainer}>
-                    <NavigationLink
-                      className={styles.discoverButton}
-                      title={slide?.cta?.label}
-                      isNewTab={slide?.cta?.isNewTab}
-                      url={slide?.cta?.url}
-                    />
-                  </div>
+                  {slide?.title && <div className={styles.brand}>{slide?.title}</div>}
+
+                  {slide?.subHeading && <h2 className={styles.title}>{slide?.subHeading}</h2>}
+
+                  {slide?.cta && (
+                    <div className={styles.btnContainer}>
+                      <NavigationLink
+                        className={styles.discoverButton}
+                        title={slide?.cta?.label}
+                        isNewTab={slide?.cta?.isNewTab}
+                        url={slide?.cta?.url}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
 
