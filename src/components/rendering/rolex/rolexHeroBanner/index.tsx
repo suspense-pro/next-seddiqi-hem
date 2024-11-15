@@ -15,6 +15,8 @@ const RolexHeroBanner = ({ ...content }) => {
 
   if (!content) return null;
 
+  console.log("content", content);
+
   const slides = content?.listItems;
 
   const handleSlideChange = (swiper) => {
@@ -25,10 +27,8 @@ const RolexHeroBanner = ({ ...content }) => {
     setActiveIndex(0);
   };
 
-  console.log("content?.listItems", content?.listItems);
   const bannerType = content?.listItems[0]?.bannerType;
 
-  const screenSize = useWindowWidth();
   return (
     <Swiper
       ref={swiperRef}
@@ -73,8 +73,8 @@ const RolexHeroBanner = ({ ...content }) => {
               )}
               {slide?.bannerType === "Rolex" ? (
                 <div className={styles.textOverlay}>
-                  <div className={styles.brand}>{slide?.title}</div>
-                  <h2 className={styles.title}>{slide.subHeading}</h2>
+                  {slide?.title && <div className={styles.brand}>{slide?.title}</div>}
+                  {slide.subHeading && <h2 className={styles.title}>{slide.subHeading}</h2>}
                   {slide?.cta?.label && (
                     <div className={styles.btnContainer}>
                       <NavigationLink
@@ -87,17 +87,21 @@ const RolexHeroBanner = ({ ...content }) => {
                   )}
                 </div>
               ) : (
-                <div className={styles.textOverlayCpo}>
-                  <div className={styles.brand}>{slide?.title}</div>
-                  <h2 className={styles.title}>{slide.subHeading}</h2>
-                  <div className={styles.btnContainer}>
-                    <NavigationLink
-                      className={styles.discoverButton}
-                      title={slide?.cta?.label}
-                      isNewTab={slide?.cta?.isNewTab}
-                      url={slide?.cta?.url}
-                    />
-                  </div>
+                <div className={`${slide?.textPosition === "Center" && styles.centerCpo} ${styles.textOverlayCpo}`}>
+                  {slide?.title && <div className={styles.brand}>{slide?.title}</div>}
+
+                  {slide?.subHeading && <h2 className={styles.title}>{slide?.subHeading}</h2>}
+
+                  {slide?.cta && slide?.cta?.label &&  (
+                    <div className={styles.btnContainer}>
+                      <NavigationLink
+                        className={styles.discoverButton}
+                        title={slide?.cta?.label}
+                        isNewTab={slide?.cta?.isNewTab}
+                        url={slide?.cta?.url}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
 
