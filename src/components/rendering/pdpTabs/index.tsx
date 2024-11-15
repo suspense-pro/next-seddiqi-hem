@@ -177,12 +177,19 @@ const PdpTabs: React.FC<any> = (props) => {
                       </li>
                     ))}
                   </ul>
-
-                  <img
-                    src={tab.productImageUrl}
+                  { tab.productImageUrl != null ? 
+                    <img
+                      src={tab.productImageUrl}
+                      className={styles.productImage}
+                      alt=""
+                    /> 
+                    : 
+                    <img
+                    src={props.tabImage}
                     className={styles.productImage}
                     alt=""
                   />
+                  }
                 </div>
               ))}
             </div>
