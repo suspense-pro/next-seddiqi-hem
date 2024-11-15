@@ -4,37 +4,33 @@ import { AccountIcon, CalendarIcon, MapIcon, SearchIcon } from "@assets/images/s
 import styles from "./MobileHeaderNavbar.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import { MobileHeaderNavbarProps } from "@utils/models";
+import Link from "next/link";
 
-const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({
-  toggleMenu,
-  menuOpen,
-}) => {
+const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({ toggleMenu, menuOpen }) => {
   const { headerData } = useContext(HeaderContext);
 
   if (!headerData) return null;
 
   const MAIN_LOGO = headerData?.content?.mainLogo?.image;
-  if(!MAIN_LOGO) return null
+  if (!MAIN_LOGO) return null;
   // console.log(headerData?.content?.logoSymbol?.image)
   return (
     <header className={styles.mobileHeader}>
       <div className={styles.mobileHeaderContainer}>
         <div className={styles.menuIcon} onClick={toggleMenu}>
-          <div
-            className={`${styles.hamBurger} ${
-              menuOpen ? styles.hamburgerCross : ""
-            }`}
-          />
+          <div className={`${styles.hamBurger} ${menuOpen ? styles.hamburgerCross : ""}`} />
           <AccountIcon fill="#" />
         </div>
-          <Image
-            className={styles.centerLogo}
-            image={headerData?.content?.logoSymbol?.image?.image}
-            imageAltText={"Seddiqi Logo"}
-          />
+        <Image
+          className={styles.centerLogo}
+          image={headerData?.content?.logoSymbol?.image?.image}
+          imageAltText={"Seddiqi Logo"}
+        />
         <div className={styles.rightIcons}>
           <SearchIcon fill="#" />
-          <CalendarIcon />
+          <Link target="_blank" href="/find-a-boutique-listing">
+            <MapIcon fill="#" />
+          </Link>
         </div>
       </div>
     </header>
