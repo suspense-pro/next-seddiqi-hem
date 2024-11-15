@@ -31,6 +31,7 @@ export interface BoutiqueBannerProps {
     label: string;
     type: string;
     color: string;
+    url: string;
   };
   mainTitle: string;
   media: MediaType;

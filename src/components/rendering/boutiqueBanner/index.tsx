@@ -42,13 +42,17 @@ const BoutiqueBanner: React.FC<BoutiqueBannerProps> = ({
           <div className={styles.richTextContainer}>
             <RichText align="left" text={richText} />
           </div>
-         {cta && cta.label && <div className={styles.ctaContainer}>
-            <Button
-              title={cta?.label}
-              type={cta?.type}
-              className={styles.ctaButton}
-            />
-          </div>}
+          {cta && cta.label && (
+            <div className={styles.ctaContainer}>
+              <Button
+                title={cta?.label}
+                type={cta?.type}
+                color={cta?.color}
+                link={cta?.url}
+                new_tab={cta?.isNewTab}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
