@@ -12,7 +12,7 @@ const RolexHeroBanner = ({ ...content }) => {
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
-
+  console.log("ROLEX HERO BANNER", content);
   if (!content) return null;
   const slides = content?.listItems;
 
@@ -84,12 +84,11 @@ const RolexHeroBanner = ({ ...content }) => {
                   )}
                 </div>
               ) : (
-                <div className={`${slide?.textPosition === "Center" && styles.centerCpo} ${styles.textOverlayCpo}`}>
+                <div className={`${styles.textOverlayCpo} ${slide?.textPosition === "Center" ? styles.centerCpo : ""}`}>
                   {slide?.title && <div className={styles.brand}>{slide?.title}</div>}
-
                   {slide?.subHeading && <h2 className={styles.title}>{slide?.subHeading}</h2>}
 
-                  {slide?.cta && slide?.cta?.label &&  (
+                  {slide?.cta && slide?.cta?.label && (
                     <div className={styles.btnContainer}>
                       <NavigationLink
                         className={styles.discoverButton}

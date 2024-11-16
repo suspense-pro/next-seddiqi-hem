@@ -22,15 +22,17 @@ const DefaultContentBlock = ({ ...content }) => {
         </div>
       </div>
       {cta && cta?.label && (
-        <Button
-          className={styles.cta}
-          isLink={true}
-          link={cta?.url}
-          title={cta?.label}
-          color={cta?.color}
-          type={cta?.type}
-          new_tab={cta?.isNewTab}
-        />
+        <div>
+          <Button
+            className={styles.cta}
+            isLink={true}
+            link={cta?.url}
+            title={cta?.label}
+            color={cta?.color}
+            type={cta?.type}
+            new_tab={cta?.isNewTab}
+          />
+        </div>
       )}
     </div>
   );
