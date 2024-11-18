@@ -4,12 +4,7 @@ import Typography from "../../module/typography";
 import { Image, Button } from "@components/module";
 import { ExploreBrandProps } from "@utils/models/exploreBrand";
 
-const ExploreBrand: React.FC<ExploreBrandProps> = ({
-  cta,
-  exploreBrandItems,
-  primaryTitle,
-  secondaryDescription,
-}) => {
+const ExploreBrand: React.FC<ExploreBrandProps> = ({ cta, exploreBrandItems, primaryTitle, secondaryDescription }) => {
   const logoTrackRef = useRef<HTMLDivElement>(null);
   const animationFrameIdRef = useRef<number | null>(null);
   const isHoveredRef = useRef(false);
@@ -60,27 +55,25 @@ const ExploreBrand: React.FC<ExploreBrandProps> = ({
 
   return (
     <div className={styles.exploreBrandContainer}>
-      <Typography variant="h2" className={styles.title}>
-        {primaryTitle?.toUpperCase()}
-      </Typography>
-      <div className={styles.description}>
-        <Typography variant="p">{secondaryDescription}</Typography>
-      </div>
+      {primaryTitle && (
+        <Typography variant="h2" className={styles.title}>
+          {primaryTitle?.toUpperCase()}
+        </Typography>
+      )}
+      {secondaryDescription && (
+        <div className={styles.description}>
+          <Typography variant="p">{secondaryDescription}</Typography>
+        </div>
+      )}
 
-      <div
-        className={styles.logoCarousel}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <div className={styles.logoCarousel} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <div className={styles.logoTrack} ref={logoTrackRef}>
           {exploreBrandItems.concat(exploreBrandItems).map((item, index) => (
             <a href="#" key={index} className={styles.logoItem}>
               <div className={styles.logoContainer}>
                 <Image
                   image={item.logoIcon.image.image}
-                  imageAltText={
-                    item.logoIcon.image.altText || `Brand Logo ${index + 1}`
-                  }
+                  imageAltText={item.logoIcon.image.altText || `Brand Logo ${index + 1}`}
                 />
               </div>
             </a>
@@ -89,11 +82,7 @@ const ExploreBrand: React.FC<ExploreBrandProps> = ({
       </div>
       {cta && cta.label && (
         <div className={styles.viewAllButton}>
-          <Button
-            title={cta.label || "View all Brands"}
-            type={cta.type || "solid"}
-            color={cta.color || "green_dark"}
-          />
+          <Button title={cta.label || "View all Brands"} type={cta.type || "solid"} color={cta.color || "green_dark"} />
         </div>
       )}
     </div>

@@ -9,11 +9,7 @@ import "swiper/css/effect-coverflow";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CategoryCard } from "@components/module";
 
-const CategoryList: React.FC<CategoryListProps> = ({
-  cta,
-  title,
-  listItems,
-}) => {
+const CategoryList: React.FC<CategoryListProps> = ({ cta, title, listItems }) => {
   const isMobile = !useDeviceWidth()[0];
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -23,9 +19,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
   }, []);
 
   // Check if there's at least one item with media
-  const hasMediaItems = listItems.some(
-    (item) => item.media?.image || item.media?.video
-  );
+  const hasMediaItems = listItems.some((item) => item.media?.image || item.media?.video);
 
   if (!hasMediaItems) {
     return null;
