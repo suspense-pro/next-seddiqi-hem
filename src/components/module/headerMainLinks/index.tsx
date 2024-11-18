@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import styles from "./headerMainLinks.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import NavigationLink from "../navigationLink";
-import { AccountIcon, CalendarIcon, SearchIcon, WishlistIcon, MapIcon } from "@assets/images/svg";
+import { AccountIcon, CalendarIcon, SearchIcon, WishlistIcon, MapIcon, PhoneIcon } from "@assets/images/svg";
 import { generateUniqueId } from "@utils/helpers/uniqueId";
 import Link from "next/link";
 import Image from "next/image";
@@ -56,12 +56,16 @@ const HeaderMainLinks = ({ isScrolled = false }: { isScrolled?: boolean }) => {
         ))}
       </div>
       <div className={styles.navIcons}>
-        <div onClick={openSearchPopup}>
+        {/* <div onClick={openSearchPopup}>
           <SearchIcon fill="#" />
-        </div>
+        </div> */}
         {/* <Link target="_blank" href="/book-an-appointment">
           <CalendarIcon fill="#" />
         </Link> */}
+        <Link target="_blank" href="/contact-us">
+          {/* <CalendarIcon fill="#" /> */}
+          <PhoneIcon fill="#" />
+        </Link>
         <Link target="_blank" href="/find-a-boutique-listing">
           {/* <CalendarIcon fill="#" /> */}
           <MapIcon fill="#" />

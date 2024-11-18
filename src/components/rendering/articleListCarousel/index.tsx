@@ -10,6 +10,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import RichText from "@components/module/richText";
+import Link from "next/link";
 
 const ArticleListCarousel = ({ ...content }) => {
   const listItems = content?.listItems;
@@ -48,12 +49,18 @@ const ArticleListCarousel = ({ ...content }) => {
   return (
     <div className={styles.container}>
       <div className={styles.headerItem}>
-        <Typography variant="h2" className={`${styles.headingPrimary}`}>
-          {content?.mainTitle}
-        </Typography>
-        <div className={`${styles.headingSecondary}`}>
-          <RichText align="" className={`${styles.headingSecondary}`} text={content?.richText} />
-        </div>
+        {content?.mainTitle && (
+          <Typography variant="h2" className={`${styles.headingPrimary}`}>
+            {content?.mainTitle}
+          </Typography>
+        )}
+
+        {content?.richText && (
+          <div className={`${styles.headingSecondary}`}>
+            <RichText align="" className={`${styles.headingSecondary}`} text={content?.richText} />
+          </div>
+        )}
+
         {!isMobile && <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />}
       </div>
       <div className={styles.carousel}>
@@ -86,7 +93,9 @@ const ArticleListCarousel = ({ ...content }) => {
               <SwiperSlide className={styles.swiperSlide} key={index}>
                 <GradientOverlay opacity={item?.opacity?.opacity} className={styles.containerImg}>
                   <div className={styles.articleItem}>
-                    {item?.media?.image && <Image height={styles.image} className={styles.image} image={item?.media?.image} />}
+                    {item?.media?.image && (
+                      <Image height={styles.image} className={styles.image} image={item?.media?.image} />
+                    )}
                     {item?.media?.video && (
                       <Video
                         className={styles.image}
@@ -96,9 +105,13 @@ const ArticleListCarousel = ({ ...content }) => {
                       />
                     )}
                     <div className={styles.articleContent}>
-                      <div className={styles.label}>{item?.readTime}</div>
-                      <div className={styles.title}>{item?.title}</div>
-                      <div className={styles.desc}>{item?.subTitle}</div>
+                      {item?.readTime && <div className={styles.label}>{item?.readTime}</div>}
+                      {item?.title && <div className={styles.title}>{item?.title}</div>}
+                      {item?.subTitle && (
+                        <Link href={item?.link}>
+                          <div className={styles.desc}>{item?.subTitle}</div>
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </GradientOverlay>

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Image from "@components/module/image";
-import { AccountIcon, CalendarIcon, MapIcon, SearchIcon } from "@assets/images/svg";
+import { AccountIcon, CalendarIcon, MapIcon, PhoneIcon, SearchIcon } from "@assets/images/svg";
 import styles from "./MobileHeaderNavbar.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import { MobileHeaderNavbarProps } from "@utils/models";
@@ -19,7 +19,9 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({ toggleMenu, men
       <div className={styles.mobileHeaderContainer}>
         <div className={styles.menuIcon} onClick={toggleMenu}>
           <div className={`${styles.hamBurger} ${menuOpen ? styles.hamburgerCross : ""}`} />
-          {/* <AccountIcon fill="#" /> */}
+          <div style={{ visibility: "hidden" }}>
+            <MapIcon fill="#" />
+          </div>
         </div>
         <Image
           className={styles.centerLogo}
@@ -27,7 +29,10 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({ toggleMenu, men
           imageAltText={"Seddiqi Logo"}
         />
         <div className={styles.rightIcons}>
-          <SearchIcon fill="#" />
+          {/* <SearchIcon fill="#" /> */}
+          <Link target="_blank" href="/contact-us">
+            <PhoneIcon fill="#" />
+          </Link>
           <Link target="_blank" href="/find-a-boutique-listing">
             <MapIcon fill="#" />
           </Link>
