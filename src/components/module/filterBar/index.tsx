@@ -66,15 +66,15 @@ const FilterBar = ({
   //   fetchCategoryFilters();
   // }, [categoryId]);
 
-  // useEffect(() => {
-  //   setFiltersState(initialFilters || {});
-  // }, [initialFilters]);
-
   useEffect(() => {
-    if (!isDrawerOpen) {
-      setFiltersState(initialFilters || {});
-    }
-  }, [initialFilters, isDrawerOpen]);
+    setFiltersState(initialFilters || {});
+  }, [initialFilters]);
+
+  // useEffect(() => {
+  //   if (!isDrawerOpen) {
+  //     setFiltersState(initialFilters || {});
+  //   }
+  // }, [initialFilters, isDrawerOpen]);
 
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
@@ -164,7 +164,7 @@ const FilterBar = ({
   return (
     <div className={styles.container}>
       <div className={styles.filterBtns}>
-          {/* <FilterBtn
+          <FilterBtn
             label={"All Filter"}
             icon={true}
             onClick={toggleDrawer}
@@ -176,7 +176,7 @@ const FilterBar = ({
               icon={false}
               onClick={undefined}
             />
-          ))} */}
+          ))}
       </div>
       <div className={styles.productsLength}>{totalProducts} Products</div>
       <SideDrawer

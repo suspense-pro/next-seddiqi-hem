@@ -21,7 +21,7 @@ const SubMenuLinks = () => {
         return null
       }
       return (
-        <div onClick={() => updateCurrent(null)}>
+        <div onClick={() => updateCurrent(null)} key={generateUniqueId()}>
           <NavigationLink
             className={styles.menuLink}
             key={generateUniqueId()}

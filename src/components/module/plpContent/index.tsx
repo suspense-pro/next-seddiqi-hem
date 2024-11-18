@@ -260,7 +260,7 @@ const PlpContent = ({ productGridContent, products }) => {
           </>
         ) : (
           <Typography align="center" variant="h4" className={styles.noProducts}>
-            No products found!!
+            No products found.
           </Typography>
         )}
 
