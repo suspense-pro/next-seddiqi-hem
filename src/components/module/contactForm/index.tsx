@@ -19,7 +19,7 @@ const ContactForm = () => {
   const [attachment, setAttachment] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    topic: "Compliant",
+    topic: "Suggestion",
     orderNumber: "",
     firstName: "",
     lastName: "",
@@ -163,7 +163,7 @@ const ContactForm = () => {
           label="Select a topic"
           value={formData.topic}
           onChange={handleChange}
-          options={["Compliant", "Suggestion", "Question", "Warranty"]}
+          options={["Suggestion", "Query", "Warranty", "Complaint"]}
           required
           optionFull
         />
