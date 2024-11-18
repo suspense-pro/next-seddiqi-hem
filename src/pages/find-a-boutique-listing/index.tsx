@@ -61,6 +61,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [brandCheckboxValues, setBrandCheckboxValues] = useState([]);
   const [serviceCheckboxValues, setServiceCheckboxValues] = useState([]);
   const [openAccordion, setOpenAccordion] = useState("brands"); // Default open accordion
+  const [filterApplied, setFilterApplied] = useState(false);
 
   const handleToggleAccordion = (accordion) => {
     setOpenAccordion(openAccordion === accordion ? null : accordion);
@@ -296,7 +297,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
           <MapView 
             nearestStore={nearestStore} 
             stores={stores} 
-            activeStore={locationStores[activeIndex]} 
+            activeStore={filterApplied === true ? getFilteredStores()[activeIndex] : locationStores[activeIndex]} 
             userLocation={userLocation} 
             useOnPopup={false}
           />
@@ -305,7 +306,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
           <MapView 
             nearestStore={null} 
             stores={stores} 
-            activeStore={locationStores[activeIndex]} 
+            activeStore={filterApplied === true ? getFilteredStores()[activeIndex] : locationStores[activeIndex]} 
             userLocation={null} 
             useOnPopup={false}
           />
@@ -478,6 +479,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       const newSelectedOptions = prevSelectedOptions.includes(option)
         ? prevSelectedOptions.filter((selected) => selected !== option)
         : [...prevSelectedOptions, option];
+
+      setFilterApplied(newSelectedOptions.length > 0 ? true : false);
 
       return {
         ...prevFilters,
