@@ -12,7 +12,6 @@ const RolexHeroBanner = ({ ...content }) => {
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
-  console.log("ROLEX HERO BANNER", content);
   if (!content) return null;
   const slides = content?.listItems;
 
