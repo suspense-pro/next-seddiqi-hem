@@ -36,6 +36,7 @@
     text-transform: uppercase;
     font-size: rem(14);
     color: getColorHex("midnight-brown");
+    cursor: pointer;
 
     @include md {
       font-size: rem(16);

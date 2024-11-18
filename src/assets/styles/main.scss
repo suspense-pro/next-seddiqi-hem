@@ -120,23 +120,23 @@
 .rolex {
   padding-top: rem(69);
   @include breakpoint-min-width(rem(768)) {
-    padding-top: rem(37);
+    padding-top: rem(23);
   }
   @include breakpoint-min-width(rem(1037)) {
-    padding-top: rem(69);
+    padding-top: rem(55);
   }
   @include breakpoint-min-width(rem(1250)) {
-    padding-top: rem(81);
+    padding-top: rem(67);
   }
 }
 
 .rolexCpo {
   padding-top: rem(69);
   @include breakpoint-min-width(rem(768)) {
-    padding-top: rem(37);
+    padding-top: rem(23);
   }
   @include breakpoint-min-width(rem(1037)) {
-    padding-top: rem(69);
+    padding-top: rem(55);
   }
   @include breakpoint-min-width(rem(1250)) {
     padding-top: rem(79);

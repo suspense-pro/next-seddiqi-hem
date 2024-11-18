@@ -368,9 +368,9 @@ const ProductDetailInfo = ({
       >
         <StoreLocator
           productImgAlt={product?.imageGroups[0]?.images[0].alt}
-          productImgSrc={product?.imageGroups[0]?.images[0].disBaseLink}
-          productBrand={product?.brand}
-          productName={product?.name}
+          productImgSrc={product?.imageGroups[0]?.images[0].link}
+          productBrand={product?.c_brandName}
+          productName={product?.c_model}
           productPrice={product?.price}
           productCurrency={product?.currency}
         />
