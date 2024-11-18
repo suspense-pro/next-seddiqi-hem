@@ -151,7 +151,7 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }
           ]
       }
   ];
-    
+
   const loader = new Loader({
     apiKey: api_key,
     version: "weekly",
@@ -171,7 +171,7 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }
 
       const getIconSize = () => {
         const width = window.innerWidth;
-        return new google.maps.Size(width < 600 ? 36 : 50, width < 600 ? 49 : 68);
+        return new google.maps.Size(width < 600 ? 41 : 55, width < 600 ? 54 : 73);
       };
 
       const nearestStoreIcon = {
@@ -188,15 +188,7 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }
         scaledSize: getIconSize(),
       };
 
-      /*if (nearestStore) {
-        new google.maps.Marker({
-          position: { lat: nearestStore.latitude, lng: nearestStore.longitude },
-          map: map,
-          title: nearestStore.name,
-          icon: nearestStoreIcon,
-        });
-      }*/
-      
+      // Mark user's location
       if (userLocation && (nearestStore.latitude !== userLocation.lat || nearestStore.longitude !== userLocation.lng)) {
         new google.maps.Marker({
           position: userLocation,
@@ -206,54 +198,60 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }
         });
       }
 
-      if (activeStore) {
-        // Only center on mobile devices
-        if (isDesktop && useOnPopup === false) {
+      stores.forEach((store) => {
+        const scalingFactor = 0.5; 
+
+        const iconSize = store.id === activeStore?.id
+          ? getIconSize()
+          : new google.maps.Size(
+              getIconSize().width * scalingFactor, 
+              getIconSize().height * scalingFactor 
+            );
+
+        const zIndex = store.id === activeStore?.id ? 100 : 1;
+
+        const marker = new google.maps.Marker({
+          position: { lat: store.latitude, lng: store.longitude },
+          map: map,
+          title: store.name,
+          icon: {
+            url: "/images/png/map-pin.png",
+            scaledSize: iconSize,
+          },
+          zIndex: zIndex
+        });
+
+        markersRef.current.push(marker);
+
+        // Optional: Add event listener for clicking a store
+        /*marker.addListener("click", () => {
+          setActiveMarker(store.id);
+
+          // Zoom and center map on clicked marker
           const currentCenter = map.getCenter();
           map.panTo({
             lat: currentCenter.lat(),
             lng: currentCenter.lng() + -0.03,
           });
           map.setZoom(14);
-        }
-      }
-
-      stores.forEach((store) => {
-        const marker = new google.maps.Marker({
-          position: { lat: store.latitude, lng: store.longitude },
-          map: map,
-          title: store.name,
-          icon: storeIcon,
-        });
-
-        markersRef.current.push(marker);
-
-        if (activeStore && store.id !== activeStore.id) {
-          marker.setVisible(false); 
-        }
-
-        /*marker.addListener("click", () => {
-          setActiveMarker(store.id); 
-
-          const currentCenter = map.getCenter();
-          map.panTo({
-            lat: currentCenter.lat(),  
-            lng: currentCenter.lng() + -0.03 
-          });
-          map.setZoom(14); 
-          markersRef.current.forEach((m) => {
-            if (m !== marker) {
-              m.setVisible(false); 
-            }
-          });
         });*/
       });
+
+      // Optionally, set up any specific logic for the activeStore here
+      if (activeStore && isDesktop && useOnPopup === false) {
+        const currentCenter = map.getCenter();
+        map.panTo({
+          lat: currentCenter.lat(),
+          lng: currentCenter.lng() + -0.03,
+        });
+        map.setZoom(14);
+      }
     }
   }).catch(err => {
     console.error("Error loading Google Maps: ", err);
   });
 
-}, [nearestStore, stores, activeStore, isDesktop]); // Add isDesktop as a dependency
+}, [nearestStore, stores, activeStore, isDesktop]);
 
 return <div ref={mapRef} style={{ height: '100%', width: '100%' }}></div>;
 };
