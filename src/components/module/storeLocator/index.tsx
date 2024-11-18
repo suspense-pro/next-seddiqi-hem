@@ -257,7 +257,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
         <div className={styles.productInfoContainerTexts}>
           <h6>{productBrand}</h6>
           <p>{productName}</p>
-          <span>{productCurrency} {productPrice}</span>
+          {/*<span>{productCurrency} {productPrice}</span>*/}
         </div>
       </div>
       <LocationTabs activeTab={activeTab} handleTabChange={handleTabChange} tabs={tabs} />
