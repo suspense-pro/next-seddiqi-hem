@@ -55,10 +55,17 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
       //const result = await UseFetchStores(productBrand, productName, '', '',);
       let result;
 
+      function capitalizeFirstLetter(string) {
+        if (!string) return string; // Check if the string is empty or null
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+      }
+
+      const capitalResult = capitalizeFirstLetter(productBrand);
+
       if (location) {
-        result = await UseFetchStores("", "", '', '', location.lat, location.lng); 
+        result = await UseFetchStores(capitalResult, '', '', '', location.lat, location.lng); 
       } else {
-        result = await UseFetchStores('', '', '', '', null, null);
+        result = await UseFetchStores(capitalResult, '', '', '', null, null);
       }
 
       setStores(result.response);
