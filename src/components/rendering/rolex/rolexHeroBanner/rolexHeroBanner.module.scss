@@ -135,12 +135,18 @@
     text-transform: capitalize;
     font-size: rem(12);
   }
+}
 
-  .centerCpo {
-    position: absolute;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
+.centerCpo {
+  position: absolute;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  text-align: center !important;
+
+  .btnContainer {
+    display: flex;
+    justify-content: center;
   }
 }
 
