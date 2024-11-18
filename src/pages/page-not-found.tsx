@@ -5,6 +5,7 @@ import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { isEmpty } from "@utils/helpers";
 import { GetServerSidePropsContext } from "next";
 import React from "react";
+import styles from "./pageNotFound.module.scss";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
@@ -29,8 +30,11 @@ export default function PageNotFound({ ...content }) {
   return (
     <>
     <div className="error-page">
-      <img src="/images/png/404-image.png" className="error-image" />
+      {/* <img src="/images/png/404-image.png" className="error-image" /> */}
 
+      <div className={styles.pageNotFoundStyle}>
+        404
+      </div>
       <Typography align="center" variant="h1">
         Page not found
       </Typography>

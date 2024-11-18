@@ -10,14 +10,18 @@ const RolexTextBlock = ({ ...content }) => {
     return (
       <div className={styles.banner}>
         <div className={styles.bannerContainer}>
-          <div className={styles.leftText}>
-            <Typography variant="h1" className={styles.title}>
-              {content?.title}
-            </Typography>
-          </div>
-          <div className={styles.rightText}>
-            <RichText align="" className={`${styles.headingSecondary}`} text={content?.description} />
-          </div>
+          {content?.title && (
+            <div className={styles.leftText}>
+              <Typography variant="h1" className={styles.title}>
+                {content?.title}
+              </Typography>
+            </div>
+          )}
+          {content?.description && (
+            <div className={styles.rightText}>
+              <RichText align="" className={`${styles.headingSecondary}`} text={content?.description} />
+            </div>
+          )}
         </div>
       </div>
     );
@@ -25,15 +29,20 @@ const RolexTextBlock = ({ ...content }) => {
     return (
       <div className={styles.bannerCpo}>
         <div className={styles.bannerContainerCpo}>
-          <div className={styles.label}>{content?.label}</div>
-          <div className={styles.leftText}>
-            <Typography variant="h1" className={styles.title}>
-              {content?.title}
-            </Typography>
-          </div>
-          <div className={styles.rightText}>
-            <RichText align="" className={`${styles.headingSecondary}`} text={content?.description} />
-          </div>
+          {content?.label && <div className={styles.label}>{content?.label}</div>}
+          {content?.title && (
+            <div className={styles.leftText}>
+              <Typography variant="h1" className={styles.title}>
+                {content?.title}
+              </Typography>
+            </div>
+          )}
+
+          {content?.description && (
+            <div className={styles.rightText}>
+              <RichText align="" className={`${styles.headingSecondary}`} text={content?.description} />
+            </div>
+          )}
         </div>
       </div>
     );

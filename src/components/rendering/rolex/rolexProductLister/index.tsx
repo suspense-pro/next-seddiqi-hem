@@ -8,7 +8,6 @@ import Image from "next/image";
 
 const RolexProductLister = ({ listItems = [], cta }) => {
   const [products, setProducts] = useState(null);
-  console.log("listItems", listItems);
   useEffect(() => {
     const fetchProducts = async () => {
       if (listItems.length > 0) {

@@ -139,11 +139,11 @@
 
   .menu {
     color: getColorHex("green-dark");
-    font-size: rem(18);
+    font-size: rem(16);
     font-weight: 400;
     line-height: rem(26);
     letter-spacing: rem(0.4);
-    text-transform: uppercase;
+    text-transform: capitalize;
 
     &.menuWhite {
       color: getColorHex("white");

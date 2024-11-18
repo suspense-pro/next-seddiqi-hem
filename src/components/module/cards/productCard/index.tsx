@@ -44,7 +44,7 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
   return (
     <Link
       href={`/product/${cleanedId}`}
-      target="_blank"
+      //target="_blank"
       rel="noopener noreferrer"
     >
       <div
