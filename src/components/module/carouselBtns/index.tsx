@@ -2,7 +2,23 @@ import React, { useCallback } from "react";
 import { ArrowRight } from "@assets/images/svg";
 import styles from "./carouselBtns.module.scss";
 
-const CarouselBtns = ({ swiper, activeIndex, slides, btnColor = "metallic", btnWidth = 0, activeBtn = true }) => {
+interface CarouselBtnsProps {
+  swiper: any;
+  activeIndex: number;
+  slides: any[];
+  btnColor?: string;
+  btnWidth?: number;
+  activeBtn?: boolean;
+}
+
+const CarouselBtns: React.FC<CarouselBtnsProps> = ({
+  swiper,
+  activeIndex,
+  slides,
+  btnColor = "metallic",
+  btnWidth,
+  activeBtn = true,
+}) => {
   const handlePaginationClick = useCallback(
     (index) => {
       if (swiper) swiper.slideToLoop(index);

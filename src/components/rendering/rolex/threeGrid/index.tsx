@@ -5,7 +5,6 @@ import GreenArrowSmall from "@assets/images/svg/GreenArrowSmall";
 import RolexSmallLink from "../rolexSmallLink";
 
 const ThreeGrid = ({ ...content }) => {
-  console.log("THREE", content);
   // if (!content) return null;
 
 
