@@ -72,7 +72,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
           </div>
         </div>
       )}
-
+      {cta && cta?.label &&(
       <div className={styles.ctaContainer}>
         <Button
           title={cta?.label}
@@ -80,6 +80,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
           className={styles.ctaButton}
         />
       </div>
+      )}
     </div>
   );
 };
