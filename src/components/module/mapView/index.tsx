@@ -188,6 +188,15 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }
         scaledSize: getIconSize(),
       };
 
+      /*if (nearestStore) {
+        new google.maps.Marker({
+          position: { lat: nearestStore.latitude, lng: nearestStore.longitude },
+          map: map,
+          title: nearestStore.name,
+          icon: nearestStoreIcon,
+        });
+      }*/
+
       // Mark user's location
       if (userLocation && (nearestStore.latitude !== userLocation.lat || nearestStore.longitude !== userLocation.lng)) {
         new google.maps.Marker({
