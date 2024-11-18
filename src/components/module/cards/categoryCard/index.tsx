@@ -18,7 +18,9 @@ const CategoryCard: React.FC<any> = ({ item }) => {
         >
           <div className={styles.categoryListItem}>
             {item?.media?.image ? (
-              <Image className={styles.image} image={item?.media?.image} />
+              <a href={item?.linkUrl} className={styles.imageContainer}>
+                <Image className={styles.image} image={item?.media?.image} />
+              </a>
             ) : item?.media?.video ? (
               <Video
                 className={styles.image}
@@ -33,9 +35,12 @@ const CategoryCard: React.FC<any> = ({ item }) => {
       <div className={styles.contentWrapper}>
         {item?.title && (
           <div className={styles.titleContainer}>
-            <Typography variant="h2" className={styles.slideTitle}>
-              {item.title}
+            {item?.title && (
+              <Typography variant="h2" className={styles.slideTitle}>
+             <a href={item?.linkText}>{item?.title}</a>
             </Typography>
+              
+            )}
           </div>
         )}
         {item?.description && (

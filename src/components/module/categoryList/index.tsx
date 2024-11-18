@@ -66,11 +66,14 @@ const CategoryList: React.FC<CategoryListProps> = ({ cta, title, listItems }) =>
           </div>
         </div>
       )}
-
-      {cta?.label && (
-        <div className={styles.ctaContainer}>
-          <Button title={cta?.label} type={cta?.type} className={styles.ctaButton} />
-        </div>
+      {cta && cta?.label &&(
+      <div className={styles.ctaContainer}>
+        <Button
+          title={cta?.label}
+          type={cta?.type}
+          className={styles.ctaButton}
+        />
+      </div>
       )}
     </div>
   );
