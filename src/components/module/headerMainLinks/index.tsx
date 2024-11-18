@@ -11,6 +11,7 @@ import { SideDrawer } from "@components/module";
 import { Search } from "@components/module";
 import { useSearchContext } from "@contexts/searchContext";
 import classNames from "classnames";
+import PhoneIconNoBorder from "@assets/images/svg/PhoneIconNoBorder";
 
 const HeaderMainLinks = ({ isScrolled = false }: { isScrolled?: boolean }) => {
   const { updateCurrent, current, headerData } = useContext(HeaderContext);
@@ -64,7 +65,7 @@ const HeaderMainLinks = ({ isScrolled = false }: { isScrolled?: boolean }) => {
         </Link> */}
         <Link target="_blank" href="/contact-us">
           {/* <CalendarIcon fill="#" /> */}
-          <PhoneIcon fill="#" />
+          <PhoneIconNoBorder className={styles.phoneIcon} fill="#" />
         </Link>
         <Link target="_blank" href="/find-a-boutique-listing">
           {/* <CalendarIcon fill="#" /> */}

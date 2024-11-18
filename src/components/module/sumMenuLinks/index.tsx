@@ -13,12 +13,11 @@ const SubMenuLinks = () => {
     return null;
   }
 
-  
   const renderLinks = (links) => {
     return links?.map(({ content }) => {
       const { item_title, isVisible } = content?.commonProps || {};
-      if(!item_title) {
-        return null
+      if (!item_title) {
+        return null;
       }
       return (
         <div onClick={() => updateCurrent(null)}>
@@ -40,14 +39,14 @@ const SubMenuLinks = () => {
 
   return (
     <div className={styles.menuLeft}>
-      <div className={styles.columnCategories}>
-        <div className={styles.label}>{columnOne}</div>
-        {renderLinks(currentHeaderData[0]?.children)}
-      </div>
-      <div className={styles.columnFilters}>
-        <div className={styles.label}>{columnTwo}</div>
-        {renderLinks(currentHeaderData[1]?.children)}
-      </div>
+      {currentHeaderData?.map((item) => {
+        return (
+          <div className={styles.columnCategories}>
+            <div className={styles.label}>{item?.content?.commonProps?.item_title}</div>
+            {renderLinks(item?.children)}
+          </div>
+        );
+      })}
     </div>
   );
 };

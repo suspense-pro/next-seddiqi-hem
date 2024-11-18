@@ -5,6 +5,7 @@ import styles from "./MobileHeaderNavbar.module.scss";
 import { HeaderContext } from "@contexts/headerContext";
 import { MobileHeaderNavbarProps } from "@utils/models";
 import Link from "next/link";
+import PhoneIconNoBorder from "@assets/images/svg/PhoneIconNoBorder";
 
 const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({ toggleMenu, menuOpen }) => {
   const { headerData } = useContext(HeaderContext);
@@ -31,7 +32,7 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({ toggleMenu, men
         <div className={styles.rightIcons}>
           {/* <SearchIcon fill="#" /> */}
           <Link target="_blank" href="/contact-us">
-            <PhoneIcon fill="#" />
+            <PhoneIconNoBorder className={styles.phoneIcon} fill="#" />
           </Link>
           <Link target="_blank" href="/find-a-boutique-listing">
             <MapIcon fill="#" />

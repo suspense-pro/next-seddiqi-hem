@@ -16,7 +16,7 @@
   background: linear-gradient(90deg, getColorHex("green-racing") 0%, getColorHex("green-spring") 100%);
   position: fixed;
   transition: all 0.3s;
-  top: rem(120);
+  top: rem(106);
 
   @include breakpoint-min-width(rem(1037)) {
     top: rem(152);
