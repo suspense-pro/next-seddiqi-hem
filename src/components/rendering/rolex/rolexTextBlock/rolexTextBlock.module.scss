@@ -82,6 +82,10 @@
     line-height: rem(22);
     letter-spacing: rem(0.4);
 
+    h4 {
+      margin-top: 0;
+    }
+
     @include lg {
       line-height: rem(26);
       font-size: rem(16);
