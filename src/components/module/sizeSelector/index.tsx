@@ -149,6 +149,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
         onSubmit={null}
         onClearAll={null}
         className={""}
+        button2Color={"green_dark"}
       >
         <div className={styles.contentWrapper}>
           <div className={styles.content}>
