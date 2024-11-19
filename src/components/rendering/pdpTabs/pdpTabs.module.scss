@@ -6,11 +6,12 @@
   gap: rem(32);
   margin-bottom: rem(40);
   //padding-top: rem(150); //To be removed later
+  background-color: getColorHex("light-cream");
 
   @include md {
     gap: rem(40);
     margin-bottom: rem(12);
-    padding-top: rem(200); //To be removed later
+    //padding-top: rem(200); //To be removed later
   }
 }
 
@@ -459,7 +460,8 @@
 .viewMoreDetails{
   display: flex;
   width: auto;
-  margin: 0 auto;
+  margin: rem(30) auto;
+  margin-bottom: rem(35);
   line-height: rem(18);
   transform: translateY(0%);
   transition: all 0.5s ease;
@@ -467,14 +469,15 @@
 
   @include md {
     transform: translateY(-320%);
+    margin-bottom: rem(0);
   }
 
   &.isOpened{
-    margin: rem(68) auto 0;
+    margin: rem(68) auto rem(35);
 
     @include md {
       transform: translateY(0%);
-      margin: rem(60) auto 0;
+      margin: rem(60) auto rem(60);
     }
   }
 }

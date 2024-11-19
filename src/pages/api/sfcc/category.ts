@@ -84,7 +84,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         */
                         console.log("category ID: ", categoryId);
                         const category = await getCategory({ method: "GET", cgid: categoryId});
-                        if (!category.isError && category.response && category.response.c_categoryQuickFilters.length > 0) {
+                        if (!category.isError && category.response && category.response.c_categoryQuickFilters && category.response.c_categoryQuickFilters.length > 0) {
                             console.log("c_categoryQuickFilters", category.response.c_categoryQuickFilters);
                             const categoryQFilters = category.response.c_categoryQuickFilters;
                             const filters = result.refinements;
