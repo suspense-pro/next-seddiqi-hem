@@ -96,7 +96,7 @@ const NewsletterSignup: React.FC = () => {
             newsletter.
           </label> */}
           <label htmlFor="privacyPolicy">
-            I consent to receive occasional marketing communications and event invitation from Ahmed Seddiqi & Sons, its
+            I consent to receiving occasional marketing communications and events invitation from Ahmed Seddiqi & Sons, its
             affiliates, and group companies via phone, email, SMS, or WhatsApp channels.
           </label>
         </div>

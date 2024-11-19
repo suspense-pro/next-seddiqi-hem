@@ -23,7 +23,7 @@
 }
 
 .headingPrimary {
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
   margin: 0;
   text-transform: uppercase;
   font-size: rem(28);
@@ -36,7 +36,7 @@
 
 .headingSecondary {
   line-height: rem(22);
-  color: getColorHex("green-metallic");
+  color: getColorHex("black-dark");
   font-size: rem(14);
   letter-spacing: rem(0.4);
 

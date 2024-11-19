@@ -225,10 +225,11 @@ const PdpTabs: React.FC<any> = (props) => {
               ))}
             </ul>
           </div>
-
+          {/*
           <button className={`${styles.viewMoreDetails} ${isOpen ? styles.isOpened : ''} button plain dark_green`} onClick={handleToggle}>
             <span>{isOpen ? 'View Less Details' : 'View More Details'}</span>
           </button>
+          */}
         </div>
         
       </div>

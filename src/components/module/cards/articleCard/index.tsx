@@ -10,18 +10,27 @@ const ArticleCard: React.FC<CardInfoProps> = ({ item }) => {
 
   const title = item?.title;
   const linkBtn = item?.linkTitle;
-  if (!image || !title || !linkBtn || !backgroundImage) return null;
+  const link = item?.link ? item?.link : "/";
+  if (!backgroundImage) return null;
+  if (!image && !title && !linkBtn && !backgroundImage) return null;
 
   return (
-    <div className={styles.articleCard} style={{ backgroundImage }}>
-      <div className={styles.backgroundFade} />
-      <Typography align="left" variant="h3" className={styles.articleTitle}>
-        {title}
-      </Typography>
-      <Link href="#" className={styles.articleBtn}>
-        {linkBtn}
-      </Link>
-    </div>
+    <Link href={link}>
+      <div className={styles.articleCard} style={{ backgroundImage }}>
+        <div className={styles.backgroundFade} />
+        {title && (
+          <Typography align="left" variant="h3" className={styles.articleTitle}>
+            {title}
+          </Typography>
+        )}
+
+        {linkBtn && (
+          <Link href="#" className={styles.articleBtn}>
+            {linkBtn}
+          </Link>
+        )}
+      </div>
+    </Link>
   );
 };
 

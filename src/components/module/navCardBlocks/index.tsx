@@ -15,14 +15,13 @@ const NavCardBlocks = () => {
 
   const contentBlock = headerData?.children[current]?.content?.contentBlock;
   if (!contentBlock) return null;
-
   return (
     <div className={styles.rightSideContainer}>
       {contentBlock.map((card, i) => {
-
-          const CardComponent = ComponentMapping[card._meta.schema];
-          const title = card._meta.schema.includes("story") ? "Other" : card._meta.schema.includes("display") ? "The Latest" : "Latest Article";
-          const cardStyle = card._meta.schema.includes("story") ? styles.storyCardContainer : styles.displayCards;
+        
+        const CardComponent = ComponentMapping[card._meta.schema];
+        const title = card._meta.schema.includes("story") ? "Other" : card._meta.schema.includes("display") ? "The Latest" : "Latest Article";
+        const cardStyle = card._meta.schema.includes("story") ? styles.storyCardContainer : styles.displayCards;
 
          return <CardSection
             key={generateUniqueId()}

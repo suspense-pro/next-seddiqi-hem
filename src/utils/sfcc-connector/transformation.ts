@@ -10,11 +10,11 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
           specs: [
             {
               title: "Case",
-              description: data.c_caseMaterial || "No available data"
+              description: data.hasOwnProperty("c_caseMaterial") ? data.c_caseMaterial : "No available data"
             },
             {
               title: "Size",
-              description: data.c_size || "No available data"
+              description: data.hasOwnProperty("c_size") ? data.c_size : "No available data"
             },
             {
               title: "Water Resistance",
@@ -30,11 +30,11 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
           specs: [
             {
               title: "Movement",
-              description: data.c_movement1
+              description: data.hasOwnProperty("c_movement1") ? data.c_movement1 : "No available data"
             },
             {
               title: "Power Reserve",
-              description: data.c_powerReserve || "No available data"
+              description: data.hasOwnProperty("c_powerReserve") ? data.c_powerReserve : "No available data"
             }
           ],
           productImageUrl: data.hasOwnProperty("c_movementTabImage") ? data.c_movementTabImage : null
@@ -46,11 +46,11 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
           specs: [
             {
               title: "Dial",
-              description: data.c_dialMaterial || "No available data"
+              description: data.hasOwnProperty("c_dialMaterial") ? data.c_dialMaterial : "No available data"
             },
             {
               title: "Power Reserve",
-              description: data.c_powerReserve || "No available data"
+              description: data.hasOwnProperty("c_powerReserve") ? data.c_powerReserve : "No available data"
             }
           ],
           productImageUrl: data.hasOwnProperty("c_caseTabImage") ? data.c_caseTabImage : null
@@ -66,7 +66,7 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
             },
             {
               title: "Size",
-              description: data.c_size || "No available data"
+              description: data.hasOwnProperty("c_size") ? data.c_size : "No available data"
             },
             {
              title: "Water Resistance",
