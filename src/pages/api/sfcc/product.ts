@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Customer, slasHelpers, Product, ClientConfig, Search } from "commerce-sdk";
+import { ShopperSearch } from "commerce-sdk-isomorphic"; // commerce-sdk-isomorphic for product search
 import initializeShopperConfig, { OAuthTokenFromAM, clientConfig } from "@utils/sfcc-connector/config";
 import { transformPriceRefinement } from "@utils/sfcc-connector/productUtils";
 import logger from "@utils/logger";
@@ -79,8 +80,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               const sortOption = (req.query.sort as string) ?? "";
               const categoryId = (req.query.categoryId as string) ?? "";
               const filters = JSON.parse(req.query.filters as string) ?? {};
-              const minPrice = req.query.minPrice ? parseFloat(req.query.minPrice as string) : undefined;
-              const maxPrice = req.query.maxPrice ? parseFloat(req.query.maxPrice as string) : undefined;
+              // const minPrice = req.query.minPrice ? parseFloat(req.query.minPrice as string) : undefined;
+              // const maxPrice = req.query.maxPrice ? parseFloat(req.query.maxPrice as string) : undefined;
     
               if (!categoryId) {
                 return res.status(400).json({ isError: true, response: "Category ID is required." });
@@ -93,9 +94,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               // Build the dynamic refine parameters
               const refineParams = [`cgid=${categoryId}`];
 
-              if (minPrice !== undefined && maxPrice !== undefined) {
+              /* if (minPrice !== undefined && maxPrice !== undefined) {
                 refineParams.push(`price=(${minPrice}..${maxPrice})`);
-              }
+              } */
  
               
             // Process other filters
@@ -113,19 +114,25 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 const sortParam = sortOption ? sortOption : undefined;
     
               const options = {
-                headers: {
-                  Authorization: `Bearer ${accessToken}`
-                },
+                /** commerce-sdk-isomorphic doesn't require authorization (Only for commerce-sdk)*/
+                // headers: {
+                //   Authorization: `Bearer ${accessToken}`
+                // },
                 parameters: {
                   organizationId: clientConfig.parameters.organizationId,
                   siteId: clientConfig.parameters.siteId,
                   refine: refineParams,
                   sort: sortParam,
+                  expand: ["images", "custom_properties"],
+                  allImages: true,
                 },
               };
+              console.log("OPTIONS: " + JSON.stringify(options, null, 2));
 
-              const shopperSearchClient = new Search.ShopperSearch(clientConfig);
-              var productResults = await shopperSearchClient.productSearch(options);         
+              // TODO: commerce-sdk doesn't support expand and allImages parameters
+              // const shopperSearchClient = new Search.ShopperSearch(clientConfig);
+              const shopperSearchClient = new ShopperSearch(clientConfig);
+              var productResults = await shopperSearchClient.productSearch(options);
               if (productResults.total > 0) {
                 
                 productResults = transformPriceRefinement(productResults);
@@ -163,7 +170,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 
                 const productResult = await shopperProductsClient.getProduct(options); 
                 if (productResult) {
-                    //console.log("Product: " + JSON.stringify(productResult, null, 4));
+                    console.log("Product: " + JSON.stringify(productResult, null, 4));
 
                     logger.log("Get getProductDetails - Response", productResult);
                     return res.status(200).json({ isError: false, response: productResult });

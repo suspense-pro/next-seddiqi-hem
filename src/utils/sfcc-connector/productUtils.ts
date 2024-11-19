@@ -53,14 +53,15 @@ export const transformPriceRefinement = (response : any) => {
   transformedResponse.refinements = transformedResponse.refinements.map((refinement) => {
     if (refinement.attributeId === "price") {
       const transformedValues = {};
-
-      refinement.values.forEach((priceRange) => {
-        const upperLimitMatch = priceRange.value.match(/\.\.(\d+)/);
-        if (upperLimitMatch) {
-          const upperLimit = parseInt(upperLimitMatch[1], 10);
-          transformedValues[upperLimit] = priceRange.hitCount;
-        }
-      });
+      if (refinement.values) {
+        refinement.values.forEach((priceRange) => {
+          const upperLimitMatch = priceRange.value.match(/\.\.(\d+)/);
+          if (upperLimitMatch) {
+            const upperLimit = parseInt(upperLimitMatch[1], 10);
+            transformedValues[upperLimit] = priceRange.hitCount;
+          }
+        });
+      }
 
       refinement.values = transformedValues;
     }

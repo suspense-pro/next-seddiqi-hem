@@ -3,22 +3,25 @@ import styles from "./defaultContentBlock.module.scss";
 import { Button, Typography } from "@components/module";
 import RichText from "@components/module/richText";
 
-const DefaultContentBlock = ({ ...content }) => {
+const DefaultContentBlock = ({...content}) => {
   if (!content) return null;
-  const { cta } = content;
+  const { cta, alignment } = content;
+
+  const alignmentClass = alignment === 'leftAligned' ? styles.leftAligned : styles.centerAligned;
+
   return (
     <div className={styles.container}>
       <div className={styles.containerHeader}>
         {content?.mainTitle && (
           <>
-            <Typography variant="h2" className={styles.headingPrimary}>
+            <Typography variant="h2" className={`${styles.headingPrimary} ${alignmentClass}`}>
               {content?.mainTitle}
             </Typography>
-            {!content?.hideUnderline && <div className={styles.bar}>&nbsp;</div>}
+            {!content?.hideUnderline && <div className={`${styles.bar} ${alignmentClass}`}>&nbsp;</div>}
           </>
         )}
         <div className={`${!content?.mainTitle && styles.highlightedText} ${styles.headingSecondary}`}>
-          <RichText align="" className={styles.desc} text={content?.richText} />
+          <RichText align="" className={`${styles.desc} ${alignmentClass}`}  text={content?.richText} />
         </div>
       </div>
       {cta && cta?.label && (
