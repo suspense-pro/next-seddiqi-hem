@@ -56,9 +56,6 @@
   text-align: center;
 }
 
-.desc {
-  text-align: center;
-}
 
 .bar {
   width: rem(70);
@@ -74,4 +71,27 @@
 
 .cta {
   min-width: rem(200);
+}
+
+.headingPrimary, 
+.headingSecondary, 
+.desc {
+  text-align: center;
+}
+
+.headingPrimary.leftAligned,
+.headingSecondary.leftAligned,
+.desc.leftAligned {
+  text-align: left;
+}
+.bar.leftAligned {
+  margin-left: 0;
+}
+
+.leftAligned {
+  text-align: left;
+}
+
+.centerAligned {
+  text-align: center;
 }
