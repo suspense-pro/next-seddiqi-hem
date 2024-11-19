@@ -117,7 +117,7 @@ const CollectionsTabMobile = ({ content, cta, ind }) => {
     <SwiperSlide
       className={styles.swiperSlide}
       key={index}
-      style={isMobile ? { width: "90%" } : {}}
+      // style={isMobile ? { width: "90%" } : {}}
     >
       <CollectionsCard
         totalItems={listItems?.length}
@@ -135,7 +135,7 @@ const CollectionsTabMobile = ({ content, cta, ind }) => {
           swiperRef.current = swiper;
         }}
         slidesPerView={
-          isMobile ? "auto" : listItems?.length < 3 ? listItems?.length : 3
+          isMobile ? 1.2 : listItems?.length < 3 ? listItems?.length : 3
         }
         onSlideChange={onSlideChange}
         className={styles.mySwiper}

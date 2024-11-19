@@ -44,6 +44,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 const BrandPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { vse, content, } = props;
   const [page] = useContent(content.page, vse as string);
+  console.log(page?.contentComponents)
   return (
     <div className="brand-content">
       {page?.contentComponents
