@@ -37,9 +37,10 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
     c_brandName,
     c_model,
     imageGroups,
+    productId
   } = item;
  
-  const cleanedId = id.replace(/\//g, "%2F");
+  const cleanedId = (id ?? productId).replace(/\//g, "%2F");
 
   return (
     <Link
@@ -64,7 +65,7 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
           {/* <HeartIcon fill="#" /> */}
         </div>
         <div className={styles.imgContainer}>
-          {hasCarousel && isHovered ? (
+          {imageGroups && hasCarousel && isHovered ? (
             <HoverProductSlider
               slides={imageGroups[0].images}
               setSwiper={setSwiper}
@@ -76,8 +77,8 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
             <Image
               layout="fill"
               objectFit="contain"
-              alt={`Slide`}
-              src={image?.absUrl}
+              alt={`Non-Slide`}
+              src={image?.absUrl ?? image.link}
               // src={imageGroups[1]?.images?.[0]?.link}
             />
           )}
@@ -92,7 +93,7 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
           {/* <Typography align="center" variant="p" className={styles.price}>
             {priceCurrency} {pricePerUnit}
           </Typography> */}
-          {hasCarousel && isHovered && (
+          {imageGroups && hasCarousel && isHovered && (
             <CarouselBtns
               swiper={swiper}
               activeIndex={activeIndex}

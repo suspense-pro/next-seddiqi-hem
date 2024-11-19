@@ -7,7 +7,10 @@ import ProductCard from "../cards/productCard";
 import { ComponentMapping } from "@utils/cms/config";
 import { generateUniqueId } from "@utils/helpers/uniqueId";
 import Button from "../button";
-import { getCategoryFilters, setFilters } from "@utils/sfcc-connector/dataService";
+import {
+  getCategoryFilters,
+  setFilters,
+} from "@utils/sfcc-connector/dataService";
 import Typography from "../typography";
 import Loader from "../loader";
 import ScrollToTop from "../scrollToTop";
@@ -20,11 +23,16 @@ const PlpContent = ({ productGridContent, products }) => {
   if (!products) return null;
 
   const router = useRouter();
+
   const categoryId = products?.query?.TermQuery?.values?.[0] || "";
-  const allHits = Array.isArray(products) ? products : products?.hits || [];
+  const [allHits, setAllHits] = useState(
+    Array.isArray(products) ? products : products?.hits || []
+  );
 
   const [filters, setFiltersState] = useState(null);
-  const [displayedProducts, setDisplayedProducts] = useState(allHits.slice(0, 24));
+  const [displayedProducts, setDisplayedProducts] = useState(
+    (Array.isArray(products) ? products : products?.hits).slice(0, 24)
+  );
   const [currentIndex, setCurrentIndex] = useState(24);
   const [isAllLoaded, setIsAllLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +42,9 @@ const PlpContent = ({ productGridContent, products }) => {
   const [quickFilters, setQuickFilters] = useState([]);
 
   const productsRef = useRef(null);
-  const isButtonDisabled = products?.total <= 24 || isAllLoaded;
+  const [isButtonDisabled, setIsButtonDisabled] = useState(
+    products?.total <= 24 || isAllLoaded
+  );
 
   const loadMoreProducts = () => {
     const currentScrollPos = window.scrollY;
@@ -56,7 +66,6 @@ const PlpContent = ({ productGridContent, products }) => {
   };
 
   useEffect(() => {
-    
     const fetchCategoryFilters = async () => {
       try {
         const response = await getCategoryFilters({
@@ -83,7 +92,7 @@ const PlpContent = ({ productGridContent, products }) => {
     };
 
     fetchCategoryFilters();
-  }, [categoryId]);
+  }, []);
 
   useEffect(() => {
     if (!router.isReady || hasInitializedFilters) return;
@@ -132,6 +141,7 @@ const PlpContent = ({ productGridContent, products }) => {
           newQuery["sort"] = filters[filterKey];
         } else {
           const filterValues = filters[filterKey];
+
           if (Array.isArray(filterValues)) {
             newQuery[`filter_${filterKey}`] = filterValues;
           } else if (filterValues) {
@@ -142,6 +152,10 @@ const PlpContent = ({ productGridContent, products }) => {
 
       const isSameQuery =
         JSON.stringify(newQuery) === JSON.stringify(router.query);
+
+      console.log(JSON.stringify(newQuery));
+      console.log(JSON.stringify(router.query));
+
       if (!isSameQuery) {
         router.replace(
           {
@@ -151,6 +165,7 @@ const PlpContent = ({ productGridContent, products }) => {
           undefined,
           { shallow: true }
         );
+      } else {
       }
     };
 
@@ -163,31 +178,44 @@ const PlpContent = ({ productGridContent, products }) => {
     const fetchFilteredProducts = async () => {
       setIsLoading(true);
 
-      console.log("Object.keys(filters): ", Object.keys(filters));
-      
       try {
         if (Object.keys(filters).length === 0) {
           setDisplayedProducts(allHits.slice(0, 24));
           setCurrentIndex(24);
-          setIsAllLoaded(allHits.length <= 24);
+          setIsAllLoaded(allHits.length < 24);
         } else {
           const { sortOption, ...otherFilters } = filters;
+
+          console.log({ otherFilters });
+
           const res = await setFilters({
             method: "GET",
             categoryId: categoryId,
-            filters: otherFilters,
+            filters: JSON.stringify(otherFilters),
             sortOption: sortOption,
           });
 
           console.log("res: ", res);
+          console.log("res.hits.length: ", res.hits.length);
 
           if (res && res.hits) {
             setDisplayedProducts(res.hits.slice(0, 24));
             setCurrentIndex(24);
             setIsAllLoaded(res.hits.length <= 24);
+            setIsButtonDisabled(res.hits.length >= displayedProducts.length);
+            setAllHits(res.hits);
+
+            setFilterOptions(res.refinements);
+
+            // setSortingOptions(res.sortingOptions);
+
+            //   setQuickFilters(res.quickFilters);
           } else {
             setDisplayedProducts([]);
             setIsAllLoaded(true);
+            setAllHits(
+              Array.isArray(products) ? products : products?.hits || []
+            );
           }
         }
       } catch (error) {
@@ -200,12 +228,9 @@ const PlpContent = ({ productGridContent, products }) => {
     };
 
     fetchFilteredProducts();
-  }, [filters, categoryId]);
+  }, [filters, categoryId, allHits]);
 
-
-
-  const totalProducts = products?.total || allHits.length;
-  const PRODUCT_INFO_TEXT = `Showing ${displayedProducts.length} out of ${totalProducts} products`;
+  const PRODUCT_INFO_TEXT = `Showing ${displayedProducts.length} out of ${allHits.length} products`;
 
   return (
     <div ref={productsRef}>
@@ -213,7 +238,7 @@ const PlpContent = ({ productGridContent, products }) => {
         <FilterBar
           filters={filters || {}}
           onFilterChange={setFiltersState}
-          totalProducts={totalProducts}
+          totalProducts={allHits.length}
           filterOptions={filterOptions}
           sortingOptions={sortingOptions}
           quickFilters={quickFilters}
@@ -248,12 +273,12 @@ const PlpContent = ({ productGridContent, products }) => {
               <div className={styles.productInfo}>{PRODUCT_INFO_TEXT}</div>
               {!isAllLoaded && (
                 // <div>
-                  <Button
-                    title={LOAD_MORE_TEXT}
-                    type="solid metallic"
-                    disabled={isButtonDisabled}
-                    clickHandler={loadMoreProducts}
-                  />
+                <Button
+                  title={LOAD_MORE_TEXT}
+                  type="solid metallic"
+                  disabled={isButtonDisabled}
+                  clickHandler={loadMoreProducts}
+                />
                 // </div>
               )}
             </div>

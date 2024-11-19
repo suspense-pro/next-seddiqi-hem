@@ -145,6 +145,10 @@ const BrandListing = ({
     setBrands(categories);
   }, [brands]);
 
+  console.log({brandPages});
+  console.log({brands});
+  
+
   return (
     <div className={styles.brandSectionContainer}>
       {/* Alphabet Navigation */}
@@ -186,6 +190,7 @@ const BrandListing = ({
               {brands &&
                 brands.filter((x) => x.id.toLowerCase().startsWith(letter)).map(({ id, name }, ind) => (
                     <div key={ind} className={styles.brandName}>
+
                       <Link
                         className={
                           !brandPages.find((x) => x.url.toLowerCase().includes(id.toLowerCase())) &&
