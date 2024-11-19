@@ -499,15 +499,11 @@ export async function setFilters({
   categoryId,
   filters,
   sortOption,
-  maxPrice,
-  minPrice,
 }: {
   method: string;
   categoryId?: string;
   filters?: any;
   sortOption?: string;
-  maxPrice?: any;
-  minPrice?: any;
 }) {
   try { 
     const json: any = {
@@ -516,8 +512,6 @@ export async function setFilters({
       categoryId: categoryId,
       filters: JSON.stringify(filters),
       sort: sortOption,
-      maxPrice: maxPrice,
-      minPrice: minPrice,
     };
 
     const config = {
