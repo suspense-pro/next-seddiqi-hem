@@ -117,28 +117,36 @@
   }
 }
 
-.rolex {
-  padding-top: rem(69);
-  @include breakpoint-min-width(rem(768)) {
-    padding-top: rem(23);
+.rolex,
+.rolexCpo {
+  // padding-top: rem(69);
+  // @include breakpoint-min-width(rem(768)) {
+  //   padding-top: rem(23);
+  // }
+  // @include breakpoint-min-width(rem(1037)) {
+  //   padding-top: rem(55);
+  // }
+  // @include breakpoint-min-width(rem(1250)) {
+  //   padding-top: rem(67);
+
+  padding-top: rem(70);
+  @include md {
+    padding-top: rem(82);
   }
-  @include breakpoint-min-width(rem(1037)) {
-    padding-top: rem(55);
-  }
-  @include breakpoint-min-width(rem(1250)) {
-    padding-top: rem(67);
-  }
+
+  // }
 }
 
 .rolexCpo {
-  padding-top: rem(69);
-  @include breakpoint-min-width(rem(768)) {
-    padding-top: rem(23);
-  }
-  @include breakpoint-min-width(rem(1037)) {
-    padding-top: rem(55);
-  }
-  @include breakpoint-min-width(rem(1250)) {
-    padding-top: rem(79);
-  }
+  // padding-top: rem(69);
+  // @include breakpoint-min-width(rem(768)) {
+  //   padding-top: rem(23);
+  // }
+  // @include breakpoint-min-width(rem(1037)) {
+  //   padding-top: rem(55);
+  // }
+  // @include breakpoint-min-width(rem(1250)) {
+  //   padding-top: rem(79);
+  // }
+  padding-top: rem(82);
 }

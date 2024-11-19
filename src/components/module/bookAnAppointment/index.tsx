@@ -35,6 +35,10 @@ const BookAnAppointment = ({ content, exclusiveInfoCards = null }) => {
     }
   };
 
+  console.log("exclusiveInfoCards?.content?.page", exclusiveInfoCards?.content?.page);
+
+  const infoCards = exclusiveInfoCards?.content?.page;
+
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
@@ -66,7 +70,7 @@ const BookAnAppointment = ({ content, exclusiveInfoCards = null }) => {
         ))}
       </div>
       <div className={styles.stepContent}>{renderStepContent()}</div>
-      {exclusiveInfoCards && <ExclusiveInfoCards exclusiveInfoCards={exclusiveInfoCards?.content?.page} />}
+      {exclusiveInfoCards && <ExclusiveInfoCards {...infoCards} />}
     </div>
   );
 };

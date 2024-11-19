@@ -14,7 +14,7 @@ const ViewAllBrandsCategory = ({ ...content }) => {
           // { id: 3, title: "Jewellery" },
           // { id: 4, title: "accessories" },
         ]}
-        // className={styles.tabContainer}
+        className={styles.tabContainer}
       />
   );
 };

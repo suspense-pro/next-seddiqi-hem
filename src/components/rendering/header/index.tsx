@@ -13,7 +13,7 @@ export default function Header({ ...props }) {
 
   const windowWidth = useWindowWidth();
   return (
-    <header className={styles.header}>{isClient && (windowWidth > 1036 ? <DesktopHeader /> : <MobileHeader />)}</header>
+    <header className={styles.header}>{isClient && (windowWidth > 768 ? <DesktopHeader /> : <MobileHeader />)}</header>
   );
 }
  
