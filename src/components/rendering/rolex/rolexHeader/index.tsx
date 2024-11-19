@@ -48,7 +48,7 @@ const RolexNavbar = ({ ...content }) => {
   return (
     <div className={styles.container}>
       <nav
-        className={`${scrolled && styles.scrolled} ${windowWidth < screenSize && styles.rolexMobileNavbar} ${
+        className={`${scrolled && styles.scrolled} ${
           isWhite && styles.whiteBg
         } ${styles.rolexNavbar}`}
       >

@@ -6,21 +6,23 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 rem(17);
-  height: rem(82);
-
+  height: rem(70);
+  
   @include xl {
-    border-top: rem(1) solid getColorHex("grey-space", 0.15);
-    border-bottom: rem(1) solid getColorHex("grey-space", 0.15);
   }
-
+  
   background: linear-gradient(90deg, getColorHex("green-racing") 0%, getColorHex("green-spring") 100%);
   position: fixed;
   transition: all 0.3s;
-  top: rem(106);
-
-  @include breakpoint-min-width(rem(1037)) {
+  top: rem(80);
+  
+  @include md {
+    border-top: rem(1) solid getColorHex("grey-space", 0.15);
+    border-bottom: rem(1) solid getColorHex("grey-space", 0.15);
+    height: rem(82);
     top: rem(152);
     padding: 0 rem(110);
+
   }
 
   .rolexLogo,

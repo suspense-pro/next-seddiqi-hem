@@ -6,7 +6,7 @@ import { HeaderFooter } from "@components/module";
 import styles from "./mobileMenuLogobar.module.scss";
 
 const MobileMenuLogobar = () => {
-  const { headerData } = useContext(HeaderContext);
+  const { headerData, menuOpen } = useContext(HeaderContext);
   const { leftLogo, bookingCTA } = headerData?.content;
 
   const PATEK_LOGO = "/images/png/PatekLogo.png";
@@ -26,25 +26,29 @@ const MobileMenuLogobar = () => {
         </iframe>
       </div>`;
     }
-  }, []);
+  }, [menuOpen]);
 
   return (
     <div className={styles.bottom}>
       <div className={styles.recommendContainer}>
         <div className={styles.recommendText}>Recommended for you</div>
         <div className={styles.logos}>
-          <Link href={"/"}>
-            <Image
-              src={PATEK_LOGO}
-              width={118}
-              height={68}
-              alt={leftLogo?.image?.altText || "Patek Philippe"}
-              className={styles.image}
-            />
-          </Link>
-          <Link href={headerData?.content?.rolexLogo}>
-            <div ref={rolexContainerRef} className={styles.rolexScriptContainer}></div>
-          </Link>
+          {menuOpen && (
+            <>
+              <Link href={"/"}>
+                <Image
+                  src={PATEK_LOGO}
+                  width={118}
+                  height={68}
+                  alt={leftLogo?.image?.altText || "Patek Philippe"}
+                  className={styles.image}
+                />
+              </Link>
+              <Link href={headerData?.content?.rolexLogo}>
+                <div ref={rolexContainerRef} className={styles.rolexScriptContainer}></div>
+              </Link>
+            </>
+          )}
         </div>
       </div>
       <HeaderFooter className={styles.headerFooter} />
