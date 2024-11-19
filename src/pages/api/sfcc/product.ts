@@ -163,7 +163,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 
                 const productResult = await shopperProductsClient.getProduct(options); 
                 if (productResult) {
-                    //console.log("Product: " + JSON.stringify(productResult, null, 4));
+                    console.log("Product: " + JSON.stringify(productResult, null, 4));
 
                     logger.log("Get getProductDetails - Response", productResult);
                     return res.status(200).json({ isError: false, response: productResult });

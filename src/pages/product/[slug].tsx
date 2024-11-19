@@ -125,7 +125,7 @@ export default function ProductPage({
       />
       <PdpTabs tabImage={product?.response.imageGroups[0]?.images[1]?.link} productTechSpecs={productTechSpecs} amplienceData={""} />
       {/* Other components like ScrollToTop and StickyWhatsapp */}
-      <StickyWhatsapp />
+      {/*<StickyWhatsapp />*/}
       <ScrollToTop />
       {compact(content?.page?.components).map((content) => (
         <ContentBlock content={content} key={content?._meta.deliveryId} />

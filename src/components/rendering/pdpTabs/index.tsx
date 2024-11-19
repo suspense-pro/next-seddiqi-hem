@@ -116,8 +116,8 @@ const PdpTabs: React.FC<any> = (props) => {
   /**** End for Tech Specs List Accordion codes ****/
   
   return (
-    //productCategory.toLowerCase() === "jewellery" || productCategory.toLowerCase() === "jewelleries" ? 
-    ((tabsData[0].productImageUrl === "" && tabsData[1].productImageUrl === "" && tabsData[2].productImageUrl === "" && tabsData[3].productImageUrl === "")
+   
+    (( productCategory.toLowerCase() === "jewellery" || productCategory.toLowerCase() === "jewelleries" && tabsData[0].productImageUrl === "" && tabsData[1].productImageUrl === "" && tabsData[2].productImageUrl === "" && tabsData[3].productImageUrl === "")
     || tabsData[0].productImageUrl === undefined && tabsData[1].productImageUrl === undefined && tabsData[2].productImageUrl === undefined && tabsData[3].productImageUrl === undefined) ?
       <div className={styles.pdpNonTabContainer}>
         <h2 className={styles.nonTabTitle}>Detail Specifications</h2>
@@ -126,7 +126,7 @@ const PdpTabs: React.FC<any> = (props) => {
             {nonTabProductTechSpecs.nonTabSpecs.map((specs, itemIndex) => (
               <div className={styles.specs}>
               {specs.items.map((item, itemIndex) => (
-                item.specsDescription && (
+                item.specsDescription && item.specsDescription !=  null && (
                   <div key={itemIndex} className={`${[styles.spec]} ${item.length >= 2 ? styles.hasMoreItems : ""}`}>
                     <h5>{item.specsTitle}</h5>
                     <p>{item.specsDescription}</p>
@@ -171,10 +171,12 @@ const PdpTabs: React.FC<any> = (props) => {
                 >
                   <ul className={styles.specsContainer}>
                     {tab.specs.map(specs => (
+                      specs.description && specs.description != null &&(
                       <li key={specs.title}>
                         <h5>{specs.title}</h5>
                         <p>{specs?.description}</p>
                       </li>
+                      )
                     ))}
                   </ul>
                   { tab.productImageUrl != null ? 
@@ -213,7 +215,7 @@ const PdpTabs: React.FC<any> = (props) => {
                     style={{ height: `${itemsListHeights[index]}px` }}
                   >
                     {spec.items.map((item, itemIndex) => (
-                      item.itemDescription && (
+                      item.itemDescription && item.itemDescription != null &&(
                         <li key={itemIndex} className={styles.item}>
                           <h5 className={styles.itemTitle}>{item.itemTitle}</h5>
                           <p className={styles.itemDescription}>{item.itemDescription}</p>
@@ -225,11 +227,11 @@ const PdpTabs: React.FC<any> = (props) => {
               ))}
             </ul>
           </div>
-          {/*
+          
           <button className={`${styles.viewMoreDetails} ${isOpen ? styles.isOpened : ''} button plain dark_green`} onClick={handleToggle}>
             <span>{isOpen ? 'View Less Details' : 'View More Details'}</span>
           </button>
-          */}
+          
         </div>
         
       </div>
