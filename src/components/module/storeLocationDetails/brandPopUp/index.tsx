@@ -18,6 +18,7 @@ const BrandPopUp: React.FC<BrandPopUpProps> = ({ brands, isOpen, onClose }) => {
         onClearAll={null}
         position={"right"}
         className={""}
+        button2Color={"green_dark"}
       >
         <div className={styles.brandListWrapper}>
           <Typography variant="h5" className={styles.title}>
