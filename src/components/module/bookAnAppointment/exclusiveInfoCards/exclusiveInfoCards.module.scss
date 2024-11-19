@@ -3,15 +3,16 @@
 .container {
   // display: none;
   flex-direction: column;
-  gap: rem(48);
   justify-content: center;
   align-items: center;
-  margin: rem(20 0);
-
+  margin: rem(0 28);
+  display: flex;
+  gap: rem(32);
+  
   @include lg {
-    display: flex;
+    gap: rem(48);
   }
-
+  
   .title {
     @include heading_light;
     color: getColorHex("green-dark");
@@ -27,12 +28,13 @@
 }
 
 .cards {
+  width: 100%;
   display: flex;
   gap: rem(24);
-  margin: 0 rem(80);
   flex-wrap: wrap;
   flex-direction: column;
   @include lg {
+    margin: 0 rem(80);
     flex-direction: row;
     flex-wrap: nowrap;
   }

@@ -365,6 +365,7 @@ const ProductDetailInfo = ({
         showBackButton={false}
         title="Find product in Boutique"
         position={"right"}
+        button2Color={"green_dark"}
       >
         <StoreLocator
           productImgAlt={product?.imageGroups[0]?.images[0].alt}

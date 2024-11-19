@@ -16,6 +16,7 @@ interface SideDrawerProps {
   position?: string;
   onSubmit?: () => void;
   onClearAll?: () => void;
+  button2Color: string;
 }
 
 const SideDrawer: React.FC<SideDrawerProps> = ({
@@ -29,6 +30,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
   onClearAll,
   className,
   position = "left",
+  button2Color
 }) => {
   useEffect(() => {
     if (isOpen) {
@@ -71,7 +73,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
         {showFooter && (
           <div className={styles.footer}>
             <Button title="Clear all" type="transparent" clickHandler={onClearAll} />
-            <Button title="Done" type="solid green_dark" clickHandler={onClose} />
+            <Button title="Done" type={`solid ${button2Color}`} clickHandler={onClose} />
           </div>
         )}
       </div>

@@ -13,9 +13,10 @@ const StoryCard: React.FC<CardInfoProps> = ({ item, className }) => {
   const link = item?.link ? item?.link : "/";
 
   if (!image || !title || !subtitle) return null;
+  console.log('link', link)
 
   return (
-    <Link href={link}>
+    <Link onClick={(e) => e.stopPropagation()} href={link}>
       <div className={`${styles.storyCardContainer} ${className}`}>
         <Image className={styles.image} image={image} imageAltText={altText} />
         <div className={styles.content}>

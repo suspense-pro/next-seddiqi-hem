@@ -14,6 +14,7 @@ const ProductDescriptionFlyoutCard = ({ isDescriptionCardOpen, setDescriptionCar
       showBackButton={false}
       title={"Product Description"}
       position="right"
+      button2Color={"green_dark"}
     >
       <div onMouseDown={(e) => e.stopPropagation()}>
         <Typography variant="p" className={styles.description}>

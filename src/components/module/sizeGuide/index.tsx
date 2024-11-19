@@ -23,6 +23,7 @@ const SizeGuide: React.FC<SizeGuideProps> = ({
       onClose={onClose}
       position={"right"}
       className={""}
+      button2Color={"green_dark"}
     >
       <div className={styles.contentWrapper}>
         <div className={styles.content}>
