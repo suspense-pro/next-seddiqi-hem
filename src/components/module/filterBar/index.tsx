@@ -193,7 +193,7 @@ const FilterBar = ({
         <FilterAccordian>
 
           {filterOptions.map((filterItem) => (
-           filterItem.values && filterItem.values.filter((val) => val.hitCount > 0).length > 0 && <FilterAccordionItem
+           <FilterAccordionItem
               key={filterItem.attributeId}
               title={filterItem.label}
               isOpen={openAccordionId === filterItem.attributeId}

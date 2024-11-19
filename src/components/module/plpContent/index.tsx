@@ -204,9 +204,7 @@ const PlpContent = ({ productGridContent, products }) => {
             setIsAllLoaded(res.hits.length <= 24);
             setIsButtonDisabled(res.hits.length >= displayedProducts.length);
             setAllHits(res.hits);
-
             setFilterOptions(res.refinements);
-
             // setSortingOptions(res.sortingOptions);
 
             //   setQuickFilters(res.quickFilters);
@@ -222,6 +220,7 @@ const PlpContent = ({ productGridContent, products }) => {
         console.error("Error fetching products:", error);
         setDisplayedProducts([]);
         setIsAllLoaded(true);
+        setIsLoading(false);
       } finally {
         setIsLoading(false);
       }
