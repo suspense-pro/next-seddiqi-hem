@@ -36,10 +36,14 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
     priceCurrency,
     c_brandName,
     c_model,
+    c_edition,
+    c_additionalField1,
     imageGroups,
+    productId,
+    representedProduct
   } = item;
  
-  const cleanedId = id.replace(/\//g, "%2F");
+  const cleanedId = (id ?? productId).replace(/\//g, "%2F");
 
   return (
     <Link
@@ -59,12 +63,14 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
       >
         <div className={styles.productTop}>
           <div className={styles.newContainer}>
-            <div className={styles.new}>New In</div>
+            <div className={styles.new}>
+            {c_edition ?? representedProduct?.c_edition}
+            </div>
           </div>
           {/* <HeartIcon fill="#" /> */}
         </div>
         <div className={styles.imgContainer}>
-          {hasCarousel && isHovered ? (
+          {imageGroups && hasCarousel && isHovered ? (
             <HoverProductSlider
               slides={imageGroups[0].images}
               setSwiper={setSwiper}
@@ -76,23 +82,24 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
             <Image
               layout="fill"
               objectFit="contain"
-              alt={`Slide`}
-              src={image?.absUrl}
+              alt={`Non-Slide`}
+              src={image?.absUrl ?? image.link}
               // src={imageGroups[1]?.images?.[0]?.link}
             />
           )}
         </div>
         <div className={styles.productBottom}>
           <Typography align="center" variant="p" className={styles.title}>
-            {c_brandName}
+            {c_brandName ?? representedProduct?.c_brandName}
           </Typography>
           <Typography align="center" variant="p" className={styles.type}>
-            {c_model}
+            {(c_model ?? representedProduct?.c_model) + " - " + (c_additionalField1 ?? representedProduct?.c_additionalField1)}
+
           </Typography>
           {/* <Typography align="center" variant="p" className={styles.price}>
             {priceCurrency} {pricePerUnit}
           </Typography> */}
-          {hasCarousel && isHovered && (
+          {imageGroups && hasCarousel && isHovered && (
             <CarouselBtns
               swiper={swiper}
               activeIndex={activeIndex}
