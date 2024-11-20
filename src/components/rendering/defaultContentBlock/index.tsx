@@ -14,10 +14,10 @@ const DefaultContentBlock = ({...content}) => {
       <div className={styles.containerHeader}>
         {content?.mainTitle && (
           <>
-            <Typography variant="h2" className={`${styles.headingPrimary} ${alignmentClass}`}>
+            <Typography variant="h2" className={`${styles.headingPrimary}`}>
               {content?.mainTitle}
             </Typography>
-            {!content?.hideUnderline && <div className={`${styles.bar} ${alignmentClass}`}>&nbsp;</div>}
+            {!content?.hideUnderline && <div className={`${styles.bar}`}>&nbsp;</div>}
           </>
         )}
         <div className={`${!content?.mainTitle && styles.highlightedText} ${styles.headingSecondary}`}>
