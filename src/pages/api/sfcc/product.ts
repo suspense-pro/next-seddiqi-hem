@@ -125,6 +125,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                   sort: sortParam,
                   expand: ["images", "custom_properties"],
                   allImages: true,
+                  limit: 200, // TODO: use the parameter offset with limit for result pagination 
+                  offset: 0,
                 },
               };
               console.log("OPTIONS: " + JSON.stringify(options, null, 2));
