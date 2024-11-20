@@ -7,62 +7,11 @@ import TabbedNavigation from "../tabbedNavigation";
 import classNames from "classnames";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 
-const brandsData = {
-  A: [
-    "Akrivia",
-    "Aramedes",
-    "Artya",
-    "Audemars Piguet",
-    "Arnold & Son",
-    "Angelus",
-  ],
-  B: [
-    "Bell & Ross",
-    "Bernard Favre",
-    "Bovet",
-    "Breitling",
-    "Bvlgari",
-    "Blancpain",
-    "Baume & Mercier",
-  ],
-  C: [
-    "Cabestan",
-    "Chopard",
-    "Christian Van der Klaauw",
-    "Christophe Claret",
-    "Claude Meylan",
-    "Cartier",
-    "Corum",
-  ],
-  D: ["Debethune", "Dior", "De Grisogono", "Daniel Wellington", "DeWitt"],
-  F: ["Franck Muller", "Ferdinand Berthoud", "Frederique Constant"],
-  G: ["Girard-Perregaux", "Glashütte Original", "Greubel Forsey"],
-  H: ["Hublot", "Hermès", "Harry Winston"],
-  I: ["IWC Schaffhausen", "Ikepod", "Invicta"],
-  J: ["Jaeger-LeCoultre", "Jacob & Co", "Junghans"],
-  M: ["MB&F", "Maurice Lacroix", "Montblanc", "Moser & Cie"],
-  P: ["Patek Philippe", "Piaget", "Panerai"],
-  R: ["Richard Mille", "Rolex", "Roger Dubuis"],
-  T: ["Tag Heuer", "Tudor", "Tissot"],
-  U: ["Ulysse Nardin", "Urwerk"],
-  Z: ["Zenith", "Zodiac"],
-};
-
-const BrandListing = ({
-  height = true,
-  categories,
-  brandPages = [],
-  ...content
-}) => {
-  const alphabet = [...Array(26).keys()].map((i) =>
-    String.fromCharCode(i + 97)
-  );
+const BrandListing = ({ height = true, categories, brandPages = [], ...content }) => {
+  const alphabet = [...Array(26).keys()].map((i) => String.fromCharCode(i + 97));
 
   const [selectedLetter, setSelectedLetter] = useState("A");
-  const availableLetters = useMemo(
-    () => Object.keys(brandsData).map((letter) => letter.toUpperCase()),
-    []
-  );
+
   const [brands, setBrands] = useState(categories);
 
   const alphabetNavRef = useRef(null);
@@ -74,33 +23,48 @@ const BrandListing = ({
 
   // Handle the letter click to scroll the brand list
   const handleLetterClick = (letter) => {
- 
-      setSelectedLetter(letter);
-      const section = document.getElementById(`section-${letter}`);
+    setSelectedLetter(letter);
+    const section = document.getElementById(`section-${letter}`);
 
-  
-      
+    if (section && brandListRef.current) {
+      if (isDesktop[0]) {
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
 
-      if (section && brandListRef.current) {
-        
-        if(isDesktop[0]) {
-          window.scrollTo({
-            top: (section.offsetTop - brandListRef.current.offsetTop) - window.screenY,
-            behavior: "smooth",
-            left: 0
-          });
-        } else {
-          section.scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-            inline: "start"
-          });
-        }
+        const containerTop = brandListRef.current.getBoundingClientRect().top + window.scrollY;
 
+        const dynamicOffset = window.innerHeight * 0.1;
+        const scrollToPosition = sectionTop - containerTop + window.scrollY + 150;
+
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "start",
+        });
+
+        // window.scrollTo({
+        //   top: scrollToPosition,
+        //   behavior: "smooth",
+        // });
+      } else {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "start",
+        });
       }
-  
+    }
   };
 
+  const enabledAlphabets = useMemo(() => {
+    const enabled = [];
+    brands?.forEach((brand) => {
+      const firstLetter = brand.id[0]?.toLowerCase();
+      if (firstLetter && !enabled.includes(firstLetter)) {
+        enabled.push(firstLetter);
+      }
+    });
+    return enabled.sort();
+  }, [brands]);
   //  scroll functionality
   const handleMouseDown = (e) => {
     isDraggingRef.current = true;
@@ -156,51 +120,44 @@ const BrandListing = ({
         onMouseMove={handleMouseMove}
         className={styles.alphabetNav}
       >
-        {Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)).map(
-          (letter) => (
-            <button
-              key={letter}
-              className={`${styles.alphabetLetter} ${brands.filter((x) => x.id.toLowerCase().startsWith(letter.toLowerCase())).length > 0 ? styles.enabled : styles.disabled }`}
-              onClick={() => handleLetterClick(letter.toLowerCase())}
-              disabled={brands.filter((x) => x.id.toLowerCase().startsWith(letter.toLowerCase())).length < 1}
-            >
-              {letter}
-            </button>
-          )
-        )}
+        {Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)).map((letter) => (
+          <button
+            key={letter}
+            className={`${styles.alphabetLetter} ${
+              brands.filter((x) => x.id.toLowerCase().startsWith(letter.toLowerCase())).length > 0
+                ? styles.enabled
+                : styles.disabled
+            }`}
+            onClick={() => handleLetterClick(letter.toLowerCase())}
+            disabled={brands.filter((x) => x.id.toLowerCase().startsWith(letter.toLowerCase())).length < 1}
+          >
+            {letter}
+          </button>
+        ))}
       </div>
 
       {/* Brand List */}
-      <div
-        className={`${height && styles.brandListHeight} ${styles.brandList}`}
-        ref={brandListRef}
-      >
-        {alphabet.map((letter) => (
-          <div
-            key={letter}
-            id={`section-${letter}`}
-            className={styles.brandGroup}
-          >
+      <div className={`${height && styles.brandListHeight} ${styles.brandList}`} ref={brandListRef}>
+        {enabledAlphabets?.map((letter) => (
+          <div key={letter} id={`section-${letter}`} className={styles.brandGroup}>
             <h4>{letter}</h4>
             <div className={styles.brandColumn}>
               {brands &&
-                brands.filter((x) => x.id.toLowerCase().startsWith(letter)).map(({ id, name }, ind) => (
+                brands
+                  .filter((x) => x.id.toLowerCase().startsWith(letter))
+                  .map(({ id, name }, ind) => (
                     <div key={ind} className={styles.brandName}>
                       <Link
                         className={
-                          !brandPages.find((x) => x.url.toLowerCase().includes(id.toLowerCase())) &&
-                          styles.disabled
+                          !brandPages.find((x) => x.url.toLowerCase().includes(id.toLowerCase())) && styles.disabled
                         }
                         target="_self"
-                        href={`${
-                          brandPages.find((x) => x.url.toLowerCase().includes(id.toLowerCase()))?.url ?? "/"
-                        }`}
+                        href={`${brandPages.find((x) => x.url.toLowerCase().includes(id.toLowerCase()))?.url ?? "/"}`}
                       >
                         {name}
                       </Link>
                     </div>
-                  )
-                )}
+                  ))}
             </div>
           </div>
         ))}
