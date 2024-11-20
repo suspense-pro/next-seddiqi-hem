@@ -188,6 +188,7 @@ const FilterBar = ({
         showBackButton={false}
         position={""}
         className={""}
+        button2Color={"green_dark"}
       >
         <div className={styles.selectedOptions}>
           {Object.keys(filters).map((filterKey) =>

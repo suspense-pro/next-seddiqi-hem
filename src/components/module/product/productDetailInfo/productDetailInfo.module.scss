@@ -168,6 +168,10 @@
 
   .productDetails {
     width: 100%;
+
+      @include lg {
+        //max-width: rem(320);
+      }
   }
 
   @include lg {

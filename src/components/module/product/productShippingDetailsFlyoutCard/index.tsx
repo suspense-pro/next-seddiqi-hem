@@ -12,6 +12,7 @@ const ProductShippingDetailsFlyoutCard = ({ isShippingCardOpen, setShippingCardO
       showBackButton={false}
       title={shippingDetails?.primaryTitle}
       position="right"
+      button2Color={"green_dark"}
     >
       <div onMouseDown={(e) => e.stopPropagation()}>
         <ul className={styles.accordianDesc}>
