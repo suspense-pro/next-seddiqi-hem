@@ -4,7 +4,7 @@ import styles from "./contentAndSingleImageColumn.module.scss";
 
 const ContentAndSingleImageColumn = ({ ...content }) => {
   return (
-    <div className={`${styles[content?.backgroundColor]} ${styles.container}`}>
+    <div className={`${styles.container} ${content?.backgroundColor}`}>
       <ContentHeader
         mainTitle={content?.mainTitle}
         richText={content?.richText}
