@@ -541,11 +541,12 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       const newSelectedOptions = prevSelectedOptions.includes(option)
         ? prevSelectedOptions.filter((selected) => selected !== option)
         : [...prevSelectedOptions, option];
-
+  
       setFilterApplied(newSelectedOptions.length > 0 ? true : false);
-  
+    
+      // Trigger the dependent filter update for locations and services after the brand filter is changed
       updateDependentFilters(filterKey, newSelectedOptions);
-  
+    
       return {
         ...prevFilters,
         [filterKey]: newSelectedOptions,
@@ -557,30 +558,33 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     const filteredStores = getFilteredStores();
   
     if (filterKey === '1') {
+      // Update locations and services based on the selected brand filter
       const filteredLocations = [...new Set(filteredStores.map(store => store.name))].sort();
-      setLocationCheckboxValues(filteredLocations);
-  
       const filteredServices = [...new Set(filteredStores.flatMap(store => store.c_services))]
         .filter(service => service && service.trim() !== '')
         .sort();
+  
+      setLocationCheckboxValues(filteredLocations);
       setServiceCheckboxValues(filteredServices);
     }
   
     if (filterKey === '2') {
+      // Update brands and services based on the selected location filter
       const filteredBrands = [...new Set(filteredStores.flatMap(store => store.c_availableBrands))].sort();
-      setBrandCheckboxValues(filteredBrands);
-  
       const filteredServices = [...new Set(filteredStores.flatMap(store => store.c_services))]
         .filter(service => service && service.trim() !== '')
         .sort();
+  
+      setBrandCheckboxValues(filteredBrands);
       setServiceCheckboxValues(filteredServices);
     }
   
     if (filterKey === '3') {
+      // Update brands and locations based on the selected service filter
       const filteredBrands = [...new Set(filteredStores.flatMap(store => store.c_availableBrands))].sort();
-      setBrandCheckboxValues(filteredBrands);
-  
       const filteredLocations = [...new Set(filteredStores.map(store => store.name))].sort();
+  
+      setBrandCheckboxValues(filteredBrands);
       setLocationCheckboxValues(filteredLocations);
     }
   };
@@ -618,6 +622,11 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   
     // Update the filtered stores and dependent filter options
     setFilteredStores(filteredStores);
+  
+    // Update dependent filters
+    updateDependentFilters('1', filters['1']); // Update locations and services based on brands
+    updateDependentFilters('2', filters['2']); // Update brands and services based on locations
+    updateDependentFilters('3', filters['3']); // Update brands and locations based on services
   
   }, [stores, activeTab, filters]);
   
@@ -873,9 +882,9 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
                           selectedOptions={filters[filterItem.id] || []}
                         />
                         {filterItem.values
-                          .map((val) => val.label)
-                          .filter((label) => label && label.toLowerCase().startsWith(brandsSearchQuery.toLowerCase())).length === 0 && (
-                          <div className={styles.noResults}>No brands found</div>
+                          .filter(val => val.label && val.label.toLowerCase().includes(brandsSearchQuery.toLowerCase()))
+                          .length === 0 && (
+                            <div className={styles.noResults}>No brands found</div>
                         )}
                       </>
                     )}
