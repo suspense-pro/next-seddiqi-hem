@@ -18,6 +18,7 @@ import PdpTabs from "./pdpTabs";
 import ExploreBrand from "./exploreBrand";
 import Spacing from "./spacing";
 import ContentAndImageTwoColumn from "./contentAndImageTwoColumn";
+import ContentAndSingleImageColumn from "./contentAndSingleImageColumn";
 
 
 
@@ -42,5 +43,5 @@ export {
   ExploreBrand,
   ContentAndImageTwoColumn,
   Spacing,
-
+  ContentAndSingleImageColumn
 };
