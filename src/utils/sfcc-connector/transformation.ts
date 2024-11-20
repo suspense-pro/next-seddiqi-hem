@@ -6,20 +6,19 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
       tabsData: [
         {
           id: 1,
-          tabTitle: "Case",
+          tabTitle: "Dial",
           specs: [
             {
-              title: "Case",
-              description: data.hasOwnProperty("c_caseMaterial") ? data.c_caseMaterial : null
+              title: "Dial Type",
+              description: data.hasOwnProperty("c_dialType") ? data.c_dialType : null
             },
             {
-              title: "Bezel",
-              description: data.hasOwnProperty("c_bezelType") ? data.c_bezelType : null
+              title: "Dial Material",
+              description: data.hasOwnProperty("c_dialMaterial") ? data.c_dialMaterial : null
             }
           ],
-          productImageUrl: data.hasOwnProperty("c_dialTabImage") ? data.c_dialTabImage : null
+          productImageUrl: data.hasOwnProperty("c_caseTabImage") ? data.c_caseTabImage : data.imageGroups[0]?.images[1]?.link
         },
-    
         {
           id: 2,
           tabTitle: "Movement",
@@ -29,43 +28,41 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               description: data.hasOwnProperty("c_movement1") ? data.c_movement1 : null
             },
             {
-              title: "Power Reserve",
-              description: data.hasOwnProperty("c_powerReserve") ? data.c_powerReserve : null
+              title: "Complication",
+              description: data.hasOwnProperty("c_complication1") ? data.c_complication1 : null
             }
           ],
-          productImageUrl: data.hasOwnProperty("c_movementTabImage") ? data.c_movementTabImage : null
+          productImageUrl: data.hasOwnProperty("c_movementTabImage") ? data.c_movementTabImage : data.imageGroups[0]?.images[1]?.link
         },
-    
         {
           id: 3,
-          tabTitle: "Dial",
+          tabTitle: "Case",
           specs: [
             {
-              title: "Dial",
-              description: data.hasOwnProperty("c_dialMaterial") ? data.c_dialMaterial : null
+              title: "Case Diameter",
+              description: data.hasOwnProperty("c_size") ? data.c_size + " mm" : null
             },
             {
-              title: "Dial Type",
-              description: data.hasOwnProperty("c_dialType") ? data.c_dialType : null
+              title: "Water Resistance",
+              description: data.hasOwnProperty("c_waterResistanceDepth") ? data.c_waterResistanceDepth : null
             }
           ],
-          productImageUrl: data.hasOwnProperty("c_caseTabImage") ? data.c_caseTabImage : null
+          productImageUrl: data.hasOwnProperty("c_dialTabImage") ? data.c_dialTabImage : data.imageGroups[0]?.images[1]?.link
         },
-      
         {
           id: 4,
           tabTitle: "Bracelet",
           specs: [
             {
-              title: "Bracelet",
-              description: data.hasOwnProperty("c_braceletMaterial") ? data.c_braceletMaterial : ""
+              title: "Strap Details",
+              description: data.hasOwnProperty("c_strapDescription") ? data.c_strapDescription : null
             },
             {
-              title: "Type",
-              description: data.hasOwnProperty("c_buckleType") ? data.c_buckleType : null
+              title: "Strap Material",
+              description: data.hasOwnProperty("c_strapMaterial") ? data.c_strapMaterial : null
             }
           ],
-          productImageUrl: data.hasOwnProperty("c_braceletTabImage") ? data.c_braceletTabImage : null
+          productImageUrl: data.hasOwnProperty("c_braceletTabImage") ? data.c_braceletTabImage : (data.imageGroups[0].images.length >= 3 ? data.imageGroups[0]?.images[3]?.link : null)
         },
         
       ],
@@ -76,72 +73,37 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
           specs: [
             {
               id: 1,
-              specsTitle: "Case",
+              specsTitle: "Dial",
               items:[
                 {
                   id: 1,
-                  itemTitle: "Case Material",
-                  itemDescription: data.hasOwnProperty("c_caseMaterial") ? data.c_caseMaterial : null
+                  itemTitle: "Dial Type",
+                  itemDescription: data.hasOwnProperty("c_dialType") ? data.c_dialType : null
                 },
                 {
                   id: 2,
-                  itemTitle: "Caseback",
-                  itemDescription: data.hasOwnProperty("c_caseBack") ? data.c_caseBack : null
+                  itemTitle: "Dial Material",
+                  itemDescription: data.hasOwnProperty("c_dialMaterial") ? data.c_dialMaterial : null
                 },
                 {
                   id: 3,
-                  itemTitle: "Water Resistance",
-                  itemDescription: data.c_waterResistance === true ? data.c_waterResistanceDepth + " " + data.c_waterResistanceDepthUnit || null : ""
+                  itemTitle: "Dial Colour",
+                  itemDescription: data.hasOwnProperty("c_dialColour") ? data.c_dialColour : null
                 },
                 {
                   id: 4,
-                  itemTitle: "Bezel",
-                  itemDescription: data.hasOwnProperty("c_bezelType") ? data.c_bezelType : null
+                  itemTitle: "Dial Index",
+                  itemDescription: data.hasOwnProperty("c_dialFigure") ? data.c_dialFigure : null
                 },
                 {
                   id: 5,
-                  itemTitle: "Crown",
-                  itemDescription: data.hasOwnProperty("c_crown") ? data.c_crown : null
+                  itemTitle: "Dial Material",
+                  itemDescription: data.hasOwnProperty("c_dialTypeOfStones1") ? data.c_dialTypeOfStones1 : null
                 },
                 {
                   id: 6,
-                  itemTitle: "Crystal",
-                  itemDescription: data.hasOwnProperty("c_crystal") ? data.c_crystal : null
-                },
-                {
-                  id: 7,
-                  itemTitle: "Product Weight",
-                  itemDescription: data.hasOwnProperty("c_productWeight") ? data.c_productWeight : null
-                },
-                {
-                  id: 8,
-                  itemTitle: "Watch-Head Weight",
-                  itemDescription: data.hasOwnProperty("c_watchHeadWeight") ? data.c_watchHeadWeight : null
-                },
-                {
-                  id: 9,
-                  itemTitle: "Diameter",
-                  itemDescription: data.hasOwnProperty("c_size") ? data.c_size : null
-                },
-                {
-                  id: 10,
-                  itemTitle: "Thickness",
-                  itemDescription: data.hasOwnProperty("c_thickness") ? data.c_thickness : null
-                },
-                {
-                  id: 11,
-                  itemTitle: "Height",
-                  itemDescription: data.hasOwnProperty("c_height") ? data.c_height : null
-                },
-                {
-                  id: 12,
-                  itemTitle: "Lug Width",
-                  itemDescription: data.hasOwnProperty("c_lugWidth") ? data.c_lugWidth : null
-                },
-                {
-                  id: 13,
-                  itemTitle: "Shape",
-                  itemDescription: data.hasOwnProperty("c_caseShape") ? data.c_caseShape : null
+                  itemTitle: "Glass Material",
+                  itemDescription: data.hasOwnProperty("c_glass") ? data.c_glass : null
                 }
               ]
             },
@@ -151,60 +113,54 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items:[
                 {
                   id: 1,
-                  itemTitle: "Caliber",
-                  itemDescription: data.hasOwnProperty("c_movementCalibre") ? data.c_movementCalibre : null
-                },
-                {
-                  id: 2,
                   itemTitle: "Movement",
                   itemDescription: data.hasOwnProperty("c_movement1") ? data.c_movement1 : null
                 },
                 {
-                  id: 3,
-                  itemTitle: "Power Reserve",
-                  itemDescription: data.hasOwnProperty("c_powerReserve") ? data.c_powerReserve : null
+                  id: 2,
+                  itemTitle: "Complication",
+                  itemDescription: data.hasOwnProperty("c_complication1") ? data.c_complication1 : null
                 },
                 {
                   id: 4,
-                  itemTitle: "Chronograph",
-                  itemDescription: data.hasOwnProperty("c_chronograph") ? data.c_chronograph : null
+                  itemTitle: "Caliber",
+                  itemDescription: data.hasOwnProperty("c_movementCalibre") ? data.c_movementCalibre : null
                 },
                 {
                   id: 5,
-                  itemTitle: "Vibration",
-                  itemDescription: data.hasOwnProperty("c_vibration") ? data.c_vibration : null
-                },
-                {
-                  id: 6,
-                  itemTitle: "Cylinder",
-                  itemDescription: data.hasOwnProperty("c_cylinder") ? data.c_cylinder : null
+                  itemTitle: "Power Reserve",
+                  itemDescription: data.hasOwnProperty("c_powerReserve") ? data.c_powerReserve : null
                 }
               ]
             },
             {
               id: 3,
-              specsTitle: "Dial",
+              specsTitle: "Case",
               items:[
-
                 {
                   id: 1,
-                  itemTitle: "Dial",
-                  itemDescription: data.hasOwnProperty("c_dialMaterial") ? data.c_dialMaterial : null
+                  itemTitle: "Case Diameter",
+                  itemDescription: data.hasOwnProperty("c_size") + " mm" ? data.c_size : null
                 },
                 {
                   id: 2,
-                  itemTitle: "Dial Type",
-                  itemDescription: data.hasOwnProperty("c_dialType") ? data.c_dialType : null
+                  itemTitle: "Water Resistance",
+                  itemDescription: data.c_waterResistance === true ? data.c_waterResistanceDepth + " " + data.c_waterResistanceDepthUnit || null : ""
                 },
                 {
                   id: 3,
-                  itemTitle: "Dial Index",
-                  itemDescription: data.hasOwnProperty("c_dialFigure") ? data.c_dialFigure : null
+                  itemTitle: "Bezel Type",
+                  itemDescription: data.hasOwnProperty("c_bezelType") ? data.c_bezelType : null
                 },
                 {
                   id: 4,
-                  itemTitle: "Stone",
-                  itemDescription: data.hasOwnProperty("c_dialTypeOfStones1") ? data.c_dialTypeOfStones1 : null
+                  itemTitle: "Bezel Material",
+                  itemDescription: data.hasOwnProperty("c_braceletMaterial") ? data.c_braceletMaterial : null
+                },
+                {
+                  id: 5,
+                  itemTitle: "Case Material",
+                  itemDescription: data.hasOwnProperty("c_caseMaterial") ? data.c_caseMaterial : null
                 }
               ]
             },
@@ -214,38 +170,23 @@ const transformTechSpecsDetails = (data: any):TechSpecsData => {
               items:[
                 {
                   id: 1,
+                  itemTitle: "Strap Details",
+                  itemDescription: data.hasOwnProperty("c_strapDescription") ?  data.c_strapDescription : null
+                },
+                {
+                  id: 2,
                   itemTitle: "Strap Material",
                   itemDescription: data.hasOwnProperty("c_strapMaterial") ?  data.c_strapMaterial : null
                 },
                 {
-                  id: 2,
-                  itemTitle: "Strap Color",
-                  itemDescription: data.hasOwnProperty("c_strapColor") ?  data.c_strapColor : null
-                },
-                {
                   id: 3,
-                  itemTitle: "Strap Type",
-                  itemDescription: data.hasOwnProperty("c_strapDescription") ?  data.c_strapDescription : null
+                  itemTitle: "Strap Lock",
+                  itemDescription: data.hasOwnProperty("c_typeOfLock") ?  data.c_typeOfLock : null
                 },
                 {
                   id: 4,
-                  itemTitle: "Lug",
-                  itemDescription: data.hasOwnProperty("c_lug") ?  data.c_lug : null
-                },
-                {
-                  id: 5,
-                  itemTitle: "Buckle Material",
-                  itemDescription: data.hasOwnProperty("c_buckleMaterial") ?  data.c_buckleMaterial : null
-                },
-                {
-                  id: 6,
-                  itemTitle: "Buckle Type",
-                  itemDescription: data.hasOwnProperty("c_buckleType") ?  data.c_buckleType : null
-                },
-                {
-                  id: 7,
-                  itemTitle: "Buckle Size",
-                  itemDescription: data.hasOwnProperty("c_buckleSize") ?  data.c_buckleSize : null
+                  itemTitle: "Original Accessories",
+                  itemDescription: data.hasOwnProperty("c_accessories") ?  data.c_typeOfLock : null
                 }
               ]
             }
