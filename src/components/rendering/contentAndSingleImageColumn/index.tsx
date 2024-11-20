@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./contentAndSingleImageColumn.module.scss";
 
 const ContentAndSingleImageColumn = ({ ...content }) => {
-  console.log("content-and-single-image-column", content);
   return (
     <div className={styles.container}>
       <ContentHeader
