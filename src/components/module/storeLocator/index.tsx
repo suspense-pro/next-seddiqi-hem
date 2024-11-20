@@ -63,7 +63,11 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
           .join(' '); // Join the words back together with a space
       }
 
-      const capitalResult = capitalizeWords(productBrand);
+      let capitalResult = capitalizeWords(productBrand);
+
+      if(capitalResult === "Rolex Certified Pre-owned"){
+        capitalResult = "Rolex Certified Pre-Owned"; // fuck this..lol
+      }
 
       if (location) {
         result = await UseFetchStores(capitalResult, '', '', '', location.lat, location.lng); 
