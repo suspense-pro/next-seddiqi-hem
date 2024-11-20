@@ -42,6 +42,7 @@ import RolexTextBlock from "@components/rendering/rolex/rolexTextBlock";
 import ViewAllBrandsCategory from "@components/module/brands/viewAllBrandsCategory";
 import NeedMoreHelp from "@components/rendering/needMoreHelp";
 import ExclusiveInfoCards from "@components/module/bookAnAppointment/exclusiveInfoCards";
+import ContentAndSingleImageColumn from "@components/rendering/contentAndSingleImageColumn";
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || "platinumpanda",
@@ -113,6 +114,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/spacing`]: Spacing,
   [`${componentUrl}/need-help`]: NeedMoreHelp,
   [`${componentUrl}/exclusive-info-list`]: ExclusiveInfoCards,
+  [`${componentUrl}/content-and-single-image-column`]: ContentAndSingleImageColumn,
 };
 
 const defaultConfig = {

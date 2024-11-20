@@ -47,6 +47,7 @@ export interface AccordionProps {
   subMenu?: string | number | boolean;
   showArrow?: boolean;
   isOpen?: boolean;
+  url?: string
 }
 
 // cards

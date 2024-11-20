@@ -123,7 +123,7 @@ export default function ProductPage({
         sizeGuideDataWomenWatches={sizeGuideDataWomenWatches}
         sizeGuideData={sizeGuideData}
       />
-      <PdpTabs tabImage={product?.response.imageGroups[0]?.images[1]?.link} productTechSpecs={productTechSpecs} amplienceData={""} />
+      <PdpTabs productTechSpecs={productTechSpecs} amplienceData={""} />
       {/* Other components like ScrollToTop and StickyWhatsapp */}
       {/*<StickyWhatsapp />*/}
       <ScrollToTop />
