@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./accordion.module.scss";
 import NavigationLink from "../navigationLink";
 import { ArrowDown } from "@assets/images/svg";
 import { AccordionProps } from "@utils/models";
+import { HeaderContext } from "@contexts/headerContext";
 
 const Accordion: React.FC<AccordionProps> = ({
   item,
@@ -11,10 +12,12 @@ const Accordion: React.FC<AccordionProps> = ({
   subMenu,
   showArrow = false,
   isOpen = false,
+  url,
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [height, setHeight] = useState<number | undefined>(undefined);
   const contentRef = useRef<HTMLDivElement>(null);
+  const { menuOpen, setMenuOpen } = useContext(HeaderContext);
 
   const activeSubMenu = subMenu === item.id && isCollapsed;
 
@@ -25,7 +28,7 @@ const Accordion: React.FC<AccordionProps> = ({
       setHeight(undefined);
     }
   }, [isCollapsed]);
-  
+
   useEffect(() => {
     if (isOpen) {
       handleClick();
@@ -38,12 +41,32 @@ const Accordion: React.FC<AccordionProps> = ({
       setIsCollapsed(!isCollapsed);
     }
   };
-
+  console.log("Item", item?.url);
   return (
     <div className={styles.accordion}>
-      <div className={styles.accordionLink} onClick={handleClick}>
-        <NavigationLink hover={false} className={styles.headerLink} title={item?.title} />
-        {showArrow && <ArrowDown className={activeSubMenu ? styles.activeArrow : undefined} />}
+      <div className={styles.accordionLink}>
+        <span
+          onClick={() => {
+            if (item?.url) {
+              setMenuOpen(false);
+            }
+          }}
+          className={styles.headerLink}
+        >
+          <NavigationLink
+            url={item?.url}
+            isNewTab={item?.isNewTab}
+            hover={false}
+           
+            title={item?.title}
+          />
+        </span>
+
+        {showArrow && (
+          <div onClick={handleClick}>
+            <ArrowDown className={activeSubMenu ? styles.activeArrow : undefined} />
+          </div>
+        )}
       </div>
       <div ref={contentRef} style={{ height: activeSubMenu ? height : 0 }} className={styles.accordionContainer}>
         {children}
