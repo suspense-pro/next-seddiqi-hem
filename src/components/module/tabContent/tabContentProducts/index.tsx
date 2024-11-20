@@ -75,6 +75,8 @@ const TabContentProducts = () => {
     );
   };
 
+  console.log("products", products);
+
   return (
     <div className={styles.tabContent}>
       <div className={styles.mobileMenuLinks}>
@@ -88,6 +90,8 @@ const TabContentProducts = () => {
                 ...item,
                 id: ind + 1,
                 title: item?.content?.commonProps?.item_title,
+                url: item?.content?.commonProps?.url,
+                isNewTab: item?.content?.commonProps?.isNewTab,
               }}
               key={item?.id}
             >
