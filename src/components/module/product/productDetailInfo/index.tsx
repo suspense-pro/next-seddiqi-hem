@@ -195,7 +195,7 @@ const ProductDetailInfo = ({
             setSwiper={setSwiper}
             setActiveIndex={setActiveIndex}
           />
-          {windowWidth > 1036 && <div className={styles.exclusive}>Exclusive</div>}
+          {windowWidth > 1036 && <div className={styles.exclusive}>{product?.c_edition}</div>}
           <div onClick={() => setShowZoom(true)} className={styles.plus}>
             <PlusIcon />
           </div>
@@ -213,8 +213,8 @@ const ProductDetailInfo = ({
           <div className={styles.productDetails}>
             <div className={styles.productHead}>
               <div className={styles.brand}>
-                <div className={styles.exclusive}>Exclusive</div>
-                <span>{product?.brand}</span>
+                <div className={styles.exclusive}>{product?.c_edition}</div>
+                <span>{product?.c_brandName}</span>
               </div>
               <div className={styles.title}>{product?.c_model}</div>
               {/*
@@ -298,13 +298,13 @@ const ProductDetailInfo = ({
                 warrantyAndCare={warrantyData}
               />
             )}
-            {shippingData && isCardOpen === "shipping" && (
+            {/*shippingData && isCardOpen === "shipping" && (
               <ProductShippingDetailsFlyoutCard
                 isShippingCardOpen={isCardOpen === "shipping"}
                 setShippingCardOpen={() => handleCardToggle("shipping")}
                 shippingDetails={shippingData}
               />
-            )}
+            )*/}
             <div className={`${!editorsView && styles.noEditView} ${styles.bottom}`}>
               {editorsView && (
                 <>
@@ -318,10 +318,12 @@ const ProductDetailInfo = ({
               <div onClick={() => handleCardToggle("careAndWarranty")} className={styles.tab}>
                 Warranty & Care
               </div>
+              {/*
               <div className={styles.vline}>&nbsp;</div>
               <div onClick={() => handleCardToggle("shipping")} className={styles.tab}>
                 Shipping
               </div>
+              */}
             </div>
           </div>
           {/*}
