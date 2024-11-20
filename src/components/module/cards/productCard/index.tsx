@@ -36,8 +36,11 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
     priceCurrency,
     c_brandName,
     c_model,
+    c_edition,
+    c_additionalField1,
     imageGroups,
-    productId
+    productId,
+    representedProduct
   } = item;
  
   const cleanedId = (id ?? productId).replace(/\//g, "%2F");
@@ -60,7 +63,9 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
       >
         <div className={styles.productTop}>
           <div className={styles.newContainer}>
-            <div className={styles.new}>New In</div>
+            <div className={styles.new}>
+            {c_edition ?? representedProduct?.c_edition}
+            </div>
           </div>
           {/* <HeartIcon fill="#" /> */}
         </div>
@@ -85,10 +90,11 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
         </div>
         <div className={styles.productBottom}>
           <Typography align="center" variant="p" className={styles.title}>
-            {c_brandName}
+            {c_brandName ?? representedProduct?.c_brandName}
           </Typography>
           <Typography align="center" variant="p" className={styles.type}>
-            {c_model}
+            {(c_model ?? representedProduct?.c_model) + " - " + (c_additionalField1 ?? representedProduct?.c_additionalField1)}
+
           </Typography>
           {/* <Typography align="center" variant="p" className={styles.price}>
             {priceCurrency} {pricePerUnit}
