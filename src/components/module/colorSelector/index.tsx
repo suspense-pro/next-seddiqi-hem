@@ -29,6 +29,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
         onSubmit={null}
         onClearAll={null}
         className={styles.customSideDrawerStyle} 
+        button2Color={"green_dark"}
       >
         <div className={styles.contentWrapper}>
           <div className={styles.content}>

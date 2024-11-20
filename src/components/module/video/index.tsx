@@ -3,31 +3,40 @@ import styles from "./video.module.scss";
 import classNames from "classnames";
 import VideoPlay from "@assets/images/svg/VideoPlay";
 import VideoPause from "@assets/images/svg/VideoPause";
+
 const Video = ({ video, className = "", autoPlay = true, showPlay = true }) => {
-  //   console.log("video----", video);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [isMuted, setIsMuted] = useState(true);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && autoPlay) {
-            setIsPlaying(true);
-          } else {
-            setIsPlaying(false);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    if (videoRef.current) {
-      videoRef.current.addEventListener("ended", function () {
-        setIsPlaying(false);
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && autoPlay) {
+          setIsPlaying(true);
+        } else {
+          setIsPlaying(false);
+        }
       });
-      observer.observe(videoRef.current);
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.5,
+    });
+
+    if (videoRef.current) {
+      const videoElement = videoRef.current;
+
+      // Manually check visibility on first load
+      if (videoElement.readyState > 0 && autoPlay) {
+        const rect = videoElement.getBoundingClientRect();
+        if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+          setIsPlaying(true);
+        }
+      }
+
+      videoElement.addEventListener("ended", () => setIsPlaying(false));
+      observer.observe(videoElement);
     }
 
     return () => {
@@ -35,18 +44,18 @@ const Video = ({ video, className = "", autoPlay = true, showPlay = true }) => {
         observer.unobserve(videoRef.current);
       }
     };
-  }, [videoRef?.current]);
+  }, [autoPlay]);
 
   useEffect(() => {
     if (videoRef.current) {
-      if (isPlaying && videoRef.current.paused) {
-        videoRef.current.play().catch((error) => {});
+      if (isPlaying) {
+        videoRef.current.play().catch(() => {});
       } else {
         videoRef.current.pause();
       }
-      setIsMuted(true);
+      videoRef.current.muted = isMuted;
     }
-  }, [isPlaying]);
+  }, [isPlaying, isMuted]);
 
   const togglePlayPause = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -61,30 +70,16 @@ const Video = ({ video, className = "", autoPlay = true, showPlay = true }) => {
     }
   };
 
-  const handleVideoLoad = () => {
-    setIsLoaded(true);
-    if (videoRef.current) {
-      if (isPlaying && videoRef.current.paused) {
-        videoRef.current.play().catch((error) => {});
-      } else {
-        videoRef.current.pause();
-      }
-      setIsMuted(true);
-    }
-  };
-
   return (
     <div className={classNames(styles.videoPlayerWrapper, className)}>
-      {/* {!isLoaded && <div className={styles.skeleton}></div>} */}
       {video && (
         <video
           ref={videoRef}
-          loop={true}
+          loop
           muted={isMuted}
           autoPlay={autoPlay}
           playsInline
           className={styles.videoPlayer}
-          onLoadedData={handleVideoLoad}
           style={{
             background: "#000101",
             width: "100%",

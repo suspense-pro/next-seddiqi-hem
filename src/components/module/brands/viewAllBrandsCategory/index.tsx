@@ -4,7 +4,7 @@ import styles from "./viewAllBrandsCategory.module.scss";
 import BrandListing from "@components/module/brandListing";
 
 const ViewAllBrandsCategory = ({ ...content }) => {
-  // console.log("ViewAllBrandsCategory", content);
+  console.log("ViewAllBrandsCategory", content);
   return (
 
       <TabbedNavigation
@@ -14,7 +14,7 @@ const ViewAllBrandsCategory = ({ ...content }) => {
           // { id: 3, title: "Jewellery" },
           // { id: 4, title: "accessories" },
         ]}
-        // className={styles.tabContainer}
+        className={styles.tabContainer}
       />
   );
 };

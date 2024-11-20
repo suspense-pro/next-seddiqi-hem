@@ -22,16 +22,24 @@ const TabContentProducts = () => {
   const renderAccordionContent = (ind) => {
     const GetSubMenu = () => {
       const subMenuLinks = products[ind].children?.map((item) => item).map((item) => item?.children);
-      const columnOne = products[ind].children[0]?.content?.commonProps?.item_title
-      const columnTwo = products[ind].children[1]?.content?.commonProps?.item_title
-      
+      const columnOne = products[ind].children[0]?.content?.commonProps?.item_title;
+      const columnTwo = products[ind].children[1]?.content?.commonProps?.item_title;
 
       return subMenuLinks && subMenuLinks.length > 0 ? (
-        <div style={{marginBottom: "48px"}}>
-          <div className={styles.label}>{columnOne}</div>
+        <div style={{ marginBottom: "48px" }}>
+          {products[ind]?.children?.map((links) => {
+            const title = links?.content?.commonProps?.item_title;
+            return (
+              <>
+                {title && <div className={styles.label}>{title}</div>}
+                <SubMenu links={links?.children} />
+              </>
+            );
+          })}
+          {/* <div className={styles.label}>{columnOne}</div>
           <SubMenu links={subMenuLinks[0]} />
           <div className={styles.label}>{columnTwo}</div>
-          <SubMenu links={subMenuLinks[1]} />
+          <SubMenu links={subMenuLinks[1]} /> */}
         </div>
       ) : null;
     };
