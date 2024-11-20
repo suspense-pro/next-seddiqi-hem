@@ -23,3 +23,41 @@
     height: rem(660);
   }
 }
+
+.metallic {
+  background-color: getColorHex("metallic");
+}
+
+.bronze-grey {
+  background-color: getColorHex("bronze-grey");
+}
+
+.green-dark {
+  background-color: getColorHex("green-dark");
+}
+
+.black {
+  background-color: getColorHex("black");
+}
+
+.white {
+  background-color: getColorHex("white");
+}
+
+.grey-light {
+  background-color: getColorHex("grey-light");
+}
+
+.light-cream {
+  background-color: getColorHex("light-cream");
+}
+.grey-pampas {
+  background-color: getColorHex("grey-pampas");
+}
+
+.beige {
+  background: getColorHex("beige");
+}
+.cream {
+  background-color: getColorHex("cream");
+}
