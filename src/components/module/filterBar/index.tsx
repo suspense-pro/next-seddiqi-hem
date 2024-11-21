@@ -11,6 +11,9 @@ import Typography from "../typography";
 import { CloseIcon } from "@assets/images/svg";
 import { getCategoryFilters } from "@utils/sfcc-connector/dataService";
 import Loader from "../loader";
+import { usePathname, useRouter } from "next/navigation";
+import { filterObjectRemoveEmptyKey, removeEmptyObjectsByKeys } from "@utils/helpers/removeEmptyObject";
+import { useDeviceWidth } from "@utils/useCustomHooks";
 
 const FilterBar = ({
   filters: initialFilters,
@@ -19,6 +22,7 @@ const FilterBar = ({
   categoryId,
   setFilterOptions,
   filterOptions = [],
+  resetProducts,
 }) => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [openAccordionId, setOpenAccordionId] = useState(null);
@@ -26,6 +30,9 @@ const FilterBar = ({
   const [sortingOptions, setSortingOptions] = useState([]);
   const [quickFilters, setQuickFilters] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const isDesktop = useDeviceWidth();
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
   useEffect(() => {
     const fetchCategoryFilters = async () => {
@@ -56,16 +63,6 @@ const FilterBar = ({
     fetchCategoryFilters();
   }, [categoryId]);
 
-  // useEffect(() => {
-  //   setFiltersState(initialFilters || {});
-  // }, [initialFilters]);
-
-  // useEffect(() => {
-  //   if (!isDrawerOpen) {
-  //     setFiltersState(initialFilters || {});
-  //   }
-  // }, [initialFilters, isDrawerOpen]);
-
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
   };
@@ -77,20 +74,14 @@ const FilterBar = ({
         ? prevSelectedOptions.filter((selected) => selected !== option)
         : [...prevSelectedOptions, option];
 
-        console.log({prevSelectedOptions});
-        console.log({newSelectedOptions});
-        console.log({prevFilters});
-        
-        
-      const updatedData = { ...prevFilters , [filterKey]: newSelectedOptions };
+      const updatedData = { ...prevFilters, [filterKey]: newSelectedOptions };
+      const queryString = new URLSearchParams(updatedData).toString();
 
-      console.log({updatedData});
+      replace(`${pathname}?${queryString}`);
+
       onFilterChange(updatedData);
       return updatedData;
     });
-
-
-
   };
 
   const handleSortChange = (selectedSortOption) => {
@@ -111,34 +102,20 @@ const FilterBar = ({
         (selected) => selected !== option
       );
 
-      const updatedData = { ...prevFilters, [filterKey]: newSelectedOptions};
+      const updatedData = { ...prevFilters, [filterKey]: newSelectedOptions };
+      const queryString = new URLSearchParams(updatedData).toString();
+
+      replace(`${pathname}?${queryString}`);
       onFilterChange(updatedData);
       return updatedData;
     });
   };
 
-  const handleSubmit = () => {
-    const filteredFilters = Object.keys(initialFilters).reduce((acc, key) => {
-      if (
-        (Array.isArray(initialFilters[key]) &&
-          initialFilters[key].length > 0) ||
-        (typeof initialFilters[key] === "string" &&
-          initialFilters[key].length > 0) ||
-        key === "sortOption"
-      ) {
-        acc[key] = initialFilters[key];
-      }
-      return acc;
-    }, {});
-
-    if (onFilterChange) {
-      onFilterChange(filteredFilters);
-    }
-  };
-
   const handleClearAll = () => {
+    replace(pathname);
     setFiltersState(null);
-    onFilterChange([]);
+    resetProducts();
+    setDrawerOpen(false);
   };
 
   const handleClearCheckboxes = (filterKey) => {
@@ -150,6 +127,10 @@ const FilterBar = ({
     } else {
       setFiltersState((prevFilters) => {
         const updatedData = { ...prevFilters, [filterKey]: null };
+
+        const queryString = new URLSearchParams(filterObjectRemoveEmptyKey(updatedData)).toString();
+
+        replace(`${pathname}?${queryString}`);
         onFilterChange(updatedData);
         return updatedData;
       });
@@ -169,7 +150,7 @@ const FilterBar = ({
   return (
     <div className={styles.container}>
       <div className={styles.filterBtns}>
-        <FilterBtn label={"All Filter"} icon={true} onClick={toggleDrawer} />
+        <FilterBtn label={`All Filter`} icon={true} onClick={toggleDrawer} />
         {/* {quickFilters &&
           quickFilters.length > 0 &&
           quickFilters.map((item, index) => (
@@ -204,32 +185,33 @@ const FilterBar = ({
         showBackButton={false}
         position={""}
         className={""}
-        button2Color={"green_dark"}
+        button2Color={"metallic"}
       >
-        <div className={styles.selectedOptions}>
-          {Object.keys(filters).map((filterKey) =>
-            Array.isArray(filters[filterKey])
-              ? filters[filterKey].map((option, index) => (
-                  <div key={index} className={styles.selectedOption}>
-                    <Typography
-                      align="left"
-                      variant="p"
-                      className={styles.option}
-                    >
-                      {option}
-                    </Typography>
-                    <div
-                      className={styles.deleteOption}
-                      onClick={() => handleDelete(filterKey, option)}
-                    >
-                      <CloseIcon />
+        {Object.keys(filters).length > 0 && (
+          <div className={styles.selectedOptions}>
+            {Object.keys(filters).map((filterKey) =>
+              Array.isArray(filters[filterKey])
+                ? filters[filterKey].map((option, index) => (
+                    <div key={index} className={styles.selectedOption}>
+                      <Typography
+                        align="left"
+                        variant="p"
+                        className={styles.option}
+                      >
+                        {option}
+                      </Typography>
+                      <div
+                        className={styles.deleteOption}
+                        onClick={() => handleDelete(filterKey, option)}
+                      >
+                        <CloseIcon />
+                      </div>
                     </div>
-                  </div>
-                ))
-              : null
-          )}
-        </div>
-
+                  ))
+                : null
+            )}
+          </div>
+        )}
         {isLoading ? (
           <Loader />
         ) : (
