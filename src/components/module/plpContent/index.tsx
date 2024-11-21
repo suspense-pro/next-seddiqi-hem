@@ -198,13 +198,14 @@ const PlpContent = ({ productGridContent, products }) => {
         console.log("res.hits: ", res.hits);
 
         if (res && res.hits) {
+          
           setDisplayedProducts(res.hits.slice(0, 24));
           setCurrentIndex(24);
           setIsAllLoaded(res.hits.length <= 24);
           setAllHits(res.hits);
           setIsButtonDisabled(res.hits.length <= 24);
           setFilterOptions(res.refinements);
-          setIsLoading(false);
+          
         } else {
           setDisplayedProducts([]);
           setIsAllLoaded(true);
@@ -221,17 +222,20 @@ const PlpContent = ({ productGridContent, products }) => {
     }
   };
 
+  
+/*
   useEffect(() => {
     const params = Object.fromEntries(searchParams.entries());
 
     console.log({params});
     
 
-    if(Object.keys(params).length < 1) return null;
+    if(Object.keys(params).length < 1) return () => {};
 
     fetchFilteredProducts(params);
     
   }, [searchParams]);
+  */
 
 
   // useEffect(() => {
