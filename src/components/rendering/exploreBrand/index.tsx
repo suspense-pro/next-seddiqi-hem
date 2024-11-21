@@ -82,7 +82,9 @@ const ExploreBrand: React.FC<ExploreBrandProps> = ({ cta, exploreBrandItems, pri
       </div>
       {cta && cta.label && (
         <div className={styles.viewAllButton}>
-          <Button title={cta.label || "View all Brands"} type={cta.type || "solid"} color={cta.color || "green_dark"} />
+          <Button title={cta.label || "View all Brands"} type={cta.type || "solid"} color={cta.color || "green_dark"}
+              link={cta?.url}  new_tab={cta?.isNewTab}
+            />
         </div>
       )}
     </div>
