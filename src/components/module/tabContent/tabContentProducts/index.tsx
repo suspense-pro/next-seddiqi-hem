@@ -75,8 +75,6 @@ const TabContentProducts = () => {
     );
   };
 
-  console.log("products", products);
-
   return (
     <div className={styles.tabContent}>
       <div className={styles.mobileMenuLinks}>

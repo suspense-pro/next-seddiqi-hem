@@ -19,6 +19,7 @@ export interface ExploreBrandProps {
     label: string;
     type: string;
     color: string;
+    url: string;
   };
   primaryTitle: string;
   media: MediaType;

@@ -168,20 +168,22 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     </span>
                   </div>
                   <span className={styles.contactWrapper}>
-                    <Button
-                      isLink={false}
-                      className={styles.contactBtn}
-                      title={"Call"}
-                      color="brown_dark"
-                      type={"Plain"}
+                     <Button
+                        isLink={true}
+                        link={`tel:${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        title={"Call"}
+                        color={"brown_dark"}
+                        type={"Plain"}
+                        className={styles.contactBtn}
                     />
                     <div className={styles.vDivider}>&nbsp;</div>
                     <Button
-                      isLink={false}
-                      className={styles.whatsappBtn}
-                      title={"WhatsApp"}
-                      color="brown_dark"
-                      type={"Plain"}
+                        isLink={true}
+                        link={`https://wa.me/${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        className={styles.whatsappBtn}
+                        title={"WhatsApp"}
+                        color="brown_dark"
+                        type={"Plain"}
                     />
                   </span>
                 </div>
@@ -232,14 +234,14 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     </ul>
                   </div>
                   <div className={styles.bookAppointment}>
-                    <Button
+                    {/* <Button
                       isLink={true}
                       link={"/"}
                       className={styles.appointmentBtn}
                       title={"Book appointment"}
                       color="brown_dark"
                       type={"Plain"}
-                    />
+                    /> */}
                   </div>
                 </div>
 
@@ -309,6 +311,8 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     activeStore={matchedStore}
                     userLocation={userLocation}
                     useOnPopup={false}
+                    handleStoreClick={null}
+                    swiperRef = {null}
                   />
                 </div>
                 <div className={styles.infoOverlay}>
@@ -355,21 +359,23 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                       </span>
                     </div>
                     <span className={styles.contactWrapper}>
-                      <Button
-                        isLink={false}
-                        className={styles.contactBtn}
+                    <Button
+                        isLink={true}
+                        link={`tel:${matchedStore?.phone.replace(/\s+/g, '')}`}
                         title={"Call"}
-                        color="brown_dark"
+                        color={"brown_dark"}
                         type={"Plain"}
-                      />
+                        className={styles.contactBtn}
+                    />
                       <div className={styles.vDivider}>&nbsp;</div>
                       <Button
-                        isLink={false}
+                        isLink={true}
+                        link={`https://wa.me/${matchedStore?.phone.replace(/\s+/g, '')}`}
                         className={styles.whatsappBtn}
                         title={"WhatsApp"}
                         color="brown_dark"
                         type={"Plain"}
-                      />
+                    />
                     </span>
                   </div>
 
@@ -419,14 +425,14 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                       </ul>
                     </div>
                     <div className={styles.bookAppointment}>
-                      <Button
+                      {/* <Button
                         isLink={true}
                         link={"/"}
                         className={styles.appointmentBtn}
                         title={"Book appointment"}
                         color="brown_dark"
                         type={"Plain"}
-                      />
+                      /> */}
                     </div>
                   </div>
 

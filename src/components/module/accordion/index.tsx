@@ -41,7 +41,6 @@ const Accordion: React.FC<AccordionProps> = ({
       setIsCollapsed(!isCollapsed);
     }
   };
-  console.log("Item", item?.url);
   return (
     <div className={styles.accordion}>
       <div className={styles.accordionLink}>

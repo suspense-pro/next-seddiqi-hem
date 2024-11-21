@@ -4,7 +4,7 @@ import { useDeviceWidth } from "@utils/useCustomHooks";
 
 const api_key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY;
 
-const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }) => {
+const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup, handleStoreClick, swiperRef }) => {
   const mapRef = useRef();
   const markersRef = useRef([]);
   const [activeMarker, setActiveMarker] = useState(null);
@@ -207,7 +207,7 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }
         });
       }
 
-      stores.forEach((store) => {
+      stores.forEach((store, index) => {
         const scalingFactor = 0.5; 
 
         const iconSize = store.id === activeStore?.id
@@ -232,18 +232,16 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }
 
         markersRef.current.push(marker);
 
-        // Optional: Add event listener for clicking a store
-        /*marker.addListener("click", () => {
-          setActiveMarker(store.id);
+        marker.addListener("click", () => {
+          handleStoreClick(index); // Pass the index to the function
 
-          // Zoom and center map on clicked marker
-          const currentCenter = map.getCenter();
-          map.panTo({
-            lat: currentCenter.lat(),
-            lng: currentCenter.lng() + -0.03,
-          });
-          map.setZoom(14);
-        });*/
+          if (swiperRef.current && swiperRef.current.swiper) {
+            console.log("Swiper is available, sliding to index:", index);
+            swiperRef.current.swiper.slideTo(index); // Scroll to the active store
+          } else {
+            console.warn("Swiper not available yet.");
+          }
+        });
       });
 
       // Optionally, set up any specific logic for the activeStore here
@@ -251,16 +249,16 @@ const MapView = ({ nearestStore, stores, activeStore, userLocation, useOnPopup }
         const currentCenter = map.getCenter();
         map.panTo({
           lat: currentCenter.lat(),
-          lng: currentCenter.lng() + -0.03,
+          lng: currentCenter.lng() + -0.01,
         });
-        map.setZoom(14);
+        map.setZoom(15);
       }
     }
   }).catch(err => {
     console.error("Error loading Google Maps: ", err);
   });
 
-}, [nearestStore, stores, activeStore, isDesktop]);
+}, [nearestStore, stores, activeStore, isDesktop, handleStoreClick, swiperRef]);
 
 return <div ref={mapRef} style={{ height: '100%', width: '100%' }}></div>;
 };
