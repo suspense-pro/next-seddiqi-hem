@@ -6,10 +6,25 @@
   justify-content: space-between;
   margin: rem(33 0);
 
+ :global(button.button) {
+  
+    &:nth-child(1),
+    &:nth-child(2) {
+      width: 100%;
+    }
+  }
+
   .filterBtns {
     display: flex;
     align-items: center;
     gap: rem(10);
+    flex-wrap: wrap;
+  }
+
+  .sortSection {
+    display: flex;
+    align-items: flex-end;
+    gap: rem(20);
     flex-wrap: wrap;
   }
 

@@ -8,7 +8,6 @@ const ExploreBrand: React.FC<ExploreBrandProps> = ({ cta, exploreBrandItems, pri
   const logoTrackRef = useRef<HTMLDivElement>(null);
   const animationFrameIdRef = useRef<number | null>(null);
   const isHoveredRef = useRef(false);
-
   useEffect(() => {
     let start = 0;
     const speed = 0.5;
@@ -69,20 +68,22 @@ const ExploreBrand: React.FC<ExploreBrandProps> = ({ cta, exploreBrandItems, pri
       <div className={styles.logoCarousel} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <div className={styles.logoTrack} ref={logoTrackRef}>
           {exploreBrandItems.concat(exploreBrandItems).map((item, index) => (
-            <a href="#" key={index} className={styles.logoItem}>
+            <div key={index} className={styles.logoItem}>
               <div className={styles.logoContainer}>
                 <Image
                   image={item.logoIcon.image.image}
                   imageAltText={item.logoIcon.image.altText || `Brand Logo ${index + 1}`}
                 />
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </div>
       {cta && cta.label && (
         <div className={styles.viewAllButton}>
-          <Button title={cta.label || "View all Brands"} type={cta.type || "solid"} color={cta.color || "green_dark"} />
+          <Button title={cta.label || "View all Brands"} type={cta.type || "solid"} color={cta.color || "green_dark"}
+              link={cta?.url}  new_tab={cta?.isNewTab}
+            />
         </div>
       )}
     </div>

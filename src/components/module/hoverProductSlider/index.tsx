@@ -44,7 +44,7 @@ const HoverProductSlider = ({
             >
               <Image
                 className={styles.image}
-                src={slide?.absUrl}
+                src={slide?.absUrl ?? slide?.link}
                 alt={slide?.alt}
                 layout="fill"
                 objectFit="contain"

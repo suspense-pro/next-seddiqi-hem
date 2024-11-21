@@ -21,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             const accessToken = configWithAuth.access_token;
             clientConfig.headers['authorization'] = `Bearer ${accessToken}`;
             const productsClient = new Product.Products(clientConfig);
-            var accountMgrAccessToken = await OAuthTokenFromAM();
+            let accountMgrAccessToken = await OAuthTokenFromAM();
             
             const options = {
                 headers: {
@@ -126,15 +126,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                   expand: ["images", "custom_properties"],
                   allImages: true,
                   limit: 200, // TODO: use the parameter offset with limit for result pagination 
-                  offset: 0,
+                  // offset: 0,
                 },
               };
-              console.log("OPTIONS: " + JSON.stringify(options, null, 2));
+              // console.log("OPTIONS: " + JSON.stringify(options, null, 2));
 
               // TODO: commerce-sdk doesn't support expand and allImages parameters
               // const shopperSearchClient = new Search.ShopperSearch(clientConfig);
               const shopperSearchClient = new ShopperSearch(clientConfig);
-              var productResults = await shopperSearchClient.productSearch(options);
+              let productResults = await shopperSearchClient.productSearch(options);
+
               if (productResults.total > 0) {
                 
                 productResults = transformPriceRefinement(productResults);
@@ -152,7 +153,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case "productDetail":
             try {
               if (requestMethod === "GET" && action === "getProductDetails") {
-                var pid = (req.query.pid as string) ?? "";
+                let pid = (req.query.pid as string) ?? "";
                 pid = pid.replace(/\//g, '%2F');
                 const configWithAuth = await initializeShopperConfig();
                 const accessToken = configWithAuth.access_token;

@@ -97,6 +97,8 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) 
                     activeStore={store}
                     userLocation={userLocation}
                     useOnPopup={true}
+                    handleStoreClick={null}
+                    swiperRef = {null}
                 />
           </div>
         ) : (
@@ -120,21 +122,23 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) 
           </span>
         </div>
         <span className={styles.contactWrapper}>
-          <Button
-            isLink={false}
-            className={styles.contactBtn}
-            title={"Call"}
-            color="brown_dark"
-            type={"Plain"}
-          />
-          <div className={styles.vDivider}>&nbsp;</div>
-          <Button
-            isLink={false}
-            className={styles.whatsappBtn}
-            title={"WhatsApp"}
-            color="brown_dark"
-            type={"Plain"}
-          />
+        <Button
+          isLink={true}
+          link={`tel:${store?.phone.replace(/\s+/g, '')}`}
+          title={"Call"}
+          color={"brown_dark"}
+          type={"Plain"}
+          className={styles.contactBtn}
+        />
+        <div className={styles.vDivider}>&nbsp;</div>
+        <Button
+          isLink={true}
+          link={`https://wa.me/${store?.phone.replace(/\s+/g, '')}`}
+          className={styles.whatsappBtn}
+          title={"WhatsApp"}
+          color="brown_dark"
+          type={"Plain"}
+        />
         </span>
       </div>
 
@@ -177,14 +181,14 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) 
           </ul>
         </div>
         <div className={styles.bookAppointment}>
-          <Button
+          {/* <Button
             isLink={true}
             link={"/book-an-appointment"}
             className={styles.appointmentBtn}
             title={"Book appointment"}
             color="brown_dark"
             type={"Plain"}
-          />
+          /> */}
         </div>
       </div>
 
