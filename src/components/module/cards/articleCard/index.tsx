@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import styles from "./articleCard.module.scss";
 import { CardInfoProps } from "@utils/models";
 import Typography from "@components/module/typography";
+import { HeaderContext } from "@contexts/headerContext";
 
 const ArticleCard: React.FC<CardInfoProps> = ({ item }) => {
   const image = item?.image?.image;
@@ -13,9 +14,17 @@ const ArticleCard: React.FC<CardInfoProps> = ({ item }) => {
   const link = item?.link ? item?.link : "/";
   if (!backgroundImage) return null;
   if (!image && !title && !linkBtn && !backgroundImage) return null;
+  const headerContext = useContext(HeaderContext);
+  const { setMenuOpen, updateCurrent } = headerContext;
 
   return (
-    <Link href={link}>
+    <Link
+      onClick={() => {
+        setMenuOpen(false);
+        updateCurrent(null);
+      }}
+      href={link}
+    >
       <div className={styles.articleCard} style={{ backgroundImage }}>
         <div className={styles.backgroundFade} />
         {title && (
@@ -25,7 +34,7 @@ const ArticleCard: React.FC<CardInfoProps> = ({ item }) => {
         )}
 
         {linkBtn && (
-          <Link href="#" className={styles.articleBtn}>
+          <Link href={link} className={styles.articleBtn}>
             {linkBtn}
           </Link>
         )}

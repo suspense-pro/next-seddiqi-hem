@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "@components/module/image";
 import styles from "./storyCard.module.scss";
 import { CardInfoProps } from "@utils/models";
 import Typography from "@components/module/typography";
 import Link from "next/link";
+import { HeaderContext } from "@contexts/headerContext";
 
 const StoryCard: React.FC<CardInfoProps> = ({ item, className }) => {
   const image = item?.media?.image || item?.image?.image;
@@ -12,21 +13,36 @@ const StoryCard: React.FC<CardInfoProps> = ({ item, className }) => {
   const subtitle = item?.subTitle;
   const link = item?.link ? item?.link : "/";
 
-  if (!image || !title || !subtitle) return null;
-  console.log('link', link)
+  if (!image || !title) return null;
+  const headerContext = useContext(HeaderContext);
+  const { setMenuOpen, updateCurrent } = headerContext;
 
   return (
-    <Link onClick={(e) => e.stopPropagation()} href={link}>
-      <div className={`${styles.storyCardContainer} ${className}`}>
+    <div
+      onClick={(e) => {
+        setMenuOpen(false);
+        updateCurrent(null);
+      }}
+      className={`${styles.storyCardContainer} ${className}`}
+    >
+      <Link
+        onClick={(e) => {
+          setMenuOpen(false);
+          updateCurrent(null);
+        }}
+        href={link}
+      >
         <Image className={styles.image} image={image} imageAltText={altText} />
         <div className={styles.content}>
-          <Typography align="left" variant="span" className={styles.title}>
-            {title}
-          </Typography>
-          <div className={styles.subtitle}>{subtitle}</div>
+          {title && (
+            <Typography align="left" variant="span" className={styles.title}>
+              {title}
+            </Typography>
+          )}
+          {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

@@ -8,7 +8,6 @@ const ExploreBrand: React.FC<ExploreBrandProps> = ({ cta, exploreBrandItems, pri
   const logoTrackRef = useRef<HTMLDivElement>(null);
   const animationFrameIdRef = useRef<number | null>(null);
   const isHoveredRef = useRef(false);
-  console.log("exploreBrandItems",exploreBrandItems )
   useEffect(() => {
     let start = 0;
     const speed = 0.5;
