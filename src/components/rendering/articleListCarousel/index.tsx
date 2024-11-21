@@ -9,6 +9,7 @@ import { ArrowRight } from "@assets/images/svg";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import RichText from "@components/module/richText";
 import Link from "next/link";
 
@@ -34,17 +35,19 @@ const ArticleListCarousel = ({ ...content }) => {
 
   const windowWidth = useWindowWidth();
 
+  /*
   useEffect(() => {
     if (windowWidth > 1920 && listItems?.length >= 4) {
-      setSlidesPerView(3.2);
+      setSlidesPerView(3);
     } else if (windowWidth < 1250) {
-      setSlidesPerView(listItems?.length === 1 ? 1 : 1.3);
+      setSlidesPerView(listItems?.length === 1 ? 1 : 1);
       setIsMobile(false);
     } else {
-      setSlidesPerView(listItems?.length === 1 ? 1 : listItems?.length === 2 ? 1.3 : 2.2);
+      setSlidesPerView(listItems?.length === 1 ? 1 : listItems?.length === 2 ? 1 : 3);
       setIsMobile(false);
     }
   }, [windowWidth]);
+  */
 
   return (
     <div className={styles.container}>
@@ -64,7 +67,8 @@ const ArticleListCarousel = ({ ...content }) => {
         {!isMobile && <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />}
       </div>
       <div className={styles.carousel}>
-        {hasMultipleItems && !isMobile && (
+
+        {/*hasMultipleItems && !isMobile && (
           <>
             {activeIndex > 0 && (
               <div className={styles.leftBtn} onClick={() => handleSlide("prev")}>
@@ -77,16 +81,18 @@ const ArticleListCarousel = ({ ...content }) => {
               </div>
             )}
           </>
-        )}
+        )*/}
         <Swiper
-          modules={[Navigation, EffectCoverflow]}
+          modules={[Navigation]}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}
-          slidesPerView={isMobile ? 1.3 : slidesPerView}
-          onSlideChange={onSlideChange}
+          slidesPerView={"auto"}
+          //onSlideChange={onSlideChange}
           className={styles.mySwiper}
           spaceBetween={20}
+          freeMode={true}
+          navigation={true}
         >
           {listItems?.map((item, index) => {
             return (

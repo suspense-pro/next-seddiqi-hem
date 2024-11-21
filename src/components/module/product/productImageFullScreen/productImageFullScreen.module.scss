@@ -15,7 +15,7 @@
   padding: rem(20);
 
   @include md {
-    padding: rem(60);
+    padding: rem(20);
   }
 
   .mySwiper {
@@ -24,7 +24,7 @@
   }
 
   .swiperSlide {
-    height: 70vh;
+    height: 100%;
     width: 100vw;
     position: relative;
 
@@ -84,7 +84,7 @@
 
   @include md {
     right: rem(40);
-    top: rem(80);
+    top: rem(40);
   }
 }
 
