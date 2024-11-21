@@ -34,6 +34,7 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
   const [selectedStoreId, setSelectedStoreId] = useState(null);
   const [mapViewOn, setMapViewOn] = useState(false);
   const swiperRef = useRef(null);
+  const [swiperHeight, setSwiperHeight] = useState(0);
   const router = useRouter();
 
   const handleStoreDtetails = (store) => {
@@ -64,6 +65,26 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
   };
 
   useEffect(() => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      const swiperInstance = swiperRef.current.swiper;
+      
+      // Get the wrapper element and calculate the full height including offset
+      const wrapper = swiperInstance.wrapperEl;
+      const offset = 30; // Adjust this to match your margin-top
+  
+      // Update height calculation to account for offset
+      const totalHeight = swiperInstance.height + offset;
+      
+      // Set the updated swiper height, ensuring the last item isn't cut off
+      setSwiperHeight(totalHeight);
+      swiperInstance.update();
+  
+      // Slide to the activeIndex
+      swiperInstance.slideTo(activeIndex, 1000, false);
+    }
+  }, [activeIndex]);
+
+  useEffect(() => {
     const updateSwiper = () => {
       if (swiperRef.current && swiperRef.current.swiper) {
         swiperRef.current.swiper.update();
@@ -83,6 +104,19 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
     };
   }, [storesList]);
 
+  const handleSlideChange = () => {
+    const swiperInstance = swiperRef.current.swiper;
+    if (swiperInstance) {
+      const offset = 30; // Adjust this to the number of pixels you want at the top
+      const wrapper = swiperInstance.wrapperEl;
+
+      // Apply the offset to the swiper container after slide change
+      setTimeout(() => {
+        wrapper.style.marginTop = `${offset}px`;
+      }, 300); // Allow time for the slide transition to complete
+    }
+  };
+
   return (
     <>
       <div
@@ -93,22 +127,27 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
         {!isMobile && needScrollbar === true ? (
           <Swiper
             direction={"vertical"}
+            spaceBetween={20}
             slidesPerView={"auto"}
-            freeMode={true}
             scrollbar={{ dragSize: 160, draggable: true }}
             mousewheel={true}
+            freeMode={true}
             modules={[FreeMode, Scrollbar, Mousewheel]}
+            breakpoints={{
+              768: {
+                spaceBetween: 32,
+              }
+            }}
             className={styles.storeMapListSwiper}
             ref={swiperRef}
+            onSlideChange={handleSlideChange}
           >
-            <SwiperSlide>
+            
               <ul className={styles.storeMapList}>
                 {storesList.map((store, index) => (
-                  <li
-                    key={store.id}
-                    className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ""}`}
-                    onClick={() => handleStoreClick(index)}
-                  >
+                  <SwiperSlide key={store.id}>
+                  <li className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ""}`}
+                    onClick={() => handleStoreClick(index)}>
                     <div className={styles.storeMapDetails}>
                       <h4 className={styles.storeMapName}>{store.name}</h4>
                       <div className={styles.storeMapLocation}>
@@ -150,9 +189,10 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
                       </a>
                     </div>
                   </li>
+                  </SwiperSlide>
                 ))}
               </ul>
-            </SwiperSlide>
+            
           </Swiper>
         ) : (
           <ul className={styles.storeMapList}>

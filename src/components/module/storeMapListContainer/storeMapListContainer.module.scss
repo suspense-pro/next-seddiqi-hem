@@ -67,6 +67,22 @@
         }
       }
     }
+
+    & > div > div:first-child{
+        display: flex;
+        //gap: rem(20);
+
+        @include md{
+            //gap: rem(32);
+        }
+    }
+
+    & > div > div:last-child{
+
+        & > div{
+            height: rem(160) !important;
+        }
+    }
 }
 
 .storeMapList{
@@ -79,7 +95,7 @@
 
     @include md{
         gap: rem(32);
-        background: #fff;
+        background: getColorHex("white");
         width: 100%;
         height: auto;
     }
@@ -89,7 +105,7 @@
     display: flex;
     flex-direction: column;
     row-gap: rem(16);
-    transition: all 0.3s ease;
+    //transition: all 0.3s ease;
     border-bottom: rem(1) solid getColorHex("grey-light");
     padding-bottom: rem(20);
 
@@ -301,10 +317,14 @@
 
 }
 
+.storeMapLinksContainer{
+    display: none;
+}
+
 .storeDetailsBackdrop {
     position: fixed;
     top: 0;
     left: 0;
     background: transparent;
     z-index: 999;
-  }
+}
