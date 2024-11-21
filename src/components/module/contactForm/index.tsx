@@ -13,6 +13,7 @@ import { contactUs } from "@utils/sfcc-connector/dataService";
 import { useRouter } from "next/router";
 import { ContactUsFormErrors } from "@utils/models/errors";
 import { countryCodes } from "@utils/data/countryCodes";
+import SlidingRadioSwitch from "../slidingRadioSwitch";
 
 const ContactForm = () => {
   const router = useRouter();
@@ -39,6 +40,9 @@ const ContactForm = () => {
     description: "",
   });
 
+  const [agreedToTerms, setAgreedToTerms] = useState(true);
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -52,6 +56,8 @@ const ContactForm = () => {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
+        privacyPolicy: agreedToTerms,
+        emailMarketing: marketingOptIn,
       };
       const data = new FormData();
       Object.keys(userData).forEach((key) => {
@@ -61,7 +67,7 @@ const ContactForm = () => {
       if (attachment) {
         data?.append("attachment", attachment);
       }
-
+      console.log("contact data", data)
       try {
         const response = await contactUs({
           method: "POST",
@@ -69,7 +75,7 @@ const ContactForm = () => {
         });
 
         if (!response?.isError) {
-          router.push("/contact-us/confirmation");
+          // router.push("/contact-us/confirmation");
         } else {
           alert("Failed to send email");
         }
@@ -248,6 +254,24 @@ const ContactForm = () => {
           </div>
         </div>
       </div>
+
+      <div className={styles.doubleForm}>
+        <div className={`${styles.slidingSwitch}`}>
+          <SlidingRadioSwitch toggleLabel={""} onToggle={(value) => setAgreedToTerms(!value)} value={agreedToTerms} />
+          <p className={styles.switchLabel}>
+            I have read and agree to Ahmed Seddiqi’ Terms of Service and Privacy Policy*
+          </p>
+        </div>
+        <div className={`${styles.slidingSwitch}`}>
+          <SlidingRadioSwitch toggleLabel={""} onToggle={(value) => setMarketingOptIn(!value)} value={marketingOptIn} />
+          <p className={styles.switchLabel}>
+            I would also like to receive marketing information about AS&S products or services. We may send you this
+            information using e-mail, text, telephone, post, social media or through online advertising. You can ask us
+            to stop marketing at any time.
+          </p>
+        </div>
+      </div>
+
       <div className={styles.btnContainer}>
         <Button
           clickHandler={(e) => handleSubmit(e)}
