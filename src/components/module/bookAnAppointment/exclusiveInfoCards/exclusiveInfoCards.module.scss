@@ -1,0 +1,86 @@
+@import "./../../../../assets/styles/main.scss";
+
+.container {
+  // display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: rem(0 28);
+  display: flex;
+  gap: rem(32);
+  
+  @include lg {
+    gap: rem(48);
+  }
+  
+  .title {
+    @include heading_light;
+    color: getColorHex("green-dark");
+    text-align: center;
+    font-size: rem(40);
+    font-style: normal;
+    font-weight: 500;
+    line-height: rem(46);
+    letter-spacing: rem(0.4);
+    text-transform: uppercase;
+    max-width: rem(840);
+  }
+}
+
+.cards {
+  width: 100%;
+  display: flex;
+  gap: rem(24);
+  flex-wrap: wrap;
+  flex-direction: column;
+  @include lg {
+    margin: 0 rem(80);
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+}
+
+.image {
+  width: rem(48);
+  height: rem(48);
+}
+
+.height {
+  height: rem(48);
+}
+
+.infoListCard {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+  padding: rem(32);
+  border-radius: rem(16) 0;
+  flex: 1;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+  }
+
+  .infoTitle {
+    color: getColorHex("green-dark");
+
+    @include heading_light;
+    font-size: rem(26);
+    font-weight: 500;
+    line-height: rem(36);
+    letter-spacing: rem(0.6);
+  }
+
+  .infoDesc {
+    color: getColorHex("grey");
+    font-size: rem(16);
+    line-height: rem(26);
+    letter-spacing: rem(0.2);
+  }
+}
+
+.grey-high {
+  background-color: getColorHex("grey-high", 0.1);
+}

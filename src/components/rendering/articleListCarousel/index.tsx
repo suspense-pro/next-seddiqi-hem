@@ -1,0 +1,136 @@
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import styles from "./articleListCarousel.module.scss";
+import { Button, ContentHeader, GradientOverlay, Image, Typography, Video } from "@components/module";
+import { useDeviceWidth, useWindowWidth } from "@utils/useCustomHooks";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, EffectCoverflow } from "swiper/modules";
+import { ArrowRight } from "@assets/images/svg";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import RichText from "@components/module/richText";
+import Link from "next/link";
+
+const ArticleListCarousel = ({ ...content }) => {
+  const listItems = content?.listItems;
+  const [slidesPerView, setSlidesPerView] = useState(2.2);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const swiperRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const onSlideChange = useCallback((swiper) => {
+    setActiveIndex(swiper.realIndex);
+  }, []);
+
+  const { cta } = content;
+  const hasMultipleItems = listItems.length > 2;
+  const handleSlide = useCallback((direction) => {
+    if (swiperRef.current) {
+      swiperRef.current[direction === "prev" ? "slidePrev" : "slideNext"]();
+    }
+  }, []);
+
+  const windowWidth = useWindowWidth();
+
+  /*
+  useEffect(() => {
+    if (windowWidth > 1920 && listItems?.length >= 4) {
+      setSlidesPerView(3);
+    } else if (windowWidth < 1250) {
+      setSlidesPerView(listItems?.length === 1 ? 1 : 1);
+      setIsMobile(false);
+    } else {
+      setSlidesPerView(listItems?.length === 1 ? 1 : listItems?.length === 2 ? 1 : 3);
+      setIsMobile(false);
+    }
+  }, [windowWidth]);
+  */
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.headerItem}>
+        {content?.mainTitle && (
+          <Typography variant="h2" className={`${styles.headingPrimary}`}>
+            {content?.mainTitle}
+          </Typography>
+        )}
+
+        {content?.richText && (
+          <div className={`${styles.headingSecondary}`}>
+            <RichText align="" className={`${styles.headingSecondary}`} text={content?.richText} />
+          </div>
+        )}
+
+        {!isMobile && <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />}
+      </div>
+      <div className={styles.carousel}>
+
+        {/*hasMultipleItems && !isMobile && (
+          <>
+            {activeIndex > 0 && (
+              <div className={styles.leftBtn} onClick={() => handleSlide("prev")}>
+                <ArrowRight fill="white" className={styles.arrowLeft} />
+              </div>
+            )}
+            {listItems?.length > 2 && activeIndex < listItems.length - slidesPerView && (
+              <div className={styles.rightBtn} onClick={() => handleSlide("next")}>
+                <ArrowRight fill="white" className={styles.arrowRight} />
+              </div>
+            )}
+          </>
+        )*/}
+        <Swiper
+          modules={[Navigation]}
+          onBeforeInit={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          slidesPerView={"auto"}
+          //onSlideChange={onSlideChange}
+          className={styles.mySwiper}
+          spaceBetween={20}
+          freeMode={true}
+          navigation={true}
+        >
+          {listItems?.map((item, index) => {
+            return (
+              <SwiperSlide className={styles.swiperSlide} key={index}>
+                <GradientOverlay opacity={item?.opacity?.opacity} className={styles.containerImg}>
+                  <div className={styles.articleItem}>
+                    {item?.media?.image && (
+                      <Image height={styles.image} className={styles.image} image={item?.media?.image} />
+                    )}
+                    {item?.media?.video && (
+                      <Video
+                        className={styles.image}
+                        video={item?.media?.video}
+                        autoPlay={item?.media?.autoPlay}
+                        showPlay={item?.media?.showPlay}
+                      />
+                    )}
+                    <div className={styles.articleContent}>
+                      {item?.readTime && <div className={styles.label}>{item?.readTime}</div>}
+                      {item?.title && <div className={styles.title}>{item?.title}</div>}
+                      {item?.subTitle && (
+                        <Link href={item?.link}>
+                          <div className={styles.desc}>{item?.subTitle}</div>
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </GradientOverlay>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
+      <div className={styles.storyBtn}>
+        {isMobile && <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />}
+      </div>
+    </div>
+  );
+};
+
+export default ArticleListCarousel;

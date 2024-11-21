@@ -1,0 +1,99 @@
+@import "./../../../assets/styles/main.scss";
+
+// PROUDCTS AND EXPLORE
+.tabContent {
+  padding: rem(16 28);
+  width: 100%;
+}
+
+.label {
+  color:getColorHex("grey-mid");
+  @include body_regular;
+  font-size: rem(14);
+  font-style: normal;
+  line-height: rem(22);
+  letter-spacing: rem(0.4);
+  text-transform: uppercase;
+  padding-top: rem(24);
+}
+
+
+.mobileMenuLinks {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+
+  .mobileMenuNavigationContainer {
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+  }
+}
+
+.subMenuContainer {
+  display: flex;
+  flex-direction: column;
+  gap: rem(22);
+  transition: all 0.3s;
+  height: 0;
+  overflow: hidden;
+}
+
+.gap {
+  gap: rem(40);
+}
+
+.subMenu {
+  display: flex;
+  flex-direction: column;
+  gap: rem(28);
+  padding-top: rem(20);
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: uppercase;
+  @include body_regular;
+  cursor: pointer;
+  font-size: rem(14);
+  line-height: rem(22);
+  letter-spacing: rem(0.4);
+  color: getColorHex("grey-dark");
+}
+
+.customContainer {
+  height: 100%;
+  gap: rem(40);
+}
+
+.displayCardsTitle {
+  font-size: rem(16);
+  @include heading_light;
+  line-height: rem(20);
+  letter-spacing: rem(0.4);
+  margin-bottom: rem(-10);
+  color: getColorHex("green-dark");
+  text-transform: uppercase;
+}
+
+.padZero {
+  padding: 0;
+}
+
+.column1,
+.cardStyle {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.column1 {
+  gap: rem(20);
+}
+
+.cardStyle {
+  gap: rem(12);
+}
+
