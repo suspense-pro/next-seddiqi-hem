@@ -288,6 +288,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     );
   };
 
+  const swiperRef = useRef(null);
+
   const renderMaps = (storesList) => {
     if (storesList.length === 0) return null;
 
@@ -317,6 +319,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
             activeStore={filterApplied === true ? sortedStoreList[activeIndex] : sortedLocationStores[activeIndex]} 
             userLocation={userLocation} 
             useOnPopup={false}
+            handleStoreClick={handleStoreClick}
+            swiperRef = {swiperRef}
           />
         )}
         {!userLocation && (
@@ -326,6 +330,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
             activeStore={filterApplied === true ? sortedStoreList[activeIndex] : sortedLocationStores[activeIndex]} 
             userLocation={null} 
             useOnPopup={false}
+            handleStoreClick={handleStoreClick}
+            swiperRef = {swiperRef}
           />
         )}
         </div>
