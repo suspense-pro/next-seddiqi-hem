@@ -246,6 +246,8 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
             activeStore={sortedLocationStores[activeIndex]} 
             userLocation={userLocation} 
             useOnPopup={true}
+            handleStoreClick={handleStoreClick}
+            swiperRef = {null}
           />
         )}
         {!userLocation && (
@@ -255,6 +257,8 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
             activeStore={sortedLocationStores[activeIndex]} 
             userLocation={null} 
             useOnPopup={true}
+            handleStoreClick={handleStoreClick}
+            swiperRef = {null}
           />
         )}
         </div>

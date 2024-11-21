@@ -173,6 +173,8 @@ const StepThree = () => {
                   activeStore={activeStore || nearestStore || filteredStores[0]}
                   userLocation={userLocation}
                   useOnPopup={false}
+                  handleStoreClick={null}
+                  swiperRef = {null}
                 />
               )}
             </div>
