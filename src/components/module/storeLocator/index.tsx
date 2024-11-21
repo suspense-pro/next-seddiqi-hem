@@ -55,12 +55,19 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
       //const result = await UseFetchStores(productBrand, productName, '', '',);
       let result;
 
-      function capitalizeFirstLetter(string) {
+      function capitalizeWords(string) {
         if (!string) return string; // Check if the string is empty or null
-        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        return string
+          .split(' ') // Split the string by spaces
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize each word
+          .join(' '); // Join the words back together with a space
       }
 
-      const capitalResult = capitalizeFirstLetter(productBrand);
+      let capitalResult = capitalizeWords(productBrand);
+
+      if(capitalResult === "Rolex Certified Pre-owned"){
+        capitalResult = "Rolex Certified Pre-Owned"; // fuck this..lol
+      }
 
       if (location) {
         result = await UseFetchStores(capitalResult, '', '', '', location.lat, location.lng); 
@@ -169,10 +176,18 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
   const renderStores = (storesList) => {
     const displayedStores = storesList.slice(0, itemsToShow);
 
+    const sortedStoreList = [...displayedStores].sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+
     return (
       <>
         <ul className={styles.storeList}>
-        {displayedStores.map(store => (
+        {sortedStoreList.map(store => (
           <li className={styles.store} key={store.id} onClick={() => handleStoreDtetails(store)}>
             <div className={styles.storeImageContainer}>
               <img src={store.c_storeImage} alt={store.name} className={styles.storeImage} />
@@ -205,14 +220,30 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
   const renderMaps = (storesList) => {
     if (storesList.length === 0) return null;
 
+    const sortedLocationStores = [...locationStores].sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+
+    const sortedStoreList = [...storesList].sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+
     return (
       <>
         <div className={styles.mapContainer}>
         {nearestStore && userLocation && (
           <MapView 
             nearestStore={nearestStore} 
-            stores={stores} 
-            activeStore={locationStores[activeIndex]} 
+            stores={sortedStoreList} 
+            activeStore={sortedLocationStores[activeIndex]} 
             userLocation={userLocation} 
             useOnPopup={true}
           />
@@ -220,8 +251,8 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
         {!userLocation && (
           <MapView 
             nearestStore={null} 
-            stores={stores} 
-            activeStore={locationStores[activeIndex]} 
+            stores={sortedStoreList} 
+            activeStore={sortedLocationStores[activeIndex]} 
             userLocation={null} 
             useOnPopup={true}
           />
@@ -230,7 +261,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
         
         <div className={styles.storeMapListWrapper}>
           <StoreMapListContainer 
-            storesList={storesList} 
+            storesList={sortedStoreList} 
             activeIndex={activeIndex} 
             handleStoreClick={handleStoreClick} 
             isMobile={isMobile} 

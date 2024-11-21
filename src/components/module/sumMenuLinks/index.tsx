@@ -20,7 +20,7 @@ const SubMenuLinks = () => {
         return null;
       }
       return (
-        <div onClick={() => updateCurrent(null)}>
+        <div onClick={() => updateCurrent(null)} key={generateUniqueId()}>
           <NavigationLink
             className={styles.menuLink}
             key={generateUniqueId()}
@@ -41,7 +41,7 @@ const SubMenuLinks = () => {
     <div className={styles.menuLeft}>
       {currentHeaderData?.map((item) => {
         return (
-          <div className={styles.columnCategories}>
+          <div className={styles.columnCategories} key={generateUniqueId()}>
             <div className={styles.label}>{item?.content?.commonProps?.item_title}</div>
             {renderLinks(item?.children)}
           </div>
