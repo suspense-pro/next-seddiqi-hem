@@ -47,11 +47,9 @@ const NewsletterSignup: React.FC = () => {
       if (!response?.isError && response?.status === 200) {
         setStatusMessage("You have successfully subscribed to our newsletter");
         setIsError(false);
-      
-      } else if (!response?.isError && response?.status === 400){
+      } else if (!response?.isError && response?.status === 400) {
         setStatusMessage("You are already subscribed to our newsletter");
         setIsError(true);
-
       } else {
         setStatusMessage("Subscription failed, please try again");
         setIsError(true);
@@ -96,8 +94,8 @@ const NewsletterSignup: React.FC = () => {
             newsletter.
           </label> */}
           <label htmlFor="privacyPolicy">
-            I consent to receiving occasional marketing communications and events invitation from Ahmed Seddiqi & Sons, its
-            affiliates, and group companies via phone, email, SMS, or WhatsApp channels.
+            I consent to receive receiving occasional marketing communications and event invitations from Ahmed Seddiqi
+            & Sons, its affiliates, and group companies via phone, email, SMS, or WhatsApp channels.
           </label>
         </div>
         {statusMessage && (

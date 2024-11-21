@@ -94,3 +94,34 @@
     width: rem(252);
   }
 }
+
+
+// .doubleForm {
+//   display: grid;
+//   grid-template-columns: 1fr;
+//   gap: rem(40);
+
+//   @include md {
+//     grid-template-columns: 1fr 1fr;
+//   }
+// }
+
+
+.slidingSwitch {
+  display: flex;
+  align-items: center;
+  gap: rem(14);
+}
+.slidingSwitchReverse {
+  display: flex;
+  align-items: center;
+  gap: rem(14);
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+.switchLabel {
+  color: getColorHex("grey");
+  font-size: rem(10);
+  line-height: rem(14);
+  letter-spacing: rem(0.2);
+}

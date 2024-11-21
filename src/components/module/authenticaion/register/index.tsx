@@ -82,14 +82,14 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
         setFirstName(value);
         setErrors((prev) => ({ ...prev, firstName: validateFirstName(value) }));
         break;
-        case "lastName":
-          if (/\d/.test(value)) {
-            setErrors((prev) => ({ ...prev, lastName: "Last Name should not contain numbers." }));
-          } else {
-            setLastName(value);
-            setErrors((prev) => ({ ...prev, lastName: validateLastName(value) }));
-          }
-          break;
+      case "lastName":
+        if (/\d/.test(value)) {
+          setErrors((prev) => ({ ...prev, lastName: "Last Name should not contain numbers." }));
+        } else {
+          setLastName(value);
+          setErrors((prev) => ({ ...prev, lastName: validateLastName(value) }));
+        }
+        break;
       case "phone":
         if (/^\d*$/.test(value) && value.length <= 10) {
           setPhone(value);
@@ -159,7 +159,7 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
             }, 3000);
           }
         } else {
-            // validateEmail("")
+          // validateEmail("")
           // throw new Error("Registration failed. Please try again.");
         }
       } catch (error) {
@@ -337,7 +337,7 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
                 value={agreedToTerms}
               />
               <p className={styles.switchLabel}>
-                I have read and agree to Ahmed Seddiqi’ Terms of Service and Privacy Policy*
+                I agree to Ahmed Seddiqi & Sons Terms & Conditions and Privacy Policy.
               </p>
             </div>
             <div className={`${gridColumn === "1fr" && styles.slidingSwitchReverse} ${styles.slidingSwitch}`}>
@@ -347,9 +347,8 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
                 value={marketingOptIn}
               />
               <p className={styles.switchLabel}>
-                I would also like to receive marketing information about AS&S products or services. We may send you this
-                information using e-mail, text, telephone, post, social media or through online advertising. You can ask
-                us to stop marketing at any time.
+                I consent to receiving occasional marketing communications and events invitation from Ahmed Seddiqi &
+                Sons, its affiliates, and group companies via phone, email, SMS, or WhatsApp channels.
               </p>
             </div>
           </div>

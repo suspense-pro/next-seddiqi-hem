@@ -24,11 +24,13 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({ toggleMenu, men
             <MapIcon fill="#" />
           </div>
         </div>
-        <Image
-          className={styles.centerLogo}
-          image={headerData?.content?.logoSymbol?.image?.image}
-          imageAltText={"Seddiqi Logo"}
-        />
+        <Link href={"/"}>
+          <Image
+            className={styles.centerLogo}
+            image={headerData?.content?.logoSymbol?.image?.image}
+            imageAltText={"Seddiqi Logo"}
+          />
+        </Link>
         <div className={styles.rightIcons}>
           {/* <SearchIcon fill="#" /> */}
           <Link target="_blank" href="/contact-us">

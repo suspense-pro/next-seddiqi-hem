@@ -13,6 +13,7 @@ import { contactUs } from "@utils/sfcc-connector/dataService";
 import { useRouter } from "next/router";
 import { ContactUsFormErrors } from "@utils/models/errors";
 import { countryCodes } from "@utils/data/countryCodes";
+import SlidingRadioSwitch from "../slidingRadioSwitch";
 
 const ContactForm = () => {
   const router = useRouter();
@@ -39,6 +40,9 @@ const ContactForm = () => {
     description: "",
   });
 
+  const [agreedToTerms, setAgreedToTerms] = useState(true);
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -52,6 +56,8 @@ const ContactForm = () => {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
+        privacyPolicy: agreedToTerms,
+        emailMarketing: marketingOptIn,
       };
       const data = new FormData();
       Object.keys(userData).forEach((key) => {
@@ -61,7 +67,6 @@ const ContactForm = () => {
       if (attachment) {
         data?.append("attachment", attachment);
       }
-
       try {
         const response = await contactUs({
           method: "POST",
@@ -248,13 +253,28 @@ const ContactForm = () => {
           </div>
         </div>
       </div>
+
+      <div className={styles.doubleForm}>
+        <div className={`${styles.slidingSwitch}`}>
+          <SlidingRadioSwitch toggleLabel={""} onToggle={(value) => setAgreedToTerms(!value)} value={agreedToTerms} />
+          <p className={styles.switchLabel}>I agree to Ahmed Seddiqi & Sons Terms & Conditions and Privacy Policy.</p>
+        </div>
+        <div className={`${styles.slidingSwitch}`}>
+          <SlidingRadioSwitch toggleLabel={""} onToggle={(value) => setMarketingOptIn(!value)} value={marketingOptIn} />
+          <p className={styles.switchLabel}>
+            I consent to receiving occasional marketing communications and events invitation from Ahmed Seddiqi & Sons,
+            its affiliates, and group companies via phone, email, SMS, or WhatsApp channels.
+          </p>
+        </div>
+      </div>
+
       <div className={styles.btnContainer}>
         <Button
           clickHandler={(e) => handleSubmit(e)}
           className={styles.submitBtn}
           title={isLoading ? "Submitting" : "Submit"}
           isLink={false}
-          type="solid"
+          type="transparent"
           color="metallic"
           disabled={isLoading}
         />
