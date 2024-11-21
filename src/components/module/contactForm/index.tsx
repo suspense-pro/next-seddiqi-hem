@@ -67,7 +67,6 @@ const ContactForm = () => {
       if (attachment) {
         data?.append("attachment", attachment);
       }
-      console.log("contact data", data)
       try {
         const response = await contactUs({
           method: "POST",
@@ -75,7 +74,7 @@ const ContactForm = () => {
         });
 
         if (!response?.isError) {
-          // router.push("/contact-us/confirmation");
+          router.push("/contact-us/confirmation");
         } else {
           alert("Failed to send email");
         }
@@ -258,16 +257,13 @@ const ContactForm = () => {
       <div className={styles.doubleForm}>
         <div className={`${styles.slidingSwitch}`}>
           <SlidingRadioSwitch toggleLabel={""} onToggle={(value) => setAgreedToTerms(!value)} value={agreedToTerms} />
-          <p className={styles.switchLabel}>
-            I have read and agree to Ahmed Seddiqi’ Terms of Service and Privacy Policy*
-          </p>
+          <p className={styles.switchLabel}>I agree to Ahmed Seddiqi & Sons Terms & Conditions and Privacy Policy.</p>
         </div>
         <div className={`${styles.slidingSwitch}`}>
           <SlidingRadioSwitch toggleLabel={""} onToggle={(value) => setMarketingOptIn(!value)} value={marketingOptIn} />
           <p className={styles.switchLabel}>
-            I would also like to receive marketing information about AS&S products or services. We may send you this
-            information using e-mail, text, telephone, post, social media or through online advertising. You can ask us
-            to stop marketing at any time.
+            I consent to receiving occasional marketing communications and events invitation from Ahmed Seddiqi & Sons,
+            its affiliates, and group companies via phone, email, SMS, or WhatsApp channels.
           </p>
         </div>
       </div>
@@ -278,7 +274,7 @@ const ContactForm = () => {
           className={styles.submitBtn}
           title={isLoading ? "Submitting" : "Submit"}
           isLink={false}
-          type="solid"
+          type="transparent"
           color="metallic"
           disabled={isLoading}
         />
