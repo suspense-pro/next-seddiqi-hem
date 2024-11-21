@@ -97,6 +97,8 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) 
                     activeStore={store}
                     userLocation={userLocation}
                     useOnPopup={true}
+                    handleStoreClick={null}
+                    swiperRef = {null}
                 />
           </div>
         ) : (
