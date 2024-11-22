@@ -14,14 +14,12 @@ const StoryCard: React.FC<CardInfoProps> = ({ item, className }) => {
   const link = item?.link ? item?.link : "/";
 
   if (!image || !title || !subtitle) return null;
-  console.log("link", link);
   const headerContext = useContext(HeaderContext);
   const { setMenuOpen, updateCurrent } = headerContext;
 
   return (
     <Link
       onClick={(e) => {
-        e.stopPropagation();
         updateCurrent(null);
         setMenuOpen(false);
       }}

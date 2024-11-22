@@ -263,35 +263,26 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
 
                 <hr className={styles.divider} />
 
-                <div className={styles.serviceWrapper}>
-                  <div className={styles.iconSection}>
-                    <ServiceIcon className={styles.serviceIcon} />
-                  </div>
-                  <div className={styles.storeServiceInfo}>
-                    <ul className={styles.serviceList}>
-                      {matchedStore?.c_services &&
-                      matchedStore.c_services?.length > 0 ? (
-                        matchedStore.c_services.map((service, index) => (
-                          <li key={index}>{service}</li>
-                        ))
-                      ) : (
-                        <li>No services available</li>
-                      )}
-                    </ul>
-                  </div>
-                  <div className={styles.bookAppointment}>
-                    {/* <Button
-                      isLink={true}
-                      link={"/"}
-                      className={styles.appointmentBtn}
-                      title={"Book appointment"}
-                      color="brown_dark"
-                      type={"Plain"}
-                    /> */}
-                  </div>
-                </div>
-
-                <hr className={styles.divider} />
+                {matchedStore?.c_services && matchedStore.c_services.length > 0 ? (
+                      <>
+                        <div className={styles.serviceWrapper}>
+                          <div className={styles.iconSection}>
+                            <ServiceIcon className={styles.serviceIcon} />
+                          </div>
+                          <div className={styles.storeServiceInfo}>
+                            <ul className={styles.serviceList}>
+                              {matchedStore.c_services.map((service, index) => (
+                                <li key={index}>{service}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className={styles.bookAppointment}>
+                            {/* Button or other content here */}
+                          </div>
+                        </div>
+                        <hr className={styles.divider} />
+                      </>
+                    ) : null}
 
                 <div className={styles.storeBrandsInfo}>
                   <div className={styles.iconSection}>
@@ -646,36 +637,26 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
 
                   <hr className={styles.divider} />
 
-                  <div className={styles.serviceWrapper}>
-                    <div className={styles.iconSection}>
-                      <ServiceIcon className={styles.serviceIcon} />
-                    </div>
-                    <div className={styles.storeServiceInfo}>
-                      <ul className={styles.serviceList}>
-                        {matchedStore?.c_services &&
-                        matchedStore.c_services?.length > 0 ? (
-                          matchedStore.c_services.map((service, index) => (
-                            <li key={index}>{service}</li>
-                          ))
-                        ) : (
-                          <li>No services available</li>
-                        )}
-                      </ul>
-                    </div>
-                    <div className={styles.bookAppointment}>
-                      {/* <Button
-                        isLink={true}
-                        link={"/"}
-                        className={styles.appointmentBtn}
-                        title={"Book appointment"}
-                        color="brown_dark"
-                        type={"Plain"}
-                      /> */}
-                    </div>
-                  </div>
-
-                  <hr className={styles.divider} />
-
+                  {matchedStore?.c_services && matchedStore.c_services.length > 0 ? (
+                        <>
+                          <div className={styles.serviceWrapper}>
+                            <div className={styles.iconSection}>
+                              <ServiceIcon className={styles.serviceIcon} />
+                            </div>
+                            <div className={styles.storeServiceInfo}>
+                              <ul className={styles.serviceList}>
+                                {matchedStore.c_services.map((service, index) => (
+                                  <li key={index}>{service}</li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className={styles.bookAppointment}>
+                              {/* Button or other content here */}
+                            </div>
+                          </div>
+                          <hr className={styles.divider} />
+                        </>
+                      ) : null}
                   <div className={styles.storeBrandsInfo}>
                     <div className={styles.iconSection}>
                       <BrandsIcon className={styles.brandsIcon} />
