@@ -165,7 +165,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) 
 
       <hr className={styles.divider} />
 
-      {matchedStore?.c_services && matchedStore.c_services.length > 0 ? (
+      {store?.c_services && store.c_services.length > 0 ? (
                       <>
                         <div className={styles.serviceWrapper}>
                           <div className={styles.iconSection}>
@@ -173,7 +173,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) 
                           </div>
                           <div className={styles.storeServiceInfo}>
                             <ul className={styles.serviceList}>
-                              {matchedStore.c_services.map((service, index) => (
+                              {store.c_services.map((service, index) => (
                                 <li key={index}>{service}</li>
                               ))}
                             </ul>
