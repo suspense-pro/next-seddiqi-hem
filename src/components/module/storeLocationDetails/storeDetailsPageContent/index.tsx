@@ -366,10 +366,9 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                {!isMobile ? ( <Swiper
                     direction={"vertical"}
                     spaceBetween={0}
-                    slidesPerView={1}
-                    scrollbar={{ draggable: true }}
+                    slidesPerView={"auto"}
+                    scrollbar={{ dragSize: 160, draggable: true }}
                     mousewheel={true}
-                    freeMode={true}
                     className={styles.storeMapListSwiper}
                     ref={swiperRef}
                     onSlideChange={null}
