@@ -7,9 +7,12 @@ import { useContent } from "@contexts/withVisualizationContext";
 import { isEmpty, notNull } from "@utils/helpers";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { slug = [] } = context.params || {};
-  const blogKey = Array.isArray(slug) ? slug.join("/") : slug;
+  const { slug } = context.params || {};
   const { vse } = context.query || {};
+
+  const slugArray = Array.isArray(slug) ? slug : slug ? [slug] : [];
+  const normalizedSlug = slugArray[0] === "blog" ? slugArray?.slice(1) : slugArray;
+  const blogKey = normalizedSlug?.join("/");
 
   const data = await fetchStandardPageData(
     {
@@ -19,7 +22,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
     context
   );
-  
+
   if (isEmpty(data.content.page)) {
     return {
       redirect: {
@@ -35,7 +38,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   };
 }
-
 export default function BlogDetail({
   content,
   vse,

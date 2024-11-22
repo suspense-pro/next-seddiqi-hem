@@ -25,7 +25,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function PageNotFound({ ...content }) {
-  const contents = content.content.page.needMoreHelp;
+  const contents = content?.content?.page?.needMoreHelp;
 
   return (
     <>
@@ -43,7 +43,7 @@ export default function PageNotFound({ ...content }) {
       <br />
       We apologise for the inconvenience.
       </Typography>
-      <Button title="Go to homepage" type="solid" color="metallic" />
+      <Button title="Go to homepage" type="transparent" color="metallic" />
     </div>
 
    {contents && <NeedMoreHelp {...contents} />}

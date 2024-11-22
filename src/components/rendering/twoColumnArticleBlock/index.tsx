@@ -19,7 +19,7 @@ const TwoColumnArticleBlock = ({ contentLeft, contentRight }) => {
           />
         </GradientOverlay>
         <div className={styles.articleInfo}>
-          <div className={styles.label}>Article</div>
+          {/* <div className={styles.label}>Article</div> */}
           <Typography variant="h4" className={styles.headingPrimary}>
             {content?.heading}
           </Typography>
