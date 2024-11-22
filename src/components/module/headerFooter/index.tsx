@@ -14,17 +14,20 @@ const HeaderFooter = ({ className }: { className?: any }) => {
   const footerLinks = headerData?.content?.hygieneLinks;
 
   if (!footerLinks) return null;
-
+  const headerContext = useContext(HeaderContext);
+  const { updateCurrent } = headerContext;
   return (
     <div className={`${className} ${styles.container}`}>
       {footerLinks?.map((item) => (
-        <NavigationLink
-          hover={true}
-          className={styles.footerNavigation}
-          title={item.title}
-          key={item.title}
-          url={item.url}
-        />
+        <div onClick={() => updateCurrent(null)}>
+          <NavigationLink
+            hover={true}
+            className={styles.footerNavigation}
+            title={item.title}
+            key={item.title}
+            url={item.url}
+          />
+        </div>
       ))}
     </div>
   );

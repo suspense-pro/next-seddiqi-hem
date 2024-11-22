@@ -78,11 +78,11 @@ export const sendEmailWithAttachment = async (fields: any, file: any) => {
       </tr>
       <tr>
         <th>Email Marketing Opt-In</th>
-        <td>${getFieldValue(fields.emailMarketing)}</td>
+        <td>${getFieldValue(fields.emailMarketing) ? 'Yes' : 'No'}</td>
       </tr>
       <tr>
         <th>Privacy Policy</th>
-        <td>${getFieldValue(fields.privacyPolicy)}</td>
+        <td>${getFieldValue(fields.privacyPolicy) ? 'Yes' : 'No'}</td>
       </tr>
     </table>
   `;

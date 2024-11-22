@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./filterAccordian.module.scss";
 import { ArrowDown } from "@assets/images/svg";
 import Typography from "../typography";

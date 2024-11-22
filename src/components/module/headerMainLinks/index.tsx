@@ -39,9 +39,9 @@ const HeaderMainLinks = ({ isScrolled = false }: { isScrolled?: boolean }) => {
           {/* <Image src={"/images/png/RolexLogo.png"} width={91.57} height={42} alt="rolex logo" /> */}
           {/* <div></div> */}
         </Link>
-        <Link href={headerData?.content?.patekLogo}>
+        {/* <Link href={headerData?.content?.patekLogo}>
           <Image src={"/images/png/PatekLogo.png"} width={118} height={68} alt="patek logo" />
-        </Link>
+        </Link> */}
       </div>
       <div className={styles.links}>
         {headerMainLinks?.map((item, ind) => (

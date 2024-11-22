@@ -35,7 +35,7 @@ const MobileMenuLogobar = () => {
         <div className={styles.logos}>
           {menuOpen && (
             <>
-              <Link href={"/"}>
+              {/* <Link href={"/"}>
                 <Image
                   src={PATEK_LOGO}
                   width={118}
@@ -43,7 +43,7 @@ const MobileMenuLogobar = () => {
                   alt={leftLogo?.image?.altText || "Patek Philippe"}
                   className={styles.image}
                 />
-              </Link>
+              </Link> */}
               <Link href={headerData?.content?.rolexLogo}>
                 <div ref={rolexContainerRef} className={styles.rolexScriptContainer}></div>
               </Link>
