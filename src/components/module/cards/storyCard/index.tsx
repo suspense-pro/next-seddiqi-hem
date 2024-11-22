@@ -17,8 +17,6 @@ const StoryCard: React.FC<CardInfoProps> = ({ item, className }) => {
   const headerContext = useContext(HeaderContext);
   const { setMenuOpen, updateCurrent } = headerContext;
 
-  console.log("link", link)
-
   return (
     <Link
       onClick={(e) => {
