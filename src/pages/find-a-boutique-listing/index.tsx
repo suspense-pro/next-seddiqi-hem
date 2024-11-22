@@ -688,8 +688,6 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   };
   
   const handlePopupTabChange = (tab) => {
-    console.log("tab: ", popupActiveTab);
-
     if (tab !== popupActiveTab) {
       setFadeList(true);
     
