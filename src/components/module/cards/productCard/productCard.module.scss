@@ -68,14 +68,15 @@
     gap: rem(12);
     align-items: center;
     flex: auto;
+    margin-top: rem(12);
 
     [dir="rtl"] & { 
       align-items: flex-start;
     }
 
     
-    @include sm-max{
-      margin-top: rem(36);
+    @include md{
+      margin-top: rem(0);
     }
 
     .title,
@@ -89,13 +90,14 @@
 
     .type {
       font-size: rem(14);
-      line-height: rem(28);
+      line-height: rem(18);
       letter-spacing: rem(0.4);
       text-align: center;
       color: getColorHex("green-metallic");
       @include body_regular; 
       @include md{
         font-size: rem(16);
+        line-height: rem(28);
       }
     }
   }

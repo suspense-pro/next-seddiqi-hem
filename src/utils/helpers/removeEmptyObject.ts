@@ -28,9 +28,10 @@ export const filterObjectRemoveEmptyKey = (filters) => {
     let newObject = {};
     Object.keys(filters).forEach((key) => {
   
-      if (filters[key]) {
-        newObject[key] = filters[key];
+      if (filters[key] === null || filters[key].length === 0) {
+        delete filters[key];
       }
+      
     });
-    return newObject;
+    return filters;
 }
