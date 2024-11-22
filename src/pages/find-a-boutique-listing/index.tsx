@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./findABotiqueListing.module.scss";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
@@ -8,7 +8,7 @@ import NeedMoreHelp from "@components/rendering/needMoreHelp";
 import ContentBlock from "@components/module/contentBlock";
 import UseFetchStores from "@utils/useCustomHooks/useFetchStores";
 import MapView from "@components/module/mapView";
-import { useDeviceWidth } from "@utils/useCustomHooks";
+import { useDebounce, useDeviceWidth } from "@utils/useCustomHooks";
 import { CloseIcon, FilterIcon, LocationIcon, SearchIcon } from "@assets/images/svg";
 import StoreMapListContainer from "@components/module/storeMapListContainer";
 import LocationTabs from "@components/module/locationTabs";
@@ -63,6 +63,18 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [openAccordion, setOpenAccordion] = useState("brands"); // Default open accordion
   const [filterApplied, setFilterApplied] = useState(false);
   const [filteredStores, setFilteredStores] = useState([]);
+  const [brandsSearchQuery, setBrandsSearchQuery] = useState('');
+  const [filters, setFiltersState] = useState({});
+  const [searchQuery, setSearchQuery] = useState('');
+  const [popupActiveTab, setPopupActiveTab] = useState('All');
+  const debouncedQuery = useDebounce(brandsSearchQuery, 300); // Delay for debounce (e.g., 300ms)
+
+  const brandProcessedRef = useRef(false);
+  const swiperRef = useRef(null);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBrandsSearchQuery(e.target.value);
+  };
 
   const handleToggleAccordion = (accordion) => {
     setOpenAccordion(openAccordion === accordion ? null : accordion);
@@ -222,21 +234,24 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   };
 
   const handleTabChange = (tab) => {
-    setFadeList(true);
-    setTimeout(() => {
-      setActiveTab(tab);
-      setItemsToShow(8);
-      setFadeList(false);
-      setActiveIndex(0); //Set the active index to the first one on the list
 
-      const storesToCalculate = tab === 'All' ? stores : stores.filter(store => store.city === tab);
+    if (tab !== activeTab) {
+      setFadeList(true);
+      setTimeout(() => {
+        setActiveTab(tab);
+        setItemsToShow(8);
+        setFadeList(false);
+        setActiveIndex(0); //Set the active index to the first one on the list
 
-      //Used to pass the current tab stores to the map
-      setLocationStores(storesToCalculate);
+        const storesToCalculate = tab === 'All' ? stores : stores.filter(store => store.city === tab);
 
-      const nearest = calculateNearestStore(storesToCalculate);
-      setNearestStore(nearest);
-    }, 300);
+        //Used to pass the current tab stores to the map
+        setLocationStores(storesToCalculate);
+
+        const nearest = calculateNearestStore(storesToCalculate);
+        setNearestStore(nearest);
+      }, 300);
+    }
   };
 
   const handleToggleChange = (toggle) => {
@@ -288,26 +303,29 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     );
   };
 
-  const swiperRef = useRef(null);
 
   const renderMaps = (storesList) => {
+    const sortedLocationStores = useMemo(() => {
+      return [...locationStores].sort((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
+    }, [locationStores]);  // Dependency: locationStores
+  
+    const sortedStoreList = useMemo(() => {
+      return [...storesList].sort((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
+    }, [storesList]);  // Dependency: storesList
+  
     if (storesList.length === 0) return null;
-
-    const sortedLocationStores = [...locationStores].sort((a, b) => {
-      const nameA = a.name.toUpperCase();
-      const nameB = b.name.toUpperCase();
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
-      return 0;
-    });
-
-    const sortedStoreList = [...storesList].sort((a, b) => {
-      const nameA = a.name.toUpperCase();
-      const nameB = b.name.toUpperCase();
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
-      return 0;
-    });
 
     return (
       <>
@@ -353,11 +371,6 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     store.city.toLowerCase() === 'dubai' || store.city.toLowerCase() === 'abu dhabi'
   );
 
-  //Open Filters Popup
-  const [filters, setFiltersState] = useState({});
-  const [searchQuery, setSearchQuery] = useState('');
-  const [popupActiveTab, setPopupActiveTab] = useState('All');
-
   const popupTabs = [
     { label: 'All Boutiques', value: 'All' },
     { label: 'Dubai', value: 'Dubai' },
@@ -367,10 +380,6 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const openFilters = () => {
     showFiltersPopup(true);
   };
-
-  useEffect(() => {
-    setFiltersState({});
-  }, []);
 
   const calculateStoreCounts = (storesList) => {
     const combinedStores = storesList.filter(store => 
@@ -384,47 +393,13 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   };
   
   // Store counts state
-  const [storeCounts, setStoreCounts] = useState(calculateStoreCounts(stores));
+  const [storeCounts, setStoreCounts] = useState(stores.length); //useState(calculateStoreCounts(stores));
   
   // Update store counts whenever filters change
   useEffect(() => {
-    const filteredStores = getFilteredStores();
-    setStoreCounts(calculateStoreCounts(filteredStores));
+    setStoreCounts(calculateStoreCounts(getFilteredStores));
   }, [filters, activeTab, stores]);
 
-  /*const getFilteredStores = () => {
-    let filteredStores = stores;
-  
-    // Filter by city
-    if (activeTab !== 'All') {
-      filteredStores = filteredStores.filter(store => store.city === activeTab);
-    }
-  
-    // Filter by brands
-    if (filters['1'] && filters['1'].length > 0) {
-      filteredStores = filteredStores.filter(store =>
-        filters['1'].some(brand => store.c_availableBrands.includes(brand))
-      );
-    }
-  
-    // Filter by locations
-    if (filters['2'] && filters['2'].length > 0) {
-      filteredStores = filteredStores.filter(store =>
-        filters['2'].includes(store.address1)
-      );
-    }
-  
-    // Filter by services
-    if (filters['3'] && filters['3'].length > 0) {
-      filteredStores = filteredStores.filter(store =>
-        filters['3'].some(service => store.c_services.includes(service))
-      );
-    }
-  
-    return filteredStores;
-  };*/
-
-  const brandProcessedRef = useRef(false);
 
   useEffect(() => {
     const { brand } = router.query;
@@ -489,7 +464,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     }
   }, [router.query, brandCheckboxValues]);
   
-  const getFilteredStores = () => {
+  const getFilteredStores = useMemo(() => {
     let filteredStores = stores;
   
     // Apply city filter (using activeTab)
@@ -526,21 +501,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       );
     }
   
-    // Sort stores alphabetically by name (or any other property)
-    // filteredStores = filteredStores.sort((a, b) => {
-    //   const nameA = a.name.toUpperCase(); // Ignore case for alphabetical comparison
-    //   const nameB = b.name.toUpperCase();
-    //   if (nameA < nameB) {
-    //     return -1; // a comes before b
-    //   }
-    //   if (nameA > nameB) {
-    //     return 1; // b comes before a
-    //   }
-    //   return 0; // names are equal
-    // });
-  
     return filteredStores;
-  };
+  }, [stores, activeTab, filters]);
 
   const handleOptionChange = (filterKey, option) => {
     setFiltersState(prevFilters => {
@@ -562,7 +524,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   };
   
   const updateDependentFilters = (filterKey, selectedOptions) => {
-    const filteredStores = getFilteredStores();
+    const filteredStores = getFilteredStores;
     const filteredBrands = [...new Set(filteredStores.flatMap(store => store.c_availableBrands))].sort();
     const filteredLocations = [...new Set(filteredStores.map(store => store.name))].sort();
     const filteredServices = [...new Set(filteredStores.flatMap(store => store.c_services))]
@@ -586,9 +548,9 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   };
 
   
-  useEffect(() => {
+  /*useEffect(() => {
     // Whenever `stores`, `activeTab`, or `filters` change, re-filter the stores
-    let filteredStores = getFilteredStores();
+    let filteredStores = getFilteredStores;
   
     // Apply city filter (based on activeTab)
     if (popupActiveTab !== 'All') {
@@ -632,7 +594,63 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     setFilteredStores(filteredStores);
     
   
-  }, [stores, activeTab, filters]);
+  }, [stores, activeTab, filters]);*/
+
+  const updateFilters = (filteredStores) => {
+    // Filter locations based on selected stores
+    const filteredAddresses = filteredStores.map(store => store.name);
+    const uniqueAddresses = [...new Set(filteredAddresses)].sort();  // Ensure unique values and sort alphabetically
+    setLocationCheckboxValues(uniqueAddresses);
+  
+    // Filter and sort Brands, excluding "Unknown" or other invalid brands
+    const uniqueBrands = [...new Set(filteredStores.flatMap(store => store.c_availableBrands))]
+      .filter((brand) => typeof brand === 'string' && brand.toLowerCase() !== "unknown")  // Exclude "Unknown" brands
+      .sort();
+    setBrandCheckboxValues(uniqueBrands);
+  
+    // Filter and sort Services: Exclude "Unknown" services during initial collection
+    const uniqueServices = [...new Set(filteredStores.flatMap(store => store.c_services))]
+      .map(service => typeof service === 'string' ? service.trim() : '')  // Ensure all services are strings and trim whitespace
+      .filter(service => service && service.toLowerCase() !== "unknown")  // Exclude "Unknown" services
+      .sort();
+    setServiceCheckboxValues(uniqueServices);
+  };
+
+  const filteredStoresMemo = useMemo(() => {
+    let filteredStores = getFilteredStores;
+    
+    // Apply city filter (based on activeTab)
+    if (popupActiveTab !== 'All') {
+      filteredStores = filteredStores.filter(store => store.city === popupActiveTab);
+    } else {
+      filteredStores = filteredStores.filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi');
+    }
+  
+    // Apply brand, location, or service filters
+    if (filters['1'] && filters['1'].length > 0) {
+      filteredStores = filteredStores.filter(store =>
+        filters['1'].some(brand => store.c_availableBrands?.includes(brand))
+      );
+      updateDependentFilters('1', filters['1']);
+    }
+  
+    if (filters['2'] && filters['2'].length > 0) {
+      filteredStores = filteredStores.filter(store => filters['2'].includes(store.name));
+      updateDependentFilters('2', filters['2']);
+    }
+  
+    if (filters['3'] && filters['3'].length > 0) {
+      filteredStores = filteredStores.filter(store =>
+        filters['3'].some(service => store.c_services?.includes(service))
+      );
+      updateDependentFilters('3', filters['3']);
+    }
+  
+    // Update the dependent filters (like locations, brands, services)
+    updateFilters(filteredStores);
+    
+    return filteredStores;
+  }, [getFilteredStores, popupActiveTab, filters]);
   
   
 
@@ -670,59 +688,43 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   };
   
   const handlePopupTabChange = (tab) => {
-    setFadeList(true);
-  
-    setTimeout(() => {
-      setPopupActiveTab(tab);
+    console.log("tab: ", popupActiveTab);
 
-      let filteredStores = getFilteredStores();
-      
-      // Step 1: Filter stores based on the selected location tab
-      filteredStores = tab === 'All' 
-          ? filteredStores.filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi') 
-          : filteredStores.filter(store => store.city === tab);
-      
-      // Step 2: Apply the brand filter if selected
-      if (filters['1'] && filters['1'].length > 0) {
-        filteredStores = filteredStores.filter(store =>
-          filters['1'].some(brand => store.c_availableBrands?.includes(brand))
-        );
-      }
-  
-      // Step 3: Filter and set the location, brand, and services based on the filtered stores
-      const filteredAddresses = [...new Set(filteredStores.map(store => store.name))];
-      const filteredBrands = [...new Set(filteredStores.flatMap(store => store.c_availableBrands))];
-      const filteredServices = [...new Set(filteredStores.flatMap(store => store.c_services))];
-  
-      setLocationCheckboxValues(filteredAddresses);
-      setBrandCheckboxValues(filteredBrands);
-      setServiceCheckboxValues(filteredServices);
-  
-      // Step 4: Update the dependent filters (like locations, brands, services)
-      updateFilters(filteredStores);
-  
-      setFadeList(false);
-    }, 300);
-  };
+    if (tab !== popupActiveTab) {
+      setFadeList(true);
+    
+      setTimeout(() => {
+        setPopupActiveTab(tab);
 
-  const updateFilters = (filteredStores) => {
-    // Filter locations based on selected stores
-    const filteredAddresses = filteredStores.map(store => store.name);
-    const uniqueAddresses = [...new Set(filteredAddresses)].sort();  // Ensure unique values and sort alphabetically
-    setLocationCheckboxValues(uniqueAddresses);
-  
-    // Filter and sort Brands, excluding "Unknown" or other invalid brands
-    const uniqueBrands = [...new Set(filteredStores.flatMap(store => store.c_availableBrands))]
-      .filter((brand) => typeof brand === 'string' && brand.toLowerCase() !== "unknown")  // Exclude "Unknown" brands
-      .sort();
-    setBrandCheckboxValues(uniqueBrands);
-  
-    // Filter and sort Services: Exclude "Unknown" services during initial collection
-    const uniqueServices = [...new Set(filteredStores.flatMap(store => store.c_services))]
-      .map(service => typeof service === 'string' ? service.trim() : '')  // Ensure all services are strings and trim whitespace
-      .filter(service => service && service.toLowerCase() !== "unknown")  // Exclude "Unknown" services
-      .sort();
-    setServiceCheckboxValues(uniqueServices);
+        let filteredStores = getFilteredStores;
+        
+        // Step 1: Filter stores based on the selected location tab
+        filteredStores = tab === 'All' 
+            ? filteredStores.filter(store => store.city === 'Dubai' || store.city === 'Abu Dhabi') 
+            : filteredStores.filter(store => store.city === tab);
+        
+        // Step 2: Apply the brand filter if selected
+        if (filters['1'] && filters['1'].length > 0) {
+          filteredStores = filteredStores.filter(store =>
+            filters['1'].some(brand => store.c_availableBrands?.includes(brand))
+          );
+        }
+    
+        // Step 3: Filter and set the location, brand, and services based on the filtered stores
+        const filteredAddresses = [...new Set(filteredStores.map(store => store.name))];
+        const filteredBrands = [...new Set(filteredStores.flatMap(store => store.c_availableBrands))];
+        const filteredServices = [...new Set(filteredStores.flatMap(store => store.c_services))];
+    
+        setLocationCheckboxValues(filteredAddresses);
+        setBrandCheckboxValues(filteredBrands);
+        setServiceCheckboxValues(filteredServices);
+    
+        // Step 4: Update the dependent filters (like locations, brands, services)
+        updateFilters(filteredStores);
+    
+        setFadeList(false);
+      }, 300);
+    }
   };
 
   const handleClearCheckboxes = (filterKey) => {
@@ -737,10 +739,6 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       return acc + (Array.isArray(curr) ? curr.length : 0);
     }, 0)
   : 0;
-
-  const [brandsSearchQuery, setBrandsSearchQuery] = useState('');
-  const [locationsSearchQuery, setLocationsSearchQuery] = useState('');
-  const [servicesSearchQuery, setServicesSearchQuery] = useState('');
 
   return (
     <>
@@ -805,8 +803,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
 
         <div className={`${styles.storeListContainer} ${fadeList ? styles.fadeOut : styles.fadeIn}`}>
           {activeToggle ? 
-            renderStores(getFilteredStores()) : 
-            renderMaps(getFilteredStores())
+            renderStores(getFilteredStores) : 
+            renderMaps(getFilteredStores)
           }
         </div>
       </div>
@@ -872,7 +870,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
                         type="text" 
                         placeholder="Search for brands" 
                         value={brandsSearchQuery} 
-                        onChange={(e) => setBrandsSearchQuery(e.target.value)} 
+                        onChange={handleSearchChange} 
                         className={styles.searchInput}
                       />
                     </div>
@@ -906,7 +904,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
                       tabs={popupTabs} 
                     />
 
-                    <div className={`${styles.locationCheckboxContainer} ${fadeList ? styles.fadeOut : styles.fadeIn}`}>
+                    <div className={`${styles.locationCheckboxContainer} ${fadeList ? styles.popupFadeOut : styles.popupFadeIn}`}>
                       {filterItem.values && locationCheckboxValues.length > 0 ? (
                         <CheckboxFilter
                           title={filterItem.label}
