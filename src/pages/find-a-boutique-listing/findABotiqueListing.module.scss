@@ -380,6 +380,16 @@
   transition: opacity 0.3s ease-out;
 }
 
+.popupFadeIn {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+.popupFadeOut {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
 .searchInputContainer{
   display: flex;
   align-items: center;

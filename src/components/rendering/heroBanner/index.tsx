@@ -7,6 +7,7 @@ import CarouselBtns from "@components/module/carouselBtns";
 import Typography from "../../module/typography";
 import RichText from "../../module/richText";
 import { GradientOverlay } from "@components/module";
+import Link from "next/link";
 
 interface HeroBannerProps {
   banners: any[];
@@ -99,10 +100,12 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
                 activeBanner.cta.map((_cta: any) => (
                   _cta.label && _cta.label.length > 0 && 
                     <div className={styles.ctaButton}>
-                    <Button
-                      title={_cta?.label}
-                      type={`${_cta?.type?.toLowerCase()} ${_cta.color?.toLowerCase()}`}
-                    />
+                      <Link href={`${_cta?.url}`}>
+                      <Button
+                        title={_cta?.label}
+                        type={`${_cta?.type?.toLowerCase()} ${_cta.color?.toLowerCase()}`}
+                        />
+                      </Link>
                   </div>
                   
               
