@@ -71,8 +71,8 @@ const ExploreBrand: React.FC<ExploreBrandProps> = ({ cta, exploreBrandItems, pri
             <div key={index} className={styles.logoItem}>
               <div className={styles.logoContainer}>
                 <Image
-                  image={item.logoIcon.image.image}
-                  imageAltText={item.logoIcon.image.altText || `Brand Logo ${index + 1}`}
+                  image={item?.logoIcon?.image?.image}
+                  imageAltText={item?.logoIcon?.image?.altText || `Brand Logo ${index + 1}`}
                 />
               </div>
             </div>
