@@ -75,9 +75,9 @@ const FilterBar = ({
         : [...prevSelectedOptions, option];
 
       const updatedData = { ...prevFilters, [filterKey]: newSelectedOptions };
-      const queryString = new URLSearchParams(updatedData).toString();
+      //const queryString = new URLSearchParams(updatedData).toString();
 
-      replace(`${pathname}?${queryString}`);
+      //replace(`${pathname}?${queryString}`);
 
       onFilterChange(updatedData);
       return updatedData;
@@ -103,17 +103,17 @@ const FilterBar = ({
       );
 
       const updatedData = { ...prevFilters, [filterKey]: newSelectedOptions };
-      const queryString = new URLSearchParams(updatedData).toString();
+      //const queryString = new URLSearchParams(updatedData).toString();
 
-      replace(`${pathname}?${queryString}`);
+      //replace(`${pathname}?${queryString}`);
       onFilterChange(updatedData);
       return updatedData;
     });
   };
 
   const handleClearAll = () => {
-    replace(pathname);
-    setFiltersState(null);
+    //replace(pathname);
+    setFiltersState({});
     resetProducts();
     setDrawerOpen(false);
   };
@@ -128,9 +128,9 @@ const FilterBar = ({
       setFiltersState((prevFilters) => {
         const updatedData = { ...prevFilters, [filterKey]: null };
 
-        const queryString = new URLSearchParams(filterObjectRemoveEmptyKey(updatedData)).toString();
+        //const queryString = new URLSearchParams(filterObjectRemoveEmptyKey(updatedData)).toString();
 
-        replace(`${pathname}?${queryString}`);
+        //replace(`${pathname}?${queryString}`);
         onFilterChange(updatedData);
         return updatedData;
       });
@@ -187,7 +187,7 @@ const FilterBar = ({
         className={""}
         button2Color={"metallic"}
       >
-        {Object.keys(filters).length > 0 && (
+        {Object && Object.keys(filters) && Object.keys(filters).length > 0 && (
           <div className={styles.selectedOptions}>
             {Object.keys(filters).map((filterKey) =>
               Array.isArray(filters[filterKey])
