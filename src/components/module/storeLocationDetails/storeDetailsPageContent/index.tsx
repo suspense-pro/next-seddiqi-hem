@@ -366,7 +366,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                {!isMobile ? ( <Swiper
                     direction={"vertical"}
                     spaceBetween={0}
-                    slidesPerView={1}
+                    slidesPerView={"auto"}
                     scrollbar={{ draggable: true }}
                     mousewheel={true}
                     freeMode={true}
@@ -374,6 +374,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     ref={swiperRef}
                     onSlideChange={null}
                     modules={[ Scrollbar, Mousewheel]}
+                    autoHeight={true}
                   >
 
                   <SwiperSlide>
@@ -406,8 +407,8 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     </span>
                   </div>
                   <hr className={styles.divider} />
-                  {/* </SwiperSlide>
-                  <SwiperSlide> */}
+                  </SwiperSlide>
+                  <SwiperSlide>
 
                   <div className={styles.storeContactWrapper}>
                     <div className={styles.leftSection}>
