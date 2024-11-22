@@ -437,7 +437,7 @@
 
 .infoOverlay {
   position: absolute;
-  width: rem(500);
+  width: rem(580);
   height: rem(650);
   left: rem(40);
   top: 50%;
@@ -445,8 +445,27 @@
   padding: rem(20);
   background: getColorHex("white");
   z-index: 10;
-  overflow: auto;
+  // overflow: auto;
   border-radius: rem(16) 0 rem(16) 0;
+
+  .storeMapListSwiper{
+  
+    & > div:last-of-type{
+      right: rem(20);
+      background: none;
+      width: rem(6);
+      
+      [dir="rtl"] & {
+        right: auto;
+        left: rem(20);
+      }
+
+      & > div{
+        background: getColorHex("dark-brown");;
+      }
+    }
+  }
+  
 }
 
 .mapOuterContainer {
@@ -501,8 +520,16 @@
       margin-top: rem(180);
       left: rem(0) !important;
       border-radius: rem(0) 0 rem(0) 0;
-      overflow: auto;
+      // overflow: auto;
     }
   }
 }
 }
+
+.storeMapListSwiper{
+  position: relative;
+  // top:rem(0);
+  overflow: auto;
+  border-radius: rem(16);
+}
+
