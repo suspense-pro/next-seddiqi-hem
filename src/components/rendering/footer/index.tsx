@@ -47,7 +47,9 @@ export default function Footer({ footerData }: FooterPropType) {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.column} style={{ gridArea: "logo" }}>
-          <Image src={logoUrl} alt={logoAltText} width={195} height={36} className={styles.logo} />
+          <Link href={"/"}>
+            <Image src={logoUrl} alt={logoAltText} width={195} height={36} className={styles.logo} />
+          </Link>
 
           {isDesktop && (
             <>

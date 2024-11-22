@@ -35,8 +35,6 @@ const BookAnAppointment = ({ content, exclusiveInfoCards = null }) => {
     }
   };
 
-  console.log("exclusiveInfoCards?.content?.page", exclusiveInfoCards?.content?.page);
-
   const infoCards = exclusiveInfoCards?.content?.page;
 
   return (

@@ -262,7 +262,7 @@ const ContactForm = () => {
         <div className={`${styles.slidingSwitch}`}>
           <SlidingRadioSwitch toggleLabel={""} onToggle={(value) => setMarketingOptIn(!value)} value={marketingOptIn} />
           <p className={styles.switchLabel}>
-            I consent to receiving occasional marketing communications and events invitation from Ahmed Seddiqi & Sons,
+            I consent to receiving occasional marketing communications and event invitations from Ahmed Seddiqi & Sons,
             its affiliates, and group companies via phone, email, SMS, or WhatsApp channels.
           </p>
         </div>

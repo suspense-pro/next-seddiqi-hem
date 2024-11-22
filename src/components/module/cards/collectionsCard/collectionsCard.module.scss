@@ -64,11 +64,17 @@
 .productItem {
   height: rem(448);
   border: rem(1) solid getColorHex("grey-light-4", 0.4);
+  // border:rem(4) solid red;
   border-left: none;
   border-bottom: none;
+  
+  &:nth-child(n+4) {
+    border-top: none;
+  }
 
-
+  
   @include md {
+    border-bottom: rem(1) solid getColorHex("grey-light-4", 0.4);
     height: rem(562);
   }
 }
