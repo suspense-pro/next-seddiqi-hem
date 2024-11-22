@@ -165,7 +165,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
           value ={activeToggle}
         /> */}
       </div>
-
+      <div className={styles.contentOuterWrapper}>
       <div className={styles.contentWrapper}>
         <div className={styles.storeImageWrapper}>
           {!activeToggle ? (
@@ -368,6 +368,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                   >
 
                   <SwiperSlide>
+                  <div className={styles.infoWrapper}>
                   <div className={styles.content}>
                     <Typography variant="h3" className={styles.title}>
                       {matchedStore?.name}
@@ -397,8 +398,6 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     </span>
                   </div>
                   <hr className={styles.divider} />
-                  </SwiperSlide>
-                  <SwiperSlide>
 
                   <div className={styles.storeContactWrapper}>
                     <div className={styles.leftSection}>
@@ -539,6 +538,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                       ))}
                   </div>
                   <hr className={styles.divider} />
+                  </div>
                   </SwiperSlide>
 
                   </Swiper>) :
@@ -704,6 +704,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
             </div>
           )}
         </div>
+      </div>
       </div>
       {
         <BrandPopup
