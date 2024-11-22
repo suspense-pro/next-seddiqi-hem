@@ -168,7 +168,7 @@ const PlpContent = ({ productGridContent, products }) => {
     setFiltersState(null);
     setCurrentIndex(24);
     setIsAllLoaded(false);
-    setIsButtonDisabled(getProducts?.total <= 24 || isAllLoaded);
+    setIsButtonDisabled(products?.productResults.total <= 24);
     setIsLoading(false);
   };
 
