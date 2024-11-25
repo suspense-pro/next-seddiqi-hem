@@ -48,6 +48,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   const [stores, setStores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userLocation, setUserLocation] = useState(null);
+  const [locationFetched, setLocationFetched] = useState(false);
   const [nearestStore, setNearestStore] = useState(null);
   const [locationStores, setLocationStores] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -173,6 +174,42 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   };
 
   useEffect(() => {
+    // This function gets the user's geolocation
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const location = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            setUserLocation(location);
+            fetchStores(location);
+          },
+          (error) => {
+            console.error("Error getting location:", error);
+            setUserLocation(null);
+            fetchStores(null);
+          },
+          {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 5000,
+          }
+        )
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+        setLocationFetched(true); // Mark location fetching as complete for unsupported browsers
+      }
+    };
+
+    // Fetch the user's location once on initial mount
+    if (!locationFetched) {
+      getLocation();
+    }
+  }, [locationFetched]);
+
+  /*useEffect(() => {
     if (navigator.geolocation) {
       const watchId = navigator.geolocation.watchPosition(
         (position) => {
@@ -202,7 +239,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
       console.error("Geolocation is not supported by this browser.");
       fetchStores(null);
     }
-  }, []);
+  }, []);*/
 
   useEffect(() => {
     if (stores.length > 0 && userLocation) {
