@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styles from './slidingRadioSwitch.module.scss'; 
+import React, { useState } from "react";
+import styles from "./slidingRadioSwitch.module.scss";
 
-const SlidingRadioSwitch = ({ toggleLabel, onToggle, value=false }) => {
+const SlidingRadioSwitch = ({ toggleLabel, onToggle, value = false, noToggle = false }) => {
   const [checkedValue, setCheckedValued] = useState<boolean>(value);
 
   return (
@@ -12,7 +12,12 @@ const SlidingRadioSwitch = ({ toggleLabel, onToggle, value=false }) => {
         <input
           type="checkbox"
           name="toggle"
-          onChange={() => {onToggle(checkedValue); setCheckedValued(prevIndex => (prevIndex === false ? true : false))}}
+          onChange={() => {
+            if (!noToggle) {
+              onToggle(checkedValue);
+              setCheckedValued((prevIndex) => (prevIndex === false ? true : false));
+            }
+          }}
           className={styles.switchInput}
           checked={checkedValue}
         />
