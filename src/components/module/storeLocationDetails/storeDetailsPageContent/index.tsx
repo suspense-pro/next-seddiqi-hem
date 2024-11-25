@@ -216,7 +216,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                   <span className={styles.contactWrapper}>
                      <Button
                         isLink={true}
-                        link={`tel:${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        link={`tel:${matchedStore?.phone?.replace(/\s+/g, '')}`}
                         title={"Call"}
                         color={"brown_dark"}
                         type={"Plain"}
@@ -225,7 +225,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     <div className={styles.vDivider}>&nbsp;</div>
                     <Button
                         isLink={true}
-                        link={`https://wa.me/${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        link={`https://wa.me/${matchedStore?.fax?.replace(/\s+/g, '')}`}
                         className={styles.whatsappBtn}
                         title={"WhatsApp"}
                         color="brown_dark"
@@ -413,7 +413,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     <span className={styles.contactWrapper}>
                     <Button
                         isLink={true}
-                        link={`tel:${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        link={`tel:${matchedStore?.phone?.replace(/\s+/g, '')}`}
                         title={"Call"}
                         color={"brown_dark"}
                         type={"Plain"}
@@ -422,7 +422,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                       <div className={styles.vDivider}>&nbsp;</div>
                       <Button
                         isLink={true}
-                        link={`https://wa.me/${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        link={`https://wa.me/${matchedStore?.fax?.replace(/\s+/g, '')}`}
                         className={styles.whatsappBtn}
                         title={"WhatsApp"}
                         color="brown_dark"
@@ -575,7 +575,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     <span className={styles.contactWrapper}>
                     <Button
                         isLink={true}
-                        link={`tel:${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        link={`tel:${matchedStore?.phone?.replace(/\s+/g, '')}`}
                         title={"Call"}
                         color={"brown_dark"}
                         type={"Plain"}
@@ -584,7 +584,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                       <div className={styles.vDivider}>&nbsp;</div>
                       <Button
                         isLink={true}
-                        link={`https://wa.me/${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        link={`https://wa.me/${matchedStore?.fax?.replace(/\s+/g, '')}`}
                         className={styles.whatsappBtn}
                         title={"WhatsApp"}
                         color="brown_dark"

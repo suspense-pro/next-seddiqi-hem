@@ -124,7 +124,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) 
         <span className={styles.contactWrapper}>
         <Button
           isLink={true}
-          link={`tel:${store?.phone.replace(/\s+/g, '')}`}
+          link={`tel:${store?.phone?.replace(/\s+/g, '')}`}
           title={"Call"}
           color={"brown_dark"}
           type={"Plain"}
@@ -133,7 +133,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) 
         <div className={styles.vDivider}>&nbsp;</div>
         <Button
           isLink={true}
-          link={`https://wa.me/${store?.phone.replace(/\s+/g, '')}`}
+          link={`https://wa.me/${store?.fax?.replace(/\s+/g, '')}`}
           className={styles.whatsappBtn}
           title={"WhatsApp"}
           color="brown_dark"
