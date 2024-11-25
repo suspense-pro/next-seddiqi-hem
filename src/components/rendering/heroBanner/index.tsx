@@ -102,8 +102,11 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
                     <div className={styles.ctaButton}>
                       <Link href={`${_cta?.url}`}>
                       <Button
+                        isLink={true}
+                        link={_cta?.url}
                         title={_cta?.label}
                         type={`${_cta?.type?.toLowerCase()} ${_cta.color?.toLowerCase()}`}
+                        new_tab={_cta?.isNewTab}
                         />
                       </Link>
                   </div>
