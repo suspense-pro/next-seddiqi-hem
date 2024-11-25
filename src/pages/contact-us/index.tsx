@@ -23,7 +23,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function ContactUs({ ...content }) {
-  console.log("DATA", content);
   return (
     <div>
       <ContactForm />

@@ -63,11 +63,11 @@ const HeaderMainLinks = ({ isScrolled = false }: { isScrolled?: boolean }) => {
         {/* <Link target="_blank" href="/book-an-appointment">
           <CalendarIcon fill="#" />
         </Link> */}
-        <Link target="_blank" href="/contact-us">
+        <Link href="/contact-us">
           {/* <CalendarIcon fill="#" /> */}
           <PhoneIconNoBorder className={styles.phoneIcon} fill="#" />
         </Link>
-        <Link target="_blank" href="/find-a-boutique-listing">
+        <Link href="/find-a-boutique-listing">
           {/* <CalendarIcon fill="#" /> */}
           <MapIcon fill="#" />
         </Link>
