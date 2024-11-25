@@ -100,8 +100,8 @@ export const validateLastName = (lastName: string): string => {
 export const validatePhone = (phone: string): string => {
   if (!phone) {
     return "Phone number is required.";
-  } else if (!/^\d{10}$/.test(phone)) {
-    return "Phone number must be 10 digits.";
+  } else if (!/^\d{9,10}$/.test(phone)) {
+    return "Phone number must be 9 or 10 digits.";
   }
   return "";
 };
