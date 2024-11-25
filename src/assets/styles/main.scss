@@ -188,3 +188,10 @@
   // }
   padding-top: rem(82);
 }
+
+//Please remove the CSS below once services are finalized.
+.seddiqi-theme{
+  div[class^="findABotiqueListing_storeLocatorContainer"] ~ div[class^="sideDrawer_drawerWrapper"] div[class^="filterAccordian_accordionItem"]:last-child {
+    visibility: hidden;
+  }
+}
