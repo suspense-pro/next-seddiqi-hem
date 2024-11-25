@@ -256,7 +256,12 @@ const ContactForm = () => {
 
       <div className={styles.doubleForm}>
         <div className={`${styles.slidingSwitch}`}>
-          <SlidingRadioSwitch toggleLabel={""} onToggle={(value) => setAgreedToTerms(true)} value={agreedToTerms} />
+          <SlidingRadioSwitch
+            noToggle={true}
+            toggleLabel={""}
+            onToggle={(value) => setAgreedToTerms(true)}
+            value={agreedToTerms}
+          />
           <p className={styles.switchLabel}>I agree to Ahmed Seddiqi & Sons Terms & Conditions and Privacy Policy.</p>
         </div>
         <div className={`${styles.slidingSwitch}`}>

@@ -334,7 +334,8 @@ const Register = ({ gridColumn = "1fr 1fr" }) => {
               <SlidingRadioSwitch
                 toggleLabel={""}
                 onToggle={(value) => setAgreedToTerms(!value)}
-                value={agreedToTerms}
+                value={true}
+                noToggle={true}
               />
               <p className={styles.switchLabel}>
                 I agree to Ahmed Seddiqi & Sons Terms & Conditions and Privacy Policy.
