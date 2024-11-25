@@ -51,9 +51,9 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
 
   return (
     <div className={styles.container}>
-      {showZoom && (
+      {/* {showZoom && (
         <ProductImageFullScreen setShowZoom={setShowZoom} listitems={displayImages} thumbnails={true} />
-      )}
+      )} */}
       {(showLeftArrow || showRightArrow) && (
         <>
           {showLeftArrow && (
@@ -104,7 +104,7 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
                   <div className={styles.label}>{item?.mainTitle}</div>
                   <div className={styles.desc}>{item?.titleDescription}</div>
                 </div>
-                <div
+                {/* <div
                   onClick={() => {
                     setShowZoom(true);
                     setCurrentImage(item);
@@ -112,7 +112,7 @@ const ImageGalleryCarousel = ({ galleryItems, ...content }) => {
                   className={styles.iconBg}
                 >
                   <PlusIcon />
-                </div>
+                </div> */}
               </div>
             </div>
           </SwiperSlide>
