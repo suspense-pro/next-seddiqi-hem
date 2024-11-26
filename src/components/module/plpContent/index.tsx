@@ -175,7 +175,7 @@ const PlpContent = ({ productGridContent, products }) => {
   const fetchFilteredProducts = async (selectedFilters) => {
     setIsLoading(true);
 
-    console.log({ selectedFilters });
+    // console.log({ selectedFilters });
 
     let updatedselectedFilters = filterObjectRemoveEmptyKey(selectedFilters);
     //console.log("updated filter:", updatedselectedFilters);
