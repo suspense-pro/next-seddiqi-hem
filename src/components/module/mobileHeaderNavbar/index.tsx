@@ -33,10 +33,10 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({ toggleMenu, men
         </Link>
         <div className={styles.rightIcons}>
           {/* <SearchIcon fill="#" /> */}
-          <Link target="_blank" href="/contact-us">
+          <Link href="/contact-us">
             <PhoneIconNoBorder className={styles.phoneIcon} fill="#" />
           </Link>
-          <Link target="_blank" href="/find-a-boutique-listing">
+          <Link href="/find-a-boutique-listing">
             <MapIcon fill="#" />
           </Link>
         </div>

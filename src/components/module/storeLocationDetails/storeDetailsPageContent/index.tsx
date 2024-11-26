@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./storeDetailsPageContent.module.scss";
 import Typography from "../../typography";
 import RichText from "../../richText";
@@ -18,10 +18,17 @@ import { ArrowRight } from "@assets/images/svg";
 import { useDeviceWidth } from "@utils/useCustomHooks";
 import BrandPopup from "@components/module/storeLocationDetails/brandPopUp";
 import { useRouter } from "next/router";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Scrollbar, Mousewheel } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/scrollbar";
 
 const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn }) => {
   const router = useRouter();
   const { mapView } = router.query; 
+  const swiperRef = useRef(null);
   const [matchedStore, setMatchedStore] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [stores, setStores] = useState([]);
@@ -72,9 +79,32 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
     fetchStoresData();
   }, [store]);
 
+  
+  // useEffect(() => {
+  //   const updateSwiper = () => {
+  //     if (swiperRef.current && swiperRef.current.swiper) {
+  //       swiperRef.current.swiper.update();
+  //     }
+  //   };
+
+  //   updateSwiper();
+
+  //   const handleResize = () => {
+  //     updateSwiper();
+  //   };
+
+  //   window.addEventListener("resize", handleResize);
+
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, [matchedStore]);
+
   if (!matchedStore) {
     return null;
   }
+
+  
 
   // Store data from matchedStore
   const storeImage = matchedStore?.c_storeImage;
@@ -94,6 +124,22 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
   };
 
   const brandsToDisplay = matchedStore?.c_availableBrands?.slice(0, 8);
+
+
+
+  // const handleSlideChange = () => {
+  //   const swiperInstance = swiperRef.current.swiper;
+  //   if (swiperInstance) {
+  //     const offset = 30; // Adjust this to the number of pixels you want at the top
+  //     const wrapper = swiperInstance.wrapperEl;
+
+  //     // Apply the offset to the swiper container after slide change
+  //     setTimeout(() => {
+  //       wrapper.style.marginTop = `${offset}px`;
+  //     }, 300); // Allow time for the slide transition to complete
+  //   }
+  // };
+
 
   return (
     <div className={styles.mainWrapper}>
@@ -119,7 +165,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
           value ={activeToggle}
         /> */}
       </div>
-
+      <div className={styles.contentOuterWrapper}>
       <div className={styles.contentWrapper}>
         <div className={styles.storeImageWrapper}>
           {!activeToggle ? (
@@ -170,7 +216,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                   <span className={styles.contactWrapper}>
                      <Button
                         isLink={true}
-                        link={`tel:${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        link={`tel:${matchedStore?.phone?.replace(/\s+/g, '')}`}
                         title={"Call"}
                         color={"brown_dark"}
                         type={"Plain"}
@@ -179,7 +225,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     <div className={styles.vDivider}>&nbsp;</div>
                     <Button
                         isLink={true}
-                        link={`https://wa.me/${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        link={`https://wa.me/${matchedStore?.fax?.replace(/\s+/g, '')}`}
                         className={styles.whatsappBtn}
                         title={"WhatsApp"}
                         color="brown_dark"
@@ -216,27 +262,26 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                 </div>
 
                 <hr className={styles.divider} />
-
                 {matchedStore?.c_services && matchedStore.c_services.length > 0 ? (
-                      <>
-                        <div className={styles.serviceWrapper}>
-                          <div className={styles.iconSection}>
-                            <ServiceIcon className={styles.serviceIcon} />
+                        <>
+                          <div className={styles.serviceWrapper}>
+                            <div className={styles.iconSection}>
+                              <ServiceIcon className={styles.serviceIcon} />
+                            </div>
+                            <div className={styles.storeServiceInfo}>
+                              <ul className={styles.serviceList}>
+                                {matchedStore.c_services.map((service, index) => (
+                                  <li key={index}>{service}</li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className={styles.bookAppointment}>
+                              {/* Button or other content here */}
+                            </div>
                           </div>
-                          <div className={styles.storeServiceInfo}>
-                            <ul className={styles.serviceList}>
-                              {matchedStore.c_services.map((service, index) => (
-                                <li key={index}>{service}</li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div className={styles.bookAppointment}>
-                            {/* Button or other content here */}
-                          </div>
-                        </div>
-                        <hr className={styles.divider} />
-                      </>
-                    ) : null}
+                          <hr className={styles.divider} />
+                        </>
+                      ) : null}
 
                 <div className={styles.storeBrandsInfo}>
                   <div className={styles.iconSection}>
@@ -307,6 +352,22 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                   />
                 </div>
                 <div className={styles.infoOverlay}>
+                {/* <div className={styles.mapInfoContainer}> */}
+               {!isMobile ? ( <Swiper
+                    direction={"vertical"}
+                    spaceBetween={0}
+                    slidesPerView={"auto"}
+                    scrollbar={{ dragSize: 160, draggable: true }}
+                    mousewheel={true}
+                    className={styles.storeMapListSwiper}
+                    ref={swiperRef}
+                    onSlideChange={null}
+                    modules={[ Scrollbar, Mousewheel]}
+                    autoHeight={true}
+                  >
+
+                  <SwiperSlide>
+                  <div className={styles.infoWrapper}>
                   <div className={styles.content}>
                     <Typography variant="h3" className={styles.title}>
                       {matchedStore?.name}
@@ -352,7 +413,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     <span className={styles.contactWrapper}>
                     <Button
                         isLink={true}
-                        link={`tel:${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        link={`tel:${matchedStore?.phone?.replace(/\s+/g, '')}`}
                         title={"Call"}
                         color={"brown_dark"}
                         type={"Plain"}
@@ -361,7 +422,7 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                       <div className={styles.vDivider}>&nbsp;</div>
                       <Button
                         isLink={true}
-                        link={`https://wa.me/${matchedStore?.phone.replace(/\s+/g, '')}`}
+                        link={`https://wa.me/${matchedStore?.fax?.replace(/\s+/g, '')}`}
                         className={styles.whatsappBtn}
                         title={"WhatsApp"}
                         color="brown_dark"
@@ -369,6 +430,169 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                     />
                     </span>
                   </div>
+           
+
+                  <hr className={styles.divider} />
+                  {/* </SwiperSlide>
+                  <SwiperSlide> */}
+                  <div className={styles.storeTimingWrapper}>
+                    <div className={styles.timingRow}>
+                      <div className={styles.iconWrapper}>
+                        <TimeIcon className={styles.timeIcon} />
+                      </div>
+                      <div className={styles.timingItems}>
+                        {formattedStoreHours.map((item, index) => (
+                          <div className={styles.timingDetail} key={index}>
+                            <Typography
+                              variant="p"
+                              className={styles.storeOpenDay}
+                            >
+                              {item.days}
+                            </Typography>
+                            <Typography
+                              variant="p"
+                              className={styles.storeOpenTiming}
+                            >
+                              {item.timings}
+                            </Typography>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+           
+
+                  <hr className={styles.divider} />
+
+                  {/* {matchedStore?.c_services && matchedStore.c_services.length > 0 ? (
+                        <>
+                          <div className={styles.serviceWrapper}>
+                            <div className={styles.iconSection}>
+                              <ServiceIcon className={styles.serviceIcon} />
+                            </div>
+                            <div className={styles.storeServiceInfo}>
+                              <ul className={styles.serviceList}>
+                                {matchedStore.c_services.map((service, index) => (
+                                  <li key={index}>{service}</li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className={styles.bookAppointment}>
+                              
+                            </div>
+                          </div>
+                          <hr className={styles.divider} />
+                        </>
+                      ) : null}
+                  */}
+                  
+                  <div className={styles.storeBrandsInfo}>
+                    <div className={styles.iconSection}>
+                      <BrandsIcon className={styles.brandsIcon} />
+                    </div>
+                    <span className={styles.availableBrandsLabel}>
+                      <Typography
+                        variant="p"
+                        className={styles.availableBrandsTitle}
+                      >
+                        {"Brands Available"}
+                      </Typography>
+                    </span>
+                    {matchedStore?.c_availableBrands?.length > 8 && (
+                      <span className={styles.viewAllBrands}>
+                        <Button
+                          isLink={false}
+                          className={styles.viewAllBrandsBtn}
+                          title={"View all brands"}
+                          color="brown_dark"
+                          type={"Plain"}
+                          clickHandler={handleViewAllBrands}
+                        />
+                      </span>
+                    )}
+                  </div>
+
+                  <div className={styles.brandsWrapper}>
+                    {brandsToDisplay &&
+                      brandsToDisplay.map((availableBrand, index) => (
+                        <React.Fragment key={index}>
+                          <p className={styles.brandsName}>{availableBrand}</p>
+                          {index < brandsToDisplay?.length - 1 && (
+                            <div className={styles.brandSeparator} />
+                          )}
+                        </React.Fragment>
+                      ))}
+                  </div>
+                  <hr className={styles.divider} />
+                  </div>
+                  </SwiperSlide>
+
+                  </Swiper>) :
+                  (
+                  <div className={styles.noSlideContainer}>
+                  <div className={styles.content}>
+                    <Typography variant="h3" className={styles.title}>
+                      {matchedStore?.name}
+                    </Typography>
+                  </div>
+                  <div className={styles.locationInfo}>
+                    <div className={styles.leftSection}>
+                      <MapIcon className={styles.mapIcon} />
+                      <span className={styles.addressWrapper}>
+                        <Typography variant="p" className={styles.storeCity}>
+                          {matchedStore?.city}
+                        </Typography>
+                        <div className={styles.vline}>&nbsp;</div>
+                        <Typography variant="p" className={styles.storeAddress}>
+                          {matchedStore?.address1}
+                        </Typography>
+                      </span>
+                    </div>
+                    <span className={styles.directionBtnWrapper}>
+                      <a
+                        href={matchedStore?.c_googleMapLocation}
+                        target="_blank"
+                        className={`${styles.storeMapLink} button plain brown_dark`}
+                      >
+                        <span>Get Directions</span>
+                      </a>
+                    </span>
+                  </div>
+                  <hr className={styles.divider} />
+
+                  <div className={styles.storeContactWrapper}>
+                    <div className={styles.leftSection}>
+                      <WhatsappIcon
+                        className={styles.WhatsappIcon}
+                        strokeColor="#464f4a"
+                      />
+                      <span className={styles.contactLabelWrapper}>
+                        <Typography variant="p" className={styles.contactLabel}>
+                          {"Get in Touch"}
+                        </Typography>
+                      </span>
+                    </div>
+                    <span className={styles.contactWrapper}>
+                    <Button
+                        isLink={true}
+                        link={`tel:${matchedStore?.phone?.replace(/\s+/g, '')}`}
+                        title={"Call"}
+                        color={"brown_dark"}
+                        type={"Plain"}
+                        className={styles.contactBtn}
+                    />
+                      <div className={styles.vDivider}>&nbsp;</div>
+                      <Button
+                        isLink={true}
+                        link={`https://wa.me/${matchedStore?.fax?.replace(/\s+/g, '')}`}
+                        className={styles.whatsappBtn}
+                        title={"WhatsApp"}
+                        color="brown_dark"
+                        type={"Plain"}
+                    />
+                    </span>
+                  </div>
+           
 
                   <hr className={styles.divider} />
                   <div className={styles.storeTimingWrapper}>
@@ -457,12 +681,16 @@ const StoreDetailsPageContent: React.FC<StoreDetailsProps> = ({ store, mapViewOn
                       ))}
                   </div>
                   <hr className={styles.divider} />
-                  {/* All Brand Pop up */}
+                  </div>
+
+                  )}
+                  {/* </div> */}
                 </div>
               </div>
             </div>
           )}
         </div>
+      </div>
       </div>
       {
         <BrandPopup
