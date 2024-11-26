@@ -109,8 +109,8 @@ const BrandListing = ({ height = true, categories, brandPages = [], ...content }
     setBrands(categories);
   }, [brands]);
 
-  console.log({brandPages});
-  console.log({brands});
+  // console.log({brandPages});
+  // console.log({brands});
   
 
   return (
