@@ -12,17 +12,22 @@ const SubMenu = ({ links, className = "" }) => {
 
   return (
     <div className={`${className} ${styles.subMenu}`}>
-      {links?.map((item) => (
-        <div onClick={() => setMenuOpen(false)}>
-          <NavigationLink
-            className={styles.menuLink}
-            key={generateUniqueId()}
-            title={item?.content?.commonProps?.item_title}
-            arrow={item?.content?.commonProps?.isVisible}
-            url={item?.content?.commonProps?.url}
-          />
-        </div>
-      ))}
+      {links?.map((item) => {
+        if (!item?.content?.commonProps?.item_title) {
+          return null;
+        }
+        return (
+          <div onClick={() => setMenuOpen(false)}>
+            <NavigationLink
+              className={styles.menuLink}
+              key={generateUniqueId()}
+              title={item?.content?.commonProps?.item_title}
+              arrow={item?.content?.commonProps?.isVisible}
+              url={item?.content?.commonProps?.url}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };
