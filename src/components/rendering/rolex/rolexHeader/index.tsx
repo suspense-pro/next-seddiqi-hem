@@ -23,7 +23,12 @@ const RolexNavbar = ({ ...content }) => {
   const isGreen = type === "green";
   const isWhite = type === "white";
 
-  const handleScroll = useCallback(() => setScrolled(window.scrollY > 40), []);
+  const handleScroll = useCallback(() => {
+    setScrolled(window.scrollY > 40);
+    if (isDropdownOpen) {
+      setIsDropdownOpen(false);
+    }
+  }, [isDropdownOpen]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -44,20 +49,18 @@ const RolexNavbar = ({ ...content }) => {
 
   if (!isClient) return null;
   const router = useRouter();
-  
+
   return (
     <div className={styles.container}>
-      <nav
-        className={`${scrolled && styles.scrolled} ${
-          isWhite && styles.whiteBg
-        } ${styles.rolexNavbar}`}
-      >
-        <Image
-          className={isGreen ? styles.rolexLogo : styles.rolexLogoBlack}
-          height={isGreen ? styles.rolexLogo : styles.rolexLogoBlack}
-          image={logo?.image}
-          imageAltText={logo?.altText}
-        />
+      <nav className={`${scrolled && styles.scrolled} ${isWhite && styles.whiteBg} ${styles.rolexNavbar}`}>
+        <Link href={isGreen ? "/rolex" : "/rolex/cpo"}>
+          <Image
+            className={isGreen ? styles.rolexLogo : styles.rolexLogoBlack}
+            height={isGreen ? styles.rolexLogo : styles.rolexLogoBlack}
+            image={logo?.image}
+            imageAltText={logo?.altText}
+          />
+        </Link>
 
         {windowWidth > screenSize ? (
           <>
@@ -102,7 +105,7 @@ const RolexNavbar = ({ ...content }) => {
             }}
           >
             {links?.map((link, index) => (
-              <li key={index}>
+               <li onClick={() => setIsDropdownOpen(false)} key={index}>
                 <NavigationLink
                   className={`${isWhite && styles.navMobileBlack} ${styles.navMobileLink}`}
                   title={link?.label}
