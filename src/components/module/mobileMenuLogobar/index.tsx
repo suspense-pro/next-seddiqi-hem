@@ -6,12 +6,12 @@ import { HeaderFooter } from "@components/module";
 import styles from "./mobileMenuLogobar.module.scss";
 
 const MobileMenuLogobar = () => {
-  const { headerData, menuOpen } = useContext(HeaderContext);
+  const { headerData, menuOpen, setMenuOpen } = useContext(HeaderContext);
   const { leftLogo, bookingCTA } = headerData?.content;
 
   const PATEK_LOGO = "/images/png/PatekLogo.png";
   const rolexContainerRef = useRef(null);
-
+  
   useEffect(() => {
     if (rolexContainerRef.current) {
       rolexContainerRef.current.innerHTML = `<div id="rolex-retailer-clock">
@@ -44,7 +44,7 @@ const MobileMenuLogobar = () => {
                   className={styles.image}
                 />
               </Link> */}
-              <Link href={headerData?.content?.rolexLogo}>
+              <Link onClick={() => setMenuOpen(false)} href={headerData?.content?.rolexLogo}>
                 <div ref={rolexContainerRef} className={styles.rolexScriptContainer}></div>
               </Link>
             </>
