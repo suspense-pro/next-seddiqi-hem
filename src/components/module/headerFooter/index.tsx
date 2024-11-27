@@ -10,7 +10,7 @@ import { HeaderContext } from "@contexts/headerContext";
 // ];
 
 const HeaderFooter = ({ className }: { className?: any }) => {
-  const { headerData } = useContext(HeaderContext) || {};
+  const { headerData, setMenuOpen } = useContext(HeaderContext) || {};
   const footerLinks = headerData?.content?.hygieneLinks;
 
   if (!footerLinks) return null;
@@ -18,8 +18,11 @@ const HeaderFooter = ({ className }: { className?: any }) => {
   const { updateCurrent } = headerContext;
   return (
     <div className={`${className} ${styles.container}`}>
-      {footerLinks?.map((item) => (
-        <div onClick={() => updateCurrent(null)}>
+      {footerLinks?.map((item, index) => (
+        <div key={index} onClick={() => {
+          updateCurrent(null)
+          setMenuOpen(false)
+        }}>
           <NavigationLink
             hover={true}
             className={styles.footerNavigation}
