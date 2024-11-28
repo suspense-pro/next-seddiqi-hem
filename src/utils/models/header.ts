@@ -48,6 +48,7 @@ export interface AccordionProps {
   showArrow?: boolean;
   isOpen?: boolean;
   url?: string
+  isCollapse?: boolean
 }
 
 // cards
