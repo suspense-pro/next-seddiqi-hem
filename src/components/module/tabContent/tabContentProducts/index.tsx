@@ -92,6 +92,7 @@ const TabContentProducts = () => {
                 isNewTab: item?.content?.commonProps?.isNewTab,
               }}
               key={item?.id}
+              isCollapse
             >
               {isDropdown(ind) && renderAccordionContent(ind)}
             </Accordion>
