@@ -20,6 +20,10 @@
   }
 }
 
+.arrow {
+  transition: transform 0.3s;
+}
+
 .activeArrow {
   transition: transform 0.3s;
   transform: rotate(180deg);

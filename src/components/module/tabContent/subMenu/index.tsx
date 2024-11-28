@@ -17,7 +17,7 @@ const SubMenu = ({ links, className = "" }) => {
           return null;
         }
         return (
-          <div onClick={() => setMenuOpen(false)}>
+          <div key={generateUniqueId()} onClick={() => setMenuOpen(false)}>
             <NavigationLink
               className={styles.menuLink}
               key={generateUniqueId()}
