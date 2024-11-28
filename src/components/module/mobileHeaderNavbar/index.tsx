@@ -9,23 +9,12 @@ import PhoneIconNoBorder from "@assets/images/svg/PhoneIconNoBorder";
 
 const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({ toggleMenu, menuOpen }) => {
   const { headerData } = useContext(HeaderContext);
-  const headerRef = useRef<HTMLElement | null>(null);
 
 
   if (!headerData) return null;
 
-  useEffect(() => {
-    if (!menuOpen && headerRef.current) {
-      // Scroll the mobileHeader element to the top
-      headerRef.current.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  }, [menuOpen]);
-
-  // const MAIN_LOGO = headerData?.content?.mainLogo?.image;
-  // if (!MAIN_LOGO) return null;
-  // console.log(headerData?.content?.logoSymbol?.image)
   return (
-    <header  ref={headerRef} className={styles.mobileHeader}>
+    <header className={styles.mobileHeader}>
       <div className={styles.mobileHeaderContainer}>
         <div className={styles.menuIcon} onClick={toggleMenu}>
           <div className={`${styles.hamBurger} ${menuOpen ? styles.hamburgerCross : ""}`} />
