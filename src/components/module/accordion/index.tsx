@@ -25,7 +25,7 @@ const Accordion: React.FC<AccordionProps> = ({
   const handleClick = () => {
     if (showArrow && setSubMenu) {
       setSubMenu(item.id);
-      setIsCollapsed((prev) => !prev);
+      setIsCollapsed(!isCollapsed);
     }
   };
 
@@ -41,7 +41,7 @@ const Accordion: React.FC<AccordionProps> = ({
     if (isOpen) {
       handleClick();
     }
-  }, [isOpen, handleClick]);
+  }, [isOpen]);
 
   return (
     <div className={styles.accordion}>
