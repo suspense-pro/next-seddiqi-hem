@@ -32,7 +32,7 @@
 .headerLink {
   padding: rem(7 0);
   cursor: pointer;
-  color: getColorHex("green-dark");
+  color: getColorHex("black");
   border-bottom: rem(2) solid getColorHex("green-dark", 0);
   @include heading_light;
   transition: all 0.3s;

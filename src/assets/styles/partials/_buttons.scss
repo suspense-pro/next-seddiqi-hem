@@ -66,13 +66,13 @@ $border-width: rem(1);
     }
     &.white {
       background-color: getColorHex("white");
-      color: getColorHex("midnight-brown");
-      border: rem(1) solid getColorHex("bronze-grey");
+      color: getColorHex("black");
+      border: rem(1) solid getColorHex("black");
 
       &:hover {
-        background-color: getColorHex("midnight-brown");
+        background-color: getColorHex("black");
         color: getColorHex("white");
-        border: rem(1) solid getColorHex("midnight-brown");
+        border: rem(1) solid getColorHex("black");
       }
     }
     &.green_dark {
