@@ -2,7 +2,14 @@
 
 .menuLeft {
   display: flex;
-  gap: rem(120);
+  gap: rem(60);
+
+  @include breakpoint-min-width(rem(1270)) {
+    gap: rem(120);
+  }
+  @include breakpoint-max-width(rem(1150)) {
+    gap: rem(120);
+  }
 }
 
 .menuLink {
