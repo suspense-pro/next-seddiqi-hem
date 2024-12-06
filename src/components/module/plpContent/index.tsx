@@ -30,7 +30,7 @@ const PlpContent = ({ productGridContent, products }) => {
 
   const [filters, setFiltersState] = useState(null);
   const [displayedProducts, setDisplayedProducts] = useState(
-    (Array.isArray(getProducts) ? getProducts : getProducts?.hits).slice(0, 24)
+    (Array.isArray(getProducts) ? getProducts : getProducts?.hits)?.slice(0, 24)
   );
   const [currentIndex, setCurrentIndex] = useState(24);
   const [isAllLoaded, setIsAllLoaded] = useState(false);
@@ -141,7 +141,6 @@ const PlpContent = ({ productGridContent, products }) => {
 
   // updateUrlWithFilters();
   // }, []);
-
   const fetchAllProductsByCategoryId = async () => {
     setIsLoading(true);
 
@@ -252,7 +251,7 @@ const PlpContent = ({ productGridContent, products }) => {
   //   fetchFilteredProducts();
   // }, []);
 
-  const PRODUCT_INFO_TEXT = `Showing ${displayedProducts.length} out of ${
+  const PRODUCT_INFO_TEXT = `Showing ${displayedProducts?.length} out of ${
     allHits.length
   } ${allHits.length === 1 ? "product" : "products"}`;
 
@@ -269,7 +268,7 @@ const PlpContent = ({ productGridContent, products }) => {
           resetProducts={fetchAllProductsByCategoryId}
         />
 
-        {displayedProducts.length > 0 ? (
+        {displayedProducts?.length > 0 ? (
           <>
             <GridWrapper>
               {displayedProducts.map((item, ind) => (

@@ -5,7 +5,7 @@ import Typography from "../../typography";
 const SearchTabs = ({ activeTab, setActiveTab }) => {
   return (
     <div className={`${styles.tabs} ${styles.tabsContainer}`}>
-      {["Watches", "Jewellery", "Stories"].map((tab) => (
+      {["Watches", "Stories"].map((tab) => (
         <div
           key={tab}
           className={`${styles.tab} ${

@@ -78,7 +78,14 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
             layout="fill"
             objectFit="contain"
             alt={`Non-Slide`}
-            src={image?.absUrl ?? image.link}
+            src={
+              image?.absUrl 
+                ? image?.absUrl 
+                : image?.link 
+                ? image?.link 
+                : imageGroups?.images?.link
+            }
+            //src={image?.absUrl ?? image.link}
             // src={imageGroups[1]?.images?.[0]?.link}
           />
         )}
