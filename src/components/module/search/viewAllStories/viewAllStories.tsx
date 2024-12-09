@@ -15,14 +15,14 @@ const ViewAllStories = ({ storiesResults }) => {
           <div className={styles.storyCardStyles} key={index}>
             <StoryCard item={story} className="customStoryCardStyle" />
             <div className={styles.buttonContainer}>
-              <Button
-                isLink={true}
-                className={styles.storyBtn}
-                title={"Discover The Collection"}
-                link={"/"}
-                type={"Plain"}
-                color={"brown-dark"}
-              />
+                <Button
+                    isLink={true}
+                    link={"/"}
+                    className={styles.storyBtn}
+                    title={"Discover The Collection"}
+                    color={"green_dark"}
+                    clickHandler={null}
+                  />
             </div>
           </div>
         ))}

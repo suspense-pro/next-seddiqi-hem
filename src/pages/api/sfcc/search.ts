@@ -131,7 +131,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 filterBy: [
                   {
                     path: "/_meta/schema",
-                    value: "https://seddiqi.amplience.com/page/content-page"
+                    value: "https://seddiqi.amplience.com/component/article-list-carousel"
                   }
                 ]
               };
