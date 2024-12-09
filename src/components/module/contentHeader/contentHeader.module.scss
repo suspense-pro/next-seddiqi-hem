@@ -27,7 +27,7 @@
   height: rem(2);
   text-align: center;
   margin: 0 auto;
-  background-color: getColorHex("chocolate-brown");
+  background-color: getColorHex("metallic");
 
   [dir="rtl"] & {
     margin: 0;
@@ -40,7 +40,7 @@
   text-align: center;
   text-transform: uppercase;
   font-size: rem(28);
-  color: getColorHex('brown-dark');
+  color: getColorHex('black');
   
   @include md {
     font-size: rem(40);
