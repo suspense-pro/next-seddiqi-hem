@@ -25,6 +25,9 @@
   color: getColorHex("grey");
   text-transform: capitalize;
 }
+.searchIcon:hover{
+  cursor: pointer;
+}
 
 .tabs {
   display: flex;
@@ -46,7 +49,7 @@
 .active {
   border-bottom: rem(1) solid getColorHex("chocolate-brown");
   font-weight: bold;
-  color: getColorHex("dark-brown");
+  color: getColorHex("brown-dark");
 }
 
 .listsContainer {
