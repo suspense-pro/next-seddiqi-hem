@@ -9,7 +9,7 @@ import styles from "./carousel.module.scss";
 import Video from "../video";
 import GradientOverlay from "../gradientOverlay";
 
-const Carousel = ({ slides, setSwiper, setActiveIndex, setTransition, setSpeed, isAnimated, opacity }) => {
+const Carousel = ({ slides, setSwiper, setActiveIndex, setTransition, setSpeed, isAnimated, opacity=0 }) => {
   // console.log("slides------", slides)
   const onSlideChange = (swiperInstance) => {
     setActiveIndex(swiperInstance.realIndex);
