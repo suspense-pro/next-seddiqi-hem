@@ -18,7 +18,6 @@ const PopularProducts = ({
   productSuggestions,
 }) => {
   const [isLoading, setLoading] = useState(true);
-  console.log("productSuggestions", productSuggestions);
   const router = useRouter();
 
   const handleNavigation = (type, value) => {
