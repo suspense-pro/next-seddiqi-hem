@@ -32,6 +32,10 @@
   @include md {
     font-size: rem(40);
   }
+
+  [dir="rtl"] & {
+    text-align: right;
+  }
 }
 
 .headingSecondary {
@@ -45,6 +49,10 @@
     line-height: rem(26);
     font-size: rem(16);
   }
+
+  [dir="rtl"] & {
+    text-align: right;
+  }
 }
 
 .highlightedText {
@@ -56,25 +64,27 @@
   text-align: center;
 }
 
-
 .bar {
   width: rem(70);
   height: rem(2);
   background: getColorHex("metallic");
   margin: 0 auto;
+  
+  [dir="rtl"] & {
+    margin: 0;
+  }
 }
 
 // .aboutBtn {
 //   background: getColorHex("green-dark");
 // }
 
-
 .cta {
   min-width: rem(200);
 }
 
-.headingPrimary, 
-.headingSecondary, 
+.headingPrimary,
+.headingSecondary,
 .desc {
   text-align: center;
 }
@@ -89,4 +99,22 @@
 
 .centerAligned {
   text-align: center;
+
+  [dir="rtl"] & {
+    text-align: right;
+  }
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  margin: rem(0 28);
+  [dir="rtl"] & {
+    justify-content: flex-start;
+  }
+
+  @include md {
+    width: rem(800);
+    margin: 0 auto;
+  }
 }

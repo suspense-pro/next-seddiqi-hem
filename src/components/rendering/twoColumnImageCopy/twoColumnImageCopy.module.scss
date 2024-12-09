@@ -93,6 +93,9 @@
 
 .desc {
   text-align: center;
+  [dir="rtl"] & {
+    text-align: right;
+  }
 }
 
 .bar {

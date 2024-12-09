@@ -467,9 +467,15 @@
   transition: all 0.5s ease;
   color: getColorHex("green-dark");
 
+  [dir="rtl"] & {
+    margin: rem(32);
+  }
   @include md {
     transform: translateY(-320%);
     margin-bottom: rem(0);
+    [dir="rtl"] & {
+      margin: rem(30 60);
+    }
   }
 
   &.isOpened{

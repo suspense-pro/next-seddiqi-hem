@@ -38,7 +38,7 @@ export default function PageNotFound({ ...content }) {
       <Typography align="center" variant="h1">
         Page not found
       </Typography>
-      <Typography align="center" variant="p">
+      <Typography variant="p">
       We cannot find the page you were looking for. Please check the URL or navigate to another page. 
       <br />
       We apologise for the inconvenience.

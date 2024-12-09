@@ -48,6 +48,9 @@ h2.title {
   @include md {
     letter-spacing: rem(0.4);
   }
+  [dir="rtl"] & {
+    text-align: right;
+  }
 }
 
 .description {
@@ -62,6 +65,9 @@ h2.title {
   @include md {
     margin-top: rem(12);
     margin-bottom: rem(0);
+  }
+  [dir="rtl"] & {
+    text-align: right;
   }
 }
 
