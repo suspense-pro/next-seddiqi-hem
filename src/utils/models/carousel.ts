@@ -1,0 +1,10 @@
+export interface CarouselProps {
+    slides: any; 
+    setSwiper: any; 
+    setActiveIndex: (index: number) => void; 
+    setTransition: any; 
+    setSpeed: any; 
+    isAnimated: any
+    opacity?: number; 
+  }
+  
