@@ -855,7 +855,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         showBackButton={false}
         title="Filter"
         position={""}
-        button2Color={"metallic"}
+        button2Color={"white"}
       >
 
         {Object.keys(filters).some(filterKey => Array.isArray(filters[filterKey]) && filters[filterKey].length > 0) && (

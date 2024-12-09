@@ -270,3 +270,8 @@
   text-overflow: ellipsis;
   white-space: normal;
 }
+
+.desc:hover {
+  color: getColorHex("grey");
+
+}
