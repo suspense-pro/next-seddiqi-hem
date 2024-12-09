@@ -127,6 +127,10 @@
 
   div[class^="swiper-button-next"] {
     right: rem(32);
+    [dir="rtl"] & {
+      right: auto;
+    }
+  
   }
 
 

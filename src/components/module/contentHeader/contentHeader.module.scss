@@ -14,11 +14,13 @@
 
   }
   max-width: rem(800);
+  width: 100%;
 
   [dir="rtl"] & {
     margin: 0 auto;
     padding: rem(0);
     align-items: flex-start;
+    
   }
 }
 

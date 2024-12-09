@@ -55,6 +55,11 @@
       transition: all 0.3s ease;
       position: relative;
       box-sizing: border-box;
+
+      [dir="rtl"] & {
+        justify-content: flex-start;
+        padding-right: 0;
+      }
   
       &::after{
         content: "";

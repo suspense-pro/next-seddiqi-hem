@@ -37,6 +37,10 @@
     right: rem(80);
   }
 
+  [dir="rtl"] & {
+    text-align: right;
+  }
+
   .brand {
     // @include rolex_regular;
     color: getColorHex("white");
@@ -48,6 +52,10 @@
     @include md {
       line-height: rem(26);
       font-size: rem(16);
+    }
+
+    [dir="rtl"] & {
+      text-align: right;
     }
   }
 

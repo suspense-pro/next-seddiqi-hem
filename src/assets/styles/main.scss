@@ -12,6 +12,10 @@
   background-color: getColorHex("grey-tint");
   color: getColorHex("midnight-brown");
 
+  [dir="rtl"] & {
+    align-items: flex-start;
+  }
+
   @include md {
     padding: 0 rem(80) rem(60);
   }
@@ -48,6 +52,10 @@
     letter-spacing: rem(0.2);
     text-align: center;
     margin-bottom: rem(24);
+
+    [dir="rtl"] & {
+      text-align: right !important;
+    }
 
     @include md {
       font-size: rem(16);
