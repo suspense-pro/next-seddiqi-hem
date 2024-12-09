@@ -20,8 +20,12 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
 
   if (!banners || banners.length === 0) return null;
 
-  const containerClass =
-    bannerType === "full_banner" ? styles.fullWidth : styles.standardWidth;
+  const containerClass = 
+  bannerType === "full_banner" ? styles.fullWidth : 
+  bannerType === "content_banner" ? styles.mediumWidth : 
+  styles.smallWidth;
+
+  console.log("bannerType" ,bannerType)
 
   const slides = banners
     ?.map((banner) => {
@@ -117,14 +121,14 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
           </div>
         )}
         <div className={styles.heroBannerContainer}>
-          <GradientOverlay
+          {/* <GradientOverlay
             opacity={
               !activeBanner?.opacity?.hideOverlay
                 ? activeBanner?.opacity?.opacity
                 : null
             }
             className={styles.containerImg}
-          >
+          > */}
             <Carousel
               slides={slides}
               setSwiper={setSwiper}
@@ -132,8 +136,13 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
               setTransition={"fade"}
               setSpeed={2000}
               isAnimated={"no"}
+              opacity={
+                !activeBanner?.opacity?.hideOverlay
+                  ? activeBanner?.opacity?.opacity
+                  : null
+              }
             />
-          </GradientOverlay>
+          {/* </GradientOverlay> */}
         </div>
 
         {slides && slides.length > 1 && (

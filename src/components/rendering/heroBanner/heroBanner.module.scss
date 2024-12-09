@@ -10,6 +10,7 @@
     position: relative;
     width: 100%;
     height: rem(742);
+    height: rem(742);
     margin: 0 auto;
     z-index: 1;
     @include md{
@@ -30,8 +31,21 @@
     width: 100%;
   }
 
-  &.standardWidth {
+  &.mediumWidth {
     width: auto;
+    height: rem(660);
+    
+    @include md {
+      height: rem(680);
+    }
+  }
+  &.smallWidth {
+    width: auto;
+    height: rem(340);
+    
+    @include md {
+      height: rem(420);
+    }
   }
 
   .bannerItem {
