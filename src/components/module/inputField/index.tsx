@@ -30,7 +30,7 @@ export default function InputField({
     return (
       <div className={`${styles.selectGroupFull} ${styles.selectGroup}`}>
         {showLabel && (
-          <label className={styles.dropdwonLabel}>
+          <label className={styles.dropdownLabel}>
             {label}
           </label>
         )}
@@ -60,7 +60,7 @@ export default function InputField({
       <div className={`${!options ? styles.inputGroup : styles.selectGroup}`}>
         {options ? (
           <>
-            <label className={styles.dropdwonLabel}>
+            <label className={styles.dropdownLabel}>
               {label}
               {/* {required && "*"} */}
             </label>
