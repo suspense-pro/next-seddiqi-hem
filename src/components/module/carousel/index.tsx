@@ -8,8 +8,17 @@ import "swiper/css/pagination";
 import styles from "./carousel.module.scss";
 import Video from "../video";
 import GradientOverlay from "../gradientOverlay";
+import { CarouselProps } from "@utils/models";
 
-const Carousel = ({ slides, setSwiper, setActiveIndex, setTransition, setSpeed, isAnimated, opacity=0 }) => {
+const Carousel: React.FC<CarouselProps> = ({
+  slides,
+  setSwiper,
+  setActiveIndex,
+  setTransition,
+  setSpeed,
+  isAnimated,
+  opacity = 0,
+}) => {
   // console.log("slides------", slides)
   const onSlideChange = (swiperInstance) => {
     setActiveIndex(swiperInstance.realIndex);
