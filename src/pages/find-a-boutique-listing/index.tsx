@@ -377,8 +377,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         {nearestStore && userLocation && (
           <MapView 
             nearestStore={nearestStore} 
-            stores={sortedStoreList} 
-            activeStore={filterApplied === true ? sortedStoreList[activeIndex] : sortedLocationStores[activeIndex]} 
+            stores={sortedNearestStores} 
+            activeStore={sortedNearestStores[activeIndex]} 
             userLocation={userLocation} 
             useOnPopup={false}
             handleStoreClick={handleStoreClick}
@@ -388,8 +388,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         {!userLocation && (
           <MapView 
             nearestStore={null} 
-            stores={sortedNearestStores} 
-            activeStore={sortedNearestStores[activeIndex]} 
+            stores={sortedStoreList} 
+            activeStore={filterApplied === true ? sortedStoreList[activeIndex] : sortedLocationStores[activeIndex]}
             userLocation={null} 
             useOnPopup={false}
             handleStoreClick={handleStoreClick}
@@ -398,6 +398,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         )}
         </div>
 
+        {nearestStore && userLocation && (
         <StoreMapListContainer 
           storesList={sortedNearestStores} 
           activeIndex={activeIndex} 
@@ -406,6 +407,17 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
           isAbsolutePosition={true}
           needScrollbar={true} //For Desktop Only
         />
+        )}
+        {!userLocation && (
+        <StoreMapListContainer 
+          storesList={sortedStoreList} 
+          activeIndex={activeIndex} 
+          handleStoreClick={handleStoreClick}
+          isMobile={!isMobile} 
+          isAbsolutePosition={true}
+          needScrollbar={true} //For Desktop Only
+        />
+        )}
       </>
     );
   };

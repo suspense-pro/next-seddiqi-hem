@@ -248,7 +248,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
         {nearestStore && userLocation && (
           <MapView 
             nearestStore={nearestStore} 
-            stores={sortedStoreList} 
+            stores={sortedNearestStores} 
             activeStore={sortedNearestStores[activeIndex]} 
             userLocation={userLocation} 
             useOnPopup={true}
@@ -260,7 +260,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
           <MapView 
             nearestStore={null} 
             stores={sortedStoreList} 
-            activeStore={sortedNearestStores[activeIndex]} 
+            activeStore={sortedStoreList[activeIndex]} 
             userLocation={null} 
             useOnPopup={true}
             handleStoreClick={handleStoreClick}
@@ -269,17 +269,33 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
         )}
         </div>
         
-        <div className={styles.storeMapListWrapper}>
-          <StoreMapListContainer 
-            storesList={sortedStoreList} 
-            activeIndex={activeIndex} 
-            handleStoreClick={handleStoreClick} 
-            isMobile={isMobile} 
-            isAbsolutePosition={false}
-            needScrollbar={false} //For Desktop Only
-            useOnPopup={true}
-          />
-        </div>
+        {nearestStore && userLocation && (
+          <div className={styles.storeMapListWrapper}>
+            <StoreMapListContainer 
+              storesList={sortedNearestStores} 
+              activeIndex={activeIndex} 
+              handleStoreClick={handleStoreClick} 
+              isMobile={isMobile} 
+              isAbsolutePosition={false}
+              needScrollbar={false} //For Desktop Only
+              useOnPopup={true}
+            />
+          </div>
+        )}
+        {!userLocation && (
+          <div className={styles.storeMapListWrapper}>
+            <StoreMapListContainer 
+              storesList={sortedStoreList} 
+              activeIndex={activeIndex} 
+              handleStoreClick={handleStoreClick} 
+              isMobile={isMobile} 
+              isAbsolutePosition={false}
+              needScrollbar={false} //For Desktop Only
+              useOnPopup={true}
+            />
+          </div>
+        )}
+        
       </>
     );
   };
