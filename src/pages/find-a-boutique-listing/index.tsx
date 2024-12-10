@@ -340,8 +340,21 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     );
   };
 
+  const haversineDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Radius of the Earth in kilometers
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * (Math.PI / 180)) *
+        Math.cos(lat2 * (Math.PI / 180)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in kilometers
+  };
 
   const renderMaps = (storesList) => {
+
     const sortedLocationStores = useMemo(() => {
       return [...locationStores].sort((a, b) => {
         const nameA = a.name.toUpperCase();
@@ -364,6 +377,13 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   
     if (storesList.length === 0) return null;
 
+
+    const sortedNearestStores = [...storesList].sort((a, b) => {
+      const distanceA = a.distance || Infinity; // Ensure a fallback if distance is not available
+      const distanceB = b.distance || Infinity;
+      return distanceA - distanceB; // Ascending order: nearest first
+    });
+
     return (
       <>
         <div className={styles.mapContainer}>
@@ -381,8 +401,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         {!userLocation && (
           <MapView 
             nearestStore={null} 
-            stores={sortedStoreList} 
-            activeStore={filterApplied === true ? sortedStoreList[activeIndex] : sortedLocationStores[activeIndex]} 
+            stores={sortedNearestStores} 
+            activeStore={sortedNearestStores[activeIndex]} 
             userLocation={null} 
             useOnPopup={false}
             handleStoreClick={handleStoreClick}
@@ -392,7 +412,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         </div>
 
         <StoreMapListContainer 
-          storesList={sortedStoreList} 
+          storesList={sortedNearestStores} 
           activeIndex={activeIndex} 
           handleStoreClick={handleStoreClick}
           isMobile={!isMobile} 
