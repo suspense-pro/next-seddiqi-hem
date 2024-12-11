@@ -18,6 +18,10 @@
     font-size: rem(40);
     margin-bottom: rem(20);
   }
+
+  [dir="rtl"] & {
+    text-align: right;
+  }
 }
 
 .description {
@@ -85,6 +89,14 @@
 }
 
 .viewAllButton {
+  display: flex;
+  justify-content: center;
+
+  [dir="rtl"] & {
+    width: rem(800);
+    margin: 0 auto;
+    justify-content: flex-start;
+  }
   button {
     font-size: rem(14);
     line-height: rem(18);

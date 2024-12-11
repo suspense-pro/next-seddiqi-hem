@@ -89,7 +89,9 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
                 </Typography>
               )}
               {!activeBanner.hideUnderline && (
-                <div className={styles.underline}></div>
+                <div className={styles.underlineConainer}>
+                  <div className={styles.underline}></div>
+                </div>
               )}
               {activeBanner.richText && (
                 <RichText

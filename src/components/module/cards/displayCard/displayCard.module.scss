@@ -48,6 +48,10 @@
 
       @include body_regular;
       @include ellipses;
+
+      [dir="rtl"] & {
+        text-align: right;
+      }
     }
 
     .subTitle {
