@@ -17,7 +17,6 @@ const HeaderMainLinks = ({ isScrolled = false }: { isScrolled?: boolean }) => {
   const { updateCurrent, current, headerData } = useContext(HeaderContext);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const { openSearch } = useSearchContext();
-
   const headerMainLinks = headerData?.children;
   if (!headerMainLinks) return null;
 
@@ -63,9 +62,9 @@ const HeaderMainLinks = ({ isScrolled = false }: { isScrolled?: boolean }) => {
         ))}
       </div>
       <div className={styles.navIcons}>
-        {/* <div onClick={openSearchPopup}>
+        <div onClick={openSearchPopup}>
           <SearchIcon fill="#" />
-        </div> */}
+        </div>
         {/* <Link target="_blank" href="/book-an-appointment">
           <CalendarIcon fill="#" />
         </Link> */}
