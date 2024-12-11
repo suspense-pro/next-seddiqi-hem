@@ -340,8 +340,8 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
     );
   };
 
-
   const renderMaps = (storesList) => {
+
     const sortedLocationStores = useMemo(() => {
       return [...locationStores].sort((a, b) => {
         const nameA = a.name.toUpperCase();
@@ -364,14 +364,21 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
   
     if (storesList.length === 0) return null;
 
+
+    const sortedNearestStores = [...storesList].sort((a, b) => {
+      const distanceA = a.distance || Infinity; // Ensure a fallback if distance is not available
+      const distanceB = b.distance || Infinity;
+      return distanceA - distanceB; // Ascending order: nearest first
+    });
+
     return (
       <>
         <div className={styles.mapContainer}>
         {nearestStore && userLocation && (
           <MapView 
             nearestStore={nearestStore} 
-            stores={sortedStoreList} 
-            activeStore={filterApplied === true ? sortedStoreList[activeIndex] : sortedLocationStores[activeIndex]} 
+            stores={sortedNearestStores} 
+            activeStore={sortedNearestStores[activeIndex]} 
             userLocation={userLocation} 
             useOnPopup={false}
             handleStoreClick={handleStoreClick}
@@ -382,7 +389,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
           <MapView 
             nearestStore={null} 
             stores={sortedStoreList} 
-            activeStore={filterApplied === true ? sortedStoreList[activeIndex] : sortedLocationStores[activeIndex]} 
+            activeStore={filterApplied === true ? sortedStoreList[activeIndex] : sortedLocationStores[activeIndex]}
             userLocation={null} 
             useOnPopup={false}
             handleStoreClick={handleStoreClick}
@@ -391,6 +398,17 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
         )}
         </div>
 
+        {nearestStore && userLocation && (
+        <StoreMapListContainer 
+          storesList={sortedNearestStores} 
+          activeIndex={activeIndex} 
+          handleStoreClick={handleStoreClick}
+          isMobile={!isMobile} 
+          isAbsolutePosition={true}
+          needScrollbar={true} //For Desktop Only
+        />
+        )}
+        {!userLocation && (
         <StoreMapListContainer 
           storesList={sortedStoreList} 
           activeIndex={activeIndex} 
@@ -399,6 +417,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
           isAbsolutePosition={true}
           needScrollbar={true} //For Desktop Only
         />
+        )}
       </>
     );
   };
