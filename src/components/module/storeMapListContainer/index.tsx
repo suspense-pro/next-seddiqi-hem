@@ -53,16 +53,14 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
   };
 
   const handleListStoreClick = (index: number) => {
-    // Scroll to the active store item on mobile devices
     if (isMobile && storeRefs.current[index]) {
       storeRefs.current[index].scrollIntoView({
-        behavior: 'smooth',   // Smooth scroll
-        block: 'center',      // Scroll to the center of the container
+        behavior: 'smooth',  
+        block: 'center',
       });
     }
 
-    // You can still call the original handleStoreClick (prop) if needed
-    handleStoreClick(index);  // Prop method
+    handleStoreClick(index);
   };
 
   const scrollToStore = (index: number) => {
