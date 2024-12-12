@@ -67,7 +67,7 @@
 }
 
 .headingPrimary {
-  color: getColorHex("green-dark");
+  color: getColorHex("black");
   margin: 0;
   @include heading_light;
 }
@@ -75,12 +75,12 @@
 .headingSecondary {
   line-height: rem(26);
   letter-spacing: rem(0.4);
-  color: getColorHex("green-dark");
+  color: getColorHex("black");
   @include body_regular;
 }
 
 .titleColor {
-  color: getColorHex("brown-dark");
+  color: getColorHex("black");
 }
 
 .subTitleColor {
@@ -93,12 +93,15 @@
 
 .desc {
   text-align: center;
+  [dir="rtl"] & {
+    text-align: right;
+  }
 }
 
 .bar {
   width: rem(70);
   height: rem(2);
-  background: getColorHex("metallic-grey");
+  background: getColorHex("metallic");
 }
 
 .discoverBtn {

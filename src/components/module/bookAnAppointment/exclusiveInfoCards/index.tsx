@@ -11,9 +11,9 @@ const ExclusiveInfoCards = ({ ...content }) => {
     <div className={styles.container}>
       {content?.title && <div className={styles.title}>{content?.title}</div>}
       <div className={styles.cards}>
-        {content?.listItems?.map((item) => {
+        {content?.listItems?.map((item, index) => {
           return (
-            <div className={`${styles[item?.backgroundColor]} ${styles.infoListCard}`}>
+            <div className={`${styles[item?.backgroundColor]} ${styles.infoListCard}`} key={index}>
               {item?.logo?.image?.image && (
                 <Image
                   height={styles.height}

@@ -12,6 +12,10 @@
   background-color: getColorHex("grey-tint");
   color: getColorHex("midnight-brown");
 
+  [dir="rtl"] & {
+    align-items: flex-start;
+  }
+
   @include md {
     padding: 0 rem(80) rem(60);
   }
@@ -48,6 +52,10 @@
     letter-spacing: rem(0.2);
     text-align: center;
     margin-bottom: rem(24);
+
+    [dir="rtl"] & {
+      text-align: right !important;
+    }
 
     @include md {
       font-size: rem(16);
@@ -131,7 +139,7 @@
 /*Customized Background -Text Color Combinations */
 .bgWhiteTextDarkGreen {
   background-color: getColorHex("white");
-  color: getColorHex("green-dark"); /* Dark-Green text */
+  color: getColorHex("black"); /* Dark-Green text */
 }
 
 .bgCreamTextMidnightBrown {
@@ -141,17 +149,17 @@
 
 .bgDefaultTextGreen {
   background-color: getColorHex("white");
-  color: getColorHex("green-dark"); /* dark-green text */
+  color: getColorHex("black"); /* dark-green text */
 }
 
 //Customized Hideunderline Color based on Textcolor
 .customBarColor {
   &.greenDark {
-    background-color: getColorHex("green-dark") !important;
+    background-color: getColorHex("metallic") !important;
   }
 
   &.midnightBrown {
-    background-color: getColorHex("midnight-brown") !important;
+    background-color: getColorHex("metallic") !important;
   }
 }
 

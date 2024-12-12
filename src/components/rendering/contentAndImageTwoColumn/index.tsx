@@ -45,7 +45,7 @@ const ContentAndImageTwoColumn: React.FC<ContentAndImageTwoColumnProps> = ({
             )}
             {description && (
               <div className={styles.description}>
-                <RichText text={description} className={styles.richTextStyle} />
+                <RichText align="" text={description} className={styles.richTextStyle} />
               </div>
             )}
             {hasCta && (

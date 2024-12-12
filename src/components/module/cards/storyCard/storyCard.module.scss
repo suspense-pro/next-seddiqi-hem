@@ -56,11 +56,15 @@
       @include md {
         font-size: rem(16);
       }
+
+      [dir="rtl"] & {
+        text-align: right;
+      }
     }
 
     .subtitle {
       @include body_light;
-      color: getColorHex("green-dark");
+      color: getColorHex("black");
       font-size: rem(12);
       line-height: rem(22);
       @include ellipses;

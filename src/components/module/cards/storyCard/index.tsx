@@ -28,7 +28,7 @@ const StoryCard: React.FC<CardInfoProps> = ({ item, className }) => {
       <div className={`${styles.storyCardContainer} ${className}`}>
         <Image className={styles.image} image={image} imageAltText={altText} />
         <div className={styles.content}>
-          <Typography align="left" variant="span" className={styles.title}>
+          <Typography  variant="span" className={styles.title}>
             {title}
           </Typography>
           <div className={styles.subtitle}>{subtitle}</div>

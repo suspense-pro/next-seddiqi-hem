@@ -13,16 +13,20 @@
 .title {
   font-size: rem(28);
   margin-bottom: rem(16);
-  color: getColorHex("green-dark");
+  color: getColorHex("black");
   @include md {
     font-size: rem(40);
     margin-bottom: rem(20);
+  }
+
+  [dir="rtl"] & {
+    text-align: right;
   }
 }
 
 .description {
   p {
-    @include body_extra_light;
+    @include body_light;
     font-size: rem(14);
     padding-bottom: rem(20);
     width: 100%;
@@ -85,6 +89,14 @@
 }
 
 .viewAllButton {
+  display: flex;
+  justify-content: center;
+
+  [dir="rtl"] & {
+    width: rem(800);
+    margin: 0 auto;
+    justify-content: flex-start;
+  }
   button {
     font-size: rem(14);
     line-height: rem(18);

@@ -14,11 +14,13 @@
 
   }
   max-width: rem(800);
+  width: 100%;
 
   [dir="rtl"] & {
-    margin: 0;
+    margin: 0 auto;
     padding: rem(0);
     align-items: flex-start;
+    
   }
 }
 
@@ -40,7 +42,7 @@
   text-align: center;
   text-transform: uppercase;
   font-size: rem(28);
-  color: getColorHex('brown-dark');
+  color: getColorHex('black');
   
   @include md {
     font-size: rem(40);

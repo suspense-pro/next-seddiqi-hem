@@ -290,6 +290,10 @@
                 line-height: normal;
                 align-items: flex-start;
 
+                [dir="rtl"] & {
+                    text-align: right;
+                }
+
                 &::before{
                     content: "|";
                 }
