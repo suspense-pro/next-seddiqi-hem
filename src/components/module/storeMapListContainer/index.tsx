@@ -36,6 +36,7 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
   const swiperRef = useRef(null);
   const [swiperHeight, setSwiperHeight] = useState(0);
   const router = useRouter();
+  const storeRefs = useRef([]);
 
   const handleStoreDtetails = (store) => {
     setSelectedStoreId(store.id);
@@ -50,6 +51,32 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
       handleStoreDetailsPage(store.id, true);
     }
   };
+
+  const handleListStoreClick = (index: number) => {
+    // Scroll to the active store item on mobile devices
+    if (isMobile && storeRefs.current[index]) {
+      storeRefs.current[index].scrollIntoView({
+        behavior: 'smooth',   // Smooth scroll
+        block: 'center',      // Scroll to the center of the container
+      });
+    }
+
+    // You can still call the original handleStoreClick (prop) if needed
+    handleStoreClick(index);  // Prop method
+  };
+
+  const scrollToStore = (index: number) => {
+    if (isMobile && storeRefs.current[index]) {
+      storeRefs.current[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
+  };
+
+  useEffect(() => {
+    scrollToStore(activeIndex)
+  }, [activeIndex]);
 
   const handleCloseDetails = () => {
     setIsDetailsOpen(false);
@@ -199,8 +226,9 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
             {storesList.map((store, index) => (
               <li
                 key={store.id}
+                ref={(el) => storeRefs.current[index] = el}
                 className={`${styles.storeMap} ${activeIndex === index ? styles.isActive : ""}`}
-                onClick={() => handleStoreClick(index)}
+                onClick={() => handleListStoreClick(index)}
               >
                 <div className={styles.storeMapDetails}>
                   <h4 className={styles.storeMapName}>{store.name}</h4>
