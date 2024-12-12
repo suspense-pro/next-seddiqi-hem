@@ -22,6 +22,7 @@ import {
   FeaturedProductCarousel,
   ExploreBrand,
   ContentAndImageTwoColumn,
+  TitleAndTwoBlockImageContentOverlap
 } from "@components/rendering";
 import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
@@ -115,6 +116,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/need-help`]: NeedMoreHelp,
   [`${componentUrl}/exclusive-info-list`]: ExclusiveInfoCards,
   [`${componentUrl}/content-and-single-image-column`]: ContentAndSingleImageColumn,
+  [`${componentUrl}/title-and-two-block-image-content-overlap`]: TitleAndTwoBlockImageContentOverlap,
 };
 
 const defaultConfig = {
