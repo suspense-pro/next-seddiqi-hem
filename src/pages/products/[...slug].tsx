@@ -31,8 +31,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   // }
 
   const products = await getProductListing({categoryId: plpKey, method: "POST"});
-
-  console.log({products});
   
 
   // if (!products) {

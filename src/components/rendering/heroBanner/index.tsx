@@ -103,9 +103,9 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
 
               {activeBanner.cta &&
                 activeBanner.cta?.length > 0 &&
-                activeBanner.cta.map((_cta: any) => (
+                activeBanner.cta.map((_cta: any, index) => (
                   _cta.label && _cta.label.length > 0 && 
-                    <div className={styles.ctaButton}>
+                    <div className={styles.ctaButton} key={index}>
                       <Link href={`${_cta?.url}`}>
                       <Button
                         isLink={true}
