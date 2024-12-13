@@ -21,7 +21,7 @@ const ViewAllStories = ({ storiesResults }) => {
                 title={"Discover The Collection"}
                 link={"/"}
                 type={"Plain"}
-                color={"brown-dark"}
+                color={"black-dark"}
               />
             </div>
           </div>

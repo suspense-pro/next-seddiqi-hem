@@ -51,10 +51,13 @@
     }
 
     .subTitle {
-      color: getColorHex("green-dark");
+      color: getColorHex("black-dark");
       font-size: rem(16);
       @include heading_light;
       @include ellipses;
+      text-decoration: underline;
+      text-underline-offset: rem(3);
+
     }
   }
 }

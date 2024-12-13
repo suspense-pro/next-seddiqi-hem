@@ -14,7 +14,7 @@
 
 .heading {
   @include heading_regular;
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
   text-align: center;
   margin: 0;
   font-size: rem(32);

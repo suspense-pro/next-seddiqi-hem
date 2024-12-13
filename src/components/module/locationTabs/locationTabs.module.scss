@@ -74,7 +74,7 @@
       }
   
       &.active{
-        color: getColorHex("green-dark");
+        color: getColorHex("black-dark");
         pointer-events: none;
   
         &::after{
@@ -83,7 +83,7 @@
       }
   
       &:hover{
-        color: getColorHex("green-dark");
+        color: getColorHex("black-dark");
         //border-bottom: rem(2) solid rgba(getColorHex("chocolate-brown"), 1);
   
         &::after{

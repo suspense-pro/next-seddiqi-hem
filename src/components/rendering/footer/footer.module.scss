@@ -143,7 +143,7 @@
   .column[style*="links2"] {
     @include heading_light;
     font-size: rem(22);
-    color: getColorHex("green-dark");
+    color: getColorHex("black-dark");
 
     @include md {
       font-size: rem(26);
@@ -202,7 +202,7 @@
 
 .mainLink {
   @include heading_regular;
-  color: getColorHex("brown-dark");
+  color: getColorHex("black-dark");
   font-size: rem(12);
   font-weight: 500;
   line-height: rem(18);
@@ -217,7 +217,7 @@
 
 .secondMainLink {
   @include body_regular;
-  color: getColorHex("grey-mid");
+  color: getColorHex("black-dark");
   font-size: rem(14);
   line-height: rem(22);
   letter-spacing: rem(0.2);

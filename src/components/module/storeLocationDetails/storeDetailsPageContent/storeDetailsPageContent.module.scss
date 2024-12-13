@@ -26,7 +26,7 @@
   text-align: left;
 }
 .storeOpenTiming {
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
 }
 
 
@@ -42,7 +42,7 @@
 
 .vline {
   height: rem(22);
-  border-left: rem(1) solid getColorHex("green-dark");
+  border-left: rem(1) solid getColorHex("black-dark");
   margin: 0 rem(5);
 }
 
@@ -352,7 +352,7 @@
 }
 
 .title {
-  color: getColorHex("brown-dark");
+  color: getColorHex("black-dark");
   letter-spacing: rem(0.6);
   margin-block-end: rem(42);
   margin-block-start: rem(60);
@@ -406,12 +406,12 @@
   line-height: rem(18);
   letter-spacing: rem(0.6);
   display: inline-block;
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
 }
 
 .underline {
   height: rem(1);
-  background-color: getColorHex("green-dark");
+  background-color: getColorHex("black-dark");
   margin-top: rem(2);
   width: 100%;
 }

@@ -252,6 +252,8 @@
   letter-spacing: rem(0.4);
   line-clamp: 2;
   -webkit-line-clamp: 2;
+  text-decoration: underline;
+  text-underline-offset: rem(3);
 }
 
 .title,

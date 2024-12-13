@@ -60,7 +60,7 @@
 
     .subtitle {
       @include body_light;
-      color: getColorHex("green-dark");
+      color: getColorHex("black-dark");
       font-size: rem(12);
       line-height: rem(22);
       @include ellipses;
