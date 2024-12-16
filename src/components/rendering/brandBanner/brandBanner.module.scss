@@ -75,7 +75,7 @@
 
     @include lg {
       @include heading_light_italic;
-      color: getColorHex("brown-dark");
+      color: getColorHex("black-dark");
       font-weight: 500;
       text-align: left;
       font-size: rem(48);
@@ -90,7 +90,7 @@
   p {
     @include heading_light_italic;
     font-size: rem(32);
-    color: getColorHex("brown-dark");
+    color: getColorHex("black-dark");
     margin-bottom: rem(16);
     text-align: center;
     margin-top: 0;
@@ -105,7 +105,7 @@
 .richTextContainer {
   @include body_italic;
   font-size: rem(16);
-  color: getColorHex("brown-dark");
+  color: getColorHex("black-dark");
   word-break: break-all;
   text-align: center;
 

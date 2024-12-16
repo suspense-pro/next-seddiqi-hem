@@ -1,7 +1,7 @@
 @import "../../../../assets/styles/main.scss";
 
 .title {
-  color: getColorHex("brown-dark");
+  color: getColorHex("black-dark");
   letter-spacing: rem(0.6);
   margin-block-end: rem(12);
   margin-block-start: rem(20);
@@ -36,7 +36,7 @@
 .vline {
   height: rem(16);
   margin: 0 rem(5);
-  background-color: getColorHex("green-dark");
+  background-color: getColorHex("black-dark");
   width: rem(1);
 }
 
@@ -113,7 +113,7 @@
 .brandSeparator {
   width: rem(1);
   height: rem(20);
-  background-color: getColorHex("green-dark");
+  background-color: getColorHex("black-dark");
   margin: 0 rem(4);
 }
 
@@ -139,7 +139,7 @@
 }
 .WhatsappIcon {
   margin-right: rem(12);
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
   height: rem(20);
   width: rem(20);
 }
@@ -154,7 +154,7 @@
   color: getColorHex("grey-mid");
 }
 .storeOpenTiming {
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
 }
 
 .locationInfo {

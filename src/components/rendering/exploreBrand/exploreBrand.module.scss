@@ -13,7 +13,7 @@
 .title {
   font-size: rem(28);
   margin-bottom: rem(16);
-  color: getColorHex("black");
+  color: getColorHex("black-dark");
   @include md {
     font-size: rem(40);
     margin-bottom: rem(20);
@@ -30,7 +30,7 @@
     font-size: rem(14);
     padding-bottom: rem(20);
     width: 100%;
-    color: getColorHex("grey");
+    color: getColorHex("black-dark");
     line-height: rem(22);
     font-weight: 300;
     @include md {

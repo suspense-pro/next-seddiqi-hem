@@ -42,7 +42,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: getColorHex("green-dark");
+    color: getColorHex("black-dark");
     font-size: rem(16);
     line-height: rem(20);
     letter-spacing: rem(0.4);
@@ -50,7 +50,7 @@
     white-space: nowrap;
 
     &.enabled {
-      color: getColorHex("green-dark");
+      color: getColorHex("black-dark");
     }
 
     &.disabled {

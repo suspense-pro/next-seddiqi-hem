@@ -260,6 +260,23 @@
   letter-spacing: rem(0.4);
   line-clamp: 2;
   -webkit-line-clamp: 2;
+  position: relative; 
+  display: inline-block !important;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;        
+      left: 0;            
+      width: 0;
+      height:rem(1);    
+      background-color: getColorHex("white");
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+
 }
 
 .title,
@@ -269,9 +286,4 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
-}
-
-.desc:hover {
-  color: getColorHex("grey");
-
 }
