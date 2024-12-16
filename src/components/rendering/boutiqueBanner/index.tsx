@@ -40,7 +40,7 @@ const BoutiqueBanner: React.FC<BoutiqueBannerProps> = ({
             {mainTitle?.toUpperCase()}
           </Typography>
           <div className={styles.richTextContainer}>
-            <RichText align="left" text={richText} />
+            <RichText align="" text={richText} />
           </div>
           {cta && cta.label && (
             <div className={styles.ctaContainer}>

@@ -13,8 +13,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const { id } = context.params! ;
     const { mapView } = context.query;
 
-    console.log('Store ID from context params:', id);
-
     const data = await fetchStandardPageData(
         {
             content: {

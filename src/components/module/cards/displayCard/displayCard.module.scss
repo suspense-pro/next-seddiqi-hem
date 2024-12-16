@@ -40,7 +40,7 @@
     line-height: rem(22);
 
     .title {
-      color: getColorHex("green-metallic");
+      color: getColorHex("black");
       letter-spacing: rem(0.4);
       text-transform: uppercase;
       font-size: rem(14);
@@ -48,12 +48,16 @@
 
       @include body_regular;
       @include ellipses;
+
+      [dir="rtl"] & {
+        text-align: right;
+      }
     }
 
     .subTitle {
       color: getColorHex("black-dark");
       font-size: rem(16);
-      @include heading_light;
+      @include body_regular;
       @include ellipses;
       text-decoration: underline;
       text-underline-offset: rem(3);

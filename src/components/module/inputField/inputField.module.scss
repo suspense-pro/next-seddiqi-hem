@@ -80,6 +80,10 @@
     line-height: rem(26);
     letter-spacing: rem(0.2);
 
+    [dir="rtl"] & {
+      right: 0;
+    }
+
     @include md {
       font-size: rem(16);
     }
@@ -89,6 +93,11 @@
   input:not(:placeholder-shown) + label {
     transform: translateY(-180%) scale(0.8);
     color: getColorHex("black");
+
+    [dir="rtl"] & {
+      transform:none;
+      transform: translateY(rem(-40));
+    }
   }
 
   .inputError {
@@ -99,7 +108,7 @@
 .selectGroup {
   width: rem(61);
   label {
-    transform: translateY(-180%) scale(0.8);
+    transform: translateY(rem(-40)) scale(0.8);
   }
 
   option {
@@ -123,4 +132,13 @@
   font-size: rem(10);
   line-height: rem(14);
   letter-spacing: rem(0.2);
+}
+
+
+.dropdownLabel {
+  [dir="rtl"] & {
+    transform:none;
+    transform: translateY(rem(-40));
+  }
+
 }

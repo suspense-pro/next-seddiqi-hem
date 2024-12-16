@@ -17,6 +17,10 @@
     gap: rem(40);
     margin-left: rem(80);
   // margin-top: rem(120);
+  [dir="rtl"] & {
+    margin-left: rem(0);
+    margin-right: rem(80);
+  }
 
   }
 
@@ -123,6 +127,10 @@
 
   div[class^="swiper-button-next"] {
     right: rem(32);
+    [dir="rtl"] & {
+      right: auto;
+    }
+  
   }
 
 
@@ -263,4 +271,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
+}
+
+.desc:hover {
+  color: getColorHex("grey");
+
 }

@@ -25,7 +25,7 @@ const DefaultContentBlock = ({...content}) => {
         </div>
       </div>
       {cta && cta?.label && (
-        <div>
+        <div className={styles.btnContainer}>
           <Button
             className={styles.cta}
             isLink={true}
