@@ -154,26 +154,58 @@ $border-width: rem(1);
     border: none;
     text-align: left;
     color: getColorHex("black-dark");
-    &:hover {
-      color: getColorHex("grey");
-    }
+   
     span {
-      text-decoration-line: underline;
-      text-underline-offset: rem(4);
-      text-decoration: underline;
-      &:hover {
-        text-decoration-color: getColorHex("grey");
-      } 
+      color: getColorHex("black-dark");
+      &::after {
+        margin-top: rem(0.2);
+        content: "";
+        display: block;
+        width: 0;
+        height: rem(1);
+        background-color: getColorHex("black-dark");
+        transition: width 0.3s;
+      }
+    
+      &:hover::after {
+        width: 100%;
+      }
     }
 
     &.green_dark {
       span {
-        color: getColorHex("green-dark");
+        color: getColorHex("black-dark");
+        &::after {
+          margin-top: rem(0.2);
+          content: "";
+          display: block;
+          width: 0;
+          height: rem(1);
+          background-color: getColorHex("black-dark");
+          transition: width 0.3s;
+        }
+      
+        &:hover::after {
+          width: 100%;
+        }
       }
     }
     &.brown_dark {
       span {
-        color: getColorHex("brown-dark");
+        color: getColorHex("black-dark");
+        &::after {
+          margin-top: rem(0.2);
+          content: "";
+          display: block;
+          width: 0;
+          height: rem(1);
+          background-color: getColorHex("black-dark");
+          transition: width 0.3s;
+        }
+      
+        &:hover::after {
+          width: 100%;
+        }
       }
     }
 
@@ -181,8 +213,18 @@ $border-width: rem(1);
       span {
         color: getColorHex("white");
 
-        &:hover {
-          color: getColorHex("black-dark");
+        &::after {
+          margin-top: rem(0.2);
+          content: "";
+          display: block;
+          width: 0;
+          height: rem(1);
+          background-color: getColorHex("white");
+          transition: width 0.3s;
+        }
+      
+        &:hover::after {
+          width: 100%;
         }
       }
     }

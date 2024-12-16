@@ -169,7 +169,7 @@
         position: relative;
 
         &:hover {
-          color: getColorHex("dark-brown");
+          color: getColorHex("black-dark");
         }
 
         @include lg {
@@ -191,7 +191,7 @@
       }
 
       .activeTab {
-        color: getColorHex("dark-brown");
+        color: getColorHex("black-dark");
 
         &::after {
           transform: scaleX(1);

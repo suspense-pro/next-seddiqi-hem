@@ -51,12 +51,25 @@
   .articleBtn {
     width: fit-content;
     display: inline-block;
-    border-bottom: rem(1) solid getColorHex("white");
+    // border-bottom: rem(1) solid getColorHex("white");
     cursor: pointer;
     line-height: rem(18);
     letter-spacing: rem(1);
     font-size: rem(14);
     z-index: 2;
     position: relative;
+    &::after {
+      margin-top: rem(0.2);
+      content: "";
+      display: block;
+      width: 0;
+      height: rem(1);
+      background-color: getColorHex("white");
+      transition: width 0.3s;
+    }
+  
+    &:hover::after {
+      width: 100%;
+    }
   }
 }

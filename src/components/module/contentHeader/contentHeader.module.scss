@@ -63,12 +63,6 @@
   line-height: rem(22);
   letter-spacing: rem(0.4);
   text-align: center;
-  a {
-    span {    
-    text-decoration: underline;
-    text-underline-offset:rem(5); 
-    }
-  }
 
   @include md {
     line-height: rem(26);
