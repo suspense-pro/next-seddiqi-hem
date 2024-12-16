@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback, useContext } from "react";
 import styles from "./rolexHeader.module.scss";
 import Link from "next/link";
 import { ArrowDown } from "@assets/images/svg";
@@ -6,6 +6,7 @@ import { useWindowWidth } from "@utils/useCustomHooks";
 import Image from "../../../module/image/index";
 import NavigationLink from "../../../module/navigationLink";
 import { useRouter } from "next/router";
+import { RolexContext } from "@contexts/rolexContext";
 
 const RolexNavbar = ({ ...content }) => {
   if (!content) return null;
@@ -49,6 +50,7 @@ const RolexNavbar = ({ ...content }) => {
 
   if (!isClient) return null;
   const router = useRouter();
+  const { rolexContact, updateRolexContact } = useContext(RolexContext);
 
   return (
     <div className={styles.container}>
@@ -65,18 +67,35 @@ const RolexNavbar = ({ ...content }) => {
         {windowWidth > screenSize ? (
           <>
             <ul className={`${styles.navbarGreenLinks} ${styles.navbarLinks}`}>
-              {links?.map((link) => (
-                <li key={link?.label}>
-                  <NavigationLink
-                    className={`${link?.url === router?.asPath && styles.activeLink} ${isWhite && styles.navBlack} ${
-                      styles.navLink
-                    }`}
-                    title={link?.label}
-                    isNewTab={link?.isNewTab}
-                    url={link?.url}
-                  />
-                </li>
-              ))}
+              {links?.map((link) =>
+                link?.label?.toLowerCase() !== "contact us" ? (
+                  <li   onClick={() => {
+                    updateRolexContact(false);
+                  }} key={link?.label}>
+                    <NavigationLink
+                      className={`${isWhite && styles.navBlack} ${styles.navLink}`}
+                      title={link?.label}
+                      isNewTab={link?.isNewTab}
+                      url={link?.url}
+                    />
+                  </li>
+                ) : (
+                  <li
+                    onClick={() => {
+                      updateRolexContact(true);
+                    }}
+                    key={link?.label}
+                  >
+                    <div
+                      className={`${link?.url === router?.asPath && styles.activeLink} ${isWhite && styles.navBlack} ${
+                        styles.navLink
+                      }`}
+                    >
+                      <span>{link?.label}</span>
+                    </div>
+                  </li>
+                )
+              )}
             </ul>
             {/* <div className={styles.contactButton}>
               <NavigationLink
@@ -105,7 +124,7 @@ const RolexNavbar = ({ ...content }) => {
             }}
           >
             {links?.map((link, index) => (
-               <li onClick={() => setIsDropdownOpen(false)} key={index}>
+              <li onClick={() => setIsDropdownOpen(false)} key={index}>
                 <NavigationLink
                   className={`${isWhite && styles.navMobileBlack} ${styles.navMobileLink}`}
                   title={link?.label}
