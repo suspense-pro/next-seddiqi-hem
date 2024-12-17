@@ -35,8 +35,8 @@
 .title {
   padding: rem(7 0);
   cursor: pointer;
-  color: getColorHex("green-dark");
-  border-bottom: rem(2) solid getColorHex("green-dark", 0);
+  color: getColorHex("black-dark");
+  border-bottom: rem(2) solid getColorHex("black-dark", 0);
   @include heading_light;
   transition: all 0.3s;
   font-size: rem(14);
@@ -49,7 +49,7 @@
 }
 
 .desc {
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
   font-size: rem(14);
   font-weight: 300;
   line-height: rem(22);

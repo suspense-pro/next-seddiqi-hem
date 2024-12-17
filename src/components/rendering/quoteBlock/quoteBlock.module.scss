@@ -18,7 +18,7 @@
   &.secondary {
     background-color: getColorHex("light-cream");
     .quoteCarouselContainer {
-      padding: rem(60) rem(28); 
+      padding: rem(60) rem(28);
     }
   }
 }
@@ -40,6 +40,11 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+
+  [dir="rtl"] & {
+    align-items: flex-start;
+    text-align: right;
+  }
 }
 
 .logo {
@@ -68,7 +73,7 @@
 .richText {
   @include heading_light;
   font-size: rem(22);
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
   position: relative;
   text-align: center;
 

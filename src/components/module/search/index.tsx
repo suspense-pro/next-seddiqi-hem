@@ -33,44 +33,40 @@ const Search = ({ closeSearch }) => {
     categorySuggestions,
     setCategorySuggestions,
     fetchCategorySuggestions,
-
+    isError,
+    isLoading,
   } = useSearchContext();
 
-  const handleSearchChange = (event) => {
-    const searchTerm = event.target.value;
-    setInputSearchTerm(searchTerm);
+  const handleSearchClick = async () => {
+    if (inputSearchTerm.length > 0) {
+      try {
 
-    if (searchTerm.length === 0) {
-      // Clear suggestions if input is empty
-      setCategorySuggestions([]);
-    } else {
-      fetchCategorySuggestions(searchTerm, activeTab); // Pass activeTab as categoryId
+        setNoResults(false);
+        await fetchCategorySuggestions(inputSearchTerm, activeTab);
+      } catch (error) {
+        console.error("Error during search:", error);
+        setNoResults(true); 
+      }
     }
-  };
-
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-    setInputSearchTerm(""); // Clear the search input when changing tabs
-    setCategorySuggestions([]); // Clear suggestions on tab change
   };
 
   return (
     <div className={styles.searchWrapper}>
-      <div className={styles.searchBarWrapper}>
+      <div className={styles.searchBarWrapper} onClick={handleSearchClick}>
         <SearchIcon fill="#" className={styles.searchIcon} />
         <input
           type="text"
           placeholder={`Search ${activeTab}`}
           value={inputSearchTerm}
-          onChange={handleSearchChange}
           className={styles.searchInput}
+          onChange={(e) => setInputSearchTerm(e.target.value)}
         />
         <div onClick={closeSearch} className={styles.closeIcon}>
           <CloseIconV2 />
         </div>
       </div>
 
-      {inputSearchTerm && (
+      {inputSearchTerm && !isLoading && (
         <div className={styles.autocompleteSuggestions}>
           {categorySuggestions.map((suggestion, index) => (
             <div key={index} className={styles.suggestionItem}>
@@ -81,18 +77,22 @@ const Search = ({ closeSearch }) => {
       )}
 
       <div className={styles.searchContentWrapper}>
-        <SearchTabs activeTab={activeTab} setActiveTab={handleTabChange} />
-        {inputSearchTerm ? (
+        <SearchTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        {isLoading ? (
+          <div className={styles.loading}></div>
+        ) : inputSearchTerm ? (
           <div>
-            <RecommendedSearches
-              categoryDetails={categoriesResults}
-              productRecommendation={recommendationResults}
-              searchTerm={inputSearchTerm}
-            />
-            {noResults && <NoSearchResultFound />}
+            {!isError && (
+              <RecommendedSearches
+                categoryDetails={categoriesResults}
+                productRecommendation={recommendationResults}
+                searchTerm={inputSearchTerm}
+              />
+            )}
+            {(noResults || isError) && <NoSearchResultFound message={inputSearchTerm} />}
           </div>
         ) : (
-          <>
+          <div>
             {activeTab === "stories" ? (
               <div className={styles.storiesWrapper}>
                 <StoriesResults storiesResults={storiesResults} />
@@ -104,8 +104,7 @@ const Search = ({ closeSearch }) => {
                 productSuggestions={productSuggestions}
               />
             )}
-            {noResults && <NoSearchResultFound />}
-          </>
+          </div>
         )}
       </div>
     </div>

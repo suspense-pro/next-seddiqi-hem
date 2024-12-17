@@ -68,7 +68,7 @@
   border-radius: 4px 0px;
   background: getColorHex("tint-grey");
   padding: rem(6) rem(12);
-  color: getColorHex("brown-dark");
+  color: getColorHex("black-dark");
   font-size: rem(10);
   line-height: rem(14);
   letter-spacing:rem(0.2);
@@ -77,7 +77,7 @@
 
 .headingPrimary {
   @include heading_light;
-  color: getColorHex("brown-dark");
+  color: getColorHex("black-dark");
   margin: 0;
   text-align: center;
   text-transform: uppercase;
@@ -94,7 +94,7 @@
 
 .description {
   @include body_regular;
-  color: getColorHex("grey");
+  color: getColorHex("black-dark");
   text-align: center;
   font-size: rem(14);
   line-height: rem(22);

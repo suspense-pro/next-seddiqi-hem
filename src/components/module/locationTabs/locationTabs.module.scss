@@ -55,6 +55,11 @@
       transition: all 0.3s ease;
       position: relative;
       box-sizing: border-box;
+
+      [dir="rtl"] & {
+        justify-content: flex-start;
+        padding-right: 0;
+      }
   
       &::after{
         content: "";
@@ -74,7 +79,7 @@
       }
   
       &.active{
-        color: getColorHex("green-dark");
+        color: getColorHex("black-dark");
         pointer-events: none;
   
         &::after{
@@ -83,7 +88,7 @@
       }
   
       &:hover{
-        color: getColorHex("green-dark");
+        color: getColorHex("black-dark");
         //border-bottom: rem(2) solid rgba(getColorHex("chocolate-brown"), 1);
   
         &::after{

@@ -258,7 +258,7 @@ const ProductDetailInfo = ({
                     link={"/"}
                     className={styles.appointmentBtn}
                     title={"Book An Appointment"}
-                    color="green_dark"
+                    color="black_dark"
                     type={"Plain"}
                     clickHandler={handleBookAppointment}
                   />
@@ -276,7 +276,7 @@ const ProductDetailInfo = ({
                   link={"/"}
                   className={styles.readMore}
                   title={"Read More"}
-                  color="green_dark"
+                  color="black_dark"
                   type={"Plain"}
                   clickHandler={() => handleCardToggle("description")}
                 />*/}
@@ -367,7 +367,7 @@ const ProductDetailInfo = ({
         showBackButton={false}
         title="Find product in Boutique"
         position={"right"}
-        button2Color={"green_dark"}
+        button2Color={"black_dark"}
       >
         <StoreLocator
           productImgAlt={product?.imageGroups[0]?.images[0].alt}

@@ -21,7 +21,7 @@ export const useVisualization = () => {
 const WithVisualization = (props: WithVisualizationProps) => {
     const [status, setStatus] = useState<VisualizationConnectionStatus>('failed');
     const [sdk, setSDK] = useState<typeof DcVisualizationStatic | null>(null);
-    const [formModel, setFormModel] = useState<any>(null);
+    const [formModel, setFormModel] = useState<any>(props); 
 
     useEffect(() => {
         setStatus('connecting');
@@ -70,7 +70,7 @@ const WithVisualization = (props: WithVisualizationProps) => {
 };
 
 export function useContent(content: any, vse: string): [any, any | undefined] {
-    const { formModel } = useVisualization() || {};
+    const { formModel } = useVisualization() || {};  
     if (vse === '') {
         return [content, undefined];
     }
