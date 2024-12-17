@@ -129,7 +129,7 @@ const RecommendedSearches = ({ categoryDetails, productRecommendation, searchTer
             link={""}
             className={styles.viewAllBtn}
             title={"View All"}
-            color="green_dark"
+            color="black_dark"
             type={"Plain"}
             clickHandler={handleViewAllClick}
           />
