@@ -843,7 +843,7 @@ export default function FindABoutiqueListing({ content }: InferGetServerSideProp
                   )}
               </div>
 
-              <button className={`${styles.clearAll} button plain green_dark`} onClick={handleClearAll}>
+              <button className={`${styles.clearAll} button plain black_dark`} onClick={handleClearAll}>
                   <span>Clear All</span>
               </button>
           </div>

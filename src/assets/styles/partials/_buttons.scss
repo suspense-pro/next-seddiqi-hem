@@ -75,14 +75,14 @@ $border-width: rem(1);
         border: rem(1) solid getColorHex("black-dark");
       }
     }
-    &.green_dark {
-      background-color: getColorHex("green-dark");
+    &.black_dark {
+      background-color: getColorHex("black-dark");
       color: getColorHex("white");
-      border: rem(1) solid getColorHex("green-dark");
+      border: rem(1) solid getColorHex("black-dark");
 
       &:hover {
-        background-color: getColorHex("green-grey");
-        border: rem(1) solid getColorHex("green-grey");
+        background-color: getColorHex("black-dark");
+        border: rem(1) solid getColorHex("black-dark");
       }
     }
     &.green_grey {
@@ -127,13 +127,13 @@ $border-width: rem(1);
         background-color: getColorHex("bronze-grey");
       }
     }
-    &.green_dark {
-      color: getColorHex("green-dark");
-      border-color: getColorHex("green-dark");
+    &.black_dark {
+      color: getColorHex("black-dark");
+      border-color: getColorHex("black-dark");
 
       &:hover {
         color: getColorHex("white");
-        background-color: getColorHex("green-dark");
+        background-color: getColorHex("black-dark");
       }
     }
     &.grey_light {
@@ -172,7 +172,7 @@ $border-width: rem(1);
       }
     }
 
-    &.green_dark {
+    &.black_dark {
       span {
         color: getColorHex("black-dark");
         &::after {
