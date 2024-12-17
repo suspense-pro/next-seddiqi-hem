@@ -24,7 +24,7 @@
   right: rem(28);
   bottom: rem(28);
   display: flex;
-  z-index: 1;
+  z-index: 1000;
 
   @include md {
     right: rem(36);
