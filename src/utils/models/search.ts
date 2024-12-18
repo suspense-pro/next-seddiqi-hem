@@ -30,4 +30,9 @@ export interface NoResultsProps {
     productResults: any[]; 
     setProductResults: (products: any[]) => void;
     openSearch: () => void;
+    closeSearch: () => void;
+    isError: boolean;
+    setIsError: (error: boolean) => void;
+    isLoading: boolean;
+    
   } 

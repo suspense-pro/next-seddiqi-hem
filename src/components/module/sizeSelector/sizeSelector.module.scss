@@ -7,7 +7,7 @@
   letter-spacing: rem(0.4);
   text-transform: uppercase;
   margin-bottom: rem(24);
-  color:  getColorHex("green-dark");
+  color:  getColorHex("black-dark");
 
   @include md {
     font-size: rem(26);
@@ -72,7 +72,7 @@
   margin-bottom: rem(32);
   .sizeGuideBtn {
     @include body_regular;
-    color: getColorHex("green-dark");
+    color: getColorHex("black-dark");
     font-size: rem(14);
     font-style: normal;
     line-height: rem(18);
@@ -85,7 +85,7 @@
 
     .findMySizeBtn {
       @include body_regular;
-      color: getColorHex("green-dark");
+      color: getColorHex("black-dark");
       font-size: rem(14);
       font-style: normal;
       line-height: rem(18);

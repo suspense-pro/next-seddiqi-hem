@@ -34,13 +34,14 @@
   }
 
   .displayCardInfo {
-    display: flex;
+    //display: flex;
+    display: block;
     flex-direction: column;
     gap: rem(8);
     line-height: rem(22);
 
     .title {
-      color: getColorHex("green-metallic");
+      color: getColorHex("black");
       letter-spacing: rem(0.4);
       text-transform: uppercase;
       font-size: rem(14);
@@ -48,13 +49,33 @@
 
       @include body_regular;
       @include ellipses;
+
+      [dir="rtl"] & {
+        text-align: right;
+      }
     }
 
     .subTitle {
-      color: getColorHex("green-dark");
+      color: getColorHex("black-dark");
       font-size: rem(16);
-      @include heading_light;
+      @include body_regular;
       @include ellipses;
+      position: relative; 
+      display: inline-block;     
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;        
+          left: 0;            
+          width: 0;
+          height:rem(1);    
+          background-color: getColorHex("black-dark");
+          transition: width 0.3s ease;
+        }
+    
+        &:hover::after {
+          width: 100% !important;
+        }
     }
   }
 }

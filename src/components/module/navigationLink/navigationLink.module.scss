@@ -4,7 +4,7 @@
   transition: all 0.2s;
   &:hover {
     opacity: 0.8;
-    color: getColorHex("green-dark");
+    color: getColorHex("black-dark");
     // letter-spacing: rem(1);
   }
   &:active {

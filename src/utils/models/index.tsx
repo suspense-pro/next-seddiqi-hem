@@ -16,5 +16,6 @@ export type { ExploreBrandProps } from "./exploreBrand";
 export type { CategoryListProps } from "./categoryList";
 export type { SignUpFormErrors, SignInFormErrors } from "./errors";
 export type { AccountConfirmationBoxProps } from "./register";
+export type { CarouselProps } from "./carousel";
 
 

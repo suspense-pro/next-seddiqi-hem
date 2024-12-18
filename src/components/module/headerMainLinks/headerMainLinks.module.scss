@@ -42,7 +42,7 @@
     .headerLink {
       padding: rem(7 0);
       cursor: pointer;
-      color: getColorHex("brown-dark");
+      color: getColorHex("black-dark");
       @include heading_light;
       transition: all 0.3s;
       font-size: rem(16);
@@ -58,7 +58,7 @@
         display: block;
         width: 0;
         height: rem(2);
-        background-color: getColorHex("green-dark");
+        background-color: getColorHex("black-dark");
         transition: width 0.3s;
       }
 
@@ -68,7 +68,7 @@
     }
 
     .headerLinkActive {
-      border-bottom: rem(2) solid getColorHex("green-dark");
+      border-bottom: rem(2) solid getColorHex("black-dark");
     }
   }
 

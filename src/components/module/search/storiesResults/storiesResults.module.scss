@@ -26,10 +26,13 @@
 .storyCards {
   display: flex;
   flex-wrap: wrap;
-  gap: rem(80);
+  row-gap: rem(24);
 }
 
 .storyCard {
-  flex: 1 1 calc(50% - 40px);
+  flex: 1 1 100%;
   box-sizing: border-box;
+  @include md{
+    flex: 1 1 calc(40% - 40px);
+  }
 }

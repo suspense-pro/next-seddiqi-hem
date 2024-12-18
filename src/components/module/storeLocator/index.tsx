@@ -236,14 +236,20 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
       return 0;
     });
 
+    const sortedNearestStores = [...storesList].sort((a, b) => {
+      const distanceA = a.distance || Infinity; // Ensure a fallback if distance is not available
+      const distanceB = b.distance || Infinity;
+      return distanceA - distanceB; // Ascending order: nearest first
+    });
+
     return (
       <>
         <div className={styles.mapContainer}>
         {nearestStore && userLocation && (
           <MapView 
             nearestStore={nearestStore} 
-            stores={sortedStoreList} 
-            activeStore={sortedLocationStores[activeIndex]} 
+            stores={sortedNearestStores} 
+            activeStore={sortedNearestStores[activeIndex]} 
             userLocation={userLocation} 
             useOnPopup={true}
             handleStoreClick={handleStoreClick}
@@ -254,7 +260,7 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
           <MapView 
             nearestStore={null} 
             stores={sortedStoreList} 
-            activeStore={sortedLocationStores[activeIndex]} 
+            activeStore={sortedStoreList[activeIndex]} 
             userLocation={null} 
             useOnPopup={true}
             handleStoreClick={handleStoreClick}
@@ -263,17 +269,33 @@ const StoreLocator = ({ productImgAlt, productImgSrc, productBrand, productName,
         )}
         </div>
         
-        <div className={styles.storeMapListWrapper}>
-          <StoreMapListContainer 
-            storesList={sortedStoreList} 
-            activeIndex={activeIndex} 
-            handleStoreClick={handleStoreClick} 
-            isMobile={isMobile} 
-            isAbsolutePosition={false}
-            needScrollbar={false} //For Desktop Only
-            useOnPopup={true}
-          />
-        </div>
+        {nearestStore && userLocation && (
+          <div className={styles.storeMapListWrapper}>
+            <StoreMapListContainer 
+              storesList={sortedNearestStores} 
+              activeIndex={activeIndex} 
+              handleStoreClick={handleStoreClick} 
+              isMobile={isMobile} 
+              isAbsolutePosition={false}
+              needScrollbar={false} //For Desktop Only
+              useOnPopup={true}
+            />
+          </div>
+        )}
+        {!userLocation && (
+          <div className={styles.storeMapListWrapper}>
+            <StoreMapListContainer 
+              storesList={sortedStoreList} 
+              activeIndex={activeIndex} 
+              handleStoreClick={handleStoreClick} 
+              isMobile={isMobile} 
+              isAbsolutePosition={false}
+              needScrollbar={false} //For Desktop Only
+              useOnPopup={true}
+            />
+          </div>
+        )}
+        
       </>
     );
   };

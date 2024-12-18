@@ -267,3 +267,25 @@
     }
   }
 }
+
+.amp-dc-text {
+  a {
+    color: inherit;
+    position: relative; 
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;        
+      left: 0;            
+      width: 0;
+      height: rem(1);    
+      background-color: currentColor;
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+}

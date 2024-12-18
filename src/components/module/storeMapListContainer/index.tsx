@@ -172,7 +172,7 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
                       <a
                         href="/"
                         target="_blank"
-                        className={`${styles.storeMapLink} button plain green_dark`}
+                        className={`${styles.storeMapLink} button plain black_dark`}
                         onClick={(e) => {
                           e.preventDefault();
                           handleStoreDtetails(store);
@@ -183,7 +183,7 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
                       <a
                         href={store.c_googleMapLocation}
                         target="_blank"
-                        className={`${styles.storeMapLink} button plain green_dark`}
+                        className={`${styles.storeMapLink} button plain black_dark`}
                       >
                         <span>Get Directions</span>
                       </a>
@@ -225,7 +225,7 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
                   <a
                     href="/"
                     target="_blank"
-                    className={`${styles.storeMapLink} button plain green_dark`}
+                    className={`${styles.storeMapLink} button plain black_dark`}
                     onClick={(e) => {
                       e.preventDefault();
                       handleStoreDtetails(store);
@@ -236,7 +236,7 @@ const StoreMapListContainer: React.FC<StoreMapListContainerProps> = ({
                   <a
                     href={store.c_googleMapLocation}
                     target="_blank"
-                    className={`${styles.storeMapLink} button plain green_dark`}
+                    className={`${styles.storeMapLink} button plain black_dark`}
                   >
                     <span>Get Directions</span>
                   </a>

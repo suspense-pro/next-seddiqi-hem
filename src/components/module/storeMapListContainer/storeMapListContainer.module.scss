@@ -223,7 +223,7 @@
     font-size: rem(18);
     line-height: rem(26);
     letter-spacing: rem(0.4);
-    color: getColorHex("green-dark");
+    color: getColorHex("black-dark");
     display: block;
     margin: 0;
     text-align: left;
@@ -263,7 +263,7 @@
         font-size: rem(14);
         line-height: rem(22);
         letter-spacing: rem(0.2);
-        color: getColorHex("green-dark");
+        color: getColorHex("black-dark");
         display: flex;
         align-items: center;
         column-gap: rem(3);
@@ -289,6 +289,10 @@
                 text-align: left;
                 line-height: normal;
                 align-items: flex-start;
+
+                [dir="rtl"] & {
+                    text-align: right;
+                }
 
                 &::before{
                     content: "|";
