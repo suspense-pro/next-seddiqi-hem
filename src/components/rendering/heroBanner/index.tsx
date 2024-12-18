@@ -20,12 +20,13 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
 
   if (!banners || banners.length === 0) return null;
 
-  const containerClass = 
-  bannerType === "full_banner" ? styles.fullWidth : 
-  bannerType === "content_banner" ? styles.mediumWidth : 
-  styles.smallWidth;
+  const bannerStyles = {
+    full_banner: styles.fullWidth,
+    content_banner: styles.mediumWidth,
+    small_banner: styles.smallWidth,
+  };
 
-  console.log("bannerType" ,bannerType)
+  const containerClass = bannerStyles[bannerType] || styles.fullWidth;
 
   const slides = banners
     ?.map((banner) => {
@@ -53,9 +54,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
   }`;
 
   const contentAlign =
-    activeBanner?.horizontalAlignment === "right"
-      ? "left"
-      : activeBanner?.horizontalAlignment || "center";
+    activeBanner?.horizontalAlignment === "right" ? "left" : activeBanner?.horizontalAlignment || "center";
 
   // console.log("HeroBanner -> activeBanner", activeBanner);
   return (
@@ -65,9 +64,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
           <div className={styles.bannerItem}>
             <div
               className={`${styles.textContainer} ${styles[alignmentClass]} ${
-                activeBanner.verticalAlignment === "bottom"
-                  ? styles.bottomPadding
-                  : ""
+                activeBanner.verticalAlignment === "bottom" ? styles.bottomPadding : ""
               }`}
             >
               {activeBanner.logoIcon && activeBanner.logoIcon.image && (
@@ -80,11 +77,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
                 </div>
               )}
               {activeBanner.mainTitle && (
-                <Typography
-                  align={contentAlign}
-                  variant="h1"
-                  className={styles.title}
-                >
+                <Typography align={contentAlign} variant="h1" className={styles.title}>
                   {activeBanner.mainTitle}
                 </Typography>
               )}
@@ -94,11 +87,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
                 </div>
               )}
               {activeBanner.richText && (
-                <RichText
-                  align={contentAlign}
-                  className={styles.description}
-                  text={activeBanner.richText}
-                />
+                <RichText align={contentAlign} className={styles.description} text={activeBanner.richText} />
               )}
 
               {activeBanner.cta &&
@@ -131,29 +120,22 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
             }
             className={styles.containerImg}
           > */}
-            <Carousel
-              slides={slides}
-              setSwiper={setSwiper}
-              setActiveIndex={setActiveIndex}
-              setTransition={"fade"}
-              setSpeed={2000}
-              isAnimated={"no"}
-              opacity={
-                !activeBanner?.opacity?.hideOverlay
-                  ? activeBanner?.opacity?.opacity
-                  : null
-              }
-            />
+          <Carousel
+            slides={slides}
+            setSwiper={setSwiper}
+            setActiveIndex={setActiveIndex}
+            setTransition={"fade"}
+            setSpeed={2000}
+            isAnimated={"no"}
+            opacity={!activeBanner?.opacity?.hideOverlay ? activeBanner?.opacity?.opacity : null}
+            className={bannerStyles[bannerType] || styles.fullWidth}
+          />
           {/* </GradientOverlay> */}
         </div>
 
         {slides && slides.length > 1 && (
           <div className={styles.carouselBtnsContainer}>
-            <CarouselBtns
-              swiper={swiper}
-              activeIndex={activeIndex}
-              slides={slides}
-            />
+            <CarouselBtns swiper={swiper} activeIndex={activeIndex} slides={slides} />
           </div>
         )}
       </div>

@@ -18,6 +18,7 @@ const Carousel: React.FC<CarouselProps> = ({
   setSpeed,
   isAnimated,
   opacity = 0,
+  className
 }) => {
   // console.log("slides------", slides)
   const onSlideChange = (swiperInstance) => {
@@ -43,7 +44,7 @@ const Carousel: React.FC<CarouselProps> = ({
       {slides.map((slide, index) => {
         return (
           <SwiperSlide key={index} className={isAnimated === "yes" ? styles.swiperSlide : ""}>
-            <GradientOverlay opacity={opacity} className={styles.containerImg}>
+            <GradientOverlay opacity={opacity} heightClass={className} className={styles.containerImg}>
               {isAnimated === "yes" ? (
                 <div
                   style={

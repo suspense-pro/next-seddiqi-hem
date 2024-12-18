@@ -6,5 +6,6 @@ export interface CarouselProps {
     setSpeed: any; 
     isAnimated: any
     opacity?: number; 
+    className?: any; 
   }
   
