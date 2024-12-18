@@ -72,6 +72,7 @@ const ProductCard = ({ item, hasCarousel = false }: Props) => {
             setActiveIndex={setActiveIndex}
             setTransition={"slide"}
             setSpeed={500}
+            href={`/product/${cleanedId}`}
           />
         ) : (
           <Image
