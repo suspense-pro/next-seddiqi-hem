@@ -44,7 +44,7 @@ const fetchContent = async (
 ): Promise<(CmsContent | CmsFilterResponse | null)[]> => {
     const { cms } = await createAppContext();
     
-    const host = `${cms.hubName}.cdn.content.amplience.net`;
+    const host = context.stagingApi || `${cms.hubName}.cdn.content.amplience.net`;
     try {
         return await Promise.all(
             items.map((request: CmsRequest): Promise<CmsContent | CmsFilterResponse> => {

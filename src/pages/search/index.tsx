@@ -1,16 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchProvider } from "@contexts/searchContext";
 import {PlpContent, Search} from '@components/module';
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { getSearchSuggestions } from "@utils/sfcc-connector/dataService";
-import { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { isEmpty } from "@utils/helpers";
-import { useRouter } from 'next/router';
+import Layout from "@components/layout";
+import {
+  getProducts,
+} from "@utils/sfcc-connector/dataService";
+import Typography from "@components/module/typography";
+import styles from "./searchStyle.module.scss";
 
 
-const SearchPage = ({product}) => {
-  const router = useRouter();
-  const { recommendations } = router.query;
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { recommendations } = context.query;
   const parsedRecommendations = (() => {
     if (Array.isArray(recommendations)) {
       return recommendations.length > 0 ? JSON.parse(recommendations.join('')) : [];
@@ -18,20 +22,95 @@ const SearchPage = ({product}) => {
 
     return recommendations ? JSON.parse(recommendations) : [];
   })();
+  
+  const data = await fetchStandardPageData(
+      {
+          content: {
+              page: { key: "/" },
+          },
+      },
+      context
+  );
 
-  const hasRecommendations = Array.isArray(parsedRecommendations) && parsedRecommendations.length > 0;
+  return {
+      props: {
+          ...data,
+          parsedRecommendations
+
+      },
+  };
+}
+
+export default function SearchPage(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const { parsedRecommendations } = props;
+  const [productDetails, setProductDetails] = useState<any[]>([]); 
+  const [loading, setLoading] = useState<boolean>(true); 
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch recommendations from sessionStorage if available
+  useEffect(() => {
+    const storedRecommendations = sessionStorage.getItem("allProductRecommendations");
+    
+    if (storedRecommendations) {
+    
+      const parsedRecommendationsFromStorage = JSON.parse(storedRecommendations);
+      
+  
+      fetchProductDetails(parsedRecommendationsFromStorage);
+    } else if (parsedRecommendations?.length > 0) {
+      
+      fetchProductDetails(parsedRecommendations);
+    }
+  }, []);
+
+  const fetchProductDetails = async (recommendations: string[]) => {
+    if (recommendations.length > 0) {
+      try {
+    
+        const products = await getProducts({
+          pids: recommendations, 
+          method: "GET", 
+        });
+
+     
+        if (products) {
+          setProductDetails(products.data); 
+        } else {
+          setError("No products found.");
+        }
+      } catch (err) {
+        setError("Error fetching products.");
+        console.error(err); 
+      } finally {
+        setLoading(false); 
+      }
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
+
+  if (error) {
+    return <div>{error}</div>; 
+  }
+
   return (
-    <div>
-        {parsedRecommendations.length > 0 && (
-          <>
+    <div className="main-content">
+      {productDetails?.length > 0 && (
+        <>
+         <Typography variant="h2" className={styles.searchResultLabel}>
+          Search Results
+        </Typography>
           <PlpContent 
-            products={parsedRecommendations}
+            products={productDetails}
             productGridContent={null}
           />
-          </>
-        ) }
+        </>
+      )}
     </div>
   );
-};
+}
 
-export default SearchPage;
+SearchPage.Layout = Layout;
+

@@ -54,13 +54,13 @@ export default function Footer({ footerData }: FooterPropType) {
           {isDesktop && (
             <>
               <NewsletterSignup />
-              {/* <LanguageSelector /> */}
+              <LanguageSelector />
             </>
           )}
           {!isDesktop && (
             <>
               <NewsletterSignup />
-              {/* <LanguageSelector /> */}
+              <LanguageSelector />
             </>
           )}
         </div>

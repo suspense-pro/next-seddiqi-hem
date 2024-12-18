@@ -14,11 +14,13 @@
 
   }
   max-width: rem(800);
+  width: 100%;
 
   [dir="rtl"] & {
-    margin: 0;
+    margin: 0 auto;
     padding: rem(0);
     align-items: flex-start;
+    
   }
 }
 
@@ -27,7 +29,8 @@
   height: rem(2);
   text-align: center;
   margin: 0 auto;
-  background-color: getColorHex("chocolate-brown");
+  background-color: getColorHex("metallic");
+  background-color: getColorHex("metallic");
 
   [dir="rtl"] & {
     margin: 0;
@@ -40,7 +43,7 @@
   text-align: center;
   text-transform: uppercase;
   font-size: rem(28);
-  color: getColorHex('brown-dark');
+  color: getColorHex('black-dark');
   
   @include md {
     font-size: rem(40);
@@ -52,7 +55,7 @@
 }
 
 .headingSecondary {
-  color: getColorHex('grey');
+  color: getColorHex('black-dark');
   line-height: rem(26);
   @include body_regular;
 

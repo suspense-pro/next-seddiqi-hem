@@ -67,7 +67,7 @@
 }
 
 .headingPrimary {
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
   margin: 0;
   @include heading_light;
 }
@@ -75,16 +75,16 @@
 .headingSecondary {
   line-height: rem(26);
   letter-spacing: rem(0.4);
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
   @include body_regular;
 }
 
 .titleColor {
-  color: getColorHex("brown-dark");
+  color: getColorHex("black-dark");
 }
 
 .subTitleColor {
-  color: getColorHex("grey");
+  color: getColorHex("black-dark");
 }
 
 .barColor {
@@ -98,7 +98,7 @@
 .bar {
   width: rem(70);
   height: rem(2);
-  background: getColorHex("metallic-grey");
+  background: getColorHex("metallic");
 }
 
 .discoverBtn {

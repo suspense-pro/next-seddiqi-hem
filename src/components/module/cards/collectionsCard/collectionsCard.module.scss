@@ -94,9 +94,11 @@
     flex-direction: column;
     gap: rem(8);
     bottom: rem(32);
-    // @include md {
-    // }
-
+    
+    [dir="rtl"] & {
+      padding: rem(0 28);
+      align-items: flex-start;
+    }
     .category {
       @include heading_light;
       font-size: rem(16);
@@ -123,10 +125,15 @@
       background-color: getColorHex("white");
       margin: 0 auto;
       margin-top: rem(8);
+      
+      [dir="rtl"] & {
+        margin: 0;
+        margin-top: rem(8);
+      }
     }
   }
 
   .productContent {
-    color: getColorHex("green-dark");
+    color: getColorHex("black-dark");
   }
 }

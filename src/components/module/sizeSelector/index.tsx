@@ -124,7 +124,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
         <Button
           className={styles.sizeGuideBtn}
           title={"Size Guide"}
-          color="green_dark"
+          color="black_dark"
           type={"Plain"}
           clickHandler={openSizeGuide}
         />
@@ -149,7 +149,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
         onSubmit={null}
         onClearAll={null}
         className={""}
-        button2Color={"green_dark"}
+        button2Color={"black_dark"}
       >
         <div className={styles.contentWrapper}>
           <div className={styles.content}>
@@ -172,7 +172,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
                 link={"/"}
                 className={styles.findMySizeBtn}
                 title={"Find My Size"}
-                color="green_dark"
+                color="black_dark"
                 type={"Plain"}
               />
             </span>

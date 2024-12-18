@@ -109,8 +109,6 @@ export default function ProductPage({
 }) {
   const productTechSpecs = product?.techSpecs;
 
-  console.log(shippingData?.content?.page);
-
   return (
     <div className="main-content">
       <ProductDetailInfo

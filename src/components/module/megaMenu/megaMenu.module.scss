@@ -27,8 +27,14 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: rem(60 120);
+    padding: rem(60);
+    gap: rem(71);
 
+    @include breakpoint-min-width(rem(1270)) {
+      padding: rem(60 120);
+    }
+    
+    
     @include breakpoint-max-width(rem(1150)) {
       flex-direction: column;
       gap: rem(20);

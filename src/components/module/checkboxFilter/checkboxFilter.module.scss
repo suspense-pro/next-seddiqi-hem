@@ -96,10 +96,10 @@
   button {
     background: none;
     border: none;
-    color: getColorHex("green-dark");
+    color: getColorHex("black-dark");
     cursor: pointer;
     margin: rem(0 0 8);
-    border-bottom: rem(1) solid getColorHex("green-dark");
+    border-bottom: rem(1) solid getColorHex("black-dark");
     padding: rem(5 0);
     @include md {
       margin: rem(0 0 23);

@@ -14,7 +14,7 @@
     text-align: center;
     .title {
       @include heading_light;
-      color: getColorHex("green-dark");
+      color: getColorHex("black-dark");
       font-size: rem(22);
       font-weight: 500;
       line-height: rem(30);
