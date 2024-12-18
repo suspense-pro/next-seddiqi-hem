@@ -54,6 +54,7 @@
     list-style: none;
     flex-direction: row;
     padding: 0;
+    align-items: center;
 
     li {
       .navLink {
@@ -64,6 +65,7 @@
         text-transform: capitalize;
         transition: all 0.3s;
         font-weight: 700;
+        cursor: pointer;
 
         @include md {
           font-size: rem(14);
@@ -78,6 +80,7 @@
       .navBlack {
         color: getColorHex("brown-grey");
         font-weight: 400;
+        cursor: pointer;
 
         &:hover {
           color: getColorHex("green-dark");

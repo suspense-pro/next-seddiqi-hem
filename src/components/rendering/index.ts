@@ -19,6 +19,7 @@ import ExploreBrand from "./exploreBrand";
 import Spacing from "./spacing";
 import ContentAndImageTwoColumn from "./contentAndImageTwoColumn";
 import ContentAndSingleImageColumn from "./contentAndSingleImageColumn";
+import TitleAndTwoBlockImageContentOverlap from "./titleAndTwoBlockImageContentOverlap";
 
 
 
@@ -43,5 +44,6 @@ export {
   ExploreBrand,
   ContentAndImageTwoColumn,
   Spacing,
-  ContentAndSingleImageColumn
+  ContentAndSingleImageColumn,
+  TitleAndTwoBlockImageContentOverlap
 };
