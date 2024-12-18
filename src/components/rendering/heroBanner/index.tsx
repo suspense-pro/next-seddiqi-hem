@@ -20,12 +20,8 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
 
   if (!banners || banners.length === 0) return null;
 
-  const containerClass = 
-  bannerType === "full_banner" ? styles.fullWidth : 
-  bannerType === "content_banner" ? styles.mediumWidth : 
-  styles.smallWidth;
-
-  console.log("bannerType" ,bannerType)
+  const containerClass =
+  bannerType === "full_banner" ? styles.fullWidth : styles.standardWidth;
 
   const slides = banners
     ?.map((banner) => {
