@@ -16,38 +16,11 @@
     @include md {
       height: rem(880);
     }
-    video {
-      height: rem(742);
-      @include md {
-        height: rem(880);
-      }
-    }
   }
 
   .containerImg {
     height: 100%;
   }
-  &.fullWidth {
-    width: 100%;
-  }
-
-  &.mediumWidth {
-    width: auto;
-    height: rem(660);
-    
-    @include md {
-      height: rem(680);
-    }
-  }
-  &.smallWidth {
-    width: auto;
-    height: rem(340);
-    
-    @include md {
-      height: rem(420);
-    }
-  }
-
   .bannerItem {
     position: absolute;
     width: 100%;
@@ -235,6 +208,48 @@
   }
 }
 
+
+.fullWidth {
+  width: 100%;
+
+  video {
+    height: rem(742);
+    @include md {
+      height: rem(880);
+    }
+  }
+}
+
+.mediumWidth {
+  width: auto;
+  height: rem(660);
+
+  @include md {
+    height: rem(680);
+  }
+
+  video {
+    height: rem(660) !important;
+    @include md {
+      height: rem(680) !important;
+    }
+  }
+}
+.smallWidth {
+  width: auto;
+  height: rem(340);
+
+  @include md {
+    height: rem(420);
+  }
+
+  video {
+    height: rem(340) !important;
+    @include md {
+      height: rem(420) !important;
+    }
+  }
+}
 .ctaButton {
   width: 100%;
   display: flex;
