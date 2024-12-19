@@ -19,7 +19,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (!banners || banners.length === 0) return null;
-  bannerType="small_banner"
+  bannerType=null
 
   const bannerStyles = {
     full_banner: styles.fullWidth,
