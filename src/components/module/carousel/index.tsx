@@ -18,7 +18,8 @@ const Carousel: React.FC<CarouselProps> = ({
   setSpeed,
   isAnimated,
   opacity = 0,
-  className
+  className,
+  imgClass
 }) => {
   // console.log("slides------", slides)
   const onSlideChange = (swiperInstance) => {
@@ -69,7 +70,7 @@ const Carousel: React.FC<CarouselProps> = ({
               ) : (
                 <div style={{ position: "relative", width: "100%", height: "100%" }}>
                   {slide.type === "image" ? (
-                    <Image layout="fill" objectFit="cover" alt={`Slide ${index + 1}`} src={slide.url} />
+                    <Image layout="fill" objectFit="cover" alt={`Slide ${index + 1}`} src={slide.url} className={imgClass} />
                   ) : slide.type === "video" ? (
                     // <video
                     //   src={slide.url}

@@ -19,6 +19,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (!banners || banners.length === 0) return null;
+  bannerType="small_banner"
 
   const bannerStyles = {
     full_banner: styles.fullWidth,
@@ -61,7 +62,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
     <>
       <div className={`${styles.heroBanner} ${containerClass}`}>
         {activeBanner && (
-          <div className={styles.bannerItem}>
+          <div className={`${styles.bannerItem}`}>
             <div
               className={`${styles.textContainer} ${styles[alignmentClass]} ${
                 activeBanner.verticalAlignment === "bottom" ? styles.bottomPadding : ""
@@ -129,6 +130,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
             isAnimated={"no"}
             opacity={!activeBanner?.opacity?.hideOverlay ? activeBanner?.opacity?.opacity : null}
             className={bannerStyles[bannerType] || styles.fullWidth}
+            imgClass={styles.imgClass}
           />
           {/* </GradientOverlay> */}
         </div>
