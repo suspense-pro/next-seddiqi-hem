@@ -24,12 +24,12 @@
   font-size: rem(14);
   line-height: rem(22);
   letter-spacing: rem(0.4);
-  color: getColorHex("grey-dark");
+  color: getColorHex("black-dark");
   cursor: pointer;
 }
 
 .label {
-  color:getColorHex("black");
+  color:getColorHex("black-dark");
   @include body_bold;
   font-size: rem(14);
   font-style: normal;
