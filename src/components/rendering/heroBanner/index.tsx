@@ -18,6 +18,8 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ banners, bannerType }) => {
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // bannerType = "content_banner"
+
   if (!banners || banners.length === 0) return null;
   const bannerStyles = {
     full_banner: styles.fullWidth,
