@@ -9,7 +9,7 @@
   .heroBannerContainer {
     position: relative;
     width: 100%;
-    height: rem(742);
+    // height: rem(742);
     margin: 0 auto;
     z-index: 1;
   }
@@ -206,22 +206,22 @@
 
 .fullWidth {
   width: 100%;
-  min-height: rem(400);
-  max-height: rem(742);
-  height: calc(100vh - 121px);
+  height: rem(742) !important;
+  // height: calc(100vh - 121px);
   @include md {
-    min-height: rem(400);
-    height: calc(100vh - 222px);
+    // height: calc(100vh - 222px);
+    height: rem(880) !important;
   }
 
   .imgClass,
   video {
     min-height: rem(400);
-    height: calc(100vh - 121px) !important;
+    // height: calc(100vh - 121px) !important;
+    height: rem(742) !important;
     @include md {
       min-height: rem(400);
-      height: calc(100vh - 222px) !important;
-      max-height: rem(880);
+      // height: calc(100vh - 222px) !important;
+      height: rem(880) !important;
     }
   }
 }
