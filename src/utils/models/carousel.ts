@@ -7,5 +7,6 @@ export interface CarouselProps {
     isAnimated: any
     opacity?: number; 
     className?: any; 
+    imgClass?: any; 
   }
   

@@ -10,12 +10,8 @@
     position: relative;
     width: 100%;
     height: rem(742);
-    height: rem(742);
     margin: 0 auto;
     z-index: 1;
-    @include md {
-      height: rem(880);
-    }
   }
 
   .containerImg {
@@ -131,16 +127,16 @@
     font-size: rem(34);
     text-transform: uppercase;
     margin-bottom: rem(16);
-    
+
     h1 {
       margin: 0;
     }
-    
+
     @include md {
       font-size: rem(48);
       margin-bottom: rem(20);
     }
-    
+
     [dir="rtl"] & {
       width: 100%;
       text-align: right;
@@ -208,41 +204,62 @@
   }
 }
 
-
 .fullWidth {
   width: 100%;
+  min-height: rem(400);
+  max-height: rem(742);
+  height: calc(100vh - 121px);
+  @include md {
+    min-height: rem(400);
+    height: calc(100vh - 222px);
+  }
 
+  .imgClass,
   video {
-    height: rem(742);
+    min-height: rem(400);
+    height: calc(100vh - 121px) !important;
     @include md {
-      height: rem(880);
+      min-height: rem(400);
+      height: calc(100vh - 222px) !important;
+      max-height: rem(880);
     }
   }
 }
 
 .mediumWidth {
-  width: auto;
-  height: rem(660);
+  width: 100%;
+  min-height: rem(400);
+  height: calc(100vh - 121px) !important;
+  max-height: rem(660);
 
   @include md {
-    height: rem(680);
+    height: calc(100vh - 222px) !important;
+    max-height: rem(680);
   }
 
+  .imgClass,
   video {
-    height: rem(660) !important;
+    width: 100%;
+    min-height: rem(400);
+    height: calc(100vh - 121px) !important;
+    max-height: rem(660);
     @include md {
-      height: rem(680) !important;
+      height: calc(100vh - 222px) !important;
+      max-height: rem(680);
     }
   }
 }
 .smallWidth {
-  width: auto;
+  width: 100%;
   height: rem(340);
+  overflow: hidden;
 
   @include md {
     height: rem(420);
+    max-height: rem(420);
   }
 
+  .imgClass,
   video {
     height: rem(340) !important;
     @include md {
