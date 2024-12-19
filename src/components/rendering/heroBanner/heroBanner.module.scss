@@ -9,45 +9,14 @@
   .heroBannerContainer {
     position: relative;
     width: 100%;
-    height: rem(742);
-    height: rem(742);
+    // height: rem(742);
     margin: 0 auto;
     z-index: 1;
-    @include md {
-      height: rem(880);
-    }
-    video {
-      height: rem(742);
-      @include md {
-        height: rem(880);
-      }
-    }
   }
 
   .containerImg {
     height: 100%;
   }
-  &.fullWidth {
-    width: 100%;
-  }
-
-  &.mediumWidth {
-    width: auto;
-    height: rem(660);
-    
-    @include md {
-      height: rem(680);
-    }
-  }
-  &.smallWidth {
-    width: auto;
-    height: rem(340);
-    
-    @include md {
-      height: rem(420);
-    }
-  }
-
   .bannerItem {
     position: absolute;
     width: 100%;
@@ -158,16 +127,16 @@
     font-size: rem(34);
     text-transform: uppercase;
     margin-bottom: rem(16);
-    
+
     h1 {
       margin: 0;
     }
-    
+
     @include md {
       font-size: rem(48);
       margin-bottom: rem(20);
     }
-    
+
     [dir="rtl"] & {
       width: 100%;
       text-align: right;
@@ -235,6 +204,69 @@
   }
 }
 
+.fullWidth {
+  width: 100%;
+  height: rem(742) !important;
+  // height: calc(100vh - 121px);
+  @include md {
+    // height: calc(100vh - 222px);
+    height: rem(880) !important;
+  }
+
+  .imgClass,
+  video {
+    min-height: rem(400);
+    // height: calc(100vh - 121px) !important;
+    height: rem(742) !important;
+    @include md {
+      min-height: rem(400);
+      // height: calc(100vh - 222px) !important;
+      height: rem(880) !important;
+    }
+  }
+}
+
+.mediumWidth {
+  width: 100%;
+  min-height: rem(400);
+  height: calc(100vh - 121px) !important;
+  max-height: rem(660);
+
+  @include md {
+    height: calc(100vh - 222px) !important;
+    max-height: rem(680);
+  }
+
+  .imgClass,
+  video {
+    width: 100%;
+    min-height: rem(400);
+    height: calc(100vh - 121px) !important;
+    max-height: rem(660);
+    @include md {
+      height: calc(100vh - 222px) !important;
+      max-height: rem(680);
+    }
+  }
+}
+.smallWidth {
+  width: 100%;
+  height: rem(340);
+  overflow: hidden;
+
+  @include md {
+    height: rem(420);
+    max-height: rem(420);
+  }
+
+  .imgClass,
+  video {
+    height: rem(340) !important;
+    @include md {
+      height: rem(420) !important;
+    }
+  }
+}
 .ctaButton {
   width: 100%;
   display: flex;

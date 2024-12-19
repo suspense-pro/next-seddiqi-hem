@@ -17,6 +17,7 @@ import { WithAppContext } from "@contexts/appContext";
 import { WithCmsContext } from "@contexts/cmsContext";
 import { UserProvider } from "@contexts/userContext";
 import RouteLoader from "@components/module/routeLoader";
+import { RolexProvider } from "@contexts/rolexContext";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -36,19 +37,21 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <UserProvider>
-        <LanguageProvider>
-          <Head />
-          <WithAppContext value={(pageProps as any).context?.appContext}>
-            <WithVisualization>
-              <WithCmsContext value={(pageProps as any).context?.cmsContext}>
-                <RouteLoader />
-                <Layout pageProps={pageProps}>
-                  <Component {...pageProps} />
-                </Layout>
-              </WithCmsContext>
-            </WithVisualization>
-          </WithAppContext>
-        </LanguageProvider>
+        <RolexProvider>
+          <LanguageProvider>
+            <Head />
+            <WithAppContext value={(pageProps as any).context?.appContext}>
+              <WithVisualization>
+                <WithCmsContext value={(pageProps as any).context?.cmsContext}>
+                  <RouteLoader />
+                  <Layout pageProps={pageProps}>
+                    <Component {...pageProps} />
+                  </Layout>
+                </WithCmsContext>
+              </WithVisualization>
+            </WithAppContext>
+          </LanguageProvider>
+        </RolexProvider>
       </UserProvider>
     </>
   );

@@ -1,0 +1,179 @@
+@import "./../../../assets/styles/main.scss";
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: rem(32);
+  width: 100%;
+  justify-content: center;
+
+  @include md {
+    gap: rem(120);
+  }
+
+  [dir="rtl"] & {
+    text-align: right;
+  }
+
+  .columnOne,
+  .columnTwo {
+    display: flex;
+    margin: 0 rem(32);
+    flex-direction: column;
+    gap: rem(20);
+    overflow: hidden;
+    max-width: rem(502);
+    position: relative;
+
+    @include md {
+      margin: 0;
+    }
+
+    .columnContent {
+      display: flex;
+      flex-direction: column;
+      gap: rem(24);
+      align-items: center;
+
+      [dir="rtl"] & {
+        align-items: flex-start;
+      }
+    }
+    .image {
+      object-fit: cover;
+      height: rem(448);
+      overflow: hidden;
+
+      @include md {
+        padding: 0;
+        width: rem(502);
+        height: rem(700);
+      }
+    }
+  }
+}
+
+.headingSecondary {
+  line-height: rem(26);
+  letter-spacing: rem(0.4);
+  color: getColorHex("black");
+  @include body_regular;
+}
+
+.label {
+  color: getColorHex("green-metallic");
+  @include body_regular;
+  font-size: rem(16);
+  font-weight: 400;
+  line-height: rem(26);
+  letter-spacing: rem(0.2);
+  text-transform: uppercase;
+  margin-bottom: rem;
+}
+
+.titleColor {
+  color: getColorHex("black");
+  font-weight: 500;
+}
+
+.subTitleColor {
+  color: getColorHex("grey");
+}
+
+.barColor {
+  background: getColorHex("metallic");
+  margin-bottom: rem(10);
+  @include md {
+    margin-bottom: rem(20) !important;
+  }
+}
+
+.desc {
+  text-align: center;
+}
+
+.bar {
+  width: rem(70);
+  height: rem(2);
+  background: getColorHex("metallic");
+}
+
+.heritageCardColumnOne {
+  position: absolute;
+  left: rem(40);
+  right: rem(40);
+  bottom: rem(30);
+  z-index: 10;
+  @include md {
+    bottom: rem(40);
+  }
+}
+
+.heritageCardColumnTwo {
+  position: absolute;
+  left: rem(40);
+  right: rem(40);
+  bottom: rem(220);
+  z-index: rem(10);
+  @include md {
+    bottom: rem(240);
+  }
+}
+
+.heritageArticleCardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: rem(10);
+  background-color: getColorHex("white");
+  padding: rem(20);
+  box-sizing: border-box;
+  @include md {
+    padding: rem(40);
+  }
+}
+
+.articleDate {
+  color: getColorHex("grey");
+  font-size: rem(12);
+  font-weight: 400;
+  line-height: rem(20);
+  letter-spacing: rem(0.4);
+  text-align: left;
+  align-items: flex-start;
+  @include md {
+    font-size: rem(14);
+    padding-bottom: rem(5);
+  }
+}
+
+.articleTitle {
+  font-weight: 500;
+  margin-block-end: rem(0);
+  margin-block-start: rem(0);
+  text-align: left;
+  align-items: flex-start;
+}
+
+.articleDescription {
+  text-align: left;
+  color: getColorHex("grey-mid");
+  font-size: rem(14);
+  font-weight: 300;
+  line-height: rem(22);
+  letter-spacing: rem(0.2);
+  align-items: flex-start;
+  @include md {
+    font-size: rem(16);
+    letter-spacing: rem(0.2);
+    line-height: rem(26);
+  }
+}
+
+.customBarColor {
+  padding-bottom: rem(10);
+  @include md {
+    padding-bottom: rem(40);
+  }
+}
