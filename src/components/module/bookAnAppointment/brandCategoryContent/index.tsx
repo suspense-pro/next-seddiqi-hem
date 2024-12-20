@@ -118,7 +118,7 @@ const BrandCategoryContent = ({ categoryType, title, suggestionsKey }) => {
             title="View all brands"
             className={styles.brandBtn}
             type="plain"
-            color="green_dark"
+            color="black_dark"
           />
         </div>
       ) : (

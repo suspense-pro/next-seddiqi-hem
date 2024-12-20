@@ -50,6 +50,11 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
   const [storyResults, setStoryResults] = useState([]);
   const [productResults, setProductResults] = useState([]);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [isError,   setIsError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const closeSearch = () => {
+    setIsSearchOpen(false);
+  };
 
   const setCategories = (categories: string[]) => {
     setCategoriesResults(categories);
@@ -83,21 +88,34 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
       .then((response) => {
         if (response.response.refinements) {
           const brandRefinement = response.response.refinements.find(
-            (refinement) => refinement.attributeId === "brand"
+            (refinement) => refinement.attributeId === "c_brandName"
           );
           if (brandRefinement) {
+            // Sort brands based on hitCount in descending order and slice the top 4
             const popularBrands = brandRefinement.values
-              .filter((value) => value.hitCount >= 0)
-              .slice(0, 4)
-              .map((value) => value.value);
-            setPopularBrands(popularBrands);
+              .filter((value) => value.hitCount >= 0) // Ensure hitCount is valid
+              .sort((a, b) => b.hitCount - a.hitCount) // Sort by hitCount in descending order
+              .slice(0, 4) 
+              .map((value) => value.value); // Extract brand names
+  
+            setPopularBrands(popularBrands); // Set the popular brands
           }
         }
 
         if (response.response.hits) {
           const productSuggestions = response.response.hits;
-          setProductSuggestions(productSuggestions);
+          // Get the first three productIds from the hits
+          const topProductIds = productSuggestions
+            .slice(0, 3)  // Get the first 3 products
+            .map((product) => product.productId);  // Extract productId for each product
+  
+          getProducts({ method: "GET", pids: topProductIds })
+          .then((productDetails) => {
+            setProductSuggestions(productDetails);
+          })
+          .catch((error) => console.error("Error fetching product details:", error));
         }
+    
       })
       .catch((error) => console.error("Error fetching search results:", error));
   };
@@ -107,10 +125,15 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
       .then((response) => {
         const storiesResults = response.response;
 
-        if (Array.isArray(storiesResults) && storiesResults.length > 2) {
-          const secondContent =
-            storiesResults[2].content.components[2].listItems;
-          setStoriesResults(secondContent);
+        if (Array.isArray(storiesResults) && storiesResults.length > 0) {
+          const allListItems = storiesResults.map((story) => {
+            if (story.content && Array.isArray(story.content.listItems)) {
+              return story.content.listItems;
+            }
+            return [];
+          });
+          const flattenedListItems = allListItems.flat();
+          setStoriesResults(flattenedListItems);
         }
       })
       .catch((error) => console.error("Error fetching stories:", error));
@@ -121,44 +144,41 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
     categoryId: string
   ): void => {
     if (searchTerm.length === 0) {
-      setCategorySuggestions([]); // Clear suggestions if input is empty
+      setCategorySuggestions([]);
+      setIsError(false);
       return;
     }
 
     // Set the input search term
     setInputSearchTerm(searchTerm);
+    setIsLoading(true); 
 
     // Call the first API
     getSearchResults({ method: "GET", query: "", categoryId })
       .then((searchResults) => {
-        setCategorySuggestions([]); // Clear existing suggestions
-
-        // Process search results
-        const categoryRefinement = searchResults.response.refinements?.find(
-          (refinement) => refinement.attributeId === "cgid"
-        );
-        if (categoryRefinement) {
-          const categoriesResults = categoryRefinement.values
-            .filter((value) => value)
-            .map((value) => value.value);
-          setCategories(categoriesResults);
-        }
+        setCategorySuggestions([]);
 
         // Call the second API for recommended products
         return getSearchSuggestions({ method: "GET", query: searchTerm });
       })
       .then((recommendedSearchResults) => {
+        const watchesInCategories = recommendedSearchResults.response.categorySuggestions.categories;
+        const categoryNamesRecommendations = watchesInCategories.map((category) => category.name);
+
+        setCategories(categoryNamesRecommendations);
+        
         // Access the product recommendations
         const productRecommendation =
-          recommendedSearchResults.response.productSuggestions.products;
+        recommendedSearchResults.response.productSuggestions.products;
         setRecommendationResults(productRecommendation);
 
         // Extract product IDs
         const productIds = productRecommendation.map(
-          (product: { productId: string }) => product.productId
+          (product: { productId: string }) => { return product.productId;
+        }
         );
 
-        // Call another API with the product IDs
+        // Call API with the product IDs
         return getProducts({ method: "GET", pids: productIds });
       })
       .then((productDetails) => {
@@ -169,6 +189,10 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        setIsError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -216,6 +240,10 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
     productResults,
     setProductResults,
     openSearch,
+    closeSearch,
+    isError,
+    setIsError,
+    isLoading
   };
 
   return (

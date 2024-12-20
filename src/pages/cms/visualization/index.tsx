@@ -8,12 +8,12 @@ import fetchContent from "@utils/cms/fetchContent";
 import { useContent } from "@contexts/withVisualizationContext";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { vse } = context.query || {};
+  const { vse, content: contentId } = context.query || {};
 
   const data = await fetchStandardPageData(
     {
       content: {
-        page: { key: "homepage" },
+        content: { id: contentId as string },
       },
     },
     context
@@ -31,13 +31,13 @@ export default function Home({
   content,
   vse,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const [page] = useContent(content.page, vse as string);
+  const [page] = useContent(content.content, vse as string);
 
   return (
     <div className="main-content">
-      {compact(page.components).map((content) => (
-          <ContentBlock content={content} key={content?._meta.deliveryId} />
-        ))}
+      {compact(page?.components).map((content) => (
+        <ContentBlock content={content} key={content?._meta.deliveryId} />
+      ))}
     </div>
   );
 }

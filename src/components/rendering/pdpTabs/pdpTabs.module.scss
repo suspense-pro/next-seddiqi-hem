@@ -74,7 +74,7 @@
   }
 
   &:hover, &.active{
-    color: getColorHex("brown-dark");
+    color: getColorHex("black-dark");
     background: getColorHex("desert-storm");
     border-bottom: rem(2) solid getColorHex("midnight-brown");
   }
@@ -183,7 +183,7 @@
       font-size: rem(14);
       line-height: rem(20);
       letter-spacing: rem(0.4);
-      color: getColorHex("green-dark");
+      color: getColorHex("black-dark");
       margin: 0;
 
       @include md {
@@ -268,7 +268,7 @@
     font-weight: 500;
     line-height: rem(30);
     letter-spacing: rem(0.6);
-    color: getColorHex("green-dark");
+    color: getColorHex("black-dark");
     text-transform: uppercase;
     margin: 0 0 rem(40);
 
@@ -328,7 +328,7 @@
         font-weight: 500;
         line-height: rem(26);
         letter-spacing: rem(0.4);
-        color: getColorHex("green-dark");
+        color: getColorHex("black-dark");
         text-transform: uppercase;
         margin: 0;
         pointer-events: all;
@@ -430,7 +430,7 @@
         font-weight: 500;
         line-height: rem(20);
         letter-spacing: rem(0.4);
-        color: getColorHex("green-dark");
+        color: getColorHex("black-dark");
         text-transform: uppercase;
         margin: 0;
 
@@ -465,11 +465,17 @@
   line-height: rem(18);
   transform: translateY(0%);
   transition: all 0.5s ease;
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
 
+  [dir="rtl"] & {
+    margin: rem(32);
+  }
   @include md {
     transform: translateY(-320%);
     margin-bottom: rem(0);
+    [dir="rtl"] & {
+      margin: rem(30 60);
+    }
   }
 
   &.isOpened{
@@ -499,7 +505,7 @@
     font-weight: 500;
     line-height: rem(30);
     letter-spacing: rem(0.6);
-    color: getColorHex("green-dark");
+    color: getColorHex("black-dark");
     text-transform: uppercase;
     margin: 0 0 rem(40);
     text-align: center;
@@ -594,7 +600,7 @@
           font-size: rem(14);
           line-height: rem(20);
           letter-spacing: rem(0.4);
-          color: getColorHex("green-dark");
+          color: getColorHex("black-dark");
           margin: 0;
           text-align: center;
           text-transform: uppercase;

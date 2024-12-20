@@ -23,9 +23,10 @@
 }
 .availableBrandsTitle {
   color: getColorHex("grey-mid");
+  text-align: left;
 }
 .storeOpenTiming {
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
 }
 
 
@@ -41,7 +42,7 @@
 
 .vline {
   height: rem(22);
-  border-left: rem(1) solid getColorHex("green-dark");
+  border-left: rem(1) solid getColorHex("black-dark");
   margin: 0 rem(5);
 }
 
@@ -92,10 +93,12 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  text-align: left;
 }
 
 .serviceList li {
   margin-bottom: rem(8);
+  text-align: left;
 }
 
 .brandsWrapper {
@@ -236,6 +239,7 @@
 
 .availableBrandsLabel {
   flex: 1;
+  text-align: left;
 }
 
 .container {
@@ -348,10 +352,11 @@
 }
 
 .title {
-  color: getColorHex("brown-dark");
+  color: getColorHex("black-dark");
   letter-spacing: rem(0.6);
   margin-block-end: rem(42);
   margin-block-start: rem(60);
+  text-align: left;
 }
 
 .mapViewWrapper {
@@ -401,12 +406,12 @@
   line-height: rem(18);
   letter-spacing: rem(0.6);
   display: inline-block;
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
 }
 
 .underline {
   height: rem(1);
-  background-color: getColorHex("green-dark");
+  background-color: getColorHex("black-dark");
   margin-top: rem(2);
   width: 100%;
 }
@@ -437,16 +442,23 @@
 
 .infoOverlay {
   position: absolute;
-  width: rem(500);
+  width: rem(580);
   height: rem(650);
   left: rem(40);
   top: 50%;
   transform: translateY(-50%);
-  padding: rem(20);
+  padding-left: rem(0);
+  padding-top: rem(20);
+  padding-bottom: rem(20);
   background: getColorHex("white");
   z-index: 10;
-  overflow: auto;
+  // overflow: auto;
   border-radius: rem(16) 0 rem(16) 0;
+  @include md{
+    padding-left: rem(20);
+
+  }
+  
 }
 
 .mapOuterContainer {
@@ -502,7 +514,42 @@
       left: rem(0) !important;
       border-radius: rem(0) 0 rem(0) 0;
       overflow: auto;
+      .infoWrapper {
+        position: relative;
+        padding-right: rem(20);
+      }
+
     }
   }
 }
+}
+
+.storeMapListSwiper{
+  position: relative;
+  height:100%;
+  border-radius: rem(16);
+  & > div:last-of-type{
+    right: rem(20);
+    background: none;
+    width: rem(6);
+    
+    [dir="rtl"] & {
+      right: auto;
+      left: rem(20);
+    }
+
+    & > div{
+      background: getColorHex("dark-brown");;
+    }
+  }
+}
+
+.infoWrapper {
+  position: relative;
+  padding-right: rem(40);
+}
+
+.noSlideContainer {
+  padding-right:rem(10);
+  padding-left:rem(10);
 }

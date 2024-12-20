@@ -128,7 +128,7 @@ export default function SignIn({ direction = "row" }) {
             isLink={true}
             link="/forgot-password"
             type="Plain"
-            color="green_darK"
+            color="black_darK"
           />
 
           <div className={styles.submitBtnContainer}>

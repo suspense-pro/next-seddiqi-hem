@@ -17,11 +17,11 @@
 }
 
 .titleColor {
-  color: getColorHex("brown-dark");
+  color: getColorHex("black-dark");
 }
 
 .subTitleColor {
-  color: getColorHex("grey");
+  color: getColorHex("black-dark");
 }
 
 .barColor {
@@ -54,7 +54,11 @@
 
   width: 100%;
   border-left: rem(1) solid getColorHex("grey-light-4", 0.4);
+  
   border-bottom: rem(1) solid getColorHex("grey-light-4", 0.4);
+  @include md {
+    border-bottom: none;
+  }
 }
 
 .mySwiper {
@@ -75,7 +79,11 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(rem(360), 1fr));
     border-left: rem(1) solid getColorHex("grey-light-4", 0.4);
+    
     border-bottom: rem(1) solid getColorHex("grey-light-4", 0.4);
+    @include md {
+      border-bottom: none;
+    }
     width: 100%;
 
     @include md {
@@ -88,7 +96,11 @@
     grid-template-columns: repeat(auto-fit, minmax(rem(360), 1fr));
     width: 100%;
     border-left: rem(1) solid getColorHex("grey-light-4", 0.4);
+    
     border-bottom: rem(1) solid getColorHex("grey-light-4", 0.4);
+    @include md {
+      border-bottom: none;
+    }
 
 
     @include lg {
@@ -106,7 +118,11 @@
     grid-template-columns: repeat(1fr, minmax(rem(260), 1fr));
     width: 100%;
     border-left: rem(1) solid getColorHex("grey-light-4", 0.4);
+    
     border-bottom: rem(1) solid getColorHex("grey-light-4", 0.4);
+    @include md {
+      border-bottom: none;
+    }
 
 
     @include lg {

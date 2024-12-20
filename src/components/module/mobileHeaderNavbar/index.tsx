@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef,useState } from "react";
 import Image from "@components/module/image";
 import { AccountIcon, CalendarIcon, MapIcon, PhoneIcon, SearchIcon } from "@assets/images/svg";
 import styles from "./MobileHeaderNavbar.module.scss";
@@ -6,16 +6,28 @@ import { HeaderContext } from "@contexts/headerContext";
 import { MobileHeaderNavbarProps } from "@utils/models";
 import Link from "next/link";
 import PhoneIconNoBorder from "@assets/images/svg/PhoneIconNoBorder";
+import { useSearchContext } from "@contexts/searchContext";
+import { Search } from "@components/module";
 
 const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({ toggleMenu, menuOpen }) => {
   const { headerData } = useContext(HeaderContext);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const { openSearch } = useSearchContext();
+
+  const openSearchPopup = () => {
+    setIsPopupVisible(true);
+    openSearch();
+  };
+
+  const closeSearchPopup = () => {
+    setIsPopupVisible(false);
+  };
+
 
   if (!headerData) return null;
 
-  const MAIN_LOGO = headerData?.content?.mainLogo?.image;
-  if (!MAIN_LOGO) return null;
-  // console.log(headerData?.content?.logoSymbol?.image)
   return (
+    <>
     <header className={styles.mobileHeader}>
       <div className={styles.mobileHeaderContainer}>
         <div className={styles.menuIcon} onClick={toggleMenu}>
@@ -32,16 +44,22 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({ toggleMenu, men
           />
         </Link>
         <div className={styles.rightIcons}>
-          {/* <SearchIcon fill="#" /> */}
-          <Link target="_blank" href="/contact-us">
+        <div onClick={openSearchPopup}>
+          <SearchIcon fill="#" />
+        </div>
+          <Link href="/contact-us">
             <PhoneIconNoBorder className={styles.phoneIcon} fill="#" />
           </Link>
-          <Link target="_blank" href="/find-a-boutique-listing">
+          <Link href="/find-a-boutique-listing">
             <MapIcon fill="#" />
           </Link>
         </div>
       </div>
     </header>
+    <div className={`${styles.drawerStyle} ${isPopupVisible ? styles.visible : ""}`}>
+    <Search closeSearch={closeSearchPopup}></Search>
+  </div>
+  </>
   );
 };
 

@@ -10,11 +10,19 @@ const StoriesResults = ({ storiesResults }) => {
   const { setStoriesResults } = useSearchContext();
   const router = useRouter();
 
-  const handleViewAllClick = () => {
-   const serializedResults = JSON.stringify(storiesResults);
-  router.push(`/stories?recommendations=${encodeURIComponent(serializedResults)}`);
-};
+  // const handleViewAllClick = () => {
+  //   const serializedResults = JSON.stringify(storiesResults);
+  //    router.push(`/stories?recommendations=${encodeURIComponent(serializedResults)}`);
+  // };
 
+
+  const handleViewAllClick = () => {
+    if (typeof window !== "undefined") {
+      // Store the full `storiesResults` in sessionStorage
+      sessionStorage.setItem("storiesResults", JSON.stringify(storiesResults));
+      window.open("/stories", "_blank");
+    }
+  };
   return (
     <div className={styles.storiesContainer}>
       <Typography variant="p" className={styles.searchStoryTitle}>
@@ -34,7 +42,7 @@ const StoriesResults = ({ storiesResults }) => {
             link={""}
             className={styles.viewAllBtn}
             title={"View All"}
-            color="green_dark"
+            color="black_dark"
             type={"Plain"}
             clickHandler={handleViewAllClick}
           />

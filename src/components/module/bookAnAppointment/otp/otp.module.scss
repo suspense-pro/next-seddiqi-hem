@@ -19,7 +19,7 @@
     font-size: rem(24);
     font-weight: 500;
 
-    color: getColorHex("green-dark");
+    color: getColorHex("black-dark");
     text-align: center;
 
     font-size: rem(32);
@@ -80,7 +80,7 @@
     letter-spacing: rem(0.2);
 
     .timer {
-      color: getColorHex("green-dark");
+      color: getColorHex("black-dark");
       font-size: rem(16);
       line-height: rem(26);
       letter-spacing: rem(0.2);
@@ -94,7 +94,7 @@
         letter-spacing: rem(1);
         text-transform: capitalize;
         cursor: pointer;
-        border-bottom: rem(1) solid getColorHex("green-dark");
+        border-bottom: rem(1) solid getColorHex("black-dark");
       }
     }
   }

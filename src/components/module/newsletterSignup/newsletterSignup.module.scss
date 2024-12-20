@@ -10,7 +10,7 @@
 .newsletterTitle {
   @include heading_light;
   font-size: rem(14);
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
   h6 {
     margin: 0;
   }

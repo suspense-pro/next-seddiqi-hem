@@ -124,7 +124,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) 
         <span className={styles.contactWrapper}>
         <Button
           isLink={true}
-          link={`tel:${store?.phone.replace(/\s+/g, '')}`}
+          link={`tel:${store?.phone?.replace(/\s+/g, '')}`}
           title={"Call"}
           color={"brown_dark"}
           type={"Plain"}
@@ -133,7 +133,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) 
         <div className={styles.vDivider}>&nbsp;</div>
         <Button
           isLink={true}
-          link={`https://wa.me/${store?.phone.replace(/\s+/g, '')}`}
+          link={`https://wa.me/${store?.fax?.replace(/\s+/g, '')}`}
           className={styles.whatsappBtn}
           title={"WhatsApp"}
           color="brown_dark"
@@ -165,34 +165,26 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ store, mapViewOn, stores}) 
 
       <hr className={styles.divider} />
 
-      <div className={styles.serviceWrapper}>
-        <div className={styles.iconSection}>
-          <ServiceIcon className={styles.serviceIcon} />
-        </div>
-        <div className={styles.storeServiceInfo}>
-          <ul className={styles.serviceList}>
-            {store.c_services && store.c_services.length > 0 ? (
-              store.c_services.map((service, index) => (
-                <li key={index}>{service}</li>
-              ))
-            ) : (
-              <li>No services available</li>
-            )}
-          </ul>
-        </div>
-        <div className={styles.bookAppointment}>
-          {/* <Button
-            isLink={true}
-            link={"/book-an-appointment"}
-            className={styles.appointmentBtn}
-            title={"Book appointment"}
-            color="brown_dark"
-            type={"Plain"}
-          /> */}
-        </div>
-      </div>
-
-      <hr className={styles.divider} />
+      {store?.c_services && store.c_services.length > 0 ? (
+                      <>
+                        <div className={styles.serviceWrapper}>
+                          <div className={styles.iconSection}>
+                            <ServiceIcon className={styles.serviceIcon} />
+                          </div>
+                          <div className={styles.storeServiceInfo}>
+                            <ul className={styles.serviceList}>
+                              {store.c_services.map((service, index) => (
+                                <li key={index}>{service}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className={styles.bookAppointment}>
+                            {/* Button or other content here */}
+                          </div>
+                        </div>
+                        <hr className={styles.divider} />
+                      </>
+                    ) : null}
 
       <div className={styles.storeBrandsInfo}>
         <div className={styles.iconSection}>

@@ -14,13 +14,17 @@
 
 .heading {
   @include heading_regular;
-  color: getColorHex("green-dark");
+  color: getColorHex("black-dark");
   text-align: center;
   margin: 0;
   font-size: rem(32);
   font-weight: 500;
   line-height: rem(44);
   letter-spacing: rem(0.6);
+
+  [dir="rtl"] & {
+   text-align: right;
+  }
 }
 
 .doubleForm {
@@ -76,6 +80,14 @@
     transform: translate(-50%, -50%);
     cursor: pointer;
     text-align: center;
+
+    [dir="rtl"] & {
+      top: 50%;
+      right: 0;
+      left: auto;
+      transform: translate(-10%, -50%);
+    }
+  
   }
 
   input {
@@ -89,6 +101,10 @@
 .btnContainer {
   width: 100%;
   text-align: center;
+
+  [dir="rtl"] & {
+    text-align: right;
+  }
 
   .submitBtn {
     width: rem(252);

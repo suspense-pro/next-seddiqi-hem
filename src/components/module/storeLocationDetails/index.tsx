@@ -75,7 +75,7 @@ const StoreLocationDetails: React.FC<StoreLocationDetailsProps> = ({
         onClearAll={null}
         position={"right"}
         className={styles.customSideDrawerStyle}
-        button2Color={"green_dark"}
+        button2Color={"black_dark"}
       >
         {selectedStore && <StoreDetails store={selectedStore} mapViewOn={mapViewOn} stores={stores}/>}
       </SideDrawer>

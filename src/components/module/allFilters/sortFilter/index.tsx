@@ -11,7 +11,7 @@ const SortFilter = ({ sortingOptions, selectedSortOption, onSortChange }) => {
   const isDesktop = useDeviceWidth();
 
   const handleOptionChange = (event, ind) => {
-    console.log({event});
+    // console.log({event});
     
     setValue(sortingOptions[ind].label)
     onSortChange(event.target.value);

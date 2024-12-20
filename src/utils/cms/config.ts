@@ -22,6 +22,7 @@ import {
   FeaturedProductCarousel,
   ExploreBrand,
   ContentAndImageTwoColumn,
+  TitleAndTwoBlockImageContentOverlap
 } from "@components/rendering";
 import { ArticleCard, DisplayCard, StoryCard } from "@components/module";
 import ImageGalleryCarousel from "@components/rendering/imageGalleryCarousel";
@@ -43,6 +44,7 @@ import ViewAllBrandsCategory from "@components/module/brands/viewAllBrandsCatego
 import NeedMoreHelp from "@components/rendering/needMoreHelp";
 import ExclusiveInfoCards from "@components/module/bookAnAppointment/exclusiveInfoCards";
 import ContentAndSingleImageColumn from "@components/rendering/contentAndSingleImageColumn";
+import Hotspot from "@components/rendering/hotspot";
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || "platinumpanda",
@@ -115,6 +117,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/need-help`]: NeedMoreHelp,
   [`${componentUrl}/exclusive-info-list`]: ExclusiveInfoCards,
   [`${componentUrl}/content-and-single-image-column`]: ContentAndSingleImageColumn,
+  [`${componentUrl}/title-and-two-block-image-content-overlap`]: TitleAndTwoBlockImageContentOverlap,
 };
 
 const defaultConfig = {

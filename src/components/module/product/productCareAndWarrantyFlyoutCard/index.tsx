@@ -26,7 +26,7 @@ const ProductCareAndWarrantyFlyoutCard = ({
       showBackButton={false}
       title={warrantyAndCare?.primaryTitle}
       position="right"
-      button2Color={"green_dark"}
+      button2Color={"black_dark"}
     >
       <div onMouseDown={(e) => e.stopPropagation()}>
         {warrantyAndCare?.listItems?.map((item, index) => {
@@ -34,12 +34,13 @@ const ProductCareAndWarrantyFlyoutCard = ({
             <>
               <div className={styles.accordianContainer}>
                 <Accordion
-                  isOpen={index === 0 && true}
+                  isOpen={index === 0}
                   showArrow={true}
                   subMenu={subMenu}
                   setSubMenu={setSubMenu}
                   item={{
-                    id: 1,
+                    ...item,
+                    id: index + 1,
                     title: `${item?.title}`,
                   }}
                   key={1}

@@ -17,7 +17,6 @@ const HeaderMainLinks = ({ isScrolled = false }: { isScrolled?: boolean }) => {
   const { updateCurrent, current, headerData } = useContext(HeaderContext);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const { openSearch } = useSearchContext();
-
   const headerMainLinks = headerData?.children;
   if (!headerMainLinks) return null;
 
@@ -39,9 +38,15 @@ const HeaderMainLinks = ({ isScrolled = false }: { isScrolled?: boolean }) => {
           {/* <Image src={"/images/png/RolexLogo.png"} width={91.57} height={42} alt="rolex logo" /> */}
           {/* <div></div> */}
         </Link>
-        {/* <Link href={headerData?.content?.patekLogo}>
-          <Image src={"/images/png/PatekLogo.png"} width={118} height={68} alt="patek logo" />
-        </Link> */}
+        {/* <Link href={headerData?.content?.patekLogo}> */}
+        <Image
+          className={styles.patekLogo}
+          src={"/images/png/PatekLogo.png"}
+          width={118}
+          height={68}
+          alt="patek logo"
+        />
+        {/* </Link> */}
       </div>
       <div className={styles.links}>
         {headerMainLinks?.map((item, ind) => (
@@ -57,17 +62,17 @@ const HeaderMainLinks = ({ isScrolled = false }: { isScrolled?: boolean }) => {
         ))}
       </div>
       <div className={styles.navIcons}>
-        {/* <div onClick={openSearchPopup}>
+        <div onClick={openSearchPopup}>
           <SearchIcon fill="#" />
-        </div> */}
+        </div>
         {/* <Link target="_blank" href="/book-an-appointment">
           <CalendarIcon fill="#" />
         </Link> */}
-        <Link target="_blank" href="/contact-us">
+        <Link href="/contact-us">
           {/* <CalendarIcon fill="#" /> */}
           <PhoneIconNoBorder className={styles.phoneIcon} fill="#" />
         </Link>
-        <Link target="_blank" href="/find-a-boutique-listing">
+        <Link href="/find-a-boutique-listing">
           {/* <CalendarIcon fill="#" /> */}
           <MapIcon fill="#" />
         </Link>

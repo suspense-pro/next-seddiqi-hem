@@ -3,13 +3,42 @@ import { BrandListing, ScrollToTop } from "@components/module";
 import ViewAllBrandsCategory from "@components/module/brands/viewAllBrandsCategory";
 import ContentBlock from "@components/module/contentBlock";
 import { HeroBanner } from "@components/rendering";
+import { CmsContext } from "@contexts/cmsContext";
 import { useContent } from "@contexts/withVisualizationContext";
+import fetchContent, { GetByFilterRequest } from "@utils/cms/fetchContent";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
 import { CmsContent } from "@utils/cms/utils";
 import { isEmpty, notNull } from "@utils/helpers";
 import { getCategory } from "@utils/sfcc-connector/dataService";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import React from "react";
+
+async function fetchBrandPages(context: CmsContext, options: { key?: string }) {
+
+  const fetchPage = async (nextCursor?: string): Promise<any> => {
+      const filterRequest: GetByFilterRequest = {
+          filterBy: [
+            {
+              path: "/_meta/schema",
+              value: "https://seddiqi.amplience.com/page/brand-page",
+            },
+          ],
+          page: {
+              size: 12,
+              cursor: nextCursor,
+          },
+      };
+      const results = (await fetchContent([filterRequest], context))[0];
+      const responses = results?.responses || [];
+
+      if (results?.page.nextCursor) {
+          return [...responses, ...(await fetchPage(results?.page.nextCursor))];
+      }
+      return responses;
+  };
+
+  return fetchPage();
+}
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const data = await fetchStandardPageData(
@@ -23,27 +52,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   // console.log({data});
 
-  const brandPagesResponse = await fetchStandardPageData(
-    {
-      content: {
-        page: {
-          filterBy: [
-            {
-              path: "/_meta/schema",
-              value: "https://seddiqi.amplience.com/page/brand-page",
-            },
-          ],
-        },
-      },
-    },
-    context
-  );
-
+  const brandPagesResponse = (await fetchBrandPages(context, {})) || [];
   const { vse } = context.query || {};
 
   const brands = await getCategory({ method: "GET", cgid: "brands" });
 
-  const brandPages = brandPagesResponse.content.page.responses.map(
+  // console.log({brandPagesResponse});
+  
+
+  const brandPages = brandPagesResponse.map(
     ({ content }) => {
       return {
         url: content._meta.deliveryKey,

@@ -16,6 +16,7 @@ import Typography from "../typography";
 import Loader from "../loader";
 import ScrollToTop from "../scrollToTop";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { filterObjectRemoveEmptyKey, removeEmptyObjectsByKeys } from "@utils/helpers/removeEmptyObject";
 
 const LOAD_MORE_TEXT = "Load More";
 
@@ -29,7 +30,7 @@ const PlpContent = ({ productGridContent, products }) => {
 
   const [filters, setFiltersState] = useState(null);
   const [displayedProducts, setDisplayedProducts] = useState(
-    (Array.isArray(getProducts) ? getProducts : getProducts?.hits).slice(0, 24)
+    (Array.isArray(getProducts) ? getProducts : getProducts?.hits)?.slice(0, 24)
   );
   const [currentIndex, setCurrentIndex] = useState(24);
   const [isAllLoaded, setIsAllLoaded] = useState(false);
@@ -140,7 +141,6 @@ const PlpContent = ({ productGridContent, products }) => {
 
   // updateUrlWithFilters();
   // }, []);
-
   const fetchAllProductsByCategoryId = async () => {
     setIsLoading(true);
 
@@ -167,25 +167,32 @@ const PlpContent = ({ productGridContent, products }) => {
     setFiltersState(null);
     setCurrentIndex(24);
     setIsAllLoaded(false);
-    setIsButtonDisabled(getProducts?.total <= 24 || isAllLoaded);
+    setIsButtonDisabled(products?.productResults.total <= 24);
     setIsLoading(false);
   };
 
   const fetchFilteredProducts = async (selectedFilters) => {
     setIsLoading(true);
 
-    console.log({ selectedFilters });
-    setFiltersState(selectedFilters);
+    // console.log({ selectedFilters });
+
+    let updatedselectedFilters = filterObjectRemoveEmptyKey(selectedFilters);
+    //console.log("updated filter:", updatedselectedFilters);
+
+
+    setFiltersState(updatedselectedFilters);
 
     try {
-      if (Object.keys(selectedFilters).length === 0) {
-        setDisplayedProducts(allHits.slice(0, 24));
-        setCurrentIndex(24);
-        setIsAllLoaded(allHits.length < 24);
-      } else {
-        const { sortOption, ...otherFilters } = selectedFilters;
+      if (Object.keys(updatedselectedFilters).length === 0) {
+        //setDisplayedProducts(allHits.slice(0, 24));
+        //setCurrentIndex(24);
+        //setIsAllLoaded(allHits.length < 24);
+        fetchAllProductsByCategoryId();
 
-        console.log({ otherFilters });
+      } else {
+        const { sortOption, ...otherFilters } = updatedselectedFilters;
+
+        //console.log({ otherFilters });
 
         const res = await setFilters({
           method: "GET",
@@ -194,10 +201,11 @@ const PlpContent = ({ productGridContent, products }) => {
           // sortOption: sortOption,
         });
 
-        console.log("res: ", res);
-        console.log("res.hits: ", res.hits);
+        //console.log("res: ", res);
+        //console.log("res.hits: ", res.hits);
 
         if (res && res.hits) {
+          
           setDisplayedProducts(res.hits.slice(0, 24));
           setCurrentIndex(24);
           setIsAllLoaded(res.hits.length <= 24);
@@ -205,10 +213,12 @@ const PlpContent = ({ productGridContent, products }) => {
           setIsButtonDisabled(res.hits.length <= 24);
           setFilterOptions(res.refinements);
           setIsLoading(false);
+          
         } else {
           setDisplayedProducts([]);
-          setIsAllLoaded(true);
+          setIsAllLoaded(false);
           setAllHits(Array.isArray(products) ? products : products?.hits || []);
+          setIsLoading(false);
         }
       }
     } catch (error) {
@@ -216,22 +226,23 @@ const PlpContent = ({ productGridContent, products }) => {
       setDisplayedProducts([]);
       setIsAllLoaded(true);
       setIsLoading(false);
-    } finally {
-      setIsLoading(false);
-    }
+    } 
   };
 
+  
+/*
   useEffect(() => {
     const params = Object.fromEntries(searchParams.entries());
 
     console.log({params});
     
 
-    if(Object.keys(params).length < 1) return null;
+    if(Object.keys(params).length < 1) return () => {};
 
     fetchFilteredProducts(params);
     
   }, [searchParams]);
+  */
 
 
   // useEffect(() => {
@@ -240,7 +251,7 @@ const PlpContent = ({ productGridContent, products }) => {
   //   fetchFilteredProducts();
   // }, []);
 
-  const PRODUCT_INFO_TEXT = `Showing ${displayedProducts.length} out of ${
+  const PRODUCT_INFO_TEXT = `Showing ${displayedProducts?.length} out of ${
     allHits.length
   } ${allHits.length === 1 ? "product" : "products"}`;
 
@@ -257,7 +268,7 @@ const PlpContent = ({ productGridContent, products }) => {
           resetProducts={fetchAllProductsByCategoryId}
         />
 
-        {displayedProducts.length > 0 ? (
+        {displayedProducts?.length > 0 ? (
           <>
             <GridWrapper>
               {displayedProducts.map((item, ind) => (

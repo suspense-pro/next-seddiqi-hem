@@ -23,13 +23,13 @@
 .active {
   border-bottom: rem(1) solid getColorHex("chocolate-brown");
   font-weight: bold;
-  color: getColorHex("dark-brown");
+  color: getColorHex("black-dark");
 }
 
 h5.watchesTab,
 h5.jewelleryTab,
 h5.storiesTab {
-  color: getColorHex("dark-brown");
+  color: getColorHex("black-dark");
   font-size: rem(14);
   line-height: rem(20);
   letter-spacing: rem(0.4);

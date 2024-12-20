@@ -4,7 +4,6 @@ import styles from "./viewAllBrandsCategory.module.scss";
 import BrandListing from "@components/module/brandListing";
 
 const ViewAllBrandsCategory = ({ ...content }) => {
-  console.log("ViewAllBrandsCategory", content);
   return (
 
       <TabbedNavigation

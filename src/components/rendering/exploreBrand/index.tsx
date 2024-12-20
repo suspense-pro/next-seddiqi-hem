@@ -3,6 +3,7 @@ import styles from "./exploreBrand.module.scss";
 import Typography from "../../module/typography";
 import { Image, Button } from "@components/module";
 import { ExploreBrandProps } from "@utils/models/exploreBrand";
+import Link from "next/link";
 
 const ExploreBrand: React.FC<ExploreBrandProps> = ({ cta, exploreBrandItems, primaryTitle, secondaryDescription }) => {
   const logoTrackRef = useRef<HTMLDivElement>(null);
@@ -69,21 +70,25 @@ const ExploreBrand: React.FC<ExploreBrandProps> = ({ cta, exploreBrandItems, pri
         <div className={styles.logoTrack} ref={logoTrackRef}>
           {exploreBrandItems.concat(exploreBrandItems).map((item, index) => (
             <div key={index} className={styles.logoItem}>
-              <div className={styles.logoContainer}>
+              <Link href={item?.url ? item?.url : "/"} className={styles.logoContainer}>
                 <Image
-                  image={item.logoIcon.image.image}
-                  imageAltText={item.logoIcon.image.altText || `Brand Logo ${index + 1}`}
+                  image={item?.logoIcon?.image?.image}
+                  imageAltText={item?.logoIcon?.image?.altText || `Brand Logo ${index + 1}`}
                 />
-              </div>
+              </Link>
             </div>
           ))}
         </div>
       </div>
       {cta && cta.label && (
         <div className={styles.viewAllButton}>
-          <Button title={cta.label || "View all Brands"} type={cta.type || "solid"} color={cta.color || "green_dark"}
-              link={cta?.url}  new_tab={cta?.isNewTab}
-            />
+          <Button
+            title={cta.label || "View all Brands"}
+            type={cta.type || "solid"}
+            color={cta.color || "black_dark"}
+            link={cta?.url}
+            new_tab={cta?.isNewTab}
+          />
         </div>
       )}
     </div>

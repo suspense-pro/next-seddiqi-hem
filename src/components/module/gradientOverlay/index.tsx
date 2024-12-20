@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./gradientOverlay.module.scss";
 
-const GradientOverlay = ({ children, opacity = 0, className = "" }) => {
+const GradientOverlay = ({ children, opacity = 0, className = "", heightClass="" }) => {
 
   const rgbaOpacity = opacity / 100;
 
@@ -15,7 +15,7 @@ const GradientOverlay = ({ children, opacity = 0, className = "" }) => {
   return (
     <div className={`${styles.container} ${className}`}>
       {children}
-      <div style={backgroundStyle} className={styles.gradientOverlay}></div>
+      <div style={backgroundStyle} className={`${heightClass} ${styles.gradientOverlay}`}></div>
     </div>
   );
 };

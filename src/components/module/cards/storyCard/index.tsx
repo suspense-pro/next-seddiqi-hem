@@ -14,14 +14,12 @@ const StoryCard: React.FC<CardInfoProps> = ({ item, className }) => {
   const link = item?.link ? item?.link : "/";
 
   if (!image || !title || !subtitle) return null;
-  console.log("link", link);
   const headerContext = useContext(HeaderContext);
   const { setMenuOpen, updateCurrent } = headerContext;
 
   return (
     <Link
       onClick={(e) => {
-        e.stopPropagation();
         updateCurrent(null);
         setMenuOpen(false);
       }}
@@ -30,7 +28,7 @@ const StoryCard: React.FC<CardInfoProps> = ({ item, className }) => {
       <div className={`${styles.storyCardContainer} ${className}`}>
         <Image className={styles.image} image={image} imageAltText={altText} />
         <div className={styles.content}>
-          <Typography align="left" variant="span" className={styles.title}>
+          <Typography  variant="span" className={styles.title}>
             {title}
           </Typography>
           <div className={styles.subtitle}>{subtitle}</div>

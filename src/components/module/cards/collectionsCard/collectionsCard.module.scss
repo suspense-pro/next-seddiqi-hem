@@ -64,11 +64,17 @@
 .productItem {
   height: rem(448);
   border: rem(1) solid getColorHex("grey-light-4", 0.4);
+  // border:rem(4) solid red;
   border-left: none;
   border-bottom: none;
+  
+  &:nth-child(n+4) {
+    border-top: none;
+  }
 
-
+  
   @include md {
+    border-bottom: rem(1) solid getColorHex("grey-light-4", 0.4);
     height: rem(562);
   }
 }
@@ -87,10 +93,12 @@
     display: flex;
     flex-direction: column;
     gap: rem(8);
-    @include md {
-      bottom: rem(32);
+    bottom: rem(32);
+    
+    [dir="rtl"] & {
+      padding: rem(0 28);
+      align-items: flex-start;
     }
-
     .category {
       @include heading_light;
       font-size: rem(16);
@@ -117,10 +125,15 @@
       background-color: getColorHex("white");
       margin: 0 auto;
       margin-top: rem(8);
+      
+      [dir="rtl"] & {
+        margin: 0;
+        margin-top: rem(8);
+      }
     }
   }
 
   .productContent {
-    color: getColorHex("green-dark");
+    color: getColorHex("black-dark");
   }
 }

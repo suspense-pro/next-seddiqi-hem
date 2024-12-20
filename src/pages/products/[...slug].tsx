@@ -12,7 +12,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const plpKey = Array.isArray(slug) ? slug.join('/') : slug;
   const { vse } = context.query || {};
 
-  
   const data = await fetchStandardPageData(
     {
       content: {
@@ -22,26 +21,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     context
   );
 
-  // if (isEmpty(data.page)) {
-  //   return {
-  //     redirect: {
-  //       destination: "/page-not-found",
-  //     },
-  //   };
-  // }
-
   const products = await getProductListing({categoryId: plpKey, method: "POST"});
-
-  console.log({products});
   
 
-  // if (!products) {
-  //   return {
-  //     redirect: {
-  //       destination: "/page-not-found",
-  //     },
-  //   };
-  // }
+  if (!products) {
+    return {
+      redirect: {
+        destination: "/page-not-found",
+      },
+    };
+  }
   
   return {
     props: {

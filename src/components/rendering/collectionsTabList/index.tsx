@@ -1,9 +1,4 @@
-import {
-  Button,
-  CollectionsCard,
-  ContentHeader,
-  TabbedNavigation,
-} from "@components/module";
+import { Button, CollectionsCard, ContentHeader, TabbedNavigation } from "@components/module";
 import React from "react";
 import styles from "./collectionsTabList.module.scss";
 
@@ -25,17 +20,9 @@ const CollectionsTabList = ({ ...content }) => {
       id: index + 1,
       title: item?.tabLabel,
       content: isMobile ? (
-        <CollectionsTabMobile
-          ind={index}
-          cta={content?.cta}
-          content={content}
-        />
+        <CollectionsTabMobile ind={index} cta={content?.cta} content={content} />
       ) : (
-        <CollectionsTabDesktop
-          ind={index}
-          cta={content?.cta}
-          content={content}
-        />
+        <CollectionsTabDesktop ind={index} cta={content?.cta} content={content} />
       ),
     };
   });
@@ -53,11 +40,7 @@ const CollectionsTabList = ({ ...content }) => {
         richText={content?.richText}
         textColor={textColor}
       />
-      <TabbedNavigation
-        gap={isMobile ? 10 : 60}
-        className={styles.tabNavigation}
-        tabs={tabs}
-      />
+      <TabbedNavigation gap={isMobile ? 10 : 60} className={styles.tabNavigation} tabs={tabs} />
     </div>
   );
 };
@@ -80,23 +63,11 @@ const CollectionsTabDesktop = ({ content, cta, ind }) => {
   }`}
       >
         {listItems?.map((item) => {
-          return (
-            <CollectionsCard
-              totalItems={listItems?.length}
-              item={item}
-              type={content?.type}
-            />
-          );
+          return <CollectionsCard totalItems={listItems?.length} item={item} type={content?.type} />;
         })}
       </div>
       {cta && cta.label && (
-        <Button
-          isLink={true}
-          link={cta?.url}
-          title={cta?.label}
-          color={cta?.color}
-          type={cta?.type}
-        />
+        <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />
       )}
     </div>
   );
@@ -119,11 +90,7 @@ const CollectionsTabMobile = ({ content, cta, ind }) => {
       key={index}
       // style={isMobile ? { width: "90%" } : {}}
     >
-      <CollectionsCard
-        totalItems={listItems?.length}
-        item={item}
-        type={content?.type}
-      />
+      <CollectionsCard totalItems={listItems?.length} item={item} type={content?.type} />
     </SwiperSlide>
   );
 
@@ -134,9 +101,7 @@ const CollectionsTabMobile = ({ content, cta, ind }) => {
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        slidesPerView={
-          isMobile ? 1.2 : listItems?.length < 3 ? listItems?.length : 3
-        }
+        slidesPerView={isMobile ? 1.2 : listItems?.length < 3 ? listItems?.length : 3}
         onSlideChange={onSlideChange}
         className={styles.mySwiper}
       >
@@ -144,13 +109,7 @@ const CollectionsTabMobile = ({ content, cta, ind }) => {
       </Swiper>
       {cta && cta?.label && (
         <div>
-          <Button
-            isLink={true}
-            link={cta?.url}
-            title={cta?.label}
-            color={cta?.color}
-            type={cta?.type}
-          />
+          <Button isLink={true} link={cta?.url} title={cta?.label} color={cta?.color} type={cta?.type} />
         </div>
       )}
     </div>

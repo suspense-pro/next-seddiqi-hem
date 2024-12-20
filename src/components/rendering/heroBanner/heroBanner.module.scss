@@ -9,31 +9,14 @@
   .heroBannerContainer {
     position: relative;
     width: 100%;
-    height: rem(742);
+    height: 100%;
     margin: 0 auto;
     z-index: 1;
-    @include md{
-      height: rem(880);
-    }
-    video {
-      height: rem(742);
-      @include md{
-        height: rem(880);
-      }
-    }
   }
 
   .containerImg {
     height: 100%;
   }
-  &.fullWidth {
-    width: 100%;
-  }
-
-  &.standardWidth {
-    width: auto;
-  }
-
   .bannerItem {
     position: absolute;
     width: 100%;
@@ -65,6 +48,13 @@
     @include lg {
       padding: rem(80);
       width: rem(635);
+    }
+
+    .logo {
+      [dir="rtl"] & {
+        display: flex;
+        width: 100%;
+      }
     }
 
     &.bottomPadding {
@@ -131,7 +121,6 @@
     width: 100%;
     height: auto;
   }
-  
 
   .title {
     @include heading_light;
@@ -146,6 +135,21 @@
     @include md {
       font-size: rem(48);
       margin-bottom: rem(20);
+    }
+
+    [dir="rtl"] & {
+      width: 100%;
+      text-align: right;
+    }
+  }
+
+  .underlineConainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    [dir="rtl"] & {
+      justify-content: flex-start;
     }
   }
 
@@ -163,6 +167,11 @@
 
     @include md {
       font-size: rem(16);
+    }
+
+    [dir="rtl"] & {
+      width: 100%;
+      text-align: right !important;
     }
   }
 
@@ -192,5 +201,77 @@
     .carouselBtns_arrowRight {
       fill: getColorHex("white");
     }
+  }
+}
+
+.fullWidth {
+  width: 100%;
+  height: rem(742) !important;
+  // height: calc(100vh - 121px);
+  @include md {
+    // height: calc(100vh - 222px);
+    height: rem(880) !important;
+  }
+
+  .imgClass,
+  video {
+    min-height: rem(400);
+    // height: calc(100vh - 121px) !important;
+    height: rem(742) !important;
+    @include md {
+      min-height: rem(400);
+      // height: calc(100vh - 222px) !important;
+      height: rem(880) !important;
+    }
+  }
+}
+
+.mediumWidth {
+  width: 100%;
+  min-height: rem(400);
+  height: calc(100vh - 121px) !important;
+  max-height: rem(660);
+
+  @include md {
+    height: calc(100vh - 222px) !important;
+    max-height: rem(680);
+  }
+
+  .imgClass,
+  video {
+    width: 100%;
+    min-height: rem(400);
+    height: calc(100vh - 121px) !important;
+    max-height: rem(660);
+    @include md {
+      height: calc(100vh - 222px) !important;
+      max-height: rem(680);
+    }
+  }
+}
+.smallWidth {
+  width: 100%;
+  height: rem(340);
+  overflow: hidden;
+
+  @include md {
+    height: rem(420);
+    max-height: rem(420);
+  }
+
+  .imgClass,
+  video {
+    height: rem(340) !important;
+    @include md {
+      height: rem(420) !important;
+    }
+  }
+}
+.ctaButton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  [dir="rtl"] & {
+    justify-content: flex-start;
   }
 }
