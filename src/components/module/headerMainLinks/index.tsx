@@ -62,9 +62,11 @@ const HeaderMainLinks = ({ isScrolled = false }: { isScrolled?: boolean }) => {
         ))}
       </div>
       <div className={styles.navIcons}>
+        {/*}
         <div onClick={openSearchPopup}>
           <SearchIcon fill="#" />
         </div>
+        */}
         {/* <Link target="_blank" href="/book-an-appointment">
           <CalendarIcon fill="#" />
         </Link> */}
