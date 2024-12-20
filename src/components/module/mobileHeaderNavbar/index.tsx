@@ -44,9 +44,11 @@ const MobileHeaderNavbar: React.FC<MobileHeaderNavbarProps> = ({ toggleMenu, men
           />
         </Link>
         <div className={styles.rightIcons}>
+        {/*
         <div onClick={openSearchPopup}>
           <SearchIcon fill="#" />
         </div>
+        */}
           <Link href="/contact-us">
             <PhoneIconNoBorder className={styles.phoneIcon} fill="#" />
           </Link>
