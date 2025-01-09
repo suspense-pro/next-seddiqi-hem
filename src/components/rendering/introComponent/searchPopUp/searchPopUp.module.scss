@@ -1,0 +1,134 @@
+@import "./../../../../assets/styles/main.scss";
+
+.container {
+  //   display: flex;
+  //   position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: rem(28);
+  padding: rem(160 205);
+  width: 100vw;
+  height: 100vh;
+  background: getColorHex("white");
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image2 {
+  flex: 1;
+  object-fit: cover;
+  height: 100% !important;
+  width: 100%;
+  min-width: rem(400);
+  min-height: rem(535);
+}
+
+.closeIcon {
+  z-index: 99999;
+  position: absolute;
+  right: rem(80);
+  top: rem(80);
+  cursor: pointer;
+}
+
+.textContainer {
+  //   flex: 1;
+  min-width: rem(800);
+  display: flex;
+  justify-content: center;
+}
+
+.searchContainer {
+  // position: absolute;
+  // bottom: rem(154);
+  // z-index: 9999;
+  // left: 50%;
+  // transform: translateX(-50%);
+
+  display: flex;
+  width: rem(800);
+  height: 76px;
+  padding: 0px 28px;
+  align-items: center;
+  gap: 20px;
+
+  border-radius: 16px 0px;
+  border: 1px solid var(--GreyShades-Lighter-Grey, #e9e8e3);
+  background: var(--Primary-White, #fff);
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.15);
+}
+
+.input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  padding: 0;
+  margin-right: 8px;
+}
+
+.input::placeholder {
+  color: #aaa;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  background: url("/path-to-your-icon.png") no-repeat center center;
+  background-size: contain;
+}
+
+.seddiqiLogo {
+  border-radius: 40px;
+  background: var(--Tertiary-Desert-Storm, #eee7db);
+  display: flex;
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.legacyContainer {
+  margin-top: 20px; /* Adjust spacing */
+  width: rem(800);
+}
+
+.legacyList {
+  list-style-type: none; /* Remove default bullets */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  font-size: 16px; /* Adjust text size */
+  color: #333; /* Dark text for readability */
+  line-height: 1.6; /* Better spacing between items */
+}
+
+.legacyList li {
+  padding: rem(20) 0; /* Add spacing between list items */
+  border-bottom: 1px solid #ddd; /* Optional separator line */
+  
+}
+
+.legacyList li:last-child {
+//   border-bottom: none; /* Remove bottom border for the last item */
+}

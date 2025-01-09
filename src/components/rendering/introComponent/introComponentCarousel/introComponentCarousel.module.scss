@@ -1,0 +1,146 @@
+@import "./../../../../assets/styles/main.scss";
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: rem(32);
+  height: calc(100vh - 80px);
+  justify-content: center;
+  max-height: rem(816);
+  position: relative;
+  min-height: rem(720);
+}
+.titleSection {
+  padding: rem(0 40);
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h3 {
+    color: var(--Primary-Midnight-Brown, #271610);
+    text-align: center;
+
+    /* Mobile/Headings/H2-AllCaps */
+    @include heading_regular;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 34px; /* 121.429% */
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    margin: 0;
+    margin-bottom: rem(8);
+  }
+
+  p {
+    color: var(--GreyShades-Grey, #403f3d);
+    text-align: center;
+
+    @include body_regular;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 22px; /* 157.143% */
+    letter-spacing: 0.2px;
+  }
+}
+
+.cards {
+  margin-left: rem(40);
+
+}
+
+.imageCard {
+  display: flex;
+  width: 282px;
+  height: 398px;
+
+  .image {
+    width: 282px;
+    height: 398px;
+    object-fit: cover;
+    border-radius: 16px 0px;
+  }
+}
+
+.swiperSlide {
+  width: 282px;
+  height: 398px;
+}
+
+.mySwiper {
+  div[class^="swiper-button-prev"],
+  div[class^="swiper-button-next"] {
+    width: rem(40);
+    height: rem(40);
+    border-radius: rem(12) 0 rem(12);
+    // background: getColorHex("metallic");
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    //position: absolute;
+    z-index: 2000;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='6' height='12' viewBox='0 0 6 12' fill='none' xmlns='http://www.w3.org/2000/svg' class='articleListCarousel_arrowLeft__IiUa9'%3E%3Cmask id='path-1-inside-1_29_6412' fill='white'%3E%3Cpath d='M0 12L6 6L0 0'%3E%3C/path%3E%3C/mask%3E%3Cpath d='M6 6L6.70711 6.70711V5.29289L6 6ZM0.707107 12.7071L6.70711 6.70711L5.29289 5.29289L-0.707107 11.2929L0.707107 12.7071ZM6.70711 5.29289L0.707107 -0.707107L-0.707107 0.707107L5.29289 6.70711L6.70711 5.29289Z' fill='white' mask='url(%23path-1-inside-1_29_6412)'%3E%3C/path%3E%3C/svg%3E");
+    background-color: getColorHex("Khaki");
+    @include md {
+      display: block;
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+
+  div[class^="swiper-button-prev"] {
+    left: rem(32);
+    transform: rotate(-180deg);
+  }
+
+  div[class^="swiper-button-next"] {
+    right: rem(32);
+    [dir="rtl"] & {
+      right: auto;
+    }
+  }
+
+  div[class^="swiper-button-prev swiper-button-disabled"] {
+    display: none;
+  }
+
+  div[class^="swiper-button-next swiper-button-disabled"] {
+    display: none;
+  }
+}
+
+
+
+.toggleBtn {
+  position: absolute;
+  display: inline-flex;
+  height: 36px;
+  padding: 0px 12px;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+  border-radius: 8px 0px;
+  border: 0px solid var(--GreyShades-Lighter-Grey, #e9e8e3);
+  background: var(--Primary-White, #fff);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+
+  color: var(--Primary-Midnight-Brown, #271610);
+  @include heading_regular;
+  cursor: pointer;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px; /* 116.667% */
+
+  bottom: rem(34);
+  right: rem(28);
+  z-index: 999;
+}

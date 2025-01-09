@@ -9,9 +9,10 @@ type ImageProps = {
     imageAltText?: string;
     di?: string;
     imgWidth?: string;
+    clickHandler?: any
 } & CmsContent;
 
-const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel, className, height, imgWidth }: ImageProps) => {
+const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel, className, height, imgWidth, clickHandler }: ImageProps) => {
     if (!image) {
         return null;
     }
@@ -123,7 +124,7 @@ const Image = ({ display, image, imageAltText, seoText, di = '', query, roundel,
             </picture>
         );
 
-    return <div className={height} style={{ position: 'relative', width: imgWidth ? imgWidth: 'auto' }}>{imageTag}</div>;
+    return <div onClick={(e) => clickHandler(e)} className={height} style={{ position: 'relative', width: imgWidth ? imgWidth: 'auto' }}>{imageTag}</div>;
 };
 
 export default Image;
