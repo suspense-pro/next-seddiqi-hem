@@ -1,4 +1,5 @@
 import Layout from "@components/layout";
+import ContentAndImageAdvanced from "@components/rendering/contentAndImageAdvanced";
 import IntroComponent from "@components/rendering/introComponent";
 import IntroPopUp from "@components/rendering/introComponent/introPopUp";
 import fetchStandardPageData from "@utils/cms/page/fetchStandardPageData";
@@ -22,8 +23,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
+// const Test = () => {
+//   return <IntroComponent />
+// };
 const Test = () => {
-  return <IntroComponent />
+  return <ContentAndImageAdvanced />
 };
 
 export default Test;
