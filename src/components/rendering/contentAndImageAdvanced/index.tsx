@@ -3,36 +3,34 @@ import React, { useEffect, useState } from "react";
 import styles from "./contentAndImageAdvanced.module.scss";
 
 const ContentAndImageAdvanced = ({ ...content }) => {
-  const [showMedia, setShowMedia] = useState(true); // Controls the visibility of the fullScreenIntro media
-  const [animateImages, setAnimateImages] = useState(false); // Triggers the image animations
-  const [animationComplete, setAnimationComplete] = useState(false); // Tracks if the image animations are complete
+  const [showMedia, setShowMedia] = useState(true);
+  const [animateImages, setAnimateImages] = useState(false);
+  const [animationComplete, setAnimationComplete] = useState(false);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setAnimateImages(true); // Trigger the animation after 3 seconds
-  //   }, 3000); // 3 seconds delay before starting the animations
-
-  //   // Cleanup timer on component unmount
-  //   return () => clearTimeout(timer);
-  // }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
-      setAnimationComplete(true); // Trigger the animation after 3 seconds
-    }, 5000); // 3 seconds delay before starting the animations
+      setAnimationComplete(true);
+    }, 5000);
 
-    // Cleanup timer on component unmount
     return () => clearTimeout(timer);
   }, []);
 
   const MediaItem = ({ item, animateImages, side }) => {
     return (
       <div
-        className={`${animateImages ? styles[`slideIn${side?.charAt(0)?.toUpperCase() + side?.slice(1)}`] : ""} ${
-          styles[`${side}ImageContainer`]
-        }  ${styles.imageContainer}`}
+        className={`${
+          animateImages
+            ? styles[
+                `slideIn${side?.charAt(0)?.toUpperCase() + side?.slice(1)}`
+              ]
+            : ""
+        } ${styles[`${side}ImageContainer`]}  ${styles.imageContainer}`}
       >
         <div className={styles.hovere}>
-          <GradientOverlay className={`${styles[`${side}Image`]} `} opacity={60}>
+          <GradientOverlay
+            className={`${styles[`${side}Image`]} `}
+            opacity={60}
+          >
             {item?.media?.image ? (
               <Image
                 className={`${styles.image} ${styles[`${side}Image`]}`}
@@ -41,36 +39,38 @@ const ContentAndImageAdvanced = ({ ...content }) => {
                 imageAltText={`${side} image`}
               />
             ) : (
-              <Video video={item?.media?.video} className={`${styles.image} ${styles[`${side}Image`]}`} />
+              <Video
+                video={item?.media?.video}
+                className={`${styles.image} ${styles[`${side}Image`]}`}
+                showPlay={item?.media?.showPlay}
+                autoPlay={item?.media?.autoPlay}
+              />
             )}
           </GradientOverlay>
 
           <div className={styles.textContainer}>
             {item?.title && <h2 className={styles.title}>{item?.title}</h2>}
-            {item?.description && <div className={styles.desc}>{item?.description}</div>}
+            <div className={styles.descContainer}>
+              {item?.description && (
+                <div className={styles.desc}>{item?.description}</div>
+              )}
 
-            <div className={styles.btnContainer}>
-              <Button
-                clickHandler={() => console.log("")}
-                className={styles.discoverBtn}
-                title="Discover"
-                isLink={false}
-                type="transparant"
-                color="white"
-              />
+              <div className={styles.btnContainer}>
+                <Button
+                  clickHandler={() => console.log("")}
+                  className={styles.discoverBtn}
+                  title="Discover"
+                  isLink={false}
+                  type="transparant"
+                  color="white"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
     );
   };
-
-  // // Once the animations are complete, we can hide the fullScreenIntro video
-  // useEffect(() => {
-  //   if (animateImages) {
-  //     setShowMedia(false); // Hide the fullScreenIntro video after images have been animated
-  //   }
-  // }, [animateImages]);
 
   return (
     <div className={styles.container}>
@@ -91,13 +91,23 @@ const ContentAndImageAdvanced = ({ ...content }) => {
                 showPlay={content?.fullScreenIntro?.media?.showPlay}
               />
             )}
-            <h1 className={styles.heading}>Ahmed Seddiqi: Legacy of Timeless Elegance</h1>
+            <h1 className={styles.heading}>
+              {content?.fullScreenIntro?.mainTitle}
+            </h1>
           </GradientOverlay>
         )}
 
         <div className={styles.imagesContainer}>
-          <MediaItem item={content?.leftItem} animateImages={animationComplete} side="left" />
-          <MediaItem item={content?.rightItem} animateImages={animationComplete} side="right" />
+          <MediaItem
+            item={content?.leftItem}
+            animateImages={animationComplete}
+            side="left"
+          />
+          <MediaItem
+            item={content?.rightItem}
+            animateImages={animationComplete}
+            side="right"
+          />
         </div>
       </div>
     </div>
