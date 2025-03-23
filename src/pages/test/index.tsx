@@ -23,12 +23,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-// const Test = () => {
-//   return <IntroComponent />
-// };
 const Test = () => {
-  return <ContentAndImageAdvanced />
+  return <IntroComponent />
 };
+// const Test = () => {
+//   return <ContentAndImageAdvanced />
+// };
 
 export default Test;
 Test.Layout = Layout;

@@ -46,6 +46,8 @@ import ExclusiveInfoCards from "@components/module/bookAnAppointment/exclusiveIn
 import ContentAndSingleImageColumn from "@components/rendering/contentAndSingleImageColumn";
 import Hotspot from "@components/rendering/hotspot";
 import ContentAndImageAdvanced from "@components/rendering/contentAndImageAdvanced";
+import IntroComponent from "@components/rendering/introComponent";
+
 
 export const defaultClientConfig: ContentClientConfigV2 = {
   hubName: process.env.DYNAMIC_CONTENT_HUB_NAME || "platinumpanda",
@@ -120,6 +122,7 @@ export const ComponentMapping: any = {
   [`${componentUrl}/content-and-single-image-column`]: ContentAndSingleImageColumn,
   [`${componentUrl}/title-and-two-block-image-content-overlap`]: TitleAndTwoBlockImageContentOverlap,
   [`${componentUrl}/content-and-image-advanced`]: ContentAndImageAdvanced,
+  [`${componentUrl}/heritage-intro-and-explore`]: IntroComponent,
 };
 
 const defaultConfig = {

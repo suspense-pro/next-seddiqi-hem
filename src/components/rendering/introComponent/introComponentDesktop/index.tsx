@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styles from "./introComponentDesktop.module.scss";
-import { Image } from "@components/module";
+import { Image, Video } from "@components/module";
 import IntroPopUp from "../introPopUp";
 import SearchPopUp from "../searchPopUp";
 
-const IntroComponentDesktop = () => {
+const IntroComponentDesktop = ({ content }) => {
   const image = {
     _meta: {
       schema: "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link",
@@ -15,8 +15,8 @@ const IntroComponentDesktop = () => {
     defaultHost: "cdn.media.amplience.net",
     mimeType: "image/png",
   };
-  const [imageInfo, setImageInfo] = useState(null)
-  const [searchOpen, setSearchOpen] = useState(false)
+  const [imageInfo, setImageInfo] = useState(null);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const handleMouseMove = (e) => {
     const container = document.getElementById("parallex");
@@ -41,13 +41,29 @@ const IntroComponentDesktop = () => {
     container.style.transform = `translate(${panX}px, ${panY}px)`;
   };
 
+  if (imageInfo) {
+    return <IntroPopUp setImageInfo={setImageInfo} />;
+  }
+  if (searchOpen) {
+    return <SearchPopUp setSearchOpen={setSearchOpen} />;
+  }
 
-  if(imageInfo) {
-    return <IntroPopUp setImageInfo={setImageInfo} />
-  }
-  if(searchOpen) {
-    return <SearchPopUp setSearchOpen={setSearchOpen} />
-  }
+  const renderMediaComponent = (media, heightClass) => {
+    console.log("content?.topLeftItem?.media", media);
+    if (media?.image) {
+      return (
+        <Image
+          clickHandler={(e) => setImageInfo("somethin")}
+          className={styles.image}
+          height={heightClass}
+          image={media?.image}
+          imageAltText={"image text"}
+        />
+      );
+    } else {
+      return <Video className={`${heightClass} ${styles.image} `} video={media?.video} />;
+    }
+  };
 
   return (
     <div className={styles.introContainer}>
@@ -55,7 +71,11 @@ const IntroComponentDesktop = () => {
         <h1>Ahmed Seddiqi Heritage</h1>
         <p>A pioneer among leading retailers in the region</p>
       </div>
-      <div onClick={() => setSearchOpen(true)} onMouseMove={(e) => handleMouseMove(e)} className={styles.searchContainer}>
+      <div
+        onClick={() => setSearchOpen(true)}
+        onMouseMove={(e) => handleMouseMove(e)}
+        className={styles.searchContainer}
+      >
         <input type="text" placeholder="Tell me about the Ahmed Seddiqi legacy" className={styles.input} />
         <button className={styles.iconButton}>
           <span className={styles.icon}></span>
@@ -74,12 +94,54 @@ const IntroComponentDesktop = () => {
         </div>
       </div>
       <div id="parallex" onMouseMove={(e) => handleMouseMove(e)} className={styles.container}>
-        <Image clickHandler={(e) => setImageInfo("somethin")} className={styles.image} height={styles.image1} image={image} imageAltText={"image text"} />
-        <Image  clickHandler={(e) => setImageInfo("somethin")} className={styles.image} height={styles.image2} image={image} imageAltText={"image text"} />
-        <Image  clickHandler={(e) => setImageInfo("somethin")} className={styles.image} height={styles.image3} image={image} imageAltText={"image text"} />
-        <Image  clickHandler={(e) => setImageInfo("somethin")} className={styles.image} height={styles.image4} image={image} imageAltText={"image text"} />
-        <Image  clickHandler={(e) => setImageInfo("somethin")} className={styles.image} height={styles.image5} image={image} imageAltText={"image text"} />
-        <Image  clickHandler={(e) => setImageInfo("somethin")} className={styles.image} height={styles.image6} image={image} imageAltText={"image text"} />
+        {renderMediaComponent(content?.topLeftItem?.media, styles.image1)}
+        {renderMediaComponent(content?.topMiddleItem?.media, styles.image2)}
+        {renderMediaComponent(content?.topRightItem?.media, styles.image3)}
+        {renderMediaComponent(content?.bottomLeftItem?.media, styles.image4)}
+        {renderMediaComponent(content?.bottomMiddleItem?.media, styles.image5)}
+        {renderMediaComponent(content?.bottomRightItem?.media, styles.image6)}
+        {/* <Image
+          clickHandler={(e) => setImageInfo("somethin")}
+          className={styles.image}
+          height={styles.image1}
+          image={image}
+          imageAltText={"image text"}
+        /> */}
+        {/* <Image
+          clickHandler={(e) => setImageInfo("somethin")}
+          className={styles.image}
+          height={styles.image2}
+          image={image}
+          imageAltText={"image text"}
+        />
+        <Image
+          clickHandler={(e) => setImageInfo("somethin")}
+          className={styles.image}
+          height={styles.image3}
+          image={image}
+          imageAltText={"image text"}
+        />
+        <Image
+          clickHandler={(e) => setImageInfo("somethin")}
+          className={styles.image}
+          height={styles.image4}
+          image={image}
+          imageAltText={"image text"}
+        />
+        <Image
+          clickHandler={(e) => setImageInfo("somethin")}
+          className={styles.image}
+          height={styles.image5}
+          image={image}
+          imageAltText={"image text"}
+        />
+        <Image
+          clickHandler={(e) => setImageInfo("somethin")}
+          className={styles.image}
+          height={styles.image6}
+          image={image}
+          imageAltText={"image text"}
+        /> */}
       </div>
     </div>
   );

@@ -3,12 +3,12 @@ import IntroComponentDesktop from "./introComponentDesktop";
 import IntroComponentMobile from "./IntroComponentMobile";
 import styles from "./introComponent.module.scss";
 
-const IntroComponent = () => {
-  
+const IntroComponent = ({...content}) => {
+  console.log("INTRO COMPONENT", content)
   return (
     <>
       <div className={styles.introContainerDesk}>
-        <IntroComponentDesktop />
+        <IntroComponentDesktop content={content} />
       </div>
       <div className={styles.introContainerMobile}>
         <IntroComponentMobile />
