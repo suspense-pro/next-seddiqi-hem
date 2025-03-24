@@ -5,16 +5,6 @@ import { CloseIconV2 } from "@assets/images/svg";
 import RichText from "@components/module/richText";
 
 const IntroPopUp = ({ imageInfo, setImageInfo }) => {
-  const image = {
-    _meta: {
-      schema: "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link",
-    },
-    id: "7942dffb-3623-47dd-8b4d-dba5e376a026",
-    name: "column_image_01",
-    endpoint: "likedigital",
-    defaultHost: "cdn.media.amplience.net",
-    mimeType: "image/png",
-  };
 
   console.log("imageInfo?.media?.video", imageInfo?.media?.video);
 
@@ -50,30 +40,6 @@ const IntroPopUp = ({ imageInfo, setImageInfo }) => {
           className={styles.description}
           text={imageInfo?.description}
         />
-        {/* <p>
-          Mr. Ahmed Qasim Seddiqi maintained his focus by offering quality Swiss
-          watches to an array of clients, including royalty and politicians. He
-          furthered the company’s growth through his exclusive franchise
-          agreements with the world’s leading Swiss watch companies and he
-          safeguarded the business by keeping Ahmed Seddiqi a tight-knit family
-          operation.The first franchise agreement was signed with Swiss watch
-          brand, West End Watch Co. in 1949, after which the portfolio of brands
-          expanded to include over 90% of the world’s luxury Swiss watch brands.
-          Today, the passion for luxury watches is deeply embedded into the
-          ethos of the Ahmed Seddiqi’ family.
-        </p>
-        <p>
-          Mr. Ahmed Qasim Seddiqi maintained his focus by offering quality Swiss
-          watches to an array of clients, including royalty and politicians. He
-          furthered the company’s growth through his exclusive franchise
-          agreements with the world’s leading Swiss watch companies and he
-          safeguarded the business by keeping Ahmed Seddiqi a tight-knit family
-          operation.The first franchise agreement was signed with Swiss watch
-          brand, West End Watch Co. in 1949, after which the portfolio of brands
-          expanded to include over 90% of the world’s luxury Swiss watch brands.
-          Today, the passion for luxury watches is deeply embedded into the
-          ethos of the Ahmed Seddiqi’ family.
-        </p> */}
       </div>
     </div>
   );
