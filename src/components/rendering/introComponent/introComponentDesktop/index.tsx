@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./introComponentDesktop.module.scss";
-import { Image, Video } from "@components/module";
+import { GradientOverlay, Image, Video } from "@components/module";
 import IntroPopUp from "../introPopUp";
 import SearchPopUp from "../searchPopUp";
 
@@ -42,32 +42,67 @@ const IntroComponentDesktop = ({ content }) => {
   };
 
   if (imageInfo) {
-    return <IntroPopUp setImageInfo={setImageInfo} />;
+    return <IntroPopUp imageInfo={imageInfo} setImageInfo={setImageInfo} />;
   }
   if (searchOpen) {
-    return <SearchPopUp setSearchOpen={setSearchOpen} />;
+    return <SearchPopUp content={content?.searchList} setSearchOpen={setSearchOpen} />;
   }
 
-  const renderMediaComponent = (media, heightClass) => {
-    console.log("content?.topLeftItem?.media", media);
-    if (media?.image) {
+  console.log("content?.topLeftItem?.media", content);
+  const renderMediaComponent = (content, heightClass, imageClass) => {
+    if (content?.media?.image) {
       return (
-        <Image
-          clickHandler={(e) => setImageInfo("somethin")}
-          className={styles.image}
-          height={heightClass}
-          image={media?.image}
-          imageAltText={"image text"}
-        />
+        <div className={`${heightClass}`}>
+          <div
+            onClick={() =>
+              setImageInfo({
+                ...content,
+              })
+            }
+            className={styles.exploreContainer}
+          >
+            <div className={styles.exploreBtn}>Explore</div>
+          </div>
+          <GradientOverlay className={imageClass} opacity={60}>
+            <Image
+              className={styles.image}
+              height={imageClass}
+              image={content?.media?.image}
+              imageAltText={"image text"}
+            />
+          </GradientOverlay>
+        </div>
       );
     } else {
-      return <Video className={`${heightClass} ${styles.image} `} video={media?.video} />;
+      return (
+        <div className={`${heightClass}`}>
+          <div
+            onClick={() =>
+              setImageInfo({
+                ...content,
+              })
+            }
+            className={styles.exploreContainer}
+          >
+            <div className={styles.exploreBtn}>Explore</div>
+          </div>
+          <GradientOverlay className={imageClass} opacity={60}>
+            <Video
+              className={`${imageClass} ${styles.image}`}
+              video={content?.media?.video}
+            />
+          </GradientOverlay>
+        </div>
+      );
     }
   };
 
   return (
     <div className={styles.introContainer}>
-      <div onMouseMove={(e) => handleMouseMove(e)} className={styles.titleSection}>
+      <div
+        onMouseMove={(e) => handleMouseMove(e)}
+        className={styles.titleSection}
+      >
         <h1>Ahmed Seddiqi Heritage</h1>
         <p>A pioneer among leading retailers in the region</p>
       </div>
@@ -76,12 +111,22 @@ const IntroComponentDesktop = ({ content }) => {
         onMouseMove={(e) => handleMouseMove(e)}
         className={styles.searchContainer}
       >
-        <input type="text" placeholder="Tell me about the Ahmed Seddiqi legacy" className={styles.input} />
+        <input
+          type="text"
+          placeholder="Tell me about the Ahmed Seddiqi legacy"
+          className={styles.input}
+        />
         <button className={styles.iconButton}>
           <span className={styles.icon}></span>
         </button>
         <div className={styles.seddiqiLogo}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+          >
             <path
               d="M2.12955 2.59101C2.12955 1.08824 3.73688 0.480768 5.044 0.480768L5.05026 0.175443L4.59057 0.100702C3.07862 -0.150554 1.85437 0.070488 1.04758 0.739976C0.356488 1.31246 0.0609777 2.02966 0.0609777 2.82318C0.0609777 4.25121 1.28054 6.21197 2.15926 7.78948C2.71275 8.76747 3.31941 9.82816 3.31941 11.0685C3.31941 12.5697 1.86687 13.4905 0.0328336 13.4905L0 13.799C1.89815 14.3015 5.47398 14.0948 5.47398 10.4134C5.47398 9.10619 4.70784 7.73541 3.86821 6.32328C3.00826 4.78712 2.12955 3.54356 2.12955 2.59101Z"
               fill="#271610"
@@ -93,13 +138,41 @@ const IntroComponentDesktop = ({ content }) => {
           </svg>
         </div>
       </div>
-      <div id="parallex" onMouseMove={(e) => handleMouseMove(e)} className={styles.container}>
-        {renderMediaComponent(content?.topLeftItem?.media, styles.image1)}
-        {renderMediaComponent(content?.topMiddleItem?.media, styles.image2)}
-        {renderMediaComponent(content?.topRightItem?.media, styles.image3)}
-        {renderMediaComponent(content?.bottomLeftItem?.media, styles.image4)}
-        {renderMediaComponent(content?.bottomMiddleItem?.media, styles.image5)}
-        {renderMediaComponent(content?.bottomRightItem?.media, styles.image6)}
+      <div
+        id="parallex"
+        onMouseMove={(e) => handleMouseMove(e)}
+        className={styles.container}
+      >
+        {renderMediaComponent(
+          content?.topLeftItem,
+          styles.image1,
+          styles.imageClass
+        )}
+        {renderMediaComponent(
+          content?.topMiddleItem,
+          styles.image2,
+          styles.imageClass
+        )}
+        {renderMediaComponent(
+          content?.topRightItem,
+          styles.image3,
+          styles.imageClass
+        )}
+        {renderMediaComponent(
+          content?.bottomLeftItem,
+          styles.image4,
+          styles.imageClass
+        )}
+        {renderMediaComponent(
+          content?.bottomMiddleItem,
+          styles.image5,
+          styles.imageClass
+        )}
+        {renderMediaComponent(
+          content?.bottomRightItem,
+          styles.image6,
+          styles.imageClass
+        )}
         {/* <Image
           clickHandler={(e) => setImageInfo("somethin")}
           className={styles.image}

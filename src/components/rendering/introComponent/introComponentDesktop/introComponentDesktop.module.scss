@@ -18,10 +18,8 @@
   // overflow: hidden;
   min-height: rem(950);
   will-change: transform;
+  width: 100%;
 }
-
-
-
 
 .titleSection {
   margin-bottom: 2rem;
@@ -31,7 +29,6 @@
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999;
-
 
   h1 {
     color: var(--Primary-Midnight-Brown, #271610);
@@ -89,7 +86,7 @@
   // max-width: 500px;
   // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: absolute;
-  bottom: rem(154);
+  bottom: rem(254);
   z-index: 9999;
   left: 50%;
   transform: translateX(-50%);
@@ -160,7 +157,17 @@
   object-fit: cover;
   overflow: hidden;
   border-radius: 16px 0px;
+}
 
+.imageWrapper {
+  // position: absolute; /* Keep the absolute position to maintain the same position */
+  // width: 100%; /* Ensure the div container covers the full width of the image */
+  // height: 100%; /* Ensure the div container covers the full height of the image */
+  // top: 0;
+  // left: 0;
+  // bottom: 0;
+  // right: 0;
+  // background-color: rebeccapurple;
 }
 
 .image1,
@@ -171,23 +178,41 @@
   height: 454px !important;
   align-items: flex-start;
   border-radius: 16px 0px;
-  object-fit: cover;
+  // object-fit: cover;
+  background-color: rebeccapurple;
+  transition: all 0.3s;
+
+  &:hover {
+    .exploreContainer {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }
 
 .image2,
 .image5 {
+  background-color: rebeccapurple;
   width: 390px;
   height: 260px;
   justify-content: center;
   align-items: center;
 
   border-radius: 16px 0px;
-}
 
+  transition: all 0.3s;
+
+  &:hover {
+    .exploreContainer {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
 
 .image1 {
   position: absolute !important;
-  top: -20px;
+  top: -100px;
   left: 59px;
 }
 .image2 {
@@ -199,21 +224,78 @@
 .image3 {
   position: absolute !important;
   top: -30px !important;
-  right: -30px !important; 
+  right: -30px !important;
 }
 .image4 {
   position: absolute !important;
   left: -66px !important;
-  bottom: -38px !important; 
+  bottom: -38px !important;
 }
 .image5 {
   position: absolute !important;
-  bottom: -17px !important; 
+  bottom: -17px !important;
   width: 490px;
   height: 327px;
 }
 .image6 {
   position: absolute !important;
   bottom: -210px !important;
-  right: -6px !important; 
+  right: -6px !important;
+}
+
+.imageClass {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 101;
+  border-radius: 16px 0px;
+}
+
+.exploreContainer {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 16px 0px;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    lightgray -552.903px -246.861px / 283.63% 210.959% no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+
+  border-radius: 16px 0px;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+
+  .exploreBtn {
+    width: rem(72);
+    height: rem(72);
+    border-radius: 120px;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
+    color: getColorHex("midnight-brown");
+    text-align: center;
+
+    font-size: rem(10);
+    line-height: rem(14);
+    letter-spacing: rem(0.2);
+    text-transform: uppercase;
+  }
+
+  z-index: 102;
 }
