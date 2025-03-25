@@ -52,7 +52,7 @@ const IntroComponentDesktop = ({ content }) => {
   const renderMediaComponent = (content, heightClass, imageClass) => {
     if (content?.media?.image) {
       return (
-        <div className={`${heightClass}`}>
+        <div onMouseMove={(e) => e.stopPropagation()} className={`${heightClass}`}>
           <div
             onClick={() =>
               setImageInfo({
@@ -75,7 +75,7 @@ const IntroComponentDesktop = ({ content }) => {
       );
     } else {
       return (
-        <div className={`${heightClass}`}>
+        <div onMouseMove={(e) => e.stopPropagation()} className={`${heightClass}`}>
           <div
             onClick={() =>
               setImageInfo({
@@ -113,7 +113,7 @@ const IntroComponentDesktop = ({ content }) => {
       >
         <input
           type="text"
-          placeholder="Tell me about the Ahmed Seddiqi legacy"
+          placeholder="Explore Ahmed Seddiqi Heritage"
           className={styles.input}
         />
         <button className={styles.iconButton}>

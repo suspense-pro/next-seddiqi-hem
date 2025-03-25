@@ -11,7 +11,7 @@ const IntroComponent = ({...content}) => {
         <IntroComponentDesktop content={content} />
       </div>
       <div className={styles.introContainerMobile}>
-        <IntroComponentMobile />
+        <IntroComponentMobile content={content} />
       </div>
     </>
   );

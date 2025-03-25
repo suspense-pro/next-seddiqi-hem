@@ -5,7 +5,7 @@ import IntroPopUp from "../introPopUp";
 import { SeddiqiLogoBlack } from "@assets/images/svg";
 import IntroComponentCarousel from "../introComponentCarousel";
 
-const IntroComponentMobile = () => {
+const IntroComponentMobile = ({content}) => {
   const image = {
     _meta: {
       schema: "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link",
@@ -42,11 +42,11 @@ const IntroComponentMobile = () => {
   };
 
   if (imageInfo) {
-    return <IntroPopUp setImageInfo={setImageInfo} />;
+    return <IntroPopUp imageInfo={imageInfo} setImageInfo={setImageInfo} />;
   }
 
   if(true) {
-    return <IntroComponentCarousel />
+    return <IntroComponentCarousel content={content} />
   }
 
   return (

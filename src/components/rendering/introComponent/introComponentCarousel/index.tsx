@@ -7,9 +7,10 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { GradientOverlay, Image } from "@components/module";
+import { GradientOverlay, Image, Typography, Video } from "@components/module";
 
-const IntroComponentCarousel = () => {
+const IntroComponentCarousel = ({ content }) => {
+  console.log("carousel", content);
   const image = {
     _meta: {
       schema: "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link",
@@ -23,11 +24,45 @@ const IntroComponentCarousel = () => {
 
   const swiperRef = useRef(null);
 
+  const renderSlide = (content, imageClass) => {
+    console.log("content?.media?.image", content?.media?.video);
+    if (content?.media?.image) {
+      return (
+        <SwiperSlide className={styles.swiperSlide} key={1}>
+          <div className={styles.imageCard}>
+            <GradientOverlay className={imageClass} opacity={60}>
+              <Image
+                className={styles.image}
+                image={content?.media?.image}
+                imageAltText={"image text"}
+              />
+            </GradientOverlay>{" "}
+          </div>
+        </SwiperSlide>
+      );
+    } else {
+      return (
+        <SwiperSlide className={styles.swiperSlide} key={1}>
+          <GradientOverlay className={imageClass} opacity={60}>
+            <div className={styles.imageCard}>
+              <Video
+                className={`${imageClass} ${styles.image}`}
+                video={content?.media?.video}
+              />
+            </div>
+          </GradientOverlay>
+        </SwiperSlide>
+      );
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.titleSection}>
-        <h3>Ahmed Seddiqi Heritage</h3>
-        <p>A pioneer among leading retailers in the region</p>
+        {content?.mainTitle && (
+          <Typography variant="h3">{content?.mainTitle}</Typography>
+        )}
+        {content?.description && <p>{content?.description}</p>}
       </div>
 
       <div className={styles.toggleBtn}>Grid View</div>
@@ -44,31 +79,12 @@ const IntroComponentCarousel = () => {
           freeMode={true}
           navigation={true}
         >
-          <SwiperSlide className={styles.swiperSlide} key={1}>
-            <div className={styles.imageCard}>
-              <Image className={styles.image} height={styles.image1} image={image} imageAltText={"image text"} />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={styles.swiperSlide} key={1}>
-            <div className={styles.imageCard}>
-              <Image className={styles.image} height={styles.image1} image={image} imageAltText={"image text"} />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={styles.swiperSlide} key={1}>
-            <div className={styles.imageCard}>
-              <Image className={styles.image} height={styles.image1} image={image} imageAltText={"image text"} />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={styles.swiperSlide} key={1}>
-            <div className={styles.imageCard}>
-              <Image className={styles.image} height={styles.image1} image={image} imageAltText={"image text"} />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={styles.swiperSlide} key={1}>
-            <div className={styles.imageCard}>
-              <Image className={styles.image} height={styles.image1} image={image} imageAltText={"image text"} />
-            </div>
-          </SwiperSlide>
+          {renderSlide(content?.topLeftItem, styles.sliderImage)}
+          {renderSlide(content?.topMiddleItem, styles.sliderImage)}
+          {renderSlide(content?.topRightItem, styles.sliderImage)}
+          {renderSlide(content?.bottomLeftItem, styles.sliderImage)}
+          {renderSlide(content?.bottomMiddleItem, styles.sliderImage)}
+          {renderSlide(content?.bottomRightItem, styles.sliderImage)}
         </Swiper>
       </div>
     </div>
