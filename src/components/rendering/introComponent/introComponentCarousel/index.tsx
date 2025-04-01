@@ -65,7 +65,6 @@ const IntroComponentCarousel = ({ content }) => {
         {content?.description && <p>{content?.description}</p>}
       </div>
 
-      <div className={styles.toggleBtn}>Grid View</div>
       <div className={styles.cards}>
         <Swiper
           modules={[Navigation]}
@@ -86,6 +85,9 @@ const IntroComponentCarousel = ({ content }) => {
           {renderSlide(content?.bottomMiddleItem, styles.sliderImage)}
           {renderSlide(content?.bottomRightItem, styles.sliderImage)}
         </Swiper>
+      </div>
+      <div className={styles.toggleBtn}>
+        <div>Grid View</div>
       </div>
     </div>
   );

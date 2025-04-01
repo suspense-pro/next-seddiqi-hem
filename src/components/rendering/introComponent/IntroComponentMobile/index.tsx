@@ -45,7 +45,7 @@ const IntroComponentMobile = ({content}) => {
     return <IntroPopUp imageInfo={imageInfo} setImageInfo={setImageInfo} />;
   }
 
-  if(true) {
+  if(false) {
     return <IntroComponentCarousel content={content} />
   }
 

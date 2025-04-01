@@ -36,7 +36,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 export default function Home({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   console.log("Homepage", content)
-  content = content?.page?.components?.slice(17, 19)
+  content = content?.page?.components?.slice(19, 22)
   console.log("asdasda", content)
   return (
     <div className="main-content">
