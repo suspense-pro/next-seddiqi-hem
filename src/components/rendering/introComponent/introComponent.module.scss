@@ -1,13 +1,13 @@
 @import './../../../assets/styles/main.scss';
 .introContainerDesk {
   display: none;
-  @include md {
+  @include xl {
     display: block;
   }
 }
 .introContainerMobile {
   display: block;
-  @include md {
+  @include xl {
     display: none;
   }
 }
