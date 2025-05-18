@@ -5,6 +5,7 @@ import IntroPopUp from "../introPopUp";
 import { SeddiqiLogoBlack } from "@assets/images/svg";
 import IntroComponentCarousel from "../introComponentCarousel";
 import SearchInputField from "../searchInputField";
+import SearchPopUp from "../searchPopUp";
 
 const IntroComponentMobile = ({ content }) => {
   const [imageInfo, setImageInfo] = useState(null);
@@ -70,6 +71,10 @@ const IntroComponentMobile = ({ content }) => {
     };
   }, []);
 
+  if(searchOpen) {
+    return <SearchPopUp setSearchOpen={setSearchOpen} content={content?.searchList} />
+  }
+
   if (isCarousel) {
     return <IntroComponentCarousel setIsCarousel={setIsCarousel} content={content} />;
   } else {
@@ -80,7 +85,7 @@ const IntroComponentMobile = ({ content }) => {
         <p>A pioneer among leading retailers in the region</p>
       </div> */}
         <div className={styles.searchBox}>
-          <div className={styles.searchContainer}>
+          <div onClick={() => setSearchOpen(true)} className={styles.searchContainer}>
             <input type="text" placeholder="Tell me about the Ahmed Seddiqi legacy" className={styles.input} />
             {/* <button className={styles.iconButton}>
             <span className={styles.icon}></span>

@@ -26,20 +26,19 @@ const SearchPopUp = ({ content, setSearchOpen }) => {
           <input
             type="text"
             value={searchQuery}
-            onChange={handleInputChange} // Update search query as user types
+            onChange={handleInputChange}
             placeholder="Explore Ahmed Seddiqi Heritage"
             className={styles.input}
           />
-          <button className={styles.iconButton}>
+          {/* <button className={styles.iconButton}>
             <span className={styles.icon}></span>
-          </button>
+          </button> */}
           <div className={styles.seddiqiLogo}>
             <SeddiqiLogoBlack />
           </div>
         </div>
       </div>
 
-      {/* Display the filtered list based on search query */}
       <div className={styles.legacyContainer}>
         <ul className={styles.legacyList}>
           {filteredContent.length > 0 ? (

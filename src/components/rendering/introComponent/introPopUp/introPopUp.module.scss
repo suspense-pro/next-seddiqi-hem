@@ -44,7 +44,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 16px 0px;
+  border-radius: rem(16) 0;
   max-height: rem(535);
 
   flex: 1;
