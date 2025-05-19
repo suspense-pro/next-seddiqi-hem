@@ -4,10 +4,8 @@ import { CloseIconV2, SeddiqiLogoBlack } from "@assets/images/svg";
 import Link from "next/link";
 
 const SearchPopUp = ({ content, setSearchOpen }) => {
-  // State to hold the search query
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Filter the content based on search query
   const filteredContent = content?.filter((item) => {
     return item?.title.toLowerCase().includes(searchQuery.toLowerCase());
   });

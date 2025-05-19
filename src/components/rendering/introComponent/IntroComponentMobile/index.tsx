@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./IntroComponentMobile.module.scss";
-import { Image, Video } from "@components/module";
+import { GradientOverlay, Image, Video } from "@components/module";
 import IntroPopUp from "../introPopUp";
 import { SeddiqiLogoBlack } from "@assets/images/svg";
 import IntroComponentCarousel from "../introComponentCarousel";
@@ -11,10 +11,6 @@ const IntroComponentMobile = ({ content }) => {
   const [imageInfo, setImageInfo] = useState(null);
   const [isCarousel, setIsCarousel] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-
-  if (imageInfo) {
-    return <IntroPopUp imageInfo={imageInfo} setImageInfo={setImageInfo} />;
-  }
 
   const items = [
     content?.topLeftItem,
@@ -71,12 +67,23 @@ const IntroComponentMobile = ({ content }) => {
     };
   }, []);
 
-  if(searchOpen) {
-    return <SearchPopUp setSearchOpen={setSearchOpen} content={content?.searchList} />
+  if (searchOpen) {
+    return (
+      <SearchPopUp
+        setSearchOpen={setSearchOpen}
+        content={content?.searchList}
+      />
+    );
+  }
+
+  if (imageInfo) {
+    return <IntroPopUp imageInfo={imageInfo} setImageInfo={setImageInfo} />;
   }
 
   if (isCarousel) {
-    return <IntroComponentCarousel setIsCarousel={setIsCarousel} content={content} />;
+    return (
+      <IntroComponentCarousel setIsCarousel={setIsCarousel} content={content} />
+    );
   } else {
     return (
       <div className={styles.introContainer}>
@@ -85,8 +92,15 @@ const IntroComponentMobile = ({ content }) => {
         <p>A pioneer among leading retailers in the region</p>
       </div> */}
         <div className={styles.searchBox}>
-          <div onClick={() => setSearchOpen(true)} className={styles.searchContainer}>
-            <input type="text" placeholder="Tell me about the Ahmed Seddiqi legacy" className={styles.input} />
+          <div
+            onClick={() => setSearchOpen(true)}
+            className={styles.searchContainer}
+          >
+            <input
+              type="text"
+              placeholder="Tell me about the Ahmed Seddiqi legacy"
+              className={styles.input}
+            />
             {/* <button className={styles.iconButton}>
             <span className={styles.icon}></span>
           </button> */}
@@ -114,11 +128,28 @@ const IntroComponentMobile = ({ content }) => {
             };
 
             if (item?.media?.image) {
-              return <Image {...commonProps} image={item.media.image} imageAltText={item.title || "image"} />;
+              return (
+                <div onClick={() => setImageInfo(item)}>
+                  <Image
+                    {...commonProps}
+                    image={item.media.image}
+                    imageAltText={item.title || "image"}
+                  />
+                </div>
+              );
             }
 
             if (item?.media?.video) {
-              return <Video {...commonProps} video={item.media.video} />;
+              return (
+                <div onClick={() => setImageInfo(item)}>
+                  <Video
+                    {...commonProps}
+                    video={item.media.video}
+                    autoPlay={item?.media?.autoPlay}
+                    showPlay={item?.media?.showPlay}
+                  />
+                </div>
+              );
             }
 
             return null;

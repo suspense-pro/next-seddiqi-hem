@@ -8,7 +8,7 @@
   width: 100%;
   height: 100vh;
   background: getColorHex("white");
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
@@ -139,7 +139,7 @@
 }
 
 .legacyContainer {
-  margin-top: rem(20); 
+  margin-top: rem(20);
   width: 100%;
 
   @include breakpoint-min-width(rem(930)) {
@@ -148,27 +148,25 @@
 }
 
 .legacyList {
-  list-style-type: none; 
-  padding: 0; 
-  margin: 0; 
-  font-size: rem(16); 
-  color: #333; 
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: rem(16);
+  color: #333;
   line-height: 1.6;
 }
 
 .legacyList li {
   @include heading_regular;
-  padding: rem(20) 0; /* Add spacing between list items */
-  border-bottom: 1px solid var(--GreyShades-Tint-Grey, #f6f5f5);
-
-  color: var(--GreyShades-Grey, #403f3d);
-  font-size: 12px;
-  font-style: normal;
+  padding: rem(20) 0;
+  border-bottom: rem(1) solid getColorHex("tint-grey");
+  color: getColorHex("grey");
+  font-size: rem(12);
   font-weight: 500;
-  line-height: 18px; /* 150% */
-  letter-spacing: 0.2px;
+  line-height: rem(18);
+  letter-spacing: rem(0.2);
 }
 
 .legacyList li:last-child {
-  //   border-bottom: none; /* Remove bottom border for the last item */
+  //   border-bottom: none;
 }

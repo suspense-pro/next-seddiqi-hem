@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { GradientOverlay, Image, Typography, Video } from "@components/module";
 import IntroPopUp from "../introPopUp";
+import { generateUniqueId } from "@utils/helpers/uniqueId";
 
 const IntroComponentCarousel = ({ content, setIsCarousel }) => {
   const [imageInfo, setImageInfo] = useState(null);
@@ -28,21 +29,39 @@ const IntroComponentCarousel = ({ content, setIsCarousel }) => {
               ...content,
             })
           }
+          key={generateUniqueId()}
           className={styles.swiperSlide}
         >
           <div className={styles.imageCard}>
             <GradientOverlay className={imageClass} opacity={60}>
-              <Image className={styles.image} image={content?.media?.image} imageAltText={"image text"} />
+              <Image
+                className={styles.image}
+                image={content?.media?.image}
+                imageAltText={"image text"}
+              />
             </GradientOverlay>{" "}
           </div>
         </SwiperSlide>
       );
     } else {
       return (
-        <SwiperSlide className={styles.swiperSlide} key={1}>
+        <SwiperSlide
+          onClick={() =>
+            setImageInfo({
+              ...content,
+            })
+          }
+          key={generateUniqueId()}
+          className={styles.swiperSlide}
+        >
           <GradientOverlay className={imageClass} opacity={60}>
             <div className={styles.imageCard}>
-              <Video className={`${imageClass} ${styles.image}`} video={content?.media?.video} />
+              <Video
+                className={`${imageClass} ${styles.image}`}
+                video={content?.media?.video}
+                autoPlay={content?.media?.autoPlay}
+                showPlay={content?.media?.showPlay}
+              />
             </div>
           </GradientOverlay>
         </SwiperSlide>
@@ -53,7 +72,9 @@ const IntroComponentCarousel = ({ content, setIsCarousel }) => {
   return (
     <div className={styles.container}>
       <div className={styles.titleSection}>
-        {content?.mainTitle && <Typography variant="h3">{content?.mainTitle}</Typography>}
+        {content?.mainTitle && (
+          <Typography variant="h3">{content?.mainTitle}</Typography>
+        )}
         {content?.description && <p>{content?.description}</p>}
       </div>
 

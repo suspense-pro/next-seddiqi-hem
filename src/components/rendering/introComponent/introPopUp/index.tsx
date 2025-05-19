@@ -1,11 +1,19 @@
 import React from "react";
 import styles from "./introPopUp.module.scss";
-import { GradientOverlay, Image, Typography, Video } from "@components/module";
+import {
+  Button,
+  GradientOverlay,
+  Image,
+  Typography,
+  Video,
+} from "@components/module";
 import { CloseIconV2 } from "@assets/images/svg";
 import RichText from "@components/module/richText";
 
 const IntroPopUp = ({ imageInfo, setImageInfo }) => {
   const onlyMedia = !imageInfo?.title && !imageInfo?.description;
+  const mediaClass = `${styles.image} ${onlyMedia ? styles.imgFull : ""}`;
+  const image2Class = styles.image2;
 
   return (
     <div className={styles.container}>
@@ -15,29 +23,46 @@ const IntroPopUp = ({ imageInfo, setImageInfo }) => {
         </div>
 
         {imageInfo?.media?.image ? (
-          <GradientOverlay className={`${onlyMedia && styles.imgFull} ${styles.image}`} opacity={60}>
+          <GradientOverlay className={mediaClass} opacity={60}>
             <Image
-              className={`${onlyMedia && styles.imgFull} ${styles.image}`}
-              height={styles.image2}
+              className={`${mediaClass} ${image2Class}`}
               image={imageInfo?.media?.image}
               imageAltText={"image text"}
             />
           </GradientOverlay>
         ) : (
-          <GradientOverlay className={`${onlyMedia && styles.imgFull} ${styles.image}`} opacity={60}>
+          <GradientOverlay className={mediaClass} opacity={60}>
             <Video
-              className={`${onlyMedia && styles.imgFull} ${styles.image2} ${styles.image}`}
+              autoPlay={imageInfo?.media?.autoPlay}
+              showPlay={imageInfo?.media?.showPlay}
+              className={mediaClass}
               video={imageInfo?.media?.video}
             />
           </GradientOverlay>
         )}
 
-        <div className={styles.textContainer}>
-          <Typography className={styles.title} variant="h2">
-            {imageInfo?.title}
-          </Typography>
-          <RichText className={styles.description} text={imageInfo?.description} />
-        </div>
+        {(imageInfo?.title || imageInfo?.description) && (
+          <div className={styles.textContainer}>
+            <Typography className={styles.title} variant="h2">
+              {imageInfo?.title}
+            </Typography>
+            <RichText
+              className={styles.description}
+              text={imageInfo?.description}
+            />
+            {imageInfo?.cta && (
+              <Button
+                isLink={true}
+                link={imageInfo?.cta?.url}
+                className={styles.cta}
+                title={imageInfo?.cta?.label}
+                color={imageInfo?.cta?.color}
+                type={imageInfo?.cta?.type}
+                new_tab={imageInfo?.cta?.isNewTab}
+              />
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

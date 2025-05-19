@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styles from "./introComponentDesktop.module.scss";
-import { GradientOverlay, Image, Video } from "@components/module";
+import { GradientOverlay, Image, Typography, Video } from "@components/module";
 import IntroPopUp from "../introPopUp";
 import SearchPopUp from "../searchPopUp";
 import SearchInputField from "../searchInputField";
+import RichText from "@components/module/richText";
 
 const IntroComponentDesktop = ({ content }) => {
   const [imageInfo, setImageInfo] = useState(null);
@@ -23,9 +24,8 @@ const IntroComponentDesktop = ({ content }) => {
     const maxX = container.offsetWidth - window.innerWidth;
     const maxY = container.offsetHeight - window.innerHeight;
 
-    const scaleFactor = 2; // Increase the scale for a stronger effect
+    const scaleFactor = 2;
 
-    // Parallax calculation with scaling
     const panX = maxX * (xDecimal - 0.5) * (scaleFactor + 10);
     const panY = maxY * (yDecimal - 0.5) * scaleFactor;
 
@@ -73,9 +73,7 @@ const IntroComponentDesktop = ({ content }) => {
       );
     } else {
       return (
-        <div
-          className={`${heightClass}`}
-        >
+        <div className={`${heightClass}`}>
           <div
             onClick={() =>
               setImageInfo({
@@ -93,6 +91,8 @@ const IntroComponentDesktop = ({ content }) => {
             <Video
               className={`${imageClass} ${styles.image}`}
               video={content?.media?.video}
+              autoPlay={content?.media?.autoPlay}
+              showPlay={content?.media?.showPlay}
             />
           </GradientOverlay>
         </div>
@@ -106,8 +106,18 @@ const IntroComponentDesktop = ({ content }) => {
         onMouseMove={(e) => handleMouseMove(e)}
         className={styles.titleSection}
       >
-        <h1>Ahmed Seddiqi Heritage</h1>
-        <p>A pioneer among leading retailers in the region</p>
+        {content?.mainTitle && (
+          <Typography className={styles.heading} variant="h1">
+            {content?.mainTitle}
+          </Typography>
+        )}
+        {content?.description && (
+          <RichText
+            align="center"
+            className={styles.description}
+            text={content?.description}
+          />
+        )}
       </div>
       <SearchInputField
         // handleMouseMove={handleMouseMove}

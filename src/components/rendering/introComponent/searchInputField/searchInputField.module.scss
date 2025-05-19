@@ -1,15 +1,6 @@
 @import "./../../../../assets/styles/main.scss";
 
 .searchContainer {
-  // display: flex;
-  // align-items: center;
-  // border: 1px solid #d1d1d1;
-  // border-radius: 8px;
-  // padding: 8px 12px;
-  // background-color: #fff;
-  // width: 100%;
-  // max-width: 500px;
-  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: absolute;
   bottom: rem(154);
   z-index: 9999;
@@ -17,16 +8,16 @@
   transform: translateX(-50%);
 
   display: flex;
-  width: 780px;
-  height: 76px;
-  padding: 0px 28px;
+  width: rem(780);
+  height: rem(76);
+  padding: 0 rem(28);
   align-items: center;
-  gap: 20px;
+  gap: rem(20);
 
-  border-radius: 16px 0px;
-  border: 1px solid var(--GreyShades-Lighter-Grey, #e9e8e3);
-  background: var(--Primary-White, #fff);
-  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.15);
+  border-radius: rem(16) 0;
+  border: rem(1) solid getColorHex("grey-light");
+  background: getColorHex("white");
+  box-shadow: 0 0 rem(30) 0 rgba(0, 0, 0, 0.15);
 }
 
 .textContainer {
@@ -40,26 +31,20 @@
 }
 
 .searchContainer {
-  // position: absolute;
-  // bottom: rem(154);
-  // z-index: 9999;
-  // left: 50%;
-  // transform: translateX(-50%);
-
   display: flex;
   width: 100%;
   height: rem(60);
-  padding: 0px 28px;
+  padding: 0px rem(28);
   align-items: center;
-  gap: 20px;
+  gap: rem(20);
 
-  border-radius: 16px 0px;
-  border: 1px solid var(--GreyShades-Lighter-Grey, #e9e8e3);
-  background: var(--Primary-White, #fff);
-  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.15);
+  border-radius: rem(16) 0;
+  border: rem(1) solid getColorHex("grey-light");
+  background: getColorHex("white");
+  box-shadow: 0 0 rem(30) 0 rgba(0, 0, 0, 0.15);
 
   @include breakpoint-min-width(rem(930)) {
-    height: 76px;
+    height: rem(76);
     width: rem(800);
   }
 }
@@ -68,37 +53,22 @@
   border: none;
   outline: none;
   flex: 1;
-  font-size: 16px;
+  font-size: rem(16);
   color: #333;
   padding: 0;
-  margin-right: 8px;
+  margin-right: rem(8);
 }
 
 .input::placeholder {
-  color: var(--Primary-Midnight-Brown, #271610);
-
-  /* Desktop/Headings/H5 */
   @include heading_regular;
-  font-size: 20px;
+  color: getColorHex("midnight-brown");
+
+  font-size: rem(20);
   font-style: normal;
   font-weight: 500;
-  line-height: 30px; /* 150% */
-  letter-spacing: 0.6px;
+  line-height: rem(30);
+  letter-spacing: rem(0.6);
 }
-
-// .input {
-//   border: none;
-//   outline: none;
-//   flex: 1;
-//   font-size: 16px;
-//   color: #333;
-//   padding: 0;
-//   margin-right: 8px;
-// }
-
-// .input::placeholder {
-//   color: #aaa;
-// }
 
 .iconButton {
   background: none;
@@ -110,20 +80,20 @@
 }
 
 .icon {
-  width: 20px;
-  height: 20px;
+  width: rem(20);
+  height: rem(20);
   background: url("/path-to-your-icon.png") no-repeat center center;
   background-size: contain;
 }
 
 .seddiqiLogo {
-  border-radius: 40px;
-  background: var(--Tertiary-Desert-Storm, #eee7db);
+  border-radius: rem(40);
+  background: getColorHex("desert-storm");
   display: flex;
-  width: 44px;
-  height: 44px;
+  width: rem(44);
+  height: rem(44);
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: rem(10);
   flex-shrink: 0;
 }
